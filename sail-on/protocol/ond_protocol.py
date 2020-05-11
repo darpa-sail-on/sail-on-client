@@ -27,10 +27,6 @@ class SailOn( BaseProtocol ):
         #novelty_detector_version = version(novelty_algorithm.__module__)
         novelty_detector_version ='1.0.0'
 
-
-        import pdb
-        pdb.set_trace()
-
         self.toolset['session_id'] = self.test_harness.session_request( 
                 self.config['test_ids'], "OND",
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
