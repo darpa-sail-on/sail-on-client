@@ -36,28 +36,33 @@ class SailOn( BaseProtocol ):
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset['image_features'] = {}
 
+            novel_dict = dict()
             for round_id in count(0):
                 self.toolset['round_id'] = round_id
                 self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
-                feature_dict, self.toolset['logit_dict'] = \
+                self.toolset['features_dict'], self.toolset['logit_dict'] = \
                         novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
-                self.toolset['features_dict'].update(feature_dict)
+                novel_dict.update(self.toolset['features_dict'])
 
                 results = dict()
-                results['novelty_detections'] = \
+                results['detection'] = \
                         novelty_algorithm.execute(self.toolset, "WorldDetection")
 
-                results['novelty_classification'] = \
+                results['CLASSIFICATION'] = \
                         novelty_algorithm.execute(self.toolset, "NoveltyClassification")
 
                 self.test_harness.post_results( results, test, round_id )
 
             results = dict()
-            #TODO: setup self.toolset['dataset_ids']
-            #TODO: setup self.toolset['novelties']
-            results['novelty_characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
-            self.test_harness.post_results( results, test, 0 )
+            with open(self.toolset['dataset'], "r") as dataset:
+                self.toolset['dataset_ids'] = dataset.readlines()
+                self.toolset['dataset_ids'] = [image_id.strip() for image_id in image_ids]
+
+            self.toolset['novelties'] = novel_dict
+            results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
+            if results['characterization'] is not None and os.path.exists(results['characterization']):
+                self.test_harness.post_results( results, test, 0 )
 
         self.test_harness.terminate_session()
         
