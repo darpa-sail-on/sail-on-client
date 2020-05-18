@@ -17,13 +17,15 @@ class OndConfig(scfg.Config):
             'OND.1.1.1234',
             ],
 
-        'novelty_detector_class': scfg.Value("RandomNoveltyAdapter"),
+        'novelty_detector_class': scfg.Value("EVMBasedNoveltyDetector"),
 
         'seed': scfg.Value("seed"),
 
         'detector_config': {
 
             'resnet_params': {},
+
+            'efficientnet_params': {},
 
             'evm_params': {},
     

@@ -33,19 +33,30 @@ class SailOn( BaseProtocol ):
 
         for test in self.config['test_ids']:
             self.toolset['test_id'] = test
-            self.toolset['round_id'] = None
-            self.toolset['dataset'] = self.test_harness.dataset_request( test, 0)
-
             novelty_algorithm.execute(self.toolset, "Initialize")
+            self.toolset['image_features'] = {}
 
-            self.toolset['image_features'] = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
+            for round_id in count(0):
+                self.toolset['round_id'] = round_id
+                self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
+                feature_dict, self.toolset['logit_dict'] = \
+                        novelty_algorithm.execute(self.toolset, "FeatureExtraction")
+
+                self.toolset['features_dict'].update(feature_dict)
+
+                results = dict()
+                results['novelty_detections'] = \
+                        novelty_algorithm.execute(self.toolset, "WorldDetection")
+
+                results['novelty_classification'] = \
+                        novelty_algorithm.execute(self.toolset, "NoveltyClassification")
+
+                self.test_harness.post_results( results, test, round_id )
 
             results = dict()
-
-            results['novelty_detections'] = novelty_algorithm.execute(self.toolset, "NoveltyDetection")
-
+            #TODO: setup self.toolset['dataset_ids']
+            #TODO: setup self.toolset['novelties']
             results['novelty_characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
-
             self.test_harness.post_results( results, test, 0 )
 
         self.test_harness.terminate_session()
