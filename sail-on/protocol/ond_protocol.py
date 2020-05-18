@@ -33,6 +33,7 @@ class SailOn( BaseProtocol ):
 
         for test in self.config['test_ids']:
             self.toolset['test_id'] = test
+            self.toolset['test_type'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset['image_features'] = {}
 
