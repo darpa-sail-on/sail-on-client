@@ -25,19 +25,31 @@ class OndConfig(scfg.Config):
 
             'resnet_params': {},
 
-            'efficientnet_params': {},
+            'efficientnet_params': {
+                "model_path": "",
+                "known_classes": 413
+                },
 
-            'evm_params': {},
+            'evm_params': {
+                "model_path": "",
+                "tailsize": 33998,
+                "cover_threshold": 0.7,
+                "distance_multiplier": 0.55
+                },
     
             'known_kmeans_params': {},
 
-            'dataloader_params': {},
+            'dataloader_params': {
+                "batch_size": 1024,
+                "num_workers": 8
+                },
 
-            'csv_folder': scfg.Path('dummy_folder'),
+            'csv_folder': scfg.Path(''),
 
-            'cores': scfg.Value(1),
+            'cores': scfg.Value(6),
 
-            'detection_threshold': scfg.Value(50.3), }
+            'detection_threshold': scfg.Value(0.3),
+            }
 
     }
 
