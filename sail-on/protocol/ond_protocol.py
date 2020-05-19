@@ -3,7 +3,6 @@ from framework.baseprotocol import BaseProtocol
 
 from ond_config import OndConfig
 from importlib_metadata import version
-from itertools import count
 import os
 
 class SailOn( BaseProtocol ):
@@ -32,6 +31,7 @@ class SailOn( BaseProtocol ):
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
 
         for test in self.config['test_ids']:
+            self.metadata = self.test_harness.get_test_metadata(test)
             self.toolset['test_id'] = test
             self.toolset['test_type'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
@@ -40,15 +40,10 @@ class SailOn( BaseProtocol ):
             novel_dict = dict()
             self.toolset['dataset_ids'] = list()
 
-            for round_id in count(0):
+            for round_id in range(self.metadata['round_size']):
                 self.toolset['round_id'] = round_id
 
-                # see if there is another round available
-                try:
-                    self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
-                except:
-                    # no more rounds available, this test is done.
-                    break
+                self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
 
                 self.toolset['features_dict'], self.toolset['logit_dict'] = \
                         novelty_algorithm.execute(self.toolset, "FeatureExtraction")
