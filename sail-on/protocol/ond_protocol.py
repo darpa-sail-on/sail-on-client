@@ -4,6 +4,8 @@ from framework.baseprotocol import BaseProtocol
 from ond_config import OndConfig
 from importlib_metadata import version
 import inspect
+from itertools import count
+
 import datetime
 
 class SailOn( BaseProtocol ):
@@ -36,17 +38,26 @@ class SailOn( BaseProtocol ):
             self.toolset['test_type'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset['image_features'] = {}
-
+            self.toolset['dataset_root'] = self.config['dataset_root']
             novel_dict = dict()
+
             for round_id in count(0):
                 self.toolset['round_id'] = round_id
-                self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
+
+                # see if there is another round available
+                try:
+                    self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
+                except:
+                    # no more rounds available, this test is done.
+                    break
+
                 self.toolset['features_dict'], self.toolset['logit_dict'] = \
                         novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
                 novel_dict.update(self.toolset['features_dict'])
 
                 results = dict()
+
                 results['detection'] = \
                         novelty_algorithm.execute(self.toolset, "WorldDetection")
 
@@ -67,9 +78,4 @@ class SailOn( BaseProtocol ):
 
         self.test_harness.terminate_session()
         
-
-            
-
-
-
 

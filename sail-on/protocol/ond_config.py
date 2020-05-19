@@ -21,17 +21,19 @@ class OndConfig(scfg.Config):
 
         'seed': scfg.Value("seed"),
 
+        'dataset_root': "/home/eric/sail-on/images",
+
         'detector_config': {
 
             'resnet_params': {},
 
             'efficientnet_params': {
-                "model_path": "",
+                "model_path": "/home/eric/merge_framework/sail-on/protocol/trained_efficientnet_b3_fp16.pth.tar",
                 "known_classes": 413
                 },
 
             'evm_params': {
-                "model_path": "",
+                "model_path": "/home/eric/merge_framework/sail-on/protocol/efficientb3_EVM_model_tail33998_ct7_dm55.hdf5",
                 "tailsize": 33998,
                 "cover_threshold": 0.7,
                 "distance_multiplier": 0.55
@@ -46,7 +48,7 @@ class OndConfig(scfg.Config):
 
             'csv_folder': scfg.Path(''),
 
-            'cores': scfg.Value(6),
+            'cores': 6,
 
             'detection_threshold': scfg.Value(0.3),
             }
