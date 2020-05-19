@@ -46,11 +46,11 @@ class OndConfig(scfg.Config):
                 "num_workers": 8
                 },
 
-            'csv_folder': scfg.Path(''),
+            'csv_folder': '',
 
             'cores': 6,
 
-            'detection_threshold': scfg.Value(0.3),
+            'detection_threshold': 0.3,
             }
 
     }
