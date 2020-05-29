@@ -68,8 +68,6 @@ class SailOn( BaseProtocol ):
             results = dict()
             self.toolset['dataset_ids'] = [image_id.strip() for image_id in self.toolset['dataset_ids']]
 
-            print(self.toolset['dataset_ids'])
-
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
                 self.test_harness.post_results( results, test, 0 )
