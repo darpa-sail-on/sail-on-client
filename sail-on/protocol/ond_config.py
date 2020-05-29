@@ -42,7 +42,7 @@ class OndConfig(scfg.Config):
             'known_kmeans_params': {},
 
             'dataloader_params': {
-                "batch_size": 1024,
+                "batch_size": 128,
                 "num_workers": 8
                 },
 
