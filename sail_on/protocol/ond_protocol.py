@@ -35,7 +35,7 @@ class SailOn( BaseProtocol ):
             self.metadata = self.test_harness.get_test_metadata(test)
             self.toolset['test_id'] = test
             self.toolset['test_type'] = ""
-            self.toolset['metadata'] = self.texst_harness.get_test_metadata( test )
+            self.toolset['metadata'] = self.test_harness.get_test_metadata( test )
             if "red_light" in self.toolset['metadata']:
                 self.toolset['redlight_image'] = self.toolset['metadata']["red_light"]
             else:
