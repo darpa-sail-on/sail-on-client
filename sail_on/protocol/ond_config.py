@@ -14,10 +14,10 @@ class OndConfig(scfg.Config):
         'domain':  scfg.Value("image_classification"),
 
         'test_ids': [
-            'OND.1.1.1234',
+            'OND.1.1.293',
             ],
 
-        'novelty_detector_class': scfg.Value("EVMBasedNoveltyDetector"),
+        'novelty_detector_class': scfg.Value("OND_5_14_A1"),
 
         'seed': scfg.Value("seed"),
 
@@ -42,13 +42,13 @@ class OndConfig(scfg.Config):
             'known_kmeans_params': {},
 
             'dataloader_params': {
-                "batch_size": 1024,
-                "num_workers": 8
+                "batch_size": 64,
+                "num_workers": 3
                 },
 
             'csv_folder': '',
 
-            'cores': 6,
+            'cores': 4,
 
             'detection_threshold': 0.3,
             }

@@ -38,7 +38,6 @@ class SailOn( BaseProtocol ):
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset['image_features'] = {}
             self.toolset['dataset_root'] = self.config['dataset_root']
-            novel_dict = dict()
             self.toolset['dataset_ids'] = list()
 
             for round_id in count(0):
@@ -54,8 +53,6 @@ class SailOn( BaseProtocol ):
                 self.toolset['features_dict'], self.toolset['logit_dict'] = \
                         novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
-                novel_dict.update(self.toolset['features_dict'])
-
                 results = dict()
 
                 results['detection'] = \
@@ -63,15 +60,15 @@ class SailOn( BaseProtocol ):
 
                 results['classification'] = \
                         novelty_algorithm.execute(self.toolset, "NoveltyClassification")
-
+                
                 self.test_harness.post_results( results, test, round_id )
                 with open(self.toolset['dataset'], "r") as dataset:
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
 
             results = dict()
+
             self.toolset['dataset_ids'] = [image_id.strip() for image_id in self.toolset['dataset_ids']]
 
-            self.toolset['novelties'] = novel_dict
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
                 self.test_harness.post_results( results, test, 0 )
