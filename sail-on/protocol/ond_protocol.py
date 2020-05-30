@@ -66,6 +66,7 @@ class SailOn( BaseProtocol ):
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
 
             results = dict()
+
             self.toolset['dataset_ids'] = [image_id.strip() for image_id in self.toolset['dataset_ids']]
 
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
