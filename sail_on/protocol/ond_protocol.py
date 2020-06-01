@@ -31,6 +31,8 @@ class SailOn( BaseProtocol ):
                 self.config['test_ids'], "OND",
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
 
+        print( "New session:", self.toolset['session_id'] )
+
         for test in self.config['test_ids']:
             self.metadata = self.test_harness.get_test_metadata(test)
             self.toolset['test_id'] = test
@@ -47,9 +49,12 @@ class SailOn( BaseProtocol ):
             self.toolset['dataset_root'] = self.config['dataset_root']
             self.toolset['dataset_ids'] = list()
 
+            print( "Start test:", self.toolset['test_id'] )
+
             for round_id in count(0):
                 self.toolset['round_id'] = round_id
 
+                print( "Start round:", self.toolset['round_id'] )
                 # see if there is another round available
                 try:
                     self.toolset['dataset'] = self.test_harness.dataset_request(
@@ -72,6 +77,18 @@ class SailOn( BaseProtocol ):
                 self.test_harness.post_results( results, test, round_id, self.toolset['session_id'] )
                 with open(self.toolset['dataset'], "r") as dataset:
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
+                print("Round complete:", self.toolset['round_id'])
+
+                #cleanup the round files
+                try:
+                    os.remove(results['detection'])
+                except:
+                    pass
+                try:
+                    os.remove(results['classification'])
+                except:
+                    pass
+                    
 
             results = dict()
 
@@ -80,7 +97,14 @@ class SailOn( BaseProtocol ):
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
                 self.test_harness.post_results( results, test, 0, self.toolset['session_id'] )
+            print( "Test complete:", self.toolset['test_id'] )
 
-        self.test_harness.terminate_session(self.toolset['session_id'])
-        
+            #cleanup the characterization file
+            try:
+                os.remove(results['characterization'])
+            except:
+                pass
+
+        print( "Session ended:", self.toolset['session_id'] )
+        self.test_harness.terminate_session( self.toolset['session_id'])
 
