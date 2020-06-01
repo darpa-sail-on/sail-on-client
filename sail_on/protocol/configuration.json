@@ -1,4 +1,4 @@
 {
-  "url": "http://3.32.8.161:5000",
-  "data_location": "/data/datasets/TA1-image-classification/dataset_v1"
+  "url": "http://localhost:3306",
+  "data_location": "/home/eric/sail-on/images"
 }
