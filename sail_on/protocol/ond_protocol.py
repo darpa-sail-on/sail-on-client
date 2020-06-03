@@ -1,4 +1,3 @@
-from framework.localinterface import LocalInterface
 from framework.baseprotocol import BaseProtocol
 
 from ond_config import OndConfig
