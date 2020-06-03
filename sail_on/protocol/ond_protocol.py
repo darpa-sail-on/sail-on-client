@@ -10,8 +10,8 @@ class SailOn( BaseProtocol ):
 
 
 
-    def __init__( self, discovered_plugins, algorithmsdirectory, harness ):
-        BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness)
+    def __init__( self, discovered_plugins, algorithmsdirectory, harness, config_file ):
+        BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
 
         self.config = OndConfig()
 
