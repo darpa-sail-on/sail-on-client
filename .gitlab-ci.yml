@@ -1,0 +1,7 @@
+image: pytorch/pytorch:latest
+
+hello-world:
+  tags:
+    - linux
+  script:
+    - echo "hello, world"
