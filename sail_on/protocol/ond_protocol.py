@@ -17,7 +17,7 @@ class SailOn( BaseProtocol ):
 
     def run_protocol(self):
 
-        # provide all of the configuration information in the toolset 
+        # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
 
         novelty_algorithm = self.get_algorithm(self.config['novelty_detector_class'], self.toolset)
@@ -26,9 +26,10 @@ class SailOn( BaseProtocol ):
         #novelty_detector_version = version(novelty_algorithm.__module__)
         novelty_detector_version ='1.0.0'
 
-        self.toolset['session_id'] = self.test_harness.session_request( 
+        self.toolset['session_id'] = self.test_harness.session_request(
                 self.config['test_ids'], "OND",
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
+        session_id = self.toolset['session_id']
 
         for test in self.config['test_ids']:
             self.metadata = self.test_harness.get_test_metadata(test)
@@ -44,7 +45,8 @@ class SailOn( BaseProtocol ):
 
                 # see if there is another round available
                 try:
-                    self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id)
+                    self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id,
+                                                                                 session_id )
                 except:
                     # no more rounds available, this test is done.
                     break
@@ -59,8 +61,8 @@ class SailOn( BaseProtocol ):
 
                 results['classification'] = \
                         novelty_algorithm.execute(self.toolset, "NoveltyClassification")
-                
-                self.test_harness.post_results( results, test, round_id )
+
+                self.test_harness.post_results( results, test, round_id, session_id )
                 with open(self.toolset['dataset'], "r") as dataset:
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
 
@@ -70,8 +72,6 @@ class SailOn( BaseProtocol ):
 
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
-                self.test_harness.post_results( results, test, 0 )
+                self.test_harness.post_results( results, test, 0, session_id )
 
-        self.test_harness.terminate_session()
-        
-
+        self.test_harness.terminate_session(session_id)
