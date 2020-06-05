@@ -3,5 +3,7 @@ image: pytorch/pytorch:latest
 hello-world:
   tags:
     - linux
+    - docker
+    - build
   script:
     - echo "hello, world"
