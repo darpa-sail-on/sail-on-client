@@ -80,14 +80,8 @@ class SailOn( BaseProtocol ):
                 print("Round complete:", self.toolset['round_id'])
 
                 #cleanup the round files
-                try:
-                    os.remove(results['detection'])
-                except:
-                    pass
-                try:
-                    os.remove(results['classification'])
-                except:
-                    pass
+                os.remove(results['detection'])
+                os.remove(results['classification'])
                     
 
             results = dict()
@@ -100,10 +94,7 @@ class SailOn( BaseProtocol ):
             print( "Test complete:", self.toolset['test_id'] )
 
             #cleanup the characterization file
-            try:
-                os.remove(results['characterization'])
-            except:
-                pass
+            os.remove(results['characterization'])
 
         print( "Session ended:", self.toolset['session_id'] )
         self.test_harness.terminate_session(session_id)
