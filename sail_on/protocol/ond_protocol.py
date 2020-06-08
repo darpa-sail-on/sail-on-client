@@ -1,4 +1,3 @@
-from framework.localinterface import LocalInterface
 from framework.baseprotocol import BaseProtocol
 
 from ond_config import OndConfig
@@ -11,14 +10,14 @@ class SailOn( BaseProtocol ):
 
 
 
-    def __init__( self, discovered_plugins, algorithmsdirectory, harness ):
-        BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness)
+    def __init__( self, discovered_plugins, algorithmsdirectory, harness, config_file ):
+        BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
 
         self.config = OndConfig()
 
     def run_protocol(self):
 
-        # provide all of the configuration information in the toolset 
+        # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
 
         novelty_algorithm = self.get_algorithm(self.config['novelty_detector_class'], self.toolset)
@@ -27,9 +26,10 @@ class SailOn( BaseProtocol ):
         #novelty_detector_version = version(novelty_algorithm.__module__)
         novelty_detector_version ='1.0.0'
 
-        self.toolset['session_id'] = self.test_harness.session_request( 
+        self.toolset['session_id'] = self.test_harness.session_request(
                 self.config['test_ids'], "OND",
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
+        session_id = self.toolset['session_id']
 
         print( "New session:", self.toolset['session_id'] )
 
@@ -57,8 +57,8 @@ class SailOn( BaseProtocol ):
                 print( "Start round:", self.toolset['round_id'] )
                 # see if there is another round available
                 try:
-                    self.toolset['dataset'] = self.test_harness.dataset_request(
-                                    test, round_id, self.toolset['session_id'])
+                    self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id,
+                                                                                 session_id )
                 except:
                     # no more rounds available, this test is done.
                     break
@@ -73,8 +73,8 @@ class SailOn( BaseProtocol ):
 
                 results['classification'] = \
                         novelty_algorithm.execute(self.toolset, "NoveltyClassification")
-                
-                self.test_harness.post_results( results, test, round_id, self.toolset['session_id'] )
+
+                self.test_harness.post_results( results, test, round_id, session_id )
                 with open(self.toolset['dataset'], "r") as dataset:
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
                 print("Round complete:", self.toolset['round_id'])
@@ -96,7 +96,7 @@ class SailOn( BaseProtocol ):
 
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
-                self.test_harness.post_results( results, test, 0, self.toolset['session_id'] )
+                self.test_harness.post_results( results, test, 0, session_id )
             print( "Test complete:", self.toolset['test_id'] )
 
             #cleanup the characterization file
@@ -106,5 +106,4 @@ class SailOn( BaseProtocol ):
                 pass
 
         print( "Session ended:", self.toolset['session_id'] )
-        self.test_harness.terminate_session( self.toolset['session_id'])
-
+        self.test_harness.terminate_session(session_id)
