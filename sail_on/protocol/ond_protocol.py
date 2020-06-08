@@ -5,6 +5,7 @@ from importlib_metadata import version
 from itertools import count
 import os
 import json
+import sys
 
 class SailOn( BaseProtocol ):
 
@@ -13,7 +14,10 @@ class SailOn( BaseProtocol ):
 
     def __init__( self, discovered_plugins, algorithmsdirectory, harness, config_file ):
         BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
-        assert os.path.exists(config_file), f"{config_file} does not exist"
+        if not os.path.exists(config_file):
+            print(f"{config_file} does not exist", file=sys.stderr)
+            sys.exit(1)
+
         with open(config_file, 'r') as f:
             overriden_config = json.load(f)
         self.config = OndConfig(overriden_config)
