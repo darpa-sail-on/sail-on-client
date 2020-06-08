@@ -1,0 +1,26 @@
+{
+  "domain": "image_classification",
+  "test_ids": [
+    "OND.1.1.293"
+  ],
+  "novelty_detector_class": "OND_5_14_A1",
+  "detector_config": {
+    "efficientnet_params": {
+      "model_path": "",
+      "known_classes": 413
+    },
+    "evm_params": {
+      "model_path": "",
+      "tailsize": 33998,
+      "cover_threshold": 0.7,
+      "distance_multiplier": 0.55
+    },
+    "dataloader_params": {
+      "batch_size": 128,
+      "num_workers": 8
+    },
+    "csv_folder": "",
+    "cores": 6,
+    "detection_threshold": 0.3
+  }
+}
