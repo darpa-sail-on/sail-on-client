@@ -39,7 +39,7 @@ class SailOn( BaseProtocol ):
         session_id = self.toolset['session_id']
 
         for test in self.config['test_ids']:
-            self.metadata = self.test_harness.get_test_metadata(test)
+            self.metadata = self.test_harness.get_test_metadata(test, session_id)
             self.toolset['test_id'] = test
             self.toolset['test_type'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
