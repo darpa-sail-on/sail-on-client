@@ -120,9 +120,7 @@ class ParInterface(Harness):
         with open(filename, "wb") as f:
             f.write(response.content)
 
-        new_filename = self._append_data_root_to_dataset(filename, test_id, session_id)
-
-        return new_filename
+        return filename
 
     #TODO: merge this code directly into dataset_request, and stop writing so many files
     def _append_data_root_to_dataset(self, dataset_path: str, test_id: UUID, session_id: str) -> str:
