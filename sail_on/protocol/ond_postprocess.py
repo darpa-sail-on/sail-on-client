@@ -5,16 +5,29 @@ from itertools import count
 import os
 import json
 import sys
+from typing import List
 
 
-def get_image_ids_from_dataset(dataset_path):
+def get_image_ids_from_dataset(dataset_path: str) -> List[str]:
+    """
+    Helper function read a file containing images ids associated with a test
+
+    :param dataset_path: Path to a csv containing the image ids
+    :return A list of image ids
+    """
     with open(dataset_path, "r") as dataset:
         image_ids = dataset.readlines()
         image_ids = [image_id.strip() for image_id in image_ids]
     return image_ids
 
 
-def l1_scaling(values):
+def l1_scaling(values: List[float]) -> List[float]:
+    """
+    Helper function to rescale class probabilities to sum to 1
+
+    :param values: A list of floating point values
+    :return A list of rescaled values that sum to 1
+    """
     scaling_factor = sum(values)
     rescaled_values = [value/scaling_factor for value in values]
     return rescaled_values
@@ -144,11 +157,17 @@ class OndPostProcess(BaseProtocol):
         self.test_harness.terminate_session(session_id)
         self.test_harness.terminate_session(session_id_wt_hint)
 
-    def post_process_redlight(self, novelty_detection_path,
-                              novelty_classification_path, is_redlight_on):
+    def post_process_redlight(self, novelty_detection_path: str,
+                              novelty_classification_path: str,
+                              is_redlight_on: bool) ->None:
         """
         Open the detection and classification files and update them according
         to the redlight indicator
+        :param novelty_detection_path: Path to file containing detection results
+        :param novelty_classification_path: Path to file containing classification results
+        :param is_redlight_on: Boolean indicator for red light
+
+        :return None
         """
         # process the detections file first
         if is_redlight_on:
