@@ -38,18 +38,30 @@ class SailOn( BaseProtocol ):
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
         session_id = self.toolset['session_id']
 
+        print( "New session:", self.toolset['session_id'] )
+
         for test in self.config['test_ids']:
             self.metadata = self.test_harness.get_test_metadata(test)
             self.toolset['test_id'] = test
             self.toolset['test_type'] = ""
+            self.toolset['metadata'] = self.test_harness.get_test_metadata( test )
+            if "red_light" in self.toolset['metadata']:
+                self.toolset['redlight_image'] = os.path.join(
+                            self.toolset['dataset_root'],
+                            self.toolset['metadata']["red_light"] )
+            else:
+                self.toolset['redlight_image'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset['image_features'] = {}
             self.toolset['dataset_root'] = self.config['dataset_root']
             self.toolset['dataset_ids'] = list()
 
+            print( "Start test:", self.toolset['test_id'] )
+
             for round_id in count(0):
                 self.toolset['round_id'] = round_id
 
+                print( "Start round:", self.toolset['round_id'] )
                 # see if there is another round available
                 try:
                     self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id,
@@ -72,6 +84,12 @@ class SailOn( BaseProtocol ):
                 self.test_harness.post_results( results, test, round_id, session_id )
                 with open(self.toolset['dataset'], "r") as dataset:
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
+                print("Round complete:", self.toolset['round_id'])
+
+                #cleanup the round files
+                os.remove(results['detection'])
+                os.remove(results['classification'])
+                    
 
             results = dict()
 
@@ -80,5 +98,10 @@ class SailOn( BaseProtocol ):
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
                 self.test_harness.post_results( results, test, 0, session_id )
+            print( "Test complete:", self.toolset['test_id'] )
 
+            #cleanup the characterization file
+            os.remove(results['characterization'])
+
+        print( "Session ended:", self.toolset['session_id'] )
         self.test_harness.terminate_session(session_id)

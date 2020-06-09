@@ -28,12 +28,12 @@ class OndConfig(scfg.Config):
             'resnet_params': {},
 
             'efficientnet_params': {
-                "model_path": "/home/eric/merge_framework/sail-on/protocol/trained_efficientnet_b3_fp16.pth.tar",
+                "model_path": "/home/eric/merge_framework/sail_on/protocol/trained_efficientnet_b3_fp16.pth.tar",
                 "known_classes": 413
                 },
 
             'evm_params': {
-                "model_path": "/home/eric/merge_framework/sail-on/protocol/efficientb3_EVM_model_tail33998_ct7_dm55.hdf5",
+                "model_path": "/home/eric/merge_framework/sail_on/protocol/efficientb3_EVM_model_tail33998_ct7_dm55.hdf5",
                 "tailsize": 33998,
                 "cover_threshold": 0.7,
                 "distance_multiplier": 0.55
