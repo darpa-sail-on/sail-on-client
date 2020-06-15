@@ -1,9 +1,10 @@
 from framework.baseprotocol import BaseProtocol
-from .condda_config import ConddaConfig
+from condda_config import ConddaConfig
 from itertools import count
 import os
 import json
 import sys
+
 
 class Condda(BaseProtocol):
     def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
@@ -14,7 +15,7 @@ class Condda(BaseProtocol):
 
         with open(config_file, 'r') as f:
             overriden_config = json.load(f)
-        self.config = Condda(overriden_config)
+        self.config = ConddaConfig(overriden_config)
 
     def run_protocol(self):
         # provide all of the configuration information in the toolset
@@ -27,7 +28,7 @@ class Condda(BaseProtocol):
                                f"{novelty_detector_version}")
         self.toolset['session_id'] = \
                 self.test_harness.session_request(self.config['test_ids'],
-                                                  "CONDAA",
+                                                  "CONDDA",
                                                   novelty_detector_cv)
         session_id = self.toolset['session_id']
         print("New session:", self.toolset['session_id'])
