@@ -75,6 +75,8 @@ class Condda(BaseProtocol):
                                                round_id,
                                                session_id )
                 print("Round complete:", self.toolset['round_id'])
+                novelty_algorithm.execute(self.toolset,
+                                          "NoveltyAdaption")
                 #cleanup the round files
                 os.remove(results['detection'])
                 os.remove(results['characterization'])
