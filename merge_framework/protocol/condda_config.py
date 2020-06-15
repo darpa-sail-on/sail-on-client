@@ -13,7 +13,7 @@ class ConddaConfig(scfg.Config):
     default = {
         'domain':  scfg.Value("image_classification"),
         'test_ids': [
-                        'OND.1.1.293',
+                        'CONDDA.2.1.293',
         ],
         'novelty_detector_class': scfg.Value("CONDDA_5_14_A1"),
         'seed': scfg.Value("seed"),
