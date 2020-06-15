@@ -38,11 +38,10 @@ class Condda(BaseProtocol):
             self.toolset['test_type'] = ""
             self.toolset['metadata'] = self.metadata
             if "red_light" in self.metadata:
-                self.toolset['redlight_image'] = os.path.join(
-                            self.toolset['dataset_root'],
-                            self.toolset['metadata']["red_light"] )
+                self.toolset['red_light_image'] = \
+                        self.toolset['metadata']["red_light"]
             else:
-                self.toolset['redlight_image'] = ""
+                self.toolset['red_light_image'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset['image_features'] = {}
             self.toolset['dataset_root'] = self.config['dataset_root']
