@@ -28,6 +28,7 @@ class ConddaConfig(scfg.Config):
             'evm_params':
             {
                 "model_path": "",
+                "known_feature_path": "",
                 "tailsize": 33998,
                 "cover_threshold": 0.7,
                 "distance_multiplier": 0.55,
