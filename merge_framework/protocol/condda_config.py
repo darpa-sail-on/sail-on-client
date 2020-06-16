@@ -40,6 +40,9 @@ class ConddaConfig(scfg.Config):
                 "batch_size": 128,
                 "num_workers": 3
             },
+            'finch_params': {},
+            'pfact_params': {},
+            'hdbscan_params': {},
             'csv_folder': '',
             'cores': 4,
             'detection_threshold': 0.3
