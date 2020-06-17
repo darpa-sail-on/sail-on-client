@@ -235,16 +235,20 @@ class ParInterface(Harness):
 
         return filename
 
-    def get_test_metadata(self, test_id: str) -> Dict[str, Any]:
+    def get_test_metadata(self, test_id: str,
+                          session_id: str = None) -> Dict[str, Any]:
         """
         Retrieve the metadata json for the specified test.
 
         Arguments:
             -test_id
+            -session_id
         Returns:
             metadata json
         """
-        response = requests.get(f"{self.api_url}/test/metadata", params={"test_id": test_id},)
+        response = requests.get(f"{self.api_url}/test/metadata",
+                                params={"session_id": session_id,
+                                        "test_id": test_id},)
 
         self._check_response(response)
         return response.json()
