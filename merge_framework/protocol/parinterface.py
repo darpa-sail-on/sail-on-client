@@ -6,7 +6,7 @@ import io
 import os
 
 from framework.harness import Harness
-from typing import Any, Dict
+from typing import Any, Dict, List
 from requests import Response
 from uuid import UUID
 
@@ -70,7 +70,9 @@ class ParInterface(Harness):
 
         return filename
 
-    def session_request(self, test_ids: list, protocol: str, novelty_detector_version: str):
+    def session_request(self, test_ids: list, protocol: str,
+                        novelty_detector_version: str,
+                        hints: List[str] = []) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
 
@@ -78,12 +80,14 @@ class ParInterface(Harness):
             -test_ids   : list of tests being evaluated in this session
             -protocol   : string indicating which protocol is being evaluated
             -novelty_detector_version : string indicating the version of the novelty detector being evaluated
+            -hints : a list of hints that are provided in the session
         Returns:
             -session id
         """
         payload = {
             "protocol": protocol,
             "novelty_detector_version": novelty_detector_version,
+            "hints": hints
         }
 
         ids = "\n".join(test_ids) + "\n"
@@ -111,7 +115,7 @@ class ParInterface(Harness):
         )
 
         self._check_response(response)
-    
+
         filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}.csv'))
         with open(filename, "wb") as f:
             f.write(response.content)
