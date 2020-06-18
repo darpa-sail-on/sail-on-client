@@ -45,7 +45,7 @@ class ConddaConfig(scfg.Config):
             'hdbscan_params': {},
             'csv_folder': '',
             'cores': 4,
-            'detection_threshold': 0.3
+            'detection_threshold': 0.5
         }
     }
 
