@@ -16,8 +16,11 @@
       "tailsize": 33998,
       "cover_threshold": 0.7,
       "distance_multiplier": 0.55,
-      "number_of_unknown_to_strat_clustering": 15,
       "number_of_unknown_to_crate_evm": 3
+    },
+    "characterization_param": {
+      "clustering_type": "FINCH",
+      "number_of_unknown_to_strat_clustering": 20
     },
     "dataloader_params": {
       "batch_size": 128,

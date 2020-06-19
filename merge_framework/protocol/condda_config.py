@@ -32,7 +32,6 @@ class ConddaConfig(scfg.Config):
                 "tailsize": 33998,
                 "cover_threshold": 0.7,
                 "distance_multiplier": 0.55,
-                "number_of_unknown_to_strat_clustering": 15,
                 "number_of_unknown_to_crate_evm": 3
             },
             'dataloader_params':
@@ -40,9 +39,10 @@ class ConddaConfig(scfg.Config):
                 "batch_size": 128,
                 "num_workers": 3
             },
-            'finch_params': {},
-            'pfact_params': {},
-            'hdbscan_params': {},
+            "characterization_param": {
+              "clustering_type": "FINCH",
+              "number_of_unknown_to_strat_clustering": 20
+            },
             'csv_folder': '',
             'cores': 4,
             'detection_threshold': 0.5
