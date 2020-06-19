@@ -115,10 +115,7 @@ class ParInterface(Harness):
         filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}.csv'))
         with open(filename, "wb") as f:
             f.write(response.content)
-
-        new_filename = self._append_data_root_to_dataset(filename, test_id, session_id)
-
-        return new_filename
+        return filename
 
     #TODO: merge this code directly into dataset_request, and stop writing so many files
     def _append_data_root_to_dataset(self, dataset_path: str, test_id: UUID, session_id: str) -> str:
