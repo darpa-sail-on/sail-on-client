@@ -1,5 +1,6 @@
 {
   "domain": "image_classification",
+  "hints": [],
   "test_ids": [
     "OND.1.1.293"
   ],

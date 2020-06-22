@@ -23,6 +23,8 @@ class OndConfig(scfg.Config):
 
         'dataset_root': "/home/eric/sail-on/images",
 
+        'hints': [],
+
         'detector_config': {
 
             'resnet_params': {},
@@ -38,7 +40,7 @@ class OndConfig(scfg.Config):
                 "cover_threshold": 0.7,
                 "distance_multiplier": 0.55
                 },
-    
+
             'known_kmeans_params': {},
 
             'dataloader_params': {
