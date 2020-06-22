@@ -1,5 +1,6 @@
 {
   "domain": "image_classification",
+  "hints": [],
   "test_ids": [
     "CONDDA.2.1.293"
   ],

@@ -18,6 +18,7 @@ class ConddaConfig(scfg.Config):
         'novelty_detector_class': scfg.Value("CONDDA_5_14_A1"),
         'seed': scfg.Value("seed"),
         'dataset_root': "",
+        'hints': [],
         'detector_config':
         {
             'efficientnet_params':
