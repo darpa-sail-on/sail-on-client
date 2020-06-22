@@ -125,7 +125,7 @@ pipenv shell
 4. Change `model_path` for `evm_params` in `local_ond_5_14_a1_nd.json` to point the model downloaded in the previous step
 3. Download the efficientnet model from following [link](https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing)
 5. Change `model_path` for `efficientnet_params` in `local_ond_5_14_a1_nd.json` to point the model downloaded in the previous step
-6.
+6. Change `dataset_root` in `local_ond_5_14_a1_nd.json`  to point to `sail-on/images` directory
 7. Run the client
     ```
       framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
@@ -146,7 +146,8 @@ pipenv shell
 4. Change `model_path` for `evm_params` in `local_ond_5_14_a2_nd.json` to point the model downloaded in the previous step
 3. Download the efficientnet model from following [link](https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing)
 5. Change `model_path` for `efficientnet_params` in `local_ond_5_14_a2_nd.json` to point the model downloaded in the previous step
-6. Run the client
+6. Change `dataset_root` in `local_ond_5_14_a1_nd.json`  to point to `sail-on/images` directory
+7. Run the client
     ```
       framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
     ```
