@@ -152,3 +152,12 @@ pipenv shell
       framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
     ```
 
+## Interpreting Results for Algorithms
+The results for the algorithm are stored in in `<results_directory>/<protocol_name>/image_classification`,
+where `<results_directory>` is specified by `--results-directory` parameter when the server is executed and `protocol`
+name would be either OND or CONDDA.
+
+For OND, every test would have three files. The files follow the following convention `session id.test name.novelty operation.csv`, where
+`session_id` is provided by the server, `test name` is specified in the json file and `novelty operation` would have the value detection,
+classification and characterization.
+
