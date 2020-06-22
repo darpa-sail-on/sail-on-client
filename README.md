@@ -125,16 +125,29 @@ pipenv shell
 4. Change `model_path` for `evm_params` in `local_ond_5_14_a1_nd.json` to point the model downloaded in the previous step
 3. Download the efficientnet model from following [link](https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing)
 5. Change `model_path` for `efficientnet_params` in `local_ond_5_14_a1_nd.json` to point the model downloaded in the previous step
-6. Run the client
+6.
+7. Run the client
     ```
       framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
     ```
 
 ### Running OND_5_14_A2 Algorithm
-1.
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory ond_5_14_a2
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running OND_5_14_A2
+    ```
+      cd merge_framework
+      cp config/ond_5_14_a2_nd.json config/local_ond_5_14_a2_nd.json
+    ```
+3. Download the evm model from following [link](https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing)
+4. Change `model_path` for `evm_params` in `local_ond_5_14_a2_nd.json` to point the model downloaded in the previous step
+3. Download the efficientnet model from following [link](https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing)
+5. Change `model_path` for `efficientnet_params` in `local_ond_5_14_a2_nd.json` to point the model downloaded in the previous step
+6. Run the client
+    ```
+      framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
+    ```
 
-### Running CONDDA_5_14_A1 Algorithm
-1.
-
-### Running  CONDDA_5_14_A1 Algorithm
-1.
