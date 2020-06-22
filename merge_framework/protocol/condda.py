@@ -26,20 +26,26 @@ class Condda(BaseProtocol):
         novelty_detector_version = '1.0.0'
         novelty_detector_cv = (f"{self.config['novelty_detector_class']}"
                                f"{novelty_detector_version}")
+        hints = self.config['hints']
         self.toolset['session_id'] = \
                 self.test_harness.session_request(self.config['test_ids'],
                                                   "CONDDA",
-                                                  novelty_detector_cv)
+                                                  novelty_detector_cv,
+                                                  hints)
         session_id = self.toolset['session_id']
         print("New session:", self.toolset['session_id'])
         for test_id in self.config['test_ids']:
-            self.metadata = self.test_harness.get_test_metadata(test_id)
+            self.metadata = self.test_harness.get_test_metadata(test_id,
+                                                                session_id)
             self.toolset['test_id'] = test_id
             self.toolset['test_type'] = ""
             self.toolset['metadata'] = self.metadata
             if "red_light" in self.metadata:
                 self.toolset['red_light_image'] = \
                         self.toolset['metadata']["red_light"]
+            elif "red_light" in hints and "red_light" not in self.toolset['metadata']:
+                print(f"{hints} requested in session request is not present in metadata",
+                        file=sys.stderr)
             else:
                 self.toolset['red_light_image'] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
