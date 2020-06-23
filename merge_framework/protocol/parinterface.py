@@ -9,6 +9,8 @@ from framework.harness import Harness
 from typing import Any, Dict
 from requests import Response
 from uuid import UUID
+from errors import ApiError, ServerError
+from json import JSONDecodeError
 
 
 class ParInterface(Harness):
@@ -32,9 +34,18 @@ class ParInterface(Harness):
         :return: True
         """
         if response.status_code != 200:
-            # TODO: print more thorough information here
-            print("Server error: ", response.status_code)
-            exit(1)
+            try:
+                response_json = response.json()
+                # Find the appropriate error class based on error code.
+                for subclass in ApiError.error_classes():
+                    if subclass.error_code == response.status_code:
+                        raise subclass(
+                            response_json["reason"],
+                            response_json["message"],
+                            response_json["stack_trace"],
+                        )
+            except JSONDecodeError:
+                raise ServerError("Unknown", response.content.decode("UTF-8"), "")
 
     def test_ids_request(self, protocol: str, domain: str, detector_seed: str, test_assumptions: str = "{}",) -> str:
         """
