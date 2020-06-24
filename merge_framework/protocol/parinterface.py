@@ -95,7 +95,7 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()["session_id"]
 
-    def dataset_request(self, test_id: UUID, round_id: int, session_id: str) -> str:
+    def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
         """
         Request data for evaluation.
 
@@ -111,26 +111,11 @@ class ParInterface(Harness):
         )
 
         self._check_response(response)
-    
+
         filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}.csv'))
         with open(filename, "wb") as f:
             f.write(response.content)
         return filename
-
-    #TODO: merge this code directly into dataset_request, and stop writing so many files
-    def _append_data_root_to_dataset(self, dataset_path: str, test_id: UUID, session_id: str) -> str:
-        assert os.path.exists(dataset_path)
-        orig_dataset = open(dataset_path, "r")
-        with open(dataset_path, "r") as orig_dataset:
-            image_names = orig_dataset.readlines()
-            image_paths = [
-                os.path.join(self.configuration_data["data_location"], image_name) for image_name in image_names
-            ]
-        new_dataset_file = f"{session_id}_{test_id}.csv"
-        new_dataset_path = os.path.join(os.getcwd(), new_dataset_file)
-        with open(new_dataset_path, "w") as new_dataset:
-            new_dataset.writelines(image_paths)
-        return new_dataset_path
 
     def get_feedback_request(
         self,
@@ -163,12 +148,13 @@ class ParInterface(Harness):
         )
 
         self._check_response(response)
-
         filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}_{feedback_type}.csv'))
+        with open(filename, "wb") as f:
+            f.write(response.content)
 
         return filename
 
-    def post_results( self, result_files: Dict[str, str], test_id: UUID, round_id: int, session_id: str) -> None:
+    def post_results( self, result_files: Dict[str, str], test_id: str, round_id: int, session_id: str) -> None:
         """
         Post client detector predictions for the dataset.
 
@@ -193,15 +179,8 @@ class ParInterface(Harness):
 
         for r_type in result_files:
             with open(result_files[r_type], "r") as f:
-                contents = f.readlines()
-                data = ""
-                for line in contents:
-                    # strip the leading self.configuration_data['data_location'] off
-                    if line.startswith(self.configuration_data['data_location']):
-                        line = line[len(self.configuration_data['data_location'])+1:]
-                    data += line
-
-                files[f"{r_type}_file"] = io.StringIO(data)
+                contents = f.read()
+                files[f"{r_type}_file"] = io.StringIO(contents)
 
         response = requests.post(f"{self.api_url}/session/results", files=files)
 
