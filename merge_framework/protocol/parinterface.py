@@ -4,12 +4,13 @@ import requests
 import json
 import io
 import os
+import traceback
 
 from framework.harness import Harness
 from typing import Any, Dict
 from requests import Response
 from uuid import UUID
-from errors import ApiError, ServerError
+from errors import ApiError
 from json import JSONDecodeError
 
 
@@ -45,7 +46,8 @@ class ParInterface(Harness):
                             response_json["stack_trace"],
                         )
             except JSONDecodeError:
-                raise ServerError("Unknown", response.content.decode("UTF-8"), "")
+                print(f"Server Error: {traceback.format_exc()}")
+                exit(1)
 
     def test_ids_request(self, protocol: str, domain: str, detector_seed: str, test_assumptions: str = "{}",) -> str:
         """
