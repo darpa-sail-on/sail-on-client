@@ -4,11 +4,14 @@ import requests
 import json
 import io
 import os
+import traceback
 
 from framework.harness import Harness
 from typing import Any, Dict
 from requests import Response
 from uuid import UUID
+from merge_framework.errors import ApiError
+from json import JSONDecodeError
 
 
 class ParInterface(Harness):
@@ -32,9 +35,19 @@ class ParInterface(Harness):
         :return: True
         """
         if response.status_code != 200:
-            # TODO: print more thorough information here
-            print("Server error: ", response.status_code)
-            exit(1)
+            try:
+                response_json = response.json()
+                # Find the appropriate error class based on error code.
+                for subclass in ApiError.error_classes():
+                    if subclass.error_code == response.status_code:
+                        raise subclass(
+                            response_json["reason"],
+                            response_json["message"],
+                            response_json["stack_trace"],
+                        )
+            except JSONDecodeError:
+                print(f"Server Error: {traceback.format_exc()}")
+                exit(1)
 
     def test_ids_request(self, protocol: str, domain: str, detector_seed: str, test_assumptions: str = "{}",) -> str:
         """
