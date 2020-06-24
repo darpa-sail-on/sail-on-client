@@ -148,8 +148,9 @@ class ParInterface(Harness):
         )
 
         self._check_response(response)
-
         filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}_{feedback_type}.csv'))
+        with open(filename, "wb") as f:
+            f.write(response.content)
 
         return filename
 
