@@ -95,7 +95,7 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()["session_id"]
 
-    def dataset_request(self, test_id: UUID, round_id: int, session_id: str) -> str:
+    def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
         """
         Request data for evaluation.
 
@@ -168,7 +168,7 @@ class ParInterface(Harness):
 
         return filename
 
-    def post_results( self, result_files: Dict[str, str], test_id: UUID, round_id: int, session_id: str) -> None:
+    def post_results( self, result_files: Dict[str, str], test_id: str, round_id: int, session_id: str) -> None:
         """
         Post client detector predictions for the dataset.
 
