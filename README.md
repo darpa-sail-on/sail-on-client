@@ -173,7 +173,7 @@ pipenv shell
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
 10. Run the client
     ```
-      framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
+      framework merge_framework/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
     ```
 
 ### Running CONDDA_5_14_A2 Algorithm
@@ -197,7 +197,7 @@ pipenv shell
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
 10. Run the client
     ```
-      framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
+      framework merge_framework/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
     ```
 
 ## Interpreting Results for Algorithms
