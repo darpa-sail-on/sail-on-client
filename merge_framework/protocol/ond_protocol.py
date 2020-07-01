@@ -16,7 +16,7 @@ class SailOn( BaseProtocol ):
     def __init__( self, discovered_plugins, algorithmsdirectory, harness, config_file ):
         BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
         if not os.path.exists(config_file):
-            logging.critical(f"{config_file} does not exist", file=sys.stderr)
+            logging.error(f"{config_file} does not exist", file=sys.stderr)
             sys.exit(1)
 
         with open(config_file, 'r') as f:
@@ -104,5 +104,5 @@ class SailOn( BaseProtocol ):
             #cleanup the characterization file
             os.remove(results['characterization'])
 
-        logging.critical( f"Session ended: {self.toolset['session_id']}" )
+        logging.error( f"Session ended: {self.toolset['session_id']}" )
         self.test_harness.terminate_session(session_id)

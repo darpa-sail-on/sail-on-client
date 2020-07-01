@@ -47,7 +47,7 @@ class ParInterface(Harness):
                             response_json["stack_trace"],
                         )
             except JSONDecodeError:
-                logging.critical(f"Server Error: {traceback.format_exc()}")
+                logging.error(f"Server Error: {traceback.format_exc()}")
                 exit(1)
 
     def test_ids_request(self, protocol: str, domain: str, detector_seed: str, test_assumptions: str = "{}",) -> str:
