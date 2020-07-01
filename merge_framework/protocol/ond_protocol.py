@@ -1,6 +1,7 @@
 from framework.baseprotocol import BaseProtocol
 
 from ond_config import OndConfig
+from merge_framework.errors import RoundError
 from importlib_metadata import version
 from itertools import count
 import os
@@ -66,7 +67,7 @@ class SailOn( BaseProtocol ):
                 try:
                     self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id,
                                                                                  session_id )
-                except:
+                except RoundError:
                     # no more rounds available, this test is done.
                     break
 
