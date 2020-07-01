@@ -1,5 +1,6 @@
 from framework.baseprotocol import BaseProtocol
 from condda_config import ConddaConfig
+from merge_framework.errors import RoundError
 from itertools import count
 import os
 import json
@@ -56,7 +57,7 @@ class Condda(BaseProtocol):
                             self.test_harness.dataset_request(test_id,
                                                               round_id,
                                                               session_id )
-                except:
+                except RoundError:
                     # no more rounds available, this test is done.
                     break
                 self.toolset['features_dict'], self.toolset['logit_dict'] = \
