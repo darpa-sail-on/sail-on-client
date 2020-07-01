@@ -77,6 +77,7 @@ class Condda(BaseProtocol):
                 novelty_algorithm.execute(self.toolset,
                                           "NoveltyAdaption")
                 #cleanup the round files
+                os.remove(self.toolset['dataset'])
                 os.remove(results['detection'])
                 os.remove(results['characterization'])
             print( "Test complete:", self.toolset['test_id'] )

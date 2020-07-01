@@ -87,6 +87,7 @@ class SailOn( BaseProtocol ):
                 print("Round complete:", self.toolset['round_id'])
 
                 #cleanup the round files
+                os.remove(self.toolset['dataset'])
                 os.remove(results['detection'])
                 os.remove(results['classification'])
                     
