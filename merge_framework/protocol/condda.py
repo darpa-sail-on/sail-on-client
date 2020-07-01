@@ -4,13 +4,14 @@ from itertools import count
 import os
 import json
 import sys
+import logging
 
 
 class Condda(BaseProtocol):
     def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
         BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
         if not os.path.exists(config_file):
-            print(f"{config_file} does not exist", file=sys.stderr)
+            logging.critical(f"{config_file} does not exist", file=sys.stderr)
             sys.exit(1)
 
         with open(config_file, 'r') as f:
@@ -31,7 +32,7 @@ class Condda(BaseProtocol):
                                                   "CONDDA",
                                                   novelty_detector_cv)
         session_id = self.toolset['session_id']
-        print("New session:", self.toolset['session_id'])
+        logging.info(f"New session: {self.toolset['session_id']}")
         for test_id in self.config['test_ids']:
             self.metadata = self.test_harness.get_test_metadata(test_id)
             self.toolset['test_id'] = test_id
@@ -46,10 +47,10 @@ class Condda(BaseProtocol):
             self.toolset['image_features'] = {}
             self.toolset['dataset_root'] = self.config['dataset_root']
             self.toolset['dataset_ids'] = list()
-            print("Start test:", self.toolset['test_id'])
+            logging.info(f"Start test: {self.toolset['test_id']}")
             for round_id in count(0):
                 self.toolset['round_id'] = round_id
-                print("Start round:", self.toolset['round_id'])
+                logging.info(f"Start round: {self.toolset['round_id']}")
                 # see if there is another round available
                 try:
                     self.toolset['dataset'] = \
@@ -73,12 +74,12 @@ class Condda(BaseProtocol):
                                                test_id,
                                                round_id,
                                                session_id )
-                print("Round complete:", self.toolset['round_id'])
+                logging.info(f"Round complete: {self.toolset['round_id']}")
                 novelty_algorithm.execute(self.toolset,
                                           "NoveltyAdaption")
                 #cleanup the round files
                 os.remove(results['detection'])
                 os.remove(results['characterization'])
-            print( "Test complete:", self.toolset['test_id'] )
-        print( "Session ended:", self.toolset['session_id'] )
+            logging.info( f"Test complete: {self.toolset['test_id']}" )
+        logging.info( f"Session ended: {self.toolset['session_id']}" )
         self.test_harness.terminate_session(session_id)
