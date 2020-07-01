@@ -11,7 +11,7 @@ class Condda(BaseProtocol):
     def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
         BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
         if not os.path.exists(config_file):
-            logging.error(f"{config_file} does not exist", file=sys.stderr)
+            logging.error(f"{config_file} does not exist")
             sys.exit(1)
 
         with open(config_file, 'r') as f:
