@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7e7ef69da7248742e869378f8421880cf8f0017f96d94d086813baa518a65489"
+            "sha256": "8cdd2959fc37a998b753d78266a0d7f1f012d64e0dbe7b3c68278c264fffc797"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,5 +16,10 @@
         ]
     },
     "default": {},
-    "develop": {}
+    "develop": {
+        "framework": {
+            "editable": true,
+            "path": "./../framework"
+        }
+    }
 }
