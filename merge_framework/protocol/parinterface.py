@@ -5,6 +5,7 @@ import json
 import io
 import os
 import traceback
+import logging
 
 from framework.harness import Harness
 from typing import Any, Dict
@@ -46,7 +47,7 @@ class ParInterface(Harness):
                             response_json["stack_trace"],
                         )
             except JSONDecodeError:
-                print(f"Server Error: {traceback.format_exc()}")
+                logging.exception(f"Server Error: {traceback.format_exc()}")
                 exit(1)
 
     def test_ids_request(self, protocol: str, domain: str, detector_seed: str, test_assumptions: str = "{}",) -> str:

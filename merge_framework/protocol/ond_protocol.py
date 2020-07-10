@@ -7,6 +7,7 @@ from itertools import count
 import os
 import json
 import sys
+import logging
 
 class SailOn( BaseProtocol ):
 
@@ -16,7 +17,7 @@ class SailOn( BaseProtocol ):
     def __init__( self, discovered_plugins, algorithmsdirectory, harness, config_file ):
         BaseProtocol.__init__(self, discovered_plugins, algorithmsdirectory, harness, config_file)
         if not os.path.exists(config_file):
-            print(f"{config_file} does not exist", file=sys.stderr)
+            logging.error(f"{config_file} does not exist")
             sys.exit(1)
 
         with open(config_file, 'r') as f:
@@ -39,7 +40,7 @@ class SailOn( BaseProtocol ):
                 "%s.%s" % (self.config['novelty_detector_class'], novelty_detector_version ) )
         session_id = self.toolset['session_id']
 
-        print( "New session:", self.toolset['session_id'] )
+        logging.info( f"New session: {self.toolset['session_id']}" )
 
         for test in self.config['test_ids']:
             self.metadata = self.test_harness.get_test_metadata(test)
@@ -57,12 +58,12 @@ class SailOn( BaseProtocol ):
             self.toolset['dataset_root'] = self.config['dataset_root']
             self.toolset['dataset_ids'] = list()
 
-            print( "Start test:", self.toolset['test_id'] )
+            logging.info( f"Start test: {self.toolset['test_id']}" )
 
             for round_id in count(0):
                 self.toolset['round_id'] = round_id
 
-                print( "Start round:", self.toolset['round_id'] )
+                logging.info( f"Start round: {self.toolset['round_id']}" )
                 # see if there is another round available
                 try:
                     self.toolset['dataset'] = self.test_harness.dataset_request( test, round_id,
@@ -85,7 +86,7 @@ class SailOn( BaseProtocol ):
                 self.test_harness.post_results( results, test, round_id, session_id )
                 with open(self.toolset['dataset'], "r") as dataset:
                     self.toolset['dataset_ids'].extend( dataset.readlines() )
-                print("Round complete:", self.toolset['round_id'])
+                logging.info( f"Round complete: {self.toolset['round_id']}")
 
                 #cleanup the round files
                 os.remove(self.toolset['dataset'])
@@ -100,10 +101,10 @@ class SailOn( BaseProtocol ):
             results['characterization'] = novelty_algorithm.execute(self.toolset, "NoveltyCharacterization")
             if results['characterization'] is not None and os.path.exists(results['characterization']):
                 self.test_harness.post_results( results, test, 0, session_id )
-            print( "Test complete:", self.toolset['test_id'] )
+            logging.info( f"Test complete: {self.toolset['test_id']}" )
 
             #cleanup the characterization file
             os.remove(results['characterization'])
 
-        print( "Session ended:", self.toolset['session_id'] )
+        logging.info( f"Session ended: {self.toolset['session_id']}" )
         self.test_harness.terminate_session(session_id)
