@@ -36,6 +36,9 @@ pyflann-py3 = ">=0.1.0"
 Pillow = ">=7.1.2"
 timm = {editable = true, path = "./../evm_based_novelty_detector/timm"}
 evm-based-novelty-detector = {editable = true, path = "./../evm_based_novelty_detector"}
+requests = ">=2.23"
+flask = ">=1.1"
+importlib-metadata = ">=1.6"
 
 [requires]
 python_version = "3.7"
