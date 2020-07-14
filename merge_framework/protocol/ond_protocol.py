@@ -8,6 +8,7 @@ import os
 import json
 import sys
 import logging
+import torch
 
 class SailOn( BaseProtocol ):
 
@@ -92,7 +93,7 @@ class SailOn( BaseProtocol ):
                 os.remove(self.toolset['dataset'])
                 os.remove(results['detection'])
                 os.remove(results['classification'])
-                    
+
 
             results = dict()
 
@@ -105,6 +106,6 @@ class SailOn( BaseProtocol ):
 
             #cleanup the characterization file
             os.remove(results['characterization'])
-
+            torch.cuda.empty_cache()
         logging.info( f"Session ended: {self.toolset['session_id']}" )
         self.test_harness.terminate_session(session_id)

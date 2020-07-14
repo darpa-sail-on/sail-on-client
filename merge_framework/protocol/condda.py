@@ -6,6 +6,7 @@ import os
 import json
 import sys
 import logging
+import torch
 
 
 class Condda(BaseProtocol):
@@ -83,5 +84,6 @@ class Condda(BaseProtocol):
                 os.remove(results['detection'])
                 os.remove(results['characterization'])
             logging.info( f"Test complete: {self.toolset['test_id']}" )
+            torch.cuda.empty_cache()
         logging.info( f"Session ended: {self.toolset['session_id']}" )
         self.test_harness.terminate_session(session_id)
