@@ -20,11 +20,34 @@ Client and Protocols for DARPA sail-on
 6. [Sail-On](https://gitlab.kitware.com/darpa-sail-on/sail-on)
 
 ## Installation
+
+### Installation with pipenv ( Recommended )
+1. Clone the repositories associated with different components in a working directory
+    ```
+      git clone https://gitlab.kitware.com/darpa_learn/framework.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/merge_framework.git
+    ```
+   This would create framework, sail-on, evm_based_novelty_detector and merge_framework directories in your working directory
+2. Use the development version of [framework](https://gitlab.kitware.com/darpa_learn/framework)
+   ```
+   cd framework
+   git checkout development
+   ```
+3. Install the different components in a virtual environment
+   ```
+   cd ../merge_framework
+   pipenv install
+   pipenv shell
+   ```
+
+### Installation without pipenv
 The installation requires cloning and installing multiple repositories. Thus after
 following the instructions for a repository, please move back to your
 your working directory.
 
-### Install Framework
+#### Install Framework
 1. Clone the [framework](https://gitlab.kitware.com/darpa_learn/framework) repository
    ```
    git clone https://gitlab.kitware.com/darpa_learn/framework.git
@@ -49,7 +72,7 @@ your working directory.
    pip install -e .
    ```
 
-### Install Sail-On Server
+#### Install Sail-On Server
 1. Clone the [sail_on](https://gitlab.kitware.com/darpa-sail-on/sail-on) repository
    ```
     git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
@@ -67,7 +90,7 @@ your working directory.
     pip install -e .
    ```
 
-### Install TA2 Agent
+#### Install TA2 Agent
 1. Clone [TA2 agent](https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector) repository
    ```
     git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
@@ -85,7 +108,7 @@ your working directory.
       pip install -e .
     ```
 
-### Install Sail-On Client
+#### Install Sail-On Client
 1. Clone the [merge_framework](https://gitlab.kitware.com/darpa-sail-on/merge_framework) repository
    ```
     git clone https://gitlab.kitware.com/darpa-sail-on/merge_framework.git
