@@ -7,7 +7,7 @@ Client and Protocols for DARPA sail-on
 2. [CONDDA](https://drive.google.com/file/d/1sIDLTgXivaguVfSp3g1qfe7sqiUcvFLA/view?usp=sharing)
 
 ### Client present in the repository
-1. [Par Interface](https://gitlab.kitware.com/darpa-sail-on/merge_framework/-/blob/master/merge_framework/protocol/parinterface.py)
+1. [Par Interface](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/blob/master/sail_on_client/protocol/parinterface.py)
 
 
 ## Requirements
@@ -27,9 +27,9 @@ Client and Protocols for DARPA sail-on
       git clone https://gitlab.kitware.com/darpa_learn/framework.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
-      git clone https://gitlab.kitware.com/darpa-sail-on/merge_framework.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create framework, sail-on, evm_based_novelty_detector and merge_framework directories in your working directory
+   This would create framework, sail-on, evm_based_novelty_detector and sail-on-client directories in your working directory
 2. Use the development version of [framework](https://gitlab.kitware.com/darpa_learn/framework)
    ```
    cd framework
@@ -37,7 +37,7 @@ Client and Protocols for DARPA sail-on
    ```
 3. Install the different components in a virtual environment
    ```
-   cd ../merge_framework
+   cd ../sail-on-client
    pipenv install
    pipenv shell
    ```
@@ -109,15 +109,15 @@ your working directory.
     ```
 
 #### Install Sail-On Client
-1. Clone the [merge_framework](https://gitlab.kitware.com/darpa-sail-on/merge_framework) repository
+1. Clone the [sail-on-client](https://gitlab.kitware.com/darpa-sail-on/sail-on-client) repository
    ```
-    git clone https://gitlab.kitware.com/darpa-sail-on/merge_framework.git
+    git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
    ```
-   This would create a directory called merge_framework in your working directory
+   This would create a directory called sail-on-client in your working directory
 
-2. Go into the merge_framework directory and install the dependencies for the client using
+2. Go into the sail-on-client directory and install the dependencies for the client using
    ```
-    cd merge_framework
+    cd sail-on-client
     pip install -r requirements.txt
    ```
 
@@ -141,7 +141,7 @@ pipenv shell
     ```
 2. Go to the sail on client repository and make a copy of the configuration file for running OND_5_14_A1
     ```
-      cd merge_framework
+      cd sail-on-client
       cp config/ond_5_14_a1_nd.json config/local_ond_5_14_a1_nd.json
     ```
 3. Download the evm model from following [link](https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing)
@@ -151,7 +151,7 @@ pipenv shell
 6. Change `dataset_root` in `local_ond_5_14_a1_nd.json`  to point to `sail-on/images` directory
 7. Run the client
     ```
-      framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
+      framework sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
     ```
 
 ### Running OND_5_14_A2 Algorithm
@@ -162,7 +162,7 @@ pipenv shell
     ```
 2. Go to the sail on client repository and make a copy of the configuration file for running OND_5_14_A2
     ```
-      cd merge_framework
+      cd sail-on-client
       cp config/ond_5_14_a2_nd.json config/local_ond_5_14_a2_nd.json
     ```
 3. Download the evm model from following [link](https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing)
@@ -172,7 +172,7 @@ pipenv shell
 6. Change `dataset_root` in `local_ond_5_14_a1_nd.json`  to point to `sail-on/images` directory
 7. Run the client
     ```
-      framework merge_framework/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
+      framework sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
     ```
 
 ### Running CONDDA_5_14_A1 Algorithm
@@ -183,7 +183,7 @@ pipenv shell
     ```
 2. Go to the sail on client repository and make a copy of the configuration file for running CONDDA_5_14_A1
     ```
-      cd merge_framework
+      cd sail-on-client
       cp config/condda_5_14_a1_nd.json config/local_condda_5_14_a1_nd.json
     ```
 3. Download the evm model from following [link](https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing)
@@ -196,7 +196,7 @@ pipenv shell
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
 10. Run the client
     ```
-      framework merge_framework/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
+      framework sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
     ```
 
 ### Running CONDDA_5_14_A2 Algorithm
@@ -207,7 +207,7 @@ pipenv shell
     ```
 2. Go to the sail on client repository and make a copy of the configuration file for running CONDDA_5_14_A2
     ```
-      cd merge_framework
+      cd sail-on-client
       cp config/condda_5_14_a2_nd.json config/local_condda_5_14_a2_nd.json
     ```
 3. Download the evm model from following [link](https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing)
@@ -220,7 +220,7 @@ pipenv shell
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
 10. Run the client
     ```
-      framework merge_framework/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
+      framework sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
     ```
 
 ## Interpreting Results for Algorithms
