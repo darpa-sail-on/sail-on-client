@@ -1,7 +1,7 @@
 from framework.baseprotocol import BaseProtocol
 
 from ond_config import OndConfig
-from merge_framework.errors import RoundError
+from sail_on_client.errors import RoundError
 from importlib_metadata import version
 from itertools import count
 import os
