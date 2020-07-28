@@ -6,7 +6,7 @@ class ConddaConfig(scfg.Config):
     Default configuration for CONDDA protocol
 
     Example:
-        >>> from merge_framework.protocol.condda_config import ConddaConfig
+        >>> from sail_on_client.protocol.condda_config import ConddaConfig
         >>> config = ConddaConfig()
         >>> print('config = {!r}'.format(config))
     """

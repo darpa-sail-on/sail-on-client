@@ -1,6 +1,6 @@
 from framework.baseprotocol import BaseProtocol
 from condda_config import ConddaConfig
-from merge_framework.errors import RoundError
+from sail_on_client.errors import RoundError
 from itertools import count
 import os
 import json
