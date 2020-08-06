@@ -1,9 +1,14 @@
 image: pytorch/pytorch:latest
 
-hello-world:
+.python-setup: &python-setup
+  - pip install pipenv
+  - pipenv install -d
+
+lint:
   tags:
     - linux
     - docker
     - build
   script:
-    - echo "hello, world"
+    - *python-setup
+    - pipenv run lint
