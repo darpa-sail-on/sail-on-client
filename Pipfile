@@ -60,3 +60,7 @@ python_version = "3.7"
 
 [pipenv]
 allow_prereleases = true
+
+[scripts]
+lint = "flake8"
+format = "black ."
