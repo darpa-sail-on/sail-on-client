@@ -1,9 +1,11 @@
+"""Configuration module for CONDDA."""
+
 import scriptconfig as scfg
 
 
 class ConddaConfig(scfg.Config):
     """
-    Default configuration for CONDDA protocol
+    Default configuration for CONDDA protocol.
 
     Example:
         >>> from sail_on_client.protocol.condda_config import ConddaConfig
@@ -13,7 +15,7 @@ class ConddaConfig(scfg.Config):
 
     default = {
         "domain": scfg.Value("image_classification"),
-        "test_ids": ["CONDDA.2.1.293",],
+        "test_ids": ["CONDDA.2.1.293"],
         "novelty_detector_class": scfg.Value("CONDDA_5_14_A1"),
         "seed": scfg.Value("seed"),
         "dataset_root": "",

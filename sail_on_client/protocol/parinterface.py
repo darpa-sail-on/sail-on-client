@@ -10,7 +10,6 @@ import logging
 from framework.harness import Harness
 from typing import Any, Dict
 from requests import Response
-from uuid import UUID
 from sail_on_client.errors import ApiError
 from json import JSONDecodeError
 

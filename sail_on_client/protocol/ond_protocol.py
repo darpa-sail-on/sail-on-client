@@ -1,8 +1,9 @@
+"""OND protocol."""
+
 from framework.baseprotocol import BaseProtocol
 
 from ond_config import OndConfig
 from sail_on_client.errors import RoundError
-from importlib_metadata import version
 from itertools import count
 import os
 import json
@@ -11,7 +12,11 @@ import logging
 
 
 class SailOn(BaseProtocol):
+    """The base protocol for Sail On."""
+
     def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
+        """Initialize."""
+
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
         )
@@ -24,6 +29,7 @@ class SailOn(BaseProtocol):
         self.config = OndConfig(overriden_config)
 
     def run_protocol(self):
+        """Run the protocol."""
 
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
@@ -33,7 +39,6 @@ class SailOn(BaseProtocol):
         )
 
         # TODO: fix the version below
-        # novelty_detector_version = version(novelty_algorithm.__module__)
         novelty_detector_version = "1.0.0"
 
         self.toolset["session_id"] = self.test_harness.session_request(
@@ -59,7 +64,7 @@ class SailOn(BaseProtocol):
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset["image_features"] = {}
             self.toolset["dataset_root"] = self.config["dataset_root"]
-            self.toolset["dataset_ids"] = list()
+            self.toolset["dataset_ids"] = []
 
             logging.info(f"Start test: {self.toolset['test_id']}")
 
@@ -81,7 +86,7 @@ class SailOn(BaseProtocol):
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
-                results = dict()
+                results = {}
 
                 results["detection"] = novelty_algorithm.execute(
                     self.toolset, "WorldDetection"
@@ -101,7 +106,7 @@ class SailOn(BaseProtocol):
                 os.remove(results["detection"])
                 os.remove(results["classification"])
 
-            results = dict()
+            results = {}
 
             self.toolset["dataset_ids"] = [
                 image_id.strip() for image_id in self.toolset["dataset_ids"]

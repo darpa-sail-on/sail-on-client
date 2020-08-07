@@ -1,3 +1,5 @@
+"""CONDDA protocol."""
+
 from framework.baseprotocol import BaseProtocol
 from condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
@@ -9,7 +11,11 @@ import logging
 
 
 class Condda(BaseProtocol):
+    """CONDDA protocol."""
+
     def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
+        """Initialize."""
+
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
         )
@@ -22,13 +28,14 @@ class Condda(BaseProtocol):
         self.config = ConddaConfig(overriden_config)
 
     def run_protocol(self):
+        """Run protocol."""
+
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
         novelty_algorithm = self.get_algorithm(
             self.config["novelty_detector_class"], self.toolset
         )
         # TODO: fix the version below
-        # novelty_detector_version = version(novelty_algorithm.__module__)
         novelty_detector_version = "1.0.0"
         novelty_detector_cv = (
             f"{self.config['novelty_detector_class']}" f"{novelty_detector_version}"
@@ -50,7 +57,7 @@ class Condda(BaseProtocol):
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset["image_features"] = {}
             self.toolset["dataset_root"] = self.config["dataset_root"]
-            self.toolset["dataset_ids"] = list()
+            self.toolset["dataset_ids"] = []
             logging.info(f"Start test: {self.toolset['test_id']}")
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
@@ -67,7 +74,7 @@ class Condda(BaseProtocol):
                     self.toolset["features_dict"],
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
-                results = dict()
+                results = {}
                 results["detection"] = novelty_algorithm.execute(
                     self.toolset, "WorldDetection"
                 )

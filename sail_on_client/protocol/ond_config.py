@@ -1,9 +1,11 @@
+"""Configuration module for OND protocol."""
+
 import scriptconfig as scfg
 
 
 class OndConfig(scfg.Config):
     """
-    Default configuration for Ond protocol
+    Default configuration for Ond protocol.
 
     Example:
         >>> from learn.protocol.learn_config import LearnConfig
@@ -13,7 +15,7 @@ class OndConfig(scfg.Config):
 
     default = {
         "domain": scfg.Value("image_classification"),
-        "test_ids": ["OND.1.1.293",],
+        "test_ids": ["OND.1.1.293"],
         "novelty_detector_class": scfg.Value("OND_5_14_A1"),
         "seed": scfg.Value("seed"),
         "dataset_root": "/home/eric/sail-on/images",
