@@ -53,7 +53,7 @@ requests = ">=2.23"
 flask = ">=1.1"
 importlib-metadata = ">=1.6"
 sail-on = {editable = true, path = "./../sail-on"}
-merge-framework = {editable = true, path = "."}
+sail-on-client = {editable = true, path = "."}
 
 [requires]
 python_version = "3.7"
