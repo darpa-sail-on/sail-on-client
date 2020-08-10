@@ -1,9 +1,18 @@
 image: pytorch/pytorch:latest
 
-hello-world:
+lint:
   tags:
     - linux
     - docker
     - build
   script:
-    - echo "hello, world"
+    - apt-get update
+    - apt-get install -y git build-essential
+    - pip install pipenv
+    - cd ..
+    - git clone https://${SAIL_ON_UNAME}:${SAIL_ON_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on
+    - git clone https://${EVM_BASED_ND_UNAME}:${EVM_BASED_ND_TOKEN}@gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector
+    - git clone https://${TINKER_ENGINE_UNAME}:${TINKER_ENGINE_TOKEN}@gitlab.kitware.com/darpa_learn/framework
+    - cd sail-on-client
+    - pipenv install -d
+    - pipenv run lint

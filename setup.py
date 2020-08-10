@@ -1,4 +1,6 @@
-from setuptools import setup, find_packages
+"""setup.py file."""
+
+from setuptools import setup
 
 with open("requirements.txt") as f:
     requirements = [line.strip() for line in f.readlines()]

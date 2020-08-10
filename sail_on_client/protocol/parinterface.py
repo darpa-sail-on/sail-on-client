@@ -10,7 +10,6 @@ import logging
 from framework.harness import Harness
 from typing import Any, Dict
 from requests import Response
-from uuid import UUID
 from sail_on_client.errors import ApiError
 from json import JSONDecodeError
 
@@ -50,7 +49,13 @@ class ParInterface(Harness):
                 logging.exception(f"Server Error: {traceback.format_exc()}")
                 exit(1)
 
-    def test_ids_request(self, protocol: str, domain: str, detector_seed: str, test_assumptions: str = "{}",) -> str:
+    def test_ids_request(
+        self,
+        protocol: str,
+        domain: str,
+        detector_seed: str,
+        test_assumptions: str = "{}",
+    ) -> str:
         """
         Request Test Identifiers as part of a series of individual tests.
 
@@ -73,18 +78,25 @@ class ParInterface(Harness):
 
         response = requests.get(
             f"{self.api_url}/test/ids",
-            files={"test_requirements": io.StringIO(json.dumps(payload)), "test_assumptions": io.StringIO(contents)},
+            files={
+                "test_requirements": io.StringIO(json.dumps(payload)),
+                "test_assumptions": io.StringIO(contents),
+            },
         )
 
         self._check_response(response)
 
-        filename = os.path.abspath(os.path.join(self.folder, f'{protocol}.{domain}.{detector_seed}.csv'))
+        filename = os.path.abspath(
+            os.path.join(self.folder, f"{protocol}.{domain}.{detector_seed}.csv")
+        )
         with open(filename, "w") as f:
             f.write(response.content.decode("utf-8"))
 
         return filename
 
-    def session_request(self, test_ids: list, protocol: str, novelty_detector_version: str):
+    def session_request(
+        self, test_ids: list, protocol: str, novelty_detector_version: str
+    ):
         """
         Create a new session to evaluate the detector using an empirical protocol.
 
@@ -103,7 +115,8 @@ class ParInterface(Harness):
         ids = "\n".join(test_ids) + "\n"
 
         response = requests.post(
-            f"{self.api_url}/session", files={"test_ids": ids, "configuration": io.StringIO(json.dumps(payload))},
+            f"{self.api_url}/session",
+            files={"test_ids": ids, "configuration": io.StringIO(json.dumps(payload))},
         )
 
         self._check_response(response)
@@ -126,7 +139,9 @@ class ParInterface(Harness):
 
         self._check_response(response)
 
-        filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}.csv'))
+        filename = os.path.abspath(
+            os.path.join(self.folder, f"{session_id}.{test_id}.{round_id}.csv")
+        )
         with open(filename, "wb") as f:
             f.write(response.content)
         return filename
@@ -137,7 +152,7 @@ class ParInterface(Harness):
         feedback_type: str,
         test_id: str,
         round_id: int,
-        session_id: str
+        session_id: str,
     ) -> Dict[str, Any]:
         """
         Get Labels from the server based provided one or more example ids.
@@ -162,13 +177,19 @@ class ParInterface(Harness):
         )
 
         self._check_response(response)
-        filename = os.path.abspath(os.path.join(self.folder, f'{session_id}.{test_id}.{round_id}_{feedback_type}.csv'))
+        filename = os.path.abspath(
+            os.path.join(
+                self.folder, f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv"
+            )
+        )
         with open(filename, "wb") as f:
             f.write(response.content)
 
         return filename
 
-    def post_results( self, result_files: Dict[str, str], test_id: str, round_id: int, session_id: str) -> None:
+    def post_results(
+        self, result_files: Dict[str, str], test_id: str, round_id: int, session_id: str
+    ) -> None:
         """
         Post client detector predictions for the dataset.
 
@@ -217,7 +238,11 @@ class ParInterface(Harness):
 
         self._check_response(response)
 
-        filename = os.path.abspath(os.path.join(self.folder,f'{session_id}.{test_id}.{round_id}_evaluation.csv'))
+        filename = os.path.abspath(
+            os.path.join(
+                self.folder, f"{session_id}.{test_id}.{round_id}_evaluation.csv"
+            )
+        )
 
         with open(filename, "w") as f:
             f.write(response.content.decode("utf-8"))
@@ -233,7 +258,9 @@ class ParInterface(Harness):
         Returns:
             metadata json
         """
-        response = requests.get(f"{self.api_url}/test/metadata", params={"test_id": test_id},)
+        response = requests.get(
+            f"{self.api_url}/test/metadata", params={"test_id": test_id},
+        )
 
         self._check_response(response)
         return response.json()
@@ -245,6 +272,8 @@ class ParInterface(Harness):
         Arguments:
         Returns: No return
         """
-        response = requests.delete(f"{self.api_url}/session", params={"session_id": session_id})
+        response = requests.delete(
+            f"{self.api_url}/session", params={"session_id": session_id}
+        )
 
         self._check_response(response)

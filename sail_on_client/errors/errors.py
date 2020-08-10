@@ -1,6 +1,6 @@
 """Exception objects representing HTTP error conditions."""
 
-from typing import Any, List, Tuple, TypeVar, Dict
+from typing import Any, List, Tuple, Dict
 
 
 def _get_all_subclasses(cls: Any) -> List[Any]:
