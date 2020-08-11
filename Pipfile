@@ -20,7 +20,7 @@ black = "==19.10b0"
 
 [packages]
 scriptconfig = "==0.5.6"
-framework = {editable = true, path = "./../framework"}
+tinker = {editable = true, path = "./../tinker"}
 gzip-reader = "==0.1"
 h5py = ">=2.10.0"
 json5 = ">=0.9.4"
