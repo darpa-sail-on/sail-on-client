@@ -151,7 +151,7 @@ pipenv shell
 6. Change `dataset_root` in `local_ond_5_14_a1_nd.json`  to point to `sail-on/images` directory
 7. Run the client
     ```
-      framework sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
     ```
 
 ### Running OND_5_14_A2 Algorithm
@@ -172,7 +172,7 @@ pipenv shell
 6. Change `dataset_root` in `local_ond_5_14_a1_nd.json`  to point to `sail-on/images` directory
 7. Run the client
     ```
-      framework sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
     ```
 
 ### Running CONDDA_5_14_A1 Algorithm
@@ -196,7 +196,7 @@ pipenv shell
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
 10. Run the client
     ```
-      framework sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
     ```
 
 ### Running CONDDA_5_14_A2 Algorithm
@@ -220,7 +220,7 @@ pipenv shell
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
 10. Run the client
     ```
-      framework sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
     ```
 
 ## Interpreting Results for Algorithms
