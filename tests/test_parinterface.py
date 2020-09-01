@@ -147,7 +147,6 @@ def test_post_results(server_setup, get_interface_params, protocol_constant, pro
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
 
 
-@pytest.mark.dependency(depends=["test_post_results"])
 @pytest.mark.parametrize("protocol_constant", ["detection", "classification", "characterization"])
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_feedback_request(server_setup, get_interface_params, protocol_constant, protocol_name):
