@@ -4,8 +4,6 @@ import pytest
 
 from sail_on_client.errors import ServerError
 
-from .helpers import server_setup, get_interface_params
-
 
 def _initialize_session(par_interface):
     """

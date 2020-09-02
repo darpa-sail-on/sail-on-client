@@ -1,4 +1,5 @@
-from .helpers import server_setup, get_interface_params, discoverable_plugins
+"""Tests for OND protocol."""
+
 from tempfile import TemporaryDirectory
 import json
 import pytest
