@@ -1,4 +1,4 @@
-from framework.basealgorithm import BaseAlgorithm
+from tinker.basealgorithm import BaseAlgorithm
 import logging
 
 class MockDetector(BaseAlgorithm):
