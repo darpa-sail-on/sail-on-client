@@ -12,7 +12,7 @@ lint:
     - cd ..
     - git clone https://${SAIL_ON_UNAME}:${SAIL_ON_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on
     - git clone https://${EVM_BASED_ND_UNAME}:${EVM_BASED_ND_TOKEN}@gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector
-    - git clone https://${TINKER_ENGINE_UNAME}:${TINKER_ENGINE_TOKEN}@gitlab.kitware.com/darpa_learn/framework
+    - git clone https://${TINKER_ENGINE_UNAME}:${TINKER_ENGINE_TOKEN}@gitlab.kitware.com/darpa_learn/tinker-engine
     - cd sail-on-client
     - pipenv install -d
     - pipenv run lint
