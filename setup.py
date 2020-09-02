@@ -1,6 +1,6 @@
 """setup.py file."""
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open("requirements.txt") as f:
     requirements = [line.strip() for line in f.readlines()]
@@ -22,8 +22,14 @@ setup(
     name="sail_on_client",
     setup_requires=setup_requirements,
     install_requires=requirements,
+    packages=find_packages(),
     test_suite="tests",
     url="https://gitlab.kitware.com/darpa-sail-on/merge_framework",
     version="0.0.1",
     zip_safe=False,
+    entry_points={
+        'framework': [
+            'MockDetector = sail_on_client.mock:MockDetector'
+        ]
+    }
 )
