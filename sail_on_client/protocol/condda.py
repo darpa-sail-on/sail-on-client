@@ -1,7 +1,7 @@
 """CONDDA protocol."""
 
 from tinker.baseprotocol import BaseProtocol
-from condda_config import ConddaConfig
+from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
 from itertools import count
 import os
