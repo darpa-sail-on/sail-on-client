@@ -1,7 +1,6 @@
 """OND protocol."""
 
-from framework.baseprotocol import BaseProtocol
-
+from tinker.baseprotocol import BaseProtocol
 from ond_config import OndConfig
 from sail_on_client.errors import RoundError
 from itertools import count

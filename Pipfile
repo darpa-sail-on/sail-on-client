@@ -20,16 +20,16 @@ black = "==19.10b0"
 
 [packages]
 scriptconfig = "==0.5.6"
-framework = {editable = true, path = "./../framework"}
+tinker-engine = {editable = true, path = "./../tinker-engine"}
 gzip-reader = "==0.1"
 h5py = ">=2.10.0"
 json5 = ">=0.9.4"
 jsonlib-python3 = ">=1.6.1"
 jsonschema = ">=3.2.0"
 Cython = "==0.29.20"
-libmr = ">=0.1.9"
 multiprocess = ">=0.70.9"
 numpy = ">=1.18.3"
+libmr = ">=0.1.9"
 opencv-python = ">=4.2.0.34"
 pandas = ">=1.0.3"
 matplotlib = ">=3.2.2"

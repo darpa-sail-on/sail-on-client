@@ -7,7 +7,7 @@ import os
 import traceback
 import logging
 
-from framework.harness import Harness
+from tinker.harness import Harness
 from typing import Any, Dict
 from requests import Response
 from sail_on_client.errors import ApiError
