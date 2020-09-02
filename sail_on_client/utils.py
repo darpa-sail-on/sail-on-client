@@ -1,5 +1,6 @@
 import os
 
+
 def safe_remove(file_path):
     """
     Remove a file after checking that it exists

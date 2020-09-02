@@ -1,10 +1,12 @@
 from tinker.basealgorithm import BaseAlgorithm
 import logging
 
+
 class MockDetector(BaseAlgorithm):
     """
     Mock detector for testing
     """
+
     def __init__(self, toolset):
         """
         Constructor for the detector
@@ -14,13 +16,13 @@ class MockDetector(BaseAlgorithm):
         """
         BaseAlgorithm.__init__(self, toolset)
         self.step_dict = {
-                "Initialize": self._initialize,
-                "FeatureExtraction": self._feature_extraction,
-                "WorldDetection": self._world_detection,
-                "NoveltyClassification": self._novelty_classification,
-                "NoveltyAdaption": self._novelty_adaption,
-                "NoveltyCharacterization": self._novelty_characterization
-                }
+            "Initialize": self._initialize,
+            "FeatureExtraction": self._feature_extraction,
+            "WorldDetection": self._world_detection,
+            "NoveltyClassification": self._novelty_classification,
+            "NoveltyAdaption": self._novelty_adaption,
+            "NoveltyCharacterization": self._novelty_characterization,
+        }
 
     def execute(self, toolset, step_descriptor):
         """

@@ -6,6 +6,7 @@ from sail_on_client.errors import ServerError
 
 from .helpers import server_setup, get_interface_params
 
+
 def _initialize_session(par_interface):
     """
     Private function to initialize session
@@ -16,12 +17,14 @@ def _initialize_session(par_interface):
     Return:
         session id
     """
-    test_id_path = os.path.join(os.path.dirname(__file__), "data", "OND",
-            "image_classification", "test_ids.csv")
-    test_ids = list(map(str.strip, open(test_id_path, 'r').readlines()))
+    test_id_path = os.path.join(
+        os.path.dirname(__file__), "data", "OND", "image_classification", "test_ids.csv"
+    )
+    test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(test_ids, "OND", "0.1.1")
     return session_id
+
 
 def _read_image_ids(image_ids_path):
     """
@@ -33,7 +36,8 @@ def _read_image_ids(image_ids_path):
     Return:
         list of image ids
     """
-    return list(map(str.strip, open(image_ids_path, 'r').readlines()))
+    return list(map(str.strip, open(image_ids_path, "r").readlines()))
+
 
 def test_initialize(server_setup, get_interface_params):
     """
@@ -47,9 +51,11 @@ def test_initialize(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     assert par_interface.api_url == server_setup[0]
+
 
 def test_test_ids_request(server_setup, get_interface_params):
     """
@@ -63,6 +69,7 @@ def test_test_ids_request(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
@@ -75,6 +82,7 @@ def test_test_ids_request(server_setup, get_interface_params):
     assert os.stat(expected).st_size > 5
     assert expected == filename
 
+
 def test_session_request(server_setup, get_interface_params):
     """
     Test session request
@@ -86,14 +94,17 @@ def test_session_request(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
-    test_id_path = os.path.join(os.path.dirname(__file__), "data", "OND",
-            "image_classification", "test_ids.csv")
-    test_ids = list(map(str.strip, open(test_id_path, 'r').readlines()))
+    test_id_path = os.path.join(
+        os.path.dirname(__file__), "data", "OND", "image_classification", "test_ids.csv"
+    )
+    test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(test_ids, "OND", "0.1.1")
+
 
 def test_dataset_request(server_setup, get_interface_params):
     """
@@ -106,6 +117,7 @@ def test_dataset_request(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
@@ -113,16 +125,21 @@ def test_dataset_request(server_setup, get_interface_params):
     # Test correct dataset request
     filename = par_interface.dataset_request("OND.1.1.1234", 0, session_id)
     expected = os.path.join(config_directory, f"{session_id}.OND.1.1.1234.0.csv")
-    assert expected==filename
+    assert expected == filename
     expected_image_ids = _read_image_ids(expected)
     assert expected_image_ids == ["n01484850_18013.JPEG", "n01484850_24624.JPEG"]
     # Test incorrect dataset request
     with pytest.raises(ServerError):
         par_interface.dataset_request(f"{session_id}", "OND.1.1.1234", 3)
 
-@pytest.mark.parametrize("protocol_constant", ["detection", "classification", "characterization"])
+
+@pytest.mark.parametrize(
+    "protocol_constant", ["detection", "classification", "characterization"]
+)
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
-def test_post_results(server_setup, get_interface_params, protocol_constant, protocol_name):
+def test_post_results(
+    server_setup, get_interface_params, protocol_constant, protocol_name
+):
     """
     Tests for post results
 
@@ -135,21 +152,26 @@ def test_post_results(server_setup, get_interface_params, protocol_constant, pro
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     session_id = _initialize_session(par_interface)
     result_files = {
-            protocol_constant: os.path.join(
+        protocol_constant: os.path.join(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     }
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
 
 
-@pytest.mark.parametrize("protocol_constant", ["detection", "classification", "characterization"])
+@pytest.mark.parametrize(
+    "protocol_constant", ["detection", "classification", "characterization"]
+)
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
-def test_feedback_request(server_setup, get_interface_params, protocol_constant, protocol_name):
+def test_feedback_request(
+    server_setup, get_interface_params, protocol_constant, protocol_name
+):
     """
     Tests for feedback request
     Args:
@@ -162,13 +184,14 @@ def test_feedback_request(server_setup, get_interface_params, protocol_constant,
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     session_id = _initialize_session(par_interface)
     # Post results before posting
     result_files = {
-            protocol_constant: os.path.join(
+        protocol_constant: os.path.join(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     }
@@ -179,11 +202,14 @@ def test_feedback_request(server_setup, get_interface_params, protocol_constant,
         protocol_constant,
         f"{protocol_name}.1.1.1234",
         0,
-        session_id
+        session_id,
     )
-    expected = os.path.join(config_directory,
-                            f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv")
+    expected = os.path.join(
+        config_directory,
+        f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
+    )
     assert expected == response
+
 
 def test_evaluate(server_setup, get_interface_params):
     """
@@ -197,15 +223,17 @@ def test_evaluate(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     session_id = _initialize_session(par_interface)
     response = par_interface.evaluate("OND.1.1.1234", 0, session_id)
     expected = os.path.join(
-            config_directory, f"{session_id}.OND.1.1.1234.0_evaluation.csv"
+        config_directory, f"{session_id}.OND.1.1.1234.0_evaluation.csv"
     )
-    assert expected==response
+    assert expected == response
+
 
 def test_terminate_session(server_setup, get_interface_params):
     """
@@ -219,11 +247,13 @@ def test_terminate_session(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     session_id = _initialize_session(par_interface)
     par_interface.terminate_session(session_id)
+
 
 def test_get_metadata(server_setup, get_interface_params):
     """
@@ -237,6 +267,7 @@ def test_get_metadata(server_setup, get_interface_params):
         None
     """
     from sail_on_client.protocol.parinterface import ParInterface
+
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)

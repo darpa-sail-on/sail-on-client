@@ -27,9 +27,5 @@ setup(
     url="https://gitlab.kitware.com/darpa-sail-on/merge_framework",
     version="0.0.1",
     zip_safe=False,
-    entry_points={
-        'framework': [
-            'MockDetector = sail_on_client.mock:MockDetector'
-        ]
-    }
+    entry_points={"framework": ["MockDetector = sail_on_client.mock:MockDetector"]},
 )
