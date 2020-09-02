@@ -1,4 +1,6 @@
 # Sail-On Client and Protocols
+[![pipeline status](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/badges/master/pipeline.svg)](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/commits/master) [![coverage report](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/badges/master/coverage.svg)](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/commits/master)
+
 
 Client and Protocols for DARPA sail-on
 
