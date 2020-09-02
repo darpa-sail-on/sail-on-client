@@ -1,8 +1,10 @@
 """OND protocol."""
 
 from tinker.baseprotocol import BaseProtocol
-from ond_config import OndConfig
+
+from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError
+from sail_on_client.utils import safe_remove
 from itertools import count
 import os
 import json
@@ -32,7 +34,6 @@ class SailOn(BaseProtocol):
 
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
-
         novelty_algorithm = self.get_algorithm(
             self.config["novelty_detector_class"], self.toolset
         )
@@ -101,9 +102,9 @@ class SailOn(BaseProtocol):
                 logging.info(f"Round complete: {self.toolset['round_id']}")
 
                 # cleanup the round files
-                os.remove(self.toolset["dataset"])
-                os.remove(results["detection"])
-                os.remove(results["classification"])
+                safe_remove(self.toolset["dataset"])
+                safe_remove(results["detection"])
+                safe_remove(results["classification"])
 
             results = {}
 
@@ -121,7 +122,7 @@ class SailOn(BaseProtocol):
             logging.info(f"Test complete: {self.toolset['test_id']}")
 
             # cleanup the characterization file
-            os.remove(results["characterization"])
+            safe_remove(results["characterization"])
 
         logging.info(f"Session ended: {self.toolset['session_id']}")
         self.test_harness.terminate_session(session_id)
