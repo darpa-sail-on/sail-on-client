@@ -14,7 +14,7 @@ Client and Protocols for DARPA sail-on
 
 1. [Python 3.7](https://www.python.org/downloads/release/python-370/)
 2. [pipenv](https://pipenv.pypa.io/en/latest/)
-3. [Framework](https://gitlab.kitware.com/darpa_learn/framework)
+3. [tinker-engine](https://gitlab.kitware.com/darpa_learn/tinker-engine)
 4. [Script Config](https://pypi.org/project/scriptconfig)
 5. [TA-2 Agent](https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector)
 6. [Sail-On](https://gitlab.kitware.com/darpa-sail-on/sail-on)
@@ -24,18 +24,13 @@ Client and Protocols for DARPA sail-on
 ### Installation with pipenv ( Recommended )
 1. Clone the repositories associated with different components in a working directory
     ```
-      git clone https://gitlab.kitware.com/darpa_learn/framework.git
+      git clone https://gitlab.kitware.com/darpa_learn/tinker-engine.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create framework, sail-on, evm_based_novelty_detector and sail-on-client directories in your working directory
-2. Use the development version of [framework](https://gitlab.kitware.com/darpa_learn/framework)
-   ```
-   cd framework
-   git checkout development
-   ```
-3. Install the different components in a virtual environment
+   This would create tinker-engine, sail-on, evm_based_novelty_detector and sail-on-client directories in your working directory
+2. Install the different components in a virtual environment
    ```
    cd ../sail-on-client
    pipenv install
@@ -47,27 +42,21 @@ The installation requires cloning and installing multiple repositories. Thus aft
 following the instructions for a repository, please move back to your
 your working directory.
 
-#### Install Framework
-1. Clone the [framework](https://gitlab.kitware.com/darpa_learn/framework) repository
+#### Install Tinker Engine
+1. Clone the [tinker-engine](https://gitlab.kitware.com/darpa_learn/tinker-engine) repository
    ```
-   git clone https://gitlab.kitware.com/darpa_learn/framework.git
+   git clone https://gitlab.kitware.com/darpa_learn/tinker-engine.git
    ```
-   This would create a directory called framework in your working directory
+   This would create a directory called tinker-engine in your working directory
 
-2. Use the development version of [framework](https://gitlab.kitware.com/darpa_learn/framework)
-   ```
-   cd framework
-   git checkout development
-   ```
-
-3. Install the dependencies of the framework in a virtual environment
+2. Install the dependencies of the tinker-engine in a virtual environment
    ```
    pipenv install
    pipenv shell
    ```
    This would create a virtual environment and activate the environment. Please use this virtual environment for installing all other repositories.
 
-4. Install the framework in the virtual environment
+3. Install the tinker-engine in the virtual environment
    ```
    pip install -e .
    ```
@@ -127,11 +116,6 @@ your working directory.
    ```
 
 ## Running Client and Server with Different Algorithms
-Before running the client or server, activate the virtual environment from the framework repository using
-```
-cd framework
-pipenv shell
-```
 
 ### Running OND_5_14_A1 Algorithm
 1. Go to sail-on server directory and start the server using
