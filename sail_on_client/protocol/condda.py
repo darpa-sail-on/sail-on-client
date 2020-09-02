@@ -3,6 +3,7 @@
 from tinker.baseprotocol import BaseProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
+from sail_on_client.utils import safe_remove
 from itertools import count
 import os
 import json
@@ -85,9 +86,9 @@ class Condda(BaseProtocol):
                 logging.info(f"Round complete: {self.toolset['round_id']}")
                 novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 # cleanup the round files
-                os.remove(self.toolset["dataset"])
-                os.remove(results["detection"])
-                os.remove(results["characterization"])
+                safe_remove(self.toolset["dataset"])
+                safe_remove(results["detection"])
+                safe_remove(results["characterization"])
             logging.info(f"Test complete: {self.toolset['test_id']}")
         logging.info(f"Session ended: {self.toolset['session_id']}")
         self.test_harness.terminate_session(session_id)
