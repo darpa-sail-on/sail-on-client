@@ -1,3 +1,5 @@
+"""Tests for CONDDA protocol."""
+
 from tempfile import TemporaryDirectory
 import json
 import pytest
@@ -9,9 +11,7 @@ from sail_on_client.protocol.parinterface import ParInterface
 
 @pytest.fixture(scope="function")
 def condda_config():
-    """
-    Fixture to create a temporal directory and create a json file in it
-    """
+    """Fixture to create a temporal directory and create a json file in it."""
     with TemporaryDirectory() as config_folder:
         dummy_config = {
             "domain": "image_classification",
@@ -27,7 +27,7 @@ def test_initialize(
     server_setup, get_interface_params, discoverable_plugins, condda_config
 ):
     """
-    Test condda protocol initialization
+    Test condda protocol initialization.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
@@ -47,7 +47,7 @@ def test_run_protocol(
     server_setup, get_interface_params, discoverable_plugins, condda_config
 ):
     """
-    Test running protocol
+    Test running protocol.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory

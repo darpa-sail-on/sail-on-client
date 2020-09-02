@@ -1,9 +1,11 @@
+"""Utility function for sail-on-client."""
+
 import os
 
 
 def safe_remove(file_path):
     """
-    Remove a file after checking that it exists
+    Remove a file after checking that it exists.
 
     Args:
         file_path (str): File path that should be removed

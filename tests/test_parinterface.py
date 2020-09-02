@@ -1,3 +1,5 @@
+"""Tests for PAR Interface."""
+
 import os
 import pytest
 
@@ -7,7 +9,7 @@ from sail_on_client.errors import ServerError
 
 def _initialize_session(par_interface):
     """
-    Private function to initialize session
+    Private function to initialize session.
 
     Args:
         par_interface (ParInterface): An instance of ParInterface
@@ -26,7 +28,7 @@ def _initialize_session(par_interface):
 
 def _read_image_ids(image_ids_path):
     """
-    Private function to read image ids from a csv file
+    Private function to read image ids from a csv file.
 
     Args:
         image_ids_path (str): Path to a file containing image ids
@@ -39,7 +41,7 @@ def _read_image_ids(image_ids_path):
 
 def test_initialize(server_setup, get_interface_params):
     """
-    Test par interface initialization
+    Test par interface initialization.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
@@ -57,7 +59,7 @@ def test_initialize(server_setup, get_interface_params):
 
 def test_test_ids_request(server_setup, get_interface_params):
     """
-    Test request for test ids
+    Test request for test ids.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
@@ -83,7 +85,8 @@ def test_test_ids_request(server_setup, get_interface_params):
 
 def test_session_request(server_setup, get_interface_params):
     """
-    Test session request
+    Test session request.
+
     Args:
         server_setup (tuple): Tuple containing url and result directory
         get_interface_params (tuple): Tuple to configure par interface
@@ -101,12 +104,13 @@ def test_session_request(server_setup, get_interface_params):
     )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    session_id = par_interface.session_request(test_ids, "OND", "0.1.1")
+    par_interface.session_request(test_ids, "OND", "0.1.1")
 
 
 def test_dataset_request(server_setup, get_interface_params):
     """
-    Tests for dataset request
+    Tests for dataset request.
+
     Args:
         server_setup (tuple): Tuple containing url and result directory
         get_interface_params (tuple): Tuple to configure par interface
@@ -139,7 +143,7 @@ def test_post_results(
     server_setup, get_interface_params, protocol_constant, protocol_name
 ):
     """
-    Tests for post results
+    Tests for post results.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
@@ -171,7 +175,8 @@ def test_feedback_request(
     server_setup, get_interface_params, protocol_constant, protocol_name
 ):
     """
-    Tests for feedback request
+    Tests for feedback request.
+
     Args:
         server_setup (tuple): Tuple containing url and result directory
         get_interface_params (tuple): Tuple to configure par interface
@@ -255,7 +260,7 @@ def test_terminate_session(server_setup, get_interface_params):
 
 def test_get_metadata(server_setup, get_interface_params):
     """
-    Test get metadata
+    Test get metadata.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
@@ -269,7 +274,7 @@ def test_get_metadata(server_setup, get_interface_params):
     url, result_dir = server_setup
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
-    session_id = _initialize_session(par_interface)
+    _initialize_session(par_interface)
     metadata = par_interface.get_test_metadata("OND.1.1.1234")
 
     assert "OND" == metadata["protocol"]

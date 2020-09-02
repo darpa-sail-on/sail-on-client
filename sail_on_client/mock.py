@@ -1,15 +1,15 @@
+"""Mocks mainly used for testing protocols."""
+
 from tinker.basealgorithm import BaseAlgorithm
 import logging
 
 
 class MockDetector(BaseAlgorithm):
-    """
-    Mock detector for testing
-    """
+    """Mock Detector for testing image classification protocols."""
 
     def __init__(self, toolset):
         """
-        Constructor for the detector
+        Detector constructor.
 
         Args:
             toolset (dict): Dictionary containing parameters for the constructor
@@ -26,22 +26,18 @@ class MockDetector(BaseAlgorithm):
 
     def execute(self, toolset, step_descriptor):
         """
-        Execute method used by the protocol to run different steps associated with
-        the algorithm
+        Execute method used by the protocol to run different steps associated with the algorithm.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
             step_descriptor (str): Name of the step
-
-        Return:
-
         """
         logging.info(f"Executing {step_descriptor}")
         return self.step_dict[step_descriptor](toolset)
 
     def _initialize(self, toolset):
         """
-        Initialization for the algorithm
+        Algorithm Initialization.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -53,7 +49,7 @@ class MockDetector(BaseAlgorithm):
 
     def _feature_extraction(self, toolset):
         """
-        Feature extraction step for the algorithm
+        Feature extraction step for the algorithm.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -66,7 +62,8 @@ class MockDetector(BaseAlgorithm):
 
     def _world_detection(self, toolset):
         """
-        Detect change in world ( Novelty has been introduced )
+        Detect change in world ( Novelty has been introduced ).
+
         Args:
             toolset (dict): Dictionary containing parameters for different steps
 
@@ -77,7 +74,7 @@ class MockDetector(BaseAlgorithm):
 
     def _novelty_classification(self, toolset):
         """
-        Classify data provided in known classes and unknown class
+        Classify data provided in known classes and unknown class.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -89,7 +86,7 @@ class MockDetector(BaseAlgorithm):
 
     def _novelty_adaption(self, toolset):
         """
-        Update models based on novelty classification and characterization
+        Update models based on novelty classification and characterization.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -101,7 +98,7 @@ class MockDetector(BaseAlgorithm):
 
     def _novelty_characterization(self, toolset):
         """
-        Characterize novelty by clustering different novel samples
+        Characterize novelty by clustering different novel samples.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
