@@ -66,3 +66,5 @@ allow_prereleases = true
 [scripts]
 lint = "flake8"
 format = "black ."
+test-with-coverage = "coverage run --source=. -m pytest tests"
+coverage-report = "coverage report -m"
