@@ -5,17 +5,20 @@ from tinker.baseprotocol import BaseProtocol
 from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError
 from sail_on_client.utils import safe_remove
+from sail_on_client.protocol.parinterface import ParInterface
 from itertools import count
 import os
 import json
 import sys
 import logging
 
+from typing import Dict, Any
+
 
 class SailOn(BaseProtocol):
     """The base protocol for Sail On."""
 
-    def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
+    def __init__(self, discovered_plugins: Dict[str, Any], algorithmsdirectory: str, harness: ParInterface, config_file: str) -> None:
         """Initialize."""
 
         BaseProtocol.__init__(
@@ -29,7 +32,7 @@ class SailOn(BaseProtocol):
             overriden_config = json.load(f)
         self.config = OndConfig(overriden_config)
 
-    def run_protocol(self):
+    def run_protocol(self) -> None:
         """Run the protocol."""
 
         # provide all of the configuration information in the toolset
@@ -86,7 +89,7 @@ class SailOn(BaseProtocol):
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
-                results = {}
+                results: Dict[str, Any] = {}
 
                 results["detection"] = novelty_algorithm.execute(
                     self.toolset, "WorldDetection"
