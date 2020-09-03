@@ -3,7 +3,7 @@
 import os
 
 
-def safe_remove(file_path):
+def safe_remove(file_path: str) -> None:
     """
     Remove a file after checking that it exists.
 
