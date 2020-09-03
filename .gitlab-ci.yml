@@ -29,3 +29,13 @@ test-with-coverage:
     - *setup
     - pipenv run test-with-coverage
     - pipenv run coverage-report
+
+typecheck:
+  tags:
+    - linux
+    - docker
+    - build
+  script:
+    - *setup
+    - pipenv run typecheck
+
