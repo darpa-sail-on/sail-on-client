@@ -19,6 +19,7 @@ pep8-naming = "==0.10.0"
 black = "==19.10b0"
 pytest = ">=6.0.1"
 coverage = ">=5.2.1"
+sphinx = "*"
 
 [packages]
 scriptconfig = "==0.5.6"
