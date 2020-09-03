@@ -17,6 +17,8 @@ flake8-polyfill = ">=1.0"
 flake8-quotes = ">=3.0"
 pep8-naming = "==0.10.0"
 black = "==19.10b0"
+pytest = ">=6.0.1"
+coverage = ">=5.2.1"
 
 [packages]
 scriptconfig = "==0.5.6"
@@ -64,3 +66,5 @@ allow_prereleases = true
 [scripts]
 lint = "flake8"
 format = "black ."
+test-with-coverage = "coverage run --source=. -m pytest tests"
+coverage-report = "coverage report -m"
