@@ -6,7 +6,7 @@
 Welcome to Sail-On Client's documentation!
 ==========================================
 
-Release v\ |version|
+Release v\ |version| (:ref:`Installation <install>`)
 
 **Sail-On Client** is a library used for supporting evaluation of open world algorithms
 in `DARPA SAIL-ON`_. The library is based update work supported by DARPA under
@@ -25,7 +25,7 @@ providing empirical protocols that are used to systematically evaluate the agent
 multiple levels of the novelty hierarchy.
 
 Sail-On Client is built upon `tinker-engine`_, an open source library that provides the
-abstractions and runner interface used for running the empirical protocols
+abstractions and interface used for running the empirical protocols
 
 Features
 --------
