@@ -44,7 +44,7 @@ User Guide
    :maxdepth: 2
 
    user/install
-   user/running_agent
+   user/running_algorithms
 
 Empirical Protocols
 -------------------
