@@ -9,8 +9,8 @@ Welcome to Sail-On Client's documentation!
 Release v\ |version|
 
 **Sail-On Client** is a library used for supporting evaluation of open world algorithms
-in `DARPA SAIL-ON`_. The library was funded DARPA under Contract No. HR001120C0055
-and is licensed under `APACHE-V2 LICENSE`_.
+in `DARPA SAIL-ON`_. The library is based update work supported by DARPA under
+Contract No. HR001120C0055 and is licensed under `APACHE-V2 LICENSE`_.
 
 From the `SAIL-ON Website <https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty>`_:
 
