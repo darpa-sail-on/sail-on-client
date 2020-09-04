@@ -8,7 +8,7 @@ import traceback
 import logging
 
 from tinker.harness import Harness
-from typing import Any, Dict
+from typing import Any, Dict, Union
 from requests import Response
 from sail_on_client.errors import ApiError
 from json import JSONDecodeError
@@ -17,7 +17,7 @@ from json import JSONDecodeError
 class ParInterface(Harness):
     """Interface to PAR server."""
 
-    def __init__(self, configfile, configfolder) -> None:
+    def __init__(self, configfile: str, configfolder: str) -> None:
         """
         Initialize a client connection object.
 
@@ -96,7 +96,7 @@ class ParInterface(Harness):
 
     def session_request(
         self, test_ids: list, protocol: str, novelty_detector_version: str
-    ):
+    ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
 
@@ -132,10 +132,12 @@ class ParInterface(Harness):
         Returns:
             -filename of a file containing a list of image files (including full path for each)
         """
-        response = requests.get(
-            f"{self.api_url}/session/dataset",
-            params={"session_id": session_id, "test_id": test_id, "round_id": round_id},
-        )
+        params: Dict[str, Union[str, int]] = {
+            "session_id": session_id,
+            "test_id": test_id,
+            "round_id": round_id,
+        }
+        response = requests.get(f"{self.api_url}/session/dataset", params=params,)
 
         self._check_response(response)
 
@@ -153,7 +155,7 @@ class ParInterface(Harness):
         test_id: str,
         round_id: int,
         session_id: str,
-    ) -> Dict[str, Any]:
+    ) -> str:
         """
         Get Labels from the server based provided one or more example ids.
 
@@ -165,16 +167,14 @@ class ParInterface(Harness):
         Returns:
             -labels dictionary
         """
-        response = requests.get(
-            f"{self.api_url}/session/feedback",
-            params={
-                "feedback_ids": "|".join(feedback_ids),
-                "session_id": session_id,
-                "test_id": test_id,
-                "round_id": round_id,
-                "feedback_type": feedback_type,
-            },
-        )
+        params: Dict[str, Union[str, int]] = {
+            "feedback_ids": "|".join(feedback_ids),
+            "session_id": session_id,
+            "test_id": test_id,
+            "round_id": round_id,
+            "feedback_type": feedback_type,
+        }
+        response = requests.get(f"{self.api_url}/session/feedback", params=params,)
 
         self._check_response(response)
         filename = os.path.abspath(
@@ -231,10 +231,12 @@ class ParInterface(Harness):
         Returns:
             -filename
         """
-        response = requests.get(
-            f"{self.api_url}/session/evaluations",
-            params={"session_id": session_id, "test_id": test_id, "round_id": round_id},
-        )
+        params: Dict[str, Union[str, int]] = {
+            "session_id": session_id,
+            "test_id": test_id,
+            "round_id": round_id,
+        }
+        response = requests.get(f"{self.api_url}/session/evaluations", params=params,)
 
         self._check_response(response)
 

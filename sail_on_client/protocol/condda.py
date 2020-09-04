@@ -4,22 +4,33 @@ from tinker.baseprotocol import BaseProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
 from sail_on_client.utils import safe_remove
+from sail_on_client.protocol.parinterface import ParInterface
 from itertools import count
 import os
 import json
 import sys
 import logging
 
+from typing import Dict, Any
+
 
 class Condda(BaseProtocol):
     """CONDDA protocol."""
 
-    def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
+    def __init__(
+        self,
+        discovered_plugins: Dict[str, Any],
+        algorithmsdirectory: str,
+        harness: ParInterface,
+        config_file: str,
+    ) -> None:
         """Initialize."""
 
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
         )
+        # The duplication is mainly to prevent mypy attribute error associated with the harness
+        self.harness = harness
         if not os.path.exists(config_file):
             logging.error(f"{config_file} does not exist")
             sys.exit(1)
@@ -28,7 +39,7 @@ class Condda(BaseProtocol):
             overriden_config = json.load(f)
         self.config = ConddaConfig(overriden_config)
 
-    def run_protocol(self):
+    def run_protocol(self) -> None:
         """Run protocol."""
 
         # provide all of the configuration information in the toolset
@@ -41,13 +52,13 @@ class Condda(BaseProtocol):
         novelty_detector_cv = (
             f"{self.config['novelty_detector_class']}" f"{novelty_detector_version}"
         )
-        self.toolset["session_id"] = self.test_harness.session_request(
+        self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"], "CONDDA", novelty_detector_cv
         )
         session_id = self.toolset["session_id"]
         logging.info(f"New session: {self.toolset['session_id']}")
         for test_id in self.config["test_ids"]:
-            self.metadata = self.test_harness.get_test_metadata(test_id)
+            self.metadata = self.harness.get_test_metadata(test_id)
             self.toolset["test_id"] = test_id
             self.toolset["test_type"] = ""
             self.toolset["metadata"] = self.metadata
@@ -65,7 +76,7 @@ class Condda(BaseProtocol):
                 logging.info(f"Start round: {self.toolset['round_id']}")
                 # see if there is another round available
                 try:
-                    self.toolset["dataset"] = self.test_harness.dataset_request(
+                    self.toolset["dataset"] = self.harness.dataset_request(
                         test_id, round_id, session_id
                     )
                 except RoundError:
@@ -75,14 +86,14 @@ class Condda(BaseProtocol):
                     self.toolset["features_dict"],
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
-                results = {}
+                results: Dict[str, Any] = {}
                 results["detection"] = novelty_algorithm.execute(
                     self.toolset, "WorldDetection"
                 )
                 results["characterization"] = novelty_algorithm.execute(
                     self.toolset, "NoveltyCharacterization"
                 )
-                self.test_harness.post_results(results, test_id, round_id, session_id)
+                self.harness.post_results(results, test_id, round_id, session_id)
                 logging.info(f"Round complete: {self.toolset['round_id']}")
                 novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 # cleanup the round files
@@ -91,4 +102,4 @@ class Condda(BaseProtocol):
                 safe_remove(results["characterization"])
             logging.info(f"Test complete: {self.toolset['test_id']}")
         logging.info(f"Session ended: {self.toolset['session_id']}")
-        self.test_harness.terminate_session(session_id)
+        self.harness.terminate_session(session_id)

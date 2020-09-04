@@ -5,22 +5,33 @@ from tinker.baseprotocol import BaseProtocol
 from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError
 from sail_on_client.utils import safe_remove
+from sail_on_client.protocol.parinterface import ParInterface
 from itertools import count
 import os
 import json
 import sys
 import logging
 
+from typing import Dict, Any
+
 
 class SailOn(BaseProtocol):
     """The base protocol for Sail On."""
 
-    def __init__(self, discovered_plugins, algorithmsdirectory, harness, config_file):
+    def __init__(
+        self,
+        discovered_plugins: Dict[str, Any],
+        algorithmsdirectory: str,
+        harness: ParInterface,
+        config_file: str,
+    ) -> None:
         """Initialize."""
 
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
         )
+        # The duplication is mainly to prevent mypy attribute error associated with the harness
+        self.harness = harness
         if not os.path.exists(config_file):
             logging.error(f"{config_file} does not exist")
             sys.exit(1)
@@ -29,7 +40,7 @@ class SailOn(BaseProtocol):
             overriden_config = json.load(f)
         self.config = OndConfig(overriden_config)
 
-    def run_protocol(self):
+    def run_protocol(self) -> None:
         """Run the protocol."""
 
         # provide all of the configuration information in the toolset
@@ -41,7 +52,7 @@ class SailOn(BaseProtocol):
         # TODO: fix the version below
         novelty_detector_version = "1.0.0"
 
-        self.toolset["session_id"] = self.test_harness.session_request(
+        self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"],
             "OND",
             "%s.%s" % (self.config["novelty_detector_class"], novelty_detector_version),
@@ -51,10 +62,10 @@ class SailOn(BaseProtocol):
         logging.info(f"New session: {self.toolset['session_id']}")
 
         for test in self.config["test_ids"]:
-            self.metadata = self.test_harness.get_test_metadata(test)
+            self.metadata = self.harness.get_test_metadata(test)
             self.toolset["test_id"] = test
             self.toolset["test_type"] = ""
-            self.toolset["metadata"] = self.test_harness.get_test_metadata(test)
+            self.toolset["metadata"] = self.harness.get_test_metadata(test)
             if "red_light" in self.toolset["metadata"]:
                 self.toolset["redlight_image"] = os.path.join(
                     self.toolset["dataset_root"], self.toolset["metadata"]["red_light"]
@@ -74,7 +85,7 @@ class SailOn(BaseProtocol):
                 logging.info(f"Start round: {self.toolset['round_id']}")
                 # see if there is another round available
                 try:
-                    self.toolset["dataset"] = self.test_harness.dataset_request(
+                    self.toolset["dataset"] = self.harness.dataset_request(
                         test, round_id, session_id
                     )
                 except RoundError:
@@ -86,7 +97,7 @@ class SailOn(BaseProtocol):
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
-                results = {}
+                results: Dict[str, Any] = {}
 
                 results["detection"] = novelty_algorithm.execute(
                     self.toolset, "WorldDetection"
@@ -96,7 +107,7 @@ class SailOn(BaseProtocol):
                     self.toolset, "NoveltyClassification"
                 )
 
-                self.test_harness.post_results(results, test, round_id, session_id)
+                self.harness.post_results(results, test, round_id, session_id)
                 with open(self.toolset["dataset"], "r") as dataset:
                     self.toolset["dataset_ids"].extend(dataset.readlines())
                 logging.info(f"Round complete: {self.toolset['round_id']}")
@@ -118,11 +129,11 @@ class SailOn(BaseProtocol):
             if results["characterization"] is not None and os.path.exists(
                 results["characterization"]
             ):
-                self.test_harness.post_results(results, test, 0, session_id)
+                self.harness.post_results(results, test, 0, session_id)
             logging.info(f"Test complete: {self.toolset['test_id']}")
 
             # cleanup the characterization file
             safe_remove(results["characterization"])
 
         logging.info(f"Session ended: {self.toolset['session_id']}")
-        self.test_harness.terminate_session(session_id)
+        self.harness.terminate_session(session_id)
