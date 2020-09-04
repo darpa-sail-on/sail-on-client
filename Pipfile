@@ -20,6 +20,7 @@ black = "==19.10b0"
 pytest = ">=6.0.1"
 coverage = ">=5.2.1"
 sphinx = "*"
+sphinxcontrib-napoleon = "*"
 
 [packages]
 scriptconfig = "==0.5.6"
