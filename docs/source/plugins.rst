@@ -1,8 +1,8 @@
 Plugins
--------
+=======
 
 Introduction
-^^^^^^^^^^^^
+------------
 
 We rely on `Entry Points`_ to register an algorithm . The entrypoint specification
 can be used by a python package to register an algorithm by specifying a key value
@@ -11,7 +11,7 @@ and the value is the path to the algorithm class relative to the package root. R
 to :ref:`the registration section<Sample Detector and Registration>` for an example.
 
 Functions Used By the Protocol
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 The protocols assumes that the algorithm have the following functions during evaluation
 
@@ -35,21 +35,21 @@ The protocols assumes that the algorithm have the following functions during eva
    :code:`NoveltyCharacterization` depending on the protocol.
 
 Adapters And Toolset
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 TBD
 
 Sample Detector and Registration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
 
 Sample Detector
-"""""""""""""""
+^^^^^^^^^^^^^^^
 
 .. literalinclude:: ../../sail_on_client/mock.py
    :language: python
 
 Registering the Detector
-""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. literalinclude:: ../../setup.py
    :language: python

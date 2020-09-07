@@ -1,5 +1,5 @@
 API Documentation
------------------
+=================
 
 .. module:: sail_on_client
 
@@ -7,7 +7,8 @@ This part of the documentation provides reference documentation for all the modu
 of the package
 
 Interfaces
-^^^^^^^^^^
+----------
+
 We currently support HTTP rest based interface to communicate with the evaluation
 server. The interface has the following functions
 
@@ -15,7 +16,7 @@ server. The interface has the following functions
     :members:
 
 Protocols
-^^^^^^^^^
+---------
 
 We currently support two empirical protocols OND and CONDDA. Both the protocols
 have the same interface with the following functions
@@ -30,7 +31,7 @@ have the same interface with the following functions
     :undoc-members:
 
 Errors
-^^^^^^
+------
 
 We currently support 3 types of errors
 
@@ -55,7 +56,7 @@ The errors can be expanded upon by inheriting the base error class
 
 
 Utils
-^^^^^^
+-----
 
 .. automodule:: sail_on_client.utils
     :members:
