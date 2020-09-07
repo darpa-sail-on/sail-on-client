@@ -3,16 +3,16 @@ Open World Novelty Detection (OND)
 
 **K+1 classification where K represents known classes, all unknown classes are grouped together**
 
-Image Classification Domain
----------------------------
-
 Introduction
-^^^^^^^^^^^^
+------------
 
 This is the standard classification setup with an unknown class to flag/reject
 samples that are deemed novel. A TA2 agent can adapt its internal representation
 in any way during testing to model novel samples, but the expected prediction
 space (K+1-classes) remains the same throughout a run.
+
+Image Classification Domain
+---------------------------
 
 Prediction Space
 ^^^^^^^^^^^^^^^^

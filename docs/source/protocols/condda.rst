@@ -3,17 +3,18 @@ Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)
 
 **K+D+1 classification where K represents known classes, D are dicovered classes, 1 are all unknown classes**
 
-Image Classification Domain
----------------------------
-
 Introduction
-^^^^^^^^^^^^
+------------
 
 This combines classification with novelty/object discovery (and is more natural
 for Class Novelty). A TA2 agent starts with a K+1-way classification model (K known,
 1 unknown) as in OND. During testing, the TA2 agent will discover clusters of
 novelty (e.g., discover new classes) and accordingly add those as separate
 classes in the prediction space (i.e., one of D discovered classes).
+
+
+Image Classification Domain
+---------------------------
 
 Prediction Space
 ^^^^^^^^^^^^^^^^
