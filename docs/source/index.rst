@@ -10,14 +10,14 @@ Release v\ |version| (:ref:`Installation <install>`)
 
 **Sail-On Client** is a library used for supporting evaluation of open world algorithms
 in `DARPA SAIL-ON`_. The library is based update work supported by DARPA under
-Contract No. HR001120C0055 and is licensed under `APACHE-V2 LICENSE`_.
+Contract No. HR001120C0055 and is licensed under `APACHE-V2 LICENSE`_.::
 
-From the `SAIL-ON Website <https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty>`_:
-
-    The Science of Artificial Intelligence and Learning for Open-world Novelty (SAIL-ON)
-    program intends to research and develop the underlying scientific principles, general
-    engineering techniques, and algorithms needed to create AI systems that act appropriately
-    and effectively in novel situations that occur in open worlds.
+  The Science of Artificial Intelligence and Learning for Open-world Novelty (SAIL-ON)
+  program intends to research and develop the underlying scientific principles,
+  general engineering techniques, and algorithms needed to create AI systems
+  that act appropriately and effectively in novel situations that occur in open
+  worlds.
+  -- SAIL-ON Website
 
 Sail-On Client is being developed as an open source library to support evaluating **vision centric**
 open world agents. This involves communicating with evaluation server across a RESTful interface,
@@ -92,3 +92,4 @@ Indices and tables
 .. _DARPA SAIL-ON: https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty
 .. _APACHE-V2 LICENSE: https://www.apache.org/licenses/LICENSE-2.0
 .. _tinker-engine: https://gitlab.kitware.com/darpa_learn/tinker-engine
+.. _SAIL-ON Website: https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty
