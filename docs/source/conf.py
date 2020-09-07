@@ -35,7 +35,7 @@ version = '0.1'
 extensions = [
         "sphinx.ext.autodoc",
         "sphinx.ext.intersphinx",
-        "sphinxcontrib.napoleon",
+        "sphinx.ext.napoleon",
         "sphinx_autodoc_typehints",
         "sphinx.ext.autosectionlabel"
 ]
