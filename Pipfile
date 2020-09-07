@@ -19,9 +19,9 @@ pep8-naming = "==0.10.0"
 black = "==19.10b0"
 pytest = ">=6.0.1"
 coverage = ">=5.2.1"
-sphinx = "*"
-sphinxcontrib-napoleon = "*"
-sphinx-press-theme = "*"
+sphinx = ">=3.2.1"
+sphinx-press-theme = "==0.5.1"
+sphinx-autodoc-typehints = ">=1.11.0"
 
 [packages]
 scriptconfig = "==0.5.6"
