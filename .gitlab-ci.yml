@@ -39,3 +39,17 @@ typecheck:
     - *setup
     - pipenv run typecheck
 
+pages:
+  tags:
+    - linux
+    - docker
+    - build
+  script:
+    - *setup
+    - pipenv run docs
+    - mv docs/build/html public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
