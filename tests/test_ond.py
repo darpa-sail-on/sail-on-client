@@ -7,7 +7,7 @@ import os
 
 from sail_on_client.protocol.ond_protocol import SailOn
 from sail_on_client.protocol.parinterface import ParInterface
-
+from sail_on_client.protocol.localinterface import LocalInterface
 
 @pytest.fixture(scope="function")
 def ond_config():
@@ -41,6 +41,8 @@ def test_initialize(
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     SailOn(discoverable_plugins, "", par_interface, ond_config)
+    local_interface = LocalInterface(config_name, config_directory)
+    SailOn(discoverable_plugins, "", local_interface, ond_config)
 
 
 def test_run_protocol(
@@ -61,4 +63,7 @@ def test_run_protocol(
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     ond = SailOn(discoverable_plugins, "", par_interface, ond_config)
+    ond.run_protocol()
+    local_interface = LocalInterface(config_name, config_directory)
+    SailOn(discoverable_plugins, "", local_interface, ond_config)
     ond.run_protocol()

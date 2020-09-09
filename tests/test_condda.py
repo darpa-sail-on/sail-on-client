@@ -7,6 +7,7 @@ import os
 
 from sail_on_client.protocol.condda import Condda
 from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.protocol.localinterface import LocalInterface
 
 
 @pytest.fixture(scope="function")
@@ -41,6 +42,8 @@ def test_initialize(
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     Condda(discoverable_plugins, "", par_interface, condda_config)
+    local_interface = LocalInterface(config_name, config_directory)
+    Condda(discoverable_plugins, "", local_interface, condda_config)
 
 
 def test_run_protocol(
@@ -61,4 +64,7 @@ def test_run_protocol(
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     condda = Condda(discoverable_plugins, "", par_interface, condda_config)
+    #condda.run_protocol()
+    local_interface = LocalInterface(config_name, config_directory)
+    condda = Condda(discoverable_plugins, "", local_interface, condda_config)
     condda.run_protocol()
