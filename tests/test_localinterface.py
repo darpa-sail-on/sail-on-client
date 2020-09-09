@@ -2,10 +2,6 @@
 
 import os
 import pytest
-from pathlib import Path
-
-
-from sail_on_client.errors import ServerError
 
 
 def _initialize_session(local_interface):
