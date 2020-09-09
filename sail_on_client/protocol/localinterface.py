@@ -155,9 +155,7 @@ class LocalInterface(Harness):
             file_name = f"{session_id}.{test_id}_{result_key}.csv"
             dst_path = os.path.join(str(base_result_path), file_name)
             shutil.copy(result_files[result_key], dst_path)
-        return self.file_provider.post_results(
-            session_id, test_id, round_id, result_files
-        )
+        self.file_provider.post_results(session_id, test_id, round_id, result_files)
 
     def evaluate(self, test_id: str, round_id: int, session_id: str) -> str:
         """
@@ -194,4 +192,4 @@ class LocalInterface(Harness):
 
         Returns: None
         """
-        return self.file_provider.terminate_session(session_id)
+        self.file_provider.terminate_session(session_id)
