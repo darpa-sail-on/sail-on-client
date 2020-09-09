@@ -9,6 +9,7 @@ from sail_on_client.protocol.ond_protocol import SailOn
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 
+
 @pytest.fixture(scope="function")
 def ond_config():
     """Fixture to create a temporal directory and create a json file in it."""

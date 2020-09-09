@@ -76,8 +76,7 @@ def test_test_ids_request(get_interface_params):
     filename = local_interface.test_ids_request(
         "OND", "image_classification", "5678", assumptions_path
     )
-    expected = os.path.join(data_dir, "OND",
-                            "image_classification", "test_ids.csv")
+    expected = os.path.join(data_dir, "OND", "image_classification", "test_ids.csv")
     assert os.stat(expected).st_size > 5
     assert expected == filename
 
@@ -97,9 +96,7 @@ def test_session_request(get_interface_params):
     config_directory, config_name = get_interface_params
     data_dir = f"{os.path.dirname(__file__)}/data"
     local_interface = LocalInterface(config_name, config_directory)
-    test_id_path = os.path.join(
-        data_dir, "OND", "image_classification", "test_ids.csv"
-    )
+    test_id_path = os.path.join(data_dir, "OND", "image_classification", "test_ids.csv")
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     local_interface.session_request(test_ids, "OND", "0.1.1")
@@ -122,7 +119,9 @@ def test_dataset_request(get_interface_params):
     session_id = _initialize_session(local_interface)
     # Test correct dataset request
     filename = local_interface.dataset_request("OND.1.1.1234", 0, session_id)
-    expected = os.path.join(local_interface.result_directory, f"{session_id}.OND.1.1.1234.0.csv")
+    expected = os.path.join(
+        local_interface.result_directory, f"{session_id}.OND.1.1.1234.0.csv"
+    )
     assert expected == filename
     expected_image_ids = _read_image_ids(expected)
     assert expected_image_ids == ["n01484850_18013.JPEG", "n01484850_24624.JPEG"]
@@ -132,9 +131,7 @@ def test_dataset_request(get_interface_params):
     "protocol_constant", ["detection", "classification", "characterization"]
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
-def test_post_results(
-    get_interface_params, protocol_constant, protocol_name
-):
+def test_post_results(get_interface_params, protocol_constant, protocol_name):
     """
     Tests for post results.
 
@@ -155,16 +152,16 @@ def test_post_results(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     }
-    local_interface.post_results(result_files, f"{protocol_name}.2.1.1234", 0, session_id)
+    local_interface.post_results(
+        result_files, f"{protocol_name}.2.1.1234", 0, session_id
+    )
 
 
 @pytest.mark.parametrize(
     "protocol_constant", ["detection", "classification", "characterization"]
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
-def test_feedback_request(
-    get_interface_params, protocol_constant, protocol_name
-):
+def test_feedback_request(get_interface_params, protocol_constant, protocol_name):
     """
     Tests for feedback request.
 
@@ -177,6 +174,7 @@ def test_feedback_request(
         None
     """
     from sail_on_client.protocol.localinterface import LocalInterface
+
     config_directory, config_name = get_interface_params
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface)
@@ -186,7 +184,9 @@ def test_feedback_request(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     }
-    local_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
+    local_interface.post_results(
+        result_files, f"{protocol_name}.1.1.1234", 0, session_id
+    )
     # Get feedback for detection
     response = local_interface.get_feedback_request(
         ["n01484850_18013.JPEG", "n01484850_24624.JPEG"],
@@ -219,9 +219,7 @@ def test_evaluate(get_interface_params):
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface)
     response = local_interface.evaluate("OND.1.1.1234", 0, session_id)
-    expected = os.path.join(
-        data_dir, "evaluation.csv"
-    )
+    expected = os.path.join(data_dir, "evaluation.csv")
     assert expected == response
 
 

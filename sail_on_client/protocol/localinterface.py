@@ -50,8 +50,9 @@ class LocalInterface(Harness):
         Returns:
             Filename of file containing test ids
         """
-        result_dict = self.file_provider.test_ids_request(protocol, domain,
-                                                          detector_seed, test_assumptions)
+        result_dict = self.file_provider.test_ids_request(
+            protocol, domain, detector_seed, test_assumptions
+        )
         return result_dict["test_ids"]
 
     def session_request(
@@ -67,7 +68,9 @@ class LocalInterface(Harness):
         Returns:
             A session identifier provided by the server
         """
-        return self.file_provider.new_session(test_ids, protocol, novelty_detector_version)
+        return self.file_provider.new_session(
+            test_ids, protocol, novelty_detector_version
+        )
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
         """
@@ -82,14 +85,19 @@ class LocalInterface(Harness):
             Filename of a file containing a list of image files (including full path for each)
         """
         try:
-            self.data_file = os.path.join(self.result_directory,
-                                          f"{session_id}.{test_id}.{round_id}.csv")
-            byte_stream = self.file_provider.dataset_request(session_id, test_id, round_id)
+            self.data_file = os.path.join(
+                self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
+            )
+            byte_stream = self.file_provider.dataset_request(
+                session_id, test_id, round_id
+            )
             with open(self.data_file, "wb") as f:
                 f.write(byte_stream.getbuffer())
             return self.data_file
         except RoundError as r:
-            raise ClientRoundError(reason=r.reason, msg=r.msg, stack_trace=r.stack_trace)
+            raise ClientRoundError(
+                reason=r.reason, msg=r.msg, stack_trace=r.stack_trace
+            )
 
     def get_feedback_request(
         self,
@@ -112,12 +120,13 @@ class LocalInterface(Harness):
         Returns:
             Path to a file containing containing requested feedback
         """
-        self.feedback_file = os.path.join(self.result_directory,
-                                      f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv")
-        byte_stream = self.file_provider.get_feedback(feedback_ids,
-                                                      feedback_type,
-                                                      session_id,
-                                                      test_id, round_id)
+        self.feedback_file = os.path.join(
+            self.result_directory,
+            f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv",
+        )
+        byte_stream = self.file_provider.get_feedback(
+            feedback_ids, feedback_type, session_id, test_id, round_id
+        )
         with open(self.feedback_file, "wb") as f:
             f.write(byte_stream.getbuffer())
         return self.feedback_file
@@ -137,17 +146,18 @@ class LocalInterface(Harness):
         Returns:
             None
         """
-        info = get_session_info(str(self.result_directory),  session_id)
+        info = get_session_info(str(self.result_directory), session_id)
         protocol = info["activity"]["created"]["protocol"]
         domain = info["activity"]["created"]["domain"]
-        base_result_path = os.path.join(str(self.result_directory),
-                                        protocol, domain)
+        base_result_path = os.path.join(str(self.result_directory), protocol, domain)
         os.makedirs(base_result_path, exist_ok=True)
         for result_key in result_files.keys():
             file_name = f"{session_id}.{test_id}_{result_key}.csv"
             dst_path = os.path.join(str(base_result_path), file_name)
             shutil.copy(result_files[result_key], dst_path)
-        return self.file_provider.post_results(session_id, test_id, round_id, result_files)
+        return self.file_provider.post_results(
+            session_id, test_id, round_id, result_files
+        )
 
     def evaluate(self, test_id: str, round_id: int, session_id: str) -> str:
         """

@@ -64,7 +64,7 @@ def test_run_protocol(
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     condda = Condda(discoverable_plugins, "", par_interface, condda_config)
-    #condda.run_protocol()
+    condda.run_protocol()
     local_interface = LocalInterface(config_name, config_directory)
     condda = Condda(discoverable_plugins, "", local_interface, condda_config)
     condda.run_protocol()
