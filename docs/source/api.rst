@@ -15,6 +15,9 @@ server. The interface has the following functions
 .. autoclass:: sail_on_client.protocol.parinterface.ParInterface
     :members:
 
+.. autoclass:: sail_on_client.protocol.localinterface.LocalInterface
+    :members:
+
 Protocols
 ---------
 

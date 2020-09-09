@@ -39,7 +39,10 @@ def server_setup():
 def get_interface_params():
     """Fixture to create a temporal directory and add a configuration.json in it."""
     with TemporaryDirectory() as config_folder:
-        dummy_config = {"url": "http://localhost:3306"}
+        dummy_config = {
+            "url": "http://localhost:3306",
+            "data_dir": f"{os.path.dirname(__file__)}/data",
+        }
         config_name = "configuration.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
         yield config_folder, config_name

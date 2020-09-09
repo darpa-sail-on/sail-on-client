@@ -63,6 +63,7 @@ Interfaces
    :maxdepth: 2
 
    interfaces/parinterface
+   interfaces/localinterface
 
 Plugins
 -------
