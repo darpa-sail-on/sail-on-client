@@ -29,9 +29,11 @@ Client and Protocols for DARPA sail-on
       git clone https://gitlab.kitware.com/darpa_learn/tinker-engine.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create tinker-engine, sail-on, evm_based_novelty_detector and sail-on-client directories in your working directory
+   This would create tinker-engine, sail-on, evm_based_novelty_detector, graph_autoencoder and sail-on-client directories in your working directory
+
 2. Install the different components in a virtual environment
    ```
    cd ../sail-on-client
@@ -82,21 +84,35 @@ your working directory.
    ```
 
 #### Install TA2 Agent
-1. Clone [TA2 agent](https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector) repository
+1. Clone [image classification algorithm](https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector) and [activity recognition] repository
    ```
     git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
+    git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
    ```
-   This would create a directory called evm_based_novelty_detector in your working directory
+   This would create a directory called evm_based_novelty_detector and graph-autoencoder your
+   working directory
 
-2. Go into the directory for TA2 agent and install the dependencies for the server using
+2. Go into the directory for image classifier repository and install the dependencies using
    ```
     cd evm_based_novelty_detector
     pip install -r requirements.txt
     pip install -e timm
    ```
-3. Install agent using
+
+3. Install the algorithm using
     ```
       pip install -e .
+    ```
+
+4. Go into the directory for activity recognition and install the dependencies using
+   ```
+    cd ../graph-autoencoder
+    pip install -r requirements.txt
+   ```
+
+5. Install the algorithm using
+    ```
+     pip install -e .
     ```
 
 #### Install Sail-On Client
@@ -119,7 +135,9 @@ your working directory.
 
 ## Running Client and Server with Different Algorithms
 
-### Running OND_5_14_A1 Algorithm
+### Running Image Classification Experiments
+
+#### Running OND_5_14_A1 Algorithm
 1. Go to sail-on server directory and start the server using
     ```
       cd sail-on
@@ -140,7 +158,7 @@ your working directory.
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
     ```
 
-### Running OND_5_14_A2 Algorithm
+#### Running OND_5_14_A2 Algorithm
 1. Go to sail-on server directory and start the server using
     ```
       cd sail-on
@@ -161,7 +179,7 @@ your working directory.
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
     ```
 
-### Running CONDDA_5_14_A1 Algorithm
+#### Running CONDDA_5_14_A1 Algorithm
 1. Go to sail-on server directory and start the server using
     ```
       cd sail-on
@@ -185,7 +203,7 @@ your working directory.
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
     ```
 
-### Running CONDDA_5_14_A2 Algorithm
+#### Running CONDDA_5_14_A2 Algorithm
 1. Go to sail-on server directory and start the server using
     ```
       cd sail-on
@@ -204,6 +222,31 @@ your working directory.
 7. Update the `known_feature_path` in `evm_params` in `local_condda_5_14_a1_nd.json` to point to the features downloaded in the previous step
 8. Download the training images using the following [link](https://drive.google.com/file/d/1QU_wD-erA1ijMZ29B1NT9ubjxF5HbImo/view?usp=sharing)
 9. Change `dataset_root` in `local_condda_5_14_a1_nd.json`  to point to directory where the images were installed in the previous step
+10. Run the client
+    ```
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
+    ```
+
+### Running Image Classification Experiments
+
+#### Running Graph Autoencoder based Novelty Detector
+
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory gae_nd_results
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
+    ```
+      cd sail-on-client
+      cp config/gae_nd.json config/local_gae_nd.json
+    ```
+3. Download the backbone model from following [link](https://drive.google.com/drive/u/0/folders/1ad8gny6Dqvp6hqTRwvTNvhW30lHmf6D2)
+4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `HMDB51_new_1_model_best.pth.tar`.
+5. Download the EVM model from following [link](https://drive.google.com/file/d/1MDV0nFYNYaC19DCBNmDmUaUXiM-amGNs/view?usp=sharing)
+6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
+7. Download the HMDB dataset using the following [link](http://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/hmdb51_org.rar)
+9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored in the previous step
 10. Run the client
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
