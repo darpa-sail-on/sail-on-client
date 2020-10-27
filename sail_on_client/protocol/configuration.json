@@ -1,5 +1,5 @@
 {
   "url": "http://localhost:3306",
-  "data_location": "/home/eric/sail-on/images"
+  "data_location": "/home/eric/sail-on/images",
   "data_dir": "tests/data"
 }

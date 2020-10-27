@@ -25,11 +25,10 @@ sphinx-autodoc-typehints = ">=1.11.0"
 
 [packages]
 scriptconfig = "==0.5.6"
-tinker-engine = {editable = true, path = "./../tinker-engine"}
 h5py = ">=2.10.0"
 json5 = ">=0.9.4"
 jsonschema = ">=3.2.0"
-Cython = "==0.29.20"
+Cython = ">=0.29.20"
 multiprocess = ">=0.70.9"
 numpy = ">=1.18.3"
 opencv-python = ">=4.4.0.42"
@@ -45,11 +44,16 @@ nvidia-ml-py3 = ">=7.352.0"
 py3nvml = ">=0.2.6"
 pyflann-py3 = ">=0.1.0"
 Pillow = ">=7.2.0"
-timm = {editable = true, path = "./../evm_based_novelty_detector/timm"}
-evm-based-novelty-detector = {editable = true, path = "./../evm_based_novelty_detector"}
 requests = ">=2.23"
 flask = ">=1.1"
 importlib-metadata = ">=1.6"
+dgl-cu102 = "==0.5.2"
+tqdm = ">=4.50.0"
+ubelt = "==0.9.2"
+tinker-engine = {editable = true, path = "./../tinker-engine"}
+timm = {editable = true, path = "./../evm_based_novelty_detector/timm"}
+evm-based-novelty-detector = {editable = true, path = "./../evm_based_novelty_detector"}
+graph-autoencoder = {editable = true, path = "./../graph-autoencoder"}
 sail-on = {editable = true, path = "./../sail-on"}
 sail-on-client = {editable = true, path = "."}
 
