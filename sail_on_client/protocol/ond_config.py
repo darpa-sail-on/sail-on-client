@@ -19,7 +19,9 @@ class OndConfig(scfg.Config):
         "novelty_detector_class": scfg.Value("OND_5_14_A1"),
         "seed": scfg.Value("seed"),
         "dataset_root": "/home/eric/sail-on/images",
-        "feature_extraction_only": scfg.Value(False, help="Quit after feature extraction"),
+        "feature_extraction_only": scfg.Value(
+            False, help="Quit after feature extraction"
+        ),
         "save_features": scfg.Value(False, help="Save features as pkl file"),
         "feature_save_dir": scfg.Value("", help="Directory where features are saved"),
         "detector_config": {

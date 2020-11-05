@@ -23,6 +23,7 @@ def condda_config():
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
         yield os.path.join(config_folder, config_name)
 
+
 @pytest.fixture(scope="function")
 def condda_config_with_feature_extraction():
     """Fixture to create a config file for feature extraction"""
@@ -39,6 +40,7 @@ def condda_config_with_feature_extraction():
             config_name = "test_condda_config.json"
             json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
             yield os.path.join(config_folder, config_name)
+
 
 def test_initialize(
     server_setup, get_interface_params, discoverable_plugins, condda_config
@@ -85,8 +87,12 @@ def test_run_protocol(
     condda = Condda(discoverable_plugins, "", local_interface, condda_config)
     condda.run_protocol()
 
+
 def test_feature_extraction(
-    server_setup, get_interface_params, discoverable_plugins, condda_config_with_feature_extraction
+    server_setup,
+    get_interface_params,
+    discoverable_plugins,
+    condda_config_with_feature_extraction,
 ):
     """
     Test feature extraction.
@@ -102,8 +108,12 @@ def test_feature_extraction(
     """
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
-    condda = Condda(discoverable_plugins, "", par_interface, condda_config_with_feature_extraction)
+    condda = Condda(
+        discoverable_plugins, "", par_interface, condda_config_with_feature_extraction
+    )
     condda.run_protocol()
     local_interface = LocalInterface(config_name, config_directory)
-    condda = Condda(discoverable_plugins, "", local_interface, condda_config_with_feature_extraction)
+    condda = Condda(
+        discoverable_plugins, "", local_interface, condda_config_with_feature_extraction
+    )
     condda.run_protocol()

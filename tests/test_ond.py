@@ -23,6 +23,7 @@ def ond_config():
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
         yield os.path.join(config_folder, config_name)
 
+
 @pytest.fixture(scope="function")
 def ond_config_with_feature_extraction():
     """Fixture to create a config file for feature extraction"""
@@ -39,6 +40,7 @@ def ond_config_with_feature_extraction():
             config_name = "test_ond_config.json"
             json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
             yield os.path.join(config_folder, config_name)
+
 
 def test_initialize(
     server_setup, get_interface_params, discoverable_plugins, ond_config
@@ -85,8 +87,12 @@ def test_run_protocol(
     SailOn(discoverable_plugins, "", local_interface, ond_config)
     ond.run_protocol()
 
+
 def test_feature_extraction(
-    server_setup, get_interface_params, discoverable_plugins, ond_config_with_feature_extraction
+    server_setup,
+    get_interface_params,
+    discoverable_plugins,
+    ond_config_with_feature_extraction,
 ):
     """
     Test feature extraction.
@@ -102,8 +108,12 @@ def test_feature_extraction(
     """
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
-    ond = SailOn(discoverable_plugins, "", par_interface, ond_config_with_feature_extraction)
+    ond = SailOn(
+        discoverable_plugins, "", par_interface, ond_config_with_feature_extraction
+    )
     ond.run_protocol()
     local_interface = LocalInterface(config_name, config_directory)
-    SailOn(discoverable_plugins, "", local_interface, ond_config_with_feature_extraction)
+    SailOn(
+        discoverable_plugins, "", local_interface, ond_config_with_feature_extraction
+    )
     ond.run_protocol()
