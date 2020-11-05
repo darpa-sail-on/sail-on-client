@@ -26,7 +26,7 @@ def ond_config():
 
 @pytest.fixture(scope="function")
 def ond_config_with_feature_extraction():
-    """Fixture to create a config file for feature extraction"""
+    """Fixture to create a config file for feature extraction."""
     with TemporaryDirectory() as feature_dir:
         with TemporaryDirectory() as config_folder:
             dummy_config = {
