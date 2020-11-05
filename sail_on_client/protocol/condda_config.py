@@ -19,6 +19,9 @@ class ConddaConfig(scfg.Config):
         "novelty_detector_class": scfg.Value("CONDDA_5_14_A1"),
         "seed": scfg.Value("seed"),
         "dataset_root": "",
+        "feature_extraction_only": scfg.Value(False, help="Quit after feature extraction"),
+        "save_features": scfg.Value(False, help="Save features as pkl file"),
+        "feature_save_dir": scfg.Value("", help="Directory where features are saved"),
         "detector_config": {
             "efficientnet_params": {"model_path": "", "known_classes": 413},
             "evm_params": {
