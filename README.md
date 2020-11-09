@@ -265,11 +265,10 @@ your working directory.
       cp config/gae_nd.json config/local_gae_nd.json
     ```
 3. Download the backbone model from following [link](https://drive.google.com/drive/u/0/folders/1ad8gny6Dqvp6hqTRwvTNvhW30lHmf6D2)
-4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `HMDB51_new_1_model_best.pth.tar`.
-5. Download the EVM model from following [link](https://drive.google.com/file/d/1MDV0nFYNYaC19DCBNmDmUaUXiM-amGNs/view?usp=sharing)
+4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
+5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
 6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
-7. Download the HMDB dataset using the following [link](http://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/hmdb51_org.rar)
-9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored in the previous step
+9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
 10. Run the client
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_fe.json
