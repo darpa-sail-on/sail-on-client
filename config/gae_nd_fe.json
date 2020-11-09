@@ -15,7 +15,7 @@
       "arch": "i3d-50",
       "graph_weight_path": "",
       "model_name": "i3d",
-      "n_classes": 400,
+      "n_classes": 88,
       "no_cuda": "False",
       "hidden_dims": [512, 128],
       "hidden": "True",
