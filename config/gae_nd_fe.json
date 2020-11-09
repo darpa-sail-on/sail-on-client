@@ -15,14 +15,15 @@
       "arch": "i3d-50",
       "graph_weight_path": "",
       "model_name": "i3d",
-      "n_classes": 88,
+      "n_classes": 400,
       "no_cuda": "False",
       "hidden_dims": [512, 128],
       "hidden": "True",
       "in_dim": 1024,
       "num_heads": [4, 1],
       "sample_duration": 64,
-      "mode": "feature"
+      "mode": "feature",
+      "graph_classes": 88
     },
     "evm_params": {
       "weight_path": "",
@@ -38,7 +39,7 @@
       "sample_duration": 64,
       "batch_size": 1,
       "n_threads": 6,
-      "n_classes": 26
+      "n_classes": 88
     },
     "csv_folder": "test_algo",
     "cores": 6,
