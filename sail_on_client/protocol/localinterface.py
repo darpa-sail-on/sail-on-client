@@ -7,7 +7,7 @@ from sail_on_client.errors import RoundError as ClientRoundError
 from tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
-from typing import Any, Dict, List
+from typing import Any, Dict
 import os
 import shutil
 
