@@ -12,7 +12,7 @@ import json
 import sys
 import logging
 import pickle as pkl
-import ubelt as ub
+import ubelt as ub  # type: ignore
 
 from typing import Dict, Any
 
@@ -81,7 +81,7 @@ class SailOn(BaseProtocol):
 
             logging.info(f"Start test: {self.toolset['test_id']}")
             if self.config["save_features"]:
-                test_features = {"features_dict": {}, "logit_dict": {}}
+                test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
