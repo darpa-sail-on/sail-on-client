@@ -5,7 +5,7 @@ image: pytorch/pytorch:latest
   - apt-get install -y git build-essential
   - pip install pipenv
   - cd ..
-  - git clone https://${SAIL_ON_UNAME}:${SAIL_ON_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on
+  - git clone https://${SAIL_ON_API_UNAME}:${SAIL_ON_API_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on-api
   - git clone https://${EVM_BASED_ND_UNAME}:${EVM_BASED_ND_TOKEN}@gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector
   - git clone https://${TINKER_ENGINE_UNAME}:${TINKER_ENGINE_TOKEN}@gitlab.kitware.com/darpa_learn/tinker-engine
   - git clone https://${GRAPH_AUTOENCODER_UNAME}:${GRAPH_AUTOENCODER_TOKEN}@gitlab.kitware.com/darpa-sail-on/graph-autoencoder
