@@ -19,11 +19,17 @@ def _initialize_session(par_interface, protocol_name):
         session id
     """
     test_id_path = os.path.join(
-        os.path.dirname(__file__), "data", f"{protocol_name}", "image_classification", "test_ids.csv"
+        os.path.dirname(__file__),
+        "data",
+        f"{protocol_name}",
+        "image_classification",
+        "test_ids.csv",
     )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    session_id = par_interface.session_request(test_ids, f"{protocol_name}", "image_classification", "0.1.1")
+    session_id = par_interface.session_request(
+        test_ids, f"{protocol_name}", "image_classification", "0.1.1"
+    )
     return session_id
 
 
@@ -169,8 +175,11 @@ def test_post_results(
 
 
 @pytest.mark.parametrize(
-        "feedback_mapping", (("classification", ("detection", "classification")),
-                             ("psuedo_labels_classification", ("detection", "classification")))
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("psuedo_labels_classification", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_feedback_request(
@@ -199,8 +208,9 @@ def test_feedback_request(
     protocol_constant = feedback_mapping[0]
     required_files = feedback_mapping[1]
     for required_file in required_files:
-        result_files[required_file] = os.path.join( os.path.dirname(__file__),
-                f"test_results_{protocol_name}.1.1.1234.csv" )
+        result_files[required_file] = os.path.join(
+            os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
+        )
 
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
     # Get feedback for detection

@@ -55,8 +55,10 @@ class Condda(BaseProtocol):
             f"{self.config['novelty_detector_class']}" f"{novelty_detector_version}"
         )
         self.toolset["session_id"] = self.harness.session_request(
-            self.config["test_ids"], "CONDDA", self.config["domain"],
-            novelty_detector_cv
+            self.config["test_ids"],
+            "CONDDA",
+            self.config["domain"],
+            novelty_detector_cv,
         )
         session_id = self.toolset["session_id"]
         logging.info(f"New session: {self.toolset['session_id']}")

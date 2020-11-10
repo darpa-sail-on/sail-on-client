@@ -58,7 +58,7 @@ class SailOn(BaseProtocol):
             self.config["test_ids"],
             "OND",
             self.config["domain"],
-            f"{novelty_detector_version}.{novelty_detector_class}"
+            f"{novelty_detector_version}.{novelty_detector_class}",
         )
         session_id = self.toolset["session_id"]
 
@@ -67,8 +67,7 @@ class SailOn(BaseProtocol):
         for test in self.config["test_ids"]:
             self.toolset["test_id"] = test
             self.toolset["test_type"] = ""
-            self.toolset["metadata"] = \
-                    self.harness.get_test_metadata(session_id, test)
+            self.toolset["metadata"] = self.harness.get_test_metadata(session_id, test)
             if "red_light" in self.toolset["metadata"]:
                 self.toolset["redlight_image"] = os.path.join(
                     self.toolset["dataset_root"], self.toolset["metadata"]["red_light"]

@@ -56,8 +56,7 @@ class LocalInterface(Harness):
         return result_dict["test_ids"]
 
     def session_request(
-            self, test_ids: list, protocol: str, domain: str,
-            novelty_detector_version: str
+        self, test_ids: list, protocol: str, domain: str, novelty_detector_version: str
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
