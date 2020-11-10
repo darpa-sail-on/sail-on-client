@@ -7,7 +7,7 @@ from sail_on_client.errors import RoundError as ClientRoundError
 from tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
-from typing import Any, Dict
+from typing import Any, Dict, List
 import os
 import shutil
 
@@ -56,7 +56,8 @@ class LocalInterface(Harness):
         return result_dict["test_ids"]
 
     def session_request(
-        self, test_ids: list, protocol: str, novelty_detector_version: str
+            self, test_ids: list, protocol: str, domain: str,
+            novelty_detector_version: str
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -64,12 +65,13 @@ class LocalInterface(Harness):
         Args:
             test_ids   : list of tests being evaluated in this session
             protocol   : string indicating which protocol is being evaluated
+            domain     : string indicating which domain is being evaluated
             novelty_detector_version : string indicating the version of the novelty detector being evaluated
         Returns:
             A session identifier provided by the server
         """
         return self.file_provider.new_session(
-            test_ids, protocol, novelty_detector_version
+            test_ids, protocol, domain, novelty_detector_version, []
         )
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
@@ -171,17 +173,18 @@ class LocalInterface(Harness):
         """
         return self.file_provider.evaluate(session_id, test_id, round_id)
 
-    def get_test_metadata(self, test_id: str) -> Dict[str, Any]:
+    def get_test_metadata(self, session_id: str, test_id: str) -> Dict[str, Any]:
         """
         Retrieve the metadata json for the specified test.
 
         Args:
-            test_id        : the id of the test currently being evaluated
+            session_id        : the id of the session currently being evaluated
+            test_id           : the id of the test currently being evaluated
 
         Returns:
             A json file containing metadata
         """
-        return self.file_provider.get_test_metadata(test_id)
+        return self.file_provider.get_test_metadata(session_id, test_id)
 
     def terminate_session(self, session_id: str) -> None:
         """
