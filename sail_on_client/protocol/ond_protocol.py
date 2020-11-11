@@ -113,9 +113,13 @@ class SailOn(BaseProtocol):
                     self.toolset, "WorldDetection"
                 )
 
-                results["classification"] = novelty_algorithm.execute(
+                ncl_results = novelty_algorithm.execute(
                     self.toolset, "NoveltyClassification"
                 )
+                if isinstance(ncl_results, dict):
+                    results.update(ncl_results)
+                else:
+                    results["classification"] = ncl_results
 
                 self.harness.post_results(results, test, round_id, session_id)
                 with open(self.toolset["dataset"], "r") as dataset:
