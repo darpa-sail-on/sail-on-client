@@ -19,7 +19,7 @@ def safe_remove(file_path: str) -> None:
 
 def safe_remove_results(results: dict) -> None:
     """
-    Remove results present in a dict
+    Remove results present in a dict.
 
     Args:
         file_path (str): File path that should be removed
