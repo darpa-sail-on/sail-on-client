@@ -226,6 +226,35 @@ your working directory.
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
     ```
+### Running Transcription Experiments
+
+#### Running HWR based Novelty Detector
+
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory hwr_nd_results
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
+    ```
+      cd sail-on-client
+      cp config/hwr_nd.json config/local_hwr_nd.json
+      cp config/hwr_config.yaml config/local_hwr_config.yaml
+    ```
+3. Download the models from following [link](https://drive.google.com/file/d/1aPkshlxP_ld5-bdX6lwqpM1EiF62f_N8/view?usp=sharing
+)
+4. Extract the model file in the root directory of sail-on-client
+   ```
+     cd sail-on-client
+     tar xvf hwr_novelty_detector_states_dry_run.tar.gz
+   ```
+5. Change `config_file_path` in `local_hwr_nd.json` to point `local_hwr_config.yaml`.
+6. Download the image for dry run using the following [link](https://drive.google.com/file/d/1nUxCqxbr46gnAFSKztnjEj0fYufWRE2f/view)
+9. Change `dataset_root` in `local_hwr_nd.json` to point to directory where the images are stored in the previous step
+10. Run the client
+    ```
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_hwr_nd.json
+    ```
 
 ### Running Activity Recognition Experiments
 
