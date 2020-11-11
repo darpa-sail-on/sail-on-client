@@ -1,9 +1,9 @@
 {
-  "domain": "handwriting_recognition",
+  "domain": "transcripts",
   "test_ids": [
-    "HWR.0.1.0"
+    "OND.1.1.1234"
   ],
-  "novelty_detector_class": "HWRBasedNoveltyDetector",
+  "novelty_detector_class": "HWRNoveltyDetector",
   "detector_config": {
     "config_file_path": "./hwr_config.yaml",
     "cores": 1,
