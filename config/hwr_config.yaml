@@ -1,0 +1,77 @@
+data:
+  iam:
+    # TODO These image paths will need modified to match user system. At least
+    # `data_path` needs to be uncommented and included. If image_root_dir is
+    # not included, then it must be passed as an argument to
+    # `HWRNoveltyDetector.feature_extraction()`. To clarify, that is the
+    # directory in which all the image files are contained.
+    data_path: './file_ids.txt'
+    #image_root_dir: './hwr_novelty_detector_states_dry_run/'
+    labels: './hwr_novelty_detector_states_dry_run/par_v1_iam_CRNN_char_set.tsv'
+model:
+  crnn:
+    metric: CER
+    init:
+      num_channels: 3
+      num_classes: 80
+      hidden_size: 256
+      input_height: 64
+      legacy: True
+    train:
+      # May be able to cut this from PAR eval version of config unless updates?
+      learning_rate: 0.01
+      batch_size: 1 # NOTE used 16 in training.
+      augmentation: False
+      blank: 0 # ~
+      unknown_idx: 4 # #
+      space_char: ' ' # 1
+      epochs: 100000
+      max_epochs_no_improvement: 200
+    eval:
+      batch_size: 1
+    load_path: './hwr_novelty_detector_states_dry_run/transcript_crnn_state_dry_run_25.pt'
+  mevm:
+    init:
+      tailsize: 20 # 100
+      cover_threshold: 0.5
+    load_path: './hwr_novelty_detector_states_dry_run/transcript_mevm_state_dry_run.hdf5'
+  style: # the style recognition portion of the agent expecting HoOGs & MEVM
+    # The separate style tasks' MEVM params
+    writer_id:
+      init:
+        tailsize: 1000
+        distance_multiplier: 0.05
+        cover_threshold: 0.9
+      load_path: './hwr_novelty_detector_states_dry_run/style_mevms/evm_5folds_train-0.tsv_writer_id_mevm_obj.hdf5'
+    pen_pressure:
+      init:
+        tailsize: 1000
+        distance_multiplier: 0.05
+        cover_threshold: 0.9
+      load_path: './hwr_novelty_detector_states_dry_run/style_mevms/evm_5folds_train-0.tsv_pen_pressure_mevm_obj.hdf5'
+    letter_size:
+      init:
+        tailsize: 1000
+        distance_multiplier: 0.05
+        cover_threshold: 0.9
+      load_path: './hwr_novelty_detector_states_dry_run/style_mevms/evm_5folds_train-0.tsv_letter_size_mevm_obj.hdf5'
+    word_spacing:
+      init:
+        tailsize: 1000
+        distance_multiplier: 0.05
+        cover_threshold: 0.9
+      load_path: './hwr_novelty_detector_states_dry_run/style_mevms/evm_5folds_train-0.tsv_word_spacing_mevm_obj.hdf5'
+    slant_angle:
+      init:
+        tailsize: 1000
+        distance_multiplier: 0.05
+        cover_threshold: 0.9
+      load_path: './hwr_novelty_detector_states_dry_run/style_mevms/evm_5folds_train-0.tsv_slant_angle_mevm_obj.hdf5'
+    # Below is commented out for now because we do not have an MEVM state for
+    # this yet. Expect Zeros in the columns corresponding to repr tasks.
+    #background_repr:
+    #  init:
+    #    tailsize: 1000
+    #    distance_multiplier: 0.05
+    #    cover_threshold: 0.9
+    #  load_path: './hwr_novelty_detector_states_dry_run/style_mevms/evm_5folds_train-0.tsv_background_repr_mevm_obj.hdf5'
