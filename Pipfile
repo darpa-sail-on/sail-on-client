@@ -25,7 +25,14 @@ Sphinx = ">=3.2.1"
 
 [packages]
 scriptconfig = "==0.5.6"
+cycler = "==0.10.0"
+editdistance = ">=0.5.3"
+kiwisolver = "==1.1.0"
 h5py = ">=2.10.0"
+python-dateutil = "==2.8.1"
+tornado = "==6.0.4"
+scikit-image = ">=0.17.2"
+exputils = "==0.1.0"
 json5 = ">=0.9.4"
 jsonschema = ">=3.2.0"
 Cython = ">=0.29.20"
@@ -58,6 +65,8 @@ evm-based-novelty-detector = {editable = true, path = "./../evm_based_novelty_de
 graph-autoencoder = {editable = true, path = "./../graph-autoencoder"}
 sail-on = {editable = true, path = "./../sail-on-api"}
 sail-on-client = {editable = true, path = "."}
+"ruamel.yaml" = "*"
+hwr-novelty-detector = {editable = true, path = "./../hwr_novelty_detector"}
 
 [requires]
 python_version = "3.7"
