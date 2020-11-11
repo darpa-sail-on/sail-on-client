@@ -30,9 +30,11 @@ Client and Protocols for DARPA sail-on
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-api.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder and sail-on-client directories in your working directory
+   This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder,
+   hwr_novelty_detector and sail-on-client directories in your working directory
 
 2. Install the different components in a virtual environment
    ```
@@ -88,6 +90,7 @@ your working directory.
    ```
     git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
     git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
+    git clone https://gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector.git
    ```
    This would create a directory called evm_based_novelty_detector and graph-autoencoder your
    working directory
@@ -111,6 +114,17 @@ your working directory.
    ```
 
 5. Install the algorithm using
+    ```
+     pip install -e .
+    ```
+
+6. Go into the directory for transcription and install the dependencies using
+   ```
+    cd ../hwr_novelty_detector
+    pip install -r requirements.txt
+   ```
+
+7. Install the algorithm using
     ```
      pip install -e .
     ```
