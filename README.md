@@ -295,7 +295,7 @@ your working directory.
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd.json
     ```
 
-#### Running Feature Extraction For Graph Autoencoder based Novelty Detector
+#### Running Feature Extraction For Graph Autoencoder based Novelty Detector Using Graph Features
 
 1. Go to sail-on server directory and start the server using
     ```
@@ -305,7 +305,7 @@ your working directory.
 2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
     ```
       cd sail-on-client
-      cp config/gae_nd.json config/local_gae_nd.json
+      cp config/gae_nd_graph_fe.json.json config/local_gae_nd_graph_fe.json
     ```
 3. Download the backbone model from following [link](https://drive.google.com/drive/u/0/folders/1ad8gny6Dqvp6hqTRwvTNvhW30lHmf6D2)
 4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
@@ -314,7 +314,30 @@ your working directory.
 9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
 10. Run the client
     ```
-      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_fe.json
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_graph_fe.json
+    ```
+    This generarates a pickle file for every test present in the config in `GAE-features` directory
+
+#### Running Feature Extraction For Graph Autoencoder based Novelty Detector Using I3D Features
+
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory gae_nd_results
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
+    ```
+      cd sail-on-client
+      cp config/gae_nd_graph_i3d_fe.json.json config/local_gae_nd_i3d_graph_fe.json
+    ```
+3. Download the backbone model from following [link](https://drive.google.com/drive/u/0/folders/1ad8gny6Dqvp6hqTRwvTNvhW30lHmf6D2)
+4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
+5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
+6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
+9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
+10. Run the client
+    ```
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_i3d_fe.json
     ```
     This generarates a pickle file for every test present in the config in `GAE-features` directory
 
