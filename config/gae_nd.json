@@ -21,6 +21,7 @@
       "sample_duration": 64,
       "mode": "feature",
       "graph_classes": 88
+      "feature_type": "graph"
     },
     "evm_params": {
       "weight_path": "",
