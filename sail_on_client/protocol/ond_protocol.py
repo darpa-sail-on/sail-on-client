@@ -85,7 +85,9 @@ class SailOn(BaseProtocol):
 
             if self.config["use_saved_features"]:
                 feature_dir = self.config["feature_save_dir"]
-                test_features = pkl.load(open(os.path.join(feature_dir, f"{test}_features.pkl"), "rb"))
+                test_features = pkl.load(
+                    open(os.path.join(feature_dir, f"{test}_features.pkl"), "rb")
+                )
                 self.toolset.update(test_features)
 
             for round_id in count(0):
@@ -107,7 +109,9 @@ class SailOn(BaseProtocol):
                     ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
                     if self.config["save_features"]:
-                        test_features["features_dict"].update(self.toolset["features_dict"])
+                        test_features["features_dict"].update(
+                            self.toolset["features_dict"]
+                        )
                         test_features["logit_dict"].update(self.toolset["logit_dict"])
                         if self.config["feature_extraction_only"]:
                             continue

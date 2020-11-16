@@ -103,7 +103,9 @@ class Condda(BaseProtocol):
                     ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
                     if self.config["save_features"]:
-                        test_features["features_dict"].update(self.toolset["features_dict"])
+                        test_features["features_dict"].update(
+                            self.toolset["features_dict"]
+                        )
                         test_features["logit_dict"].update(self.toolset["logit_dict"])
                         if self.config["feature_extraction_only"]:
                             continue
