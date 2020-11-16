@@ -11,6 +11,8 @@ import os
 import json
 import sys
 import logging
+import pickle as pkl
+import ubelt as ub
 
 from typing import Dict, Any
 
@@ -78,6 +80,8 @@ class SailOn(BaseProtocol):
             self.toolset["dataset_ids"] = []
 
             logging.info(f"Start test: {self.toolset['test_id']}")
+            if self.config["save_features"]:
+                test_features = {"features_dict": {}, "logit_dict": {}}
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
@@ -96,6 +100,12 @@ class SailOn(BaseProtocol):
                     self.toolset["features_dict"],
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
+
+                if self.config["save_features"]:
+                    test_features["features_dict"].update(self.toolset["features_dict"])
+                    test_features["logit_dict"].update(self.toolset["logit_dict"])
+                    if self.config["feature_extraction_only"]:
+                        continue
 
                 results: Dict[str, Any] = {}
 
@@ -116,6 +126,16 @@ class SailOn(BaseProtocol):
                 safe_remove(self.toolset["dataset"])
                 safe_remove(results["detection"])
                 safe_remove(results["classification"])
+
+            if self.config["save_features"]:
+                feature_dir = self.config["feature_save_dir"]
+                ub.ensuredir(feature_dir)
+                feature_path = os.path.join(feature_dir, f"{test}_features.pkl")
+                logging.info(f"Saving features in {feature_path}")
+                with open(feature_path, "wb") as f:
+                    pkl.dump(test_features, f)
+                if self.config["feature_extraction_only"]:
+                    continue
 
             results = {}
 

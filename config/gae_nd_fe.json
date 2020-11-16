@@ -5,6 +5,9 @@
   ],
   "novelty_detector_class": "gae_nd",
   "dataset_root": "",
+  "feature_extraction_only": "True",
+  "save_features": "True",
+  "feature_save_dir": "GAE-features",
   "detector_config": {
     "feature_extractor_params": {
       "backbone_weight_path": "",

@@ -10,6 +10,8 @@ import os
 import json
 import sys
 import logging
+import pickle as pkl
+import ubelt as ub
 
 from typing import Dict, Any
 
@@ -71,6 +73,10 @@ class Condda(BaseProtocol):
             self.toolset["dataset_root"] = self.config["dataset_root"]
             self.toolset["dataset_ids"] = []
             logging.info(f"Start test: {self.toolset['test_id']}")
+
+            if self.config["save_features"]:
+                test_features = {"features_dict": {}, "logit_dict": {}}
+
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
                 logging.info(f"Start round: {self.toolset['round_id']}")
@@ -86,6 +92,13 @@ class Condda(BaseProtocol):
                     self.toolset["features_dict"],
                     self.toolset["logit_dict"],
                 ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
+
+                if self.config["save_features"]:
+                    test_features["features_dict"].update(self.toolset["features_dict"])
+                    test_features["logit_dict"].update(self.toolset["logit_dict"])
+                    if self.config["feature_extraction_only"]:
+                        continue
+
                 results: Dict[str, Any] = {}
                 results["detection"] = novelty_algorithm.execute(
                     self.toolset, "WorldDetection"
@@ -101,5 +114,15 @@ class Condda(BaseProtocol):
                 safe_remove(results["detection"])
                 safe_remove(results["characterization"])
             logging.info(f"Test complete: {self.toolset['test_id']}")
+
+            if self.config["save_features"]:
+                feature_dir = self.config["feature_save_dir"]
+                ub.ensuredir(feature_dir)
+                feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
+                logging.info(f"Saving features in {feature_path}")
+                with open(feature_path, "wb") as f:
+                    pkl.dump(test_features, f)
+                if self.config["feature_extraction_only"]:
+                    continue
         logging.info(f"Session ended: {self.toolset['session_id']}")
         self.harness.terminate_session(session_id)
