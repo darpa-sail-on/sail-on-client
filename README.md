@@ -264,8 +264,8 @@ your working directory.
    ```
 5. Change `config_file_path` in `local_hwr_nd.json` to point `local_hwr_config.yaml`.
 6. Download the image for dry run using the following [link](https://drive.google.com/file/d/1nUxCqxbr46gnAFSKztnjEj0fYufWRE2f/view)
-9. Change `dataset_root` in `local_hwr_nd.json` to point to directory where the images are stored in the previous step
-10. Run the client
+8. Change `dataset_root` in `local_hwr_nd.json` to point to directory where the images are stored in the previous step
+9. Run the client
     ```
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_hwr_nd.json
     ```
@@ -289,8 +289,8 @@ your working directory.
 5. Download the EVM model from following [link](https://drive.google.com/file/d/1MDV0nFYNYaC19DCBNmDmUaUXiM-amGNs/view?usp=sharing)
 6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
 7. Download the HMDB dataset using the following [link](http://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/hmdb51_org.rar)
-9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored in the previous step
-10. Run the client
+8. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored in the previous step
+9. Run the client
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd.json
     ```
@@ -311,12 +311,35 @@ your working directory.
 4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
 5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
 6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
-9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
-10. Run the client
+7. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
+8. Run the client
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_graph_fe.json
     ```
     This generarates a pickle file for every test present in the config in `GAE-features` directory
+
+#### Running Graph Autoencoder based Novelty Detector Using Pre-Computed Features
+
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory gae_nd_results
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
+    ```
+      cd sail-on-client
+      cp config/gae_nd_graph_precomputed.json config/local_gae_nd_precomputed.json
+    ```
+3. Download the backbone model from following [link](https://drive.google.com/drive/u/0/folders/1ad8gny6Dqvp6hqTRwvTNvhW30lHmf6D2)
+4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
+5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
+6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
+7. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored.
+8. Change `feature_save_dir` to the path where features are stored.
+9. Run the client
+    ```
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_precomputed.json
+    ```
 
 #### Running Feature Extraction For Graph Autoencoder based Novelty Detector Using I3D Features
 
@@ -334,8 +357,8 @@ your working directory.
 4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_nd.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
 5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
 6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
-9. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
-10. Run the client
+7. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored
+8. Run the client
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_gae_nd_i3d_fe.json
     ```
