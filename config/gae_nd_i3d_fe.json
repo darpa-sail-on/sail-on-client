@@ -23,7 +23,8 @@
       "num_heads": [4, 1],
       "sample_duration": 64,
       "mode": "feature",
-      "graph_classes": 88
+      "graph_classes": 88,
+      "feature_type": "3d"
     },
     "evm_params": {
       "weight_path": "",
