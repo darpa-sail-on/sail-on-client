@@ -95,7 +95,7 @@ class ParInterface(Harness):
         return filename
 
     def session_request(
-        self, test_ids: list, protocol: str, novelty_detector_version: str
+        self, test_ids: list, protocol: str, domain: str, novelty_detector_version: str
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -103,6 +103,7 @@ class ParInterface(Harness):
         Arguments:
             -test_ids   : list of tests being evaluated in this session
             -protocol   : string indicating which protocol is being evaluated
+            -domain     : string indicating which domain is being evaluated
             -novelty_detector_version : string indicating the version of the novelty detector being evaluated
         Returns:
             -session id
@@ -110,6 +111,7 @@ class ParInterface(Harness):
         payload = {
             "protocol": protocol,
             "novelty_detector_version": novelty_detector_version,
+            "domain": domain,
         }
 
         ids = "\n".join(test_ids) + "\n"
@@ -251,7 +253,7 @@ class ParInterface(Harness):
 
         return filename
 
-    def get_test_metadata(self, test_id: str) -> Dict[str, Any]:
+    def get_test_metadata(self, session_id: str, test_id: str) -> Dict[str, Any]:
         """
         Retrieve the metadata json for the specified test.
 
@@ -261,7 +263,8 @@ class ParInterface(Harness):
             metadata json
         """
         response = requests.get(
-            f"{self.api_url}/test/metadata", params={"test_id": test_id},
+            f"{self.api_url}/test/metadata",
+            params={"test_id": test_id, "session_id": session_id},
         )
 
         self._check_response(response)

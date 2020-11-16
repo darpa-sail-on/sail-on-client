@@ -11,7 +11,7 @@ import json
 import sys
 import logging
 import pickle as pkl
-import ubelt as ub
+import ubelt as ub  # type: ignore
 
 from typing import Dict, Any
 
@@ -55,12 +55,15 @@ class Condda(BaseProtocol):
             f"{self.config['novelty_detector_class']}" f"{novelty_detector_version}"
         )
         self.toolset["session_id"] = self.harness.session_request(
-            self.config["test_ids"], "CONDDA", novelty_detector_cv
+            self.config["test_ids"],
+            "CONDDA",
+            self.config["domain"],
+            novelty_detector_cv,
         )
         session_id = self.toolset["session_id"]
         logging.info(f"New session: {self.toolset['session_id']}")
         for test_id in self.config["test_ids"]:
-            self.metadata = self.harness.get_test_metadata(test_id)
+            self.metadata = self.harness.get_test_metadata(session_id, test_id)
             self.toolset["test_id"] = test_id
             self.toolset["test_type"] = ""
             self.toolset["metadata"] = self.metadata
@@ -75,7 +78,7 @@ class Condda(BaseProtocol):
             logging.info(f"Start test: {self.toolset['test_id']}")
 
             if self.config["save_features"]:
-                test_features = {"features_dict": {}, "logit_dict": {}}
+                test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id

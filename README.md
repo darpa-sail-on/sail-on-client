@@ -19,7 +19,7 @@ Client and Protocols for DARPA sail-on
 3. [tinker-engine](https://gitlab.kitware.com/darpa_learn/tinker-engine)
 4. [Script Config](https://pypi.org/project/scriptconfig)
 5. [TA-2 Agent](https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector)
-6. [Sail-On](https://gitlab.kitware.com/darpa-sail-on/sail-on)
+6. [Sail-On API](https://gitlab.kitware.com/darpa-sail-on/sail-on-api)
 
 ## Installation
 
@@ -27,12 +27,12 @@ Client and Protocols for DARPA sail-on
 1. Clone the repositories associated with different components in a working directory
     ```
       git clone https://gitlab.kitware.com/darpa_learn/tinker-engine.git
-      git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-api.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create tinker-engine, sail-on, evm_based_novelty_detector, graph_autoencoder and sail-on-client directories in your working directory
+   This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder and sail-on-client directories in your working directory
 
 2. Install the different components in a virtual environment
    ```
@@ -66,15 +66,15 @@ your working directory.
    ```
 
 #### Install Sail-On Server
-1. Clone the [sail_on](https://gitlab.kitware.com/darpa-sail-on/sail-on) repository
+1. Clone the [sail-on-api](https://gitlab.kitware.com/darpa-sail-on/sail-on-api) repository
    ```
-    git clone https://gitlab.kitware.com/darpa-sail-on/sail-on.git
+    git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-api.git
    ```
    This would create a directory called sail-on in your working directory
 
 2. Go into the sail-on directory and install the dependencies for the server using
    ```
-    cd sail-on
+    cd sail-on-api
     pip install -r requirements.txt
    ```
 

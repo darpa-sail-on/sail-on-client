@@ -12,7 +12,7 @@ import json
 import sys
 import logging
 import pickle as pkl
-import ubelt as ub
+import ubelt as ub  # type: ignore
 
 from typing import Dict, Any
 
@@ -53,21 +53,21 @@ class SailOn(BaseProtocol):
 
         # TODO: fix the version below
         novelty_detector_version = "1.0.0"
-
+        novelty_detector_class = self.config["novelty_detector_class"]
         self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"],
             "OND",
-            "%s.%s" % (self.config["novelty_detector_class"], novelty_detector_version),
+            self.config["domain"],
+            f"{novelty_detector_version}.{novelty_detector_class}",
         )
         session_id = self.toolset["session_id"]
 
         logging.info(f"New session: {self.toolset['session_id']}")
 
         for test in self.config["test_ids"]:
-            self.metadata = self.harness.get_test_metadata(test)
             self.toolset["test_id"] = test
             self.toolset["test_type"] = ""
-            self.toolset["metadata"] = self.harness.get_test_metadata(test)
+            self.toolset["metadata"] = self.harness.get_test_metadata(session_id, test)
             if "red_light" in self.toolset["metadata"]:
                 self.toolset["redlight_image"] = os.path.join(
                     self.toolset["dataset_root"], self.toolset["metadata"]["red_light"]
@@ -81,7 +81,7 @@ class SailOn(BaseProtocol):
 
             logging.info(f"Start test: {self.toolset['test_id']}")
             if self.config["save_features"]:
-                test_features = {"features_dict": {}, "logit_dict": {}}
+                test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
