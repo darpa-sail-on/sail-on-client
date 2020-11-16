@@ -77,8 +77,13 @@ class Condda(BaseProtocol):
             self.toolset["dataset_ids"] = []
             logging.info(f"Start test: {self.toolset['test_id']}")
 
-            if self.config["save_features"]:
+            if self.config["save_features"] and not self.config["use_saved_features"]:
                 test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
+
+            if self.config["use_saved_features"]:
+                feature_dir = self.config["feature_save_dir"]
+                test_features = open(os.path.join(feature_dir, f"{test}_features.pkl"))
+                self.toolset.update(test_features)
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
@@ -91,16 +96,17 @@ class Condda(BaseProtocol):
                 except RoundError:
                     # no more rounds available, this test is done.
                     break
-                (
-                    self.toolset["features_dict"],
-                    self.toolset["logit_dict"],
-                ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
+                if not self.config["use_saved_features"]:
+                    (
+                        self.toolset["features_dict"],
+                        self.toolset["logit_dict"],
+                    ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
 
-                if self.config["save_features"]:
-                    test_features["features_dict"].update(self.toolset["features_dict"])
-                    test_features["logit_dict"].update(self.toolset["logit_dict"])
-                    if self.config["feature_extraction_only"]:
-                        continue
+                    if self.config["save_features"]:
+                        test_features["features_dict"].update(self.toolset["features_dict"])
+                        test_features["logit_dict"].update(self.toolset["logit_dict"])
+                        if self.config["feature_extraction_only"]:
+                            continue
 
                 results: Dict[str, Any] = {}
                 results["detection"] = novelty_algorithm.execute(
@@ -117,7 +123,7 @@ class Condda(BaseProtocol):
                 safe_remove_results(results)
             logging.info(f"Test complete: {self.toolset['test_id']}")
 
-            if self.config["save_features"]:
+            if self.config["save_features"] and not self.config["use_saved_features"]:
                 feature_dir = self.config["feature_save_dir"]
                 ub.ensuredir(feature_dir)
                 feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
