@@ -1,0 +1,20 @@
+{
+  "domain": "transcripts",
+  "dataset_root": "",
+  "test_ids": [
+    "OND.1.1.1234"
+  ],
+  "novelty_detector_class": "HWRNoveltyDetector",
+  "detector_config": {
+    "config_file_path": "./hwr_config.yaml",
+    "cores": 1,
+    "device": "gpu",
+    "csv_folder": "",
+    "img_height": 64,
+    "hogs_ppc": 16,
+    "unknown_threshold": 0.5,
+    "crnn_pass": [],
+    "save_header_csv": 0
+  }
+}
+

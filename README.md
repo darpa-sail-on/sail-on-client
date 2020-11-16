@@ -30,9 +30,11 @@ Client and Protocols for DARPA sail-on
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-api.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder and sail-on-client directories in your working directory
+   This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder,
+   hwr_novelty_detector and sail-on-client directories in your working directory
 
 2. Install the different components in a virtual environment
    ```
@@ -88,6 +90,7 @@ your working directory.
    ```
     git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
     git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
+    git clone https://gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector.git
    ```
    This would create a directory called evm_based_novelty_detector and graph-autoencoder your
    working directory
@@ -111,6 +114,17 @@ your working directory.
    ```
 
 5. Install the algorithm using
+    ```
+     pip install -e .
+    ```
+
+6. Go into the directory for transcription and install the dependencies using
+   ```
+    cd ../hwr_novelty_detector
+    pip install -r requirements.txt
+   ```
+
+7. Install the algorithm using
     ```
      pip install -e .
     ```
@@ -225,6 +239,35 @@ your working directory.
 10. Run the client
     ```
       tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
+    ```
+### Running Transcription Experiments
+
+#### Running HWR based Novelty Detector
+
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory hwr_nd_results
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
+    ```
+      cd sail-on-client
+      cp config/hwr_nd.json config/local_hwr_nd.json
+      cp config/hwr_config.yaml config/local_hwr_config.yaml
+    ```
+3. Download the models from following [link](https://drive.google.com/file/d/1rR-Xs2QXuPhfT6xyIuDOPds-PVp7yOLP/view?usp=sharing
+)
+4. Extract the model file in the root directory of sail-on-client
+   ```
+     cd sail-on-client
+     tar xvf hwr_novelty_detector_states_dry_run.tar.gz
+   ```
+5. Change `config_file_path` in `local_hwr_nd.json` to point `local_hwr_config.yaml`.
+6. Download the image for dry run using the following [link](https://drive.google.com/file/d/1nUxCqxbr46gnAFSKztnjEj0fYufWRE2f/view)
+9. Change `dataset_root` in `local_hwr_nd.json` to point to directory where the images are stored in the previous step
+10. Run the client
+    ```
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_hwr_nd.json
     ```
 
 ### Running Activity Recognition Experiments

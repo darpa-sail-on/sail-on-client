@@ -4,7 +4,7 @@ from tinker.baseprotocol import BaseProtocol
 
 from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError
-from sail_on_client.utils import safe_remove
+from sail_on_client.utils import safe_remove, safe_remove_results
 from sail_on_client.protocol.parinterface import ParInterface
 from itertools import count
 import os
@@ -95,7 +95,6 @@ class SailOn(BaseProtocol):
                 except RoundError:
                     # no more rounds available, this test is done.
                     break
-
                 (
                     self.toolset["features_dict"],
                     self.toolset["logit_dict"],
@@ -113,9 +112,13 @@ class SailOn(BaseProtocol):
                     self.toolset, "WorldDetection"
                 )
 
-                results["classification"] = novelty_algorithm.execute(
+                ncl_results = novelty_algorithm.execute(
                     self.toolset, "NoveltyClassification"
                 )
+                if isinstance(ncl_results, dict):
+                    results.update(ncl_results)
+                else:
+                    results["classification"] = ncl_results
 
                 self.harness.post_results(results, test, round_id, session_id)
                 with open(self.toolset["dataset"], "r") as dataset:
@@ -124,8 +127,7 @@ class SailOn(BaseProtocol):
 
                 # cleanup the round files
                 safe_remove(self.toolset["dataset"])
-                safe_remove(results["detection"])
-                safe_remove(results["classification"])
+                safe_remove_results(results)
 
             if self.config["save_features"]:
                 feature_dir = self.config["feature_save_dir"]
