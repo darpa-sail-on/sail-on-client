@@ -1,7 +1,7 @@
 {
   "domain": "activity_recognition",
   "test_ids": [
-    "CONDDA.3.1.193"
+    "OND.0.90001.2100554"
   ],
   "novelty_detector_class": "gae_nd",
   "dataset_root": "",
