@@ -255,7 +255,7 @@ your working directory.
       cp config/hwr_nd.json config/local_hwr_nd.json
       cp config/hwr_config.yaml config/local_hwr_config.yaml
     ```
-3. Download the models from following [link](https://drive.google.com/file/d/1aPkshlxP_ld5-bdX6lwqpM1EiF62f_N8/view?usp=sharing
+3. Download the models from following [link](https://drive.google.com/file/d/1rR-Xs2QXuPhfT6xyIuDOPds-PVp7yOLP/view?usp=sharing
 )
 4. Extract the model file in the root directory of sail-on-client
    ```
