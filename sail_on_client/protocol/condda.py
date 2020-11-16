@@ -82,7 +82,9 @@ class Condda(BaseProtocol):
 
             if self.config["use_saved_features"]:
                 feature_dir = self.config["feature_save_dir"]
-                test_features = open(os.path.join(feature_dir, f"{test_id}_features.pkl"))
+                test_features = pkl.load(
+                    open(os.path.join(feature_dir, f"{test_id}_features.pkl"), "rb")
+                )
                 self.toolset.update(test_features)
 
             for round_id in count(0):
