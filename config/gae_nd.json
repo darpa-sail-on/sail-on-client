@@ -19,7 +19,8 @@
       "in_dim": 1024,
       "num_heads": [4, 1],
       "sample_duration": 64,
-      "mode": "feature"
+      "mode": "feature",
+      "graph_classes": 88
     },
     "evm_params": {
       "weight_path": "",
@@ -35,7 +36,7 @@
       "sample_duration": 64,
       "batch_size": 1,
       "n_threads": 6,
-      "n_classes": 26
+      "n_classes": 88
     },
     "csv_folder": "test_algo",
     "cores": 6,
