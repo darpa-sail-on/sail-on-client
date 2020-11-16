@@ -23,6 +23,7 @@ class OndConfig(scfg.Config):
             False, help="Quit after feature extraction"
         ),
         "save_features": scfg.Value(False, help="Save features as pkl file"),
+        "use_saved_features": scfg.Value(False, help="Use features saved the pkl file"),
         "feature_save_dir": scfg.Value("", help="Directory where features are saved"),
         "detector_config": {
             "efficientnet_params": {

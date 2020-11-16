@@ -7,6 +7,7 @@
   "dataset_root": "",
   "feature_extraction_only": "True",
   "save_features": "True",
+  "use_saved_features": "True",
   "feature_save_dir": "GAE-features",
   "detector_config": {
     "feature_extractor_params": {
