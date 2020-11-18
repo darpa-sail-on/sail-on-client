@@ -36,6 +36,12 @@ Client and Protocols for DARPA sail-on
    This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder,
    hwr_novelty_detector and sail-on-client directories in your working directory
 
+2. Checkout older version of tinker-engine using
+   ```
+      cd tinker-engine
+      git checkout old-tinker
+   ```
+
 2. Install the different components in a virtual environment
    ```
    cd ../sail-on-client
