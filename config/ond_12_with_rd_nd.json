@@ -16,7 +16,8 @@
                  "cover_threshold": 0.7,
                  "distance_multiplier": 0.55,
                  "distance_function": "cosine",
-                 "sigma_train": 1.0,
+                 "mu_train": 1.0,
+                 "sigma_train": 0.1872130436656377,
                  "KL_threshold": 7.13040406025555,
                  "known_threshold": 0.7
                 },
