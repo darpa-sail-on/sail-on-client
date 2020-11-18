@@ -88,7 +88,8 @@ class SailOn(BaseProtocol):
                 test_features = pkl.load(
                     open(os.path.join(feature_dir, f"{test}_features.pkl"), "rb")
                 )
-                self.toolset.update(test_features)
+                features_dict = test_features["features_dict"]
+                logit_dict = test_features["logit_dict"]
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
@@ -102,7 +103,22 @@ class SailOn(BaseProtocol):
                 except RoundError:
                     # no more rounds available, this test is done.
                     break
-                if not self.config["use_saved_features"]:
+
+                with open(self.toolset["dataset"], "r") as dataset:
+                    dataset_ids = dataset.readlines()
+                    image_ids = [image_id.strip() for image_id in dataset_ids]
+                    self.toolset["dataset_ids"].extend(image_ids)
+
+                if self.config["use_saved_features"]:
+                    self.toolset["features_dict"] = {}
+                    self.toolset["logit_dict"] = {}
+                    for image_id in image_ids:
+                        self.toolset["features_dict"][image_id] = features_dict[
+                            image_id
+                        ]
+                        self.toolset["logit_dict"][image_id] = logit_dict[image_id]
+
+                else:
                     (
                         self.toolset["features_dict"],
                         self.toolset["logit_dict"],
@@ -131,8 +147,6 @@ class SailOn(BaseProtocol):
                     results["classification"] = ncl_results
 
                 self.harness.post_results(results, test, round_id, session_id)
-                with open(self.toolset["dataset"], "r") as dataset:
-                    self.toolset["dataset_ids"].extend(dataset.readlines())
                 logging.info(f"Round complete: {self.toolset['round_id']}")
 
                 # cleanup the round files
@@ -150,11 +164,6 @@ class SailOn(BaseProtocol):
                     continue
 
             results = {}
-
-            self.toolset["dataset_ids"] = [
-                image_id.strip() for image_id in self.toolset["dataset_ids"]
-            ]
-
             results["characterization"] = novelty_algorithm.execute(
                 self.toolset, "NoveltyCharacterization"
             )

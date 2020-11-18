@@ -85,7 +85,8 @@ class Condda(BaseProtocol):
                 test_features = pkl.load(
                     open(os.path.join(feature_dir, f"{test_id}_features.pkl"), "rb")
                 )
-                self.toolset.update(test_features)
+                features_dict = test_features["features_dict"]
+                logit_dict = test_features["logit_dict"]
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
@@ -98,7 +99,20 @@ class Condda(BaseProtocol):
                 except RoundError:
                     # no more rounds available, this test is done.
                     break
-                if not self.config["use_saved_features"]:
+
+                with open(self.toolset["dataset"], "r") as dataset:
+                    dataset_ids = dataset.readlines()
+                    image_ids = [image_id.strip() for image_id in dataset_ids]
+
+                if self.config["use_saved_features"]:
+                    self.toolset["features_dict"] = {}
+                    self.toolset["logit_dict"] = {}
+                    for image_id in image_ids:
+                        self.toolset["features_dict"][image_id] = features_dict[
+                            image_id
+                        ]
+                        self.toolset["logit_dict"][image_id] = logit_dict[image_id]
+                else:
                     (
                         self.toolset["features_dict"],
                         self.toolset["logit_dict"],
@@ -134,7 +148,5 @@ class Condda(BaseProtocol):
                 logging.info(f"Saving features in {feature_path}")
                 with open(feature_path, "wb") as f:
                     pkl.dump(test_features, f)
-                if self.config["feature_extraction_only"]:
-                    continue
         logging.info(f"Session ended: {self.toolset['session_id']}")
         self.harness.terminate_session(session_id)
