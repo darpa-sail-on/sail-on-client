@@ -113,7 +113,9 @@ class SailOn(BaseProtocol):
                     self.toolset["features_dict"] = {}
                     self.toolset["logit_dict"] = {}
                     for image_id in image_ids:
-                        self.toolset["features_dict"][image_id] = features_dict[image_id]
+                        self.toolset["features_dict"][image_id] = features_dict[
+                            image_id
+                        ]
                         self.toolset["logit_dict"][image_id] = logit_dict[image_id]
 
                 else:
