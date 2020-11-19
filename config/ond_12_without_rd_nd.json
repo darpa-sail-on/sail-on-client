@@ -3,6 +3,7 @@
   "test_ids": [
     "OND.54012315.0900.1239"
   ],
+  "dataset_root": "",
   "novelty_detector_class": "OND_12_Without_Redlight",
   "detector_config": {
       "efficientnet_params": {
