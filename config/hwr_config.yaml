@@ -6,8 +6,8 @@ data:
     # `HWRNoveltyDetector.feature_extraction()`. To clarify, that is the
     # directory in which all the image files are contained.
     #data_path: './file_ids.txt'
-    #image_root_dir: './round_1_gs1_states/'
-    labels: './round_1_gs1_states/par_v1_iam_CRNN_char_set.tsv'
+    #image_root_dir: './round_1_gs1.2_states/'
+    labels: './round_1_gs1.2_states/par_v1_iam_CRNN_char_set.tsv'
 model:
   crnn:
     metric: CER
@@ -29,7 +29,7 @@ model:
       max_epochs_no_improvement: 200
     eval:
       batch_size: 1
-    load_path: './round_1_gs1_states/transcript_crnn_fold0_183.pt'
+    load_path: './round_1_gs1.2_states/transcript_crnn_fold0_183.pt'
   style: # the style recognition portion of the agent expecting HoOGs & MEVM
     # The separate style tasks' MEVM params
     writer_id:
@@ -39,34 +39,34 @@ model:
         cover_threshold: 0.4
         max_unknown: 1
       detection_threshold: 0.7 # as thresh for all means.
-      load_path: './round_1_gs1_states/style_mevms/evm_5folds_train-0.tsv_writer_id_v2_mevm_obj.hdf5'
+      load_path: './round_1_gs1.2_states/style_mevms/evm_5folds_train-0.tsv_writer_id_v2_mevm_obj.hdf5'
     pen_pressure:
       init:
         tailsize: 7969
         distance_multiplier: 0.01
         cover_threshold: 0.9
-      load_path: './round_1_gs1_states/style_mevms/evm_5folds_train-0.tsv_pen_pressure_v2_mevm_obj.hdf5'
+      load_path: './round_1_gs1.2_states/style_mevms/evm_5folds_train-0.tsv_pen_pressure_v2_mevm_obj.hdf5'
     letter_size:
       init:
         tailsize: 8656
         distance_multiplier: 0.01
         cover_threshold: 0.3
-      load_path: './round_1_gs1_states/style_mevms/evm_5folds_train-0.tsv_letter_size_v2_mevm_obj.hdf5'
+      load_path: './round_1_gs1.2_states/style_mevms/evm_5folds_train-0.tsv_letter_size_v2_mevm_obj.hdf5'
     word_spacing:
       init:
         tailsize: 7309
         distance_multiplier: 0.02
         cover_threshold: 0.9
-      load_path: './round_1_gs1_states/style_mevms/evm_5folds_train-0.tsv_word_spacing_v2_mevm_obj.hdf5'
+      load_path: './round_1_gs1.2_states/style_mevms/evm_5folds_train-0.tsv_word_spacing_v2_mevm_obj.hdf5'
     slant_angle:
       init:
         tailsize: 8722
         distance_multiplier: 0.11
         cover_threshold: 0.9
-      load_path: './round_1_gs1_states/style_mevms/evm_5folds_train-0.tsv_slant_angle_v2_mevm_obj.hdf5'
+      load_path: './round_1_gs1.2_states/style_mevms/evm_5folds_train-0.tsv_slant_angle_v2_mevm_obj.hdf5'
     background_repr:
       init:
         tailsize: 4465
         distance_multiplier: 0.01
         cover_threshold: 0.9
-      load_path: './round_1_gs1_states/style_mevms/evm_5folds_train-0.tsv_rep_v2_mevm_obj.hdf5'
+      load_path: './round_1_gs1.2_states/style_mevms/evm_5folds_train-0.tsv_rep_v2_mevm_obj.hdf5'
