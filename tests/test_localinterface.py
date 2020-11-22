@@ -105,7 +105,9 @@ def test_session_request(get_interface_params):
     # Testing if session was sucessfully initalized
     local_interface.session_request(test_ids, "OND", "image_classification", "0.1.1")
     # Testing with hints
-    local_interface.session_request(test_ids, "OND", "image_classification", "0.1.1", ["red_light"])
+    local_interface.session_request(
+        test_ids, "OND", "image_classification", "0.1.1", ["red_light"]
+    )
 
 
 def test_dataset_request(get_interface_params):

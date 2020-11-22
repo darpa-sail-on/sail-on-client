@@ -59,7 +59,7 @@ class Condda(BaseProtocol):
             "CONDDA",
             self.config["domain"],
             novelty_detector_cv,
-            self.config["hints"]
+            self.config["hints"],
         )
         session_id = self.toolset["session_id"]
         logging.info(f"New session: {self.toolset['session_id']}")
