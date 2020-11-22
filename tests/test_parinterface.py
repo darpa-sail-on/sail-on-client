@@ -7,13 +7,14 @@ import pytest
 from sail_on_client.errors import ProtocolError
 
 
-def _initialize_session(par_interface, protocol_name):
+def _initialize_session(par_interface, protocol_name, hints=[]):
     """
     Private function to initialize session.
 
     Args:
         par_interface (ParInterface): An instance of ParInterface
         protocol_name (str): Name of the protocol
+        hints (list[str]): Hints used in session request
 
     Return:
         session id
@@ -28,7 +29,7 @@ def _initialize_session(par_interface, protocol_name):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
-        test_ids, f"{protocol_name}", "image_classification", "0.1.1"
+        test_ids, f"{protocol_name}", "image_classification", "0.1.1", hints
     )
     return session_id
 
@@ -112,6 +113,8 @@ def test_session_request(server_setup, get_interface_params):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     par_interface.session_request(test_ids, "OND", "image_classification", "0.1.1")
+    # Testing with hints
+    par_interface.session_request(test_ids, "OND", "image_classification", "0.1.1", ["red_light"])
 
 
 def test_dataset_request(server_setup, get_interface_params):
@@ -293,3 +296,7 @@ def test_get_metadata(server_setup, get_interface_params):
 
     assert "OND" == metadata["protocol"]
     assert 3 == metadata["known_classes"]
+
+    session_id = _initialize_session(par_interface, "OND", ["red_light"])
+    metadata = par_interface.get_test_metadata(session_id, "OND.1.1.1234")
+    assert "n01484850_4515.JPEG" == metadata["red_light"]
