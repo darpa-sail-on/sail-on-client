@@ -4,6 +4,7 @@
     "OND.1.1.293"
   ],
   "novelty_detector_class": "OND_5_14_A2",
+  "hints": ["red_light"],
   "detector_config": {
     "efficientnet_params": {
       "model_path": "",
