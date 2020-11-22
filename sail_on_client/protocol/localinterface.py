@@ -61,7 +61,7 @@ class LocalInterface(Harness):
         protocol: str,
         domain: str,
         novelty_detector_version: str,
-        hints: list = [],
+        hints: list,
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
