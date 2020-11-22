@@ -25,6 +25,7 @@ class ConddaConfig(scfg.Config):
         "save_features": scfg.Value(False, help="Save features as pkl file"),
         "use_saved_features": scfg.Value(False, help="Use features saved the pkl file"),
         "feature_save_dir": scfg.Value("", help="Directory where features are saved"),
+        "hints": [],
         "detector_config": {
             "efficientnet_params": {"model_path": "", "known_classes": 413},
             "evm_params": {

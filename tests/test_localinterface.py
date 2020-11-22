@@ -4,13 +4,14 @@ import os
 import pytest
 
 
-def _initialize_session(par_interface, protocol_name):
+def _initialize_session(par_interface, protocol_name, hints=()):
     """
     Private function to initialize session.
 
     Args:
         local_interface (LocalInterface): An instance of LocalInterface
         protocol_name (str): Name of the protocol
+        hints (list[str]): Hints used in session request
 
     Return:
         session id
@@ -25,7 +26,7 @@ def _initialize_session(par_interface, protocol_name):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
-        test_ids, f"{protocol_name}", "image_classification", "0.1.1"
+        test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints)
     )
     return session_id
 
@@ -102,7 +103,13 @@ def test_session_request(get_interface_params):
     test_id_path = os.path.join(data_dir, "OND", "image_classification", "test_ids.csv")
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    local_interface.session_request(test_ids, "OND", "image_classification", "0.1.1")
+    local_interface.session_request(
+        test_ids, "OND", "image_classification", "0.1.1", []
+    )
+    # Testing with hints
+    local_interface.session_request(
+        test_ids, "OND", "image_classification", "0.1.1", ["red_light"]
+    )
 
 
 def test_dataset_request(get_interface_params):
@@ -272,3 +279,7 @@ def test_get_metadata(get_interface_params):
 
     assert "OND" == metadata["protocol"]
     assert 3 == metadata["known_classes"]
+
+    session_id = _initialize_session(local_interface, "OND", ["red_light"])
+    metadata = local_interface.get_test_metadata(session_id, "OND.1.1.1234")
+    assert "n01484850_4515.JPEG" == metadata["red_light"]

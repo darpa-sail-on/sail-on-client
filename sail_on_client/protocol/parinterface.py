@@ -95,7 +95,12 @@ class ParInterface(Harness):
         return filename
 
     def session_request(
-        self, test_ids: list, protocol: str, domain: str, novelty_detector_version: str
+        self,
+        test_ids: list,
+        protocol: str,
+        domain: str,
+        novelty_detector_version: str,
+        hints: list,
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -105,6 +110,7 @@ class ParInterface(Harness):
             -protocol   : string indicating which protocol is being evaluated
             -domain     : string indicating which domain is being evaluated
             -novelty_detector_version : string indicating the version of the novelty detector being evaluated
+            -hint       : a list hints provided for the session
         Returns:
             -session id
         """
@@ -112,6 +118,7 @@ class ParInterface(Harness):
             "protocol": protocol,
             "novelty_detector_version": novelty_detector_version,
             "domain": domain,
+            "hints": hints,
         }
 
         ids = "\n".join(test_ids) + "\n"

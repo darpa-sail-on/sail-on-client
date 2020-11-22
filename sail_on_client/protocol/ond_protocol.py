@@ -59,6 +59,7 @@ class SailOn(BaseProtocol):
             "OND",
             self.config["domain"],
             f"{novelty_detector_version}.{novelty_detector_class}",
+            self.config["hints"],
         )
         session_id = self.toolset["session_id"]
 

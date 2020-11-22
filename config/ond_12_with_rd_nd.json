@@ -4,6 +4,7 @@
     "OND.54012315.0900.1239"
   ],
   "novelty_detector_class": "OND_12_With_Redlight",
+  "hints": ["red_light"],
   "dataset_root": "",
   "detector_config": {
       "efficientnet_params": {

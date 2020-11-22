@@ -4,6 +4,7 @@
     "CONDDA.2.1.293"
   ],
   "novelty_detector_class": "CONDDA_5_14_A2",
+  "hints": ["red_light"],
   "dataset_root": "",
   "detector_config": {
     "efficientnet_params": {
