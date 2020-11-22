@@ -103,7 +103,9 @@ def test_session_request(get_interface_params):
     test_id_path = os.path.join(data_dir, "OND", "image_classification", "test_ids.csv")
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    local_interface.session_request(test_ids, "OND", "image_classification", "0.1.1", [])
+    local_interface.session_request(
+        test_ids, "OND", "image_classification", "0.1.1", []
+    )
     # Testing with hints
     local_interface.session_request(
         test_ids, "OND", "image_classification", "0.1.1", ["red_light"]
