@@ -1,4 +1,4 @@
-""" Image Classification Feedback."""
+"""Image Classification Feedback."""
 import pandas as pd
 
 from sail_on_client.protocol.parinterface import ParInterface
