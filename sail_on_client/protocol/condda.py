@@ -73,6 +73,7 @@ class Condda(BaseProtocol):
             else:
                 self.toolset["red_light_image"] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
+
             self.toolset["image_features"] = {}
             self.toolset["dataset_root"] = self.config["dataset_root"]
             self.toolset["dataset_ids"] = []
@@ -136,7 +137,6 @@ class Condda(BaseProtocol):
                 )
                 self.harness.post_results(results, test_id, round_id, session_id)
                 logging.info(f"Round complete: {self.toolset['round_id']}")
-                novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 # cleanup the round files
                 safe_remove(self.toolset["dataset"])
                 safe_remove_results(results)
