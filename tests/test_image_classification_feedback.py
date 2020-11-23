@@ -121,7 +121,7 @@ def test_get_feedback(
         2, 2, 2, par_interface, session_id, test_ids[0], protocol_constant
     )
     df_feedback = ic_feedback.get_feedback(
-        0, ["n01484850_18013.JPEG", "n01484850_24624.JPEG"]
+        0, [0, 1], ["n01484850_18013.JPEG", "n01484850_24624.JPEG"]
     )
     expected_list = [["n01484850_18013.JPEG", 1], ["n01484850_24624.JPEG", 2]]
     assert df_feedback.values.tolist() == expected_list

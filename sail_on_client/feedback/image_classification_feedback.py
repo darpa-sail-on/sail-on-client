@@ -31,7 +31,7 @@ class ImageClassificationFeedback:
         self.feedback_type = feedback_type
 
     def get_feedback(
-        self, round_id: int, images_id_list: list, image_names: list = None
+        self, round_id: int, images_id_list: list, image_names: list
     ) -> Union[pd.DataFrame, None]:
         """Get feedback for the round."""
         if round_id > self.current_round:
@@ -39,15 +39,17 @@ class ImageClassificationFeedback:
             self.current_round = round_id
             if len(images_id_list) <= self.budget:
                 self.budget = self.budget - len(images_id_list)
+                image_ids = [image_names[int(idx)] for idx in images_id_list]
                 feedback_file = self.interface.get_feedback_request(
-                    images_id_list,
+                    image_ids,
                     self.feedback_type,
                     self.test_id,
                     round_id,
                     self.session_id,
                 )
 
-                df = pd.read_csv(feedback_file, delimiter=",", header=None)
+                df = pd.read_csv(feedback_file, delimiter=",", header=None,
+                                 names=["id", "labels"])
             else:
                 raise ValueError("the function should be added")
         else:
