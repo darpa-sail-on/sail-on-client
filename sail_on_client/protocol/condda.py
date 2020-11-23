@@ -5,9 +5,6 @@ from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
 from sail_on_client.utils import safe_remove, safe_remove_results
 from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.feedback.image_classification_feedback import (
-    ImageClassificationFeedback,
-)
 from itertools import count
 import os
 import json
@@ -77,32 +74,6 @@ class Condda(BaseProtocol):
                 self.toolset["red_light_image"] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
 
-            # Intialize feedback object for Image Classfication
-            if (
-                "feedback_params" in self.config["detector_config"]
-                and self.config["domain"] == "image_classification"
-            ):
-                logging.info("Creating Feedback object")
-                first_budget = self.config["detector_config"]["feedback_params"][
-                    "first_budget"
-                ]
-                income_per_batch = self.config["detector_config"]["feedback_params"][
-                    "income_per_batch"
-                ]
-                max_budget = self.config["detector_config"]["feedback_params"][
-                    "maximum_budget"
-                ]
-                self.toolset[
-                    "ImageClassificationFeedback"
-                ] = ImageClassificationFeedback(
-                    first_budget,
-                    income_per_batch,
-                    max_budget,
-                    self.harness,
-                    session_id,
-                    test_id,
-                    "characterization",
-                )
             self.toolset["image_features"] = {}
             self.toolset["dataset_root"] = self.config["dataset_root"]
             self.toolset["dataset_ids"] = []
@@ -165,7 +136,6 @@ class Condda(BaseProtocol):
                     self.toolset, "NoveltyCharacterization"
                 )
                 self.harness.post_results(results, test_id, round_id, session_id)
-                novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 logging.info(f"Round complete: {self.toolset['round_id']}")
                 # cleanup the round files
                 safe_remove(self.toolset["dataset"])
