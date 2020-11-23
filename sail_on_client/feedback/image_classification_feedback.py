@@ -48,8 +48,9 @@ class ImageClassificationFeedback:
                     self.session_id,
                 )
 
-                df = pd.read_csv(feedback_file, delimiter=",", header=None,
-                                 names=["id", "labels"])
+                df = pd.read_csv(
+                    feedback_file, delimiter=",", header=None, names=["id", "labels"]
+                )
             else:
                 raise ValueError("the function should be added")
         else:
