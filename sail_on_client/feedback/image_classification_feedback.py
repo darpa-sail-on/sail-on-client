@@ -1,3 +1,4 @@
+""" Image Classification Feedback."""
 import pandas as pd
 
 from sail_on_client.protocol.parinterface import ParInterface
@@ -30,7 +31,7 @@ class ImageClassificationFeedback:
         self.feedback_type = feedback_type
 
     def get_feedback(
-        self, round_id: int, images_id_list: list, image_names: list = []
+        self, round_id: int, images_id_list: list, image_names: list = None
     ) -> Union[pd.DataFrame, None]:
         """Get feedback for the round."""
         if round_id > self.current_round:
