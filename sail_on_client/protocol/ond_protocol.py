@@ -101,6 +101,7 @@ class SailOn(BaseProtocol):
                     income_per_batch,
                     max_budget,
                     self.harness,
+                    session_id,
                     test,
                     "classification",
                 )
