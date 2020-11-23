@@ -10,14 +10,14 @@ class ImageClassificationFeedback:
     """Feedback for image classification."""
 
     def __init__(
-            self,
-            first_budget: int,
-            income_per_batch: int,
-            maximum_budget: int,
-            interface: Union[LocalInterface, ParInterface],
-            session_id: str,
-            test_id: str,
-            feedback_type: str = "classification",
+        self,
+        first_budget: int,
+        income_per_batch: int,
+        maximum_budget: int,
+        interface: Union[LocalInterface, ParInterface],
+        session_id: str,
+        test_id: str,
+        feedback_type: str = "classification",
     ) -> None:
         """Initialize."""
         self.budget = first_budget
@@ -30,10 +30,7 @@ class ImageClassificationFeedback:
         self.feedback_type = feedback_type
 
     def get_feedback(
-            self,
-            round_id: int,
-            images_id_list: list,
-            image_names: list = []
+        self, round_id: int, images_id_list: list, image_names: list = []
     ) -> Union[pd.DataFrame, None]:
         """Get feedback for the round."""
         if round_id > self.current_round:
@@ -42,9 +39,12 @@ class ImageClassificationFeedback:
             if len(images_id_list) <= self.budget:
                 self.budget = self.budget - len(images_id_list)
                 feedback_file = self.interface.get_feedback_request(
-                                               images_id_list, self.feedback_type,
-                                               self.test_id, round_id,
-                                               self.session_id)
+                    images_id_list,
+                    self.feedback_type,
+                    self.test_id,
+                    round_id,
+                    self.session_id,
+                )
 
                 df = pd.read_csv(feedback_file, delimiter=",", header=None)
             else:
@@ -55,7 +55,7 @@ class ImageClassificationFeedback:
 
     def deposit_income(self):
         """Get income for a round."""
-        self.budget = min(self.maximum_budget , (self.budget + self.income_per_batch))
+        self.budget = min(self.maximum_budget, (self.budget + self.income_per_batch))
 
     def get_budget(self):
         """Get current budget."""

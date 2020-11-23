@@ -5,7 +5,9 @@ import json
 import pytest
 import os
 
-from sail_on_client.feedback.image_classification_feedback import ImageClassificationFeedback
+from sail_on_client.feedback.image_classification_feedback import (
+    ImageClassificationFeedback,
+)
 from sail_on_client.protocol.parinterface import ParInterface
 
 
@@ -33,7 +35,7 @@ def _initialize_session(par_interface, protocol_name, hints=()):
     session_id = par_interface.session_request(
         test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints)
     )
-    return session_id,test_ids
+    return session_id, test_ids
 
 
 @pytest.fixture(scope="function")
@@ -51,10 +53,7 @@ def ond_config():
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping",
-    (
-        ("classification", ("detection", "classification")),
-    )
+    "feedback_mapping", (("classification", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_initialize(
@@ -83,15 +82,13 @@ def test_initialize(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
-    ImageClassificationFeedback(2, 2, 2, par_interface, session_id,
-                                test_ids[0], protocol_constant)
+    ImageClassificationFeedback(
+        2, 2, 2, par_interface, session_id, test_ids[0], protocol_constant
+    )
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping",
-    (
-        ("classification", ("detection", "classification")),
-    )
+    "feedback_mapping", (("classification", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_get_feedback(
@@ -120,18 +117,18 @@ def test_get_feedback(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
-    ic_feedback = ImageClassificationFeedback(2, 2, 2, par_interface, session_id,
-                                              test_ids[0], protocol_constant)
-    df_feedback = ic_feedback.get_feedback(0, ["n01484850_18013.JPEG", "n01484850_24624.JPEG"])
-    expected_list = [['n01484850_18013.JPEG', 1], ['n01484850_24624.JPEG', 2]]
+    ic_feedback = ImageClassificationFeedback(
+        2, 2, 2, par_interface, session_id, test_ids[0], protocol_constant
+    )
+    df_feedback = ic_feedback.get_feedback(
+        0, ["n01484850_18013.JPEG", "n01484850_24624.JPEG"]
+    )
+    expected_list = [["n01484850_18013.JPEG", 1], ["n01484850_24624.JPEG", 2]]
     assert df_feedback.values.tolist() == expected_list
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping",
-    (
-        ("classification", ("detection", "classification")),
-    )
+    "feedback_mapping", (("classification", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_deposit_income(
@@ -160,16 +157,14 @@ def test_deposit_income(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
-    ic_feedback = ImageClassificationFeedback(2, 2, 2, par_interface, session_id,
-                                              test_ids[0], protocol_constant)
+    ic_feedback = ImageClassificationFeedback(
+        2, 2, 2, par_interface, session_id, test_ids[0], protocol_constant
+    )
     ic_feedback.deposit_income()
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping",
-    (
-        ("classification", ("detection", "classification")),
-    )
+    "feedback_mapping", (("classification", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_get_budget(
@@ -198,6 +193,7 @@ def test_get_budget(
             os.path.dirname(__file__), f"test_results_{protocol_name}.1.1.1234.csv"
         )
     par_interface.post_results(result_files, f"{protocol_name}.1.1.1234", 0, session_id)
-    ic_feedback = ImageClassificationFeedback(2, 2, 2, par_interface, session_id,
-                                              test_ids[0], protocol_constant)
+    ic_feedback = ImageClassificationFeedback(
+        2, 2, 2, par_interface, session_id, test_ids[0], protocol_constant
+    )
     assert ic_feedback.get_budget() == 2

@@ -6,7 +6,9 @@ from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError
 from sail_on_client.utils import safe_remove, safe_remove_results
 from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.feedback.image_classification_feedback import ImageClassificationFeedback
+from sail_on_client.feedback.image_classification_feedback import (
+    ImageClassificationFeedback,
+)
 from itertools import count
 import os
 import json
@@ -43,7 +45,6 @@ class SailOn(BaseProtocol):
             overriden_config = json.load(f)
         self.config = OndConfig(overriden_config)
 
-
     def run_protocol(self) -> None:
         """Run the protocol."""
 
@@ -79,19 +80,30 @@ class SailOn(BaseProtocol):
                 self.toolset["redlight_image"] = ""
 
             # Intialize feedback object for Image Classfication
-            if "feedback_params" in self.config["detector_config"] and \
-                    self.config["domain"] == "image_classification":
+            if (
+                "feedback_params" in self.config["detector_config"]
+                and self.config["domain"] == "image_classification"
+            ):
                 logging.info("Creating Feedback object")
-                first_budget = self.config["detector_config"]["feedback_params"]["first_budget"]
-                income_per_batch = self.config["detector_config"]["feedback_params"]["income_per_batch"]
-                max_budget = self.config["detector_config"]["feedback_params"]["maximum_budget"]
-                self.toolset["ImageClassificationFeedback"] = \
-                        ImageClassificationFeedback(first_budget,
-                                                    income_per_batch,
-                                                    max_budget,
-                                                    self.harness,
-                                                    test,
-                                                    "classification")
+                first_budget = self.config["detector_config"]["feedback_params"][
+                    "first_budget"
+                ]
+                income_per_batch = self.config["detector_config"]["feedback_params"][
+                    "income_per_batch"
+                ]
+                max_budget = self.config["detector_config"]["feedback_params"][
+                    "maximum_budget"
+                ]
+                self.toolset[
+                    "ImageClassificationFeedback"
+                ] = ImageClassificationFeedback(
+                    first_budget,
+                    income_per_batch,
+                    max_budget,
+                    self.harness,
+                    test,
+                    "classification",
+                )
             novelty_algorithm.execute(self.toolset, "Initialize")
             self.toolset["image_features"] = {}
             self.toolset["dataset_root"] = self.config["dataset_root"]
@@ -108,8 +120,6 @@ class SailOn(BaseProtocol):
                 )
                 features_dict = test_features["features_dict"]
                 logit_dict = test_features["logit_dict"]
-
-
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
