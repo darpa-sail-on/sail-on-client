@@ -53,10 +53,10 @@ class ImageClassificationFeedback:
             df = None
         return df
 
-    def deposit_income(self):
+    def deposit_income(self) -> None:
         """Get income for a round."""
         self.budget = min(self.maximum_budget, (self.budget + self.income_per_batch))
 
-    def get_budget(self):
+    def get_budget(self) -> int:
         """Get current budget."""
         return self.budget
