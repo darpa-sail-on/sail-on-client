@@ -25,7 +25,7 @@ class OndConfig(scfg.Config):
         "use_feedback": scfg.Value(False, help="Use feedback for the run"),
         "save_features": scfg.Value(False, help="Save features as pkl file"),
         "use_saved_features": scfg.Value(False, help="Use features saved the pkl file"),
-        "feature_save_dir": scfg.Value("", help="Directory where features are saved"),
+        "save_dir": scfg.Value("", help="Directory where features are saved"),
         "hints": [],
         "detector_config": {
             "efficientnet_params": {

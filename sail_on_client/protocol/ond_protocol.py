@@ -120,7 +120,6 @@ class SailOn(BaseProtocol):
                     )
                 else:
                     test_features = pkl.load(open(feature_dir, "rb"))
-
                 features_dict = test_features["features_dict"]
                 logit_dict = test_features["logit_dict"]
 
@@ -189,7 +188,7 @@ class SailOn(BaseProtocol):
                 safe_remove_results(results)
 
             if self.config["save_features"] and not self.config["use_saved_features"]:
-                feature_dir = self.config["feature_save_dir"]
+                feature_dir = self.config["save_dir"]
                 ub.ensuredir(feature_dir)
                 feature_path = os.path.join(feature_dir, f"{test}_features.pkl")
                 logging.info(f"Saving features in {feature_path}")
