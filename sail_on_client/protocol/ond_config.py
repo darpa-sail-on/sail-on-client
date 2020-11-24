@@ -26,6 +26,11 @@ class OndConfig(scfg.Config):
         "save_features": scfg.Value(False, help="Save features as pkl file"),
         "use_saved_features": scfg.Value(False, help="Use features saved the pkl file"),
         "save_dir": scfg.Value("", help="Directory where features are saved"),
+        "save_attributes": scfg.Value(False, help="Flag to attributes in save dir"),
+        "use_saved_attributes": scfg.Value(False, help="Use attributes saved in save dir"),
+        "save_elementwise": scfg.Value(False, help="Save attributes elementwise"),
+        "saved_attributes": {},
+        "skip_stage": [],
         "hints": [],
         "detector_config": {
             "efficientnet_params": {

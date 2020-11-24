@@ -71,6 +71,8 @@ class SailOn(BaseProtocol):
         for test in self.config["test_ids"]:
             self.toolset["test_id"] = test
             self.toolset["test_type"] = ""
+            if self.config["save_attributes"]:
+                self.toolset["attributes"] = {}
             self.toolset["metadata"] = self.harness.get_test_metadata(session_id, test)
             if "red_light" in self.toolset["metadata"]:
                 self.toolset["redlight_image"] = self.toolset["metadata"]["red_light"]
@@ -196,6 +198,14 @@ class SailOn(BaseProtocol):
                     pkl.dump(test_features, f)
                 if self.config["feature_extraction_only"]:
                     continue
+
+            if self.config["save_attributes"]:
+                attribute_dir = self.config["save_dir"]
+                ub.ensuredir(attribute_dir)
+                attribute_path = os.path.join(attribute_dir, f"{test}_attribute.pkl")
+                logging.info(f"Saving features in {attribute_path}")
+                with open(attribute_path, "wb") as f:
+                    pkl.dump(self.toolset["attributes"], f)
 
             results = {}
             results["characterization"] = novelty_algorithm.execute(
