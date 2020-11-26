@@ -3,7 +3,6 @@
   "test_ids": [
     "OND.54012315.0900.1239"
   ],
-  "use_feedback": "True",
   "novelty_detector_class": "OND_12_With_Redlight",
   "hints": ["red_light"],
   "dataset_root": "",

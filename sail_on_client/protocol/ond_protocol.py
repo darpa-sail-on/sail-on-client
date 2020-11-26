@@ -182,7 +182,8 @@ class SailOn(BaseProtocol):
                     results["classification"] = ncl_results
 
                 self.harness.post_results(results, test, round_id, session_id)
-                novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
+                if self.toolset["use_feedback"]:
+                    novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 logging.info(f"Round complete: {self.toolset['round_id']}")
 
                 # cleanup the round files
