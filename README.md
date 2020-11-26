@@ -155,9 +155,12 @@ your working directory.
 
 ## Running Client and Server with Different Algorithms
 
+Note: If you are using the server setup by PAR, update the `url` to `http://3.32.8.161:5000`
+in sail_on_client/protocol/configuration.json and skip step 1 of running the running the server.
+
 ### Running Image Classification Experiments
 
-#### Running OND 12 With Red Light
+#### Running OND 12 With Red Light and Feedback
 1. Go to sail-on server directory and start the server using
     ```
       cd sail-on
@@ -178,7 +181,7 @@ your working directory.
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_12_with_rd_nd.json
     ```
 
-#### Running OND 12 Without Red Light
+#### Running OND 12 Without Red Light and with Feedback
 1. Go to sail-on server directory and start the server using
     ```
       cd sail-on
@@ -187,17 +190,60 @@ your working directory.
 2. Go to the sail on client repository and make a copy of the configuration file for the algorithm
     ```
       cd sail-on-client
-      cp config/ond_12_without_rd_nd.json config/local_ond_12_without_rd_nd.json
+      cp config/ond_12_wo_rd_nd.json config/local_ond_12_wo_rd_nd.json
     ```
 3. Download the evm model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/EVM_cosine_model_umd_b3_CC_tail40000_ct7_dm55.hdf5)
-4. Change `model_path` for `evm_params` in `local_ond_12_without_rd_nd.json` to point the model downloaded in the previous step
+4. Change `model_path` for `evm_params` in `local_ond_12_wo_rd_nd.json` to point the model downloaded in the previous step
 3. Download the efficientnet model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/trained_efficientnet_b3_CC.pth.tar)
-5. Change `model_path` for `efficientnet_params` in `local_ond_12_without_rd_nd.json` to point the model downloaded in the previous step
-6. Change `dataset_root` in `local_ond_12_without_rd_nd.json`  to point to `sail-on/images` directory
+5. Change `model_path` for `efficientnet_params` in `local_ond_12_wo_rd_nd.json` to point the model downloaded in the previous step
+6. Change `dataset_root` in `local_ond_12_wo_rd_nd.json`  to point to `sail-on/images` directory
 7. Run the client
     ```
-      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_12_without_rd_nd.json
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_12_wo_rd_nd.json
     ```
+
+#### Running OND 12 With Red Light and Without Feedback
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory ond_12_with_rd
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for the algorithm
+    ```
+      cd sail-on-client
+      cp config/ond_12_with_rd_nd_wo_feedback.json config/local_ond_12_with_rd_nd_wo_feedback.json
+    ```
+3. Download the evm model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/EVM_cosine_model_umd_b3_CC_tail40000_ct7_dm55.hdf5)
+4. Change `model_path` for `evm_params` in `local_ond_12_with_rd_nd_wo_feedback.json` to point the model downloaded in the previous step
+3. Download the efficientnet model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/trained_efficientnet_b3_CC.pth.tar)
+5. Change `model_path` for `efficientnet_params` in `local_ond_12_with_rd_nd_wo_feedback.json` to point the model downloaded in the previous step
+6. Change `dataset_root` in `local_ond_12_with_rd_nd_wo_feedback.json`  to point to `sail-on/images` directory
+7. Run the client
+    ```
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_12_with_rd_nd_wo_feedback.json
+    ```
+
+#### Running OND 12 Without Red Light and Without Feedback
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory ond_12_without_rd
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for the algorithm
+    ```
+      cd sail-on-client
+      cp config/ond_12_wo_rd_nd_wo_feedback.json config/local_ond_12_wo_rd_nd_wo_feedback.json
+    ```
+3. Download the evm model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/EVM_cosine_model_umd_b3_CC_tail40000_ct7_dm55.hdf5)
+4. Change `model_path` for `evm_params` in `local_ond_12_wo_rd_nd_wo_feedback.json` to point the model downloaded in the previous step
+3. Download the efficientnet model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/trained_efficientnet_b3_CC.pth.tar)
+5. Change `model_path` for `efficientnet_params` in `local_ond_12_wo_rd_nd_wo_feedback.json` to point the model downloaded in the previous step
+6. Change `dataset_root` in `local_ond_12_wo_rd_nd_wo_feedback.json`  to point to `sail-on/images` directory
+7. Run the client
+    ```
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_12_wo_rd_nd_wo_feedback.json
+    ```
+
 Note: The instructions for running the old algorithms are available in M6-ALGO.md
 
 ### Running Transcription Experiments
