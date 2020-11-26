@@ -156,7 +156,7 @@ your working directory.
 ## Running Client and Server with Different Algorithms
 
 Note: If you are using the server setup by PAR, update the `url` to `http://3.32.8.161:5000`
-in sail_on_client/protocol/configuration.json and skip step 1 of running the running the server.
+in sail_on_client/protocol/configuration.json and skip step 1 of running the server.
 
 ### Running Image Classification Experiments
 
