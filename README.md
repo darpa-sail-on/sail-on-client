@@ -158,6 +158,9 @@ your working directory.
 Note: If you are using the server setup by PAR, update the `url` to `http://3.32.8.161:5000`
 in sail_on_client/protocol/configuration.json and skip step 1 of running the server.
 
+Note: The instructions assume that under given detection, the red-light information is
+provided via metadata and under system detection, this information is determined by the algorithm.
+
 ### Running Image Classification Experiments
 
 #### Running OND 12 With Red Light and Feedback
