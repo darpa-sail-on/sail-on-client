@@ -1,8 +1,13 @@
 """Mocks mainly used for testing protocols."""
 
+from __future__ import annotations
+
 from tinker.basealgorithm import BaseAlgorithm
-import logging
+from sail_on_client.checkpointer import Checkpointer
 from typing import Dict, Any, Tuple, Callable
+
+import logging
+import torch
 
 
 class MockDetector(BaseAlgorithm):
@@ -110,3 +115,77 @@ class MockDetector(BaseAlgorithm):
             path to csv file containing the results for novelty characterization step
         """
         return self.dataset
+
+
+class MockDetectorWithAttributes(MockDetector):
+    """Mock Detector for testing checkpointing."""
+
+    def __init__(self, toolset: Dict) -> None:
+        """
+        Detector constructor.
+
+        Args:
+            toolset (dict): Dictionary containing parameters for the constructor
+        """
+        MockDetector.__init__(self, toolset)
+
+    def _feature_extraction(
+        self, toolset: Dict
+    ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+        """
+        Feature extraction step for the algorithm.
+
+        Args:
+            toolset (dict): Dictionary containing parameters for different steps
+
+        Return:
+            Tuple of dictionary
+        """
+        self.dummy_dict = toolset["dummy_dict"]
+        self.dummy_list = toolset["dummy_list"]
+        self.dummy_tuple = toolset["dummy_tuple"]
+        self.dummy_tensor = toolset["dummy_tensor"]
+        self.dummy_val = toolset["dummy_val"]
+        return {}, {}
+
+
+class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):
+    """Mock Adapter for testing checkpointing."""
+
+    def __init__(self, toolset: Dict) -> None:
+        """
+        Detector constructor.
+
+        Args:
+            toolset (dict): Dictionary containing parameters for the constructor
+        """
+        BaseAlgorithm.__init__(self, toolset)
+        Checkpointer.__init__(self, toolset)
+        self.detector = MockDetectorWithAttributes(toolset)
+
+    def execute(self, toolset: Dict, step_descriptor: str) -> Any:
+        """
+        Execute method used by the protocol to run different steps
+
+        Args:
+            toolset (dict): Dictionary containing parameters for different steps
+            step_descriptor (str): Name of the step
+        """
+        logging.info(f"Executing {step_descriptor}")
+        return self.detector.step_dict[step_descriptor](toolset)
+
+    def __eq__(self, other: MockAdapterWithCheckpoint) -> bool:
+        """
+        Overriden method to compare two mock adapters
+
+        Args:
+            other (MockAdapterWithCheckpoint): Another instance of mock adapter
+
+        Return:
+            True if both instances have same attributes
+        """
+        return self.detector.dummy_dict == other.detector.dummy_dict and \
+               self.detector.dummy_list == other.detector.dummy_list and \
+               self.detector.dummy_tuple == other.detector.dummy_tuple and \
+               torch.all(torch.eq(self.detector.dummy_tensor, other.detector.dummy_tensor)) and \
+               self.detector.dummy_val == other.detector.dummy_val
