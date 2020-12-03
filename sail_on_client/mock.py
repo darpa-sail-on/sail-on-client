@@ -165,7 +165,7 @@ class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):
 
     def execute(self, toolset: Dict, step_descriptor: str) -> Any:
         """
-        Execute method used by the protocol to run different steps
+        Execute method used by the protocol to run different steps.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -174,9 +174,9 @@ class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):
         logging.info(f"Executing {step_descriptor}")
         return self.detector.step_dict[step_descriptor](toolset)
 
-    def __eq__(self, other: MockAdapterWithCheckpoint) -> bool:
+    def __eq__(self, other: object) -> bool:
         """
-        Overriden method to compare two mock adapters
+        Overriden method to compare two mock adapters.
 
         Args:
             other (MockAdapterWithCheckpoint): Another instance of mock adapter
@@ -184,8 +184,17 @@ class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):
         Return:
             True if both instances have same attributes
         """
-        return self.detector.dummy_dict == other.detector.dummy_dict and \
-               self.detector.dummy_list == other.detector.dummy_list and \
-               self.detector.dummy_tuple == other.detector.dummy_tuple and \
-               torch.all(torch.eq(self.detector.dummy_tensor, other.detector.dummy_tensor)) and \
-               self.detector.dummy_val == other.detector.dummy_val
+        if not isinstance(other, MockAdapterWithCheckpoint):
+            return NotImplemented
+
+        return (
+            self.detector.dummy_dict == other.detector.dummy_dict
+            and self.detector.dummy_list == other.detector.dummy_list
+            and self.detector.dummy_tuple == other.detector.dummy_tuple
+            and bool(
+                torch.all(
+                    torch.eq(self.detector.dummy_tensor, other.detector.dummy_tensor)
+                )
+            )
+            and self.detector.dummy_val == other.detector.dummy_val
+        )

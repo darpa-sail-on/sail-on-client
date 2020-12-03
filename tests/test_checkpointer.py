@@ -14,18 +14,21 @@ import pickle as pkl
 @pytest.fixture(scope="function")
 def checkpoint_save_config():
     """Fixture to create a config for saving attributes of a detector."""
-    toolset = \
-        {
-            "test_id": "Dummy_test",
-            "saved_attributes": {
-                "FeatureExtraction": ["dummy_dict", "dummy_list",
-                                      "dummy_tuple", "dummy_tensor",
-                                      "dummy_val"],
-                 },
-            "save_attributes": True,
-            "attributes": {},
-            "save_elementwise": True,
-        }
+    toolset = {
+        "test_id": "Dummy_test",
+        "saved_attributes": {
+            "FeatureExtraction": [
+                "dummy_dict",
+                "dummy_list",
+                "dummy_tuple",
+                "dummy_tensor",
+                "dummy_val",
+            ],
+        },
+        "save_attributes": True,
+        "attributes": {},
+        "save_elementwise": True,
+    }
     return toolset
 
 
@@ -46,33 +49,36 @@ def checkpoint_restore_config(request):
     with open(dataset_file, "w") as f:
         f.writelines(["dummy_key\n"])
 
-    toolset = \
-        {
-            "test_id": "Dummy_test",
-            "save_dir": save_dir,
-            "dataset": dataset_file,
-            "round_id": 0,
-            "saved_attributes": {
-                    "FeatureExtraction": ["dummy_dict", "dummy_list",
-                                          "dummy_tuple", "dummy_tensor",
-                                          "dummy_val"],
-                },
-            "use_saved_attributes": True,
-            "save_elementwise": True,
-        }
+    toolset = {
+        "test_id": "Dummy_test",
+        "save_dir": save_dir,
+        "dataset": dataset_file,
+        "round_id": 0,
+        "saved_attributes": {
+            "FeatureExtraction": [
+                "dummy_dict",
+                "dummy_list",
+                "dummy_tuple",
+                "dummy_tensor",
+                "dummy_val",
+            ],
+        },
+        "use_saved_attributes": True,
+        "save_elementwise": True,
+    }
     return toolset
 
 
 @pytest.fixture(scope="function")
 def dummy_attributes():
-    toolset = \
-            {
-                    "dummy_dict": {"dummy_key": "Dummy_val"},
-                    "dummy_list": [randint(1, 100)],
-                    "dummy_tuple": (randint(1, 100)),
-                    "dummy_tensor": torch.rand(1, 10),
-                    "dummy_val": randint(1, 100)
-            }
+    """Fixture for generating dummy attributes."""
+    toolset = {
+        "dummy_dict": {"dummy_key": "Dummy_val"},
+        "dummy_list": [randint(1, 100)],
+        "dummy_tuple": (randint(1, 100)),
+        "dummy_tensor": torch.rand(1, 10),
+        "dummy_val": randint(1, 100),
+    }
     return toolset
 
 
@@ -111,10 +117,17 @@ def test_save_attribute(checkpoint_save_config, dummy_attributes):
             assert attribute_val == dummy_val
 
 
-@pytest.mark.parametrize("checkpoint_restore_config", [TemporaryDirectory().name,
-                                                       os.path.join(TemporaryDirectory().name, "attributes.pkl")],
-                         indirect=True)
-def test_restore_attribute(checkpoint_restore_config, checkpoint_save_config, dummy_attributes):
+@pytest.mark.parametrize(
+    "checkpoint_restore_config",
+    [
+        TemporaryDirectory().name,
+        os.path.join(TemporaryDirectory().name, "attributes.pkl"),
+    ],
+    indirect=True,
+)
+def test_restore_attribute(
+    checkpoint_restore_config, checkpoint_save_config, dummy_attributes
+):
     """
     Test attributes restored by checkpointer.
 
