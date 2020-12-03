@@ -65,8 +65,8 @@ class Checkpointer(object):
 
         :return None
         """
-        if step_descriptor in self.toolset["save_attributes"]:
-            attributes = self.toolset["save_attributes"][step_descriptor]
+        if step_descriptor in self.toolset["saved_attributes"]:
+            attributes = self.toolset["saved_attributes"][step_descriptor]
         else:
             attributes = []
         save_elementwise = self.toolset["save_elementwise"]

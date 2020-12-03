@@ -17,11 +17,12 @@ def checkpoint_save_config():
     toolset = \
         {
             "test_id": "Dummy_test",
-            "save_attributes": {
+            "saved_attributes": {
                 "FeatureExtraction": ["dummy_dict", "dummy_list",
                                       "dummy_tuple", "dummy_tensor",
                                       "dummy_val"],
                  },
+            "save_attributes": True,
             "attributes": {},
             "save_elementwise": True,
         }
