@@ -35,7 +35,7 @@ def condda_config_with_feature_extraction():
                 "novelty_detector_class": "MockDetector",
                 "feature_extraction_only": True,
                 "save_features": True,
-                "feature_save_dir": feature_dir,
+                "save_dir": feature_dir,
             }
             config_name = "test_condda_config.json"
             json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))

@@ -147,7 +147,7 @@ class Condda(BaseProtocol):
             logging.info(f"Test complete: {self.toolset['test_id']}")
 
             if self.config["save_features"] and not self.config["use_saved_features"]:
-                feature_dir = self.config["feature_save_dir"]
+                feature_dir = self.config["save_dir"]
                 ub.ensuredir(feature_dir)
                 feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
                 logging.info(f"Saving features in {feature_path}")

@@ -36,6 +36,7 @@ The major features provided by Sail-On Client
 - Empirical protocols for evaluating open world agents
 - Dynamic algorithm discovery via plugins
 - Configurable components with sensible defaults
+- Saving and Restoring parameter for an algorithm
 
 User Guide
 ----------
@@ -72,6 +73,14 @@ Plugins
    :maxdepth: 1
 
    plugins
+
+Saving and Restoring Models
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+   saving
 
 API Documentation
 -----------------
