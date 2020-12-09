@@ -139,9 +139,7 @@ class Condda(BaseProtocol):
                 results["characterization"] = novelty_algorithm.execute(
                     self.toolset, "NoveltyCharacterization"
                 )
-                novelty_algorithm.execute(
-                    self.toolset, "NoveltyAdaption"
-                )
+                novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 self.harness.post_results(results, test_id, round_id, session_id)
                 logging.info(f"Round complete: {self.toolset['round_id']}")
                 # cleanup the round files
