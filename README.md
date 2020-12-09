@@ -247,6 +247,48 @@ provided via metadata and under system detection, this information is determined
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_12_wo_rd_nd_wo_feedback.json
     ```
 
+#### Running CONDDA 12 With Red Light and Without Feedback
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory condda_12_with_rd
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for the algorithm
+    ```
+      cd sail-on-client
+      cp config/condda_12_with_rd_nd.json config/local_condda_12_with_rd_nd.json
+    ```
+3. Download the evm model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/EVM_cosine_model_umd_b3_CC_tail40000_ct7_dm55.hdf5)
+4. Change `model_path` for `evm_params` in `local_condda_12_with_rd_nd.json` to point the model downloaded in the previous step
+3. Download the efficientnet model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/trained_efficientnet_b3_CC.pth.tar)
+5. Change `model_path` for `efficientnet_params` in `local_condda_12_with_rd_nd.json` to point the model downloaded in the previous step
+6. Change `dataset_root` in `local_condda_12_with_rd_nd.json`  to point to directory with images for testing
+7. Run the client
+    ```
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_12_with_rd_nd.json
+    ```
+
+#### Running CONDDA 12 Without Red Light and Without Feedback
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory condda_12_wo_rd
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for the algorithm
+    ```
+      cd sail-on-client
+      cp config/condda_12_wo_rd_nd.json config/local_condda_12_wo_rd_nd.json
+    ```
+3. Download the evm model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/EVM_cosine_model_umd_b3_CC_tail40000_ct7_dm55.hdf5)
+4. Change `model_path` for `evm_params` in `local_condda_12_wo_rd_nd.json` to point the model downloaded in the previous step
+3. Download the efficientnet model from following [link](https://vast.uccs.edu/~adhamija/4kitware/file_to_share/trained_efficientnet_b3_CC.pth.tar)
+5. Change `model_path` for `efficientnet_params` in `local_condda_12_wo_rd_nd.json` to point the model downloaded in the previous step
+6. Change `dataset_root` in `local_condda_12_wo_rd_nd.json`  to point to directory with images for testing
+7. Run the client
+    ```
+      tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_12_wo_rd_nd.json
+    ```
+
 #### Save Attributes for OND 12 Without Red Light and Without Feedback
 1. Go to sail-on server directory and start the server using
     ```
