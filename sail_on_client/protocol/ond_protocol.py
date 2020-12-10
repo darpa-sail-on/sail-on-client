@@ -115,7 +115,7 @@ class SailOn(BaseProtocol):
                 test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
 
             if self.config["use_saved_features"]:
-                feature_dir = self.config["feature_save_dir"]
+                feature_dir = self.config["save_dir"]
                 if os.path.isdir(feature_dir):
                     test_features = pkl.load(
                         open(os.path.join(feature_dir, f"{test}_features.pkl"), "rb")
