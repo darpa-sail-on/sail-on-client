@@ -69,9 +69,9 @@ class Condda(BaseProtocol):
             self.toolset["test_type"] = ""
             self.toolset["metadata"] = self.metadata
             if "red_light" in self.metadata:
-                self.toolset["red_light_image"] = self.toolset["metadata"]["red_light"]
+                self.toolset["redlight_image"] = self.toolset["metadata"]["red_light"]
             else:
-                self.toolset["red_light_image"] = ""
+                self.toolset["redlight_image"] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
 
             self.toolset["image_features"] = {}
