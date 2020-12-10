@@ -69,9 +69,9 @@ class Condda(BaseProtocol):
             self.toolset["test_type"] = ""
             self.toolset["metadata"] = self.metadata
             if "red_light" in self.metadata:
-                self.toolset["red_light_image"] = self.toolset["metadata"]["red_light"]
+                self.toolset["redlight_image"] = self.toolset["metadata"]["red_light"]
             else:
-                self.toolset["red_light_image"] = ""
+                self.toolset["redlight_image"] = ""
             novelty_algorithm.execute(self.toolset, "Initialize")
 
             self.toolset["image_features"] = {}
@@ -139,6 +139,7 @@ class Condda(BaseProtocol):
                 results["characterization"] = novelty_algorithm.execute(
                     self.toolset, "NoveltyCharacterization"
                 )
+                novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 self.harness.post_results(results, test_id, round_id, session_id)
                 logging.info(f"Round complete: {self.toolset['round_id']}")
                 # cleanup the round files
