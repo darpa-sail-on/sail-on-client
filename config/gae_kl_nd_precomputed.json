@@ -1,0 +1,56 @@
+{
+  "domain": "activity_recognition",
+  "test_ids": [
+    "OND.0.90001.2100554"
+  ],
+  "novelty_detector_class": "gae_kl_nd",
+  "dataset_root": "",
+  "feature_extraction_only": "True",
+  "save_features": "True",
+  "use_saved_features": "True",
+  "save_dir": "GAE-features/all_feats_updated.pkl",
+  "detector_config": {
+    "feature_extractor_params": {
+      "backbone_weight_path": "",
+      "name": "i3d",
+      "arch": "i3d-50",
+      "graph_weight_path": "",
+      "model_name": "i3d",
+      "n_classes": 400,
+      "no_cuda": "False",
+      "hidden_dims": [512, 128],
+      "hidden": "True",
+      "in_dim": 1024,
+      "num_heads": [4, 1],
+      "sample_duration": 64,
+      "graph_classes": 88,
+      "mode": "feature",
+      "feature_type": "graph"
+    },
+    "kl_params": {
+      "window_size": 100,
+      "mu_train": 1.0,
+      "sigma_train": 0.1242729408792351,
+      "KL_threshold": 5.365822113508410
+    },
+    "evm_params": {
+      "weight_path": "",
+      "number_of_unknown_to_crate_evm": 7
+    },
+    "characterization_params": {
+      "clustering_type": "FINCH",
+      "number_of_unknown_to_strat_clustering": 50
+    },
+    "dataloader_params": {
+      "sample_size": 224,
+      "mean": [114.7748, 107.7354, 99.4750],
+      "sample_duration": 64,
+      "batch_size": 1,
+      "n_threads": 6,
+      "n_classes": 88
+    },
+    "csv_folder": "",
+    "cores": 6,
+    "detection_threshold": 0.1
+  }
+}
