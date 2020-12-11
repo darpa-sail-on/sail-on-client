@@ -413,6 +413,29 @@ Note: The instructions for running the old algorithms are available in M6-ALGO.m
     ```
     This generarates a pickle file for every test present in the config in `GAE-features` directory
 
+#### Running Graph Autoencoder with KL divergence Using Pre-Computed Features Without Red Light
+
+1. Go to sail-on server directory and start the server using
+    ```
+      cd sail-on
+      sail_on_server --data-directory data/ --results-directory gae_kl_nd_results
+    ```
+2. Go to the sail on client repository and make a copy of the configuration file for running the algorithm
+    ```
+      cd sail-on-client
+      cp config/gae_nd_graph_precomputed.json config/local_gae_kl_nd_precomputed.json
+    ```
+3. Download the backbone model from following [link](https://drive.google.com/drive/u/0/folders/1ad8gny6Dqvp6hqTRwvTNvhW30lHmf6D2)
+4. Change `backbone_weight_path`  and `graph_weight_path` for `feature_extractor_params` in `local_gae_kl_nd_precomputed.json` to point `rgb_imagenet.pth` and `TA2_model_best.pth.tar`.
+5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
+6. Change `weight_path` for `evm_params` in `local_gae_kl_nd_precomputed.json` to point the model downloaded in previous step.
+7. Change `dataset_root` in `local_gae_kl_nd_precomputed.json` to point to directory where the videos are stored.
+8. Change `save_dir` to the path where features are stored.
+9. Run the client
+    ```
+      tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_gae_kl_nd_precomputed.json
+    ```
+
 #### Running Graph Autoencoder based Novelty Detector Using Pre-Computed Features Without Red Light
 
 1. Go to sail-on server directory and start the server using
@@ -430,7 +453,7 @@ Note: The instructions for running the old algorithms are available in M6-ALGO.m
 5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
 6. Change `weight_path` for `evm_params` in `local_gae_nd.json` to point the model downloaded in previous step.
 7. Change `dataset_root` in `local_gae_nd.json` to point to directory where the videos are stored.
-8. Change `feature_save_dir` to the path where features are stored.
+8. Change `save_dir` to the path where features are stored.
 9. Run the client
     ```
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_gae_nd_precomputed.json
@@ -499,7 +522,7 @@ Note: The instructions for running the old algorithms are available in M6-ALGO.m
 5. Download the EVM model from following [link](https://drive.google.com/file/d/1C1V9bk8NTxSCqncG6yPus3-iuI8kABtp/view?usp=sharing)
 6. Change `weight_path` for `evm_params` in `local_gae_nd_rd_precomputed.json` to point the model downloaded in previous step.
 7. Change `dataset_root` in `local_gae_nd_rd_precomputed.json` to point to directory where the videos are stored.
-8. Change `feature_save_dir` to the path where features are stored.
+8. Change `save_dir` to the path where features are stored.
 9. Run the client
     ```
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_gae_nd_rd_precomputed.json
