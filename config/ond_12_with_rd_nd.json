@@ -21,7 +21,7 @@
                  "distance_function": "cosine",
                  "mu_train": 1.0,
                  "sigma_train": 0.1872130436656377,
-                 "KL_threshold": 7.13040406025555,
+                 "KL_threshold": 8.55648487230666,
                  "known_threshold": 0.7
                 },
       "dataloader_params": {
