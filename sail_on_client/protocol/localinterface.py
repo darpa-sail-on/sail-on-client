@@ -4,7 +4,7 @@ from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
 from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
-from tinker.harness import Harness
+from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
 from typing import Any, Dict
