@@ -14,6 +14,8 @@ import os
 import json
 import sys
 import logging
+log = logging.getLogger(__name__)
+
 import pickle as pkl
 import ubelt as ub  # type: ignore
 
@@ -38,7 +40,7 @@ class SailOn(BaseProtocol):
         # The duplication is mainly to prevent mypy attribute error associated with the harness
         self.harness = harness
         if not os.path.exists(config_file):
-            logging.error(f"{config_file} does not exist")
+            log.error(f"{config_file} does not exist")
             sys.exit(1)
 
         with open(config_file, "r") as f:
@@ -47,7 +49,7 @@ class SailOn(BaseProtocol):
 
     def run_protocol(self) -> None:
         """Run the protocol."""
-
+        log.info('Starting OND')
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
         novelty_algorithm = self.get_algorithm(
@@ -66,7 +68,7 @@ class SailOn(BaseProtocol):
         )
         session_id = self.toolset["session_id"]
 
-        logging.info(f"New session: {self.toolset['session_id']}")
+        log.info(f"New session: {self.toolset['session_id']}")
 
         for test in self.config["test_ids"]:
             self.toolset["test_id"] = test
@@ -84,7 +86,7 @@ class SailOn(BaseProtocol):
                 "feedback_params" in self.config["detector_config"]
                 and self.config["domain"] == "image_classification"
             ):
-                logging.info("Creating Feedback object")
+                log.info("Creating Feedback object")
                 first_budget = self.config["detector_config"]["feedback_params"][
                     "first_budget"
                 ]
@@ -110,7 +112,7 @@ class SailOn(BaseProtocol):
             self.toolset["dataset_root"] = self.config["dataset_root"]
             self.toolset["dataset_ids"] = []
 
-            logging.info(f"Start test: {self.toolset['test_id']}")
+            log.info(f"Start test: {self.toolset['test_id']}")
             if self.config["save_features"] and not self.config["use_saved_features"]:
                 test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
 
@@ -128,7 +130,7 @@ class SailOn(BaseProtocol):
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
 
-                logging.info(f"Start round: {self.toolset['round_id']}")
+                log.info(f"Start round: {self.toolset['round_id']}")
                 # see if there is another round available
                 try:
                     self.toolset["dataset"] = self.harness.dataset_request(
@@ -183,7 +185,7 @@ class SailOn(BaseProtocol):
                 self.harness.post_results(results, test, round_id, session_id)
                 if self.toolset["use_feedback"]:
                     novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
-                logging.info(f"Round complete: {self.toolset['round_id']}")
+                log.info(f"Round complete: {self.toolset['round_id']}")
 
                 # cleanup the round files
                 safe_remove(self.toolset["dataset"])
@@ -193,7 +195,7 @@ class SailOn(BaseProtocol):
                 feature_dir = self.config["save_dir"]
                 ub.ensuredir(feature_dir)
                 feature_path = os.path.join(feature_dir, f"{test}_features.pkl")
-                logging.info(f"Saving features in {feature_path}")
+                log.info(f"Saving features in {feature_path}")
                 with open(feature_path, "wb") as f:
                     pkl.dump(test_features, f)
                 if self.config["feature_extraction_only"]:
@@ -203,7 +205,7 @@ class SailOn(BaseProtocol):
                 attribute_dir = self.config["save_dir"]
                 ub.ensuredir(attribute_dir)
                 attribute_path = os.path.join(attribute_dir, f"{test}_attribute.pkl")
-                logging.info(f"Saving features in {attribute_path}")
+                log.info(f"Saving features in {attribute_path}")
                 with open(attribute_path, "wb") as f:
                     pkl.dump(self.toolset["attributes"], f)
 
@@ -215,10 +217,10 @@ class SailOn(BaseProtocol):
                 results["characterization"]
             ):
                 self.harness.post_results(results, test, 0, session_id)
-            logging.info(f"Test complete: {self.toolset['test_id']}")
+            log.info(f"Test complete: {self.toolset['test_id']}")
 
             # cleanup the characterization file
             safe_remove(results["characterization"])
 
-        logging.info(f"Session ended: {self.toolset['session_id']}")
+        log.info(f"Session ended: {self.toolset['session_id']}")
         self.harness.terminate_session(session_id)
