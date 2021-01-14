@@ -25,9 +25,9 @@ def server_setup():
     ub.ensuredir(data_dir)
     ub.ensuredir(result_dir)
 
-    url = "http://localhost:3306"
+    url = "http://localhost:3307"
     server.set_provider(FileProvider(data_dir, result_dir))
-    api_process = multiprocessing.Process(target=server.init, args=("localhost", 3306))
+    api_process = multiprocessing.Process(target=server.init, args=("localhost", 3307))
     api_process.start()
     yield url, result_dir
     api_process.terminate()
@@ -40,7 +40,7 @@ def get_interface_params():
     """Fixture to create a temporal directory and add a configuration.json in it."""
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "url": "http://localhost:3306",
+            "url": "http://localhost:3307",
             "data_dir": f"{os.path.dirname(__file__)}/data",
         }
         config_name = "configuration.json"
