@@ -13,6 +13,8 @@ from requests import Response
 from sail_on_client.errors import ApiError
 from json import JSONDecodeError
 
+log = logging.getLogger(__name__)
+
 
 class ParInterface(Harness):
     """Interface to PAR server."""
@@ -46,7 +48,7 @@ class ParInterface(Harness):
                             response_json["stack_trace"],
                         )
             except JSONDecodeError:
-                logging.exception(f"Server Error: {traceback.format_exc()}")
+                log.exception(f"Server Error: {traceback.format_exc()}")
                 exit(1)
 
     def test_ids_request(

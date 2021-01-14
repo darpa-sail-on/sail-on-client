@@ -14,12 +14,13 @@ import os
 import json
 import sys
 import logging
-log = logging.getLogger(__name__)
 
 import pickle as pkl
 import ubelt as ub  # type: ignore
 
 from typing import Dict, Any
+
+log = logging.getLogger(__name__)
 
 
 class SailOn(BaseProtocol):
