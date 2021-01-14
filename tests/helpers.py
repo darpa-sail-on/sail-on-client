@@ -16,6 +16,8 @@ from pkg_resources import DistributionNotFound
 from sail_on.api import server
 from sail_on.api.file_provider import FileProvider
 
+log = logging.getLogger(__name__)
+
 
 @pytest.fixture(scope="function")
 def server_setup():
@@ -61,5 +63,5 @@ def discoverable_plugins():
             ep = entry_point.load()
             discovered_plugins[entry_point.name] = ep
         except (DistributionNotFound, ImportError):
-            logging.exception(f"Plugin {entry_point.name} not found")
+            log.exception(f"Plugin {entry_point.name} not found")
     return discovered_plugins

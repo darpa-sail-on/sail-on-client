@@ -15,6 +15,8 @@ import ubelt as ub  # type: ignore
 
 from typing import Dict, Any
 
+log = logging.getLogger(__name__)
+
 
 class Condda(BaseProtocol):
     """CONDDA protocol."""
@@ -34,7 +36,7 @@ class Condda(BaseProtocol):
         # The duplication is mainly to prevent mypy attribute error associated with the harness
         self.harness = harness
         if not os.path.exists(config_file):
-            logging.error(f"{config_file} does not exist")
+            log.error(f"{config_file} does not exist")
             sys.exit(1)
 
         with open(config_file, "r") as f:
@@ -52,7 +54,7 @@ class Condda(BaseProtocol):
         # TODO: fix the version below
         novelty_detector_version = "1.0.0"
         novelty_detector_cv = (
-            f"{self.config['novelty_detector_class']}" f"{novelty_detector_version}"
+            f"{self.config['novelty_detector_class']}{novelty_detector_version}"
         )
         self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"],
@@ -62,7 +64,7 @@ class Condda(BaseProtocol):
             self.config["hints"],
         )
         session_id = self.toolset["session_id"]
-        logging.info(f"New session: {self.toolset['session_id']}")
+        log.info(f"New session: {self.toolset['session_id']}")
         for test_id in self.config["test_ids"]:
             self.metadata = self.harness.get_test_metadata(session_id, test_id)
             self.toolset["test_id"] = test_id
@@ -77,7 +79,7 @@ class Condda(BaseProtocol):
             self.toolset["image_features"] = {}
             self.toolset["dataset_root"] = self.config["dataset_root"]
             self.toolset["dataset_ids"] = []
-            logging.info(f"Start test: {self.toolset['test_id']}")
+            log.info(f"Start test: {self.toolset['test_id']}")
 
             if self.config["save_features"] and not self.config["use_saved_features"]:
                 test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
@@ -96,7 +98,7 @@ class Condda(BaseProtocol):
 
             for round_id in count(0):
                 self.toolset["round_id"] = round_id
-                logging.info(f"Start round: {self.toolset['round_id']}")
+                log.info(f"Start round: {self.toolset['round_id']}")
                 # see if there is another round available
                 try:
                     self.toolset["dataset"] = self.harness.dataset_request(
@@ -141,18 +143,18 @@ class Condda(BaseProtocol):
                 )
                 novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
                 self.harness.post_results(results, test_id, round_id, session_id)
-                logging.info(f"Round complete: {self.toolset['round_id']}")
+                log.info(f"Round complete: {self.toolset['round_id']}")
                 # cleanup the round files
                 safe_remove(self.toolset["dataset"])
                 safe_remove_results(results)
-            logging.info(f"Test complete: {self.toolset['test_id']}")
+            log.info(f"Test complete: {self.toolset['test_id']}")
 
             if self.config["save_features"] and not self.config["use_saved_features"]:
                 feature_dir = self.config["save_dir"]
                 ub.ensuredir(feature_dir)
                 feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
-                logging.info(f"Saving features in {feature_path}")
+                log.info(f"Saving features in {feature_path}")
                 with open(feature_path, "wb") as f:
                     pkl.dump(test_features, f)
-        logging.info(f"Session ended: {self.toolset['session_id']}")
+        log.info(f"Session ended: {self.toolset['session_id']}")
         self.harness.terminate_session(session_id)

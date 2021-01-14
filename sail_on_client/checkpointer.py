@@ -8,6 +8,8 @@ from torch import Tensor
 
 from typing import Dict, Any
 
+log = logging.getLogger(__name__)
+
 
 class Checkpointer(object):
     """Checkpoint object to save and restore attributes."""
@@ -55,7 +57,7 @@ class Checkpointer(object):
             else:
                 attribute_dict[test_id] = attribute_val
         else:
-            logging.info(
+            log.info(
                 "Treating attribute value as a single element rather than an iterable"
             )
             attribute_dict[test_id] = attribute_val
@@ -89,9 +91,9 @@ class Checkpointer(object):
                         "Saving attributes for an entire round is not supported"
                     )
                 else:
-                    logging.warn(f"Detector does not have {attribute} attribute")
+                    log.warn(f"Detector does not have {attribute} attribute")
         else:
-            logging.info(f"No attributes found for {step_descriptor}")
+            log.info(f"No attributes found for {step_descriptor}")
         self.toolset["attributes"] = attribute_dict
 
     def _restore_elementwise_attribute(
@@ -124,7 +126,7 @@ class Checkpointer(object):
                 round_id * round_len : (round_id + 1) * round_len
             ]
         else:
-            logging.info(
+            log.info(
                 "Treating attribute value as a single element rather than an iterable."
             )
             round_attribute_val = attribute_val
@@ -163,4 +165,4 @@ class Checkpointer(object):
                     )
 
         else:
-            logging.info(f"No attributes found for {step_descriptor}.")
+            log.info(f"No attributes found for {step_descriptor}.")
