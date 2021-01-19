@@ -50,7 +50,7 @@ class SailOn(BaseProtocol):
 
     def run_protocol(self) -> None:
         """Run the protocol."""
-        log.info('Starting OND')
+        log.info("Starting OND")
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
         novelty_algorithm = self.get_algorithm(

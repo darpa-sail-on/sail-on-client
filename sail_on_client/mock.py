@@ -11,6 +11,7 @@ import torch
 
 log = logging.getLogger(__name__)
 
+
 class MockDetector(BaseAlgorithm):
     """Mock Detector for testing image classification protocols."""
 
