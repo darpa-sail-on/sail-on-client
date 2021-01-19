@@ -67,6 +67,7 @@ sail-on = {editable = true, path = "./../sail-on-api"}
 sail-on-client = {editable = true, path = "."}
 "ruamel.yaml" = "*"
 hwr-novelty-detector = {editable = true, path = "./../hwr_novelty_detector"}
+sailon-tinker-launcher = {path = "./../sailon_tinker_launcher"}
 
 [requires]
 python_version = "3.7"

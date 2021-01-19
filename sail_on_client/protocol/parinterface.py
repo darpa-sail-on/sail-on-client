@@ -7,7 +7,7 @@ import os
 import traceback
 import logging
 
-from tinker.harness import Harness
+from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 from typing import Any, Dict, Union
 from requests import Response
 from sail_on_client.errors import ApiError
