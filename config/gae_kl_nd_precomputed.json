@@ -30,8 +30,8 @@
     "kl_params": {
       "window_size": 100,
       "mu_train": 1.0,
-      "sigma_train": 0.1242729408792351,
-      "KL_threshold": 5.365822113508410
+      "sigma_train": 0.0057400320777888664,
+      "KL_threshold": 5.830880886275709
     },
     "evm_params": {
       "weight_path": "",
