@@ -16,6 +16,8 @@ from pkg_resources import DistributionNotFound
 from sail_on.api import server
 from sail_on.api.file_provider import FileProvider
 
+log = logging.getLogger(__name__)
+
 
 @pytest.fixture(scope="function")
 def server_setup():
@@ -25,9 +27,9 @@ def server_setup():
     ub.ensuredir(data_dir)
     ub.ensuredir(result_dir)
 
-    url = "http://localhost:3306"
+    url = "http://localhost:3307"
     server.set_provider(FileProvider(data_dir, result_dir))
-    api_process = multiprocessing.Process(target=server.init, args=("localhost", 3306))
+    api_process = multiprocessing.Process(target=server.init, args=("localhost", 3307))
     api_process.start()
     yield url, result_dir
     api_process.terminate()
@@ -40,7 +42,7 @@ def get_interface_params():
     """Fixture to create a temporal directory and add a configuration.json in it."""
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "url": "http://localhost:3306",
+            "url": "http://localhost:3307",
             "data_dir": f"{os.path.dirname(__file__)}/data",
         }
         config_name = "configuration.json"
@@ -61,5 +63,5 @@ def discoverable_plugins():
             ep = entry_point.load()
             discovered_plugins[entry_point.name] = ep
         except (DistributionNotFound, ImportError):
-            logging.exception(f"Plugin {entry_point.name} not found")
+            log.exception(f"Plugin {entry_point.name} not found")
     return discovered_plugins
