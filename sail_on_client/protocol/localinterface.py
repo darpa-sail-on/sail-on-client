@@ -9,6 +9,7 @@ from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 from tempfile import TemporaryDirectory
 from typing import Any, Dict
 import os
+import io
 import shutil
 
 
@@ -158,11 +159,12 @@ class LocalInterface(Harness):
         domain = info["activity"]["created"]["domain"]
         base_result_path = os.path.join(str(self.result_directory), protocol, domain)
         os.makedirs(base_result_path, exist_ok=True)
-        for result_key in result_files.keys():
-            file_name = f"{session_id}.{test_id}_{result_key}.csv"
-            dst_path = os.path.join(str(base_result_path), file_name)
-            shutil.copy(result_files[result_key], dst_path)
-        self.file_provider.post_results(session_id, test_id, round_id, result_files)
+        result_content = {}
+        for result_key, result_file in result_files.items():
+            with open(result_file, "r") as f:
+                content = f.read()
+            result_content[result_key] = io.StringIO(content).getvalue()
+        self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
     def evaluate(self, test_id: str, round_id: int, session_id: str) -> str:
         """
