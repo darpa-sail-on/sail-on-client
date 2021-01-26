@@ -10,7 +10,6 @@ from tempfile import TemporaryDirectory
 from typing import Any, Dict
 import os
 import io
-import shutil
 
 
 class LocalInterface(Harness):
