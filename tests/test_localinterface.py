@@ -167,9 +167,6 @@ def test_post_results(get_interface_params, protocol_constant, protocol_name):
     )
 
 
-@pytest.mark.skip(
-    reason="Modifications in results is incompatible with the feedback api. Refer to #1 on sail-on-api"
-)
 @pytest.mark.parametrize(
     "feedback_mapping",
     (
