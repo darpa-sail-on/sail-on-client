@@ -1,9 +1,12 @@
 image: pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
 
 .setup: &setup
-  - apt-get update
-  - apt-get install -y git build-essential
-  - pip install pipenv
+  - apt update
+  - apt-get install -y git build-essential software-properties-common
+  - apt-add-repository -y ppa:deadsnakes/ppa
+  - apt update
+  - apt install -y python3.7 python3-pip
+  - pip3 install pipenv
   - cd ..
   - git clone https://${SAIL_ON_API_UNAME}:${SAIL_ON_API_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on-api
   - git clone https://${TINKER_ENGINE_DEPRECATED_UNAME}:${TINKER_ENGINE_DEPRECATED_TOKEN}@gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher
@@ -12,7 +15,7 @@ image: pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
   - git clone https://${GRAPH_AUTOENCODER_UNAME}:${GRAPH_AUTOENCODER_TOKEN}@gitlab.kitware.com/darpa-sail-on/graph-autoencoder
   - git clone https://${HWR_UNAME}:${HWR_TOKEN}@gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector
   - cd sail-on-client
-  - pipenv install -d
+  - pipenv --python=$(which python3.7) install -d
 
 lint:
   tags:
