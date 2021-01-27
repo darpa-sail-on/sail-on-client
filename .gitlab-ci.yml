@@ -6,7 +6,7 @@ image: pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
   - apt-add-repository -y ppa:deadsnakes/ppa
   - apt update
   - apt install -y python3.7 python3-pip
-  - pip3 install pipenv
+  - python3.7 -m pip3 install pipenv
   - cd ..
   - git clone https://${SAIL_ON_API_UNAME}:${SAIL_ON_API_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on-api
   - git clone https://${TINKER_ENGINE_DEPRECATED_UNAME}:${TINKER_ENGINE_DEPRECATED_TOKEN}@gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher
@@ -24,7 +24,7 @@ lint:
     - build
   script:
     - *setup
-    - pipenv run lint
+    - pipenn --python=$(which python3.7) run lint
 
 test-with-coverage:
   tags:
@@ -33,8 +33,8 @@ test-with-coverage:
     - build
   script:
     - *setup
-    - pipenv run test-with-coverage
-    - pipenv run coverage-report
+    - pipenv --python=$(which python3.7) run test-with-coverage
+    - pipenv --python=$(which python3.7) run coverage-report
 
 typecheck:
   tags:
@@ -43,7 +43,7 @@ typecheck:
     - build
   script:
     - *setup
-    - pipenv run typecheck
+    - pipenv --python=$(which python3.7) run typecheck
 
 pages:
   tags:
@@ -52,7 +52,7 @@ pages:
     - build
   script:
     - *setup
-    - pipenv run docs
+    - pipenv --python=$(which python3.7) run docs
     - mv docs/build/html public/
   artifacts:
     paths:
