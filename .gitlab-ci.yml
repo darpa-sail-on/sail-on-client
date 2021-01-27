@@ -24,7 +24,7 @@ lint:
     - build
   script:
     - *setup
-    - pipenn --python=$(which python3.7) run lint
+    - pipenv run lint
 
 test-with-coverage:
   tags:
@@ -33,8 +33,8 @@ test-with-coverage:
     - build
   script:
     - *setup
-    - pipenv --python=$(which python3.7) run test-with-coverage
-    - pipenv --python=$(which python3.7) run coverage-report
+    - pipenv run test-with-coverage
+    - pipenv run coverage-report
 
 typecheck:
   tags:
@@ -43,7 +43,7 @@ typecheck:
     - build
   script:
     - *setup
-    - pipenv --python=$(which python3.7) run typecheck
+    - pipenv run typecheck
 
 pages:
   tags:
@@ -52,7 +52,7 @@ pages:
     - build
   script:
     - *setup
-    - pipenv --python=$(which python3.7) run docs
+    - pipenv run docs
     - mv docs/build/html public/
   artifacts:
     paths:
