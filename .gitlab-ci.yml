@@ -6,7 +6,7 @@ image: pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
   - apt-add-repository -y ppa:deadsnakes/ppa
   - apt update
   - apt install -y python3.7 python3-pip
-  - python3.7 -m pip3 install pipenv
+  - python3.7 -m pip install pipenv
   - cd ..
   - git clone https://${SAIL_ON_API_UNAME}:${SAIL_ON_API_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on-api
   - git clone https://${TINKER_ENGINE_DEPRECATED_UNAME}:${TINKER_ENGINE_DEPRECATED_TOKEN}@gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher
