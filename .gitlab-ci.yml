@@ -6,13 +6,12 @@ image: pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
   - pip install pipenv
   - cd ..
   - git clone https://${SAIL_ON_API_UNAME}:${SAIL_ON_API_TOKEN}@gitlab.kitware.com/darpa-sail-on/sail-on-api
+  - git clone https://${TINKER_ENGINE_DEPRECATED_UNAME}:${TINKER_ENGINE_DEPRECATED_TOKEN}@gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher
   - git clone https://${EVM_BASED_ND_UNAME}:${EVM_BASED_ND_TOKEN}@gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector
   - git clone https://${TINKER_ENGINE_UNAME}:${TINKER_ENGINE_TOKEN}@gitlab.kitware.com/darpa_learn/tinker-engine
   - git clone https://${GRAPH_AUTOENCODER_UNAME}:${GRAPH_AUTOENCODER_TOKEN}@gitlab.kitware.com/darpa-sail-on/graph-autoencoder
   - git clone https://${HWR_UNAME}:${HWR_TOKEN}@gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector
-  - cd tinker-engine
-  - git checkout ${TINKER_TAG}
-  - cd ../sail-on-client
+  - cd sail-on-client
   - pipenv install -d
 
 lint:

@@ -1,6 +1,6 @@
 """OND protocol."""
 
-from tinker.baseprotocol import BaseProtocol
+from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 
 from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError

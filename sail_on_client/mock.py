@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from tinker.basealgorithm import BaseAlgorithm
+from sailon_tinker_launcher.deprecated_tinker.basealgorithm import BaseAlgorithm
 from sail_on_client.checkpointer import Checkpointer
 from typing import Dict, Any, Tuple, Callable
 
