@@ -2,8 +2,6 @@
 
 from setuptools import setup, find_packages
 
-with open("requirements.txt") as f:
-    requirements = [line.strip() for line in f.readlines()]
 
 setup_requirements = [
     "setuptools",
@@ -21,7 +19,6 @@ setup(
     description="""Protocols and client for sail on""",
     name="sail_on_client",
     setup_requires=setup_requirements,
-    install_requires=requirements,
     packages=find_packages(),
     package_data={"sail_on_client": ["py.typed"]},
     test_suite="tests",
