@@ -45,7 +45,7 @@ def get_interface_params():
             "url": "http://localhost:3307",
             "data_dir": f"{os.path.dirname(__file__)}/data",
             "gt_dir": f"{os.path.dirname(__file__)}/data/OND/image_classification",
-            "gt_config": f"{os.path.dirname(__file__)}/data/OND/image_classification/image_classification.json"
+            "gt_config": f"{os.path.dirname(__file__)}/data/OND/image_classification/image_classification.json",
         }
         config_name = "configuration.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
@@ -60,7 +60,7 @@ def get_ar_interface_params():
             "url": "http://localhost:3307",
             "data_dir": f"{os.path.dirname(__file__)}/data",
             "gt_dir": f"{os.path.dirname(__file__)}/data/OND/activity_recognition",
-            "gt_config": f"{os.path.dirname(__file__)}/data/OND/activity_recognition/activity_recognition.json"
+            "gt_config": f"{os.path.dirname(__file__)}/data/OND/activity_recognition/activity_recognition.json",
         }
         config_name = "configuration.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))

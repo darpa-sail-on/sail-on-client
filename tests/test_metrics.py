@@ -34,10 +34,13 @@ def test_m_acc(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_acc(np.random.random((10, 1)),
-                              np.random.random((10, 1)),
-                              np.random.random((10, 3)),
-                              10, 10)
+        program_metrics.m_acc(
+            np.random.random((10, 1)),
+            np.random.random((10, 1)),
+            np.random.random((10, 3)),
+            10,
+            10,
+        )
 
 
 def test_m_num(program_metrics):
@@ -51,8 +54,7 @@ def test_m_num(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_num(np.random.random((10, 1)),
-                              np.random.random((10, 1)))
+        program_metrics.m_num(np.random.random((10, 1)), np.random.random((10, 1)))
 
 
 def test_m_num_stats(program_metrics):
@@ -66,8 +68,9 @@ def test_m_num_stats(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_num_stats(np.random.random((10, 1)),
-                                    np.random.random((10, 1)))
+        program_metrics.m_num_stats(
+            np.random.random((10, 1)), np.random.random((10, 1))
+        )
 
 
 def test_m_ndp(program_metrics):
@@ -81,8 +84,7 @@ def test_m_ndp(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_ndp(np.random.random((10, 1)),
-                              np.random.random((10, 1)))
+        program_metrics.m_ndp(np.random.random((10, 1)), np.random.random((10, 1)))
 
 
 def test_m_ndp_pre(program_metrics):
@@ -96,8 +98,7 @@ def test_m_ndp_pre(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_ndp_pre(np.random.random((10, 1)),
-                                  np.random.random((10, 1)))
+        program_metrics.m_ndp_pre(np.random.random((10, 1)), np.random.random((10, 1)))
 
 
 def test_m_ndp_post(program_metrics):
@@ -111,8 +112,7 @@ def test_m_ndp_post(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_ndp_post(np.random.random((10, 1)),
-                                   np.random.random((10, 1)))
+        program_metrics.m_ndp_post(np.random.random((10, 1)), np.random.random((10, 1)))
 
 
 def test_m_ndp_failed_reaction(program_metrics):
@@ -126,10 +126,12 @@ def test_m_ndp_failed_reaction(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_ndp_failed_reaction(np.random.random((10, 1)),
-                                              np.random.random((10, 1)),
-                                              np.random.random((10, 3)),
-                                              np.random.random((10, 3)))
+        program_metrics.m_ndp_failed_reaction(
+            np.random.random((10, 1)),
+            np.random.random((10, 1)),
+            np.random.random((10, 3)),
+            np.random.random((10, 3)),
+        )
 
 
 def test_m_accuracy_on_novel(program_metrics):
@@ -143,9 +145,11 @@ def test_m_accuracy_on_novel(program_metrics):
         None
     """
     with pytest.raises(NotImplementedError):
-        program_metrics.m_accuracy_on_novel(np.random.random((10, 1)),
-                                            np.random.random((10, 1)),
-                                            np.random.random((10, 3)))
+        program_metrics.m_accuracy_on_novel(
+            np.random.random((10, 1)),
+            np.random.random((10, 1)),
+            np.random.random((10, 3)),
+        )
 
 
 def test_is_cdt_and_is_early(program_metrics):

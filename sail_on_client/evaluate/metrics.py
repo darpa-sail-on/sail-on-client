@@ -3,7 +3,8 @@
 import numpy as np
 from typing import Dict
 
-class ProgramMetrics():
+
+class ProgramMetrics:
     """Abstract program metric class."""
 
     def __init__(self, protocol: str) -> None:
@@ -11,12 +12,13 @@ class ProgramMetrics():
         self.protocol = protocol
 
     def m_acc(
-            self,
-            gt_novel: np.ndarray,
-            p_class: np.ndarray,
-            gt_class: int,
-            round_size: int,
-            asymptotic_start_round: int) -> Dict:
+        self,
+        gt_novel: np.ndarray,
+        p_class: np.ndarray,
+        gt_class: int,
+        round_size: int,
+        asymptotic_start_round: int,
+    ) -> Dict:
         """m_acc abstract function."""
         raise NotImplementedError("Calling m_acc for an abstract class")
 

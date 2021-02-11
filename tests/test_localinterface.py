@@ -4,8 +4,9 @@ import os
 import pytest
 
 
-def _initialize_session(par_interface, protocol_name,
-        domain="image_classification", hints=()):
+def _initialize_session(
+    par_interface, protocol_name, domain="image_classification", hints=()
+):
     """
     Private function to initialize session.
 
@@ -253,20 +254,24 @@ def test_activity_recognition_evaluate(get_ar_interface_params):
 
     config_directory, config_name = get_ar_interface_params
     local_interface = LocalInterface(config_name, config_directory)
-    session_id = _initialize_session(local_interface, "OND",
-                                     "activity_recognition")
-    result_folder = os.path.join(os.path.dirname(__file__),
-                                 "mock_results",
-                                 "activity_recognition")
-    detection_file_id = os.path.join(result_folder,
-                                     "OND.10.90001.2100554_detection.csv")
-    classification_file_id = os.path.join(result_folder,
-                                          "OND.10.90001.2100554_classification.csv")
-    characterization_file_id = os.path.join(result_folder,
-                                          "OND.10.90001.2100554_characterization.csv")
-    results = {"detection": detection_file_id,
-               "classification": classification_file_id,
-               "characterization": characterization_file_id}
+    session_id = _initialize_session(local_interface, "OND", "activity_recognition")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
+    )
+    detection_file_id = os.path.join(
+        result_folder, "OND.10.90001.2100554_detection.csv"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.10.90001.2100554_classification.csv"
+    )
+    characterization_file_id = os.path.join(
+        result_folder, "OND.10.90001.2100554_characterization.csv"
+    )
+    results = {
+        "detection": detection_file_id,
+        "classification": classification_file_id,
+        "characterization": characterization_file_id,
+    }
 
     local_interface.post_results(results, "OND.10.90001.2100554", 0, session_id)
     response = local_interface.evaluate("OND.10.90001.2100554", 0, session_id)

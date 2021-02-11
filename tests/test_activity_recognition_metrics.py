@@ -19,14 +19,12 @@ def arm_metrics():
 @pytest.fixture(scope="function")
 def detection_files():
     """Fixture for reading detection file and ground truth."""
-    result_folder = os.path.join(os.path.dirname(__file__),
-                                 "mock_results",
-                                 "activity_recognition")
-    gt_file = os.path.join(result_folder,
-                           "OND.10.90001.2100554_single_df.csv")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
+    )
+    gt_file = os.path.join(result_folder, "OND.10.90001.2100554_single_df.csv")
     gt = pd.read_csv(gt_file, sep=",", header=None, skiprows=1)
-    detection_file = os.path.join(result_folder,
-                                  "OND.10.90001.2100554_detection.csv")
+    detection_file = os.path.join(result_folder, "OND.10.90001.2100554_detection.csv")
     detection = pd.read_csv(detection_file, sep=",", header=None)
     return detection, gt
 
@@ -34,11 +32,12 @@ def detection_files():
 @pytest.fixture(scope="function")
 def classification_file():
     """Fixture for reading classification file"""
-    result_folder = os.path.join(os.path.dirname(__file__),
-                                 "mock_results",
-                                 "activity_recognition")
-    classification_file_id = os.path.join(result_folder,
-                                          "OND.10.90001.2100554_classification.csv")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.10.90001.2100554_classification.csv"
+    )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
 
@@ -69,14 +68,15 @@ def test_m_acc(arm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    m_acc = arm_metrics.m_acc(gt[1],
-                              classification_file,
-                              gt[3],
-                              100, 5)
-    assert m_acc == { "full_top1": 0.1988, "full_top3": 0.25602, \
-                      "post_top1": 0.30556, "post_top3": 0.34722, \
-                      "pre_top1": 0.0, "pre_top3": 0.08621 }
-
+    m_acc = arm_metrics.m_acc(gt[1], classification_file, gt[3], 100, 5)
+    assert m_acc == {
+        "full_top1": 0.1988,
+        "full_top3": 0.25602,
+        "post_top1": 0.30556,
+        "post_top3": 0.34722,
+        "pre_top1": 0.0,
+        "pre_top3": 0.08621,
+    }
 
 
 def test_m_num(arm_metrics, detection_files):
@@ -124,14 +124,16 @@ def test_m_ndp(arm_metrics, detection_files):
     """
     detection, gt = detection_files
     m_ndp = arm_metrics.m_ndp(detection[arm_metrics.novel_id], gt[1])
-    assert m_ndp == {"FN": 23,
-                     "FP": 65,
-                     "TN": 169,
-                     "TP": 75,
-                     "accuracy": 0.73494,
-                     "f1_score": 0.63025,
-                     "precision": 0.53571,
-                     "recall": 0.76531}
+    assert m_ndp == {
+        "FN": 23,
+        "FP": 65,
+        "TN": 169,
+        "TP": 75,
+        "accuracy": 0.73494,
+        "f1_score": 0.63025,
+        "precision": 0.53571,
+        "recall": 0.76531,
+    }
 
 
 def test_m_ndp_pre(arm_metrics, detection_files):
@@ -183,6 +185,7 @@ def test_m_ndp_post(arm_metrics, detection_files):
         "recall": 0.76531,
     }
 
+
 def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file):
     """
     Test m_ndp_failed_reaction computation.
@@ -196,10 +199,9 @@ def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file
         None
     """
     detection, gt = detection_files
-    m_ndp_failed = arm_metrics.m_ndp_failed_reaction(detection[arm_metrics.novel_id],
-                                                     gt[1],
-                                                     classification_file,
-                                                     gt[3])
+    m_ndp_failed = arm_metrics.m_ndp_failed_reaction(
+        detection[arm_metrics.novel_id], gt[1], classification_file, gt[3]
+    )
     assert m_ndp_failed == {
         "top1_FN": 8,
         "top1_FP": 65,
@@ -233,9 +235,7 @@ def test_m_accuracy_on_novel(arm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    m_acc_novel = arm_metrics.m_accuracy_on_novel(classification_file,
-                                                  gt[3],
-                                                  gt[1])
+    m_acc_novel = arm_metrics.m_accuracy_on_novel(classification_file, gt[3], gt[1])
 
 
 def test_is_cdt_and_is_early(arm_metrics, detection_files):
@@ -251,8 +251,7 @@ def test_is_cdt_and_is_early(arm_metrics, detection_files):
     """
     detection, gt = detection_files
     m_num_stats = arm_metrics.m_num_stats(detection[arm_metrics.novel_id], gt[1])
-    is_cdt_is_early = arm_metrics.m_is_cdt_and_is_early(m_num_stats["GT_indx"],
-                                               m_num_stats["P_indx"],
-                                               gt.shape[0])
-    assert is_cdt_is_early["Is CDT"] == True and \
-            is_cdt_is_early["Is Early"] == False
+    is_cdt_is_early = arm_metrics.m_is_cdt_and_is_early(
+        m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0]
+    )
+    assert is_cdt_is_early["Is CDT"] == True and is_cdt_is_early["Is Early"] == False
