@@ -4,13 +4,19 @@ from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
 from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
+from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
 from typing import Any, Dict
 import os
 import io
+import logging
+import ubelt as ub
+import pandas as pd
+import json
 
+log = logging.getLogger(__name__)
 
 class LocalInterface(Harness):
     """Interface without any server communication."""
@@ -29,6 +35,8 @@ class LocalInterface(Harness):
         Harness.__init__(self, config_file, config_folder)
         self.temp_dir = TemporaryDirectory()
         self.data_dir = self.configuration_data["data_dir"]
+        self.gt_dir = self.configuration_data["gt_dir"]
+        self.gt_config = json.load(open(self.configuration_data["gt_config"], "r"))
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
@@ -165,7 +173,7 @@ class LocalInterface(Harness):
             result_content[result_key] = io.StringIO(content).getvalue()
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
-    def evaluate(self, test_id: str, round_id: int, session_id: str) -> str:
+    def evaluate(self, test_id: str, round_id: int, session_id: str) -> Dict:
         """
         Get results for test(s).
 
@@ -177,7 +185,48 @@ class LocalInterface(Harness):
         Returns:
             Path to a file with the results
         """
-        return self.file_provider.evaluate(session_id, test_id, round_id)
+        gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
+        gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1)
+        info = get_session_info(str(self.result_directory), session_id)
+        protocol = info["activity"]["created"]["protocol"]
+        domain = info["activity"]["created"]["domain"]
+        results  = {}
+        if domain == "activity_recognition":
+            detection_file_id = os.path.join(self.result_directory, \
+                                             protocol, \
+                                             domain, \
+                                             f"{session_id}.{test_id}_detection.csv")
+            detections = pd.read_csv(detection_file_id, sep=",", header=None)
+            classification_file_id = os.path.join(self.result_directory, \
+                                             protocol, \
+                                             domain, \
+                                             f"{session_id}.{test_id}_classification.csv")
+            classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+            arm = ActivityRecognitionMetrics(protocol,
+                                             **self.gt_config)
+            m_num = arm.m_num(detections[arm.novel_id], gt[1])
+            results["m_num"] = m_num
+            m_num_stats = arm.m_num_stats(detections[arm.novel_id], gt[1])
+            results["m_num_stats"] = m_num_stats
+            m_ndp = arm.m_ndp(detections[arm.novel_id], gt[1])
+            results["m_ndp"] = m_ndp
+            m_ndp_pre = arm.m_ndp_pre(detections[arm.novel_id], gt[1])
+            results["m_ndp_pre"] = m_ndp_pre
+            m_ndp_post = arm.m_ndp_post(detections[arm.novel_id], gt[1])
+            results["m_ndp_post"] = m_ndp_post
+            m_acc = arm.m_acc(gt[1], classifications, gt[3], 100, 5)
+            results["m_acc"] = m_acc
+            m_acc_failed = arm.m_ndp_failed_reaction(detections[arm.novel_id],
+                                                     gt[1],
+                                                     classifications,
+                                                     gt[3])
+            results["m_acc_failed"] = m_acc_failed
+            m_is_cdt_and_is_early = arm.m_is_cdt_and_is_early(results["m_num_stats"]["GT_indx"],
+                                                              results["m_num_stats"]["P_indx"],
+                                                              gt.shape[0])
+            results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
+        log.info(f"Results for {test_id}: {ub.repr2(results)}")
+        return results
 
     def get_test_metadata(self, session_id: str, test_id: str) -> Dict[str, Any]:
         """

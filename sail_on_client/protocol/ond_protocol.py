@@ -145,7 +145,6 @@ class SailOn(BaseProtocol):
                     dataset_ids = dataset.readlines()
                     image_ids = [image_id.strip() for image_id in dataset_ids]
                     self.toolset["dataset_ids"].extend(image_ids)
-
                 if self.config["use_saved_features"]:
                     self.toolset["features_dict"] = {}
                     self.toolset["logit_dict"] = {}
@@ -154,7 +153,6 @@ class SailOn(BaseProtocol):
                             image_id
                         ]
                         self.toolset["logit_dict"][image_id] = logit_dict[image_id]
-
                 else:
                     (
                         self.toolset["features_dict"],
@@ -182,7 +180,6 @@ class SailOn(BaseProtocol):
                     results.update(ncl_results)
                 else:
                     results["classification"] = ncl_results
-
                 self.harness.post_results(results, test, round_id, session_id)
                 if self.toolset["use_feedback"]:
                     novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
@@ -218,6 +215,7 @@ class SailOn(BaseProtocol):
                 results["characterization"]
             ):
                 self.harness.post_results(results, test, 0, session_id)
+            self.harness.evaluate(test, 0, session_id)
             log.info(f"Test complete: {self.toolset['test_id']}")
 
             # cleanup the characterization file
