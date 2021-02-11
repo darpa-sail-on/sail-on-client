@@ -4,13 +4,15 @@ import os
 import pytest
 
 
-def _initialize_session(par_interface, protocol_name, hints=()):
+def _initialize_session(par_interface, protocol_name,
+        domain="image_classification", hints=()):
     """
     Private function to initialize session.
 
     Args:
         local_interface (LocalInterface): An instance of LocalInterface
         protocol_name (str): Name of the protocol
+        domain (str): Name of the domain
         hints (list[str]): Hints used in session request
 
     Return:
@@ -20,13 +22,13 @@ def _initialize_session(par_interface, protocol_name, hints=()):
         os.path.dirname(__file__),
         "data",
         f"{protocol_name}",
-        "image_classification",
+        f"{domain}",
         "test_ids.csv",
     )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
-        test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints)
+        test_ids, f"{protocol_name}", f"{domain}", "0.1.1", list(hints)
     )
     return session_id
 
@@ -231,12 +233,43 @@ def test_evaluate(get_interface_params):
     from sail_on_client.protocol.localinterface import LocalInterface
 
     config_directory, config_name = get_interface_params
-    data_dir = f"{os.path.dirname(__file__)}/data"
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface, "OND")
     response = local_interface.evaluate("OND.1.1.1234", 0, session_id)
-    expected = os.path.join(data_dir, "evaluation.csv")
-    assert expected == response
+    assert response == {}
+
+
+def test_activity_recognition_evaluate(get_ar_interface_params):
+    """
+    Test evaluate for activity recognition.
+
+    Args:
+        get_ar_interface_params (tuple): Tuple to configure local interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.localinterface import LocalInterface
+
+    config_directory, config_name = get_ar_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    session_id = _initialize_session(local_interface, "OND",
+                                     "activity_recognition")
+    result_folder = os.path.join(os.path.dirname(__file__),
+                                 "mock_results",
+                                 "activity_recognition")
+    detection_file_id = os.path.join(result_folder,
+                                     "OND.10.90001.2100554_detection.csv")
+    classification_file_id = os.path.join(result_folder,
+                                          "OND.10.90001.2100554_classification.csv")
+    characterization_file_id = os.path.join(result_folder,
+                                          "OND.10.90001.2100554_characterization.csv")
+    results = {"detection": detection_file_id,
+               "classification": classification_file_id,
+               "characterization": characterization_file_id}
+
+    local_interface.post_results(results, "OND.10.90001.2100554", 0, session_id)
+    response = local_interface.evaluate("OND.10.90001.2100554", 0, session_id)
 
 
 def test_terminate_session(get_interface_params):
@@ -277,6 +310,6 @@ def test_get_metadata(get_interface_params):
     assert "OND" == metadata["protocol"]
     assert 3 == metadata["known_classes"]
 
-    session_id = _initialize_session(local_interface, "OND", ["red_light"])
+    session_id = _initialize_session(local_interface, "OND", hints=["red_light"])
     metadata = local_interface.get_test_metadata(session_id, "OND.1.1.1234")
     assert "n01484850_4515.JPEG" == metadata["red_light"]

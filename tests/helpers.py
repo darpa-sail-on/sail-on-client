@@ -44,6 +44,23 @@ def get_interface_params():
         dummy_config = {
             "url": "http://localhost:3307",
             "data_dir": f"{os.path.dirname(__file__)}/data",
+            "gt_dir": f"{os.path.dirname(__file__)}/data/OND/image_classification",
+            "gt_config": f"{os.path.dirname(__file__)}/data/OND/image_classification/image_classification.json"
+        }
+        config_name = "configuration.json"
+        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
+        yield config_folder, config_name
+
+
+@pytest.fixture(scope="function")
+def get_ar_interface_params():
+    """Fixture to create a temporary directory and add a configuration.json in it for activity recognition."""
+    with TemporaryDirectory() as config_folder:
+        dummy_config = {
+            "url": "http://localhost:3307",
+            "data_dir": f"{os.path.dirname(__file__)}/data",
+            "gt_dir": f"{os.path.dirname(__file__)}/data/OND/activity_recognition",
+            "gt_config": f"{os.path.dirname(__file__)}/data/OND/activity_recognition/activity_recognition.json"
         }
         config_name = "configuration.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
