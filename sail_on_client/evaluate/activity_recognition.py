@@ -2,7 +2,6 @@
 
 from sail_on_client.evaluate.metrics import ProgramMetrics
 from evaluate.metrics import M_acc, M_num, M_ndp, M_num_stats
-from evaluate.metrics import M_ndp_pre, M_ndp_post
 from evaluate.metrics import M_ndp_failed_reaction
 from evaluate.metrics import M_accuracy_on_novel
 
@@ -17,7 +16,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
     def __init__(
         self,
         protocol: str,
-        id: int,
+        video_id: int,
         novel: int,
         detection: int,
         classification: int,
