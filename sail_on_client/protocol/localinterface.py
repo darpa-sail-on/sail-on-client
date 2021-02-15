@@ -8,7 +8,7 @@ from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetr
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
-from typing import Any, Dict
+from typing import Any, Dict, Union
 import os
 import io
 import logging
@@ -191,7 +191,7 @@ class LocalInterface(Harness):
         info = get_session_info(str(self.result_directory), session_id)
         protocol = info["activity"]["created"]["protocol"]
         domain = info["activity"]["created"]["domain"]
-        results = {}
+        results: Dict[str, Union[Dict, float]] = {}
         if domain == "activity_recognition":
             detection_file_id = os.path.join(
                 self.result_directory,
@@ -225,9 +225,7 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm.m_is_cdt_and_is_early(
-                results["m_num_stats"]["GT_indx"],
-                results["m_num_stats"]["P_indx"],
-                gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
         log.info(f"Results for {test_id}: {ub.repr2(results)}")
