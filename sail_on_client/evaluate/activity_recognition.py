@@ -23,7 +23,21 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         spatial: int,
         temporal: int,
     ) -> None:
-        """Initialize."""
+        """
+        Initialize.
+
+        Args:
+            protocol: Name of the protocol.
+            video_id: Column id for video
+            novel: Column id for predicting if change was detected
+            detection: Column id for predicting sample wise novelty
+            classification: Column id for predicting sample wise classes
+            spatial: Column id for predicting spatial attribute
+            temporal: Column id for predicting temporal attribute
+
+        Returns:
+            None
+        """
         super().__init__(protocol)
         self.activity_id = id
         self.novel_id = novel
@@ -40,7 +54,19 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         round_size: int,
         asymptotic_start_round: int,
     ) -> Dict:
-        """m_acc function."""
+        """
+        m_acc function.
+
+        Args:
+            gt_novel: ground truth detections
+            p_class: detection predictions
+            gt_class: ground truth classes
+            round_size: size of the round
+            asymptotic_start_round: asymptotic samples considered for computing metrics
+
+        Returns:
+            Dictionary containing top1, top3 accuracy over the test, pre and post novelty.
+        """
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_acc(
@@ -48,23 +74,68 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         )
 
     def m_num(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> float:
-        """m_num function."""
+        """
+        m_num function.
+
+        Args:
+            p_novel: detection predictions
+            gt_novel: ground truth detections
+
+        Returns:
+            Difference between the novelty introduction and predicting change in world.
+        """
         return M_num(p_novel, gt_novel)
 
     def m_num_stats(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
-        """m_num_stats function."""
+        """
+        m_num_stats function.
+
+        Args:
+            p_novel: detection predictions
+            gt_novel: ground truth detections
+
+        Returns:
+            Dictionary containing indices for novelty introduction and change in world prediction.
+        """
         return M_num_stats(p_novel, gt_novel)
 
     def m_ndp(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
-        """m_ndp function."""
+        """
+        m_ndp function.
+
+        Args:
+            p_novel: detection predictions
+            gt_novel: ground truth detections
+
+        Returns:
+            Dictionary containing novelty detection performance over the test.
+        """
         return M_ndp(p_novel, gt_novel)
 
     def m_ndp_pre(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
-        """m_ndp_pre function."""
+        """
+        m_ndp_pre function.
+
+        Args:
+            p_novel: detection predictions
+            gt_novel: ground truth detections
+
+        Returns:
+            Dictionary containing detection performance pre novelty.
+        """
         return M_ndp(p_novel, gt_novel, mode="pre_novelty")
 
     def m_ndp_post(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
-        """m_ndp_post function."""
+        """
+        m_ndp_post function.
+
+        Args:
+            p_novel: detection predictions
+            gt_novel: ground truth detections
+
+        Returns:
+            Dictionary containing detection performance post novelty.
+        """
         return M_ndp(p_novel, gt_novel, mode="post_novelty")
 
     def m_ndp_failed_reaction(
@@ -74,7 +145,18 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         p_class: np.ndarray,
         gt_class: np.ndarray,
     ) -> Dict:
-        """m_ndp_failed_reaction function."""
+        """
+        m_ndp_failed_reaction function.
+
+        Args:
+            p_novel: detection predictions
+            gt_novel: ground truth detections
+            p_class: class predictions
+            gt_class: ground truth classes
+
+        Returns:
+            Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
+        """
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
@@ -82,13 +164,33 @@ class ActivityRecognitionMetrics(ProgramMetrics):
     def m_accuracy_on_novel(
         self, p_class: np.ndarray, gt_class: np.ndarray, gt_novel: np.ndarray
     ) -> Dict:
-        """m_accuracy_on_novel function."""
+        """
+        m_accuracy_on_novel function.
+
+        Args:
+            p_novel: detection predictions
+            gt_class: ground truth classes
+            gt_novel: ground truth detections
+
+        Returns:
+            Accuracy on novely samples
+        """
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_accuracy_on_novel(class_prob, gt_class_idx, gt_novel)
 
     def m_is_cdt_and_is_early(self, gt_idx: int, ta2_idx: int, test_len: int) -> Dict:
-        """Is CDT and is early."""
+        """
+        m_is_cdt_and_is_early function.
+
+        Args:
+            gt_idx: Index when novelty is introduced
+            ta2_idx: Index when change is detected
+            test_len: Length of test
+
+        Returns
+            Dictionary containing boolean showing if change was was detected and if it was detected early
+        """
         is_cdt = (ta2_idx >= gt_idx) & (ta2_idx < test_len)
         is_early = ta2_idx < gt_idx
         return {"Is CDT": is_cdt, "Is Early": is_early}
