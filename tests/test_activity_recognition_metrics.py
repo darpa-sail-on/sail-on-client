@@ -3,7 +3,6 @@
 from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
 
 import os
-import numpy as np
 import pandas as pd
 import pytest
 
@@ -31,7 +30,7 @@ def detection_files():
 
 @pytest.fixture(scope="function")
 def classification_file():
-    """Fixture for reading classification file"""
+    """Fixture for reading classification file."""
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
@@ -235,7 +234,7 @@ def test_m_accuracy_on_novel(arm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    m_acc_novel = arm_metrics.m_accuracy_on_novel(classification_file, gt[3], gt[1])
+    arm_metrics.m_accuracy_on_novel(classification_file, gt[3], gt[1])
 
 
 def test_is_cdt_and_is_early(arm_metrics, detection_files):
@@ -254,4 +253,4 @@ def test_is_cdt_and_is_early(arm_metrics, detection_files):
     is_cdt_is_early = arm_metrics.m_is_cdt_and_is_early(
         m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0]
     )
-    assert is_cdt_is_early["Is CDT"] == True and is_cdt_is_early["Is Early"] == False
+    assert is_cdt_is_early["Is CDT"] and not is_cdt_is_early["Is Early"]

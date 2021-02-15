@@ -274,7 +274,7 @@ def test_activity_recognition_evaluate(get_ar_interface_params):
     }
 
     local_interface.post_results(results, "OND.10.90001.2100554", 0, session_id)
-    response = local_interface.evaluate("OND.10.90001.2100554", 0, session_id)
+    local_interface.evaluate("OND.10.90001.2100554", 0, session_id)
 
 
 def test_terminate_session(get_interface_params):

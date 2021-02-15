@@ -7,6 +7,12 @@ import pytest
 
 @pytest.fixture(scope="function")
 def program_metrics():
+    """
+    Fixture for initializing program metric.
+
+    Return:
+        None
+    """
     program_metrics = ProgramMetrics("OND")
     return program_metrics
 
