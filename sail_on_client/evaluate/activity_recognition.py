@@ -6,6 +6,7 @@ from evaluate.metrics import M_ndp_failed_reaction
 from evaluate.metrics import M_accuracy_on_novel
 
 import numpy as np
+from pandas import DataFrame
 
 from typing import Dict
 
@@ -48,9 +49,9 @@ class ActivityRecognitionMetrics(ProgramMetrics):
 
     def m_acc(
         self,
-        gt_novel: np.ndarray,
-        p_class: np.ndarray,
-        gt_class: np.ndarray,
+        gt_novel: DataFrame,
+        p_class: DataFrame,
+        gt_class: DataFrame,
         round_size: int,
         asymptotic_start_round: int,
     ) -> Dict:
@@ -73,7 +74,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
             gt_novel, class_prob, gt_class_idx, round_size, asymptotic_start_round
         )
 
-    def m_num(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> float:
+    def m_num(self, p_novel: DataFrame, gt_novel: DataFrame) -> float:
         """
         m_num function.
 
@@ -140,10 +141,10 @@ class ActivityRecognitionMetrics(ProgramMetrics):
 
     def m_ndp_failed_reaction(
         self,
-        p_novel: np.ndarray,
-        gt_novel: np.ndarray,
-        p_class: np.ndarray,
-        gt_class: np.ndarray,
+        p_novel: DataFrame,
+        gt_novel: DataFrame,
+        p_class: DataFrame,
+        gt_class: DataFrame,
     ) -> Dict:
         """
         m_ndp_failed_reaction function.
@@ -162,7 +163,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         return M_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
 
     def m_accuracy_on_novel(
-        self, p_class: np.ndarray, gt_class: np.ndarray, gt_novel: np.ndarray
+        self, p_class: DataFrame, gt_class: DataFrame, gt_novel: DataFrame
     ) -> Dict:
         """
         m_accuracy_on_novel function.
