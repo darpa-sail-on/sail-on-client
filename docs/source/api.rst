@@ -33,6 +33,22 @@ have the same interface with the following functions
     :members:
     :undoc-members:
 
+Metrics
+-------
+
+We currently support metrics for activity recognition domain with the following
+functions
+
+.. autoclass:: sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics
+    :members:
+    :undoc-members:
+
+The metrics inherit from the program metric class with the following functions
+
+.. autoclass:: sail_on_client.evaluate.metrics.ProgramMetrics
+    :members:
+    :undoc-members:
+
 Errors
 ------
 
