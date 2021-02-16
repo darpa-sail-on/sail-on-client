@@ -25,7 +25,7 @@ class Condda(BaseProtocol):
         self,
         discovered_plugins: Dict[str, Any],
         algorithmsdirectory: str,
-        harness: ParInterface,
+        harness: Union[ParIntereFace,LocalInterface],
         config_file: str,
     ) -> None:
         """Initialize."""
