@@ -174,7 +174,7 @@ class LocalInterface(Harness):
             result_content[result_key] = io.StringIO(content).getvalue()
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
-    def evaluate(self, test_id: str, round_id: int, session_id: str) -> Dict:
+    def evaluate(self, test_id: str, round_id: int, session_id: str) -> Dict[str, Any]:
         """
         Get results for test(s).
 
