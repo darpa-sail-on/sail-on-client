@@ -1,6 +1,6 @@
 """Tests for image classification metric class."""
 
-from sail_on_client.evaluate.activity_recognition import ImageClassificationMetrics
+from sail_on_client.evaluate.image_classification import ImageClassificationMetrics
 
 import os
 import pandas as pd
@@ -10,7 +10,7 @@ import pytest
 @pytest.fixture(scope="function")
 def arm_metrics():
     """Fixture for generated image classification metrics."""
-    gt_config = list(range(0, 6))
+    gt_config = list(range(0, 3))
     arm_metrics = ImageClassificationMetrics("OND", *gt_config)
     return arm_metrics
 
@@ -21,9 +21,9 @@ def detection_files():
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "image_classification"
     )
-    gt_file = os.path.join(result_folder, "OND.10.90001.2100554_single_df.csv")
+    gt_file = os.path.join(result_folder, "OND.1.1.1234_single_df.csv")
     gt = pd.read_csv(gt_file, sep=",", header=None, skiprows=1)
-    detection_file = os.path.join(result_folder, "OND.10.90001.2100554_detection.csv")
+    detection_file = os.path.join(result_folder, "OND.1.1.1234_detection.csv")
     detection = pd.read_csv(detection_file, sep=",", header=None)
     return detection, gt
 
@@ -35,7 +35,7 @@ def classification_file():
         os.path.dirname(__file__), "mock_results", "image_classification"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_classification.csv"
+        result_folder, "OND.1.1.1234_classification.csv"
     )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
@@ -49,7 +49,7 @@ def test_initialize(protocol_name):
     Return:
         None
     """
-    gt_config = list(range(0, 6))
+    gt_config = list(range(0, 3))
     arm_metrics = ImageClassificationMetrics(protocol_name, *gt_config)
     assert arm_metrics.protocol == protocol_name
 
