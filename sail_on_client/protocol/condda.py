@@ -5,6 +5,7 @@ from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
 from sail_on_client.utils import safe_remove, safe_remove_results
 from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.protocol.localinterface import LocalInterface
 from itertools import count
 import os
 import json
@@ -13,7 +14,7 @@ import logging
 import pickle as pkl
 import ubelt as ub  # type: ignore
 
-from typing import Dict, Any
+from typing import Dict, Any, Union
 
 log = logging.getLogger(__name__)
 
@@ -25,7 +26,7 @@ class Condda(BaseProtocol):
         self,
         discovered_plugins: Dict[str, Any],
         algorithmsdirectory: str,
-        harness: Union[ParIntereFace,LocalInterface],
+        harness: Union[ParInterface, LocalInterface],
         config_file: str,
     ) -> None:
         """Initialize."""
