@@ -59,9 +59,9 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_acc function.
 
         Args:
-            gt_novel: ground truth detections
-            p_class: detection predictions
-            gt_class: ground truth classes
+            gt_novel: ground truth detections (Dimension: N X 6)
+            p_class: detection predictions (Dimension: N X 2)
+            gt_class: ground truth classes (Dimension: N X 90)
             round_size: size of the round
             asymptotic_start_round: asymptotic samples considered for computing metrics
 
@@ -79,8 +79,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_num function.
 
         Args:
-            p_novel: detection predictions
-            gt_novel: ground truth detections
+            p_novel: detection predictions (Dimension: N X 2)
+            gt_novel: ground truth detections (Dimension: N X 6)
 
         Returns:
             Difference between the novelty introduction and predicting change in world.
@@ -92,8 +92,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_num_stats function.
 
         Args:
-            p_novel: detection predictions
-            gt_novel: ground truth detections
+            p_novel: detection predictions (Dimension: N X 2)
+            gt_novel: ground truth detections (Dimension: N X 6)
 
         Returns:
             Dictionary containing indices for novelty introduction and change in world prediction.
@@ -105,8 +105,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp function.
 
         Args:
-            p_novel: detection predictions
-            gt_novel: ground truth detections
+            p_novel: detection predictions (Dimension: N X 2)
+            gt_novel: ground truth detections (Dimension: N X 6)
 
         Returns:
             Dictionary containing novelty detection performance over the test.
@@ -118,8 +118,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp_pre function.
 
         Args:
-            p_novel: detection predictions
-            gt_novel: ground truth detections
+            p_novel: detection predictions (Dimension: N X 2)
+            gt_novel: ground truth detections (Dimension: N X 6)
 
         Returns:
             Dictionary containing detection performance pre novelty.
@@ -131,8 +131,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp_post function.
 
         Args:
-            p_novel: detection predictions
-            gt_novel: ground truth detections
+            p_novel: detection predictions (Dimension: N X 2)
+            gt_novel: ground truth detections (Dimension: N X 6)
 
         Returns:
             Dictionary containing detection performance post novelty.
@@ -150,10 +150,10 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp_failed_reaction function.
 
         Args:
-            p_novel: detection predictions
-            gt_novel: ground truth detections
-            p_class: class predictions
-            gt_class: ground truth classes
+            p_novel: detection predictions (Dimension: N X 2)
+            gt_novel: ground truth detections (Dimension: N X 6)
+            p_class: class predictions (Dimension: N X 90)
+            gt_class: ground truth classes ( Dimension: N X 6 )
 
         Returns:
             Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
@@ -169,9 +169,9 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_accuracy_on_novel function.
 
         Args:
-            p_novel: detection predictions
-            gt_class: ground truth classes
-            gt_novel: ground truth detections
+            p_class: class predictions (Dimension: N X 90)
+            gt_class: ground truth classes (Dimension: N X 6)
+            gt_novel: ground truth detections (Dimension: N X 6)
 
         Returns:
             Accuracy on novely samples
