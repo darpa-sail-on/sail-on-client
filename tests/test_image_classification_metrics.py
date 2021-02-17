@@ -124,14 +124,14 @@ def test_m_ndp(arm_metrics, detection_files):
     detection, gt = detection_files
     m_ndp = arm_metrics.m_ndp(detection[arm_metrics.detection_id], gt[1])
     assert m_ndp == {
-        "FN": 23,
-        "FP": 65,
-        "TN": 169,
-        "TP": 75,
-        "accuracy": 0.73494,
-        "f1_score": 0.63025,
-        "precision": 0.53571,
-        "recall": 0.76531,
+        "FN": 1337,
+        "FP": 1337,
+        "TN": 1337,
+        "TP": 1337,
+        "accuracy": 0.1337,
+        "f1_score": 0.1337,
+        "precision": 0.1337,
+        "recall": 0.1337,
     }
 
 
@@ -149,14 +149,14 @@ def test_m_ndp_pre(arm_metrics, detection_files):
     detection, gt = detection_files
     m_ndp_pre = arm_metrics.m_ndp_pre(detection[arm_metrics.detection_id], gt[1])
     assert m_ndp_pre == {
-        "FN": 0,
-        "FP": 0,
-        "TN": 116,
-        "TP": 0,
-        "accuracy": 1.0,
-        "f1_score": 0.0,
-        "precision": 0.0,
-        "recall": 0.0,
+        "FN": 1337,
+        "FP": 1337,
+        "TN": 1337,
+        "TP": 1337,
+        "accuracy": 0.1337,
+        "f1_score": 0.1337,
+        "precision": 0.1337,
+        "recall": 0.1337,
     }
 
 
@@ -174,14 +174,14 @@ def test_m_ndp_post(arm_metrics, detection_files):
     detection, gt = detection_files
     m_ndp_post = arm_metrics.m_ndp_post(detection[arm_metrics.detection_id], gt[1])
     assert m_ndp_post == {
-        "FN": 23,
-        "FP": 65,
-        "TN": 53,
-        "TP": 75,
-        "accuracy": 0.59259,
-        "f1_score": 0.63025,
-        "precision": 0.53571,
-        "recall": 0.76531,
+        "FN": 1337,
+        "FP": 1337,
+        "TN": 1337,
+        "TP": 1337,
+        "accuracy": 0.1337,
+        "f1_score": 0.1337,
+        "precision": 0.1337,
+        "recall": 0.1337,
     }
 
 
@@ -202,22 +202,22 @@ def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file
         detection[arm_metrics.detection_id], gt[1], classification_file, gt[3]
     )
     assert m_ndp_failed == {
-        "top1_FN": 8,
-        "top1_FP": 65,
-        "top1_TN": 169,
-        "top1_TP": 24,
-        "top1_accuracy": 0.72556,
-        "top1_f1_score": 0.39669,
-        "top1_precision": 0.26966,
-        "top1_recall": 0.75,
-        "top3_FN": 8,
-        "top3_FP": 58,
-        "top3_TN": 157,
-        "top3_TP": 24,
-        "top3_accuracy": 0.73279,
-        "top3_f1_score": 0.42105,
-        "top3_precision": 0.29268,
-        "top3_recall": 0.75,
+        "top1_FN": 1337,
+        "top1_FP": 1337,
+        "top1_TN": 1337,
+        "top1_TP": 1337,
+        "top1_accuracy": 0.1337,
+        "top1_f1_score": 0.1337,
+        "top1_precision": 0.1337,
+        "top1_recall": 0.1337,
+        "top3_FN": 1337,
+        "top3_FP": 1337,
+        "top3_TN": 1337,
+        "top3_TP": 1337,
+        "top3_accuracy": 0.1337,
+        "top3_f1_score": 0.1337,
+        "top3_precision": 0.1337,
+        "top3_recall": 0.1337,
     }
 
 
