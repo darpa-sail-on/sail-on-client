@@ -16,7 +16,7 @@ Client and Protocols for DARPA sail-on
 
 1. [Python 3.7](https://www.python.org/downloads/release/python-370/)
 2. [pipenv](https://pipenv.pypa.io/en/latest/)
-3. [tinker-engine](https://gitlab.kitware.com/darpa_learn/tinker-engine)
+3. [tinker-engine](https://github.com/tinker-engine)
 4. [Script Config](https://pypi.org/project/scriptconfig)
 5. [TA-2 Agent](https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector)
 6. [Sail-On API](https://gitlab.kitware.com/darpa-sail-on/sail-on-api)
@@ -26,25 +26,22 @@ Client and Protocols for DARPA sail-on
 ### Installation with pipenv ( Recommended )
 1. Clone the repositories associated with different components in a working directory
     ```
-      git clone https://gitlab.kitware.com/darpa_learn/tinker-engine.git
+      git clone https://github.com/tinker-engine/tinker-engine.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-api.git
       git clone https://gitlab.kitware.com/darpa-sail-on/evm_based_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/graph-autoencoder.git
       git clone https://gitlab.kitware.com/darpa-sail-on/hwr_novelty_detector.git
       git clone https://gitlab.kitware.com/darpa-sail-on/sail-on-client.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/Sail_On_Evaluate.git
+      git clone https://gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher.git
     ```
    This would create tinker-engine, sail-on-api, evm_based_novelty_detector, graph_autoencoder,
-   hwr_novelty_detector and sail-on-client directories in your working directory
+   hwr_novelty_detector, sailon_tinker_launcher, Sail_On_Evaluate and sail-on-client directories in your working directory
 
-2. Checkout older version of tinker-engine using
-   ```
-      cd tinker-engine
-      git checkout old-tinker
-   ```
 
 2. Install the different components in a virtual environment
    ```
-   cd ../sail-on-client
+   cd sail-on-client
    pipenv install
    pipenv shell
    ```
@@ -55,9 +52,9 @@ following the instructions for a repository, please move back to your
 your working directory.
 
 #### Install Tinker Engine
-1. Clone the [tinker-engine](https://gitlab.kitware.com/darpa_learn/tinker-engine) repository
+1. Clone the [tinker-engine](https://github.com/tinker-engine) repository
    ```
-   git clone https://gitlab.kitware.com/darpa_learn/tinker-engine.git
+   git clone https://github.com/tinker-engine/tinker-engine.git
    ```
    This would create a directory called tinker-engine in your working directory
 
@@ -152,6 +149,43 @@ your working directory.
    ```
     pip install -e .
    ```
+
+#### Install Sail On Metric
+1. Clone the [Sail_On_Evaluate](https://gitlab.kitware.com/darpa-sail-on/Sail_On_Evaluate) repository
+   ```
+    git clone https://gitlab.kitware.com/darpa-sail-on/Sail_On_Evaluate
+   ```
+   This would create a directory called Sail_On_Evaluate in your working directory
+
+2. Go into the Sail_On_Evaluate directory and install the dependencies for the metric using
+   ```
+    cd Sail_On_Evaluate
+    pip install -r requirements.txt
+   ```
+
+3. Install the metric using
+   ```
+    pip install -e .
+   ```
+
+#### Install Launcher
+1. Clone the [sailon_tinker_launcher](https://gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher) repository
+   ```
+    git clone https://gitlab.kitware.com/darpa-sail-on/sailon_tinker_launcher.git
+   ```
+   This would create a directory called sailon_tinker_launcher in your working directory
+
+2. Go into the sailon_tinker_launcher directory and install the dependencies for the launcher using
+   ```
+    cd sailon_tinker_launcher
+    pip install -r requirements.txt
+   ```
+
+3. Install the launcher using
+   ```
+    pip install -e .
+   ```
+
 
 ## Running Client and Server with Different Algorithms
 
@@ -527,6 +561,26 @@ Note: The instructions for running the old algorithms are available in M6-ALGO.m
     ```
       tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_gae_nd_rd_precomputed.json
     ```
+
+## Running algorithms with Local Interface
+
+Self evaluation requires local interface along with ground truth for the tests.
+Add `gt_dir` in `sail_on_client/protocol/configuration.json` to the folder containing ground truth for the tests.
+Additionally set `gt_config` in `sail_on_client/protocol/configuration.json` to point to domain specific json file.
+Refer to `tests/data/OND/activity_recognition/activity_recognition.json` for an example of `gt_config`.
+
+Note: The instructions assume that the configuration required for running the algorithms has been created as shown in the previous section
+
+#### Running Graph Autoencoder with KL divergence Using Pre-Computed Features Without Red Light
+1. Go to the sail on client repository
+    ```
+      cd sail-on-client
+    ```
+2. Run the client
+    ```
+      tinker sail_on_client/protocol/ond_protocol.py -i LocalInterface -p config/local_gae_kl_nd_precomputed.json
+    ```
+
 
 ## Interpreting Results for Algorithms
 The results for the algorithm are stored in in `<results_directory>/<protocol_name>/image_classification`,
