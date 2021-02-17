@@ -42,7 +42,6 @@ class ProgramMetrics(ABC):
         Returns:
             Dictionary containing top1, top3 accuracy over the test, pre and post novelty.
         """
-        raise NotImplementedError("Calling m_acc for an abstract class")
 
     @abstractmethod
     def m_num(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> float:
@@ -56,7 +55,6 @@ class ProgramMetrics(ABC):
         Returns:
             Difference between the novelty introduction and predicting change in world.
         """
-        raise NotImplementedError("Calling m_num for an abstract class")
 
     @abstractmethod
     def m_num_stats(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
@@ -70,7 +68,6 @@ class ProgramMetrics(ABC):
         Returns:
             Dictionary containing indices for novelty introduction and change in world prediction.
         """
-        raise NotImplementedError("Calling m_num_stats for an abstract class")
 
     @abstractmethod
     def m_ndp(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
@@ -84,7 +81,6 @@ class ProgramMetrics(ABC):
         Returns:
             Dictionary containing novelty detection performance over the test.
         """
-        raise NotImplementedError("Calling m_ndp for an abstract class")
 
     @abstractmethod
     def m_ndp_pre(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
@@ -98,7 +94,6 @@ class ProgramMetrics(ABC):
         Returns:
             Dictionary containing detection performance pre novelty.
         """
-        raise NotImplementedError("Calling m_ndp_pre for an abstract class")
 
     @abstractmethod
     def m_ndp_post(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
@@ -112,7 +107,6 @@ class ProgramMetrics(ABC):
         Returns:
             Dictionary containing detection performance post novelty.
         """
-        raise NotImplementedError("Calling m_ndp_post for an abstract class")
 
     @abstractmethod
     def m_ndp_failed_reaction(
@@ -134,7 +128,6 @@ class ProgramMetrics(ABC):
         Returns:
             Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
         """
-        raise NotImplementedError("Calling m_ndp_failed_reaction for an abstract class")
 
     @abstractmethod
     def m_accuracy_on_novel(
@@ -151,7 +144,6 @@ class ProgramMetrics(ABC):
         Returns:
             Accuracy on novely samples
         """
-        raise NotImplementedError("Calling m_accuracy_on_novel for an abstract class")
 
     @abstractmethod
     def m_is_cdt_and_is_early(self, gt_idx: int, ta2_idx: int, test_len: int) -> Dict:
@@ -166,4 +158,3 @@ class ProgramMetrics(ABC):
         Returns
             Dictionary containing boolean showing if change was was detected and if it was detected early
         """
-        raise NotImplementedError("Calling m_is_cdt_and_is_early for an abstract class")
