@@ -21,7 +21,6 @@ setup(
     description="""Protocols and client for sail on""",
     name="sail_on_client",
     setup_requires=setup_requirements,
-    install_requires=requirements,
     packages=find_packages(),
     package_data={"sail_on_client": ["py.typed"]},
     test_suite="tests",

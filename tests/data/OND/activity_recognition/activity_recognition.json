@@ -1,0 +1,8 @@
+{
+    "video_id": 0,
+    "novel": 1,
+    "detection": 2,
+    "classification": 3,
+    "spatial": 4,
+    "temporal": 5
+}
