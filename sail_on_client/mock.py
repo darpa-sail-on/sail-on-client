@@ -9,6 +9,8 @@ from typing import Dict, Any, Tuple, Callable
 import logging
 import torch
 
+log = logging.getLogger(__name__)
+
 
 class MockDetector(BaseAlgorithm):
     """Mock Detector for testing image classification protocols."""
@@ -38,7 +40,7 @@ class MockDetector(BaseAlgorithm):
             toolset (dict): Dictionary containing parameters for different steps
             step_descriptor (str): Name of the step
         """
-        logging.info(f"Executing {step_descriptor}")
+        log.info(f"Executing {step_descriptor}")
         return self.step_dict[step_descriptor](toolset)
 
     def _initialize(self, toolset: Dict) -> None:
@@ -171,7 +173,7 @@ class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):
             toolset (dict): Dictionary containing parameters for different steps
             step_descriptor (str): Name of the step
         """
-        logging.info(f"Executing {step_descriptor}")
+        log.info(f"Executing {step_descriptor}")
         return self.detector.step_dict[step_descriptor](toolset)
 
     def __eq__(self, other: object) -> bool:

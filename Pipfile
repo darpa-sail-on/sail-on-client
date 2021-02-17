@@ -59,15 +59,18 @@ ubelt = "==0.9.2"
 flask = ">=1.1.2"
 requests-toolbelt = ">=0.9.1"
 nltk = ">=3.5"
+click = ">=7.1"
+smqtk-core = "==0.15.0"
+"ruamel.yaml" = "*"
 tinker-engine = {editable = true, path = "./../tinker-engine"}
 timm = {editable = true, path = "./../evm_based_novelty_detector/timm"}
 evm-based-novelty-detector = {editable = true, path = "./../evm_based_novelty_detector"}
 graph-autoencoder = {editable = true, path = "./../graph-autoencoder"}
 sail-on = {editable = true, path = "./../sail-on-api"}
 sail-on-client = {editable = true, path = "."}
-"ruamel.yaml" = "*"
 hwr-novelty-detector = {editable = true, path = "./../hwr_novelty_detector"}
-sailon-tinker-launcher = {path = "./../sailon_tinker_launcher"}
+sailon-tinker-launcher = {editable = true, path = "./../sailon_tinker_launcher"}
+sail-on-evaluate = {editable = true, path = "./../Sail_On_Evaluate"}
 
 [requires]
 python_version = "3.7"

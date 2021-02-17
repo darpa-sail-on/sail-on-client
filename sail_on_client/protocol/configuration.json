@@ -1,5 +1,7 @@
 {
-  "url": "http://localhost:3306",
+  "url": "http://3.32.8.161:5001/",
   "data_location": "/home/eric/sail-on/images",
-  "data_dir": "tests/data"
+  "data_dir": "tests/data",
+  "gt_dir": "tests/data/OND/activity_recognition/",
+  "gt_config": "tests/data/OND/activity_recognition/activity_recognition.json"
 }
