@@ -171,6 +171,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
         """
+        raise NotImplementedError('Characterization not used for image_classification')
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
