@@ -4,7 +4,7 @@ from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
 from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
-from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
+from sail_on_client.evaluate.activity_recognition import ImageClassificationMetrics, ActivityRecognitionMetrics
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
@@ -192,7 +192,48 @@ class LocalInterface(Harness):
         protocol = info["activity"]["created"]["protocol"]
         domain = info["activity"]["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
-        if domain == "activity_recognition":
+
+        ######### Image Classification Evaluation  ###########
+        if domain == "image_classification":
+            detection_file_id = os.path.join(
+                self.result_directory,
+                protocol,
+                domain,
+                f"{session_id}.{test_id}_detection.csv",
+            )
+            detections = pd.read_csv(detection_file_id, sep=",", header=None)
+            classification_file_id = os.path.join(
+                self.result_directory,
+                protocol,
+                domain,
+                f"{session_id}.{test_id}_classification.csv",
+            )
+            classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+            arm = ImageClassificationMetrics(protocol, **self.gt_config)
+            m_num = arm.m_num(detections[arm.novel_id], gt[1])
+            results["m_num"] = m_num
+            m_num_stats = arm.m_num_stats(detections[arm.novel_id], gt[1])
+            results["m_num_stats"] = m_num_stats
+            m_ndp = arm.m_ndp(detections[arm.novel_id], gt[1])
+            results["m_ndp"] = m_ndp
+            m_ndp_pre = arm.m_ndp_pre(detections[arm.novel_id], gt[1])
+            results["m_ndp_pre"] = m_ndp_pre
+            m_ndp_post = arm.m_ndp_post(detections[arm.novel_id], gt[1])
+            results["m_ndp_post"] = m_ndp_post
+            m_acc = arm.m_acc(gt[1], classifications, gt[3], 100, 5)
+            results["m_acc"] = m_acc
+            m_acc_failed = arm.m_ndp_failed_reaction(
+                detections[arm.novel_id], gt[1], classifications, gt[3]
+            )
+            results["m_acc_failed"] = m_acc_failed
+            m_is_cdt_and_is_early = arm.m_is_cdt_and_is_early(
+                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+            )
+            results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
+
+
+        ######### Activity Recognition Evaluation  ###########
+        elif domain == "activity_recognition":
             detection_file_id = os.path.join(
                 self.result_directory,
                 protocol,
