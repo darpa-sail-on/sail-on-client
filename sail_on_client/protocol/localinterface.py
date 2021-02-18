@@ -194,7 +194,7 @@ class LocalInterface(Harness):
         domain = info["activity"]["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
 
-        ######### Image Classification Evaluation  ###########
+        # ######## Image Classification Evaluation  ###########
         if domain == "image_classification":
             detection_file_id = os.path.join(
                 self.result_directory,
@@ -232,8 +232,7 @@ class LocalInterface(Harness):
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
 
-
-        ######### Activity Recognition Evaluation  ###########
+        # ######## Activity Recognition Evaluation  ###########
         elif domain == "activity_recognition":
             detection_file_id = os.path.join(
                 self.result_directory,

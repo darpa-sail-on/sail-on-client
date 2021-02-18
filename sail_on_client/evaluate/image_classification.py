@@ -15,11 +15,7 @@ class ImageClassificationMetrics(ProgramMetrics):
     """Activity Recognition program metric class."""
 
     def __init__(
-        self,
-        protocol: str,
-        image_id: int,
-        detection: int,
-        classification: int
+        self, protocol: str, image_id: int, detection: int, classification: int
     ) -> None:
         """
         Initialize.
@@ -67,8 +63,10 @@ class ImageClassificationMetrics(ProgramMetrics):
 
     def m_num(self, p_novel: DataFrame, gt_novel: DataFrame) -> float:
         """
-        Program Metric: Number of samples needed for detecting novelty.
-            The method computes number of GT novel samples needed to predict the first true positive.
+        m_num function.
+
+        A Program Metric where the number of samples needed for detecting novelty.
+        The method computes number of GT novel samples needed to predict the first true positive.
 
         Args:
             p_novel: detection predictions (Dimension: N X [img,novel])
@@ -83,8 +81,10 @@ class ImageClassificationMetrics(ProgramMetrics):
 
     def m_num_stats(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
-        Program Metric: Number of samples needed for detecting novelty.
-            The method computes number of GT novel samples needed to predict the first true positive.
+        Program Metric.
+
+        Number of samples needed for detecting novelty.  The method computes number of GT novel
+            samples needed to predict the first true positive.
 
         Args:
             p_novel: detection predictions (Dimension: N X [img,novel])
@@ -97,10 +97,13 @@ class ImageClassificationMetrics(ProgramMetrics):
         """
         return M_num_stats(p_novel, gt_novel)
 
-    def m_ndp(self, p_novel: np.ndarray, gt_novel: np.ndarray, mode:str= 'full_test') -> Dict:
+    def m_ndp(
+        self, p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test"
+    ) -> Dict:
         """
-        Program Metric: Novelty detection performance.
-            The method computes per-sample novelty detection performance
+        Program Metric.
+
+            Novelty detection performance.  The method computes per-sample novelty detection performance.
 
         Args:
             p_novel: detection predictions (Dimension: N X [img,novel])
@@ -114,11 +117,13 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing novelty detection performance over the test.
         """
-        return M_ndp(p_novel, gt_novel, mode='full_test')
+        return M_ndp(p_novel, gt_novel, mode="full_test")
 
     def m_ndp_pre(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
-        m_ndp_pre function.  See :func:`~sail-on-client.evaluation.ImageClassificationMetrics.m_ndp` with
+        m_ndp_pre function.
+
+        See :func:`~sail-on-client.evaluation.ImageClassificationMetrics.m_ndp` with
             post_novelty.  This computes to the first GT novel sample
 
         Args:
@@ -132,7 +137,9 @@ class ImageClassificationMetrics(ProgramMetrics):
 
     def m_ndp_post(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
-        m_ndp_post function. See :func:`~sail-on-client.evaluation.ImageClassificationMetrics.m_ndp` with
+        m_ndp_post function.
+
+        See :func:`~sail-on-client.evaluation.ImageClassificationMetrics.m_ndp` with
             post_novelty.  This computes from the first GT novel sample
 
         Args:
@@ -150,11 +157,12 @@ class ImageClassificationMetrics(ProgramMetrics):
         gt_novel: DataFrame,
         p_class: DataFrame,
         gt_class: DataFrame,
-        mode:str = 'full_test'
+        mode: str = "full_test",
     ) -> Dict:
         """
         Additional Metric: Novelty detection when reaction fails.
-            The method computes novelty detection performance for only on samples with incorrect k-class predictions
+
+        The method computes novelty detection performance for only on samples with incorrect k-class predictions
 
         Args:
             p_novel: detection predictions (Dimension: N X [img,novel])
@@ -171,19 +179,17 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
         """
-        raise NotImplementedError('Characterization not used for image_classification')
+        raise NotImplementedError("Characterization not used for image_classification")
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
 
     def m_accuracy_on_novel(
-            self,
-            p_class: DataFrame,
-            gt_class: DataFrame,
-            gt_novel: DataFrame
+        self, p_class: DataFrame, gt_class: DataFrame, gt_novel: DataFrame
     ) -> Dict:
         """
         Additional Metric: Novelty robustness.
+
         The method computes top-K accuracy for only the novel samples
 
         Args:
@@ -197,7 +203,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Accuracy on novely samples
         """
-        raise NotImplementedError('Characterization not used for image_classification')
+        raise NotImplementedError("Characterization not used for image_classification")
         # Not sure what p_class is doing here
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
