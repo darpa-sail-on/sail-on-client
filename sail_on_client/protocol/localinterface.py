@@ -212,20 +212,21 @@ class LocalInterface(Harness):
 
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
             arm_im = ImageClassificationMetrics(protocol, **self.gt_config)
-            m_num = arm_im.m_num(detections[arm_im.detection_id], gt[1])
+            m_num = arm_im.m_num(detections[1], gt[arm_im.detection_id])
             results["m_num"] = m_num
-            m_num_stats = arm_im.m_num_stats(detections[arm_im.detection_id], gt[1])
+            m_num_stats = arm_im.m_num_stats(detections[1], gt[arm_im.detection_id])
             results["m_num_stats"] = m_num_stats
-            m_ndp = arm_im.m_ndp(detections[arm_im.detection_id], gt[1])
+            m_ndp = arm_im.m_ndp(detections[1], gt[arm_im.detection_id])
             results["m_ndp"] = m_ndp
-            m_ndp_pre = arm_im.m_ndp_pre(detections[arm_im.detection_id], gt[1])
+            m_ndp_pre = arm_im.m_ndp_pre(detections[1], gt[arm_im.detection_id])
             results["m_ndp_pre"] = m_ndp_pre
-            m_ndp_post = arm_im.m_ndp_post(detections[arm_im.detection_id], gt[1])
+            m_ndp_post = arm_im.m_ndp_post(detections[1], gt[arm_im.detection_id])
             results["m_ndp_post"] = m_ndp_post
-            m_acc = arm_im.m_acc(gt[1], classifications, gt[3], 100, 5)
+            m_acc = arm_im.m_acc(gt[arm_im.classification_id], classifications, gt[arm_im.detection_id],
+                                 100, 5)
             results["m_acc"] = m_acc
             m_acc_failed = arm_im.m_ndp_failed_reaction(
-                detections[arm_im.detection_id], gt[1], classifications, gt[3]
+                detections[arm_im.detection_id], gt[1], classifications, gt[arm_im.classification_id]
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_im.m_is_cdt_and_is_early(
@@ -270,6 +271,10 @@ class LocalInterface(Harness):
                 m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
+
+        else:
+            raise AttributeError(f'Domain: "{domain}" is not a real domain.  Get a clue.')
+
         log.info(f"Results for {test_id}: {ub.repr2(results)}")
         return results
 

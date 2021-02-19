@@ -21,9 +21,9 @@ def detection_files():
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "image_classification"
     )
-    gt_file = os.path.join(result_folder, "OND.1.1.1234_single_df.csv")
+    gt_file = os.path.join(result_folder, "OND.54011215.0000.1236_single_df.csv")
     gt = pd.read_csv(gt_file, sep=",", header=None, skiprows=1)
-    detection_file = os.path.join(result_folder, "OND.1.1.1234_detection.csv")
+    detection_file = os.path.join(result_folder, "OND.54011215.0000.1236_detection.csv")
     detection = pd.read_csv(detection_file, sep=",", header=None)
     return detection, gt
 
@@ -35,7 +35,7 @@ def classification_file():
         os.path.dirname(__file__), "mock_results", "image_classification"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.1.1.1234_classification.csv"
+        result_folder, "OND.54011215.0000.1236_classification.csv"
     )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
@@ -67,14 +67,58 @@ def test_m_acc(arm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    m_acc = arm_metrics.m_acc(gt[1], classification_file, gt[3], 100, 5)
+    m_acc = arm_metrics.m_acc(gt[arm_metrics.detection_id],
+                              classification_file,
+                              gt[arm_metrics.classification_id], 100, 5)
     assert m_acc == {
-        "full_top1": 0.1337,
-        "full_top3": 0.1337,
-        "post_top1": 0.1337,
-        "post_top3": 0.1337,
-        "pre_top1": 0.1337,
-        "pre_top3": 0.1337,
+        'asymptotic_1000_top1': 0.501,
+         'asymptotic_1000_top3': 0.501,
+         'asymptotic_1100_top1': 0.49727,
+         'asymptotic_1100_top3': 0.49727,
+         'asymptotic_1200_top1': 0.49917,
+         'asymptotic_1200_top3': 0.49917,
+         'asymptotic_1300_top1': 0.49692,
+         'asymptotic_1300_top3': 0.49692,
+         'asymptotic_1400_top1': 0.49071,
+         'asymptotic_1400_top3': 0.49071,
+         'asymptotic_1500_top1': 0.49067,
+         'asymptotic_1500_top3': 0.49067,
+         'asymptotic_1600_top1': 0.49188,
+         'asymptotic_1600_top3': 0.49188,
+         'asymptotic_1700_top1': 0.49,
+         'asymptotic_1700_top3': 0.49,
+         'asymptotic_1800_top1': 0.49167,
+         'asymptotic_1800_top3': 0.49167,
+         'asymptotic_1900_top1': 0.49421,
+         'asymptotic_1900_top3': 0.49421,
+         'asymptotic_2000_top1': 0.4915,
+         'asymptotic_2000_top3': 0.4915,
+         'asymptotic_2100_top1': 0.51143,
+         'asymptotic_2100_top3': 0.51143,
+         'asymptotic_2200_top1': 0.53364,
+         'asymptotic_2200_top3': 0.53364,
+         'asymptotic_2300_top1': 0.55391,
+         'asymptotic_2300_top3': 0.55391,
+         'asymptotic_2400_top1': 0.5725,
+         'asymptotic_2400_top3': 0.5725,
+         'asymptotic_2500_top1': 0.5896,
+         'asymptotic_2500_top3': 0.5896,
+         'asymptotic_500_top1': 0.492,
+         'asymptotic_500_top3': 0.492,
+         'asymptotic_600_top1': 0.49167,
+         'asymptotic_600_top3': 0.49167,
+         'asymptotic_700_top1': 0.48714,
+         'asymptotic_700_top3': 0.48714,
+         'asymptotic_800_top1': 0.49125,
+         'asymptotic_800_top3': 0.49125,
+         'asymptotic_900_top1': 0.49556,
+         'asymptotic_900_top3': 0.49556,
+         'full_top1': 0.59922,
+         'full_top3': 0.59922,
+         'post_top1': 0.49031,
+         'post_top3': 0.49031,
+         'pre_top1': 1.0,
+         'pre_top3': 1.0
     }
 
 
@@ -90,8 +134,8 @@ def test_m_num(arm_metrics, detection_files):
         None
     """
     detection, gt = detection_files
-    m_num = arm_metrics.m_num(detection[arm_metrics.detection_id], gt[1])
-    assert m_num == 24
+    m_num = arm_metrics.m_num(detection[1], gt[arm_metrics.detection_id])
+    assert m_num == 1
 
 
 def test_m_num_stats(arm_metrics, detection_files):
@@ -106,8 +150,8 @@ def test_m_num_stats(arm_metrics, detection_files):
         None
     """
     detection, gt = detection_files
-    m_num_stats = arm_metrics.m_num_stats(detection[arm_metrics.detection_id], gt[1])
-    assert m_num_stats["GT_indx"] == 117 and m_num_stats["P_indx"] == 193
+    m_num_stats = arm_metrics.m_num_stats(detection[1], gt[arm_metrics.detection_id])
+    assert m_num_stats["GT_indx"] == 548 and m_num_stats["P_indx"] == 548
 
 
 def test_m_ndp(arm_metrics, detection_files):
@@ -122,16 +166,16 @@ def test_m_ndp(arm_metrics, detection_files):
         None
     """
     detection, gt = detection_files
-    m_ndp = arm_metrics.m_ndp(detection[arm_metrics.detection_id], gt[1])
+    m_ndp = arm_metrics.m_ndp(detection[1], gt[arm_metrics.detection_id])
     assert m_ndp == {
-        "FN": 1337,
-        "FP": 1337,
-        "TN": 1337,
-        "TP": 1337,
-        "accuracy": 0.1337,
-        "f1_score": 0.1337,
-        "precision": 0.1337,
-        "recall": 0.1337,
+        "FN": 0,
+        "FP": 0,
+        "TN": 547,
+        "TP": 2013,
+        "accuracy": 1.0,
+        "f1_score": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
     }
 
 
@@ -147,16 +191,16 @@ def test_m_ndp_pre(arm_metrics, detection_files):
         None
     """
     detection, gt = detection_files
-    m_ndp_pre = arm_metrics.m_ndp_pre(detection[arm_metrics.detection_id], gt[1])
+    m_ndp_pre = arm_metrics.m_ndp_pre(detection[1], gt[arm_metrics.detection_id])
     assert m_ndp_pre == {
-        "FN": 1337,
-        "FP": 1337,
-        "TN": 1337,
-        "TP": 1337,
-        "accuracy": 0.1337,
-        "f1_score": 0.1337,
-        "precision": 0.1337,
-        "recall": 0.1337,
+        "FN": 0,
+        "FP": 0,
+        "TN": 547,
+        "TP": 0,
+        "accuracy": 1.0,
+        "f1_score": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
     }
 
 
@@ -172,19 +216,20 @@ def test_m_ndp_post(arm_metrics, detection_files):
         None
     """
     detection, gt = detection_files
-    m_ndp_post = arm_metrics.m_ndp_post(detection[arm_metrics.detection_id], gt[1])
+    m_ndp_post = arm_metrics.m_ndp_post(detection[1], gt[arm_metrics.detection_id])
     assert m_ndp_post == {
-        "FN": 1337,
-        "FP": 1337,
-        "TN": 1337,
-        "TP": 1337,
-        "accuracy": 0.1337,
-        "f1_score": 0.1337,
-        "precision": 0.1337,
-        "recall": 0.1337,
+        "FN": 0,
+        "FP": 0,
+        "TN": 0,
+        "TP": 2013,
+        "accuracy": 1.0,
+        "f1_score": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
     }
 
 
+@pytest.mark.skip(reason="no way of currently testing this since no gt_class")
 def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file):
     """
     Test m_ndp_failed_reaction computation.
@@ -199,7 +244,7 @@ def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file
     """
     detection, gt = detection_files
     m_ndp_failed = arm_metrics.m_ndp_failed_reaction(
-        detection[arm_metrics.detection_id], gt[1], classification_file, gt[3]
+        detection[1], gt[arm_metrics.detection_id], classification_file, gt[3]
     )
     assert m_ndp_failed == {
         "top1_FN": 1337,
@@ -221,6 +266,7 @@ def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file
     }
 
 
+@pytest.mark.skip(reason="no way of currently testing this")
 def test_m_accuracy_on_novel(arm_metrics, detection_files, classification_file):
     """
     Test m_accuracy_on_novel computation.
@@ -249,7 +295,8 @@ def test_is_cdt_and_is_early(arm_metrics, detection_files):
         None
     """
     detection, gt = detection_files
-    m_num_stats = arm_metrics.m_num_stats(detection[arm_metrics.detection_id], gt[1])
+    m_num_stats = arm_metrics.m_num_stats(detection[1],
+                                          gt[arm_metrics.detection_id])
     is_cdt_is_early = arm_metrics.m_is_cdt_and_is_early(
         m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0]
     )

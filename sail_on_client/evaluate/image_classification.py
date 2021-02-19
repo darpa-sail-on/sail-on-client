@@ -7,6 +7,7 @@ from evaluate.metrics import M_accuracy_on_novel
 
 import numpy as np
 from pandas import DataFrame
+import pandas as pd
 
 from typing import Dict
 
@@ -106,9 +107,9 @@ class ImageClassificationMetrics(ProgramMetrics):
             Novelty detection performance.  The method computes per-sample novelty detection performance.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img,novel])
+            p_novel: detection predictions (Dimension: N X [img, novel])
                 Nx1 vector with each element corresponding to probability of it being novel
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            gt_novel: ground truth detections (Dimension: N X [img, detection])
                 Nx1 vector with each element 0 (not novel) or 1 (novel)
             mode: the mode to compute the test.  if 'full_test' computes on all test samples,
                 if 'post_novelty' computes from first GT novel sample.  If 'pre_novelty', only calculate
@@ -165,13 +166,13 @@ class ImageClassificationMetrics(ProgramMetrics):
         The method computes novelty detection performance for only on samples with incorrect k-class predictions
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img,novel])
+            p_novel: detection predictions (Dimension: [img X novel])
                 Nx1 vector with each element corresponding to probability of novelty
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            gt_novel: ground truth detections (Dimension: [img X detection])
                 Nx1 vector with each element 0 (not novel) or 1 (novel)
-            p_class: detection predictions (Dimension: N X [img,prob that sample is novel, prob of 88 known classes])
+            p_class: detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
                 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
-            gt_class: ground truth classes (Dimension: N X [img,detection,classification])
+            gt_class: ground truth classes (Dimension:  [img X classification])
                 Nx1 vector with ground-truth class for each sample
             mode: if 'full_test' computes on all test samples, if 'post_novelty' computes from the first GT
                 novel sample.  If 'pre_novelty', than everything before novelty introduced.
@@ -193,11 +194,11 @@ class ImageClassificationMetrics(ProgramMetrics):
         The method computes top-K accuracy for only the novel samples
 
         Args:
-            p_class: detection predictions (Dimension: N X [img,prob that sample is novel, prob of 88 known classes])
+            p_class: detection predictions (Dimension: [img X  prob that sample is novel, prob of 88 known classes])
                 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
-            gt_class: ground truth classes (Dimension: N X [img,detection,classification])
+            gt_class: ground truth classes (Dimension: [img X classification])
                 Nx1 vector with ground-truth class for each sample
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            gt_novel: ground truth detections (Dimension: N X [img, classification])
                 Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels
 
         Returns:
@@ -224,3 +225,19 @@ class ImageClassificationMetrics(ProgramMetrics):
         is_cdt = (ta2_idx >= gt_idx) & (ta2_idx < test_len)
         is_early = ta2_idx < gt_idx
         return {"Is CDT": is_cdt, "Is Early": is_early}
+
+
+def convert_df(old_filepath: str, new_filepath: str):
+    """ Convert from the old df to the new df
+
+    Args:
+        old_filepath:  the filepath the the old *_single_df.csv file
+        new_filepath:  the filepath the the old *_single_df.csv file
+
+    """
+    df = pd.read_csv(old_filepath)
+    df['id'] = df.current_path
+    df['detection'] = df.cls_novelty.cummax()
+    df['classification'] = df.class_id
+
+    df[['id', 'detection', 'classification']].to_csv(new_filepath, index=False)

@@ -236,7 +236,7 @@ def test_evaluate(get_interface_params):
     config_directory, config_name = get_interface_params
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface, "OND")
-    response = local_interface.evaluate("OND.1.1.1234", 0, session_id)
+    response = local_interface.evaluate("OND.54011215.0000.1236", 0, session_id)
     assert response == {}
 
 
