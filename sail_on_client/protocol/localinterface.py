@@ -271,10 +271,19 @@ class LocalInterface(Harness):
             results["m_ndp_pre"] = m_ndp_pre
             m_ndp_post = arm_ar.m_ndp_post(detections[1], gt[arm_ar.novel_id])
             results["m_ndp_post"] = m_ndp_post
-            m_acc = arm_ar.m_acc(gt[arm_ar.novel_id], classifications, gt[arm_ar.classification_id], 100, 5)
+            m_acc = arm_ar.m_acc(
+                gt[arm_ar.novel_id],
+                classifications,
+                gt[arm_ar.classification_id],
+                100,
+                5,
+            )
             results["m_acc"] = m_acc
             m_acc_failed = arm_ar.m_ndp_failed_reaction(
-                detections[1], gt[arm_ar.novel_id], classifications, gt[arm_ar.classification_id]
+                detections[1],
+                gt[arm_ar.novel_id],
+                classifications,
+                gt[arm_ar.classification_id],
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_ar.m_is_cdt_and_is_early(
