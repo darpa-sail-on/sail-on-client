@@ -295,6 +295,43 @@ def test_activity_recognition_evaluate(get_ar_interface_params):
     local_interface.evaluate("OND.10.90001.2100554", 0, session_id)
 
 
+def test_transcripts_evaluate(get_transcripts_interface_params):
+    """
+    Test evaluate for transcripts.
+
+    Args:
+        get_transcripts_interface_params (tuple): Tuple to configure local interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.localinterface import LocalInterface
+
+    config_directory, config_name = get_transcripts_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    session_id = _initialize_session(local_interface, "OND", "transcripts")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "transcripts"
+    )
+    detection_file_id = os.path.join(
+        result_folder, "OND.0.90001.8714062_detection.csv"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.0.90001.8714062_classification.csv"
+    )
+    characterization_file_id = os.path.join(
+        result_folder, "OND.0.90001.8714062_characterization.csv"
+    )
+    results = {
+        "detection": detection_file_id,
+        "classification": classification_file_id,
+        "characterization": characterization_file_id,
+    }
+
+    local_interface.post_results(results, "OND.0.90001.8714062", 0, session_id)
+    local_interface.evaluate("OND.0.90001.8714062", 0, session_id)
+
+:
 def test_terminate_session(get_interface_params):
     """
     Test terminate session request.
