@@ -40,7 +40,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
             None
         """
         super().__init__(protocol)
-        self.activity_id = id
+        self.activity_id = video_id
         self.novel_id = novel
         self.detection_id = detection
         self.classification_id = classification
