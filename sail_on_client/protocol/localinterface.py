@@ -261,20 +261,20 @@ class LocalInterface(Harness):
             )
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
             arm_ar = ActivityRecognitionMetrics(protocol, **self.gt_config)
-            m_num = arm_ar.m_num(detections[arm_ar.novel_id], gt[1])
+            m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
             results["m_num"] = m_num
-            m_num_stats = arm_ar.m_num_stats(detections[arm_ar.novel_id], gt[1])
+            m_num_stats = arm_ar.m_num_stats(detections[1], gt[arm_ar.novel_id])
             results["m_num_stats"] = m_num_stats
-            m_ndp = arm_ar.m_ndp(detections[arm_ar.novel_id], gt[1])
+            m_ndp = arm_ar.m_ndp(detections[1], gt[arm_ar.novel_id])
             results["m_ndp"] = m_ndp
-            m_ndp_pre = arm_ar.m_ndp_pre(detections[arm_ar.novel_id], gt[1])
+            m_ndp_pre = arm_ar.m_ndp_pre(detections[1], gt[arm_ar.novel_id])
             results["m_ndp_pre"] = m_ndp_pre
-            m_ndp_post = arm_ar.m_ndp_post(detections[arm_ar.novel_id], gt[1])
+            m_ndp_post = arm_ar.m_ndp_post(detections[1], gt[arm_ar.novel_id])
             results["m_ndp_post"] = m_ndp_post
-            m_acc = arm_ar.m_acc(gt[1], classifications, gt[3], 100, 5)
+            m_acc = arm_ar.m_acc(gt[arm_ar.novel_id], classifications, gt[arm_ar.classification_id], 100, 5)
             results["m_acc"] = m_acc
             m_acc_failed = arm_ar.m_ndp_failed_reaction(
-                detections[arm_ar.novel_id], gt[1], classifications, gt[3]
+                detections[1], gt[arm_ar.novel_id], classifications, gt[arm_ar.classification_id]
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_ar.m_is_cdt_and_is_early(
