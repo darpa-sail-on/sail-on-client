@@ -6,6 +6,7 @@ from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
 from sail_on_client.evaluate.image_classification import ImageClassificationMetrics
 from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
+from sail_on_client.evaluate.document_transcription import DocumentTranscriptionMetrics
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
@@ -281,12 +282,47 @@ class LocalInterface(Harness):
                 m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
-
+        # ######## Document Transcript Evaluation  ###########
+        elif domain == "transcripts":
+            detection_file_id = os.path.join(
+                self.result_directory,
+                protocol,
+                domain,
+                f"{session_id}.{test_id}_detection.csv",
+            )
+            detections = pd.read_csv(detection_file_id, sep=",", header=None)
+            classification_file_id = os.path.join(
+                self.result_directory,
+                protocol,
+                domain,
+                f"{session_id}.{test_id}_classification.csv",
+            )
+            classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+            dtm = DocumentTranscriptionMetrics(protocol, **self.gt_config)
+            m_num = dtm.m_num(detections[1], gt[dtm.novel_id])
+            results["m_num"] = m_num
+            m_num_stats = dtm.m_num_stats(detections[1], gt[dtm.novel_id])
+            results["m_num_stats"] = m_num_stats
+            m_ndp = dtm.m_ndp(detections[1], gt[dtm.novel_id])
+            results["m_ndp"] = m_ndp
+            m_ndp_pre = dtm.m_ndp_pre(detections[1], gt[dtm.novel_id])
+            results["m_ndp_pre"] = m_ndp_pre
+            m_ndp_post = dtm.m_ndp_post(detections[1], gt[dtm.novel_id])
+            results["m_ndp_post"] = m_ndp_post
+            m_acc = dtm.m_acc(gt[dtm.novel_id], classifications, gt[dtm.classification_id], 100, 5)
+            results["m_acc"] = m_acc
+            m_acc_failed = dtm.m_ndp_failed_reaction(
+                detections[1], gt[dtm.novel_id], classifications, gt[dtm.classification_id]
+            )
+            results["m_acc_failed"] = m_acc_failed
+            m_is_cdt_and_is_early = dtm.m_is_cdt_and_is_early(
+                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+            )
+            results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
         else:
             raise AttributeError(
                 f'Domain: "{domain}" is not a real domain.  Get a clue.'
             )
-
         log.info(f"Results for {test_id}: {ub.repr2(results)}")
         return results
 
