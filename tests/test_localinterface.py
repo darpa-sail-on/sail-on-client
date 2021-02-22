@@ -313,9 +313,7 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "transcripts"
     )
-    detection_file_id = os.path.join(
-        result_folder, "OND.0.90001.8714062_detection.csv"
-    )
+    detection_file_id = os.path.join(result_folder, "OND.0.90001.8714062_detection.csv")
     classification_file_id = os.path.join(
         result_folder, "OND.0.90001.8714062_classification.csv"
     )
@@ -331,7 +329,7 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
     local_interface.post_results(results, "OND.0.90001.8714062", 0, session_id)
     local_interface.evaluate("OND.0.90001.8714062", 0, session_id)
 
-:
+
 def test_terminate_session(get_interface_params):
     """
     Test terminate session request.
