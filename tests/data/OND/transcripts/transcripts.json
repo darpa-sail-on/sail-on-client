@@ -1,0 +1,13 @@
+{
+    "image_id": 0,
+    "text": 1,
+    "novel": 2,
+    "representation": 3,
+    "detection": 4,
+    "classification": 5,
+    "pen_pressure": 6,
+    "letter_size": 7,
+    "word_spacing": 8,
+    "slant_angle": 9,
+    "attribute": 10
+}
