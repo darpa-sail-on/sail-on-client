@@ -47,9 +47,9 @@ class ImageClassificationMetrics(ProgramMetrics):
         m_acc function.
 
         Args:
-            gt_novel: ground truth detections (Dimension: N X [img, detection, classification])
-            p_class: detection predictions (Dimension: N X [img,prob that sample is novel, prob of 88 known classes])
-            gt_class: ground truth classes (Dimension: N X [img, detection, classification])
+            gt_novel: ground truth detections (Dimension: [img X detection])
+            p_class: detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
+            gt_class: ground truth classes (Dimension: [img X detection, classification])
             round_size: size of the round
             asymptotic_start_round: asymptotic samples considered for computing metrics
 
@@ -67,12 +67,12 @@ class ImageClassificationMetrics(ProgramMetrics):
         m_num function.
 
         A Program Metric where the number of samples needed for detecting novelty.
-        The method computes number of GT novel samples needed to predict the first true positive.
+        The method computes the number of GT novel samples needed to predict the first true positive.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img,novel])
+            p_novel: detection predictions (Dimension: [img X novel])
                 Nx1 vector with each element corresponding to probability of novelty
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            gt_novel: ground truth detections (Dimension: [img X detection])
                 Nx1 vector with each element 0 (not novel) or 1 (novel)
 
         Returns:
@@ -88,9 +88,9 @@ class ImageClassificationMetrics(ProgramMetrics):
             samples needed to predict the first true positive.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img,novel])
+            p_novel: detection predictions (Dimension: [img X novel])
                 Nx1 vector with each element corresponding to probability of novelty
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            gt_novel: ground truth detections (Dimension: [img X detection])
                 Nx1 vector with each element 0 (not novel) or 1 (novel)
 
         Returns:
@@ -107,9 +107,9 @@ class ImageClassificationMetrics(ProgramMetrics):
             Novelty detection performance.  The method computes per-sample novelty detection performance.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img, novel])
+            p_novel: detection predictions (Dimension: [img X novel])
                 Nx1 vector with each element corresponding to probability of it being novel
-            gt_novel: ground truth detections (Dimension: N X [img, detection])
+            gt_novel: ground truth detections (Dimension: [img X detection])
                 Nx1 vector with each element 0 (not novel) or 1 (novel)
             mode: the mode to compute the test.  if 'full_test' computes on all test samples,
                 if 'post_novelty' computes from first GT novel sample.  If 'pre_novelty', only calculate
@@ -128,8 +128,8 @@ class ImageClassificationMetrics(ProgramMetrics):
             post_novelty.  This computes to the first GT novel sample
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img,novel])
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            p_novel: detection predictions (Dimension: [img X novel])
+            gt_novel: ground truth detections (Dimension: [img X detection])
 
         Returns:
             Dictionary containing detection performance pre novelty.
@@ -144,8 +144,8 @@ class ImageClassificationMetrics(ProgramMetrics):
             post_novelty.  This computes from the first GT novel sample
 
         Args:
-            p_novel: detection predictions (Dimension: N X [img,novel])
-            gt_novel: ground truth detections (Dimension: N X [img,detection,classification])
+            p_novel: detection predictions (Dimension: [img X novel])
+            gt_novel: ground truth detections (Dimension: [img X detection])
 
         Returns:
             Dictionary containing detection performance post novelty.
@@ -162,6 +162,8 @@ class ImageClassificationMetrics(ProgramMetrics):
     ) -> Dict:
         """
         Additional Metric: Novelty detection when reaction fails.
+
+        Not Implemented since no gt_class info for novel samples
 
         The method computes novelty detection performance for only on samples with incorrect k-class predictions
 
@@ -190,6 +192,8 @@ class ImageClassificationMetrics(ProgramMetrics):
     ) -> Dict:
         """
         Additional Metric: Novelty robustness.
+
+        Not Implemented since no gt_class info for novel samples
 
         The method computes top-K accuracy for only the novel samples
 
