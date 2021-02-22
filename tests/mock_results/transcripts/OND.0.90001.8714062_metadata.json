@@ -1,0 +1,17 @@
+{
+  "protocol": "OND",
+  "known_classes": 50,
+  "novel_classes": 6,
+  "n_representations": 1,
+  "distribution": "high",
+  "difficulty": "high",
+  "prop_novel": 0.5,
+  "n_rounds": 0,
+  "detection": "256",
+  "red_light": "6194f0f5-255f-4c92-893c-8257e587433d",
+  "round_size": 32,
+  "threshold": 0.5,
+  "pre_novelty_batches": 5,
+  "max_novel_classes": 6,
+  "feedback_max_ids": 4
+}
