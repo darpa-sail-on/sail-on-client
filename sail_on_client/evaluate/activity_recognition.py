@@ -60,7 +60,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
 
         Args:
             gt_novel: ground truth detections for N videos (Dimension: N X 1)
-            p_class: detection predictions for N videos (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])
+            p_class: class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])
             gt_class: ground truth classes for N videos (Dimension: N X 1)
             round_size: size of the round
             asymptotic_start_round: asymptotic samples considered for computing metrics
