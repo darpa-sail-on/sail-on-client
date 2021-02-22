@@ -67,8 +67,13 @@ def test_m_acc(dtm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    m_acc = dtm_metrics.m_acc(gt[dtm_metrics.novel_id], classification_file, \
-                              gt[dtm_metrics.classification_id], 100, 5)
+    m_acc = dtm_metrics.m_acc(
+        gt[dtm_metrics.novel_id],
+        classification_file,
+        gt[dtm_metrics.classification_id],
+        100,
+        5,
+    )
     assert m_acc == {
         "asymptotic_500_top1": 0.766,
         "asymptotic_500_top3": 0.91,
@@ -134,7 +139,7 @@ def test_m_ndp(dtm_metrics, detection_files):
         "accuracy": 0.82227,
         "f1_score": 0.64591,
         "precision": 0.61029,
-        "recall": 0.68595
+        "recall": 0.68595,
     }
 
 
@@ -159,7 +164,7 @@ def test_m_ndp_pre(dtm_metrics, detection_files):
         "accuracy": 0.86617,
         "f1_score": 0.0,
         "precision": 0.0,
-        "recall": 0.0
+        "recall": 0.0,
     }
 
 
@@ -184,7 +189,7 @@ def test_m_ndp_post(dtm_metrics, detection_files):
         "accuracy": 0.77366,
         "f1_score": 0.75113,
         "precision": 0.83,
-        "recall": 0.68595
+        "recall": 0.68595,
     }
 
 
@@ -202,7 +207,10 @@ def test_m_ndp_failed_reaction(dtm_metrics, detection_files, classification_file
     """
     detection, gt = detection_files
     m_ndp_failed = dtm_metrics.m_ndp_failed_reaction(
-        detection[1], gt[dtm_metrics.novel_id], classification_file, gt[dtm_metrics.classification_id]
+        detection[1],
+        gt[dtm_metrics.novel_id],
+        classification_file,
+        gt[dtm_metrics.classification_id],
     )
     assert m_ndp_failed == {
         "top1_FN": 28,
@@ -220,7 +228,7 @@ def test_m_ndp_failed_reaction(dtm_metrics, detection_files, classification_file
         "top3_accuracy": 0.17778,
         "top3_f1_score": 0.0,
         "top3_precision": 0.0,
-        "top3_recall": 0.0
+        "top3_recall": 0.0,
     }
 
 
@@ -237,7 +245,9 @@ def test_m_accuracy_on_novel(dtm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    dtm_metrics.m_accuracy_on_novel(classification_file, gt[dtm_metrics.classification_id], gt[dtm_metrics.novel_id])
+    dtm_metrics.m_accuracy_on_novel(
+        classification_file, gt[dtm_metrics.classification_id], gt[dtm_metrics.novel_id]
+    )
 
 
 def test_is_cdt_and_is_early(dtm_metrics, detection_files):

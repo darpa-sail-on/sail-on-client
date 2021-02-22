@@ -27,7 +27,7 @@ class DocumentTranscriptionMetrics(ProgramMetrics):
         letter_size: int,
         word_spacing: int,
         slant_angle: int,
-        attribute: int
+        attribute: int,
     ) -> None:
         """
         Initialize.
