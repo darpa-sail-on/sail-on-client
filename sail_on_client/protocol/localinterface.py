@@ -223,9 +223,9 @@ class LocalInterface(Harness):
             m_ndp_post = arm_im.m_ndp_post(detections[1], gt[arm_im.detection_id])
             results["m_ndp_post"] = m_ndp_post
             m_acc = arm_im.m_acc(
-                gt[arm_im.classification_id],
-                classifications,
                 gt[arm_im.detection_id],
+                classifications,
+                gt[arm_im.classification_id],
                 100,
                 5,
             )
