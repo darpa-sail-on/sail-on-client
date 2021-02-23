@@ -182,7 +182,6 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
         """
-        raise NotImplementedError("Characterization not used for image_classification")
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
@@ -231,17 +230,20 @@ class ImageClassificationMetrics(ProgramMetrics):
         return {"Is CDT": is_cdt, "Is Early": is_early}
 
 
-def convert_df(old_filepath: str, new_filepath: str):
-    """ Convert from the old df to the new df
+def convert_df(old_filepath: str, new_filepath: str) -> None:
+    """
+    Convert from the old df to the new df.
 
     Args:
         old_filepath:  the filepath the the old *_single_df.csv file
         new_filepath:  the filepath the the old *_single_df.csv file
 
+    Return:
+        None
     """
     df = pd.read_csv(old_filepath)
-    df['id'] = df.current_path
-    df['detection'] = df.cls_novelty.cummax()
-    df['classification'] = df.class_id
+    df["id"] = df.current_path
+    df["detection"] = df.cls_novelty.cummax()
+    df["classification"] = df.class_id
 
-    df[['id', 'detection', 'classification']].to_csv(new_filepath, index=False)
+    df[["id", "detection", "classification"]].to_csv(new_filepath, index=False)

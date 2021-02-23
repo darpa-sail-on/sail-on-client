@@ -36,12 +36,17 @@ have the same interface with the following functions
 Metrics
 -------
 
-We currently support metrics for activity recognition domain with the following
+We currently support metrics for image classification and activity recognition domain with the following
 functions
+
+.. autoclass:: sail_on_client.evaluate.image_classification.ImageClassificationMetrics
+    :members:
+    :undoc-members:
 
 .. autoclass:: sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics
     :members:
     :undoc-members:
+
 
 The metrics inherit from the program metric class with the following functions
 

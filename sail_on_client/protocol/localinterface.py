@@ -222,11 +222,19 @@ class LocalInterface(Harness):
             results["m_ndp_pre"] = m_ndp_pre
             m_ndp_post = arm_im.m_ndp_post(detections[1], gt[arm_im.detection_id])
             results["m_ndp_post"] = m_ndp_post
-            m_acc = arm_im.m_acc(gt[arm_im.classification_id], classifications, gt[arm_im.detection_id],
-                                 100, 5)
+            m_acc = arm_im.m_acc(
+                gt[arm_im.classification_id],
+                classifications,
+                gt[arm_im.detection_id],
+                100,
+                5,
+            )
             results["m_acc"] = m_acc
             m_acc_failed = arm_im.m_ndp_failed_reaction(
-                detections[arm_im.detection_id], gt[1], classifications, gt[arm_im.classification_id]
+                detections[arm_im.detection_id],
+                gt[1],
+                classifications,
+                gt[arm_im.classification_id],
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_im.m_is_cdt_and_is_early(
@@ -273,7 +281,9 @@ class LocalInterface(Harness):
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
 
         else:
-            raise AttributeError(f'Domain: "{domain}" is not a real domain.  Get a clue.')
+            raise AttributeError(
+                f'Domain: "{domain}" is not a real domain.  Get a clue.'
+            )
 
         log.info(f"Results for {test_id}: {ub.repr2(results)}")
         return results
