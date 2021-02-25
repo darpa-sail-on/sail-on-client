@@ -234,7 +234,13 @@ class ParInterface(Harness):
 
         self._check_response(response)
 
-    def evaluate(self, test_id: str, round_id: int, session_id: str) -> str:
+    def evaluate(
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
+        baseline_session_id: str = None,
+    ) -> str:
         """
         Get results for test(s).
 
