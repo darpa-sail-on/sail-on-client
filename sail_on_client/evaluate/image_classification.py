@@ -102,7 +102,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         self, p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test"
     ) -> Dict:
         """
-        Program Metric.
+        Novelty Detection Performance: Program Metric.
 
             Novelty detection performance.  The method computes per-sample novelty detection performance.
 
@@ -122,10 +122,11 @@ class ImageClassificationMetrics(ProgramMetrics):
 
     def m_ndp_pre(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
-        m_ndp_pre function.
+        Novelty Detection Performance Pre Red Light.  m_ndp_pre function.
 
         See :func:`~sail-on-client.evaluation.ImageClassificationMetrics.m_ndp` with
-            post_novelty.  This computes to the first GT novel sample
+            post_novelty.  This computes to the first GT novel sample.  It really isn't useful
+            and is just added for completion.  Should always be 0 since no possible TP.
 
         Args:
             p_novel: detection predictions (Dimension: [img X novel])
@@ -138,7 +139,7 @@ class ImageClassificationMetrics(ProgramMetrics):
 
     def m_ndp_post(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
-        m_ndp_post function.
+        Novelty Detection Performance Post Red Light.  m_ndp_post function.
 
         See :func:`~sail-on-client.evaluation.ImageClassificationMetrics.m_ndp` with
             post_novelty.  This computes from the first GT novel sample
@@ -207,15 +208,14 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Accuracy on novely samples
         """
-        raise NotImplementedError("Characterization not used for image_classification")
-        # Not sure what p_class is doing here
+
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
         return M_accuracy_on_novel(class_prob, gt_class_idx, gt_novel)
 
     def m_is_cdt_and_is_early(self, gt_idx: int, ta2_idx: int, test_len: int) -> Dict:
         """
-        m_is_cdt_and_is_early function.
+        Is change detection and is change detection early (m_is_cdt_and_is_early) function.
 
         Args:
             gt_idx: Index when novelty is introduced
@@ -244,6 +244,13 @@ def convert_df(old_filepath: str, new_filepath: str) -> None:
     df = pd.read_csv(old_filepath)
     df["id"] = df.current_path
     df["detection"] = df.cls_novelty.cummax()
+
     df["classification"] = df.class_id
+
+    # Retain the class num for novel classes but as negative numbers
+    mask = df.classification == -1
+    df.loc[mask, "classification"] = df.loc[mask, "current_path"].map(
+        lambda x: -int(x.split("/")[-2])
+    )
 
     df[["id", "detection", "classification"]].to_csv(new_filepath, index=False)
