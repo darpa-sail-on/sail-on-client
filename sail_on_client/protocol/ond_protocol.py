@@ -4,7 +4,7 @@ from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 
 from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.errors import RoundError
-from sail_on_client.utils import safe_remove, safe_remove_results
+from sail_on_client.utils import safe_remove, safe_remove_results, update_harness_parameters
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.feedback.image_classification_feedback import (
     ImageClassificationFeedback,
@@ -38,8 +38,6 @@ class SailOn(BaseProtocol):
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
         )
-        # The duplication is mainly to prevent mypy attribute error associated with the harness
-        self.harness = harness
         if not os.path.exists(config_file):
             log.error(f"{config_file} does not exist")
             sys.exit(1)

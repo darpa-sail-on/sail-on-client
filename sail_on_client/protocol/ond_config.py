@@ -34,21 +34,82 @@ class OndConfig(scfg.Config):
         "saved_attributes": {},
         "skip_stage": [],
         "hints": [],
-        "detector_config": {
-            "efficientnet_params": {
-                "model_path": "/home/eric/merge_framework/sail_on/protocol/trained_efficientnet_b3_fp16.pth.tar",
-                "known_classes": 413,
-            },
-            "evm_params": {
-                "model_path": "/home/eric/merge_framework/sail_on/protocol/efficientb3_EVM_model_tail33998_ct7_dm55.hdf5",  # noqa: E501
-                "tailsize": 33998,
-                "cover_threshold": 0.7,
-                "distance_multiplier": 0.55,
-            },
-            "known_kmeans_params": {},
-            "dataloader_params": {"batch_size": 64, "num_workers": 3},
+        "detectors": {
+            "has_baseline": False,
+            "has_reaction_baseline": False,
+            "baseline_class": "",
             "csv_folder": "",
-            "cores": 4,
-            "detection_threshold": 0.3,
+            "cores": 6,
+            "detection_threshold": 0.1,
+            "detector_configs": {
+                "gae_kl_nd": {
+                    "feature_extractor_params": {
+                      "backbone_weight_path": "",
+                      "name": "i3d",
+                      "arch": "i3d-50",
+                      "graph_weight_path": "",
+                      "model_name": "i3d",
+                      "n_classes": 400,
+                      "no_cuda": "False",
+                      "hidden_dims": [512, 128],
+                      "hidden": "True",
+                      "in_dim": 1024,
+                      "num_heads": [4, 1],
+                      "sample_duration": 64,
+                      "graph_classes": 88,
+                      "mode": "feature",
+                      "feature_type": "graph"
+                    },
+                    "kl_params": {
+                      "window_size": 100,
+                      "mu_train": 1.0,
+                      "sigma_train": 0.0057400320777888664,
+                      "KL_threshold": 5.830880886275709
+                    },
+                    "evm_params": {
+                      "weight_path": "",
+                      "number_of_unknown_to_crate_evm": 7
+                    },
+                    "characterization_params": {
+                      "clustering_type": "FINCH",
+                      "number_of_unknown_to_strat_clustering": 50
+                    },
+                    "dataloader_params": {
+                      "sample_size": 224,
+                      "mean": [114.7748, 107.7354, 99.4750],
+                      "sample_duration": 64,
+                      "batch_size": 1,
+                      "n_threads": 6,
+                      "n_classes": 88
+                    },
+                },
+                "baseline_i3d": {
+                    "feature_extractor_params": {
+                      "backbone_weight_path": "",
+                      "name": "i3d",
+                      "arch": "i3d-50",
+                      "graph_weight_path": "",
+                      "model_name": "i3d",
+                      "n_classes": 400,
+                      "no_cuda": "False",
+                      "hidden_dims": [512, 128],
+                      "hidden": "True",
+                      "in_dim": 1024,
+                      "num_heads": [4, 1],
+                      "sample_duration": 64,
+                      "graph_classes": 88,
+                      "mode": "feature",
+                      "feature_type": "graph"
+                    },
+                },
+            },
+
+        },
+        "harness_config": {
+            "url": "http://3.32.8.161:5001/",
+            "data_location": "",
+            "data_dir": "",
+            "gt_dir": "",
+            "gt_config": "",
         },
     }
