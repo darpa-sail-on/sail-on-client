@@ -51,7 +51,9 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
     """
     for param_name, param_value in new_parameters.items():
         if not hasattr(ip_harness, param_name):
-            log.warn(f"{param_name} is not an attribute in the harness, adding the attribute")
+            log.warn(
+                f"{param_name} is not an attribute in the harness, adding the attribute"
+            )
         setattr(ip_harness, param_name, param_value)
     return ip_harness
 

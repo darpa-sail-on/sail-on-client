@@ -6,6 +6,7 @@ from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
 from sail_on_client.evaluate.image_classification import ImageClassificationMetrics
 from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
+from sail_on_client.utils import create_baseline
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
@@ -38,8 +39,8 @@ class LocalInterface(Harness):
         self.temp_dir = TemporaryDirectory()
         self.data_dir = self.configuration_data["data_dir"]
         self.gt_dir = self.configuration_data["gt_dir"]
-        self.gt_config = json.load(open(self.configuration_data["gt_config"], "r"))
         self.result_directory = self.temp_dir.name
+        self.use_baseline = self.configuration_data["use_baseline"]
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
     def test_ids_request(
@@ -177,7 +178,8 @@ class LocalInterface(Harness):
             result_content[result_key] = io.StringIO(content).getvalue()
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
-    def evaluate(self, test_id: str, round_id: int, session_id: str) -> Dict[str, Any]:
+
+    def evaluate(self, test_id: str, round_id: int, session_id: str, baseline_session_id: str = None) -> Dict[str, Any]:
         """
         Get results for test(s).
 
@@ -195,6 +197,7 @@ class LocalInterface(Harness):
         protocol = info["activity"]["created"]["protocol"]
         domain = info["activity"]["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
+        gt_config = json.load(open(self.gt_config, "r"))
 
         # ######## Image Classification Evaluation  ###########
         if domain == "image_classification":
@@ -260,6 +263,16 @@ class LocalInterface(Harness):
                 f"{session_id}.{test_id}_classification.csv",
             )
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+            if baseline_session_id is not None:
+                baseline_classification_file_id = os.path.join(
+                    self.result_directory,
+                    protocol,
+                    domain,
+                    f"{baseline_session_id}.{test_id}_classification.csv",
+                )
+                baseline_classifications = pd.read_csv(baseline_classification_file_id, sep=",", header=None)
+            arm_ar = ActivityRecognitionMetrics(protocol, **gt_config)
+            m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
             arm_ar = ActivityRecognitionMetrics(protocol, **self.gt_config)
             m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
             results["m_num"] = m_num
@@ -290,7 +303,12 @@ class LocalInterface(Harness):
                 m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
-
+            if baseline_session_id is not None:
+                m_acc_baseline = arm_ar.m_acc(
+                    gt[arm_ar.novel_id], baseline_classifications, gt[arm_ar.classification_id], 100, 5
+                )
+                m_nrp = arm_ar.m_nrp(m_acc, m_acc_baseline)
+                results["m_nrp"] = m_nrp
         else:
             raise AttributeError(
                 f'Domain: "{domain}" is not a real domain.  Get a clue.'
