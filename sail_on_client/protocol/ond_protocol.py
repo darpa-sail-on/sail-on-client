@@ -209,7 +209,7 @@ class SailOn(BaseProtocol):
                                 continue
 
                     results: Dict[str, Any] = {}
-                    if not has_reaction_baseline and session_id == baseline_session_id:
+                    if not has_reaction_baseline or session_id != baseline_session_id:
                         results["detection"] = algorithms[algorithm_name].execute(
                             self.toolset, "WorldDetection"
                         )
@@ -277,5 +277,5 @@ class SailOn(BaseProtocol):
             if session_id != baseline_session_id:
                 self.harness.evaluate(test_id, 0, session_id, baseline_session_id)
 
-            log.info(f"Session ended: {self.toolset['session_id']}")
+            log.info(f"Session ended: {session_id}")
             self.harness.terminate_session(session_id)
