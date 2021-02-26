@@ -39,6 +39,7 @@ class LocalInterface(Harness):
         self.temp_dir = TemporaryDirectory()
         self.data_dir = self.configuration_data["data_dir"]
         self.gt_dir = self.configuration_data["gt_dir"]
+        self.gt_config = self.configuration_data["gt_config"]
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
@@ -271,8 +272,6 @@ class LocalInterface(Harness):
                 )
                 baseline_classifications = pd.read_csv(baseline_classification_file_id, sep=",", header=None)
             arm_ar = ActivityRecognitionMetrics(protocol, **gt_config)
-            m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
-            arm_ar = ActivityRecognitionMetrics(protocol, **self.gt_config)
             m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
             results["m_num"] = m_num
             m_num_stats = arm_ar.m_num_stats(detections[1], gt[arm_ar.novel_id])
