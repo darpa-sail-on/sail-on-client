@@ -40,7 +40,6 @@ class LocalInterface(Harness):
         self.data_dir = self.configuration_data["data_dir"]
         self.gt_dir = self.configuration_data["gt_dir"]
         self.result_directory = self.temp_dir.name
-        self.use_baseline = self.configuration_data["use_baseline"]
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
     def test_ids_request(
