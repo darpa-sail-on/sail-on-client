@@ -27,5 +27,7 @@ setup(
     url="https://gitlab.kitware.com/darpa-sail-on/merge_framework",
     version="0.0.1",
     zip_safe=False,
+    # Note: The entrypoint for tinker is "tinker" not "tinker_test" the dummy entrypoint
+    # is being used because the CI tries and fails to load algorithms that requires libcuda
     entry_points={"tinker_test": ["MockDetector = sail_on_client.mock:MockDetector"]},
 )
