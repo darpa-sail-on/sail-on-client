@@ -89,8 +89,9 @@ class SailOn(BaseProtocol):
                 self.config["hints"],
                 detector_threshold,
             )
-            if ( has_baseline or has_reaction_baseline ) and \
-                    algorithm_name == self.config["detectors"]["baseline_class"]:
+            if (
+                has_baseline or has_reaction_baseline
+            ) and algorithm_name == self.config["detectors"]["baseline_class"]:
                 baseline_session_id = session_id
             sessions[algorithm_name] = session_id
         for algorithm_name, session_id in sessions.items():
@@ -109,22 +110,20 @@ class SailOn(BaseProtocol):
                     ]
                 else:
                     self.toolset["redlight_image"] = ""
-                detector_config = self.config["detectors"]["detector_configs"][algorithm_name]
+                detector_config = self.config["detectors"]["detector_configs"][
+                    algorithm_name
+                ]
                 # Intialize feedback object for Image Classfication
                 if (
                     "feedback_params" in detector_config
                     and self.config["domain"] == "image_classification"
                 ):
                     log.info("Creating Feedback object")
-                    first_budget = detector_config["feedback_params"][
-                        "first_budget"
-                    ]
+                    first_budget = detector_config["feedback_params"]["first_budget"]
                     income_per_batch = detector_config["feedback_params"][
                         "income_per_batch"
                     ]
-                    max_budget = detector_config["feedback_params"][
-                        "maximum_budget"
-                    ]
+                    max_budget = detector_config["feedback_params"]["maximum_budget"]
                     self.toolset[
                         "ImageClassificationFeedback"
                     ] = ImageClassificationFeedback(
@@ -138,9 +137,11 @@ class SailOn(BaseProtocol):
                     )
                 algorithm_toolset = {}
                 for config_name, config_value in self.config["detectors"].items():
-                    if config_name == "has_baseline" or \
-                            config_name == "has_reaction_baseline" or \
-                            config_name == "baseline_class":
+                    if (
+                        config_name == "has_baseline"
+                        or config_name == "has_reaction_baseline"
+                        or config_name == "baseline_class"
+                    ):
                         continue
                     elif config_name == "detector_configs":
                         algorithm_toolset.update(config_value[algorithm_name])
@@ -171,7 +172,8 @@ class SailOn(BaseProtocol):
                     if os.path.isdir(feature_dir):
                         test_features = pkl.load(
                             open(
-                                os.path.join(feature_dir, f"{test}_features.pkl"), "rb"
+                                os.path.join(feature_dir, f"{test_id}_features.pkl"),
+                                "rb",
                             )
                         )
                     else:
