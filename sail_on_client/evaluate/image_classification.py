@@ -24,7 +24,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Args:
             protocol: Name of the protocol.
             image_id: Column id for image
-            detection: Column id for predicting sample wise novelty
+            detection: Column id for predicting sample wise world detection
             classification: Column id for predicting sample wise classes
 
         Returns:
