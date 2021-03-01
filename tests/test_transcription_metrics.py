@@ -232,6 +232,7 @@ def test_m_ndp_failed_reaction(dtm_metrics, detection_files, classification_file
     }
 
 
+@pytest.mark.skip(reason="no way of currently testing this")
 def test_m_accuracy_on_novel(dtm_metrics, detection_files, classification_file):
     """
     Test m_accuracy_on_novel computation.
