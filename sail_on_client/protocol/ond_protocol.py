@@ -61,6 +61,7 @@ class SailOn(BaseProtocol):
         sessions = {}
         baseline_session_id = None
         has_reaction_baseline = self.config["detectors"]["has_reaction_baseline"]
+        has_baseline = self.config["detectors"]["has_baseline"]
         # Create sessions an instances of all the algorithms
         for algorithm_name in algorithm_names:
             algorithm = self.get_algorithm(
@@ -88,7 +89,8 @@ class SailOn(BaseProtocol):
                 self.config["hints"],
                 detector_threshold,
             )
-            if algorithm_name == self.config["detectors"]["baseline_class"]:
+            if ( has_baseline or has_reaction_baseline ) and \
+                    algorithm_name == self.config["detectors"]["baseline_class"]:
                 baseline_session_id = session_id
             sessions[algorithm_name] = session_id
         for algorithm_name, session_id in sessions.items():
@@ -107,41 +109,45 @@ class SailOn(BaseProtocol):
                     ]
                 else:
                     self.toolset["redlight_image"] = ""
-
+                detector_config = self.config["detectors"]["detector_configs"][algorithm_name]
                 # Intialize feedback object for Image Classfication
-                # if (
-                #     "feedback_params" in self.config["detector_config"]
-                #     and self.config["domain"] == "image_classification"
-                # ):
-                #     log.info("Creating Feedback object")
-                #     first_budget = self.config["detector_config"]["feedback_params"][
-                #         "first_budget"
-                #     ]
-                #     income_per_batch = self.config["detector_config"]["feedback_params"][
-                #         "income_per_batch"
-                #     ]
-                #     max_budget = self.config["detector_config"]["feedback_params"][
-                #         "maximum_budget"
-                #     ]
-                #     self.toolset[
-                #         "ImageClassificationFeedback"
-                #     ] = ImageClassificationFeedback(
-                #         first_budget,
-                #         income_per_batch,
-                #         max_budget,
-                #         self.harness,
-                #         session_id,
-                #         test_id,
-                #         "classification",
-                #     )
-                algorithm_toolset = self.config["detectors"]["detector_configs"][
-                    algorithm_name
-                ]
-                algorithm_toolset["csv_folder"] = self.config["detectors"]["csv_folder"]
-                algorithm_toolset["cores"] = self.config["detectors"]["cores"]
-                algorithm_toolset["detection_threshold"] = self.config["detectors"][
-                    "detection_threshold"
-                ]
+                if (
+                    "feedback_params" in detector_config
+                    and self.config["domain"] == "image_classification"
+                ):
+                    log.info("Creating Feedback object")
+                    first_budget = detector_config["feedback_params"][
+                        "first_budget"
+                    ]
+                    income_per_batch = detector_config["feedback_params"][
+                        "income_per_batch"
+                    ]
+                    max_budget = detector_config["feedback_params"][
+                        "maximum_budget"
+                    ]
+                    self.toolset[
+                        "ImageClassificationFeedback"
+                    ] = ImageClassificationFeedback(
+                        first_budget,
+                        income_per_batch,
+                        max_budget,
+                        self.harness,
+                        session_id,
+                        test_id,
+                        "classification",
+                    )
+                algorithm_toolset = {}
+                for config_name, config_value in self.config["detectors"].items():
+                    if config_name == "has_baseline" or \
+                            config_name == "has_reaction_baseline" or \
+                            config_name == "baseline_class":
+                        continue
+                    elif config_name == "detector_configs":
+                        algorithm_toolset.update(config_value[algorithm_name])
+                    else:
+                        algorithm_toolset[config_name] = config_value
+
+                self.config["detectors"]["detector_configs"][algorithm_name]
                 algorithm_toolset["session_id"] = session_id
                 algorithm_toolset["test_id"] = test_id
                 algorithm_toolset["test_type"] = ""
