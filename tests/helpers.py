@@ -57,7 +57,7 @@ def get_interface_params():
 
 @pytest.fixture(scope="function")
 def get_ic_interface_params():
-    """Fixture to create a temporal directory and add a configuration.json in it."""
+    """Fixture to create a temporary directory and add a configuration.json in it."""
     with TemporaryDirectory() as config_folder:
         dummy_config = {
             "url": URL,
