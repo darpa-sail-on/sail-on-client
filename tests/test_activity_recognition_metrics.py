@@ -40,6 +40,7 @@ def classification_file():
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
 
+
 @pytest.fixture(scope="function")
 def baseline_classification_file():
     """Fixture for reading baseline classification file."""
@@ -51,6 +52,7 @@ def baseline_classification_file():
     )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
+
 
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
 def test_initialize(protocol_name):
@@ -266,7 +268,10 @@ def test_is_cdt_and_is_early(arm_metrics, detection_files):
     )
     assert is_cdt_is_early["Is CDT"] and not is_cdt_is_early["Is Early"]
 
-def test_m_nrp(arm_metrics, detection_files, classification_file, baseline_classification_file):
+
+def test_m_nrp(
+    arm_metrics, detection_files, classification_file, baseline_classification_file
+):
     """
     Test novelty reaction performance.
 
@@ -281,11 +286,21 @@ def test_m_nrp(arm_metrics, detection_files, classification_file, baseline_class
     """
     detection, gt = detection_files
     m_acc = arm_metrics.m_acc(
-        gt[arm_metrics.novel_id], classification_file, gt[arm_metrics.classification_id], 100, 5
+        gt[arm_metrics.novel_id],
+        classification_file,
+        gt[arm_metrics.classification_id],
+        100,
+        5,
     )
     m_acc_baseline = arm_metrics.m_acc(
-        gt[arm_metrics.novel_id], baseline_classification_file, gt[arm_metrics.classification_id], 100, 5
+        gt[arm_metrics.novel_id],
+        baseline_classification_file,
+        gt[arm_metrics.classification_id],
+        100,
+        5,
     )
     m_nrp = arm_metrics.m_nrp(m_acc, m_acc_baseline)
-    assert m_nrp == {"M_nrp_post_top1": 31.092026537506616,
-                     "M_nrp_post_top3": 35.02390607032621}
+    assert m_nrp == {
+        "M_nrp_post_top1": 31.092026537506616,
+        "M_nrp_post_top3": 35.02390607032621,
+    }
