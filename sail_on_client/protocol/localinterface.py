@@ -178,8 +178,13 @@ class LocalInterface(Harness):
             result_content[result_key] = io.StringIO(content).getvalue()
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
-
-    def evaluate(self, test_id: str, round_id: int, session_id: str, baseline_session_id: str = None) -> Dict[str, Any]:
+    def evaluate(
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
+        baseline_session_id: str = None,
+    ) -> Dict[str, Any]:
         """
         Get results for test(s).
 
@@ -270,7 +275,9 @@ class LocalInterface(Harness):
                     domain,
                     f"{baseline_session_id}.{test_id}_classification.csv",
                 )
-                baseline_classifications = pd.read_csv(baseline_classification_file_id, sep=",", header=None)
+                baseline_classifications = pd.read_csv(
+                    baseline_classification_file_id, sep=",", header=None
+                )
             arm_ar = ActivityRecognitionMetrics(protocol, **gt_config)
             m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
             results["m_num"] = m_num
@@ -303,7 +310,11 @@ class LocalInterface(Harness):
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
             if baseline_session_id is not None:
                 m_acc_baseline = arm_ar.m_acc(
-                    gt[arm_ar.novel_id], baseline_classifications, gt[arm_ar.classification_id], 100, 5
+                    gt[arm_ar.novel_id],
+                    baseline_classifications,
+                    gt[arm_ar.classification_id],
+                    100,
+                    5,
                 )
                 m_nrp = arm_ar.m_nrp(m_acc, m_acc_baseline)
                 results["m_nrp"] = m_nrp
