@@ -27,5 +27,5 @@ setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     zip_safe=False,
-    entry_points={"tinker": ["MockDetector = sail_on_client.mock:MockDetector"]},
+    entry_points={"tinker_test": ["MockDetector = sail_on_client.mock:MockDetector"]},
 )
