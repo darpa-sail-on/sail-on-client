@@ -2,10 +2,9 @@
 
 import os
 import logging
-from pkg_resources import DistributionNotFound, iter_entry_points
 from sailon_tinker_launcher.deprecated_tinker import harness
 
-from typing import Dict, Any
+from typing import Dict
 
 log = logging.getLogger(__name__)
 
@@ -56,29 +55,3 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
             )
         setattr(ip_harness, param_name, param_value)
     return ip_harness
-
-
-def create_baseline(baseline_cls_name: str, baseline_cfg: Dict) -> Any:
-    """
-    Create baseline object using entrypoints.
-
-    Args:
-        baseline_cls_name (str): Name of the baseline class
-        baseline_cfg (dict): Parameters for the class
-
-    Return:
-        Baseline object
-    """
-    is_found = False
-    for entry_point in iter_entry_points("tinker"):
-        try:
-            baseline_ep = entry_point.load()
-            if entry_point.name == baseline_cls_name:
-                is_found = True
-                break
-        except (DistributionNotFound, ImportError):
-            log.exception(f"Failed to load {entry_point.name}")
-    if is_found:
-        return baseline_ep(baseline_cfg)
-    else:
-        raise ValueError(f"Failed to discover {baseline_cls_name}")
