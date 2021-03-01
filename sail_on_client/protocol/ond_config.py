@@ -16,7 +16,6 @@ class OndConfig(scfg.Config):
     default = {
         "domain": scfg.Value("image_classification"),
         "test_ids": ["OND.1.1.293"],
-        "novelty_detector_class": scfg.Value("OND_5_14_A1"),
         "seed": scfg.Value("seed"),
         "dataset_root": "/home/eric/sail-on/images",
         "feature_extraction_only": scfg.Value(
@@ -37,7 +36,7 @@ class OndConfig(scfg.Config):
         "detectors": {
             "has_baseline": False,
             "has_reaction_baseline": False,
-            "baseline_class": "",
+            "baseline_class": None,
             "csv_folder": "",
             "cores": 6,
             "detection_threshold": 0.1,
