@@ -285,5 +285,5 @@ class SailOn(BaseProtocol):
             if session_id != baseline_session_id:
                 self.harness.evaluate(test_id, 0, session_id, baseline_session_id)
 
-            log.info(f"Session ended: {session_id}")
+            log.info(f"Session ended for {algorithm_name}: {session_id}")
             self.harness.terminate_session(session_id)
