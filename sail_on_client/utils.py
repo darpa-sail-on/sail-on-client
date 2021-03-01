@@ -73,7 +73,7 @@ def create_baseline(baseline_cls_name: str, baseline_cfg: Dict) -> Any:
     for entry_point in iter_entry_points("tinker"):
         try:
             baseline_ep = entry_point.load()
-            if baseline_ep.name == baseline_cls_name:
+            if entry_point.name == baseline_cls_name:
                 is_found = True
                 break
         except (DistributionNotFound, ImportError):
