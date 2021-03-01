@@ -93,7 +93,7 @@ def discoverable_plugins():
     TODO: Replace this with a function call from framework
     """
     discovered_plugins = {}
-    for entry_point in iter_entry_points("tinker"):
+    for entry_point in iter_entry_points("tinker_test"):
         try:
             ep = entry_point.load()
             discovered_plugins[entry_point.name] = ep
