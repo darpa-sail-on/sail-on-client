@@ -188,7 +188,7 @@ def test_feedback_request(get_interface_params, feedback_mapping, protocol_name)
     Args:
         get_interface_params (tuple): Tuple to configure local interface
         feedback_mapping (dict): Dict with mapping for feedback
-        protocol_name (str): Name of the protocol ( options: OND and CONDDA)
+        protocol_name (str): Name of the protocol (options: OND and CONDDA)
 
     Return:
         None
@@ -218,7 +218,7 @@ def test_feedback_request(get_interface_params, feedback_mapping, protocol_name)
         session_id,
     )
     expected = os.path.join(
-        local_interface.result_directory,
+        local_interface.result_directory, 'feedback',
         f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
     )
     assert expected == response

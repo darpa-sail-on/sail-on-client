@@ -141,7 +141,7 @@ class LocalInterface(Harness):
             self.result_directory, 'feedback',
             f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv",
         )
-        ub.ensuredir(self.feedback_file)
+        ub.ensuredir(os.path.join(self.result_directory, 'feedback'))
         byte_stream = self.file_provider.get_feedback(
             feedback_ids, feedback_type, session_id, test_id, round_id
         )
