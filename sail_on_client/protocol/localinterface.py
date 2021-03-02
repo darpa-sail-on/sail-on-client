@@ -138,9 +138,10 @@ class LocalInterface(Harness):
             Path to a file containing containing requested feedback
         """
         self.feedback_file = os.path.join(
-            self.result_directory,
+            self.result_directory, 'feedback',
             f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv",
         )
+        ub.ensuredir(self.feedback_file)
         byte_stream = self.file_provider.get_feedback(
             feedback_ids, feedback_type, session_id, test_id, round_id
         )
