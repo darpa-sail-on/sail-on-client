@@ -111,7 +111,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         Returns:
             Dictionary containing novelty detection performance over the test.
         """
-        return M_ndp(p_novel, gt_novel)
+        return M_ndp(p_novel, gt_novel, mode="full_test")
 
     def m_ndp_pre(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
