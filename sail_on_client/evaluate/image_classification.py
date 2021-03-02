@@ -1,4 +1,4 @@
-"""Activity Recognition Class for metrics for sail-on."""
+"""Image Classification Class for metrics for sail-on."""
 
 from sail_on_client.evaluate.metrics import ProgramMetrics
 from evaluate.metrics import M_acc, M_num, M_ndp, M_num_stats
@@ -13,7 +13,7 @@ from typing import Dict
 
 
 class ImageClassificationMetrics(ProgramMetrics):
-    """Activity Recognition program metric class."""
+    """Image Classification program metric class."""
 
     def __init__(
         self, protocol: str, image_id: int, detection: int, classification: int
