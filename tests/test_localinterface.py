@@ -218,7 +218,8 @@ def test_feedback_request(get_interface_params, feedback_mapping, protocol_name)
         session_id,
     )
     expected = os.path.join(
-        local_interface.result_directory, 'feedback',
+        local_interface.result_directory,
+        "feedback",
         f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
     )
     assert expected == response

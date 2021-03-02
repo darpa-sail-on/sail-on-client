@@ -286,11 +286,16 @@ def test_m_accuracy_on_novel(arm_metrics, detection_files, classification_file):
         None
     """
     detection, gt = detection_files
-    m_accuracy_on_novel = arm_metrics.m_accuracy_on_novel(classification_file,
-                                                          gt[arm_metrics.classification_id],
-                                                          gt[arm_metrics.detection_id])
+    m_accuracy_on_novel = arm_metrics.m_accuracy_on_novel(
+        classification_file,
+        gt[arm_metrics.classification_id],
+        gt[arm_metrics.detection_id],
+    )
 
-    assert m_accuracy_on_novel == {'top1_acc_novel_only': 0.49031, 'top3_acc_novel_only': 0.49031}
+    assert m_accuracy_on_novel == {
+        "top1_acc_novel_only": 0.49031,
+        "top3_acc_novel_only": 0.49031,
+    }
 
 
 def test_is_cdt_and_is_early(arm_metrics, detection_files):
