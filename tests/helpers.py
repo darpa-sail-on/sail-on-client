@@ -18,6 +18,9 @@ from sail_on.api.file_provider import FileProvider
 
 log = logging.getLogger(__name__)
 
+URL = "http://localhost:3307"
+CONFIG_NAME = "configuration.json"
+
 
 @pytest.fixture(scope="function")
 def server_setup():
@@ -27,7 +30,7 @@ def server_setup():
     ub.ensuredir(data_dir)
     ub.ensuredir(result_dir)
 
-    url = "http://localhost:3307"
+    url = URL
     server.set_provider(FileProvider(data_dir, result_dir))
     api_process = multiprocessing.Process(target=server.init, args=("localhost", 3307))
     api_process.start()
@@ -42,7 +45,7 @@ def get_interface_params():
     """Fixture to create a temporal directory and add a configuration.json in it."""
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "url": "http://localhost:3307",
+            "url": URL,
             "data_dir": f"{os.path.dirname(__file__)}/data",
             "gt_dir": f"{os.path.dirname(__file__)}/data/OND/image_classification",
             "gt_config": f"{os.path.dirname(__file__)}/data/OND/image_classification/image_classification.json",
@@ -53,16 +56,31 @@ def get_interface_params():
 
 
 @pytest.fixture(scope="function")
+def get_ic_interface_params():
+    """Fixture to create a temporary directory and add a configuration.json in it."""
+    with TemporaryDirectory() as config_folder:
+        dummy_config = {
+            "url": URL,
+            "data_dir": f"{os.path.dirname(__file__)}/data",
+            "gt_dir": f"{os.path.dirname(__file__)}/data/OND/image_classification",
+            "gt_config": f"{os.path.dirname(__file__)}/data/OND/image_classification/image_classification.json",
+        }
+        config_name = CONFIG_NAME
+        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
+        yield config_folder, config_name
+
+
+@pytest.fixture(scope="function")
 def get_ar_interface_params():
     """Fixture to create a temporary directory and add a configuration.json in it for activity recognition."""
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "url": "http://localhost:3307",
+            "url": URL,
             "data_dir": f"{os.path.dirname(__file__)}/data",
             "gt_dir": f"{os.path.dirname(__file__)}/data/OND/activity_recognition",
             "gt_config": f"{os.path.dirname(__file__)}/data/OND/activity_recognition/activity_recognition.json",
         }
-        config_name = "configuration.json"
+        config_name = CONFIG_NAME
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
         yield config_folder, config_name
 

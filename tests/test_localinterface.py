@@ -4,8 +4,11 @@ import os
 import pytest
 
 
+TEST_ID_NAME = "test_ids.csv"
+
+
 def _initialize_session(
-    par_interface, protocol_name, domain="image_classification", hints=()
+    local_interface, protocol_name, domain="image_classification", hints=()
 ):
     """
     Private function to initialize session.
@@ -24,11 +27,11 @@ def _initialize_session(
         "data",
         f"{protocol_name}",
         f"{domain}",
-        "test_ids.csv",
+        TEST_ID_NAME,
     )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    session_id = par_interface.session_request(
+    session_id = local_interface.session_request(
         test_ids, f"{protocol_name}", f"{domain}", "0.1.1", list(hints)
     )
     return session_id
@@ -83,7 +86,7 @@ def test_test_ids_request(get_interface_params):
     filename = local_interface.test_ids_request(
         "OND", "image_classification", "5678", assumptions_path
     )
-    expected = os.path.join(data_dir, "OND", "image_classification", "test_ids.csv")
+    expected = os.path.join(data_dir, "OND", "image_classification", TEST_ID_NAME)
     assert os.stat(expected).st_size > 5
     assert expected == filename
 
@@ -103,7 +106,7 @@ def test_session_request(get_interface_params):
     config_directory, config_name = get_interface_params
     data_dir = f"{os.path.dirname(__file__)}/data"
     local_interface = LocalInterface(config_name, config_directory)
-    test_id_path = os.path.join(data_dir, "OND", "image_classification", "test_ids.csv")
+    test_id_path = os.path.join(data_dir, "OND", "image_classification", TEST_ID_NAME)
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     local_interface.session_request(
@@ -185,7 +188,7 @@ def test_feedback_request(get_interface_params, feedback_mapping, protocol_name)
     Args:
         get_interface_params (tuple): Tuple to configure local interface
         feedback_mapping (dict): Dict with mapping for feedback
-        protocol_name (str): Name of the protocol ( options: OND and CONDDA)
+        protocol_name (str): Name of the protocol (options: OND and CONDDA)
 
     Return:
         None
@@ -216,12 +219,13 @@ def test_feedback_request(get_interface_params, feedback_mapping, protocol_name)
     )
     expected = os.path.join(
         local_interface.result_directory,
+        "feedback",
         f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
     )
     assert expected == response
 
 
-def test_evaluate(get_interface_params):
+def test_image_classification_evaluate(get_ic_interface_params):
     """
     Test evaluate with rounds.
 
@@ -233,11 +237,25 @@ def test_evaluate(get_interface_params):
     """
     from sail_on_client.protocol.localinterface import LocalInterface
 
-    config_directory, config_name = get_interface_params
+    config_directory, config_name = get_ic_interface_params
     local_interface = LocalInterface(config_name, config_directory)
-    session_id = _initialize_session(local_interface, "OND")
-    response = local_interface.evaluate("OND.1.1.1234", 0, session_id)
-    assert response == {}
+    session_id = _initialize_session(local_interface, "OND", "image_classification")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "image_classification"
+    )
+    detection_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_detection.csv"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_classification.csv"
+    )
+    results = {
+        "detection": detection_file_id,
+        "classification": classification_file_id,
+    }
+
+    local_interface.post_results(results, "OND.54011215.0000.1236", 0, session_id)
+    local_interface.evaluate("OND.54011215.0000.1236", 0, session_id)
 
 
 def test_activity_recognition_evaluate(get_ar_interface_params):
