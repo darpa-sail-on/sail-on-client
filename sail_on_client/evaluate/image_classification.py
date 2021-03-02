@@ -193,12 +193,10 @@ class ImageClassificationMetrics(ProgramMetrics):
         """
         Additional Metric: Novelty robustness.
 
-        Not Implemented since no gt_class info for novel samples
-
         The method computes top-K accuracy for only the novel samples
 
         Args:
-            p_class: detection predictions (Dimension: [img X  prob that sample is novel, prob of 88 known classes])
+            p_class: detection predictions (Dimension: [img X  prob that sample is novel, prob of known classes])
                 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
             gt_class: ground truth classes (Dimension: [img X classification])
                 Nx1 vector with ground-truth class for each sample
@@ -211,6 +209,7 @@ class ImageClassificationMetrics(ProgramMetrics):
 
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
+
         return M_accuracy_on_novel(class_prob, gt_class_idx, gt_novel)
 
     def m_is_cdt_and_is_early(self, gt_idx: int, ta2_idx: int, test_len: int) -> Dict:
