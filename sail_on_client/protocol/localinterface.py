@@ -225,7 +225,7 @@ class LocalInterface(Harness):
             )
 
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            arm_im = ImageClassificationMetrics(protocol, **self.gt_config)
+            arm_im = ImageClassificationMetrics(protocol, **gt_config)
             m_num = arm_im.m_num(detections[1], gt[arm_im.detection_id])
             results["m_num"] = m_num
             m_num_stats = arm_im.m_num_stats(detections[1], gt[arm_im.detection_id])
