@@ -12,10 +12,10 @@ def precomputed_detector():
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     init_toolset = {
-                "cache_dir": cache_dir,
-                "algorithm_name": "PreComputedDetector",
-                "has_roundwise_file": False
-            }
+        "cache_dir": cache_dir,
+        "algorithm_name": "PreComputedDetector",
+        "has_roundwise_file": False,
+    }
     return PreComputedDetector(init_toolset)
 
 
@@ -25,10 +25,10 @@ def precomputed_detector_with_round():
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     init_toolset = {
-                "cache_dir": cache_dir,
-                "algorithm_name": "PreComputedDetector",
-                "has_roundwise_file": True
-            }
+        "cache_dir": cache_dir,
+        "algorithm_name": "PreComputedDetector",
+        "has_roundwise_file": True,
+    }
     return PreComputedDetector(init_toolset)
 
 
@@ -38,17 +38,18 @@ def precomputed_detector_with_features():
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     init_toolset = {
-                "cache_dir": cache_dir,
-                "algorithm_name": "PreComputedDetector",
-                "has_roundwise_file": False
-            }
+        "cache_dir": cache_dir,
+        "algorithm_name": "PreComputedDetector",
+        "has_roundwise_file": False,
+    }
     precomputed_detector = PreComputedDetector(init_toolset)
     precomputed_detector.execute({}, "Initialize")
-    dataset = os.path.join(test_dir, "data", "OND", "activity_recognition",
-                            "OND.10.90001.2100554.csv")
+    dataset = os.path.join(
+        test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
+    )
     fe_toolset = {
-                "dataset": dataset,
-            }
+        "dataset": dataset,
+    }
     precomputed_detector.execute(fe_toolset, "FeatureExtraction")
     return precomputed_detector
 
@@ -59,17 +60,18 @@ def precomputed_detector_with_features_with_round():
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     init_toolset = {
-                "cache_dir": cache_dir,
-                "algorithm_name": "PreComputedDetector",
-                "has_roundwise_file": True
-            }
+        "cache_dir": cache_dir,
+        "algorithm_name": "PreComputedDetector",
+        "has_roundwise_file": True,
+    }
     precomputed_detector = PreComputedDetector(init_toolset)
     precomputed_detector.execute({}, "Initialize")
-    dataset = os.path.join(test_dir, "data", "OND", "activity_recognition",
-                            "OND.10.90001.2100554.csv")
+    dataset = os.path.join(
+        test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
+    )
     fe_toolset = {
-                "dataset": dataset,
-            }
+        "dataset": dataset,
+    }
     precomputed_detector.execute(fe_toolset, "FeatureExtraction")
     return precomputed_detector
 
@@ -84,15 +86,15 @@ def test_init():
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     init_toolset = {
-                "cache_dir": cache_dir,
-                "algorithm_name": "PreComputedDetector",
-                "has_roundwise_file": False
-            }
+        "cache_dir": cache_dir,
+        "algorithm_name": "PreComputedDetector",
+        "has_roundwise_file": False,
+    }
     init_toolset_with_round = {
-                "cache_dir": cache_dir,
-                "algorithm_name": "PreComputedDetector",
-                "has_roundwise_file": True
-            }
+        "cache_dir": cache_dir,
+        "algorithm_name": "PreComputedDetector",
+        "has_roundwise_file": True,
+    }
     precomputed_detector = PreComputedDetector(init_toolset)
     assert precomputed_detector.algorithm_name == "PreComputedDetector"
     precomputed_detector_with_round = PreComputedDetector(init_toolset_with_round)
@@ -125,15 +127,19 @@ def test_feature_extraction(precomputed_detector):
         None
     """
     test_dir = os.path.dirname(__file__)
-    dataset = os.path.join(test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv")
+    dataset = os.path.join(
+        test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
+    )
     fe_toolset = {
-                "dataset": dataset,
-            }
+        "dataset": dataset,
+    }
     precomputed_detector.execute({}, "Initialize")
     precomputed_detector.execute(fe_toolset, "FeatureExtraction")
 
 
-def test_detection(precomputed_detector_with_features, precomputed_detector_with_features_with_round):
+def test_detection(
+    precomputed_detector_with_features, precomputed_detector_with_features_with_round
+):
     """
     Test precomputed detector detection.
 
@@ -150,7 +156,9 @@ def test_detection(precomputed_detector_with_features, precomputed_detector_with
     precomputed_detector_with_features_with_round.execute(toolset, "WorldDetection")
 
 
-def test_classification(precomputed_detector_with_features, precomputed_detector_with_features_with_round):
+def test_classification(
+    precomputed_detector_with_features, precomputed_detector_with_features_with_round
+):
     """
     Test precomputed detector classification.
 
@@ -164,7 +172,9 @@ def test_classification(precomputed_detector_with_features, precomputed_detector
     toolset = {"test_id": "OND.10.90001.2100554"}
     precomputed_detector_with_features.execute(toolset, "NoveltyClassification")
     toolset.update({"round_id": 1})
-    precomputed_detector_with_features_with_round.execute(toolset, "NoveltyClassification")
+    precomputed_detector_with_features_with_round.execute(
+        toolset, "NoveltyClassification"
+    )
 
 
 def test_characterization(precomputed_detector_with_features):

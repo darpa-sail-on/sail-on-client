@@ -23,7 +23,9 @@ def detection_files():
     )
     gt_file = os.path.join(result_folder, "OND.10.90001.2100554_single_df.csv")
     gt = pd.read_csv(gt_file, sep=",", header=None, skiprows=1)
-    detection_file = os.path.join(result_folder, "OND.10.90001.2100554_PreComputedDetector_detection.csv")
+    detection_file = os.path.join(
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_detection.csv"
+    )
     detection = pd.read_csv(detection_file, sep=",", header=None)
     return detection, gt
 
@@ -48,7 +50,8 @@ def baseline_classification_file():
         os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_BaselinePreComputedDetector_classification.csv"
+        result_folder,
+        "OND.10.90001.2100554_BaselinePreComputedDetector_classification.csv",
     )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification

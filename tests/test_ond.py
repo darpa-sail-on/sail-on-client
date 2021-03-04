@@ -32,22 +32,20 @@ def ond_config():
 @pytest.fixture(scope="function")
 def ond_config_with_feature_extraction():
     """Fixture to create a config file for feature extraction."""
-    with TemporaryDirectory() as feature_dir:
-        with TemporaryDirectory() as config_folder:
-            dummy_config = {
-                "domain": "image_classification",
-                "test_ids": ["OND.1.1.1234"],
-                "detectors": {
-                    "has_baseline": False,
-                    "has_reaction_baseline": False,
-                    "detector_configs": {"MockDetector": {}},
-                    "csv_folder": "",
-                },
-            }
-            config_name = "test_ond_config.json"
-            json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
-            yield os.path.join(config_folder, config_name)
-
+    with TemporaryDirectory() as config_folder:
+        dummy_config = {
+            "domain": "image_classification",
+            "test_ids": ["OND.1.1.1234"],
+            "detectors": {
+                "has_baseline": False,
+                "has_reaction_baseline": False,
+                "detector_configs": {"MockDetector": {}},
+                "csv_folder": "",
+            },
+        }
+        config_name = "test_ond_config.json"
+        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
+        yield os.path.join(config_folder, config_name)
 
 
 @pytest.fixture(scope="function")
@@ -71,20 +69,20 @@ def ond_config_with_reaction_baseline():
                     "PreComputedDetector": {
                         "cache_dir": cache_dir,
                         "algorithm_name": "PreComputedDetector",
-                        "has_roundwise_file": False
+                        "has_roundwise_file": False,
                     },
                     "BaselinePreComputedDetector": {
                         "cache_dir": cache_dir,
                         "algorithm_name": "BaselinePreComputedDetector",
-                        "has_roundwise_file": False
-                    }
+                        "has_roundwise_file": False,
+                    },
                 },
             },
             "harness_config": {
                 "url": "http://3.32.8.161:5001/",
                 "data_dir": f"{data_dir}",
                 "gt_dir": f"{gt_dir}",
-                "gt_config": f"{gt_config}"
+                "gt_config": f"{gt_config}",
             },
         }
         config_name = "test_ond_config.json"
