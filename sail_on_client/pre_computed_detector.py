@@ -58,7 +58,7 @@ class PreComputedDetector(BaseAlgorithm):
 
     def _get_test_info_from_toolset(self, toolset: Dict) -> Tuple:
         """
-        Private function for getting test id and round id (optionally) from toolset
+        Private function for getting test id and round id (optionally) from toolset.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -73,7 +73,7 @@ class PreComputedDetector(BaseAlgorithm):
 
     def _get_result_path(self, toolset: Dict, step_descriptor: str) -> str:
         """
-        Private function for getting path to results
+        Private function for getting path to results.
 
         Args:
             toolset (dict): Dictionary containing parameters for different steps
@@ -125,7 +125,7 @@ class PreComputedDetector(BaseAlgorithm):
         self.round_size = pd.read_csv(self.dataset, header=None).shape[0]
         return {}, {}
 
-    def _world_detection(self, toolset: str) -> str:
+    def _world_detection(self, toolset: Dict) -> str:
         """
         Detect change in world ( Novelty has been introduced ).
 
@@ -137,7 +137,7 @@ class PreComputedDetector(BaseAlgorithm):
         """
         return self._generate_step_result(toolset, "detection")
 
-    def _novelty_classification(self, toolset: str) -> str:
+    def _novelty_classification(self, toolset: Dict) -> str:
         """
         Classify data provided in known classes and unknown class.
 
@@ -149,7 +149,7 @@ class PreComputedDetector(BaseAlgorithm):
         """
         return self._generate_step_result(toolset, "classification")
 
-    def _novelty_adaption(self, toolset: str) -> None:
+    def _novelty_adaption(self, toolset: Dict) -> None:
         """
         Update models based on novelty classification and characterization.
 
@@ -161,7 +161,7 @@ class PreComputedDetector(BaseAlgorithm):
         """
         pass
 
-    def _novelty_characterization(self, toolset: str) -> str:
+    def _novelty_characterization(self, toolset: Dict) -> str:
         """
         Characterize novelty by clustering different novel samples.
 
