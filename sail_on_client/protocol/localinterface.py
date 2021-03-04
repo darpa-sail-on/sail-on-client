@@ -38,6 +38,9 @@ class LocalInterface(Harness):
         self.temp_dir = TemporaryDirectory()
         self.data_dir = self.configuration_data["data_dir"]
         self.gt_dir = self.configuration_data["gt_dir"]
+        # Config file containing column id for ground truth for a particular domain.
+        # Refer to sail-on-client/tests/data/OND/activity_recognition/activity_recognition.json
+        # for an example.
         self.gt_config = self.configuration_data["gt_config"]
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
