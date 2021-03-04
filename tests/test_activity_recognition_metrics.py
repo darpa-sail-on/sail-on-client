@@ -23,7 +23,9 @@ def detection_files():
     )
     gt_file = os.path.join(result_folder, "OND.10.90001.2100554_single_df.csv")
     gt = pd.read_csv(gt_file, sep=",", header=None, skiprows=1)
-    detection_file = os.path.join(result_folder, "OND.10.90001.2100554_detection.csv")
+    detection_file = os.path.join(
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_detection.csv"
+    )
     detection = pd.read_csv(detection_file, sep=",", header=None)
     return detection, gt
 
@@ -35,7 +37,21 @@ def classification_file():
         os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_classification.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_classification.csv"
+    )
+    classification = pd.read_csv(classification_file_id, sep=",", header=None)
+    return classification
+
+
+@pytest.fixture(scope="function")
+def baseline_classification_file():
+    """Fixture for reading baseline classification file."""
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
+    )
+    classification_file_id = os.path.join(
+        result_folder,
+        "OND.10.90001.2100554_BaselinePreComputedDetector_classification.csv",
     )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
@@ -254,3 +270,40 @@ def test_is_cdt_and_is_early(arm_metrics, detection_files):
         m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0]
     )
     assert is_cdt_is_early["Is CDT"] and not is_cdt_is_early["Is Early"]
+
+
+def test_m_nrp(
+    arm_metrics, detection_files, classification_file, baseline_classification_file
+):
+    """
+    Test novelty reaction performance.
+
+    Args:
+        arm_metrics (ActivityRecognitionMetrics): An instance of ActivityRecognitionMetrics
+        detection_files (Tuple): A tuple of data frames containing detection and ground truth
+        classification_file (DataFrame): A data frame with classification prediction
+        baseline_classification_fDataFrame): A data frame with classification prediction for baseline
+
+    Return:
+        None
+    """
+    detection, gt = detection_files
+    m_acc = arm_metrics.m_acc(
+        gt[arm_metrics.novel_id],
+        classification_file,
+        gt[arm_metrics.classification_id],
+        100,
+        5,
+    )
+    m_acc_baseline = arm_metrics.m_acc(
+        gt[arm_metrics.novel_id],
+        baseline_classification_file,
+        gt[arm_metrics.classification_id],
+        100,
+        5,
+    )
+    m_nrp = arm_metrics.m_nrp(m_acc, m_acc_baseline)
+    assert m_nrp == {
+        "M_nrp_post_top1": 31.092026537506616,
+        "M_nrp_post_top3": 35.02390607032621,
+    }

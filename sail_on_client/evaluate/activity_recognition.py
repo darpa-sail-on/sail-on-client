@@ -40,7 +40,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
             None
         """
         super().__init__(protocol)
-        self.activity_id = id
+        self.activity_id = video_id
         self.novel_id = novel
         self.detection_id = detection
         self.classification_id = classification
@@ -59,9 +59,9 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_acc function.
 
         Args:
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
-            p_class: detection predictions (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])
-            gt_class: ground truth classes (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
+            p_class: class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])
+            gt_class: ground truth classes for N videos (Dimension: N X 1)
             round_size: size of the round
             asymptotic_start_round: asymptotic samples considered for computing metrics
 
@@ -79,8 +79,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_num function.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [vid,novel])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_novel: detection predictions for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
         Returns:
             Difference between the novelty introduction and predicting change in world.
@@ -92,8 +92,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_num_stats function.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [vid,novel])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_novel: detection predictions for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
         Returns:
             Dictionary containing indices for novelty introduction and change in world prediction.
@@ -105,8 +105,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp function.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [vid,novel])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_novel: detection predictions for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
         Returns:
             Dictionary containing novelty detection performance over the test.
@@ -118,8 +118,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp_pre function.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [vid,novel])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_novel: detection predictions for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
         Returns:
             Dictionary containing detection performance pre novelty.
@@ -131,8 +131,8 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp_post function.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [vid,novel])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_novel: detection predictions for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
         Returns:
             Dictionary containing detection performance post novelty.
@@ -150,10 +150,10 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_ndp_failed_reaction function.
 
         Args:
-            p_novel: detection predictions (Dimension: N X [vid,novel])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
-            p_class: detection predictions (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])
-            gt_class: ground truth classes (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_novel: detection predictions for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
+            p_class: detection predictions for N videos (Dimension: N X 1)
+            gt_class: ground truth classes for N videos (Dimension: N X 1)
 
         Returns:
             Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.
@@ -169,9 +169,9 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_accuracy_on_novel function.
 
         Args:
-            p_class: detection predictions (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])
-            gt_class: ground truth classes (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
-            gt_novel: ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])
+            p_class: detection predictions for N videos (Dimension: N X 1)
+            gt_class: ground truth classes for N videos (Dimension: N X 1)
+            gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
         Returns:
             Accuracy on novely samples
@@ -195,3 +195,19 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         is_cdt = (ta2_idx >= gt_idx) & (ta2_idx < test_len)
         is_early = ta2_idx < gt_idx
         return {"Is CDT": is_cdt, "Is Early": is_early}
+
+    def m_nrp(self, ta2_acc: Dict, baseline_acc: Dict) -> Dict:
+        """
+        m_nrp function.
+
+        Args:
+            ta2_acc: Accuracy scores for the agent
+            baseline_acc: Accuracy scores for baseline
+
+        Returns:
+            Reaction performance for the agent
+        """
+        nrp = {}
+        nrp["M_nrp_post_top3"] = 100 * (ta2_acc["post_top3"] / baseline_acc["pre_top3"])
+        nrp["M_nrp_post_top1"] = 100 * (ta2_acc["post_top1"] / baseline_acc["pre_top1"])
+        return nrp
