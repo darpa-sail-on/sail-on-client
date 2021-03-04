@@ -145,7 +145,7 @@ def test_detection(
 
     Args:
         precomputed_detector_with_features (PreComputedDetector): An instance of PreComputedDetector
-        precomputed_detector_with_features_with_round (PreComputedDetector): An instance of PreComputedDetector with feature and roundwise file
+        precomputed_detector_with_features_with_round (PreComputedDetector): An instance of PreComputedDetector
 
     Return:
         None
@@ -164,7 +164,7 @@ def test_classification(
 
     Args:
         precomputed_detector_with_features (PreComputedDetector): An instance of PreComputedDetector
-        precomputed_detector_with_features_with_round (PreComputedDetector): An instance of PreComputedDetector with feature and roundwise file
+        precomputed_detector_with_features_with_round (PreComputedDetector): An instance of PreComputedDetector
 
     Return:
         None
