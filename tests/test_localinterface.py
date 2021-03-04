@@ -273,26 +273,33 @@ def test_activity_recognition_evaluate(get_ar_interface_params):
     config_directory, config_name = get_ar_interface_params
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface, "OND", "activity_recognition")
+    baseline_session_id = _initialize_session(local_interface, "OND", "activity_recognition")
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     detection_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_detection.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_detection.csv"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_classification.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_classification.csv"
     )
     characterization_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_characterization.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_characterization.csv"
     )
     results = {
         "detection": detection_file_id,
         "classification": classification_file_id,
         "characterization": characterization_file_id,
     }
-
+    baseline_classification_file_id = os.path.join(result_folder,
+            "OND.10.90001.2100554_BaselinePreComputedDetector_classification.csv")
+    baseline_result = {
+        "classification": baseline_classification_file_id,
+    }
     local_interface.post_results(results, "OND.10.90001.2100554", 0, session_id)
+    local_interface.post_results(baseline_result, "OND.10.90001.2100554", 0, baseline_session_id)
     local_interface.evaluate("OND.10.90001.2100554", 0, session_id)
+    local_interface.evaluate("OND.10.90001.2100554", 0, session_id, baseline_session_id)
 
 
 def test_terminate_session(get_interface_params):
