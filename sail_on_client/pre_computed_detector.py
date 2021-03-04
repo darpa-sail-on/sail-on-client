@@ -67,14 +67,9 @@ class PreComputedDetector(BaseAlgorithm):
             tuple containing test id and round id (optionally)
         """
         if self.has_roundwise_file:
-            return (
-                     toolset["test_id"],
-                     toolset["round_id"]
-                    )
+            return (toolset["test_id"], toolset["round_id"])
         else:
-            return (
-                     toolset["test_id"]
-                    )
+            return toolset["test_id"]
 
     def _get_result_path(self, toolset: Dict, step_descriptor: str) -> str:
         """
@@ -89,27 +84,30 @@ class PreComputedDetector(BaseAlgorithm):
         """
         if self.has_roundwise_file:
             test_id, round_id = self._get_test_info_from_toolset(toolset)
-            return os.path.join(self.cache_dir,
-                                f"{test_id}.{round_id}_{self.algorithm_name}_{step_descriptor}.csv")
+            return os.path.join(
+                self.cache_dir,
+                f"{test_id}.{round_id}_{self.algorithm_name}_{step_descriptor}.csv",
+            )
         else:
             test_id = self._get_test_info_from_toolset(toolset)
-            return os.path.join(self.cache_dir,
-                                f"{test_id}_{self.algorithm_name}_{step_descriptor}.csv")
+            return os.path.join(
+                self.cache_dir, f"{test_id}_{self.algorithm_name}_{step_descriptor}.csv"
+            )
 
     def _generate_step_result(self, toolset: Dict, step_descriptor: str) -> str:
         result_path = self._get_result_path(toolset, step_descriptor)
         if self.has_roundwise_file:
             return result_path
         else:
-            round_file_path = os.path.join(self.cache_dir,
-                                           f"{self.algorithm_name}_{step_descriptor}.csv")
+            round_file_path = os.path.join(
+                self.cache_dir, f"{self.algorithm_name}_{step_descriptor}.csv"
+            )
             round_idx = self.round_idx[step_descriptor]
             test_df = pd.read_csv(result_path, header=None)
-            round_df = test_df.iloc[round_idx:round_idx+self.round_size]
+            round_df = test_df.iloc[round_idx : round_idx + self.round_size]
             self.round_idx[step_descriptor] += self.round_size
             round_df.to_csv(round_file_path, index=False, header=False)
             return round_file_path
-
 
     def _feature_extraction(
         self, toolset: Dict
