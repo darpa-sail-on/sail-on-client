@@ -34,12 +34,17 @@ class DocumentTranscriptionMetrics(ProgramMetrics):
 
         Args:
             protocol: Name of the protocol.
-            video_id: Column id for video
+            image_id: Column id for image
+            text: Transcription associated with the image
             novel: Column id for predicting if change was detected
-            detection: Column id for predicting sample wise novelty
-            classification: Column id for predicting sample wise classes
-            spatial: Column id for predicting spatial attribute
-            temporal: Column id for predicting temporal attribute
+            representation: Column id with representation novelty label
+            detection: Column id with sample wise novelty
+            classification:  Column id with writer id
+            pen_pressure: Column id with pen pressure values
+            letter_size: Column id with letter size values
+            word_spacing: Column id with word spacing values
+            slant_angle: Column id with slant angle values
+            attribute: Column id with attribute level novelty label
 
         Returns:
             None
