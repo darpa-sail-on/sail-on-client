@@ -36,8 +36,8 @@ have the same interface with the following functions
 Metrics
 -------
 
-We currently support metrics for image classification and activity recognition domain with the following
-functions
+We currently support metrics for image classification, document transcription
+and activity recognition domain with the following functions
 
 .. autoclass:: sail_on_client.evaluate.image_classification.ImageClassificationMetrics
     :members:
@@ -47,6 +47,9 @@ functions
     :members:
     :undoc-members:
 
+.. autoclass:: sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics
+    :members:
+    :undoc-members:
 
 The metrics inherit from the program metric class with the following functions
 
