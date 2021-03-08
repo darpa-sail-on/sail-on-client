@@ -66,6 +66,9 @@ jobs:
           python-version: '3.7'
           architecture: 'x64'
 
+      - name: Install pipenv
+        run: pip install pipenv
+
       - name: Capture pipenv version
         run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
         id: pipenv-version
@@ -83,8 +86,6 @@ jobs:
            ${GITHUB_WORKSPACE}/sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Install pipenv
-        run: pip install pipenv
 
       - name: Cache Pipenv environment
         uses: actions/cache@v2
