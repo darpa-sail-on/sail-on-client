@@ -60,11 +60,20 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: sailon_tinker_launcher
 
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
       - name: Cache additional repositories
         uses: actions/cache@v2
         with:
           path: |
-           ${GITHUB_WORKSPACE}/sail-on-client
            ${GITHUB_WORKSPACE}/tinker-engine
            ${GITHUB_WORKSPACE}/sail-on-api
            ${GITHUB_WORKSPACE}/Sail_On_Evaluate
@@ -72,13 +81,7 @@ jobs:
            ${GITHUB_WORKSPACE}/evm_based_novelty_detector
            ${GITHUB_WORKSPACE}/graph-autoencoder
            ${GITHUB_WORKSPACE}/sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}
-
-      - name: Setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.7'
-          architecture: 'x64'
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Install pipenv
         run: pip install pipenv
@@ -87,7 +90,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Install Using Pipenv
         run: pipenv install --dev
