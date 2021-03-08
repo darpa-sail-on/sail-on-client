@@ -259,3 +259,12 @@ jobs:
       - name: Generate coverage report
         run: pipenv run coverage-report
         working-directory: sail-on-client
+
+      - name: Upload coverage report to code cov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: sail-on-client-tests
+          fail_ci_if_error: true
+          verbose: true
