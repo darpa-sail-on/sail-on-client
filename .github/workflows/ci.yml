@@ -257,7 +257,9 @@ jobs:
         working-directory: sail-on-client
 
       - name: Generate coverage report
-        run: pipenv run coverage-report
+        run: |
+          pipenv run coverage-report
+          pipenv run coverage-xml
         working-directory: sail-on-client
 
       - name: Upload coverage report to code cov
@@ -266,4 +268,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
-          directory: ./sail-on-client
+          files: ./sail-on-client/coverage.xml
