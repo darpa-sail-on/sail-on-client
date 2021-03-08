@@ -264,8 +264,5 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests
-          name: sail-on-client-tests
           fail_ci_if_error: true
           verbose: true
-          working-directory: sail-on-client
