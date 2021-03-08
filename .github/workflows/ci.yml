@@ -75,6 +75,7 @@ jobs:
 
       - name: Cache additional repositories
         uses: actions/cache@v2
+        id: repo-cache
         with:
           path: |
            ${GITHUB_WORKSPACE}/tinker-engine
@@ -89,10 +90,12 @@ jobs:
 
       - name: Cache Pipenv environment
         uses: actions/cache@v2
+        id: pipenv-cache
         with:
           path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
         run: pipenv install --dev
         working-directory: sail-on-client
