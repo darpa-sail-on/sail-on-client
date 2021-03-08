@@ -197,7 +197,7 @@ jobs:
         run: pipenv install --dev
         working-directory: sail-on-client
 
-      - name: Run linting
+      - name: Run typechecking
         run: pipenv run typecheck
         working-directory: sail-on-client
 
