@@ -248,6 +248,10 @@ jobs:
         run: pipenv install --dev
         working-directory: sail-on-client
 
+      - name: Install Sail On Client Explicitly
+        run: pip install -e .
+        working-directory: sail-on-client
+
       - name: Run Test with coverage
         run: pipenv run test-with-coverage
         working-directory: sail-on-client
