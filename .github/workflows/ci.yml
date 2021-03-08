@@ -266,4 +266,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
-          root_dir: sail-on-client
+          directory: ./sail-on-client
