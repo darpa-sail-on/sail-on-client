@@ -85,7 +85,6 @@ jobs:
 
       - name: Cache Pipenv environment
         uses: actions/cache@v2
-        working-directory: ${GITHUB_WORKSPACE}/sail-on-client
         with:
           path: ~/.local/share/virtualenvs
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}
