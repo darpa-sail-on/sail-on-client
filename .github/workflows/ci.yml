@@ -18,6 +18,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: sail-on-client
+      - name: Checkout tinker engine
+        uses: actions/checkout@v2
+        with:
+          repository: tinker-engine/tinker-engine
+          path: tinker-engine
       - name: Checkout sail on api
         uses: actions/checkout@v2
         with:
