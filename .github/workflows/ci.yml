@@ -268,4 +268,4 @@ jobs:
           name: sail-on-client-tests
           fail_ci_if_error: true
           verbose: true
-          worker-directory: sail-on-client
+          working-directory: sail-on-client
