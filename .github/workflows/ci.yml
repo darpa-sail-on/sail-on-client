@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build all repositories
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Checkout sail on api
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/sail-on-api
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: sail-on-api
+      - name: Checkout sail on evaluate
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/Sail_On_Evaluate
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: Sail_On_Evaluate
+      - name: Checkout hwr novelty detector
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/hwr_novelty_detector
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: hwr_novelty_detector
+      - name: Checkout evm based novelty detector
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/evm_based_novelty_detector
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: evm_based_novelty_detector
+      - name: Checkout graph autoencoder
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/graph-autoencoder
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: graph-autoencoder
+      - name: Checkout sail on tinker launcher
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/sailon_tinker_launcher
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: sailon_tinker_launcher
+
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Cache Pipenv environment
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pipenv-
+
+      - name: Install Using Pipenv
+        run: pipenv install --dev
+        working-directory: sail-on-client
