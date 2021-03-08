@@ -78,13 +78,13 @@ jobs:
         id: repo-cache
         with:
           path: |
-           ${GITHUB_WORKSPACE}/tinker-engine
-           ${GITHUB_WORKSPACE}/sail-on-api
-           ${GITHUB_WORKSPACE}/Sail_On_Evaluate
-           ${GITHUB_WORKSPACE}/hwr_novelty_detector
-           ${GITHUB_WORKSPACE}/evm_based_novelty_detector
-           ${GITHUB_WORKSPACE}/graph-autoencoder
-           ${GITHUB_WORKSPACE}/sailon_tinker_launcher
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
 
