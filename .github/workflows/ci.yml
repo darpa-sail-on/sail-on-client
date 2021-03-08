@@ -200,3 +200,58 @@ jobs:
       - name: Run linting
         run: pipenv run typecheck
         working-directory: sail-on-client
+
+  test-with-coverage:
+    needs: build
+    name: Run test and generate coverage report on sail on client
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        with:
+          path: |
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Cache Pipenv environment
+        id: pipenv-cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        run: pipenv install --dev
+        working-directory: sail-on-client
+
+      - name: Run Test with coverage
+        run: pipenv run test-with-coverage
+        working-directory: sail-on-client
+
+      - name: Generate coverage report
+        run: pipenv run coverage-report
+        working-directory: sail-on-client
