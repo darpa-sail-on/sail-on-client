@@ -60,6 +60,21 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: sailon_tinker_launcher
 
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        working-directory: ${GITHUB_WORKSPACE}/sail-on-client
+        with:
+          path: |
+           ${GITHUB_WORKSPACE}/sail-on-client
+           ${GITHUB_WORKSPACE}/tinker-engine
+           ${GITHUB_WORKSPACE}/sail-on-api
+           ${GITHUB_WORKSPACE}/Sail_On_Evaluate
+           ${GITHUB_WORKSPACE}/hwr_novelty_detector
+           ${GITHUB_WORKSPACE}/evm_based_novelty_detector
+           ${GITHUB_WORKSPACE}/graph-autoencoder
+           ${GITHUB_WORKSPACE}/sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('Pipfile.lock') }}
+
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -71,11 +86,10 @@ jobs:
 
       - name: Cache Pipenv environment
         uses: actions/cache@v2
+        working-directory: ${GITHUB_WORKSPACE}/sail-on-client
         with:
           path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-pipenv-
+          key: ${{ runner.os }}-repositories-${{ hashFiles('Pipfile.lock') }}
 
       - name: Install Using Pipenv
         run: pipenv install --dev
