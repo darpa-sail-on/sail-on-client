@@ -1,0 +1,2 @@
+include versioneer.py
+include sail_on_client/_version.py
