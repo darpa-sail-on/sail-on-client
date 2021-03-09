@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>API Documentation</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      <link rel="stylesheet" href="_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="prev" title="Saving And Restoring Attributes of Algorithm" href="saving.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#api-documentation"
+         class="nav-link  router-link-active">
+         api documentation
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="index.html#api-documentation"
+         class="nav-link  router-link-active">
+         api documentation
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#user-guide">user guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="user/cli.html" class="reference internal ">CLI Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="user/running_algorithms.html" class="reference internal ">Running The Algorithms</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#interfaces">interfaces</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="interfaces/parinterface.html" class="reference internal ">PAR Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="interfaces/localinterface.html" class="reference internal ">Local Interface</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="saving.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#api-documentation">api documentation</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">API Documentation</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#interfaces" class="reference internal">Interfaces</a></li>
+                
+                  <li class="toctree-l2"><a href="#protocols" class="reference internal">Protocols</a></li>
+                
+                  <li class="toctree-l2"><a href="#metrics" class="reference internal">Metrics</a></li>
+                
+                  <li class="toctree-l2"><a href="#errors" class="reference internal">Errors</a></li>
+                
+                  <li class="toctree-l2"><a href="#module-sail_on_client.utils" class="reference internal">Utils</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>API Documentation</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="saving.html"
+       title="previous chapter">← Saving And Restoring Attributes of Algorithm</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="module-sail_on_client">
+<span id="api-documentation"></span><h1>API Documentation<a class="headerlink" href="#module-sail_on_client" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation provides reference documentation for all the modules
+of the package</p>
+<div class="section" id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h2>
+<p>We currently support HTTP rest based interface to communicate with the evaluation
+server. The interface has the following functions</p>
+<dl class="py class">
+<dt id="sail_on_client.protocol.parinterface.ParInterface">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.parinterface.</span></code><code class="sig-name descname"><span class="pre">ParInterface</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">configfolder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface to PAR server.</p>
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.dataset_request">
+<code class="sig-name descname"><span class="pre">dataset_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.dataset_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request data for evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>-test_id</strong> – the test being evaluated at this moment.</p></li>
+<li><p><strong>-round_id</strong> – the sequential number of the round being evaluated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>-filename of a file containing a list of image files (including full path for each)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.evaluate">
+<code class="sig-name descname"><span class="pre">evaluate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get results for test(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>-test_id</strong> – </p></li>
+<li><p><strong>-round_id</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>-filename</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.get_feedback_request">
+<code class="sig-name descname"><span class="pre">get_feedback_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.get_feedback_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Labels from the server based provided one or more example ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>-feedback_ids</strong> – </p></li>
+<li><p><strong>-test_id</strong> – the id of the test currently being evaluated</p></li>
+<li><p><strong>-round_id</strong> – the sequential number of the round being evaluated</p></li>
+<li><p><strong>-- label</strong> (<em>-feedback_type</em>) – </p></li>
+<li><p><strong>detection</strong> – </p></li>
+<li><p><strong>characterization</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>-labels dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.get_test_metadata">
+<code class="sig-name descname"><span class="pre">get_test_metadata</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the metadata json for the specified test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>-test_id</strong> – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>metadata json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.post_results">
+<code class="sig-name descname"><span class="pre">post_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.post_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Post client detector predictions for the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>dict of &quot;type</strong> (<em>-result_files</em>) – file”)</p></li>
+<li><p><strong>-session_id</strong> – </p></li>
+<li><p><strong>-test_id</strong> – </p></li>
+<li><p><strong>-round_id</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns: No return</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.session_request">
+<code class="sig-name descname"><span class="pre">session_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.session_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new session to evaluate the detector using an empirical protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>-test_ids</strong> – list of tests being evaluated in this session</p></li>
+<li><p><strong>-protocol</strong> – string indicating which protocol is being evaluated</p></li>
+<li><p><strong>-domain</strong> – string indicating which domain is being evaluated</p></li>
+<li><p><strong>-novelty_detector_version</strong> – string indicating the version of the novelty detector being evaluated</p></li>
+<li><p><strong>-hint</strong> – a list hints provided for the session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>-session id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.terminate_session">
+<code class="sig-name descname"><span class="pre">terminate_session</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.terminate_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the session after the evaluation for the protocol is complete.</p>
+<p>Arguments:
+Returns: No return</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.parinterface.ParInterface.test_ids_request">
+<code class="sig-name descname"><span class="pre">test_ids_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.parinterface.ParInterface.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request Test Identifiers as part of a series of individual tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>-protocol</strong> – string indicating which protocol is being evaluated</p></li>
+<li><p><strong>-domain</strong> – </p></li>
+<li><p><strong>-detector_seed</strong> – </p></li>
+<li><p><strong>-test_assumptions</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>-filename of file containing test ids</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.localinterface.</span></code><code class="sig-name descname"><span class="pre">LocalInterface</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_folder</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface without any server communication.</p>
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.dataset_request">
+<code class="sig-name descname"><span class="pre">dataset_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.dataset_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request data for evaluation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the test being evaluated at this moment.</p></li>
+<li><p><strong>round_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the sequential number of the round being evaluated</p></li>
+<li><p><strong>session_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the identifier provided by the server for a single experiment</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Filename of a file containing a list of image files (including full path for each)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.evaluate">
+<code class="sig-name descname"><span class="pre">evaluate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get results for test(s).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id of the test currently being evaluated</p></li>
+<li><p><strong>round_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the sequential number of the round being evaluated</p></li>
+<li><p><strong>session_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id provided by a server denoting a session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path to a file with the results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.get_feedback_request">
+<code class="sig-name descname"><span class="pre">get_feedback_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.get_feedback_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Labels from the server based provided one or more example ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>feedback_ids</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – List of media ids for which feedback is required</p></li>
+<li><p><strong>feedback_type</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – protocols constants with the values: label, detection, characterization</p></li>
+<li><p><strong>test_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id of the test currently being evaluated</p></li>
+<li><p><strong>round_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the sequential number of the round being evaluated</p></li>
+<li><p><strong>session_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id provided by a server denoting a session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path to a file containing containing requested feedback</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.get_test_metadata">
+<code class="sig-name descname"><span class="pre">get_test_metadata</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the metadata json for the specified test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id of the session currently being evaluated</p></li>
+<li><p><strong>test_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id of the test currently being evaluated</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A json file containing metadata</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.post_results">
+<code class="sig-name descname"><span class="pre">post_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.post_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Post client detector predictions for the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_files</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – A dictionary of results with protocol constant as key and file path as value</p></li>
+<li><p><strong>test_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id of the test currently being evaluated</p></li>
+<li><p><strong>round_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the sequential number of the round being evaluated</p></li>
+<li><p><strong>session_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id provided by a server denoting a session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.session_request">
+<code class="sig-name descname"><span class="pre">session_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.session_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new session to evaluate the detector using an empirical protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_ids</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – list of tests being evaluated in this session</p></li>
+<li><p><strong>protocol</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string indicating which protocol is being evaluated</p></li>
+<li><p><strong>domain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string indicating which domain is being evaluated</p></li>
+<li><p><strong>novelty_detector_version</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string indicating the version of the novelty detector being evaluated</p></li>
+<li><p><strong>hints</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>) – Hints used for the session</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A session identifier provided by the server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.terminate_session">
+<code class="sig-name descname"><span class="pre">terminate_session</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.terminate_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terminate the session after the evaluation for the protocol is complete.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>session_id</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the id provided by a server denoting a session</p>
+</dd>
+</dl>
+<p>Returns: None</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.protocol.localinterface.LocalInterface.test_ids_request">
+<code class="sig-name descname"><span class="pre">test_ids_request</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.localinterface.LocalInterface.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request Test Identifiers as part of a series of individual tests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>protocol</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string indicating which protocol is being evaluated</p></li>
+<li><p><strong>domain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – problem domain for the tests</p></li>
+<li><p><strong>detector_seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – A seed provided by the novelty detector</p></li>
+<li><p><strong>test_assumptions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Assumptions used by the detector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Filename of file containing test ids</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="protocols">
+<h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this headline">¶</a></h2>
+<p>We currently support two empirical protocols OND and CONDDA. Both the protocols
+have the same interface with the following functions</p>
+<dl class="py class">
+<dt id="sail_on_client.protocol.ond_protocol.SailOn">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_protocol.</span></code><code class="sig-name descname"><span class="pre">SailOn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base protocol for Sail On.</p>
+<dl class="py method">
+<dt id="sail_on_client.protocol.ond_protocol.SailOn.run_protocol">
+<code class="sig-name descname"><span class="pre">run_protocol</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.run_protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sail_on_client.protocol.condda.Condda">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda.</span></code><code class="sig-name descname"><span class="pre">Condda</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda" title="Permalink to this definition">¶</a></dt>
+<dd><p>CONDDA protocol.</p>
+<dl class="py method">
+<dt id="sail_on_client.protocol.condda.Condda.run_protocol">
+<code class="sig-name descname"><span class="pre">run_protocol</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.run_protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="metrics">
+<h2>Metrics<a class="headerlink" href="#metrics" title="Permalink to this headline">¶</a></h2>
+<p>We currently support metrics for image classification and activity recognition domain with the following
+functions</p>
+<dl class="py class">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></code><code class="sig-name descname"><span class="pre">ImageClassificationMetrics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Image Classification program metric class.</p>
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc">
+<code class="sig-name descname"><span class="pre">m_acc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_acc function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X detection, classification])</p></li>
+<li><p><strong>round_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – asymptotic samples considered for computing metrics</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_accuracy_on_novel">
+<code class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional Metric: Novelty robustness.</p>
+<p>The method computes top-K accuracy for only the novel samples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X  prob that sample is novel, prob of known classes])
+Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X classification])
+Nx1 vector with ground-truth class for each sample</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: N X [img, classification])
+Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Accuracy on novely samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_is_cdt_and_is_early">
+<code class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is change detection and is change detection early (m_is_cdt_and_is_early) function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Length of test</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>Dictionary containing boolean showing if change was was detected and if it was detected early</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp">
+<code class="sig-name descname"><span class="pre">m_ndp</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Novelty Detection Performance: Program Metric.</p>
+<blockquote>
+<div><p>Novelty detection performance.  The method computes per-sample novelty detection performance.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: [img X novel])
+Nx1 vector with each element corresponding to probability of it being novel</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: [img X detection])
+Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+<li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – the mode to compute the test.  if ‘full_test’ computes on all test samples,
+if ‘post_novelty’ computes from first GT novel sample.  If ‘pre_novelty’, only calculate
+before first novel sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_failed_reaction">
+<code class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional Metric: Novelty detection when reaction fails.</p>
+<p>Not Implemented since no gt_class info for novel samples</p>
+<p>The method computes novelty detection performance for only on samples with incorrect k-class predictions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X novel])
+Nx1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])
+Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
+Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension:  [img X classification])
+Nx1 vector with ground-truth class for each sample</p></li>
+<li><p><strong>mode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – if ‘full_test’ computes on all test samples, if ‘post_novelty’ computes from the first GT
+novel sample.  If ‘pre_novelty’, than everything before novelty introduced.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_post">
+<code class="sig-name descname"><span class="pre">m_ndp_post</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Novelty Detection Performance Post Red Light.  m_ndp_post function.</p>
+<dl class="simple">
+<dt>See <code class="xref py py-func docutils literal notranslate"><span class="pre">m_ndp()</span></code> with</dt><dd><p>post_novelty.  This computes from the first GT novel sample</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: [img X novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing detection performance post novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_pre">
+<code class="sig-name descname"><span class="pre">m_ndp_pre</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Novelty Detection Performance Pre Red Light.  m_ndp_pre function.</p>
+<dl class="simple">
+<dt>See <code class="xref py py-func docutils literal notranslate"><span class="pre">m_ndp()</span></code> with</dt><dd><p>post_novelty.  This computes to the first GT novel sample.  It really isn’t useful
+and is just added for completion.  Should always be 0 since no possible TP.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: [img X novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num">
+<code class="sig-name descname"><span class="pre">m_num</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_num function.</p>
+<p>A Program Metric where the number of samples needed for detecting novelty.
+The method computes the number of GT novel samples needed to predict the first true positive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X novel])
+Nx1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])
+Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num_stats">
+<code class="sig-name descname"><span class="pre">m_num_stats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Program Metric.</p>
+<dl class="simple">
+<dt>Number of samples needed for detecting novelty.  The method computes number of GT novel</dt><dd><p>samples needed to predict the first true positive.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: [img X novel])
+Nx1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: [img X detection])
+Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.activity_recognition.</span></code><code class="sig-name descname"><span class="pre">ActivityRecognitionMetrics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">video_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activity Recognition program metric class.</p>
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc">
+<code class="sig-name descname"><span class="pre">m_acc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_acc function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+<li><p><strong>round_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – asymptotic samples considered for computing metrics</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_accuracy_on_novel">
+<code class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_accuracy_on_novel function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Accuracy on novely samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_is_cdt_and_is_early">
+<code class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_is_cdt_and_is_early function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Length of test</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>Dictionary containing boolean showing if change was was detected and if it was detected early</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp">
+<code class="sig-name descname"><span class="pre">m_ndp</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: N X [vid,novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_failed_reaction">
+<code class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp_failed_reaction function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: N X [vid,novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: N X [vid,prob that sample is novel, prob of 88 known classes])</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_post">
+<code class="sig-name descname"><span class="pre">m_ndp_post</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp_post function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: N X [vid,novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing detection performance post novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_pre">
+<code class="sig-name descname"><span class="pre">m_ndp_pre</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp_pre function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: N X [vid,novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num">
+<code class="sig-name descname"><span class="pre">m_num</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_num function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: N X [vid,novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num_stats">
+<code class="sig-name descname"><span class="pre">m_num_stats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_num_stats function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions (Dimension: N X [vid,novel])</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections (Dimension: N X [vid,novel,detection,activity,spatial,temporal])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>The metrics inherit from the program metric class with the following functions</p>
+<dl class="py class">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></code><code class="sig-name descname"><span class="pre">ProgramMetrics</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract program metric class.</p>
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_acc">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_acc</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_acc abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth classes</p></li>
+<li><p><strong>round_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – asymptotic samples considered for computing metrics</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_accuracy_on_novel">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_accuracy_on_novel abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth classes</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Accuracy on novely samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_is_cdt_and_is_early">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_is_cdt_and_is_early abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gt_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Length of test</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Returns</dt><dd><p>Dictionary containing boolean showing if change was was detected and if it was detected early</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_ndp</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_failed_reaction">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp_failed_reaction abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – class predictions</p></li>
+<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth classes</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_post">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_ndp_post</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp_post abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing detection performance post novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_pre">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_ndp_pre</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_ndp_pre abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_num">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_num</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_num abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.evaluate.metrics.ProgramMetrics.m_num_stats">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">m_num_stats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>m_num_stats abstract function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – detection predictions</p></li>
+<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code>) – ground truth detections</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this headline">¶</a></h2>
+<p>We currently support 3 types of errors</p>
+<dl class="py class">
+<dt id="sail_on_client.errors.ServerError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.errors.</span></code><code class="sig-name descname"><span class="pre">ServerError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stack</span> <span class="pre">trace</span> <span class="pre">unavailable'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ServerError" title="Permalink to this definition">¶</a></dt>
+<dd><p>500-series error indicating general problem on the serverside.</p>
+<dl class="py method">
+<dt id="sail_on_client.errors.ServerError.error_classes">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">error_classes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ServerError.error_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all error classes in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.ServerError.flask_response">
+<code class="sig-name descname"><span class="pre">flask_response</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ServerError.flask_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object to a Flask response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.ServerError.with_traceback">
+<code class="sig-name descname"><span class="pre">with_traceback</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ServerError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sail_on_client.errors.RoundError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.errors.</span></code><code class="sig-name descname"><span class="pre">RoundError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stack</span> <span class="pre">trace</span> <span class="pre">unavailable'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.RoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Error indicating problem with rounds.</p>
+<dl class="py method">
+<dt id="sail_on_client.errors.RoundError.error_classes">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">error_classes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.RoundError.error_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all error classes in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.RoundError.flask_response">
+<code class="sig-name descname"><span class="pre">flask_response</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.RoundError.flask_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object to a Flask response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.RoundError.with_traceback">
+<code class="sig-name descname"><span class="pre">with_traceback</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.RoundError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sail_on_client.errors.ProtocolError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.errors.</span></code><code class="sig-name descname"><span class="pre">ProtocolError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stack</span> <span class="pre">trace</span> <span class="pre">unavailable'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ProtocolError" title="Permalink to this definition">¶</a></dt>
+<dd><p>400-series error indicating caller caused a problem engaging a protocol.</p>
+<dl class="py method">
+<dt id="sail_on_client.errors.ProtocolError.error_classes">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">error_classes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ProtocolError.error_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all error classes in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.ProtocolError.flask_response">
+<code class="sig-name descname"><span class="pre">flask_response</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ProtocolError.flask_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object to a Flask response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.ProtocolError.with_traceback">
+<code class="sig-name descname"><span class="pre">with_traceback</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ProtocolError.with_traceback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exception.with_traceback(tb) –
+set self.__traceback__ to tb and return self.</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>The errors can be expanded upon by inheriting the base error class</p>
+<dl class="py class">
+<dt id="sail_on_client.errors.ApiError">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">sail_on_client.errors.</span></code><code class="sig-name descname"><span class="pre">ApiError</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stack_trace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'stack</span> <span class="pre">trace</span> <span class="pre">unavailable'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ApiError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for all serverside error conditions.</p>
+<dl class="py method">
+<dt id="sail_on_client.errors.ApiError.error_classes">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">error_classes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ApiError.error_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all error classes in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sail_on_client.errors.ApiError.flask_response">
+<code class="sig-name descname"><span class="pre">flask_response</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.errors.ApiError.flask_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the object to a Flask response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-sail_on_client.utils">
+<span id="utils"></span><h2>Utils<a class="headerlink" href="#module-sail_on_client.utils" title="Permalink to this headline">¶</a></h2>
+<p>Utility function for sail-on-client.</p>
+<dl class="py function">
+<dt id="sail_on_client.utils.safe_remove">
+<code class="sig-prename descclassname"><span class="pre">sail_on_client.utils.</span></code><code class="sig-name descname"><span class="pre">safe_remove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.utils.safe_remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a file after checking that it exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – File path that should be removed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="sail_on_client.utils.safe_remove_results">
+<code class="sig-prename descclassname"><span class="pre">sail_on_client.utils.</span></code><code class="sig-name descname"><span class="pre">safe_remove_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.utils.safe_remove_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove results present in a dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – File path that should be removed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="saving.html"
+       title="previous chapter">← Saving And Restoring Attributes of Algorithm</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Running The Algorithms</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="Open World Novelty Detection (OND)" href="../protocols/ond.html" />
+  <link rel="prev" title="CLI Interface" href="cli.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link  router-link-active">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#api-documentation"
+         class="nav-link ">
+         api documentation
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link  router-link-active">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#api-documentation"
+         class="nav-link ">
+         api documentation
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 "><a href="install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="cli.html" class="reference internal ">CLI Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Running The Algorithms</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#running-ond-5-14-a1-algorithm" class="reference internal">Running OND_5_14_A1 Algorithm</a></li>
+                
+                  <li class="toctree-l2"><a href="#running-ond-5-14-a2-algorithm" class="reference internal">Running OND_5_14_A2 Algorithm</a></li>
+                
+                  <li class="toctree-l2"><a href="#running-condda-5-14-a1-algorithm" class="reference internal">Running CONDDA_5_14_A1 Algorithm</a></li>
+                
+                  <li class="toctree-l2"><a href="#running-condda-5-14-a2-algorithm" class="reference internal">Running CONDDA_5_14_A2 Algorithm</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../interfaces/parinterface.html" class="reference internal ">PAR Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../interfaces/localinterface.html" class="reference internal ">Local Interface</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../saving.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#api-documentation">api documentation</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../api.html" class="reference internal ">API Documentation</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Running The Algorithms</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="cli.html"
+       title="previous chapter">← CLI Interface</a>
+  </li>
+  <li class="next">
+    <a href="../protocols/ond.html"
+       title="next chapter">Open World Novelty Detection (OND) →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="running-the-algorithms">
+<h1>Running The Algorithms<a class="headerlink" href="#running-the-algorithms" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation goes over the steps for executing different algorithms using different protocols.</p>
+<div class="section" id="running-ond-5-14-a1-algorithm">
+<h2>Running OND_5_14_A1 Algorithm<a class="headerlink" href="#running-ond-5-14-a1-algorithm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to sail-on server directory and start the server using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on
+$ sail_on_server --data-directory data/ --results-directory ond_5_14_a1
+</pre></div>
+</div>
+</li>
+<li><p>Go to the sail on client repository and make a copy of the configuration file for running OND_5_14_A1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on-client
+$ cp config/ond_5_14_a1_nd.json config/local_ond_5_14_a1_nd.json
+</pre></div>
+</div>
+</li>
+<li><p>Download the <a class="reference external" href="https:https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing">EVM Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">evm_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a1_nd.json</span></code> to
+point the model downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing">Efficientnet Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">efficientnet_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a1_nd.json</span></code>
+to point the model downloaded in the previous step.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">dataset_root</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a1_nd.json</span></code>
+to point to <code class="code docutils literal notranslate"><span class="pre">sail-on/images</span></code> directory.</p></li>
+<li><p>Run the client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a1_nd.json
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="running-ond-5-14-a2-algorithm">
+<h2>Running OND_5_14_A2 Algorithm<a class="headerlink" href="#running-ond-5-14-a2-algorithm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to sail-on server directory and start the server using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on
+$ sail_on_server --data-directory data/ --results-directory ond_5_14_a2
+</pre></div>
+</div>
+</li>
+<li><p>Go to the sail on client repository and make a copy of the configuration file for running OND_5_14_A2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on-client
+$ cp config/ond_5_14_a2_nd.json config/local_ond_5_14_a2_nd.json
+</pre></div>
+</div>
+</li>
+<li><p>Download the <a class="reference external" href="https:https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing">EVM Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">evm_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a2_nd.json</span></code>
+to point the model downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing">Efficientnet Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">efficientnet_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a2_nd.json</span></code>
+to point the model downloaded in the previous step.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">dataset_root</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a1_nd.json</span></code>  to point to
+<code class="code docutils literal notranslate"><span class="pre">sail-on/images</span></code> directory.</p></li>
+<li><p>Run the client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tinker sail_on_client/protocol/ond_protocol.py -i ParInterface -p config/local_ond_5_14_a2_nd.json
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="running-condda-5-14-a1-algorithm">
+<h2>Running CONDDA_5_14_A1 Algorithm<a class="headerlink" href="#running-condda-5-14-a1-algorithm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to sail-on server directory and start the server using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on
+$ sail_on_server --data-directory data/ --results-directory condda_5_14_a1
+</pre></div>
+</div>
+</li>
+<li><p>Go to the sail on client repository and make a copy of the configuration file for running CONDDA_5_14_A1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on-client
+$ cp config/condda_5_14_a1_nd.json config/local_condda_5_14_a1_nd.json
+</pre></div>
+</div>
+</li>
+<li><p>Download the <a class="reference external" href="https:https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing">EVM Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">evm_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code>.
+to point the model downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing">Efficientnet Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">efficientnet_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code>
+to point the model downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1fzRv-8ngv89YB0J91SNejEvCuVnJK_e7/view?usp=sharing">Precomputed Features</a>.</p></li>
+<li><p>Update the <code class="code docutils literal notranslate"><span class="pre">known_feature_path</span></code> in <code class="code docutils literal notranslate"><span class="pre">evm_params</span></code> in
+<code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code> to point to the features
+downloaded in the previous step</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1QU_wD-erA1ijMZ29B1NT9ubjxF5HbImo/view?usp=sharing">Training Images</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">dataset_root</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code>
+to point to directory where the images were installed in the previous step.</p></li>
+<li><p>Run the client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a1_nd.json
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="running-condda-5-14-a2-algorithm">
+<h2>Running CONDDA_5_14_A2 Algorithm<a class="headerlink" href="#running-condda-5-14-a2-algorithm" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to sail-on server directory and start the server using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on
+$ sail_on_server --data-directory data/ --results-directory condda_5_14_a2
+</pre></div>
+</div>
+</li>
+<li><p>Go to the sail on client repository and make a copy of the configuration
+file for running CONDDA_5_14_A2:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd sail-on-client
+$ cp config/condda_5_14_a2_nd.json config/local_condda_5_14_a2_nd.json
+</pre></div>
+</div>
+</li>
+<li><p>Download the <a class="reference external" href="https:https://drive.google.com/file/d/1XrSWQWJsF-iPkvGM4AWkMNqvhFTb0yfk/view?usp=sharing">EVM Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">evm_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_ond_5_14_a2_nd.json</span></code> to point
+the model downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1esL1W7pDHrsTmLpSFxWdzOg6oP-p8IDi/view?usp=sharing">Efficientnet Model</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">model_path</span></code> for <code class="code docutils literal notranslate"><span class="pre">efficientnet_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code>
+to point the model downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1fzRv-8ngv89YB0J91SNejEvCuVnJK_e7/view?usp=sharing">Precomputed Features</a>.</p></li>
+<li><p>Update the <code class="code docutils literal notranslate"><span class="pre">known_feature_path</span></code> in <code class="code docutils literal notranslate"><span class="pre">evm_params</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code>
+to point to the features downloaded in the previous step.</p></li>
+<li><p>Download the <a class="reference external" href="https://drive.google.com/file/d/1QU_wD-erA1ijMZ29B1NT9ubjxF5HbImo/view?usp=sharing">Training Images</a>.</p></li>
+<li><p>Change <code class="code docutils literal notranslate"><span class="pre">dataset_root</span></code> in <code class="code docutils literal notranslate"><span class="pre">local_condda_5_14_a1_nd.json</span></code> to point to directory
+where the images were installed in the previous step.</p></li>
+<li><p>Run the client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tinker sail_on_client/protocol/condda.py -i ParInterface -p config/local_condda_5_14_a2_nd.json
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="cli.html"
+       title="previous chapter">← CLI Interface</a>
+  </li>
+  <li class="next">
+    <a href="../protocols/ond.html"
+       title="next chapter">Open World Novelty Detection (OND) →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>
