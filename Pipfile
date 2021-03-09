@@ -71,6 +71,7 @@ sail-on-client = {editable = true, path = "."}
 hwr-novelty-detector = {editable = true, path = "./../hwr_novelty_detector"}
 sailon-tinker-launcher = {editable = true, path = "./../sailon_tinker_launcher"}
 sail-on-evaluate = {editable = true, path = "./../Sail_On_Evaluate"}
+versioneer = "==0.19"
 
 [requires]
 python_version = "3.7"
