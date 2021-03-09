@@ -6,10 +6,7 @@ import versioneer
 with open("requirements.txt") as f:
     requirements = [line.strip() for line in f.readlines()]
 
-setup_requirements = [
-    "setuptools",
-    "versioneer"
-]
+setup_requirements = ["setuptools", "versioneer"]
 
 setup(
     author="Kitware, Inc.",
