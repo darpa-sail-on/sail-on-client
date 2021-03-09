@@ -1,0 +1,330 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: build all repositories
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Checkout tinker engine
+        uses: actions/checkout@v2
+        with:
+          repository: tinker-engine/tinker-engine
+          path: tinker-engine
+      - name: Checkout sail on api
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/sail-on-api
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: sail-on-api
+      - name: Checkout sail on evaluate
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/Sail_On_Evaluate
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: Sail_On_Evaluate
+      - name: Checkout hwr novelty detector
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/hwr_novelty_detector
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: hwr_novelty_detector
+      - name: Checkout evm based novelty detector
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/evm_based_novelty_detector
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: evm_based_novelty_detector
+      - name: Checkout graph autoencoder
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/graph-autoencoder
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: graph-autoencoder
+      - name: Checkout sail on tinker launcher
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/sailon_tinker_launcher
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: sailon_tinker_launcher
+
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        id: repo-cache
+        with:
+          path: |
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Cache Pipenv environment
+        uses: actions/cache@v2
+        id: pipenv-cache
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        run: pipenv install --dev
+        working-directory: sail-on-client
+
+  lint:
+    needs: build
+    name: Run linting on sail on client
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        with:
+          path: |
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Cache Pipenv environment
+        id: pipenv-cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        run: pipenv install --dev
+        working-directory: sail-on-client
+
+      - name: Run linting
+        run: pipenv run lint
+        working-directory: sail-on-client
+
+  typecheck:
+    needs: build
+    name: Run typechecking on sail on client
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        with:
+          path: |
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Cache Pipenv environment
+        id: pipenv-cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        run: pipenv install --dev
+        working-directory: sail-on-client
+
+      - name: Run typechecking
+        run: pipenv run typecheck
+        working-directory: sail-on-client
+
+  test-with-coverage:
+    needs: build
+    name: Run test and generate coverage report on sail on client
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        with:
+          path: |
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Cache Pipenv environment
+        id: pipenv-cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        run: pipenv install --dev
+        working-directory: sail-on-client
+
+      - name: Install Sail On Client Explicitly
+        run: pip install -e .
+        working-directory: sail-on-client
+
+      - name: Run Test with coverage
+        run: pipenv run test-with-coverage
+        working-directory: sail-on-client
+
+      - name: Generate coverage report
+        run: |
+          pipenv run coverage-report
+          pipenv run coverage-xml
+        working-directory: sail-on-client
+
+      - name: Upload coverage report to code cov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          verbose: true
+          files: ./sail-on-client/coverage.xml
+
+  pages:
+    needs: build
+    if: github.event.pull_request.merged == true
+    name: Generate documentation and upload it on pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install pipenv
+        run: pip install pipenv
+
+      - name: Capture pipenv version
+        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
+        id: pipenv-version
+
+      - name: Cache additional repositories
+        uses: actions/cache@v2
+        with:
+          path: |
+           tinker-engine
+           sail-on-api
+           Sail_On_Evaluate
+           hwr_novelty_detector
+           evm_based_novelty_detector
+           graph-autoencoder
+           sailon_tinker_launcher
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Cache Pipenv environment
+        id: pipenv-cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+
+      - name: Install Using Pipenv
+        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        run: pipenv install --dev
+        working-directory: sail-on-client
+
+      - name: Generate docs
+        run: pipenv run docs
+        working-directory: sail-on-client
+
+      - name: Upload docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./sail-on-client/docs/build/html
+

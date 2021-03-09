@@ -1,6 +1,9 @@
 # Sail-On Client and Protocols
-[![pipeline status](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/badges/master/pipeline.svg)](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/commits/master) [![coverage report](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/badges/master/coverage.svg)](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/commits/master)
-
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![CI Workflow](https://github.com/darpa-sail-on/sail-on-client/actions/workflows/ci.yml/badge.svg)](https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/commits/master)
+[![codecov](https://codecov.io/gh/darpa-sail-on/sail-on-client/branch/master/graph/badge.svg?token=300M5S27NE)](https://codecov.io/gh/darpa-sail-on/sail-on-client)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/darpa-sail-on/sail-on-client)
 
 Client and Protocols for DARPA sail-on
 
