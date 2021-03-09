@@ -318,11 +318,12 @@ jobs:
         working-directory: sail-on-client
 
       - name: Generate docs
-        run: pipenv run docs
+        run: |
+          pipenv run docs
+          mv docs/build/html public/
         working-directory: sail-on-client
 
       - name: Upload docs
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./sail-on-client/docs/build/html
