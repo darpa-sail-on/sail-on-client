@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Welcome to Sail-On Client’s documentation!</title>
+    
+      <link rel="stylesheet" href="_static/pygments.css">
+      <link rel="stylesheet" href="_static/theme.css">
+      <link rel="stylesheet" href="_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+
+      
+      <script src="_static/theme-vendors.js"></script>
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="Installation" href="user/install.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="#" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#api-documentation"
+         class="nav-link ">
+         api documentation
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="#api-documentation"
+         class="nav-link ">
+         api documentation
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#user-guide">user guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="user/cli.html" class="reference internal ">CLI Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="user/running_algorithms.html" class="reference internal ">Running The Algorithms</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#interfaces">interfaces</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="interfaces/parinterface.html" class="reference internal ">PAR Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="interfaces/localinterface.html" class="reference internal ">Local Interface</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="saving.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#api-documentation">api documentation</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="api.html" class="reference internal ">API Documentation</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+    
+    <li>Welcome to Sail-On Client’s documentation!</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="next">
+    <a href="user/install.html"
+       title="next chapter">Installation →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="welcome-to-sail-on-client-s-documentation">
+<h1>Welcome to Sail-On Client’s documentation!<a class="headerlink" href="#welcome-to-sail-on-client-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Release v0.1 (<a class="reference internal" href="user/install.html#install"><span class="std std-ref">Installation</span></a>)</p>
+<p><strong>Sail-On Client</strong> is a library used for supporting evaluation of open world algorithms
+in <a class="reference external" href="https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty">DARPA SAIL-ON</a>. The library is based update work supported by DARPA under
+Contract No. HR001120C0055 and is licensed under <a class="reference external" href="https://www.apache.org/licenses/LICENSE-2.0">APACHE-V2 LICENSE</a>.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">Science</span> <span class="n">of</span> <span class="n">Artificial</span> <span class="n">Intelligence</span> <span class="ow">and</span> <span class="n">Learning</span> <span class="k">for</span> <span class="n">Open</span><span class="o">-</span><span class="n">world</span> <span class="n">Novelty</span> <span class="p">(</span><span class="n">SAIL</span><span class="o">-</span><span class="n">ON</span><span class="p">)</span>
+<span class="n">program</span> <span class="n">intends</span> <span class="n">to</span> <span class="n">research</span> <span class="ow">and</span> <span class="n">develop</span> <span class="n">the</span> <span class="n">underlying</span> <span class="n">scientific</span> <span class="n">principles</span><span class="p">,</span>
+<span class="n">general</span> <span class="n">engineering</span> <span class="n">techniques</span><span class="p">,</span> <span class="ow">and</span> <span class="n">algorithms</span> <span class="n">needed</span> <span class="n">to</span> <span class="n">create</span> <span class="n">AI</span> <span class="n">systems</span>
+<span class="n">that</span> <span class="n">act</span> <span class="n">appropriately</span> <span class="ow">and</span> <span class="n">effectively</span> <span class="ow">in</span> <span class="n">novel</span> <span class="n">situations</span> <span class="n">that</span> <span class="n">occur</span> <span class="ow">in</span> <span class="nb">open</span>
+<span class="n">worlds</span><span class="o">.</span>
+<span class="o">--</span> <span class="n">SAIL</span><span class="o">-</span><span class="n">ON</span> <span class="n">Website</span>
+</pre></div>
+</div>
+<p>Sail-On Client is being developed as an open source library to support evaluating <strong>vision centric</strong>
+open world agents. This involves communicating with evaluation server across a RESTful interface,
+providing empirical protocols that are used to systematically evaluate the agents capabilities across
+multiple levels of the novelty hierarchy.</p>
+<p>Sail-On Client is built upon <a class="reference external" href="https://gitlab.kitware.com/darpa_learn/tinker-engine">tinker-engine</a>, an open source library that provides the
+abstractions and interface used for running the empirical protocols</p>
+<div class="section" id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
+<p>The major features provided by Sail-On Client</p>
+<ul class="simple">
+<li><p>RESTful interface for communicating with the evaluation server</p></li>
+<li><p>Empirical protocols for evaluating open world agents</p></li>
+<li><p>Dynamic algorithm discovery via plugins</p></li>
+<li><p>Configurable components with sensible defaults</p></li>
+<li><p>Saving and Restoring parameter for an algorithm</p></li>
+</ul>
+</div>
+<div class="section" id="user-guide">
+<h2>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install.html#id1">Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/cli.html">CLI Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/running_algorithms.html">Running The Algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/running_algorithms.html#running-ond-5-14-a1-algorithm">Running OND_5_14_A1 Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/running_algorithms.html#running-ond-5-14-a2-algorithm">Running OND_5_14_A2 Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/running_algorithms.html#running-condda-5-14-a1-algorithm">Running CONDDA_5_14_A1 Algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/running_algorithms.html#running-condda-5-14-a2-algorithm">Running CONDDA_5_14_A2 Algorithm</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="empirical-protocols">
+<h2>Empirical Protocols<a class="headerlink" href="#empirical-protocols" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="protocols/ond.html">Open World Novelty Detection (OND)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocols/ond.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols/ond.html#image-classification-domain">Image Classification Domain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="protocols/condda.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocols/condda.html#image-classification-domain">Image Classification Domain</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="interfaces">
+<h2>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/parinterface.html">PAR Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interfaces/parinterface.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interfaces/parinterface.html#rest-api">REST API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interfaces/localinterface.html">Local Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interfaces/localinterface.html#introduction">Introduction</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="plugins">
+<h2>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="saving-and-restoring-models">
+<h2>Saving and Restoring Models<a class="headerlink" href="#saving-and-restoring-models" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="saving.html">Saving And Restoring Attributes of Algorithm</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="api-documentation">
+<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Documentation</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="next">
+    <a href="user/install.html"
+       title="next chapter">Installation →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>
