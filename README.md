@@ -594,6 +594,10 @@ For OND, every test would have three files. The files follow the following conve
 `session_id` is provided by the server, `test name` is specified in the json file and `novelty operation` would have the value detection,
 classification and characterization.
 
+## Semantic Versioning
+We use [python versioneer](https://github.com/python-versioneer/python-versioneer) to maintain the version for the python package and release.
+Please push a [semantic version](https://semver.org/) tag once the Pull request is approved and merged.
+
 ## Acknowledgement of Support and Disclaimer
 
 This material is based upon work supported by the Defense Advanced Research Projects Agency (DARPA) under Contract No. HR001120C0055. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the DARPA.
