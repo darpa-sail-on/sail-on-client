@@ -54,4 +54,6 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
                 f"{param_name} is not an attribute in the harness, adding the attribute"
             )
         setattr(ip_harness, param_name, param_value)
+    if hasattr(ip_harness, "update_provider"):
+        ip_harness.update_provider()
     return ip_harness
