@@ -594,6 +594,16 @@ For OND, every test would have three files. The files follow the following conve
 `session_id` is provided by the server, `test name` is specified in the json file and `novelty operation` would have the value detection,
 classification and characterization.
 
+## Semantic Versioning
+We use [python versioneer](https://github.com/python-versioneer/python-versioneer) to maintain the version for the python package and release.
+It uses tag information available in git to generate a version dynamically, for more information please refer to
+[versioneer theory of operation](https://github.com/python-versioneer/python-versioneer#theory-of-operation). Please push a [semantic version](https://semver.org/)
+tag once the Pull request is approved and merged. For example, if the most recent tag on master is 0.1.0 and your branch is making minor changes
+then pushing a tag 0.2.0 would update the version for the python package.
+
+Note: Versioneer generates the versions using the most recent tag information,
+thus all commits in your branch would be versioned using the following [scheme](https://github.com/python-versioneer/python-versioneer#version-string-flavors).
+
 ## Acknowledgement of Support and Disclaimer
 
 This material is based upon work supported by the Defense Advanced Research Projects Agency (DARPA) under Contract No. HR001120C0055. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the DARPA.
