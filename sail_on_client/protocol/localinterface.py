@@ -45,6 +45,15 @@ class LocalInterface(Harness):
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
+    def update_provider(self):
+        """
+        Update file provider with new data directory and result directory
+
+        Returns:
+            None
+        """
+        self.file_provider = FileProvider(self.data_dir, self.result_directory)
+
     def test_ids_request(
         self,
         protocol: str,
