@@ -45,9 +45,9 @@ class LocalInterface(Harness):
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
-    def update_provider(self):
+    def update_provider(self) -> None:
         """
-        Update file provider with new data directory and result directory
+        Update file provider with new data directory and result directory.
 
         Returns:
             None
