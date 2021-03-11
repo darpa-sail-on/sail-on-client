@@ -327,7 +327,9 @@ class LocalInterface(Harness):
                     100,
                     5,
                 )
-                log.info(f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}")
+                log.info(
+                    f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
+                )
                 m_nrp = arm_ar.m_nrp(m_acc, m_acc_baseline)
                 results["m_nrp"] = m_nrp
         else:
