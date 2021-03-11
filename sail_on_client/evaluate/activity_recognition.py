@@ -152,7 +152,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         Args:
             p_novel: detection predictions for N videos (Dimension: N X 1)
             gt_novel: ground truth detections for N videos (Dimension: N X 1)
-            p_class: detection predictions for N videos (Dimension: N X 1)
+            p_class: class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])
             gt_class: ground truth classes for N videos (Dimension: N X 1)
 
         Returns:
@@ -169,7 +169,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         m_accuracy_on_novel function.
 
         Args:
-            p_class: detection predictions for N videos (Dimension: N X 1)
+            p_class: class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])
             gt_class: ground truth classes for N videos (Dimension: N X 1)
             gt_novel: ground truth detections for N videos (Dimension: N X 1)
 
