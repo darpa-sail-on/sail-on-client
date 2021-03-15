@@ -60,12 +60,18 @@ class SailOn(BaseProtocol):
         # TODO: fix the version below
         novelty_detector_version = "1.0.0"
         novelty_detector_class = self.config["novelty_detector_class"]
+        if "detection_threshold" in self.config["detector_config"]:
+            detector_threshold = float(self.config["detector_config"]["detection_threshold"])
+        else:
+            detector_threshold = 0.5
+        novelty_detector_class = self.config["novelty_detector_class"]
         self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"],
             "OND",
             self.config["domain"],
             f"{novelty_detector_version}.{novelty_detector_class}",
             self.config["hints"],
+            detector_threshold
         )
         session_id = self.toolset["session_id"]
 

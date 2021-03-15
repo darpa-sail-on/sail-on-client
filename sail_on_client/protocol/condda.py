@@ -57,12 +57,18 @@ class Condda(BaseProtocol):
         novelty_detector_cv = (
             f"{self.config['novelty_detector_class']}{novelty_detector_version}"
         )
+        if "detection_threshold" in self.config["detector_config"]:
+            detector_threshold = self.config["detector_config"]["detection_threshold"]
+        else:
+            detector_threshold = 0.5
+        novelty_detector_class = self.config["novelty_detector_class"]
         self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"],
             "CONDDA",
             self.config["domain"],
             novelty_detector_cv,
             self.config["hints"],
+            detector_threshold
         )
         session_id = self.toolset["session_id"]
         log.info(f"New session: {self.toolset['session_id']}")
