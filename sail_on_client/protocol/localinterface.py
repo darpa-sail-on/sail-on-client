@@ -104,20 +104,20 @@ class LocalInterface(Harness):
         Returns:
             Filename of a file containing a list of image files (including full path for each)
         """
-        try:
-            self.data_file = os.path.join(
-                self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
+        self.data_file = os.path.join(
+            self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
+        )
+        byte_stream = self.file_provider.dataset_request(
+            session_id, test_id, round_id
+        )
+        if byte_stream is None:
+            raise ClientRoundError(
+                reason="End of Dataset", msg="All Data from dataset has been requested"
             )
-            byte_stream = self.file_provider.dataset_request(
-                session_id, test_id, round_id
-            )
+        else:
             with open(self.data_file, "wb") as f:
                 f.write(byte_stream.getbuffer())
             return self.data_file
-        except RoundError as r:
-            raise ClientRoundError(
-                reason=r.reason, msg=r.msg, stack_trace=r.stack_trace
-            )
 
     def get_feedback_request(
         self,
