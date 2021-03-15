@@ -32,7 +32,7 @@ def _initialize_session(
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = local_interface.session_request(
-        test_ids, f"{protocol_name}", f"{domain}", "0.1.1", list(hints)
+        test_ids, f"{protocol_name}", f"{domain}", "0.1.1", list(hints), 0.5
     )
     return session_id
 
@@ -110,11 +110,11 @@ def test_session_request(get_interface_params):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     local_interface.session_request(
-        test_ids, "OND", "image_classification", "0.1.1", []
+        test_ids, "OND", "image_classification", "0.1.1", [], 0.5
     )
     # Testing with hints
     local_interface.session_request(
-        test_ids, "OND", "image_classification", "0.1.1", ["red_light"]
+        test_ids, "OND", "image_classification", "0.1.1", ["red_light"], 0.5
     )
 
 

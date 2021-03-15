@@ -73,6 +73,7 @@ class LocalInterface(Harness):
         domain: str,
         novelty_detector_version: str,
         hints: list,
+        detection_threshold: float,
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -83,11 +84,12 @@ class LocalInterface(Harness):
             domain     : string indicating which domain is being evaluated
             novelty_detector_version : string indicating the version of the novelty detector being evaluated
             hints      : Hints used for the session
+            detection_threshold      : Detection threshold for the session
         Returns:
             A session identifier provided by the server
         """
         return self.file_provider.new_session(
-            test_ids, protocol, domain, novelty_detector_version, hints
+            test_ids, protocol, domain, novelty_detector_version, hints, detection_threshold
         )
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
