@@ -33,7 +33,7 @@ def _initialize_session(par_interface, protocol_name, hints=()):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
-        test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints)
+        test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints), 0.5
     )
     return session_id, test_ids
 
