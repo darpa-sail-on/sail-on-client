@@ -2,7 +2,6 @@
 
 from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
-from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
 from sail_on_client.evaluate.image_classification import ImageClassificationMetrics
 from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics

@@ -61,7 +61,6 @@ class Condda(BaseProtocol):
             detector_threshold = self.config["detector_config"]["detection_threshold"]
         else:
             detector_threshold = 0.5
-        novelty_detector_class = self.config["novelty_detector_class"]
         self.toolset["session_id"] = self.harness.session_request(
             self.config["test_ids"],
             "CONDDA",
