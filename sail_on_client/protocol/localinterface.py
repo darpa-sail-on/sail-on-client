@@ -169,8 +169,8 @@ class LocalInterface(Harness):
             None
         """
         info = get_session_info(str(self.result_directory), session_id)
-        protocol = info["activity"]["created"]["protocol"]
-        domain = info["activity"]["created"]["domain"]
+        protocol = info["created"]["protocol"]
+        domain = info["created"]["domain"]
         base_result_path = os.path.join(str(self.result_directory), protocol, domain)
         os.makedirs(base_result_path, exist_ok=True)
         result_content = {}
@@ -195,8 +195,8 @@ class LocalInterface(Harness):
         gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
         gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1)
         info = get_session_info(str(self.result_directory), session_id)
-        protocol = info["activity"]["created"]["protocol"]
-        domain = info["activity"]["created"]["domain"]
+        protocol = info["created"]["protocol"]
+        domain = info["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
 
         # ######## Image Classification Evaluation  ###########
