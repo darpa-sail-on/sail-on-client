@@ -147,7 +147,7 @@ class LocalInterface(Harness):
         )
         ub.ensuredir(os.path.join(self.result_directory, "feedback"))
         byte_stream = self.file_provider.get_feedback(
-            feedback_ids, feedback_type, session_id, test_id, round_id
+            feedback_ids, feedback_type, session_id, test_id
         )
         with open(self.feedback_file, "wb") as f:
             f.write(byte_stream.getbuffer())
