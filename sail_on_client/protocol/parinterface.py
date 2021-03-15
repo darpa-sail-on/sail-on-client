@@ -103,6 +103,7 @@ class ParInterface(Harness):
         domain: str,
         novelty_detector_version: str,
         hints: list,
+        detection_threshold: float,
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -113,6 +114,7 @@ class ParInterface(Harness):
             -domain     : string indicating which domain is being evaluated
             -novelty_detector_version : string indicating the version of the novelty detector being evaluated
             -hint       : a list hints provided for the session
+            -detection_threshold      : Detection threshold for the session
         Returns:
             -session id
         """
@@ -121,6 +123,7 @@ class ParInterface(Harness):
             "novelty_detector_version": novelty_detector_version,
             "domain": domain,
             "hints": hints,
+            "detection_threshold": detection_threshold
         }
 
         ids = "\n".join(test_ids) + "\n"
@@ -182,7 +185,6 @@ class ParInterface(Harness):
             "feedback_ids": "|".join(feedback_ids),
             "session_id": session_id,
             "test_id": test_id,
-            "round_id": round_id,
             "feedback_type": feedback_type,
         }
         response = requests.get(f"{self.api_url}/session/feedback", params=params,)
