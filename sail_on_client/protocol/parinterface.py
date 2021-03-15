@@ -10,7 +10,7 @@ import logging
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 from typing import Any, Dict, Union
 from requests import Response
-from sail_on_client.errors import ApiError
+from sail_on_client.errors import ApiError, RoundError
 from json import JSONDecodeError
 
 log = logging.getLogger(__name__)
@@ -152,7 +152,8 @@ class ParInterface(Harness):
             "round_id": round_id,
         }
         response = requests.get(f"{self.api_url}/session/dataset", params=params,)
-
+        if response.status_code == 204:
+            raise RoundError("End of Dataset", "The entire dataset has been requested")
         self._check_response(response)
 
         filename = os.path.abspath(
@@ -188,7 +189,6 @@ class ParInterface(Harness):
             "feedback_type": feedback_type,
         }
         response = requests.get(f"{self.api_url}/session/feedback", params=params,)
-
         self._check_response(response)
         filename = os.path.abspath(
             os.path.join(
