@@ -123,7 +123,7 @@ class ParInterface(Harness):
             "novelty_detector_version": novelty_detector_version,
             "domain": domain,
             "hints": hints,
-            "detection_threshold": detection_threshold
+            "detection_threshold": detection_threshold,
         }
 
         ids = "\n".join(test_ids) + "\n"

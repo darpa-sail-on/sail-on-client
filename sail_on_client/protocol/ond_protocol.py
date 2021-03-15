@@ -61,7 +61,9 @@ class SailOn(BaseProtocol):
         novelty_detector_version = "1.0.0"
         novelty_detector_class = self.config["novelty_detector_class"]
         if "detection_threshold" in self.config["detector_config"]:
-            detector_threshold = float(self.config["detector_config"]["detection_threshold"])
+            detector_threshold = float(
+                self.config["detector_config"]["detection_threshold"]
+            )
         else:
             detector_threshold = 0.5
         novelty_detector_class = self.config["novelty_detector_class"]
@@ -71,7 +73,7 @@ class SailOn(BaseProtocol):
             self.config["domain"],
             f"{novelty_detector_version}.{novelty_detector_class}",
             self.config["hints"],
-            detector_threshold
+            detector_threshold,
         )
         session_id = self.toolset["session_id"]
 

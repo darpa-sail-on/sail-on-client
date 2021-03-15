@@ -112,7 +112,9 @@ def test_session_request(server_setup, get_interface_params):
     )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    par_interface.session_request(test_ids, "OND", "image_classification", "0.1.1", [], 0.5)
+    par_interface.session_request(
+        test_ids, "OND", "image_classification", "0.1.1", [], 0.5
+    )
     # Testing with hints
     par_interface.session_request(
         test_ids, "OND", "image_classification", "0.1.1", ["red_light"], 0.4

@@ -18,7 +18,7 @@ def ond_config():
             "domain": "image_classification",
             "test_ids": ["OND.1.1.1234"],
             "novelty_detector_class": "MockDetector",
-            "detector_config": {}
+            "detector_config": {},
         }
         config_name = "test_ond_config.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))

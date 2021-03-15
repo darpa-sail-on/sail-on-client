@@ -89,7 +89,12 @@ class LocalInterface(Harness):
             A session identifier provided by the server
         """
         return self.file_provider.new_session(
-            test_ids, protocol, domain, novelty_detector_version, hints, detection_threshold
+            test_ids,
+            protocol,
+            domain,
+            novelty_detector_version,
+            hints,
+            detection_threshold,
         )
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
@@ -107,9 +112,7 @@ class LocalInterface(Harness):
         self.data_file = os.path.join(
             self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
         )
-        byte_stream = self.file_provider.dataset_request(
-            session_id, test_id, round_id
-        )
+        byte_stream = self.file_provider.dataset_request(session_id, test_id, round_id)
         if byte_stream is None:
             raise ClientRoundError(
                 reason="End of Dataset", msg="All Data from dataset has been requested"
