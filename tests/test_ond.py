@@ -18,6 +18,7 @@ def ond_config():
             "domain": "image_classification",
             "test_ids": ["OND.1.1.1234"],
             "novelty_detector_class": "MockDetector",
+            "detector_config": {}
         }
         config_name = "test_ond_config.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
@@ -33,6 +34,7 @@ def ond_config_with_feature_extraction():
                 "domain": "image_classification",
                 "test_ids": ["OND.1.1.1234"],
                 "novelty_detector_class": "MockDetector",
+                "detector_config": {},
                 "feature_extraction_only": True,
                 "save_features": True,
                 "save_dir": feature_dir,
