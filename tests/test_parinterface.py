@@ -183,7 +183,7 @@ def test_post_results(
     "feedback_mapping",
     (
         ("classification", ("detection", "classification")),
-        ("psuedo_labels_classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
     ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
