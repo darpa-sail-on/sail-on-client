@@ -154,7 +154,7 @@ class Condda(BaseProtocol):
                 safe_remove(self.toolset["dataset"])
                 safe_remove_results(results)
             log.info(f"Test complete: {self.toolset['test_id']}")
-
+            self.harness.complete_test(session_id, test_id)
             if self.config["save_features"] and not self.config["use_saved_features"]:
                 feature_dir = self.config["save_dir"]
                 ub.ensuredir(feature_dir)

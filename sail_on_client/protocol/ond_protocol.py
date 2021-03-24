@@ -228,6 +228,7 @@ class SailOn(BaseProtocol):
 
             # cleanup the characterization file
             safe_remove(results["characterization"])
+            self.harness.complete_test(session_id, test)
 
         log.info(f"Session ended: {self.toolset['session_id']}")
         self.harness.terminate_session(session_id)
