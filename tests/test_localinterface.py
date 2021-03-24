@@ -330,6 +330,23 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
     local_interface.evaluate("OND.0.90001.8714062", 0, session_id)
 
 
+def test_complete_test(get_interface_params):
+    """
+    Test complete test request.
+
+    Args:
+        get_interface_params (tuple): Tuple to configure local interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.localinterface import LocalInterface
+    config_directory, config_name = get_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    session_id = _initialize_session(local_interface, "OND")
+    local_interface.complete_test(session_id, "OND.10.90001.2100554")
+
+
 def test_terminate_session(get_interface_params):
     """
     Test terminate session request.
