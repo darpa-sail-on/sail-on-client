@@ -357,6 +357,19 @@ class LocalInterface(Harness):
         """
         return self.file_provider.get_test_metadata(session_id, test_id)
 
+    def complete_test(self, session_id: str, test_id: str) -> None:
+        """
+        Mark test as completed.
+
+        Args:
+            session_id        : the id of the session currently being evaluated
+            test_id           : the id of the test currently being evaluated
+
+        Returns:
+            None
+        """
+        self.file_provider.complete_test(session_id, test_id)
+
     def terminate_session(self, session_id: str) -> None:
         """
         Terminate the session after the evaluation for the protocol is complete.

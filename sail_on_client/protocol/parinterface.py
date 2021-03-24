@@ -281,6 +281,22 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()
 
+    def complete_test(self, session_id: str, test_id: str) -> None:
+        """
+        Mark the given test as completed.
+
+        Args:
+            session_id: the id of session currently being evaluated
+            test_id:    the id of the test currently being evaluated
+
+        Returns:
+            None
+        """
+        requests.get(
+            f"{self.api_url}/test",
+            params={"test_id": test_id, "session_id": session_id},
+        )
+
     def terminate_session(self, session_id: str) -> None:
         """
         Terminate the session after the evaluation for the protocol is complete.
