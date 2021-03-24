@@ -4,39 +4,45 @@
     "OND.54012315.0900.1239"
   ],
   "use_feedback": "True",
-  "novelty_detector_class": "OND_12_With_Redlight",
   "hints": ["red_light"],
   "dataset_root": "",
-  "detector_config": {
-      "efficientnet_params": {
-                "model_path": "",
-                "known_classes": 413,
-                "image_size": 300
-                },
-      "evm_params": {
-                 "model_path": "",
-                 "tailsize": 40000,
-                 "cover_threshold": 0.7,
-                 "distance_multiplier": 0.55,
-                 "distance_function": "cosine",
-                 "mu_train": 1.0,
-                 "sigma_train": 0.1872130436656377,
-                 "KL_threshold": 8.55648487230666,
-                 "known_threshold": 0.7
-                },
-      "dataloader_params": {
-                "batch_size": 100,
-                "num_workers": 20
-                },
-      "csv_folder": "ond_result",
-      "feedback_params": {
-                "first_budget": 10,
-                "income_per_batch": 10,
-                "maximum_budget": 10
-      },
-      "classification_params": {
-                "alpha": 1.0,
-                "flag_only_evm": 1
+  "detectors": {
+    "has_reaction_baseline": "False",
+    "has_baseline": "False",
+    "csv_folder": "image_classification",
+    "cores": 6,
+    "detector_config": {
+      "OND_12_With_Redlight": {
+        "efficientnet_params": {
+            "model_path": "",
+            "known_classes": 413,
+            "image_size": 300
+        },
+        "evm_params": {
+          "model_path": "",
+          "tailsize": 40000,
+          "cover_threshold": 0.7,
+          "distance_multiplier": 0.55,
+          "distance_function": "cosine",
+          "mu_train": 1.0,
+          "sigma_train": 0.1872130436656377,
+          "KL_threshold": 8.55648487230666,
+          "known_threshold": 0.7
+        },
+        "dataloader_params": {
+          "batch_size": 100,
+          "num_workers": 20
+        },
+        "feedback_params": {
+          "first_budget": 10,
+          "income_per_batch": 10,
+          "maximum_budget": 10
+        },
+        "classification_params": {
+          "alpha": 1.0,
+          "flag_only_evm": 1
+        }
       }
+    }
   }
 }
