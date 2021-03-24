@@ -341,6 +341,7 @@ def test_complete_test(get_interface_params):
         None
     """
     from sail_on_client.protocol.localinterface import LocalInterface
+
     config_directory, config_name = get_interface_params
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface, "OND")
