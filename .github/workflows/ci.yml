@@ -237,15 +237,15 @@ jobs:
            sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Cache Pipenv environment
-        id: pipenv-cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+      # - name: Cache Pipenv environment
+      #   id: pipenv-cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: ~/.local/share/virtualenvs
+      #     key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Install Using Pipenv
-        if: steps.pipenv-cache.outputs.cache-hit != 'true'
+        # if: steps.pipenv-cache.outputs.cache-hit != 'true'
         run: pipenv install --dev
         working-directory: sail-on-client
 
