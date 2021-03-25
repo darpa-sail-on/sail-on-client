@@ -26,9 +26,10 @@ jobs:
       - name: Checkout sail on api
         uses: actions/checkout@v2
         with:
-          repository: darpa-sail-on/sail-on-api
+          repository: darpa-sail-on/Sail-On-Api
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: sail-on-api
+          path: Sail-On-Api
+          ref: update-requirements
       - name: Checkout sail on evaluate
         uses: actions/checkout@v2
         with:
