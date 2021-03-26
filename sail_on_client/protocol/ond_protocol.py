@@ -76,9 +76,7 @@ class SailOn(BaseProtocol):
             novelty_detector_version = "1.0.0"
             novelty_detector_class = algorithm_name
             if "detection_threshold" in algorithm_toolset:
-                detector_threshold = float(
-                    algorithm_toolset["detection_threshold"]
-                )
+                detector_threshold = float(algorithm_toolset["detection_threshold"])
             else:
                 detector_threshold = 0.5
             session_id = self.harness.session_request(
@@ -288,7 +286,7 @@ class SailOn(BaseProtocol):
 
                     # cleanup the characterization file
                     safe_remove(results["characterization"])
-                    self.harness.complete_test(session_id, test)
+                self.harness.complete_test(session_id, test_id)
         for algorithm_name, session_id in sessions.items():
             if session_id != baseline_session_id:
                 self.harness.evaluate(test_id, 0, session_id, baseline_session_id)
