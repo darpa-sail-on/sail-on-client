@@ -245,7 +245,7 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_im.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
 
@@ -292,7 +292,7 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_ar.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
         # ######## Document Transcript Evaluation  ###########
@@ -334,7 +334,7 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = dtm.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
         else:
