@@ -127,7 +127,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -178,7 +178,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -229,7 +229,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -299,7 +299,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
