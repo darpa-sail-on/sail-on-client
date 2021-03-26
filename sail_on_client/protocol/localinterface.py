@@ -353,7 +353,7 @@ class LocalInterface(Harness):
                 f"{session_id}.{test_id}_classification.csv",
             )
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            dtm = DocumentTranscriptionMetrics(protocol, **self.gt_config)
+            dtm = DocumentTranscriptionMetrics(protocol, **gt_config)
             m_num = dtm.m_num(detections[1], gt[dtm.novel_id])
             results["m_num"] = m_num
             m_num_stats = dtm.m_num_stats(detections[1], gt[dtm.novel_id])
