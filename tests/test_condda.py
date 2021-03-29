@@ -13,12 +13,22 @@ from sail_on_client.protocol.localinterface import LocalInterface
 @pytest.fixture(scope="function")
 def condda_config():
     """Fixture to create a temporal directory and create a json file in it."""
+    test_dir = os.path.dirname(__file__)
+    data_dir = os.path.join(test_dir, "data")
     with TemporaryDirectory() as config_folder:
         dummy_config = {
             "domain": "image_classification",
             "test_ids": ["CONDDA.1.1.1234"],
-            "novelty_detector_class": "MockDetector",
-            "detector_config": {},
+            "detectors": {
+                "has_baseline": False,
+                "has_reaction_baseline": False,
+                "detector_configs": {"MockDetector": {}},
+                "csv_folder": "",
+            },
+            "harness_config": {
+                "url": "http://localhost:3307",
+                "data_dir": f"{data_dir}",
+            },
         }
         config_name = "test_condda_config.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
@@ -28,16 +38,26 @@ def condda_config():
 @pytest.fixture(scope="function")
 def condda_config_with_feature_extraction():
     """Fixture to create a config file for feature extraction."""
+    test_dir = os.path.dirname(__file__)
+    data_dir = os.path.join(test_dir, "data")
     with TemporaryDirectory() as feature_dir:
         with TemporaryDirectory() as config_folder:
             dummy_config = {
                 "domain": "image_classification",
                 "test_ids": ["CONDDA.1.1.1234"],
-                "novelty_detector_class": "MockDetector",
-                "detector_config": {},
+                "detectors": {
+                    "has_baseline": False,
+                    "has_reaction_baseline": False,
+                    "detector_configs": {"MockDetector": {}},
+                    "csv_folder": "",
+                },
                 "feature_extraction_only": True,
                 "save_features": True,
                 "save_dir": feature_dir,
+                "harness_config": {
+                    "url": "http://localhost:3307",
+                    "data_dir": f"{data_dir}",
+                },
             }
             config_name = "test_condda_config.json"
             json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
