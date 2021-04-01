@@ -26,9 +26,10 @@ jobs:
       - name: Checkout sail on api
         uses: actions/checkout@v2
         with:
-          repository: darpa-sail-on/sail-on-api
+          repository: darpa-sail-on/Sail-On-API
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: sail-on-api
+          path: Sail-On-API
+          ref: update-requirements
       - name: Checkout sail on evaluate
         uses: actions/checkout@v2
         with:
@@ -79,7 +80,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -126,7 +127,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -177,7 +178,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -228,7 +229,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector
@@ -298,7 +299,7 @@ jobs:
         with:
           path: |
            tinker-engine
-           sail-on-api
+           Sail-On-API
            Sail_On_Evaluate
            hwr_novelty_detector
            evm_based_novelty_detector

@@ -29,7 +29,7 @@ def _initialize_session(par_interface, protocol_name, hints=()):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
-        test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints)
+        test_ids, f"{protocol_name}", "image_classification", "0.1.1", list(hints), 0.5
     )
     return session_id
 
@@ -112,10 +112,12 @@ def test_session_request(server_setup, get_interface_params):
     )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
-    par_interface.session_request(test_ids, "OND", "image_classification", "0.1.1", [])
+    par_interface.session_request(
+        test_ids, "OND", "image_classification", "0.1.1", [], 0.5
+    )
     # Testing with hints
     par_interface.session_request(
-        test_ids, "OND", "image_classification", "0.1.1", ["red_light"]
+        test_ids, "OND", "image_classification", "0.1.1", ["red_light"], 0.4
     )
 
 
@@ -183,7 +185,7 @@ def test_post_results(
     "feedback_mapping",
     (
         ("classification", ("detection", "classification")),
-        ("psuedo_labels_classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
     ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
@@ -255,6 +257,26 @@ def test_evaluate(server_setup, get_interface_params):
         config_directory, f"{session_id}.OND.1.1.1234.0_evaluation.csv"
     )
     assert expected == response
+
+
+def test_complete_test(server_setup, get_interface_params):
+    """
+    Test complete test request.
+
+    Args:
+        server_setup (tuple): Tuple containing url and result directory
+        get_interface_params (tuple): Tuple to configure par interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.parinterface import ParInterface
+
+    url, result_dir = server_setup
+    config_directory, config_name = get_interface_params
+    par_interface = ParInterface(config_name, config_directory)
+    session_id = _initialize_session(par_interface, "OND")
+    par_interface.complete_test(session_id, "OND.10.90001.2100554")
 
 
 def test_terminate_session(server_setup, get_interface_params):

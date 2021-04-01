@@ -32,7 +32,7 @@ def _initialize_session(
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     session_id = local_interface.session_request(
-        test_ids, f"{protocol_name}", f"{domain}", "0.1.1", list(hints)
+        test_ids, f"{protocol_name}", f"{domain}", "0.1.1", list(hints), 0.5
     )
     return session_id
 
@@ -110,11 +110,11 @@ def test_session_request(get_interface_params):
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     local_interface.session_request(
-        test_ids, "OND", "image_classification", "0.1.1", []
+        test_ids, "OND", "image_classification", "0.1.1", [], 0.5
     )
     # Testing with hints
     local_interface.session_request(
-        test_ids, "OND", "image_classification", "0.1.1", ["red_light"]
+        test_ids, "OND", "image_classification", "0.1.1", ["red_light"], 0.5
     )
 
 
@@ -177,7 +177,7 @@ def test_post_results(get_interface_params, protocol_constant, protocol_name):
     "feedback_mapping",
     (
         ("classification", ("detection", "classification")),
-        ("psuedo_labels_classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
     ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
@@ -273,26 +273,39 @@ def test_activity_recognition_evaluate(get_ar_interface_params):
     config_directory, config_name = get_ar_interface_params
     local_interface = LocalInterface(config_name, config_directory)
     session_id = _initialize_session(local_interface, "OND", "activity_recognition")
+    baseline_session_id = _initialize_session(
+        local_interface, "OND", "activity_recognition"
+    )
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     detection_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_detection.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_detection.csv"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_classification.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_classification.csv"
     )
     characterization_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_characterization.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedDetector_characterization.csv"
     )
     results = {
         "detection": detection_file_id,
         "classification": classification_file_id,
         "characterization": characterization_file_id,
     }
-
+    baseline_classification_file_id = os.path.join(
+        result_folder,
+        "OND.10.90001.2100554_BaselinePreComputedDetector_classification.csv",
+    )
+    baseline_result = {
+        "classification": baseline_classification_file_id,
+    }
     local_interface.post_results(results, "OND.10.90001.2100554", 0, session_id)
+    local_interface.post_results(
+        baseline_result, "OND.10.90001.2100554", 0, baseline_session_id
+    )
     local_interface.evaluate("OND.10.90001.2100554", 0, session_id)
+    local_interface.evaluate("OND.10.90001.2100554", 0, session_id, baseline_session_id)
 
 
 def test_transcripts_evaluate(get_transcripts_interface_params):
@@ -328,6 +341,24 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
 
     local_interface.post_results(results, "OND.0.90001.8714062", 0, session_id)
     local_interface.evaluate("OND.0.90001.8714062", 0, session_id)
+
+
+def test_complete_test(get_interface_params):
+    """
+    Test complete test request.
+
+    Args:
+        get_interface_params (tuple): Tuple to configure local interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.localinterface import LocalInterface
+
+    config_directory, config_name = get_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    session_id = _initialize_session(local_interface, "OND")
+    local_interface.complete_test(session_id, "OND.10.90001.2100554")
 
 
 def test_terminate_session(get_interface_params):

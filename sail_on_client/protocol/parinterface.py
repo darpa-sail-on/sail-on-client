@@ -10,7 +10,7 @@ import logging
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 from typing import Any, Dict, Union
 from requests import Response
-from sail_on_client.errors import ApiError
+from sail_on_client.errors import ApiError, RoundError
 from json import JSONDecodeError
 
 log = logging.getLogger(__name__)
@@ -103,6 +103,7 @@ class ParInterface(Harness):
         domain: str,
         novelty_detector_version: str,
         hints: list,
+        detection_threshold: float,
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -113,6 +114,7 @@ class ParInterface(Harness):
             -domain     : string indicating which domain is being evaluated
             -novelty_detector_version : string indicating the version of the novelty detector being evaluated
             -hint       : a list hints provided for the session
+            -detection_threshold      : Detection threshold for the session
         Returns:
             -session id
         """
@@ -121,6 +123,7 @@ class ParInterface(Harness):
             "novelty_detector_version": novelty_detector_version,
             "domain": domain,
             "hints": hints,
+            "detection_threshold": detection_threshold,
         }
 
         ids = "\n".join(test_ids) + "\n"
@@ -149,7 +152,8 @@ class ParInterface(Harness):
             "round_id": round_id,
         }
         response = requests.get(f"{self.api_url}/session/dataset", params=params,)
-
+        if response.status_code == 204:
+            raise RoundError("End of Dataset", "The entire dataset has been requested")
         self._check_response(response)
 
         filename = os.path.abspath(
@@ -182,11 +186,9 @@ class ParInterface(Harness):
             "feedback_ids": "|".join(feedback_ids),
             "session_id": session_id,
             "test_id": test_id,
-            "round_id": round_id,
             "feedback_type": feedback_type,
         }
         response = requests.get(f"{self.api_url}/session/feedback", params=params,)
-
         self._check_response(response)
         filename = os.path.abspath(
             os.path.join(
@@ -232,7 +234,13 @@ class ParInterface(Harness):
 
         self._check_response(response)
 
-    def evaluate(self, test_id: str, round_id: int, session_id: str) -> str:
+    def evaluate(
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
+        baseline_session_id: str = None,
+    ) -> str:
         """
         Get results for test(s).
 
@@ -278,6 +286,22 @@ class ParInterface(Harness):
 
         self._check_response(response)
         return response.json()
+
+    def complete_test(self, session_id: str, test_id: str) -> None:
+        """
+        Mark the given test as completed.
+
+        Args:
+            session_id: the id of session currently being evaluated
+            test_id:    the id of the test currently being evaluated
+
+        Returns:
+            None
+        """
+        requests.get(
+            f"{self.api_url}/test",
+            params={"test_id": test_id, "session_id": session_id},
+        )
 
     def terminate_session(self, session_id: str) -> None:
         """

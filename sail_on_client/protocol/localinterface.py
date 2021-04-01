@@ -2,7 +2,6 @@
 
 from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
-from sail_on.api.errors import RoundError
 from sail_on_client.errors import RoundError as ClientRoundError
 from sail_on_client.evaluate.image_classification import ImageClassificationMetrics
 from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
@@ -39,8 +38,20 @@ class LocalInterface(Harness):
         self.temp_dir = TemporaryDirectory()
         self.data_dir = self.configuration_data["data_dir"]
         self.gt_dir = self.configuration_data["gt_dir"]
-        self.gt_config = json.load(open(self.configuration_data["gt_config"], "r"))
+        # Config file containing column id for ground truth for a particular domain.
+        # Refer to sail-on-client/tests/data/OND/activity_recognition/activity_recognition.json
+        # for an example.
+        self.gt_config = self.configuration_data["gt_config"]
         self.result_directory = self.temp_dir.name
+        self.file_provider = FileProvider(self.data_dir, self.result_directory)
+
+    def update_provider(self) -> None:
+        """
+        Update file provider with new data directory and result directory.
+
+        Returns:
+            None
+        """
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
     def test_ids_request(
@@ -73,6 +84,7 @@ class LocalInterface(Harness):
         domain: str,
         novelty_detector_version: str,
         hints: list,
+        detection_threshold: float,
     ) -> str:
         """
         Create a new session to evaluate the detector using an empirical protocol.
@@ -83,11 +95,17 @@ class LocalInterface(Harness):
             domain     : string indicating which domain is being evaluated
             novelty_detector_version : string indicating the version of the novelty detector being evaluated
             hints      : Hints used for the session
+            detection_threshold      : Detection threshold for the session
         Returns:
             A session identifier provided by the server
         """
         return self.file_provider.new_session(
-            test_ids, protocol, domain, novelty_detector_version, hints
+            test_ids,
+            protocol,
+            domain,
+            novelty_detector_version,
+            hints,
+            detection_threshold,
         )
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
@@ -102,20 +120,18 @@ class LocalInterface(Harness):
         Returns:
             Filename of a file containing a list of image files (including full path for each)
         """
-        try:
-            self.data_file = os.path.join(
-                self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
+        self.data_file = os.path.join(
+            self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
+        )
+        byte_stream = self.file_provider.dataset_request(session_id, test_id, round_id)
+        if byte_stream is None:
+            raise ClientRoundError(
+                reason="End of Dataset", msg="All Data from dataset has been requested"
             )
-            byte_stream = self.file_provider.dataset_request(
-                session_id, test_id, round_id
-            )
+        else:
             with open(self.data_file, "wb") as f:
                 f.write(byte_stream.getbuffer())
             return self.data_file
-        except RoundError as r:
-            raise ClientRoundError(
-                reason=r.reason, msg=r.msg, stack_trace=r.stack_trace
-            )
 
     def get_feedback_request(
         self,
@@ -145,7 +161,7 @@ class LocalInterface(Harness):
         )
         ub.ensuredir(os.path.join(self.result_directory, "feedback"))
         byte_stream = self.file_provider.get_feedback(
-            feedback_ids, feedback_type, session_id, test_id, round_id
+            feedback_ids, feedback_type, session_id, test_id
         )
         with open(self.feedback_file, "wb") as f:
             f.write(byte_stream.getbuffer())
@@ -167,8 +183,8 @@ class LocalInterface(Harness):
             None
         """
         info = get_session_info(str(self.result_directory), session_id)
-        protocol = info["activity"]["created"]["protocol"]
-        domain = info["activity"]["created"]["domain"]
+        protocol = info["created"]["protocol"]
+        domain = info["created"]["domain"]
         base_result_path = os.path.join(str(self.result_directory), protocol, domain)
         os.makedirs(base_result_path, exist_ok=True)
         result_content = {}
@@ -178,7 +194,13 @@ class LocalInterface(Harness):
             result_content[result_key] = io.StringIO(content).getvalue()
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
-    def evaluate(self, test_id: str, round_id: int, session_id: str) -> Dict[str, Any]:
+    def evaluate(
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
+        baseline_session_id: str = None,
+    ) -> Dict[str, Any]:
         """
         Get results for test(s).
 
@@ -193,9 +215,10 @@ class LocalInterface(Harness):
         gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
         gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1)
         info = get_session_info(str(self.result_directory), session_id)
-        protocol = info["activity"]["created"]["protocol"]
-        domain = info["activity"]["created"]["domain"]
+        protocol = info["created"]["protocol"]
+        domain = info["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
+        gt_config = json.load(open(self.gt_config, "r"))
 
         # ######## Image Classification Evaluation  ###########
         if domain == "image_classification":
@@ -214,7 +237,7 @@ class LocalInterface(Harness):
             )
 
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            arm_im = ImageClassificationMetrics(protocol, **self.gt_config)
+            arm_im = ImageClassificationMetrics(protocol, **gt_config)
             m_num = arm_im.m_num(detections[1], gt[arm_im.detection_id])
             results["m_num"] = m_num
             m_num_stats = arm_im.m_num_stats(detections[1], gt[arm_im.detection_id])
@@ -241,7 +264,7 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_im.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
 
@@ -261,7 +284,17 @@ class LocalInterface(Harness):
                 f"{session_id}.{test_id}_classification.csv",
             )
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            arm_ar = ActivityRecognitionMetrics(protocol, **self.gt_config)
+            if baseline_session_id is not None:
+                baseline_classification_file_id = os.path.join(
+                    self.result_directory,
+                    protocol,
+                    domain,
+                    f"{baseline_session_id}.{test_id}_classification.csv",
+                )
+                baseline_classifications = pd.read_csv(
+                    baseline_classification_file_id, sep=",", header=None
+                )
+            arm_ar = ActivityRecognitionMetrics(protocol, **gt_config)
             m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
             results["m_num"] = m_num
             m_num_stats = arm_ar.m_num_stats(detections[1], gt[arm_ar.novel_id])
@@ -288,9 +321,22 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = arm_ar.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
+            if baseline_session_id is not None:
+                m_acc_baseline = arm_ar.m_acc(
+                    gt[arm_ar.novel_id],
+                    baseline_classifications,
+                    gt[arm_ar.classification_id],
+                    100,
+                    5,
+                )
+                log.info(
+                    f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
+                )
+                m_nrp = arm_ar.m_nrp(m_acc, m_acc_baseline)
+                results["m_nrp"] = m_nrp
         # ######## Document Transcript Evaluation  ###########
         elif domain == "transcripts":
             detection_file_id = os.path.join(
@@ -307,7 +353,7 @@ class LocalInterface(Harness):
                 f"{session_id}.{test_id}_classification.csv",
             )
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            dtm = DocumentTranscriptionMetrics(protocol, **self.gt_config)
+            dtm = DocumentTranscriptionMetrics(protocol, **gt_config)
             m_num = dtm.m_num(detections[1], gt[dtm.novel_id])
             results["m_num"] = m_num
             m_num_stats = dtm.m_num_stats(detections[1], gt[dtm.novel_id])
@@ -330,7 +376,7 @@ class LocalInterface(Harness):
             )
             results["m_acc_failed"] = m_acc_failed
             m_is_cdt_and_is_early = dtm.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx"], gt.shape[0],
+                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
         else:
@@ -352,6 +398,19 @@ class LocalInterface(Harness):
             A json file containing metadata
         """
         return self.file_provider.get_test_metadata(session_id, test_id)
+
+    def complete_test(self, session_id: str, test_id: str) -> None:
+        """
+        Mark test as completed.
+
+        Args:
+            session_id        : the id of the session currently being evaluated
+            test_id           : the id of the test currently being evaluated
+
+        Returns:
+            None
+        """
+        self.file_provider.complete_test(session_id, test_id)
 
     def terminate_session(self, session_id: str) -> None:
         """

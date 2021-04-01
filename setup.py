@@ -27,5 +27,17 @@ setup(
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     zip_safe=False,
-    entry_points={"framework": ["MockDetector = sail_on_client.mock:MockDetector"]},
+    # Note: The entrypoint for tinker is "tinker" not "tinker_test" the dummy entrypoint
+    # is being used because the CI tries and fails to load algorithms that requires libcuda
+    entry_points={
+        "tinker_test": [
+            "MockDetector = sail_on_client.mock:MockDetector",
+            "PreComputedDetector = sail_on_client.pre_computed_detector:PreComputedDetector",
+            "BaselinePreComputedDetector = sail_on_client.pre_computed_detector:PreComputedDetector",
+        ],
+        "tinker": [
+            "MockDetector = sail_on_client.mock:MockDetector",
+            "PreComputedDetector = sail_on_client.pre_computed_detector:PreComputedDetector",
+        ],
+    },
 )

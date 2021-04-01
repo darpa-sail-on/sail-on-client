@@ -63,7 +63,7 @@ class ServerError(ApiError):
 class RoundError(ServerError):
     """Error indicating problem with rounds."""
 
-    error_code = 502
+    error_code = 204
 
     def __init__(
         self, reason: str, msg: str, stack_trace: str = "stack trace unavailable"

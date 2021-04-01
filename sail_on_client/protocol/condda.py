@@ -49,113 +49,164 @@ class Condda(BaseProtocol):
 
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
-        novelty_algorithm = self.get_algorithm(
-            self.config["novelty_detector_class"], self.toolset
-        )
-        # TODO: fix the version below
-        novelty_detector_version = "1.0.0"
-        novelty_detector_cv = (
-            f"{self.config['novelty_detector_class']}{novelty_detector_version}"
-        )
-        self.toolset["session_id"] = self.harness.session_request(
-            self.config["test_ids"],
-            "CONDDA",
-            self.config["domain"],
-            novelty_detector_cv,
-            self.config["hints"],
-        )
-        session_id = self.toolset["session_id"]
-        log.info(f"New session: {self.toolset['session_id']}")
-        for test_id in self.config["test_ids"]:
-            self.metadata = self.harness.get_test_metadata(session_id, test_id)
-            self.toolset["test_id"] = test_id
-            self.toolset["test_type"] = ""
-            self.toolset["metadata"] = self.metadata
-            if "red_light" in self.metadata:
-                self.toolset["redlight_image"] = self.toolset["metadata"]["red_light"]
+        algorithm_names = self.config["detectors"]["detector_configs"].keys()
+        algorithms = {}
+        sessions = {}
+        # Create sessions an instances of all the algorithms
+        for algorithm_name in algorithm_names:
+            algorithm = self.get_algorithm(
+                algorithm_name,
+                self.config["detectors"]["detector_configs"][algorithm_name],
+            )
+            algorithms[algorithm_name] = algorithm
+            algorithm_toolset = self.config["detectors"]["detector_configs"][
+                algorithm_name
+            ]
+            # TODO: fix the version below
+            novelty_detector_version = "1.0.0"
+            novelty_detector_class = algorithm_name
+            if "detection_threshold" in algorithm_toolset:
+                detector_threshold = float(algorithm_toolset["detection_threshold"])
             else:
-                self.toolset["redlight_image"] = ""
-            novelty_algorithm.execute(self.toolset, "Initialize")
-
-            self.toolset["image_features"] = {}
-            self.toolset["dataset_root"] = self.config["dataset_root"]
-            self.toolset["dataset_ids"] = []
-            log.info(f"Start test: {self.toolset['test_id']}")
-
-            if self.config["save_features"] and not self.config["use_saved_features"]:
-                test_features: Dict[str, Dict] = {"features_dict": {}, "logit_dict": {}}
-
-            if self.config["use_saved_features"]:
-                feature_dir = self.config["feature_save_dir"]
-                if os.path.isdir(feature_dir):
-                    test_features = pkl.load(
-                        open(os.path.join(feature_dir, f"{test_id}_features.pkl"), "rb")
-                    )
+                detector_threshold = 0.5
+            session_id = self.harness.session_request(
+                self.config["test_ids"],
+                "CONDDA",
+                self.config["domain"],
+                f"{novelty_detector_version}.{novelty_detector_class}",
+                self.config["hints"],
+                detector_threshold,
+            )
+            sessions[algorithm_name] = session_id
+        for algorithm_name, session_id in sessions.items():
+            log.info(f"New session: {session_id} for algorithm: {algorithm_name}")
+            for test_id in self.config["test_ids"]:
+                self.metadata = self.harness.get_test_metadata(session_id, test_id)
+                self.toolset["test_id"] = test_id
+                self.toolset["test_type"] = ""
+                self.toolset["metadata"] = self.metadata
+                if "red_light" in self.metadata:
+                    self.toolset["redlight_image"] = self.toolset["metadata"][
+                        "red_light"
+                    ]
                 else:
-                    test_features = pkl.load(open(feature_dir, "rb"))
+                    self.toolset["redlight_image"] = ""
+                algorithm_toolset = {}
+                for config_name, config_value in self.config["detectors"].items():
+                    if (
+                        config_name == "has_baseline"
+                        or config_name == "has_reaction_baseline"
+                        or config_name == "baseline_class"
+                    ):
+                        continue
+                    elif config_name == "detector_configs":
+                        algorithm_toolset.update(config_value[algorithm_name])
+                    else:
+                        algorithm_toolset[config_name] = config_value
 
-                features_dict = test_features["features_dict"]
-                logit_dict = test_features["logit_dict"]
+                self.config["detectors"]["detector_configs"][algorithm_name]
+                algorithm_toolset["session_id"] = session_id
+                algorithm_toolset["test_id"] = test_id
+                algorithm_toolset["test_type"] = ""
+                algorithms[algorithm_name].execute(algorithm_toolset, "Initialize")
 
-            for round_id in count(0):
-                self.toolset["round_id"] = round_id
-                log.info(f"Start round: {self.toolset['round_id']}")
-                # see if there is another round available
-                try:
-                    self.toolset["dataset"] = self.harness.dataset_request(
-                        test_id, round_id, session_id
-                    )
-                except RoundError:
-                    # no more rounds available, this test is done.
-                    break
+                self.toolset["image_features"] = {}
+                self.toolset["dataset_root"] = self.config["dataset_root"]
+                self.toolset["dataset_ids"] = []
 
-                with open(self.toolset["dataset"], "r") as dataset:
-                    dataset_ids = dataset.readlines()
-                    image_ids = [image_id.strip() for image_id in dataset_ids]
+                log.info(f"Start test: {self.toolset['test_id']}")
+
+                if (
+                    self.config["save_features"]
+                    and not self.config["use_saved_features"]
+                ):
+                    test_features: Dict[str, Dict] = {
+                        "features_dict": {},
+                        "logit_dict": {},
+                    }
 
                 if self.config["use_saved_features"]:
-                    self.toolset["features_dict"] = {}
-                    self.toolset["logit_dict"] = {}
-                    for image_id in image_ids:
-                        self.toolset["features_dict"][image_id] = features_dict[
-                            image_id
-                        ]
-                        self.toolset["logit_dict"][image_id] = logit_dict[image_id]
-                else:
-                    (
-                        self.toolset["features_dict"],
-                        self.toolset["logit_dict"],
-                    ) = novelty_algorithm.execute(self.toolset, "FeatureExtraction")
-
-                    if self.config["save_features"]:
-                        test_features["features_dict"].update(
-                            self.toolset["features_dict"]
+                    feature_dir = self.config["feature_save_dir"]
+                    if os.path.isdir(feature_dir):
+                        test_features = pkl.load(
+                            open(
+                                os.path.join(feature_dir, f"{test_id}_features.pkl"),
+                                "rb",
+                            )
                         )
-                        test_features["logit_dict"].update(self.toolset["logit_dict"])
-                        if self.config["feature_extraction_only"]:
-                            continue
+                    else:
+                        test_features = pkl.load(open(feature_dir, "rb"))
 
-                results: Dict[str, Any] = {}
-                results["detection"] = novelty_algorithm.execute(
-                    self.toolset, "WorldDetection"
-                )
-                results["characterization"] = novelty_algorithm.execute(
-                    self.toolset, "NoveltyCharacterization"
-                )
-                novelty_algorithm.execute(self.toolset, "NoveltyAdaption")
-                self.harness.post_results(results, test_id, round_id, session_id)
-                log.info(f"Round complete: {self.toolset['round_id']}")
-                # cleanup the round files
-                safe_remove(self.toolset["dataset"])
-                safe_remove_results(results)
-            log.info(f"Test complete: {self.toolset['test_id']}")
+                    features_dict = test_features["features_dict"]
+                    logit_dict = test_features["logit_dict"]
 
-            if self.config["save_features"] and not self.config["use_saved_features"]:
-                feature_dir = self.config["save_dir"]
-                ub.ensuredir(feature_dir)
-                feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
-                log.info(f"Saving features in {feature_path}")
-                with open(feature_path, "wb") as f:
-                    pkl.dump(test_features, f)
-        log.info(f"Session ended: {self.toolset['session_id']}")
-        self.harness.terminate_session(session_id)
+                for round_id in count(0):
+                    self.toolset["round_id"] = round_id
+                    log.info(f"Start round: {self.toolset['round_id']}")
+                    # see if there is another round available
+                    try:
+                        self.toolset["dataset"] = self.harness.dataset_request(
+                            test_id, round_id, session_id
+                        )
+                    except RoundError:
+                        # no more rounds available, this test is done.
+                        break
+
+                    with open(self.toolset["dataset"], "r") as dataset:
+                        dataset_ids = dataset.readlines()
+                        image_ids = [image_id.strip() for image_id in dataset_ids]
+
+                    if self.config["use_saved_features"]:
+                        self.toolset["features_dict"] = {}
+                        self.toolset["logit_dict"] = {}
+                        for image_id in image_ids:
+                            self.toolset["features_dict"][image_id] = features_dict[
+                                image_id
+                            ]
+                            self.toolset["logit_dict"][image_id] = logit_dict[image_id]
+                    else:
+                        (
+                            self.toolset["features_dict"],
+                            self.toolset["logit_dict"],
+                        ) = algorithms[algorithm_name].execute(
+                            self.toolset, "FeatureExtraction"
+                        )
+
+                        if self.config["save_features"]:
+                            test_features["features_dict"].update(
+                                self.toolset["features_dict"]
+                            )
+                            test_features["logit_dict"].update(
+                                self.toolset["logit_dict"]
+                            )
+                            if self.config["feature_extraction_only"]:
+                                continue
+
+                    results: Dict[str, Any] = {}
+                    results["detection"] = algorithms[algorithm_name].execute(
+                        self.toolset, "WorldDetection"
+                    )
+                    results["characterization"] = algorithms[algorithm_name].execute(
+                        self.toolset, "NoveltyCharacterization"
+                    )
+                    algorithms[algorithm_name].execute(self.toolset, "NoveltyAdaption")
+                    self.harness.post_results(results, test_id, round_id, session_id)
+                    log.info(f"Round complete: {self.toolset['round_id']}")
+                    # cleanup the round files
+                    safe_remove(self.toolset["dataset"])
+                    safe_remove_results(results)
+                log.info(f"Test complete: {self.toolset['test_id']}")
+                self.harness.complete_test(session_id, test_id)
+                if (
+                    self.config["save_features"]
+                    and not self.config["use_saved_features"]
+                ):
+                    feature_dir = self.config["save_dir"]
+                    ub.ensuredir(feature_dir)
+                    feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
+                    log.info(f"Saving features in {feature_path}")
+                    with open(feature_path, "wb") as f:
+                        pkl.dump(test_features, f)
+        for algorithm_name, session_id in sessions.items():
+            log.info(f"Session ended for {algorithm_name}: {session_id}")
+            self.harness.terminate_session(session_id)
