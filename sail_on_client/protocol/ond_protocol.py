@@ -112,6 +112,7 @@ class SailOn(BaseProtocol):
                     algorithm_name
                 ]
                 # Intialize feedback object for Image Classfication
+                algorithm_toolset = {}
                 if (
                     "feedback_params" in detector_config
                     and self.config["domain"] == "image_classification"
@@ -122,7 +123,7 @@ class SailOn(BaseProtocol):
                         "income_per_batch"
                     ]
                     max_budget = detector_config["feedback_params"]["maximum_budget"]
-                    self.toolset[
+                    algorithm_toolset[
                         "ImageClassificationFeedback"
                     ] = ImageClassificationFeedback(
                         first_budget,
@@ -133,7 +134,6 @@ class SailOn(BaseProtocol):
                         test_id,
                         "classification",
                     )
-                algorithm_toolset = {}
                 for config_name, config_value in self.config["detectors"].items():
                     if (
                         config_name == "has_baseline"
@@ -150,6 +150,7 @@ class SailOn(BaseProtocol):
                 algorithm_toolset["session_id"] = session_id
                 algorithm_toolset["test_id"] = test_id
                 algorithm_toolset["test_type"] = ""
+
                 algorithms[algorithm_name].execute(algorithm_toolset, "Initialize")
                 self.toolset["image_features"] = {}
                 self.toolset["dataset_root"] = self.config["dataset_root"]
@@ -164,7 +165,6 @@ class SailOn(BaseProtocol):
                         "features_dict": {},
                         "logit_dict": {},
                     }
-
                 if self.config["use_saved_features"]:
                     feature_dir = self.config["save_dir"]
                     if os.path.isdir(feature_dir):
