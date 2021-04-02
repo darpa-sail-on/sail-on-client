@@ -253,7 +253,8 @@ def test_image_classification_evaluate(get_ic_interface_params):
         result_folder, "OND.54011215.0000.1236_PreComputedDetector_classification.csv"
     )
     baseline_classification_file_id = os.path.join(
-        result_folder, "OND.54011215.0000.1236_BaselinePreComputedDetector_classification.csv"
+        result_folder,
+        "OND.54011215.0000.1236_BaselinePreComputedDetector_classification.csv",
     )
     results = {
         "detection": detection_file_id,
@@ -267,7 +268,9 @@ def test_image_classification_evaluate(get_ic_interface_params):
         baseline_result, "OND.54011215.0000.1236", 0, baseline_session_id
     )
     local_interface.evaluate("OND.54011215.0000.1236", 0, session_id)
-    local_interface.evaluate("OND.54011215.0000.1236", 0, session_id, baseline_session_id)
+    local_interface.evaluate(
+        "OND.54011215.0000.1236", 0, session_id, baseline_session_id
+    )
 
 
 def test_activity_recognition_evaluate(get_ar_interface_params):
