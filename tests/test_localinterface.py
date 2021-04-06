@@ -341,12 +341,12 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "transcripts"
     )
-    detection_file_id = os.path.join(result_folder, "OND.0.90001.8714062_detection.csv")
+    detection_file_id = os.path.join(result_folder, "OND.0.90001.8714062_PreComputedDetector_detection.csv")
     classification_file_id = os.path.join(
-        result_folder, "OND.0.90001.8714062_classification.csv"
+        result_folder, "OND.0.90001.8714062_PreComputedDetector_classification.csv"
     )
     characterization_file_id = os.path.join(
-        result_folder, "OND.0.90001.8714062_characterization.csv"
+        result_folder, "OND.0.90001.8714062_PreComputedDetector_characterization.csv"
     )
     results = {
         "detection": detection_file_id,
@@ -354,8 +354,23 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
         "characterization": characterization_file_id,
     }
 
+    baseline_session_id = _initialize_session(
+        local_interface, "OND", "transcripts"
+    )
     local_interface.post_results(results, "OND.0.90001.8714062", 0, session_id)
     local_interface.evaluate("OND.0.90001.8714062", 0, session_id)
+
+    baseline_classification_file_id = os.path.join(
+        result_folder,
+        "OND.0.90001.8714062_BaselinePreComputedDetector_classification.csv",
+    )
+    baseline_result = {
+        "classification": baseline_classification_file_id,
+    }
+    local_interface.post_results(
+        baseline_result, "OND.0.90001.8714062", 0, baseline_session_id
+    )
+    local_interface.evaluate("OND.0.90001.8714062", 0, session_id, baseline_session_id)
 
 
 def test_complete_test(get_interface_params):

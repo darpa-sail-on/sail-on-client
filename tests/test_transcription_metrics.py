@@ -23,7 +23,7 @@ def detection_files():
     )
     gt_file = os.path.join(result_folder, "OND.0.90001.8714062_single_df.csv")
     gt = pd.read_csv(gt_file, sep=",", header=None, skiprows=1)
-    detection_file = os.path.join(result_folder, "OND.0.90001.8714062_detection.csv")
+    detection_file = os.path.join(result_folder, "OND.0.90001.8714062_PreComputedDetector_detection.csv")
     detection = pd.read_csv(detection_file, sep=",", header=None)
     return detection, gt
 
@@ -35,7 +35,20 @@ def classification_file():
         os.path.dirname(__file__), "mock_results", "transcripts"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.0.90001.8714062_classification.csv"
+        result_folder, "OND.0.90001.8714062_PreComputedDetector_classification.csv"
+    )
+    classification = pd.read_csv(classification_file_id, sep=",", header=None)
+    return classification
+
+
+@pytest.fixture(scope="function")
+def baseline_classification_file():
+    """Fixture for reading baseline classification file."""
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "transcripts"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.0.90001.8714062_BaselinePreComputedDetector_classification.csv"
     )
     classification = pd.read_csv(classification_file_id, sep=",", header=None)
     return classification
@@ -476,3 +489,40 @@ def test_is_cdt_and_is_early(dtm_metrics, detection_files):
         m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0]
     )
     assert not is_cdt_is_early["Is CDT"] and is_cdt_is_early["Is Early"]
+
+
+def test_m_nrp(
+    dtm_metrics, detection_files, classification_file, baseline_classification_file
+):
+    """
+    Test novelty reaction performance.
+
+    Args:
+        dtm_metrics (DocumentTranscriptionMetrics): An instance of DocumentTranscriptionMetrics
+        detection_files (Tuple): A tuple of data frames containing detection and ground truth
+        classification_file (DataFrame): A data frame with classification prediction
+        baseline_classification_fDataFrame): A data frame with classification prediction for baseline
+
+    Return:
+        None
+    """
+    detection, gt = detection_files
+    m_acc = dtm_metrics.m_acc(
+        gt[dtm_metrics.novel_id],
+        classification_file,
+        gt[dtm_metrics.classification_id],
+        100,
+        5,
+    )
+    m_acc_baseline = dtm_metrics.m_acc(
+        gt[dtm_metrics.detection_id],
+        baseline_classification_file,
+        gt[dtm_metrics.classification_id],
+        100,
+        5,
+    )
+    m_nrp = dtm_metrics.m_nrp(m_acc, m_acc_baseline)
+    assert m_nrp == {
+        "M_nrp_post_top3": 86.831,
+        "M_nrp_post_top1": 76.543,
+    }
