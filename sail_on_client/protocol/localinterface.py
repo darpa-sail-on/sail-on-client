@@ -265,7 +265,9 @@ class LocalInterface(Harness):
 
         m_num = metric.m_num(detections[detection_idx], gt[gt_detection_idx])
         results["m_num"] = m_num
-        m_num_stats = metric.m_num_stats(detections[detection_idx], gt[gt_detection_idx])
+        m_num_stats = metric.m_num_stats(
+            detections[detection_idx], gt[gt_detection_idx]
+        )
         results["m_num_stats"] = m_num_stats
         m_ndp = metric.m_ndp(detections[detection_idx], gt[gt_detection_idx])
         results["m_ndp"] = m_ndp
@@ -274,11 +276,7 @@ class LocalInterface(Harness):
         m_ndp_post = metric.m_ndp_post(detections[detection_idx], gt[gt_detection_idx])
         results["m_ndp_post"] = m_ndp_post
         m_acc = metric.m_acc(
-            gt[gt_detection_idx],
-            classifications,
-            gt[gt_classification_idx],
-            100,
-            5,
+            gt[gt_detection_idx], classifications, gt[gt_classification_idx], 100, 5,
         )
         results["m_acc"] = m_acc
         m_acc_failed = metric.m_ndp_failed_reaction(
@@ -300,9 +298,7 @@ class LocalInterface(Harness):
                 100,
                 5,
             )
-            log.info(
-                f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
-            )
+            log.info(f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}")
             m_nrp = metric.m_nrp(m_acc, m_acc_baseline)
             results["m_nrp"] = m_nrp
 

@@ -6,11 +6,7 @@ from sail_on_client.evaluate.image_classification import ImageClassificationMetr
 from sail_on_client.evaluate.document_transcription import DocumentTranscriptionMetrics
 import pytest
 
-ic_dict = {
-    "image_id": 0,
-    "detection": 1,
-    "classification": 2
-}
+ic_dict = {"image_id": 0, "detection": 1, "classification": 2}
 
 dt_dict = {
     "image_id": 0,
@@ -23,7 +19,7 @@ dt_dict = {
     "letter_size": 7,
     "word_spacing": 8,
     "slant_angle": 9,
-    "attribute": 10
+    "attribute": 10,
 }
 
 ar_dict = {
@@ -32,17 +28,18 @@ ar_dict = {
     "detection": 2,
     "classification": 3,
     "spatial": 4,
-    "temporal": 5
+    "temporal": 5,
 }
 
 
+@pytest.mark.parametrize("protocol", ["OND", "CONDDA"])
 @pytest.mark.parametrize(
-    "protocol", ["OND", "CONDDA"]
-)
-@pytest.mark.parametrize(
-    "domain,gt_dict,expected", [("image_classification", ic_dict, ImageClassificationMetrics),
-                                ("transcripts", dt_dict, DocumentTranscriptionMetrics),
-                                ("activity_recognition", ar_dict, ActivityRecognitionMetrics)]
+    "domain,gt_dict,expected",
+    [
+        ("image_classification", ic_dict, ImageClassificationMetrics),
+        ("transcripts", dt_dict, DocumentTranscriptionMetrics),
+        ("activity_recognition", ar_dict, ActivityRecognitionMetrics),
+    ],
 )
 def test_create_metric_instance(protocol, domain, gt_dict, expected):
     """

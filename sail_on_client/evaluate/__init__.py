@@ -6,7 +6,11 @@ from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetr
 from typing import Dict, Union
 
 
-def create_metric_instance(protocol: str, domain: str, gt_config: Dict) -> Union[ImageClassificationMetrics, DocumentTranscriptionMetrics, ActivityRecognitionMetrics]:
+def create_metric_instance(
+    protocol: str, domain: str, gt_config: Dict
+) -> Union[
+    ImageClassificationMetrics, DocumentTranscriptionMetrics, ActivityRecognitionMetrics
+]:
     """
     Create an instance of metric object.
 
@@ -22,6 +26,4 @@ def create_metric_instance(protocol: str, domain: str, gt_config: Dict) -> Union
     elif domain == "transcripts":
         return DocumentTranscriptionMetrics(protocol, **gt_config)
     else:
-        raise ValueError(
-            f'Domain: "{domain}" is not a real domain.'
-        )
+        raise ValueError(f'Domain: "{domain}" is not a real domain.')
