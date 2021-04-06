@@ -376,6 +376,16 @@ class LocalInterface(Harness):
                 f"{session_id}.{test_id}_classification.csv",
             )
             classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+            if baseline_session_id is not None:
+                baseline_classification_file_id = os.path.join(
+                    self.result_directory,
+                    protocol,
+                    domain,
+                    f"{baseline_session_id}.{test_id}_classification.csv",
+                )
+                baseline_classifications = pd.read_csv(
+                    baseline_classification_file_id, sep=",", header=None
+                )
             dtm = DocumentTranscriptionMetrics(protocol, **gt_config)
             m_num = dtm.m_num(detections[1], gt[dtm.novel_id])
             results["m_num"] = m_num
@@ -402,6 +412,19 @@ class LocalInterface(Harness):
                 m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
             )
             results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
+            if baseline_session_id is not None:
+                m_acc_baseline = dtm.m_acc(
+                    gt[dtm.novel_id],
+                    baseline_classifications,
+                    gt[dtm.classification_id],
+                    100,
+                    5,
+                )
+                log.info(
+                    f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
+                )
+                m_nrp = dtm.m_nrp(m_acc, m_acc_baseline)
+                results["m_nrp"] = m_nrp
         else:
             raise AttributeError(
                 f'Domain: "{domain}" is not a real domain.  Get a clue.'

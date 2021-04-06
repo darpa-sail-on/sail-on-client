@@ -234,3 +234,19 @@ class DocumentTranscriptionMetrics(ProgramMetrics):
         is_cdt = (ta2_idx >= gt_idx) & (ta2_idx < test_len)
         is_early = ta2_idx < gt_idx
         return {"Is CDT": is_cdt, "Is Early": is_early}
+
+    def m_nrp(self, ta2_acc: Dict, baseline_acc: Dict) -> Dict:
+        """
+        m_nrp function.
+
+        Args:
+            ta2_acc: Accuracy scores for the agent
+            baseline_acc: Accuracy scores for baseline
+
+        Returns:
+            Reaction performance for the agent
+        """
+        nrp = {}
+        nrp["M_nrp_post_top3"] = 100 * (ta2_acc["post_top3"] / baseline_acc["pre_top3"])
+        nrp["M_nrp_post_top1"] = 100 * (ta2_acc["post_top1"] / baseline_acc["pre_top1"])
+        return nrp
