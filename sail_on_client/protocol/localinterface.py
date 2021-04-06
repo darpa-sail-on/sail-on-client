@@ -219,216 +219,98 @@ class LocalInterface(Harness):
         domain = info["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
         gt_config = json.load(open(self.gt_config, "r"))
+        detection_file_id = os.path.join(
+            self.result_directory,
+            protocol,
+            domain,
+            f"{session_id}.{test_id}_detection.csv",
+        )
+        detections = pd.read_csv(detection_file_id, sep=",", header=None)
+        classification_file_id = os.path.join(
+            self.result_directory,
+            protocol,
+            domain,
+            f"{session_id}.{test_id}_classification.csv",
+        )
+
+        classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+        if baseline_session_id is not None:
+            baseline_classification_file_id = os.path.join(
+                self.result_directory,
+                protocol,
+                domain,
+                f"{baseline_session_id}.{test_id}_classification.csv",
+            )
+            baseline_classifications = pd.read_csv(
+                baseline_classification_file_id, sep=",", header=None
+            )
 
         # ######## Image Classification Evaluation  ###########
         if domain == "image_classification":
-            detection_file_id = os.path.join(
-                self.result_directory,
-                protocol,
-                domain,
-                f"{session_id}.{test_id}_detection.csv",
-            )
-            detections = pd.read_csv(detection_file_id, sep=",", header=None)
-            classification_file_id = os.path.join(
-                self.result_directory,
-                protocol,
-                domain,
-                f"{session_id}.{test_id}_classification.csv",
-            )
-
-            classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            if baseline_session_id is not None:
-                baseline_classification_file_id = os.path.join(
-                    self.result_directory,
-                    protocol,
-                    domain,
-                    f"{baseline_session_id}.{test_id}_classification.csv",
-                )
-                baseline_classifications = pd.read_csv(
-                    baseline_classification_file_id, sep=",", header=None
-                )
-            arm_im = ImageClassificationMetrics(protocol, **gt_config)
-            m_num = arm_im.m_num(detections[1], gt[arm_im.detection_id])
-            results["m_num"] = m_num
-            m_num_stats = arm_im.m_num_stats(detections[1], gt[arm_im.detection_id])
-            results["m_num_stats"] = m_num_stats
-            m_ndp = arm_im.m_ndp(detections[1], gt[arm_im.detection_id])
-            results["m_ndp"] = m_ndp
-            m_ndp_pre = arm_im.m_ndp_pre(detections[1], gt[arm_im.detection_id])
-            results["m_ndp_pre"] = m_ndp_pre
-            m_ndp_post = arm_im.m_ndp_post(detections[1], gt[arm_im.detection_id])
-            results["m_ndp_post"] = m_ndp_post
-            m_acc = arm_im.m_acc(
-                gt[arm_im.detection_id],
-                classifications,
-                gt[arm_im.classification_id],
-                100,
-                5,
-            )
-            results["m_acc"] = m_acc
-            m_acc_failed = arm_im.m_ndp_failed_reaction(
-                detections[arm_im.detection_id],
-                gt[1],
-                classifications,
-                gt[arm_im.classification_id],
-            )
-            results["m_acc_failed"] = m_acc_failed
-            m_is_cdt_and_is_early = arm_im.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
-            )
-            results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
-            if baseline_session_id is not None:
-                m_acc_baseline = arm_im.m_acc(
-                    gt[arm_im.detection_id],
-                    baseline_classifications,
-                    gt[arm_im.classification_id],
-                    100,
-                    5,
-                )
-                log.info(
-                    f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
-                )
-                m_nrp = arm_im.m_nrp(m_acc, m_acc_baseline)
-                results["m_nrp"] = m_nrp
-
+            metric = ImageClassificationMetrics(protocol, **gt_config)
+            detection_idx = 1
+            gt_detection_idx = metric.detection_id
+            gt_classification_idx = metric.classification_id
         # ######## Activity Recognition Evaluation  ###########
         elif domain == "activity_recognition":
-            detection_file_id = os.path.join(
-                self.result_directory,
-                protocol,
-                domain,
-                f"{session_id}.{test_id}_detection.csv",
-            )
-            detections = pd.read_csv(detection_file_id, sep=",", header=None)
-            classification_file_id = os.path.join(
-                self.result_directory,
-                protocol,
-                domain,
-                f"{session_id}.{test_id}_classification.csv",
-            )
-            classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            if baseline_session_id is not None:
-                baseline_classification_file_id = os.path.join(
-                    self.result_directory,
-                    protocol,
-                    domain,
-                    f"{baseline_session_id}.{test_id}_classification.csv",
-                )
-                baseline_classifications = pd.read_csv(
-                    baseline_classification_file_id, sep=",", header=None
-                )
-            arm_ar = ActivityRecognitionMetrics(protocol, **gt_config)
-            m_num = arm_ar.m_num(detections[1], gt[arm_ar.novel_id])
-            results["m_num"] = m_num
-            m_num_stats = arm_ar.m_num_stats(detections[1], gt[arm_ar.novel_id])
-            results["m_num_stats"] = m_num_stats
-            m_ndp = arm_ar.m_ndp(detections[1], gt[arm_ar.novel_id])
-            results["m_ndp"] = m_ndp
-            m_ndp_pre = arm_ar.m_ndp_pre(detections[1], gt[arm_ar.novel_id])
-            results["m_ndp_pre"] = m_ndp_pre
-            m_ndp_post = arm_ar.m_ndp_post(detections[1], gt[arm_ar.novel_id])
-            results["m_ndp_post"] = m_ndp_post
-            m_acc = arm_ar.m_acc(
-                gt[arm_ar.novel_id],
-                classifications,
-                gt[arm_ar.classification_id],
-                100,
-                5,
-            )
-            results["m_acc"] = m_acc
-            m_acc_failed = arm_ar.m_ndp_failed_reaction(
-                detections[1],
-                gt[arm_ar.novel_id],
-                classifications,
-                gt[arm_ar.classification_id],
-            )
-            results["m_acc_failed"] = m_acc_failed
-            m_is_cdt_and_is_early = arm_ar.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
-            )
-            results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
-            if baseline_session_id is not None:
-                m_acc_baseline = arm_ar.m_acc(
-                    gt[arm_ar.novel_id],
-                    baseline_classifications,
-                    gt[arm_ar.classification_id],
-                    100,
-                    5,
-                )
-                log.info(
-                    f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
-                )
-                m_nrp = arm_ar.m_nrp(m_acc, m_acc_baseline)
-                results["m_nrp"] = m_nrp
-        # ######## Document Transcript Evaluation  ###########
+            metric = ActivityRecognitionMetrics(protocol, **gt_config)
+            detection_idx = 1
+            gt_detection_idx = metric.novel_id
+            gt_classification_idx = metric.classification_id
+        # ######## Document Transcription Evaluation  ###########
         elif domain == "transcripts":
-            detection_file_id = os.path.join(
-                self.result_directory,
-                protocol,
-                domain,
-                f"{session_id}.{test_id}_detection.csv",
-            )
-            detections = pd.read_csv(detection_file_id, sep=",", header=None)
-            classification_file_id = os.path.join(
-                self.result_directory,
-                protocol,
-                domain,
-                f"{session_id}.{test_id}_classification.csv",
-            )
-            classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-            if baseline_session_id is not None:
-                baseline_classification_file_id = os.path.join(
-                    self.result_directory,
-                    protocol,
-                    domain,
-                    f"{baseline_session_id}.{test_id}_classification.csv",
-                )
-                baseline_classifications = pd.read_csv(
-                    baseline_classification_file_id, sep=",", header=None
-                )
-            dtm = DocumentTranscriptionMetrics(protocol, **gt_config)
-            m_num = dtm.m_num(detections[1], gt[dtm.novel_id])
-            results["m_num"] = m_num
-            m_num_stats = dtm.m_num_stats(detections[1], gt[dtm.novel_id])
-            results["m_num_stats"] = m_num_stats
-            m_ndp = dtm.m_ndp(detections[1], gt[dtm.novel_id])
-            results["m_ndp"] = m_ndp
-            m_ndp_pre = dtm.m_ndp_pre(detections[1], gt[dtm.novel_id])
-            results["m_ndp_pre"] = m_ndp_pre
-            m_ndp_post = dtm.m_ndp_post(detections[1], gt[dtm.novel_id])
-            results["m_ndp_post"] = m_ndp_post
-            m_acc = dtm.m_acc(
-                gt[dtm.novel_id], classifications, gt[dtm.classification_id], 100, 5
-            )
-            results["m_acc"] = m_acc
-            m_acc_failed = dtm.m_ndp_failed_reaction(
-                detections[1],
-                gt[dtm.novel_id],
-                classifications,
-                gt[dtm.classification_id],
-            )
-            results["m_acc_failed"] = m_acc_failed
-            m_is_cdt_and_is_early = dtm.m_is_cdt_and_is_early(
-                m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
-            )
-            results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
-            if baseline_session_id is not None:
-                m_acc_baseline = dtm.m_acc(
-                    gt[dtm.novel_id],
-                    baseline_classifications,
-                    gt[dtm.classification_id],
-                    100,
-                    5,
-                )
-                log.info(
-                    f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
-                )
-                m_nrp = dtm.m_nrp(m_acc, m_acc_baseline)
-                results["m_nrp"] = m_nrp
+            metric = DocumentTranscriptionMetrics(protocol, **gt_config)
+            detection_idx = 1
+            gt_detection_idx = metric.novel_id
+            gt_classification_idx = metric.classification_id
         else:
             raise AttributeError(
                 f'Domain: "{domain}" is not a real domain.  Get a clue.'
             )
+
+        m_num = metric.m_num(detections[detection_idx], gt[gt_detection_idx])
+        results["m_num"] = m_num
+        m_num_stats = metric.m_num_stats(detections[detection_idx], gt[gt_detection_idx])
+        results["m_num_stats"] = m_num_stats
+        m_ndp = metric.m_ndp(detections[detection_idx], gt[gt_detection_idx])
+        results["m_ndp"] = m_ndp
+        m_ndp_pre = metric.m_ndp_pre(detections[detection_idx], gt[gt_detection_idx])
+        results["m_ndp_pre"] = m_ndp_pre
+        m_ndp_post = metric.m_ndp_post(detections[detection_idx], gt[gt_detection_idx])
+        results["m_ndp_post"] = m_ndp_post
+        m_acc = metric.m_acc(
+            gt[gt_detection_idx],
+            classifications,
+            gt[gt_classification_idx],
+            100,
+            5,
+        )
+        results["m_acc"] = m_acc
+        m_acc_failed = metric.m_ndp_failed_reaction(
+            detections[detection_idx],
+            gt[gt_detection_idx],
+            classifications,
+            gt[gt_classification_idx],
+        )
+        results["m_acc_failed"] = m_acc_failed
+        m_is_cdt_and_is_early = metric.m_is_cdt_and_is_early(
+            m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
+        )
+        results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
+        if baseline_session_id is not None:
+            m_acc_baseline = metric.m_acc(
+                gt[gt_detection_idx],
+                baseline_classifications,
+                gt[gt_classification_idx],
+                100,
+                5,
+            )
+            log.info(
+                f"Baseline performance for {test_id}: {ub.repr2(m_acc_baseline)}"
+            )
+            m_nrp = metric.m_nrp(m_acc, m_acc_baseline)
+            results["m_nrp"] = m_nrp
+
         log.info(f"Results for {test_id}: {ub.repr2(results)}")
         return results
 
