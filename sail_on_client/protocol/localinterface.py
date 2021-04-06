@@ -3,9 +3,7 @@
 from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
 from sail_on_client.errors import RoundError as ClientRoundError
-from sail_on_client.evaluate.image_classification import ImageClassificationMetrics
-from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetrics
-from sail_on_client.evaluate.document_transcription import DocumentTranscriptionMetrics
+from sail_on_client.evaluate import create_metric_instance
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
@@ -244,22 +242,19 @@ class LocalInterface(Harness):
             baseline_classifications = pd.read_csv(
                 baseline_classification_file_id, sep=",", header=None
             )
-
+        metric = create_metric_instance(protocol, domain, gt_config)
         # ######## Image Classification Evaluation  ###########
         if domain == "image_classification":
-            metric = ImageClassificationMetrics(protocol, **gt_config)
             detection_idx = 1
             gt_detection_idx = metric.detection_id
             gt_classification_idx = metric.classification_id
         # ######## Activity Recognition Evaluation  ###########
         elif domain == "activity_recognition":
-            metric = ActivityRecognitionMetrics(protocol, **gt_config)
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             gt_classification_idx = metric.classification_id
         # ######## Document Transcription Evaluation  ###########
         elif domain == "transcripts":
-            metric = DocumentTranscriptionMetrics(protocol, **gt_config)
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             gt_classification_idx = metric.classification_id
