@@ -34,7 +34,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         self.image_id = image_id
         self.detection_id = detection
         self.classification_id = classification
-        self.novel_id = -1  #  Added only for fixing typechecking problems
+        self.novel_id = -1  # Added only for fixing typechecking problems
 
     def m_acc(
         self,
