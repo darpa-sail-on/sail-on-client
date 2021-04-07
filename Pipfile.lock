@@ -431,10 +431,11 @@
         },
         "nltk": {
             "hashes": [
-                "sha256:845365449cd8c5f9731f7cb9f8bd6fd0767553b9d53af9eb1b3abf7700936b35"
+                "sha256:5c5c0c02942cb423d38e5d66285257f53f05e420a8715bca273fb9cf28067e0e",
+                "sha256:718de6908f538db19a77f96b9e6f5f586b0892d7de5eea32e71f2a2535ed8657"
             ],
             "index": "pypi",
-            "version": "==3.5"
+            "version": "==3.6"
         },
         "numpy": {
             "hashes": [
