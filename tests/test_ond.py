@@ -13,15 +13,32 @@ from sail_on_client.protocol.localinterface import LocalInterface
 @pytest.fixture(scope="function")
 def ond_config():
     """Fixture to create a temporal directory and create a json file in it."""
+    test_dir = os.path.dirname(__file__)
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+    data_dir = os.path.join(test_dir, "data")
+    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
+    gt_config = os.path.join(gt_dir, "activity_recognition")
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "domain": "image_classification",
-            "test_ids": ["OND.1.1.1234"],
+            "domain": "activity_recognition",
+            "test_ids": ["OND.10.90001.2100554"],
             "detectors": {
                 "has_baseline": False,
                 "has_reaction_baseline": False,
-                "detector_configs": {"MockDetector": {}},
+                "detector_configs": {
+                    "PreComputedDetector": {
+                        "cache_dir": cache_dir,
+                        "algorithm_name": "PreComputedDetector",
+                        "has_roundwise_file": False,
+                    }
+                },
                 "csv_folder": "",
+            },
+            "harness_config": {
+                "url": "http://localhost:3307",
+                "data_dir": f"{data_dir}",
+                "gt_dir": f"{gt_dir}",
+                "gt_config": f"{gt_config}",
             },
         }
         config_name = "test_ond_config.json"
@@ -32,15 +49,32 @@ def ond_config():
 @pytest.fixture(scope="function")
 def ond_config_with_feature_extraction():
     """Fixture to create a config file for feature extraction."""
+    test_dir = os.path.dirname(__file__)
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+    data_dir = os.path.join(test_dir, "data")
+    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
+    gt_config = os.path.join(gt_dir, "activity_recognition.json")
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "domain": "image_classification",
-            "test_ids": ["OND.1.1.1234"],
+            "domain": "activity_recognition",
+            "test_ids": ["OND.10.90001.2100554"],
             "detectors": {
                 "has_baseline": False,
                 "has_reaction_baseline": False,
-                "detector_configs": {"MockDetector": {}},
+                "detector_configs": {
+                    "PreComputedDetector": {
+                        "cache_dir": cache_dir,
+                        "algorithm_name": "PreComputedDetector",
+                        "has_roundwise_file": False,
+                    }
+                },
                 "csv_folder": "",
+            },
+            "harness_config": {
+                "url": "http://localhost:3307",
+                "data_dir": f"{data_dir}",
+                "gt_dir": f"{gt_dir}",
+                "gt_config": f"{gt_config}",
             },
         }
         config_name = "test_ond_config.json"
@@ -79,7 +113,7 @@ def ond_config_with_reaction_baseline():
                 },
             },
             "harness_config": {
-                "url": "http://3.32.8.161:5001/",
+                "url": "http://localhost:3307",
                 "data_dir": f"{data_dir}",
                 "gt_dir": f"{gt_dir}",
                 "gt_config": f"{gt_config}",
