@@ -33,7 +33,7 @@ jobs:
       - name: Checkout sail on evaluate
         uses: actions/checkout@v2
         with:
-          repository: darpa-sail-on/sil_on_evaluate
+          repository: darpa-sail-on/sail_on_evaluate
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: Sail_On_Evaluate
       - name: Checkout hwr novelty detector
