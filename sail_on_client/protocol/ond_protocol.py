@@ -170,7 +170,7 @@ class SailOn(BaseProtocol):
                     if os.path.isdir(feature_dir):
                         test_features = pkl.load(
                             open(
-                                os.path.join(feature_dir, f"{test_id}_features.pkl"),
+                                os.path.join(feature_dir, f"{test_id}_{algorithm_name}_features.pkl"),
                                 "rb",
                             )
                         )
@@ -256,7 +256,7 @@ class SailOn(BaseProtocol):
                 ):
                     feature_dir = self.config["save_dir"]
                     ub.ensuredir(feature_dir)
-                    feature_path = os.path.join(feature_dir, f"{test_id}_features.pkl")
+                    feature_path = os.path.join(feature_dir, f"{test_id}_{algorithm_name}_features.pkl")
                     log.info(f"Saving features in {feature_path}")
                     with open(feature_path, "wb") as f:
                         pkl.dump(test_features, f)
