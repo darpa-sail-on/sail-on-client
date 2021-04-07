@@ -29,7 +29,6 @@ jobs:
           repository: darpa-sail-on/Sail-On-API
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: Sail-On-API
-          ref: fix-variable
       - name: Checkout sail on evaluate
         uses: actions/checkout@v2
         with:
