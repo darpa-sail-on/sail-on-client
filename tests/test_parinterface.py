@@ -252,11 +252,21 @@ def test_evaluate(server_setup, get_interface_params):
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     session_id = _initialize_session(par_interface, "OND")
-    response = par_interface.evaluate("OND.1.1.1234", 0, session_id)
-    expected = os.path.join(
-        config_directory, f"{session_id}.OND.1.1.1234.0_evaluation.csv"
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "image_classification"
     )
-    assert expected == response
+    detection_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_detection.csv"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_classification.csv"
+    )
+    results = {
+        "detection": detection_file_id,
+        "classification": classification_file_id,
+    }
+    par_interface.post_results(results, "OND.54011215.0000.1236", 0, session_id)
+    par_interface.evaluate("OND.54011215.0000.1236", 0, session_id)
 
 
 def test_complete_test(server_setup, get_interface_params):
