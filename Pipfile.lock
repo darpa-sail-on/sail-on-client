@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "23f6c94808c36c60c142e0e0068cc6291e1e4d3e79c1b28f5db88f7579bc589d"
+            "sha256": "f309bb06369a6a587d6bcce68c2ad7b358d8b440f8deb3b7eb604ce3a7278da5"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,14 @@
             ],
             "markers": "python_version < '3.8'",
             "version": "==1.5.2"
+        },
+        "cachetools": {
+            "hashes": [
+                "sha256:513d4ff98dd27f85743a8dc0e92f55ddb1b49e060c2d5961512855cda2c01a98",
+                "sha256:bbaa39c3dede00175df2dc2b03d0cf18dd2d32a7de7beb68072d13043c9edb20"
+            ],
+            "index": "pypi",
+            "version": "==4.1.1"
         },
         "certifi": {
             "hashes": [
@@ -194,6 +202,13 @@
         "graph-autoencoder": {
             "editable": true,
             "path": "./../graph-autoencoder"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8"
+            ],
+            "index": "pypi",
+            "version": "==20.1.0"
         },
         "h5py": {
             "hashes": [
