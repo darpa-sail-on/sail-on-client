@@ -1,4 +1,4 @@
-"""Image Classification Feedback."""
+"""Activity Recognition Feedback."""
 
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
@@ -8,8 +8,8 @@ from typing import Union
 SUPPORTED_FEEDBACK = ["classification", "score"]
 
 
-class ImageClassificationFeedback(Feedback):
-    """Feedback for image classification."""
+class ActivityRecognitionFeedback(Feedback):
+    """Feedback for activity recognition."""
 
     def __init__(
         self,
@@ -22,7 +22,7 @@ class ImageClassificationFeedback(Feedback):
         feedback_type: str,
     ) -> None:
         """
-        Initialize image classification feedback object.
+        Initialize activity recognition feedback object.
 
         Args:
             first_budget: Initial budget
@@ -38,7 +38,7 @@ class ImageClassificationFeedback(Feedback):
         """
         if feedback_type not in SUPPORTED_FEEDBACK:
             raise ValueError(f"Unsupported feedback_type {feedback_type}")
-        super(ImageClassificationFeedback, self).__init__(
+        super(ActivityRecognitionFeedback, self).__init__(
             first_budget,
             income_per_batch,
             maximum_budget,
