@@ -1,5 +1,6 @@
 """Document Transcription Feedback."""
 
+import pandas as pd
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.feedback.feedback import Feedback
