@@ -199,7 +199,7 @@ def test_get_score_feedback(
     (("transcription", ("detection", "classification", "transcription")),),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
-def test_get_score_feedback(
+def test_get_lavenshtein_feedback(
     server_setup, get_interface_params, feedback_mapping, protocol_name
 ):
     """
