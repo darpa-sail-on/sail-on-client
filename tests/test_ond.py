@@ -94,6 +94,7 @@ def ond_config_with_reaction_baseline():
         dummy_config = {
             "domain": "activity_recognition",
             "test_ids": ["OND.10.90001.2100554"],
+            "is_eval_enabled": True,
             "detectors": {
                 "has_baseline": False,
                 "has_reaction_baseline": True,
