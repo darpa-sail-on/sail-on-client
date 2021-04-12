@@ -101,14 +101,17 @@ class Feedback:
             self.deposit_income()
             self.current_round = round_id
             image_ids = [image_names[int(idx)] for idx in images_id_list]
-            feedback_score = self.interface.get_feedback_request(
+            feedback_file = self.interface.get_feedback_request(
                 image_ids,
                 self.feedback_type,
                 self.test_id,
                 round_id,
                 self.session_id,
             )
-            return feedback_score
+            df = pd.read_csv(
+                feedback_file, delimiter=",", header=None
+            )
+            return df
         else:
             return None
 
