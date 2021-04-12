@@ -20,22 +20,11 @@ feedback_image_ids = [
     "31d4b650-3f4f-41b7-9f7f-93433d470bee.avi",
     "c0784443-e0e7-4b76-817c-fc6e1529f467.avi",
     "de9af377-2e0b-42da-9b91-de79e13537d9.avi",
-    "f97a7f62-7db3-46c9-b827-8f2676760a04.avi"
+    "f97a7f62-7db3-46c9-b827-8f2676760a04.avi",
 ]
 
 
-feedback_labels = [
-    74,
-    34,
-    10,
-    10,
-    21,
-    21,
-    21,
-    10,
-    74,
-    21
-]
+feedback_labels = [74, 34, 10, 10, 21, 21, 21, 10, 74, 21]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -149,9 +138,7 @@ def test_get_labelled_feedback(
     ar_feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_labelled = ar_feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_labelled = ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert all(df_labelled.id == feedback_image_ids)
     assert all(df_labelled.labels == feedback_labels)
 
@@ -192,15 +179,16 @@ def test_get_score_feedback(
     feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_score = feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_score = feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert df_score[1][0] == 0.1987951807228915
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")),)
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_feedback(
@@ -235,9 +223,7 @@ def test_get_feedback(
     ar_feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    ar_feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
 
 
 @pytest.mark.parametrize(

@@ -12,31 +12,20 @@ from sail_on_client.protocol.parinterface import ParInterface
 
 
 feedback_image_ids = [
-        "61b1747b-84f0-4ef7-b11f-691d842c524b.png",
-        "659ec8f9-aefd-4645-9d1d-e3e0a2356e2b.png",
-        "df523435-bb28-47a0-a42a-17b9e7e5f11d.png",
-        "13efc410-8fab-41ed-a840-1beb9648613c.png",
-        "e5290f9e-a313-411e-9801-691db75c33ae.png",
-        "17ea4fe5-db52-4e50-9765-4d31b0e3eae2.png",
-        "302b940a-c985-485c-a50f-df615fca38e7.png",
-        "e0e7ae2c-91e5-4ccf-bb03-eb469f38c316.png",
-        "11899acf-a701-4180-bc20-00cc0ac47482.png",
-        "823ecc48-70f0-4d19-82d7-2a6d1e240d44.png"
+    "61b1747b-84f0-4ef7-b11f-691d842c524b.png",
+    "659ec8f9-aefd-4645-9d1d-e3e0a2356e2b.png",
+    "df523435-bb28-47a0-a42a-17b9e7e5f11d.png",
+    "13efc410-8fab-41ed-a840-1beb9648613c.png",
+    "e5290f9e-a313-411e-9801-691db75c33ae.png",
+    "17ea4fe5-db52-4e50-9765-4d31b0e3eae2.png",
+    "302b940a-c985-485c-a50f-df615fca38e7.png",
+    "e0e7ae2c-91e5-4ccf-bb03-eb469f38c316.png",
+    "11899acf-a701-4180-bc20-00cc0ac47482.png",
+    "823ecc48-70f0-4d19-82d7-2a6d1e240d44.png",
 ]
 
 
-feedback_labels = [
-    44,
-    4,
-    9,
-    45,
-    0,
-    9,
-    0,
-    35,
-    35,
-    15
-]
+feedback_labels = [44, 4, 9, 45, 0, 9, 0, 35, 35, 15]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -160,9 +149,7 @@ def test_get_labelled_feedback(
     dt_feedback = DocumentTranscriptionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_labelled = dt_feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_labelled = dt_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert all(df_labelled.id == feedback_image_ids)
     assert all(df_labelled.labels == feedback_labels)
 
@@ -203,14 +190,13 @@ def test_get_score_feedback(
     dt_feedback = DocumentTranscriptionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_score = dt_feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_score = dt_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert df_score[1][0] == 0.76953125
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("transcription", ("detection", "classification", "transcription")),)
+    "feedback_mapping",
+    (("transcription", ("detection", "classification", "transcription")),),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_score_feedback(
@@ -245,16 +231,17 @@ def test_get_score_feedback(
     dt_feedback = DocumentTranscriptionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_score = dt_feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_score = dt_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert df_score[1][0] == 8
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")),
-                         ("transcription", ("detection", "classification", "transcription")))
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+        ("transcription", ("detection", "classification", "transcription")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_feedback(
@@ -289,14 +276,15 @@ def test_get_feedback(
     dt_feedback = DocumentTranscriptionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    dt_feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    dt_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")),)
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_deposit_income(
@@ -326,8 +314,11 @@ def test_deposit_income(
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")))
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_budget(

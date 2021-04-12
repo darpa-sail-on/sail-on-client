@@ -45,5 +45,5 @@ class ImageClassificationFeedback(Feedback):
             interface,
             session_id,
             test_id,
-            feedback_type
+            feedback_type,
         )

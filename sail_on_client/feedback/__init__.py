@@ -1,14 +1,24 @@
 """Sail On client feedback package."""
 
-from sail_on_client.feedback.image_classification_feedback import ImageClassificationFeedback
-from sail_on_client.feedback.document_transcription_feedback import DocumentTranscriptionFeedback
-from sail_on_client.feedback.activity_recognition_feedback import ActivityRecognitionFeedback
+from sail_on_client.feedback.image_classification_feedback import (
+    ImageClassificationFeedback,
+)
+from sail_on_client.feedback.document_transcription_feedback import (
+    DocumentTranscriptionFeedback,
+)
+from sail_on_client.feedback.activity_recognition_feedback import (
+    ActivityRecognitionFeedback,
+)
 from typing import Dict, Union
 
 
 def create_feedback_instance(
     domain: str, feedback_config: Dict
-) -> Union[ImageClassificationFeedback, DocumentTranscriptionFeedback, ActivityRecognitionFeedback]:
+) -> Union[
+    ImageClassificationFeedback,
+    DocumentTranscriptionFeedback,
+    ActivityRecognitionFeedback,
+]:
     """
     Create an instance of feedback object.
 

@@ -19,21 +19,10 @@ feedback_image_ids = [
     "known_classes/images/val/00080/00085.JPEG",
     "known_classes/images/val/00277/00062.JPEG",
     "known_classes/images/val/00004/00073.JPEG",
-    "known_classes/images/val/00365/00047.JPEG"
+    "known_classes/images/val/00365/00047.JPEG",
 ]
 
-feedback_labels = [
-    233,
-    72,
-    330,
-    99,
-    228,
-    200,
-    80,
-    277,
-    4,
-    365
-]
+feedback_labels = [233, 72, 330, 99, 228, 200, 80, 277, 4, 365]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -116,9 +105,7 @@ def test_initialize(
             result_folder, f"{test_id}_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    Feedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
-    )
+    Feedback(10, 10, 10, par_interface, session_id, test_id, protocol_constant)
 
 
 @pytest.mark.parametrize(
@@ -157,9 +144,7 @@ def test_get_labeled_feedback(
     feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_labelled = feedback.get_labeled_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_labelled = feedback.get_labeled_feedback(0, list(range(10)), feedback_image_ids)
     assert all(df_labelled.id == feedback_image_ids)
     assert all(df_labelled.labels == feedback_labels)
 
@@ -200,15 +185,16 @@ def test_get_score_feedback(
     feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_score = feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    df_score = feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert df_score[1][0] == 0.59921875
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")),)
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_feedback(
@@ -243,14 +229,15 @@ def test_get_feedback(
     feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    feedback.get_feedback(
-        0, list(range(10)), feedback_image_ids
-    )
+    feedback.get_feedback(0, list(range(10)), feedback_image_ids)
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")),)
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_deposit_income(
@@ -280,8 +267,11 @@ def test_deposit_income(
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),
-                         ("score", ("detection", "classification")))
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_budget(

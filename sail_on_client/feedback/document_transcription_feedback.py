@@ -47,7 +47,7 @@ class DocumentTranscriptionFeedback(Feedback):
             interface,
             session_id,
             test_id,
-            feedback_type
+            feedback_type,
         )
 
     def get_levenshtein_feedback(
@@ -78,9 +78,7 @@ class DocumentTranscriptionFeedback(Feedback):
                     round_id,
                     self.session_id,
                 )
-                df = pd.read_csv(
-                    feedback_file, delimiter=",", header=None
-                )
+                df = pd.read_csv(feedback_file, delimiter=",", header=None)
                 return df
             else:
                 raise ValueError("the function should be added")

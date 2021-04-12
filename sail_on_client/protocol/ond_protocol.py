@@ -125,20 +125,15 @@ class SailOn(BaseProtocol):
                 algorithm_toolset["test_type"] = ""
 
                 # Initialize feedback object for the domains
-                if (
-                    "feedback_params" in algorithm_toolset
-                ):
+                if "feedback_params" in algorithm_toolset:
                     log.info("Creating Feedback object")
                     feedback_params = algorithm_toolset["feedback_params"]
                     feedback_params["interface"] = self.harness
                     feedback_params["session_id"] = session_id
                     feedback_params["test_id"] = test_id
                     feedback_params["feedback_type"] = self.config["feedback_type"]
-                    self.toolset[
-                        "FeedbackInstance"
-                    ] = create_feedback_instance(
-                        self.config["domain"],
-                        feedback_params
+                    self.toolset["FeedbackInstance"] = create_feedback_instance(
+                        self.config["domain"], feedback_params
                     )
                 algorithms[algorithm_name].execute(algorithm_toolset, "Initialize")
                 self.toolset["image_features"] = {}
