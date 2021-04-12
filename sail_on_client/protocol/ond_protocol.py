@@ -10,9 +10,7 @@ from sail_on_client.utils import (
     update_harness_parameters,
 )
 from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.feedback.image_classification_feedback import (
-    ImageClassificationFeedback,
-)
+from sail_on_client.feedback import create_feedback_instance
 from itertools import count
 import os
 import json
@@ -108,32 +106,8 @@ class SailOn(BaseProtocol):
                     ]
                 else:
                     self.toolset["redlight_image"] = ""
-                detector_config = self.config["detectors"]["detector_configs"][
-                    algorithm_name
-                ]
-                # Intialize feedback object for Image Classfication
+
                 algorithm_toolset = {}
-                if (
-                    "feedback_params" in detector_config
-                    and self.config["domain"] == "image_classification"
-                ):
-                    log.info("Creating Feedback object")
-                    first_budget = detector_config["feedback_params"]["first_budget"]
-                    income_per_batch = detector_config["feedback_params"][
-                        "income_per_batch"
-                    ]
-                    max_budget = detector_config["feedback_params"]["maximum_budget"]
-                    algorithm_toolset[
-                        "ImageClassificationFeedback"
-                    ] = ImageClassificationFeedback(
-                        first_budget,
-                        income_per_batch,
-                        max_budget,
-                        self.harness,
-                        session_id,
-                        test_id,
-                        "classification",
-                    )
                 for config_name, config_value in self.config["detectors"].items():
                     if (
                         config_name == "has_baseline"
@@ -146,11 +120,26 @@ class SailOn(BaseProtocol):
                     else:
                         algorithm_toolset[config_name] = config_value
 
-                self.config["detectors"]["detector_configs"][algorithm_name]
                 algorithm_toolset["session_id"] = session_id
                 algorithm_toolset["test_id"] = test_id
                 algorithm_toolset["test_type"] = ""
 
+                # Initialize feedback object for the domains
+                if (
+                    "feedback_params" in algorithm_toolset
+                ):
+                    log.info("Creating Feedback object")
+                    feedback_params = algorithm_toolset["feedback_params"]
+                    feedback_params["interface"] = self.harness
+                    feedback_params["session_id"] = session_id
+                    feedback_params["test_id"] = test_id
+                    feedback_params["feedback_type"] = self.config["feedback_type"]
+                    self.toolset[
+                        "FeedbackInstance"
+                    ] = create_feedback_instance(
+                        self.config["domain"],
+                        feedback_params
+                    )
                 algorithms[algorithm_name].execute(algorithm_toolset, "Initialize")
                 self.toolset["image_features"] = {}
                 self.toolset["dataset_root"] = self.config["dataset_root"]
