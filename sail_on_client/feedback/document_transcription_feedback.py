@@ -78,7 +78,10 @@ class DocumentTranscriptionFeedback(Feedback):
                     round_id,
                     self.session_id,
                 )
-                return feedback_file
+                df = pd.read_csv(
+                    feedback_file, delimiter=",", header=None
+                )
+                return df
             else:
                 raise ValueError("the function should be added")
         else:
