@@ -6,7 +6,18 @@ import pytest
 import os
 
 from sail_on_client.feedback.feedback import Feedback
+from sail_on_client.feedback.image_classification_feedback import (
+    ImageClassificationFeedback,
+)
+from sail_on_client.feedback.document_transcription_feedback import (
+    DocumentTranscriptionFeedback,
+)
+from sail_on_client.feedback.activity_recognition_feedback import (
+    ActivityRecognitionFeedback,
+)
+from sail_on_client.feedback import create_feedback_instance
 from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.protocol.localinterface import LocalInterface
 
 
 feedback_image_ids = [
@@ -297,3 +308,43 @@ def test_get_budget(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
     assert ic_feedback.get_budget() == 10
+
+
+@pytest.mark.parametrize(
+    "domain,test_id,expected",
+    [
+        ("image_classification", "OND.54011215.0000.1236", ImageClassificationFeedback),
+        ("transcripts", "OND.0.90001.8714062", DocumentTranscriptionFeedback),
+        ("activity_recognition", "OND.10.90001.2100554", ActivityRecognitionFeedback),
+    ],
+)
+def test_create_feedback_instance(domain, test_id, get_interface_params, expected):
+    """
+    Test for creating metric instance.
+
+    Args:
+        protocol: Name of the protocol
+        domain: Name of the domain
+        gt_dict: Parameters for the class created by metric
+        expected: Expected Output Class
+
+    Returns:
+        None
+    """
+    config_directory, config_name = get_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    protocol_name = "OND"
+    session_id = local_interface.session_request(
+        [test_id], protocol_name, domain, "0.1.1", (), 0.5
+    )
+    feedback_dict = {
+        "first_budget": 10,
+        "income_per_batch": 10,
+        "maximum_budget": 10,
+        "interface": local_interface,
+        "session_id": session_id,
+        "test_id": test_id,
+        "feedback_type": "classification",
+    }
+    feedback_obj = create_feedback_instance(domain, feedback_dict)
+    assert isinstance(feedback_obj, expected)
