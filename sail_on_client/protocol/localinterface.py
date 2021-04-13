@@ -192,6 +192,49 @@ class LocalInterface(Harness):
             result_content[result_key] = io.StringIO(content).getvalue()
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
+    def evaluate_round_wise(
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
+    ) -> Dict[str, Any]:
+        """
+        Get results for round(s).
+
+        Args:
+            test_id        : the id of the test currently being evaluated
+            round_id       : the sequential number of the round being evaluated
+            session_id     : the id provided by a server denoting a session
+
+        Returns:
+            Path to a file with the results
+        """
+        gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
+        gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1)
+        info = get_session_info(str(self.result_directory), session_id)
+        protocol = info["created"]["protocol"]
+        domain = info["created"]["domain"]
+        metadata = self.get_test_metadata(session_id, test_id)
+        round_size = metadata["round_size"]
+        results: Dict[str, Union[Dict, float]] = {}
+        gt_config = json.load(open(self.gt_config, "r"))
+        classification_file_id = os.path.join(
+            self.result_directory,
+            protocol,
+            domain,
+            f"{session_id}.{test_id}_classification.csv",
+        )
+
+        classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+        gt_round = gt.iloc[round_id*round_size: (round_id+1)*round_size]
+        classification_round = classifications[round_id*round_size: (round_id+1)*round_size]
+        metric = create_metric_instance(protocol, domain, gt_config)
+        m_acc = metric.m_acc_round_wise(
+            classification_round, gt_round[metric.classification_id], round_id
+        )
+        results[f"m_acc_round_{round_id}"] = m_acc
+        return results
+
     def evaluate(
         self,
         test_id: str,
