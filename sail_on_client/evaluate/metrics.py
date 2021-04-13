@@ -44,6 +44,24 @@ class ProgramMetrics(ABC):
         """
 
     @abstractmethod
+    def m_acc_round_wise(
+        self,
+        p_class: np.ndarray,
+        gt_class: np.ndarray,
+        round_id: int
+    ) -> Dict:
+        """
+        m_acc_round_wise abstract function.
+
+        Args:
+            p_class: detection predictions
+            gt_class: ground truth classes
+
+        Returns:
+            Dictionary containing top1, top3 accuracy for a round
+        """
+
+    @abstractmethod
     def m_num(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> float:
         """
         m_num abstract function.

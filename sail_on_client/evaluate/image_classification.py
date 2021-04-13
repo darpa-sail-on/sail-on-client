@@ -4,6 +4,7 @@ from sail_on_client.evaluate.metrics import ProgramMetrics
 from evaluate.metrics import M_acc, M_num, M_ndp, M_num_stats
 from evaluate.metrics import M_ndp_failed_reaction
 from evaluate.metrics import M_accuracy_on_novel
+from evaluate.metrics import topk_accuracy
 
 import numpy as np
 from pandas import DataFrame
@@ -62,6 +63,32 @@ class ImageClassificationMetrics(ProgramMetrics):
         return M_acc(
             gt_novel, class_prob, gt_class_idx, round_size, asymptotic_start_round
         )
+
+    def m_acc_round_wise(
+        self,
+        p_class: np.ndarray,
+        gt_class: np.ndarray,
+        round_id: int
+    ) -> Dict:
+        """
+        m_acc_round_wise function.
+
+        Args:
+            p_class: detection predictions
+            gt_class: ground truth classes
+            round_id: round identifier
+
+        Returns:
+            Dictionary containing top1, top3 accuracy for a round
+        """
+        class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
+        gt_class_idx = gt_class.to_numpy()
+        top1_acc = topk_accuracy(class_prob, gt_class_idx, k=1)
+        top3_acc = topk_accuracy(class_prob, gt_class_idx, k=3)
+        return {
+            f"top1_accuracy_round_{round_id}": top1_acc,
+            f"top3_accuracy_round_{round_id}": top3_acc
+        }
 
     def m_num(self, p_novel: DataFrame, gt_novel: DataFrame) -> float:
         """
