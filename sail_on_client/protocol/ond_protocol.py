@@ -237,6 +237,8 @@ class SailOn(BaseProtocol):
                         results["classification"] = ncl_results
 
                     self.harness.post_results(results, test_id, round_id, session_id)
+                    if self.config["is_eval_enabled"] and self.config["is_eval_roundwise_enabled"]:
+                        self.harness.evaluate_round_wise(test_id, round_id, session_id)
                     if has_reaction_baseline and session_id == baseline_session_id:
                         continue
 
