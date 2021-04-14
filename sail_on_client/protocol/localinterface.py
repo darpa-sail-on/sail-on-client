@@ -233,6 +233,7 @@ class LocalInterface(Harness):
             classification_round, gt_round[metric.classification_id], round_id
         )
         results[f"m_acc_round_{round_id}"] = m_acc
+        log.info(f"Accuracy for {test_id}, {round_id}: {ub.repr2(results)}")
         return results
 
     def evaluate(
