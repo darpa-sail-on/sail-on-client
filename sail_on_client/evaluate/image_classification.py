@@ -65,7 +65,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         )
 
     def m_acc_round_wise(
-        self, p_class: np.ndarray, gt_class: np.ndarray, round_id: int
+        self, p_class: DataFrame, gt_class: DataFrame, round_id: int
     ) -> Dict:
         """
         m_acc_round_wise function.
