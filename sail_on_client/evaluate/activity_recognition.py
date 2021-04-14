@@ -76,10 +76,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         )
 
     def m_acc_round_wise(
-        self,
-        p_class: np.ndarray,
-        gt_class: np.ndarray,
-        round_id: int
+        self, p_class: np.ndarray, gt_class: np.ndarray, round_id: int
     ) -> Dict:
         """
         m_acc_round_wise function.
@@ -98,7 +95,7 @@ class ActivityRecognitionMetrics(ProgramMetrics):
         top3_acc = topk_accuracy(class_prob, gt_class_idx, k=3)
         return {
             f"top1_accuracy_round_{round_id}": top1_acc,
-            f"top3_accuracy_round_{round_id}": top3_acc
+            f"top3_accuracy_round_{round_id}": top3_acc,
         }
 
     def m_num(self, p_novel: DataFrame, gt_novel: DataFrame) -> float:

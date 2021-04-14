@@ -193,10 +193,7 @@ class LocalInterface(Harness):
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
     def evaluate_round_wise(
-        self,
-        test_id: str,
-        round_id: int,
-        session_id: str,
+        self, test_id: str, round_id: int, session_id: str,
     ) -> Dict[str, Any]:
         """
         Get results for round(s).
@@ -226,8 +223,10 @@ class LocalInterface(Harness):
         )
 
         classifications = pd.read_csv(classification_file_id, sep=",", header=None)
-        gt_round = gt.iloc[round_id*round_size: (round_id+1)*round_size]
-        classification_round = classifications[round_id*round_size: (round_id+1)*round_size]
+        gt_round = gt.iloc[round_id * round_size : (round_id + 1) * round_size]
+        classification_round = classifications[
+            round_id * round_size : (round_id + 1) * round_size
+        ]
         metric = create_metric_instance(protocol, domain, gt_config)
         m_acc = metric.m_acc_round_wise(
             classification_round, gt_round[metric.classification_id], round_id

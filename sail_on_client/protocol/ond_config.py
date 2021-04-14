@@ -31,7 +31,9 @@ class OndConfig(scfg.Config):
         ),
         "save_elementwise": scfg.Value(False, help="Save attributes elementwise"),
         "is_eval_enabled": scfg.Value(False, help="Flag to enable evaluate"),
-        "is_eval_roundwise_enabled": scfg.Value(False, help="Flag to enable roundwise evaluate"),
+        "is_eval_roundwise_enabled": scfg.Value(
+            False, help="Flag to enable roundwise evaluate"
+        ),
         "saved_attributes": {},
         "skip_stage": [],
         "hints": [],

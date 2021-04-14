@@ -116,13 +116,11 @@ def test_m_acc_round_wise(dtm_metrics, detection_files, classification_file):
     """
     _, gt = detection_files
     m_acc_round_wise = dtm_metrics.m_acc_round_wise(
-        classification_file,
-        gt[dtm_metrics.classification_id],
-        0
+        classification_file, gt[dtm_metrics.classification_id], 0
     )
     assert m_acc_round_wise == {
         "top1_accuracy_round_0": 0.76953,
-        "top3_accuracy_round_0": 0.91211
+        "top3_accuracy_round_0": 0.91211,
     }
 
 

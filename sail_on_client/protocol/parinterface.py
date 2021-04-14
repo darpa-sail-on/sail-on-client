@@ -235,10 +235,7 @@ class ParInterface(Harness):
         self._check_response(response)
 
     def evaluate_round_wise(
-        self,
-        test_id: str,
-        round_id: int,
-        session_id: str,
+        self, test_id: str, round_id: int, session_id: str,
     ) -> Dict[str, Any]:
         """
         Get results for round(s).
