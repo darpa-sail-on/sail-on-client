@@ -277,7 +277,7 @@ class SailOn(BaseProtocol):
                     safe_remove(results["characterization"])
                 self.harness.complete_test(session_id, test_id)
         for algorithm_name, session_id in sessions.items():
-            if session_id != baseline_session_id:
+            if session_id != baseline_session_id and self.config["is_eval_enabled"]:
                 self.harness.evaluate(test_id, 0, session_id, baseline_session_id)
 
             log.info(f"Session ended for {algorithm_name}: {session_id}")

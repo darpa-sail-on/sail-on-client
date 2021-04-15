@@ -31,6 +31,7 @@ class OndConfig(scfg.Config):
             False, help="Use attributes saved in save dir"
         ),
         "save_elementwise": scfg.Value(False, help="Save attributes elementwise"),
+        "is_eval_enabled": scfg.Value(False, help="Flag to enable evaluate"),
         "saved_attributes": {},
         "skip_stage": [],
         "hints": [],
