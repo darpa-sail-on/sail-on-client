@@ -397,9 +397,6 @@ def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file
         classification_file,
         gt[arm_metrics.classification_id],
     )
-    import pdb
-
-    pdb.set_trace()
     assert m_ndp_failed == {
         "top1_accuracy_0.175": 1.0,
         "top1_precision_0.175": 1.0,
