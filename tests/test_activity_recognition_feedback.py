@@ -1,30 +1,30 @@
-"""Tests for Image Classification Feedback."""
+"""Tests for Activity Recognition Feedback."""
 
 from tempfile import TemporaryDirectory
 import json
 import pytest
 import os
 
-from sail_on_client.feedback.image_classification_feedback import (
-    ImageClassificationFeedback,
+from sail_on_client.feedback.activity_recognition_feedback import (
+    ActivityRecognitionFeedback,
 )
 from sail_on_client.protocol.parinterface import ParInterface
 
-
 feedback_image_ids = [
-    "known_classes/images/val/00233/00068.JPEG",
-    "known_classes/images/val/00072/00048.JPEG",
-    "known_classes/images/val/00330/00013.JPEG",
-    "known_classes/images/val/00099/00032.JPEG",
-    "known_classes/images/val/00228/00091.JPEG",
-    "known_classes/images/val/00200/00062.JPEG",
-    "known_classes/images/val/00080/00085.JPEG",
-    "known_classes/images/val/00277/00062.JPEG",
-    "known_classes/images/val/00004/00073.JPEG",
-    "known_classes/images/val/00365/00047.JPEG",
+    "3985211f-d6dd-4510-81d7-1825469008f3.avi",
+    "ed60328c-1cfb-4082-8586-f9b5902d79eb.avi",
+    "2c2c4800-6ddf-4bf3-be01-a83635198720.avi",
+    "2df4df62-fa02-4638-a054-e6a5fe19edee.avi",
+    "1a50f7c1-c0c6-46d6-a3ab-05959f9f5545.avi",
+    "3e800115-770f-4067-8543-af77c8661133.avi",
+    "31d4b650-3f4f-41b7-9f7f-93433d470bee.avi",
+    "c0784443-e0e7-4b76-817c-fc6e1529f467.avi",
+    "de9af377-2e0b-42da-9b91-de79e13537d9.avi",
+    "f97a7f62-7db3-46c9-b827-8f2676760a04.avi",
 ]
 
-feedback_labels = [233, 72, 330, 99, 228, 200, 80, 277, 4, 365]
+
+feedback_labels = [74, 34, 10, 10, 21, 21, 21, 10, 74, 21]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -39,10 +39,10 @@ def _initialize_session(par_interface, protocol_name, hints=()):
     Return:
         session id, test_ids
     """
-    test_id = "OND.54011215.0000.1236"
+    test_id = "OND.10.90001.2100554"
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
-        [test_id], f"{protocol_name}", "image_classification", "0.1.1", list(hints), 0.5
+        [test_id], f"{protocol_name}", "activity_recognition", "0.1.1", list(hints), 0.5
     )
     return session_id, test_id
 
@@ -51,11 +51,11 @@ def _initialize_session(par_interface, protocol_name, hints=()):
 def ond_config():
     """Fixture to create a temporal directory and create a json file in it."""
     test_dir = os.path.dirname(__file__)
-    cache_dir = os.path.join(test_dir, "mock_results", "image_classification")
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-            "domain": "image_classification",
-            "test_ids": ["OND.54011215.0000.1236"],
+            "domain": "activity_recognition",
+            "test_ids": ["OND.10.90001.2100554"],
             "detectors": {
                 "has_baseline": False,
                 "has_reaction_baseline": False,
@@ -97,7 +97,7 @@ def test_initialize(
     par_interface = ParInterface(config_name, config_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
-    ImageClassificationFeedback(
+    ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
 
@@ -126,19 +126,19 @@ def test_get_labelled_feedback(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
-        os.path.dirname(__file__), "mock_results", "image_classification"
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     protocol_constant = feedback_mapping[0]
     required_files = feedback_mapping[1]
     for required_file in required_files:
         result_files[required_file] = os.path.join(
-            result_folder, f"{test_id}_{required_file}.csv"
+            result_folder, f"{test_id}_PreComputedDetector_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    ic_feedback = ImageClassificationFeedback(
+    ar_feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_labelled = ic_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
+    df_labelled = ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert all(df_labelled.id == feedback_image_ids)
     assert all(df_labelled.labels == feedback_labels)
 
@@ -167,20 +167,20 @@ def test_get_score_feedback(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
-        os.path.dirname(__file__), "mock_results", "image_classification"
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     protocol_constant = feedback_mapping[0]
     required_files = feedback_mapping[1]
     for required_file in required_files:
         result_files[required_file] = os.path.join(
-            result_folder, f"{test_id}_{required_file}.csv"
+            result_folder, f"{test_id}_PreComputedDetector_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    feedback = ImageClassificationFeedback(
+    feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
     df_score = feedback.get_feedback(0, list(range(10)), feedback_image_ids)
-    assert df_score[1][0] == 0.59921875
+    assert df_score[1][0] == 0.1987951807228915
 
 
 @pytest.mark.parametrize(
@@ -211,19 +211,19 @@ def test_get_feedback(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
-        os.path.dirname(__file__), "mock_results", "image_classification"
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     protocol_constant = feedback_mapping[0]
     required_files = feedback_mapping[1]
     for required_file in required_files:
         result_files[required_file] = os.path.join(
-            result_folder, f"{test_id}_{required_file}.csv"
+            result_folder, f"{test_id}_PreComputedDetector_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    feedback = ImageClassificationFeedback(
+    ar_feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    feedback.get_feedback(0, list(range(10)), feedback_image_ids)
+    ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
 
 
 @pytest.mark.parametrize(
@@ -249,11 +249,11 @@ def test_deposit_income(
     par_interface = ParInterface(config_name, config_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
-    ic_feedback = ImageClassificationFeedback(
+    ar_feedback = ActivityRecognitionFeedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    ic_feedback.deposit_income()
-    assert ic_feedback.budget == 10
+    ar_feedback.deposit_income()
+    assert ar_feedback.budget == 10
 
 
 @pytest.mark.parametrize(
@@ -277,9 +277,9 @@ def test_get_budget(
     """
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
-    session_id, test_ids = _initialize_session(par_interface, protocol_name)
+    session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
-    ic_feedback = ImageClassificationFeedback(
-        10, 10, 10, par_interface, session_id, test_ids[0], protocol_constant
+    ar_feedback = ActivityRecognitionFeedback(
+        10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    assert ic_feedback.get_budget() == 10
+    assert ar_feedback.get_budget() == 10

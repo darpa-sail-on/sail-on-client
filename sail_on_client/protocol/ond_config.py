@@ -22,6 +22,7 @@ class OndConfig(scfg.Config):
             False, help="Quit after feature extraction"
         ),
         "use_feedback": scfg.Value(False, help="Use feedback for the run"),
+        "feedback_type": scfg.Value("classification", help="Type of feedback"),
         "save_features": scfg.Value(False, help="Save features as pkl file"),
         "use_saved_features": scfg.Value(False, help="Use features saved the pkl file"),
         "save_dir": scfg.Value("", help="Directory where features are saved"),

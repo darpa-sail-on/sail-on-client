@@ -15,5 +15,5 @@
   "threshold": 0.5,
   "pre_novelty_batches": 5,
   "max_novel_classes": 3,
-  "feedback_max_ids": 4
+  "feedback_max_ids": 10
 }

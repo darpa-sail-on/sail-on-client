@@ -1,14 +1,23 @@
-"""Tests for Image Classification Feedback."""
+"""Tests for Base Class For Feedback."""
 
 from tempfile import TemporaryDirectory
 import json
 import pytest
 import os
 
+from sail_on_client.feedback.feedback import Feedback
 from sail_on_client.feedback.image_classification_feedback import (
     ImageClassificationFeedback,
 )
+from sail_on_client.feedback.document_transcription_feedback import (
+    DocumentTranscriptionFeedback,
+)
+from sail_on_client.feedback.activity_recognition_feedback import (
+    ActivityRecognitionFeedback,
+)
+from sail_on_client.feedback import create_feedback_instance
 from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.protocol.localinterface import LocalInterface
 
 
 feedback_image_ids = [
@@ -96,17 +105,25 @@ def test_initialize(
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
-    protocol_constant = feedback_mapping[0]
-    ImageClassificationFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "image_classification"
     )
+    result_files = {}
+    protocol_constant = feedback_mapping[0]
+    required_files = feedback_mapping[1]
+    for required_file in required_files:
+        result_files[required_file] = os.path.join(
+            result_folder, f"{test_id}_{required_file}.csv"
+        )
+    par_interface.post_results(result_files, f"{test_id}", 0, session_id)
+    Feedback(10, 10, 10, par_interface, session_id, test_id, protocol_constant)
 
 
 @pytest.mark.parametrize(
     "feedback_mapping", (("classification", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
-def test_get_labelled_feedback(
+def test_get_labeled_feedback(
     server_setup, get_interface_params, feedback_mapping, protocol_name
 ):
     """
@@ -135,10 +152,10 @@ def test_get_labelled_feedback(
             result_folder, f"{test_id}_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    ic_feedback = ImageClassificationFeedback(
+    feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    df_labelled = ic_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
+    df_labelled = feedback.get_labeled_feedback(0, list(range(10)), feedback_image_ids)
     assert all(df_labelled.id == feedback_image_ids)
     assert all(df_labelled.labels == feedback_labels)
 
@@ -176,7 +193,7 @@ def test_get_score_feedback(
             result_folder, f"{test_id}_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    feedback = ImageClassificationFeedback(
+    feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
     df_score = feedback.get_feedback(0, list(range(10)), feedback_image_ids)
@@ -220,14 +237,18 @@ def test_get_feedback(
             result_folder, f"{test_id}_{required_file}.csv"
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
-    feedback = ImageClassificationFeedback(
+    feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
     feedback.get_feedback(0, list(range(10)), feedback_image_ids)
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),)
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_deposit_income(
@@ -249,15 +270,19 @@ def test_deposit_income(
     par_interface = ParInterface(config_name, config_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
-    ic_feedback = ImageClassificationFeedback(
+    feedback = Feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
-    ic_feedback.deposit_income()
-    assert ic_feedback.budget == 10
+    feedback.deposit_income()
+    assert feedback.budget == 10
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),)
+    "feedback_mapping",
+    (
+        ("classification", ("detection", "classification")),
+        ("score", ("detection", "classification")),
+    ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_budget(
@@ -277,9 +302,49 @@ def test_get_budget(
     """
     config_directory, config_name = get_interface_params
     par_interface = ParInterface(config_name, config_directory)
-    session_id, test_ids = _initialize_session(par_interface, protocol_name)
+    session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
-    ic_feedback = ImageClassificationFeedback(
-        10, 10, 10, par_interface, session_id, test_ids[0], protocol_constant
+    ic_feedback = Feedback(
+        10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
     assert ic_feedback.get_budget() == 10
+
+
+@pytest.mark.parametrize(
+    "domain,test_id,expected",
+    [
+        ("image_classification", "OND.54011215.0000.1236", ImageClassificationFeedback),
+        ("transcripts", "OND.0.90001.8714062", DocumentTranscriptionFeedback),
+        ("activity_recognition", "OND.10.90001.2100554", ActivityRecognitionFeedback),
+    ],
+)
+def test_create_feedback_instance(domain, test_id, get_interface_params, expected):
+    """
+    Test for creating metric instance.
+
+    Args:
+        protocol: Name of the protocol
+        domain: Name of the domain
+        gt_dict: Parameters for the class created by metric
+        expected: Expected Output Class
+
+    Returns:
+        None
+    """
+    config_directory, config_name = get_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    protocol_name = "OND"
+    session_id = local_interface.session_request(
+        [test_id], protocol_name, domain, "0.1.1", (), 0.5
+    )
+    feedback_dict = {
+        "first_budget": 10,
+        "income_per_batch": 10,
+        "maximum_budget": 10,
+        "interface": local_interface,
+        "session_id": session_id,
+        "test_id": test_id,
+        "feedback_type": "classification",
+    }
+    feedback_obj = create_feedback_instance(domain, feedback_dict)
+    assert isinstance(feedback_obj, expected)
