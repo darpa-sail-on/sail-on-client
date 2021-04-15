@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     package_data={"sail_on_client": ["py.typed"]},
     test_suite="tests",
-    url="https://gitlab.kitware.com/darpa-sail-on/merge_framework",
+    url="https://github.com/darpa-sail-on/sail-on-client",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     zip_safe=False,
