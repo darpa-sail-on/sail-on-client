@@ -132,7 +132,7 @@ class SailOn(BaseProtocol):
                     feedback_params["session_id"] = session_id
                     feedback_params["test_id"] = test_id
                     feedback_params["feedback_type"] = self.config["feedback_type"]
-                    self.toolset["FeedbackInstance"] = create_feedback_instance(
+                    algorithm_toolset["FeedbackInstance"] = create_feedback_instance(
                         self.config["domain"], feedback_params
                     )
                 algorithms[algorithm_name].execute(algorithm_toolset, "Initialize")
