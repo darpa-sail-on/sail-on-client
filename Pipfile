@@ -64,15 +64,15 @@ smqtk-core = "==0.15.0"
 cachetools = "==4.1.1"
 gunicorn = ">=20.0.4"
 "ruamel.yaml" = "*"
-tinker-engine = {editable = true, path = "./../tinker-engine"}
-timm = {editable = true, path = "./../evm_based_novelty_detector/timm"}
-evm-based-novelty-detector = {editable = true, path = "./../evm_based_novelty_detector"}
-graph-autoencoder = {editable = true, path = "./../graph-autoencoder"}
-sail-on = {editable = true, path = "./../Sail-On-API"}
-sail-on-client = {editable = true, path = "."}
-hwr-novelty-detector = {editable = true, path = "./../hwr_novelty_detector"}
-sailon-tinker-launcher = {editable = true, path = "./../sailon_tinker_launcher"}
-sail-on-evaluate = {editable = true, path = "./../Sail_On_Evaluate"}
+tinker-engine = {path = "./../tinker-engine"}
+timm = {path = "./../evm_based_novelty_detector/timm"}
+evm-based-novelty-detector = {path = "./../evm_based_novelty_detector"}
+graph-autoencoder = {path = "./../graph-autoencoder"}
+sail-on = {path = "./../Sail-On-API"}
+sail-on-client = {editable=true, path = "."}
+hwr-novelty-detector = {path = "./../hwr_novelty_detector"}
+sailon-tinker-launcher = {path = "./../sailon_tinker_launcher"}
+sail-on-evaluate = {path = "./../Sail_On_Evaluate"}
 versioneer = "==0.19"
 
 [requires]
