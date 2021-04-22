@@ -234,6 +234,22 @@ class ParInterface(Harness):
 
         self._check_response(response)
 
+    def evaluate_round_wise(
+        self, test_id: str, round_id: int, session_id: str,
+    ) -> Dict[str, Any]:
+        """
+        Get results for round(s).
+
+        Args:
+            test_id        : the id of the test currently being evaluated
+            round_id       : the sequential number of the round being evaluated
+            session_id     : the id provided by a server denoting a session
+
+        Returns:
+            Path to a file with the results
+        """
+        raise NotImplementedError("Round wise accuracy computation is not supported")
+
     def evaluate(
         self,
         test_id: str,

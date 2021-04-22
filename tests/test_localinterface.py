@@ -373,6 +373,38 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
     local_interface.evaluate("OND.0.90001.8714062", 0, session_id, baseline_session_id)
 
 
+def test_image_classification_evaluate_roundwise(get_ic_interface_params):
+    """
+    Test evaluate with rounds.
+
+    Args:
+        get_interface_params (tuple): Tuple to configure local interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.localinterface import LocalInterface
+
+    config_directory, config_name = get_ic_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    session_id = _initialize_session(local_interface, "OND", "image_classification")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "image_classification"
+    )
+    detection_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_PreComputedDetector_detection.csv"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_PreComputedDetector_classification.csv"
+    )
+    results = {
+        "detection": detection_file_id,
+        "classification": classification_file_id,
+    }
+    local_interface.post_results(results, "OND.54011215.0000.1236", 0, session_id)
+    local_interface.evaluate_round_wise("OND.54011215.0000.1236", 0, session_id)
+
+
 def test_complete_test(get_interface_params):
     """
     Test complete test request.

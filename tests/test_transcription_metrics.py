@@ -102,6 +102,28 @@ def test_m_acc(dtm_metrics, detection_files, classification_file):
     }
 
 
+def test_m_acc_round_wise(dtm_metrics, detection_files, classification_file):
+    """
+    Test m_acc computation for a round.
+
+    Args:
+        dtm_metrics (DocumentTranscriptionMetrics): An instance of DocumentTranscriptionMetrics
+        detection_files (Tuple): A tuple of data frames containing detection and ground truth
+        classification_file: A data frame containing classification
+
+    Return:
+        None
+    """
+    _, gt = detection_files
+    m_acc_round_wise = dtm_metrics.m_acc_round_wise(
+        classification_file, gt[dtm_metrics.classification_id], 0
+    )
+    assert m_acc_round_wise == {
+        "top1_accuracy_round_0": 0.76953,
+        "top3_accuracy_round_0": 0.91211,
+    }
+
+
 def test_m_num(dtm_metrics, detection_files):
     """
     Test m_num computation.

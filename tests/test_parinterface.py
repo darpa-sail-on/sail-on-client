@@ -269,6 +269,43 @@ def test_evaluate(server_setup, get_interface_params):
     par_interface.evaluate("OND.54011215.0000.1236", 0, session_id)
 
 
+def test_evaluate_roundwise(server_setup, get_interface_params):
+    """
+    Test evaluate with rounds.
+
+    Args:
+        server_setup (tuple): Tuple containing url and result directory
+        get_interface_params (tuple): Tuple to configure par interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.parinterface import ParInterface
+
+    url, result_dir = server_setup
+    config_directory, config_name = get_interface_params
+    par_interface = ParInterface(config_name, config_directory)
+    session_id = _initialize_session(par_interface, "OND")
+
+    session_id = _initialize_session(par_interface, "OND")
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "image_classification"
+    )
+    detection_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_detection.csv"
+    )
+    classification_file_id = os.path.join(
+        result_folder, "OND.54011215.0000.1236_classification.csv"
+    )
+    results = {
+        "detection": detection_file_id,
+        "classification": classification_file_id,
+    }
+    par_interface.post_results(results, "OND.54011215.0000.1236", 0, session_id)
+    with pytest.raises(NotImplementedError):
+        par_interface.evaluate_round_wise("OND.54011215.0000.1236", 0, session_id)
+
+
 def test_complete_test(server_setup, get_interface_params):
     """
     Test complete test request.

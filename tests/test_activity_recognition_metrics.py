@@ -94,6 +94,28 @@ def test_m_acc(arm_metrics, detection_files, classification_file):
     }
 
 
+def test_m_acc_round_wise(arm_metrics, detection_files, classification_file):
+    """
+    Test m_acc computation for a round.
+
+    Args:
+        arm_metrics (ActivityRecognitionMetrics): An instance of ActivityRecognitionMetrics
+        detection_files (Tuple): A tuple of data frames containing detection and ground truth
+        classification_file: A data frame containing classification
+
+    Return:
+        None
+    """
+    _, gt = detection_files
+    m_acc_round_wise = arm_metrics.m_acc_round_wise(
+        classification_file, gt[arm_metrics.classification_id], 0
+    )
+    assert m_acc_round_wise == {
+        "top1_accuracy_round_0": 0.1988,
+        "top3_accuracy_round_0": 0.25602,
+    }
+
+
 def test_m_num(arm_metrics, detection_files):
     """
     Test m_num computation.
