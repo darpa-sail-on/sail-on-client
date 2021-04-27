@@ -11,6 +11,8 @@ from sail_on_client.utils import (
 )
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.feedback import create_feedback_instance
+from sail_on_client.utils import NumpyEncoder
+from sail_on_client.utils import NumpyEncoder
 from itertools import count
 import os
 import json
@@ -296,7 +298,8 @@ class SailOn(BaseProtocol):
                 else:
                     self.toolset["scores"] = test_score
                 with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:
-                    json.dump(self.toolset["scores"], f, indent=4)
+                    log.info(f"Saving results in {save_dir}")
+                    json.dump(self.toolset["scores"], f, indent=4, cls=NumpyEncoder)
 
             log.info(f"Session ended for {algorithm_name}: {session_id}")
             self.harness.terminate_session(session_id)

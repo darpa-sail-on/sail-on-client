@@ -1,10 +1,12 @@
 """Utility function for sail-on-client."""
 
 import os
+import numpy as np
 import logging
+import json
 from sailon_tinker_launcher.deprecated_tinker import harness
 
-from typing import Dict
+from typing import Dict, Any
 
 log = logging.getLogger(__name__)
 
@@ -57,3 +59,22 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
     if hasattr(ip_harness, "update_provider"):
         ip_harness.update_provider()
     return ip_harness
+
+
+class NumpyEncoder(json.JSONEncoder):
+    """An encoder to convert numpy data types to python primitives."""
+
+    def default(self, obj: Any) -> Any:
+        """
+        Serialization defaults for numpy types.
+        """
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, np.bool_):
+            return bool(obj)
+        else:
+            return super(NumpyEncoder, self).default(obj)
