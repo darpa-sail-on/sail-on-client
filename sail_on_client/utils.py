@@ -65,9 +65,7 @@ class NumpyEncoder(json.JSONEncoder):
     """An encoder to convert numpy data types to python primitives."""
 
     def default(self, obj: Any) -> Any:
-        """
-        Serialization defaults for numpy types.
-        """
+        """Defaults for numpy types."""
         if isinstance(obj, np.integer):
             return int(obj)
         elif isinstance(obj, np.floating):

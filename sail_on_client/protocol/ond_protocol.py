@@ -12,7 +12,6 @@ from sail_on_client.utils import (
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.feedback import create_feedback_instance
 from sail_on_client.utils import NumpyEncoder
-from sail_on_client.utils import NumpyEncoder
 from itertools import count
 import os
 import json
@@ -231,8 +230,9 @@ class SailOn(BaseProtocol):
                         self.config["is_eval_enabled"]
                         and self.config["is_eval_roundwise_enabled"]
                     ):
-                        round_score = \
-                                self.harness.evaluate_round_wise(test_id, round_id, session_id)
+                        round_score = self.harness.evaluate_round_wise(
+                            test_id, round_id, session_id
+                        )
                         if "scores" in self.toolset:
                             self.toolset["scores"].update(round_score)
                         else:
@@ -292,14 +292,16 @@ class SailOn(BaseProtocol):
                 self.harness.complete_test(session_id, test_id)
         for algorithm_name, session_id in sessions.items():
             if session_id != baseline_session_id and self.config["is_eval_enabled"]:
-                test_score = self.harness.evaluate(test_id, 0, session_id, baseline_session_id)
+                test_score = self.harness.evaluate(
+                    test_id, 0, session_id, baseline_session_id
+                )
                 if "scores" in self.toolset:
                     self.toolset["scores"].update(test_score)
                 else:
                     self.toolset["scores"] = test_score
-                with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:
+                with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
                     log.info(f"Saving results in {save_dir}")
-                    json.dump(self.toolset["scores"], f, indent=4, cls=NumpyEncoder)
+                    json.dump(self.toolset["scores"], f, indent=4, cls=NumpyEncoder)  # type: ignore
 
             log.info(f"Session ended for {algorithm_name}: {session_id}")
             self.harness.terminate_session(session_id)
