@@ -157,8 +157,7 @@ class SailOn(BaseProtocol):
                         test_features = pkl.load(
                             open(
                                 os.path.join(
-                                    feature_dir,
-                                    f"{test_id}_{algorithm_name}_features.pkl",
+                                    feature_dir, f"{algorithm_name}_features.pkl",
                                 ),
                                 "rb",
                             )
