@@ -92,9 +92,12 @@ class SailOn(BaseProtocol):
             ) and algorithm_name == self.config["detectors"]["baseline_class"]:
                 baseline_session_id = session_id
             sessions[algorithm_name] = session_id
+        algorithm_scores = {}
         for algorithm_name, session_id in sessions.items():
+            test_scores = {}
             log.info(f"New session: {session_id} for algorithm: {algorithm_name}")
             for test_id in self.config["test_ids"]:
+                test_score = {}
                 self.toolset["test_id"] = test_id
                 self.toolset["test_type"] = ""
                 if self.config["save_attributes"]:
@@ -243,11 +246,7 @@ class SailOn(BaseProtocol):
                         round_score = self.harness.evaluate_round_wise(
                             test_id, round_id, session_id
                         )
-                        if "scores" in self.toolset:
-                            self.toolset["scores"].update(round_score)
-                        else:
-                            self.toolset["scores"] = round_score
-
+                        test_score.update(round_score)
                     if has_reaction_baseline and session_id == baseline_session_id:
                         continue
 
@@ -299,19 +298,19 @@ class SailOn(BaseProtocol):
 
                     # cleanup the characterization file
                     safe_remove(results["characterization"])
+                test_scores[test_id] = test_score
                 self.harness.complete_test(session_id, test_id)
+            algorithm_scores[algorithm_name] = test_scores
         for algorithm_name, session_id in sessions.items():
-            if session_id != baseline_session_id and self.config["is_eval_enabled"]:
-                test_score = self.harness.evaluate(
-                    test_id, 0, session_id, baseline_session_id
-                )
-                if "scores" in self.toolset:
-                    self.toolset["scores"].update(test_score)
-                else:
-                    self.toolset["scores"] = test_score
-                with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
-                    log.info(f"Saving results in {save_dir}")
-                    json.dump(self.toolset["scores"], f, indent=4, cls=NumpyEncoder)  # type: ignore
+            for test_id in self.config["test_ids"]:
+                if session_id != baseline_session_id and self.config["is_eval_enabled"]:
+                    score = self.harness.evaluate(
+                        test_id, 0, session_id, baseline_session_id
+                    )
+                    score.update(algorithm_scores[algorithm_name][test_id])
+                    with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
+                        log.info(f"Saving results in {save_dir}")
+                        json.dump(score, f, indent=4, cls=NumpyEncoder)  # type: ignore
 
             log.info(f"Session ended for {algorithm_name}: {session_id}")
             self.harness.terminate_session(session_id)
