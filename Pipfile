@@ -41,6 +41,7 @@ smqtk-core = "==0.15.0"
 cachetools = "==4.1.1"
 gunicorn = ">=20.0.4"
 matplotlib = ">=3.2.2"
+torch = ">=1.6.0"
 tinker-engine = {editable = true, path = "./../tinker-engine"}
 sail-on = {editable = true, path = "./../Sail-On-API"}
 sailon-tinker-launcher = {editable = true, path = "./../sailon_tinker_launcher"}
