@@ -11,6 +11,7 @@ flask>=1.1.2
 requests-toolbelt>=0.9.1
 nltk>=3.5
 click>=7.1
+matplotlib>=3.2.2
 smqtk-core==0.15.0
 versioneer==0.19
 tinker-engine
