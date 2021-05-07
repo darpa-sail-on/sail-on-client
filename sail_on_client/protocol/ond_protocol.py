@@ -11,6 +11,7 @@ from sail_on_client.utils import (
 )
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.feedback import create_feedback_instance
+from sail_on_client.utils import NumpyEncoder
 from itertools import count
 import os
 import json
@@ -60,6 +61,7 @@ class SailOn(BaseProtocol):
         baseline_session_id = None
         has_reaction_baseline = self.config["detectors"]["has_reaction_baseline"]
         has_baseline = self.config["detectors"]["has_baseline"]
+        save_dir = self.config["detectors"]["csv_folder"]
         # Create sessions an instances of all the algorithms
         for algorithm_name in algorithm_names:
             algorithm = self.get_algorithm(
@@ -90,9 +92,12 @@ class SailOn(BaseProtocol):
             ) and algorithm_name == self.config["detectors"]["baseline_class"]:
                 baseline_session_id = session_id
             sessions[algorithm_name] = session_id
+        algorithm_scores = {}
         for algorithm_name, session_id in sessions.items():
+            test_scores = {}
             log.info(f"New session: {session_id} for algorithm: {algorithm_name}")
             for test_id in self.config["test_ids"]:
+                test_score = {}
                 self.toolset["test_id"] = test_id
                 self.toolset["test_type"] = ""
                 if self.config["save_attributes"]:
@@ -152,15 +157,25 @@ class SailOn(BaseProtocol):
                 if self.config["use_saved_features"]:
                     feature_dir = self.config["save_dir"]
                     if os.path.isdir(feature_dir):
-                        test_features = pkl.load(
-                            open(
-                                os.path.join(
-                                    feature_dir,
-                                    f"{test_id}_{algorithm_name}_features.pkl",
-                                ),
-                                "rb",
+                        if self.config["use_consolidated_features"]:
+                            test_features = pkl.load(
+                                open(
+                                    os.path.join(
+                                        feature_dir, f"{algorithm_name}_features.pkl",
+                                    ),
+                                    "rb",
+                                )
                             )
-                        )
+                        else:
+                            test_features = pkl.load(
+                                open(
+                                    os.path.join(
+                                        feature_dir,
+                                        f"{test_id}_{algorithm_name}_features.pkl",
+                                    ),
+                                    "rb",
+                                )
+                            )
                     else:
                         test_features = pkl.load(open(feature_dir, "rb"))
                     features_dict = test_features["features_dict"]
@@ -228,7 +243,10 @@ class SailOn(BaseProtocol):
                         self.config["is_eval_enabled"]
                         and self.config["is_eval_roundwise_enabled"]
                     ):
-                        self.harness.evaluate_round_wise(test_id, round_id, session_id)
+                        round_score = self.harness.evaluate_round_wise(
+                            test_id, round_id, session_id
+                        )
+                        test_score.update(round_score)
                     if has_reaction_baseline and session_id == baseline_session_id:
                         continue
 
@@ -280,10 +298,19 @@ class SailOn(BaseProtocol):
 
                     # cleanup the characterization file
                     safe_remove(results["characterization"])
+                test_scores[test_id] = test_score
                 self.harness.complete_test(session_id, test_id)
+            algorithm_scores[algorithm_name] = test_scores
         for algorithm_name, session_id in sessions.items():
-            if session_id != baseline_session_id and self.config["is_eval_enabled"]:
-                self.harness.evaluate(test_id, 0, session_id, baseline_session_id)
+            for test_id in self.config["test_ids"]:
+                if session_id != baseline_session_id and self.config["is_eval_enabled"]:
+                    score = self.harness.evaluate(
+                        test_id, 0, session_id, baseline_session_id
+                    )
+                    score.update(algorithm_scores[algorithm_name][test_id])
+                    with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
+                        log.info(f"Saving results in {save_dir}")
+                        json.dump(score, f, indent=4, cls=NumpyEncoder)  # type: ignore
 
             log.info(f"Session ended for {algorithm_name}: {session_id}")
             self.harness.terminate_session(session_id)
