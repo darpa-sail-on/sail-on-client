@@ -25,6 +25,9 @@ class OndConfig(scfg.Config):
         "feedback_type": scfg.Value("classification", help="Type of feedback"),
         "save_features": scfg.Value(False, help="Save features as pkl file"),
         "use_saved_features": scfg.Value(False, help="Use features saved the pkl file"),
+        "use_consolidated_features": scfg.Value(
+            False, help="Use features consolidated over multiple tests"
+        ),
         "save_dir": scfg.Value("", help="Directory where features are saved"),
         "save_attributes": scfg.Value(False, help="Flag to attributes in save dir"),
         "use_saved_attributes": scfg.Value(
