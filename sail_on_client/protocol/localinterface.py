@@ -291,16 +291,19 @@ class LocalInterface(Harness):
             detection_idx = 1
             gt_detection_idx = metric.detection_id
             gt_classification_idx = metric.classification_id
+            novel_idx = 1
         # ######## Activity Recognition Evaluation  ###########
         elif domain == "activity_recognition":
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             gt_classification_idx = metric.classification_id
+            novel_idx = 89
         # ######## Document Transcription Evaluation  ###########
         elif domain == "transcripts":
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             gt_classification_idx = metric.classification_id
+            novel_idx = 50
         else:
             raise AttributeError(
                 f'Domain: "{domain}" is not a real domain.  Get a clue.'
@@ -312,11 +315,11 @@ class LocalInterface(Harness):
             detections[detection_idx], gt[gt_detection_idx]
         )
         results["m_num_stats"] = m_num_stats
-        m_ndp = metric.m_ndp(detections[detection_idx], gt[gt_detection_idx])
+        m_ndp = metric.m_ndp(classifications[novel_idx], gt[gt_detection_idx])
         results["m_ndp"] = m_ndp
-        m_ndp_pre = metric.m_ndp_pre(detections[detection_idx], gt[gt_detection_idx])
+        m_ndp_pre = metric.m_ndp_pre(classifications[novel_idx], gt[gt_detection_idx])
         results["m_ndp_pre"] = m_ndp_pre
-        m_ndp_post = metric.m_ndp_post(detections[detection_idx], gt[gt_detection_idx])
+        m_ndp_post = metric.m_ndp_post(classifications[novel_idx], gt[gt_detection_idx])
         results["m_ndp_post"] = m_ndp_post
         m_acc = metric.m_acc(
             gt[gt_detection_idx], classifications, gt[gt_classification_idx], 100, 5,
