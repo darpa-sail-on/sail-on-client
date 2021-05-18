@@ -291,18 +291,21 @@ class LocalInterface(Harness):
             detection_idx = 1
             gt_detection_idx = metric.detection_id
             gt_classification_idx = metric.classification_id
+            # p_unknown column for image classification
             novel_idx = 1
         # ######## Activity Recognition Evaluation  ###########
         elif domain == "activity_recognition":
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             gt_classification_idx = metric.classification_id
+            # p_unknown column for activity recognition
             novel_idx = 89
         # ######## Document Transcription Evaluation  ###########
         elif domain == "transcripts":
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             gt_classification_idx = metric.classification_id
+            # p_unknown column for transcripts in writer identification
             novel_idx = 50
         else:
             raise AttributeError(
