@@ -145,11 +145,17 @@ def test_resume_session(server_setup, get_interface_params):
     assert finished_test == ["OND.54011215.0000.1236"]
     # Testing with hints
     session_id = par_interface.session_request(
-        ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", ["red_light"], 0.4
+        ["OND.54011215.0000.1236"],
+        "OND",
+        "image_classification",
+        "0.1.1",
+        ["red_light"],
+        0.4,
     )
     par_interface.complete_test(session_id, "OND.54011215.0000.1236")
     finished_test = par_interface.resume_session(session_id)
     assert finished_test == ["OND.54011215.0000.1236"]
+
 
 def test_dataset_request(server_setup, get_interface_params):
     """

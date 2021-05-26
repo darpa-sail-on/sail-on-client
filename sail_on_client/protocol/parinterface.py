@@ -136,10 +136,7 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()["session_id"]
 
-    def resume_session(
-        self,
-        session_id: str
-    ) -> List[str]:
+    def resume_session(self, session_id: str) -> List[str]:
         """
         Get finished test from an existing session.
 
@@ -149,9 +146,7 @@ class ParInterface(Harness):
         Returns:
             list of tests finished in the session
         """
-        params: Dict[str, str] = {
-                "session_id": session_id
-        }
+        params: Dict[str, str] = {"session_id": session_id}
         response = requests.get(f"{self.api_url}/session/latest", params=params)
         self._check_response(response)
         return response.json()["finished_tests"]

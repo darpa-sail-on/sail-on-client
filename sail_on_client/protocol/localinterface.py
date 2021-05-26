@@ -106,10 +106,7 @@ class LocalInterface(Harness):
             detection_threshold,
         )
 
-    def resume_session(
-        self,
-        session_id: str
-    ) -> List[str]:
+    def resume_session(self, session_id: str) -> List[str]:
         """
         Get finished test from an existing session.
 
