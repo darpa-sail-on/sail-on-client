@@ -8,7 +8,7 @@ import traceback
 import logging
 
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
-from typing import Any, Dict, Union
+from typing import Any, Dict, Union, List
 from requests import Response
 from sail_on_client.errors import ApiError, RoundError
 from json import JSONDecodeError
@@ -135,6 +135,26 @@ class ParInterface(Harness):
 
         self._check_response(response)
         return response.json()["session_id"]
+
+    def resume_session(
+        self,
+        session_id: str
+    ) -> List[str]:
+        """
+        Get finished test from an existing session.
+
+        Arguments:
+            -session id : session id that was started but not terminated
+
+        Returns:
+            list of tests finished in the session
+        """
+        params: Dict[str, str] = {
+                "session_id": session_id
+        }
+        response = requests.get(f"{self.api_url}/session/latest", params=params)
+        self._check_response(response)
+        return response.json()["finished_tests"]
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
         """
