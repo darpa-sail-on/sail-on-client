@@ -118,6 +118,35 @@ def test_session_request(get_interface_params):
     )
 
 
+def test_resume_session(get_interface_params):
+    """
+    Test resume session.
+
+    Args:
+        get_interface_params (tuple): Tuple to configure par interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.localinterface import LocalInterface
+
+    config_directory, config_name = get_interface_params
+    local_interface = LocalInterface(config_name, config_directory)
+    session_id = local_interface.session_request(
+        ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", [], 0.5
+    )
+    local_interface.complete_test(session_id, "OND.54011215.0000.1236")
+    finished_test = local_interface.resume_session(session_id)
+    assert finished_test == ["OND.54011215.0000.1236"]
+    # Testing with hints
+    session_id = local_interface.session_request(
+        ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", ["red_light"], 0.4
+    )
+    local_interface.complete_test(session_id, "OND.54011215.0000.1236")
+    finished_test = local_interface.resume_session(session_id)
+    assert finished_test == ["OND.54011215.0000.1236"]
+
+
 def test_dataset_request(get_interface_params):
     """
     Tests for dataset request.

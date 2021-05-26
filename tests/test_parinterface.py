@@ -121,6 +121,36 @@ def test_session_request(server_setup, get_interface_params):
     )
 
 
+def test_resume_session(server_setup, get_interface_params):
+    """
+    Test resume session.
+
+    Args:
+        server_setup (tuple): Tuple containing url and result directory
+        get_interface_params (tuple): Tuple to configure par interface
+
+    Return:
+        None
+    """
+    from sail_on_client.protocol.parinterface import ParInterface
+
+    url, result_dir = server_setup
+    config_directory, config_name = get_interface_params
+    par_interface = ParInterface(config_name, config_directory)
+    session_id = par_interface.session_request(
+        ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", [], 0.5
+    )
+    par_interface.complete_test(session_id, "OND.54011215.0000.1236")
+    finished_test = par_interface.resume_session(session_id)
+    assert finished_test == ["OND.54011215.0000.1236"]
+    # Testing with hints
+    session_id = par_interface.session_request(
+        ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", ["red_light"], 0.4
+    )
+    par_interface.complete_test(session_id, "OND.54011215.0000.1236")
+    finished_test = par_interface.resume_session(session_id)
+    assert finished_test == ["OND.54011215.0000.1236"]
+
 def test_dataset_request(server_setup, get_interface_params):
     """
     Tests for dataset request.
