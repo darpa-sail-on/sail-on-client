@@ -75,18 +75,31 @@ class SailOn(BaseProtocol):
             # TODO: fix the version below
             novelty_detector_version = "1.0.0"
             novelty_detector_class = algorithm_name
+            test_ids = self.config["test_ids"]
             if "detection_threshold" in algorithm_toolset:
                 detector_threshold = float(algorithm_toolset["detection_threshold"])
             else:
                 detector_threshold = 0.5
-            session_id = self.harness.session_request(
-                self.config["test_ids"],
-                "OND",
-                self.config["domain"],
-                f"{novelty_detector_version}.{novelty_detector_class}",
-                self.config["hints"],
-                detector_threshold,
-            )
+            if self.config["resume_session"]:
+                if algorithm_name in self.config["resumed_session_ids"]:
+                    session_id = self.config["resumed_session_ids"][algorithm_name]
+                else:
+                    raise ValueError(f"Failed to resume session for {algorithm_name}")
+                finished_test = self.harness.resume_session(session_id)
+                remaining_tests = []
+                for test_id in test_ids:
+                    if test_id not in finished_test:
+                        remaining_tests.append(test_id)
+                test_ids = remaining_tests
+            else:
+                session_id = self.harness.session_request(
+                    test_ids,
+                    "OND",
+                    self.config["domain"],
+                    f"{novelty_detector_version}.{novelty_detector_class}",
+                    self.config["hints"],
+                    detector_threshold,
+                )
             if (
                 has_baseline or has_reaction_baseline
             ) and algorithm_name == self.config["detectors"]["baseline_class"]:
@@ -96,7 +109,7 @@ class SailOn(BaseProtocol):
         for algorithm_name, session_id in sessions.items():
             test_scores = {}
             log.info(f"New session: {session_id} for algorithm: {algorithm_name}")
-            for test_id in self.config["test_ids"]:
+            for test_id in test_ids:
                 test_score = {}
                 self.toolset["test_id"] = test_id
                 self.toolset["test_type"] = ""
