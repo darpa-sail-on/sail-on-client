@@ -5,11 +5,11 @@ import scriptconfig as scfg
 
 class OndConfig(scfg.Config):
     """
-    Default configuration for Ond protocol.
+    Default configuration for OND protocol.
 
     Example:
-        >>> from learn.protocol.learn_config import LearnConfig
-        >>> config = LearnConfig()
+        >>> from sail_on_client.protocol.ond_config import OndConfig
+        >>> config = OndConfig()
         >>> print('config = {!r}'.format(config))
     """
 
