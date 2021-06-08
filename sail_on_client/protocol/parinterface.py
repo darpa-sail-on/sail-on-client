@@ -23,7 +23,13 @@ class ParInterface(Harness):
         """
         Initialize a client connection object.
 
-        :param api_url: url for where server is hosted
+        Args:
+            config_file: Name of the config file that provides parameter
+                         to the interface
+            config_folder: The directory where configfile is present
+
+        Returns:
+            None
         """
         Harness.__init__(self, configfile, configfolder)
         self.api_url = self.configuration_data["url"]
@@ -31,10 +37,13 @@ class ParInterface(Harness):
 
     def _check_response(self, response: Response) -> None:
         """
-        Produce appropriate output on error.
+        Helper function to parse errors that present in the server response.
 
-        :param response:
-        :return: True
+        Args:
+            response: The response object obtained from the server
+
+        Returns:
+            None
         """
         if response.status_code != 200:
             try:
@@ -61,13 +70,14 @@ class ParInterface(Harness):
         """
         Request Test Identifiers as part of a series of individual tests.
 
-        Arguments:
-            -protocol   : string indicating which protocol is being evaluated
-            -domain     :
-            -detector_seed
-            -test_assumptions
+        Args:
+            protocol : string indicating which protocol is being evaluated
+            domain : problem domain for the tests
+            detector_seed : A seed provided by the novelty detector
+            test_assumptions : Assumptions used by the detector
+
         Returns:
-            -filename of file containing test ids
+            Filename of file containing test ids
         """
         payload = {
             "protocol": protocol,
@@ -108,15 +118,16 @@ class ParInterface(Harness):
         """
         Create a new session to evaluate the detector using an empirical protocol.
 
-        Arguments:
-            -test_ids   : list of tests being evaluated in this session
-            -protocol   : string indicating which protocol is being evaluated
-            -domain     : string indicating which domain is being evaluated
-            -novelty_detector_version : string indicating the version of the novelty detector being evaluated
-            -hint       : a list hints provided for the session
-            -detection_threshold      : Detection threshold for the session
+        Args:
+            test_ids: List of tests being evaluated in this session
+            protocol: String indicating which protocol is being evaluated
+            domain: String indicating which domain is being evaluated
+            novelty_detector_version: The novelty detector being evaluated
+            hints: Hints used for the session
+            detection_threshold: Detection threshold for the session
+
         Returns:
-            -session id
+            A session identifier provided by the server
         """
         payload = {
             "protocol": protocol,
@@ -140,11 +151,11 @@ class ParInterface(Harness):
         """
         Get finished test from an existing session.
 
-        Arguments:
-            -session id : session id that was started but not terminated
+        Args:
+            session id : Session id that was started but not terminated
 
         Returns:
-            list of tests finished in the session
+            List of tests finished in the session
         """
         params: Dict[str, str] = {"session_id": session_id}
         response = requests.get(f"{self.api_url}/session/latest", params=params)
@@ -155,11 +166,13 @@ class ParInterface(Harness):
         """
         Request data for evaluation.
 
-        Arguments:
-            -test_id    : the test being evaluated at this moment.
-            -round_id   : the sequential number of the round being evaluated
+        Args:
+            test_id: The test being evaluated at this moment.
+            round_id: The sequential number of the round being evaluated
+            session_id: The identifier provided by the server for a single experiment
+
         Returns:
-            -filename of a file containing a list of image files (including full path for each)
+            Filename of a file containing a list of image files (including full path for each)
         """
         params: Dict[str, Union[str, int]] = {
             "session_id": session_id,
@@ -189,13 +202,15 @@ class ParInterface(Harness):
         """
         Get Labels from the server based provided one or more example ids.
 
-        Arguments:
-            -feedback_ids
-            -test_id        : the id of the test currently being evaluated
-            -round_id       : the sequential number of the round being evaluated
-            -feedback_type -- label, detection, characterization
+        Args:
+            feedback_ids: List of media ids for which feedback is required
+            feedback_type: Protocols constants with the values: label, detection, characterization
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
+
         Returns:
-            -labels dictionary
+            Path to a file containing containing requested feedback
         """
         params: Dict[str, Union[str, int]] = {
             "feedback_ids": "|".join(feedback_ids),
@@ -221,12 +236,14 @@ class ParInterface(Harness):
         """
         Post client detector predictions for the dataset.
 
-        Arguments:
-            -result_files (dict of "type : file")
-            -session_id
-            -test_id
-            -round_id
-        Returns: No return
+        Args:
+            result_files: A dictionary of results with protocol constant as key and file path as value
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
+
+        Returns:
+            None
         """
         payload = {
             "session_id": session_id,
@@ -256,9 +273,9 @@ class ParInterface(Harness):
         Get results for round(s).
 
         Args:
-            test_id        : the id of the test currently being evaluated
-            round_id       : the sequential number of the round being evaluated
-            session_id     : the id provided by a server denoting a session
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
 
         Returns:
             Path to a file with the results
@@ -275,11 +292,13 @@ class ParInterface(Harness):
         """
         Get results for test(s).
 
-        Arguments:
-            -test_id
-            -round_id
+        Args:
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
+
         Returns:
-            -filename
+            Path to a file with the results
         """
         params: Dict[str, Union[str, int]] = {
             "session_id": session_id,
@@ -305,10 +324,12 @@ class ParInterface(Harness):
         """
         Retrieve the metadata json for the specified test.
 
-        Arguments:
-            -test_id
+        Args:
+            session_id: The id of the session currently being evaluated
+            test_id: The id of the test currently being evaluated
+
         Returns:
-            metadata json
+            A dictionary containing metadata
         """
         response = requests.get(
             f"{self.api_url}/test/metadata",
@@ -320,11 +341,11 @@ class ParInterface(Harness):
 
     def complete_test(self, session_id: str, test_id: str) -> None:
         """
-        Mark the given test as completed.
+        Mark test as completed.
 
         Args:
-            session_id: the id of session currently being evaluated
-            test_id:    the id of the test currently being evaluated
+            session_id: The id of the session currently being evaluated
+            test_id: The id of the test currently being evaluated
 
         Returns:
             None
@@ -338,8 +359,10 @@ class ParInterface(Harness):
         """
         Terminate the session after the evaluation for the protocol is complete.
 
-        Arguments:
-        Returns: No return
+        Args:
+            session_id: The id provided by a server denoting a session
+
+        Returns: None
         """
         response = requests.delete(
             f"{self.api_url}/session", params={"session_id": session_id}
