@@ -285,21 +285,26 @@ class SailOn(BaseProtocol):
                     with open(attribute_path, "wb") as f:
                         pkl.dump(self.toolset["attributes"], f)
 
-                results = {}
-                if not has_reaction_baseline and session_id == baseline_session_id:
-                    results["characterization"] = algorithms[algorithm_name].execute(
+                if has_reaction_baseline and session_id == baseline_session_id:
+                    log.info(f"Test complete without characterization: {test_id}")
+                    test_scores[test_id] = test_score
+                    self.harness.complete_test(session_id, test_id)
+                else:
+                    results = {}
+                    characterization_results = algorithms[algorithm_name].execute(
                         self.toolset, "NoveltyCharacterization"
                     )
-                    if results["characterization"] is not None and os.path.exists(
-                        results["characterization"]
-                    ):
+                    if isinstance(characterization_results, dict):
+                        results.update(characterization_results)
                         self.harness.post_results(results, test_id, 0, session_id)
-                    log.info(f"Test complete: {test_id}")
+                    else:
+                        results["characterization"] = characterization_results
+                        if results["characterization"] is not None:
+                            self.harness.post_results(results, test_id, 0, session_id)
 
-                    # cleanup the characterization file
-                    safe_remove(results["characterization"])
-                test_scores[test_id] = test_score
-                self.harness.complete_test(session_id, test_id)
+                    log.info(f"Test complete: {test_id}")
+                    test_scores[test_id] = test_score
+                    self.harness.complete_test(session_id, test_id)
             algorithm_scores[algorithm_name] = test_scores
         for algorithm_name, session_id in sessions.items():
             for test_id in self.config["test_ids"]:
