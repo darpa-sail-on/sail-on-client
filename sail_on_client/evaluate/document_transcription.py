@@ -76,7 +76,7 @@ class DocumentTranscriptionMetrics(ProgramMetrics):
 
         Args:
             gt_novel: ground truth detections (Dimension: [img X detection])
-            p_class: detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])
+            p_class: class predictions (Dimension: [img X prob that sample is novel, prob of known classes])
             gt_class: ground truth classes (Dimension: [img X class idx])
             round_size: size of the round
             asymptotic_start_round: asymptotic samples considered for computing metrics
@@ -97,7 +97,7 @@ class DocumentTranscriptionMetrics(ProgramMetrics):
         m_acc_round_wise function.
 
         Args:
-            p_class: detection predictions
+            p_class: class predictions
             gt_class: ground truth classes
             round_id: round identifier
 

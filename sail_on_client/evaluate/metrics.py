@@ -34,7 +34,7 @@ class ProgramMetrics(ABC):
 
         Args:
             gt_novel: ground truth detections
-            p_class: detection predictions
+            p_class: class predictions
             gt_class: ground truth classes
             round_size: size of the round
             asymptotic_start_round: asymptotic samples considered for computing metrics
@@ -51,7 +51,7 @@ class ProgramMetrics(ABC):
         m_acc_round_wise abstract function.
 
         Args:
-            p_class: detection predictions
+            p_class: class predictions
             gt_class: ground truth classes
 
         Returns:
