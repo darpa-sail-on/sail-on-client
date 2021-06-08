@@ -15,7 +15,15 @@ class Checkpointer(object):
     """Checkpoint object to save and restore attributes."""
 
     def __init__(self, toolset: Dict) -> None:
-        """Initialize."""
+        """
+        Initialize.
+
+        Args:
+            toolset: Dictionary with parameter for the mixin
+
+        Returns:
+            None
+        """
         self.toolset = toolset
 
     def _save_elementwise_attribute(
@@ -24,11 +32,13 @@ class Checkpointer(object):
         """
         Private method to save attributes element wise.
 
-        :params detector: Instance of novelty detector
-        :params attribute: Name of the detector attribute that needs to be saved
-        :params attribute dict: A dictonary containing attribute value for other tests
+        Args:
+            detector: Instance of novelty detector
+            attribute: Name of the detector attribute that needs to be saved
+            attribute dict: A dictonary containing attribute value for other tests
 
-        :return Update attribute dictionary
+        Returns:
+            Update attribute dictionary
         """
         attribute_val = getattr(detector, attribute)
         test_id = self.toolset["test_id"]
@@ -67,9 +77,11 @@ class Checkpointer(object):
         """
         Save attribute for a detector.
 
-        :params step_descriptor: String describing steps for protocol
+        Args:
+            step_descriptor: String describing steps for protocol
 
-        :return None
+        Returns
+            None
         """
         if step_descriptor in self.toolset["saved_attributes"]:
             attributes = self.toolset["saved_attributes"][step_descriptor]
@@ -102,11 +114,13 @@ class Checkpointer(object):
         """
         Private method to restore attributes element wise.
 
-        :params detector: Instance of novelty detector
-        :params attribute_name: Name of the detector attribute that needs to be saved
-        :params attribute_val: A dictonary containing value for attributes
+        Args:
+            detector: Instance of novelty detector
+            attribute_name: Name of the detector attribute that needs to be saved
+            attribute_val: A dictonary containing value for attributes
 
-        :return Detector with updated value for attributes
+        Returns
+            Detector with updated value for attributes
         """
         dataset_ids = list(
             map(lambda x: x.strip(), open(self.toolset["dataset"], "r").readlines())
@@ -137,9 +151,11 @@ class Checkpointer(object):
         """
         Restore attribute for a detector.
 
-        :params step_descriptor: String describing steps for protocol
+        Args:
+            step_descriptor: String describing steps for protocol
 
-        :return None
+        Returns:
+            None
         """
         if (
             self.toolset["use_saved_attributes"]
