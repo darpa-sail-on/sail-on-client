@@ -33,7 +33,18 @@ class Condda(BaseProtocol):
         harness: Union[ParInterface, LocalInterface],
         config_file: str,
     ) -> None:
-        """Initialize."""
+        """
+        Initialize condda protocol object.
+
+        Args:
+            discovered_plugins: Dict of algorithms that can be used by the protocols
+            algorithmsdirectory: Directory with the algorithms
+            harness: An object for the harness used for T&E
+            config_file: Path to a config file used by the protocol
+
+        Returns:
+            None
+        """
 
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file

@@ -27,7 +27,7 @@ log = logging.getLogger(__name__)
 
 
 class SailOn(BaseProtocol):
-    """The base protocol for Sail On."""
+    """OND protocol."""
 
     def __init__(
         self,
@@ -36,7 +36,18 @@ class SailOn(BaseProtocol):
         harness: ParInterface,
         config_file: str,
     ) -> None:
-        """Initialize."""
+        """
+        Initialize ond protocol object.
+
+        Args:
+            discovered_plugins: Dict of algorithms that can be used by the protocols
+            algorithmsdirectory: Directory with the algorithms
+            harness: An object for the harness used for T&E
+            config_file: Path to a config file used by the protocol
+
+        Returns:
+            None
+        """
 
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
