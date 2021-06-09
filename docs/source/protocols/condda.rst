@@ -44,6 +44,6 @@ CONDDA Workflow With Red Light
 CONDDA API
 ----------
 
-.. autoclass:: sail_on_client.protocol.condda.CONDDA
+.. autoclass:: sail_on_client.protocol.condda.Condda
     :members:
     :inherited-members:
