@@ -1,8 +1,26 @@
+Interface
+=========
+
+Interfaces are used for testing and evaluating TA2 agents. The
+evaluation can be conducted using a server setup by TA1 or by
+providing the files containing ground truth and metadata
+associated with the tests. We support two interfaces for
+sail-on-client
+
+1. Local Interface
+2. PAR Interface
+
+Local Interface
+---------------
+
+:code:`LocalInterface` is primarily used for replicating the capabilities of
+:code:`PARInterface` without using the server. This allows local testing without
+setting up a server instance locally or via a URL. Since LocalInterface uses
+the files directly, the config parameter `data_dir` needs to be specified to
+use this interface.
+
 PAR Interface
 -------------
-
-Introduction
-^^^^^^^^^^^^
 
 :code:`ParInterface` is primarily responsible for communicating with the evaluation
 server setup by the TA1 team. The interface relies on RESTful api :ref:`(detailed in the next section)<REST API>`  to provide the
@@ -16,7 +34,6 @@ following features
    (e.g time intervals for video) along with class and certainty scores.
 6. Provide feedback as requested by the algorithm after the results for a batch have been
    submitted.
-
 
 REST API
 ^^^^^^^^
