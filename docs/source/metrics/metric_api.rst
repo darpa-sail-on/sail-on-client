@@ -4,7 +4,7 @@ Metric API
 Base Class For Metric
 ---------------------
 
-.. autoclass:: sail_on_client.evaluate.metric.ProgramMetric
+.. autoclass:: sail_on_client.evaluate.metrics.ProgramMetrics
     :members:
     :inherited-members:
 
@@ -25,6 +25,6 @@ Document Transcription Metric
 Image Classification Metric
 ---------------------------
 
-.. autoclass:: sail_on_client.evaluate.metric.activity_recognition.ActivityRecognitionMetrics
+.. autoclass:: sail_on_client.evaluate.image_classification.ImageClassificationMetrics
     :members:
     :inherited-members:
