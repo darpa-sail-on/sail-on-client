@@ -13,9 +13,11 @@
 import os
 import sys
 
+
 sys.path.insert(0, os.path.abspath("."))
 sys.path.insert(0, os.path.abspath(".."))
 
+from sail_on_client import __version__
 
 # -- Project information -----------------------------------------------------
 
@@ -25,8 +27,8 @@ author = "Kitware INC."
 
 # TODO: Get the version from the package
 # The full version, including alpha/beta/rc tags
-release = "0.1"
-version = "0.1"
+release = __version__
+version = __version__
 
 # -- General configuration ---------------------------------------------------
 
