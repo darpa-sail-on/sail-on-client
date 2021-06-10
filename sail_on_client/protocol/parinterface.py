@@ -11,6 +11,7 @@ from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 from typing import Any, Dict, Union, List
 from requests import Response
 from sail_on_client.errors import ApiError, RoundError
+from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_type, after_log, before_sleep_log
 from json import JSONDecodeError
 
 log = logging.getLogger(__name__)
@@ -51,6 +52,8 @@ class ParInterface(Harness):
                 log.exception(f"Server Error: {traceback.format_exc()}")
                 exit(1)
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def test_ids_request(
         self,
         protocol: str,
@@ -96,6 +99,8 @@ class ParInterface(Harness):
 
         return filename
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def session_request(
         self,
         test_ids: list,
@@ -151,6 +156,8 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()["finished_tests"]
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
         """
         Request data for evaluation.
@@ -178,6 +185,8 @@ class ParInterface(Harness):
             f.write(response.content)
         return filename
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def get_feedback_request(
         self,
         feedback_ids: list,
@@ -215,6 +224,8 @@ class ParInterface(Harness):
 
         return filename
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def post_results(
         self, result_files: Dict[str, str], test_id: str, round_id: int, session_id: str
     ) -> None:
@@ -249,6 +260,8 @@ class ParInterface(Harness):
 
         self._check_response(response)
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def evaluate_round_wise(
         self, test_id: str, round_id: int, session_id: str,
     ) -> Dict[str, Any]:
@@ -265,6 +278,8 @@ class ParInterface(Harness):
         """
         raise NotImplementedError("Round wise accuracy computation is not supported")
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def evaluate(
         self,
         test_id: str,
@@ -301,6 +316,8 @@ class ParInterface(Harness):
 
         return filename
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def get_test_metadata(self, session_id: str, test_id: str) -> Dict[str, Any]:
         """
         Retrieve the metadata json for the specified test.
@@ -318,6 +335,8 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def complete_test(self, session_id: str, test_id: str) -> None:
         """
         Mark the given test as completed.
@@ -334,6 +353,8 @@ class ParInterface(Harness):
             params={"test_id": test_id, "session_id": session_id},
         )
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def terminate_session(self, session_id: str) -> None:
         """
         Terminate the session after the evaluation for the protocol is complete.
