@@ -91,6 +91,7 @@ Saving and Restoring Models
 
    saving/features
    saving/checkpoint
+   saving/checkpoint_api
 
 
 Indices and tables
