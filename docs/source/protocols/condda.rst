@@ -40,10 +40,3 @@ CONDDA Workflow With Red Light
    :alt: Workflow for CONDDA with red light
    :align: center
    :figclass: align-center
-
-CONDDA API
-----------
-
-.. autoclass:: sail_on_client.protocol.condda.Condda
-    :members:
-    :inherited-members:

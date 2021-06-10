@@ -38,10 +38,3 @@ OND Workflow With Red Light
    :alt: Workflow for OND with red light
    :align: center
    :figclass: align-center
-
-OND API
--------
-
-.. autoclass:: sail_on_client.protocol.ond_protocol.SailOn
-    :members:
-    :inherited-members:

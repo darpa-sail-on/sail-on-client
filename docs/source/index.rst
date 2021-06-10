@@ -47,6 +47,7 @@ Empirical Protocols
 
    protocols/ond
    protocols/condda
+   protocols/protocol_api
 
 Interfaces
 ----------
