@@ -54,8 +54,10 @@ Install Tinker Engine
 
 2. Install the dependencies of the tinker-engine in a virtual environment::
 
-     $ pipenv install
-     $ pipenv shell
+     $ python -m venv sail-on-client-env
+     $ source sail-on-client-env/bin/activate
+     $ cd tinker-engine
+     $ pip install -r requirements.txt
 
    This would create a virtual environment and activate the environment. Please
    use this virtual environment for installing all other repositories.
