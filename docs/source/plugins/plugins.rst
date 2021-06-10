@@ -66,7 +66,7 @@ Registering the Detector
 .. literalinclude:: ../../../setup.py
    :language: python
    :lines: 29-43
-   :emphasize-lines: 38-40
+   :emphasize-lines: 10-14
 
 .. Appendix 1: Links
 
