@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9ea74dc33ed8d57b3278e4f88c81f6907370aef73fc25704923e4ac28d7fe7c0"
+            "sha256": "a59f03443e0431fbcad49f7df1374b526aa4cb6581847fb43b2ed4f68b6f0c6b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -1255,6 +1255,34 @@
             ],
             "markers": "python_version < '3.8'",
             "version": "==1.4.3"
+        },
+        "types-pkg-resources": {
+            "hashes": [
+                "sha256:42d640500de564f1ccc21f918117afadf78039e4fa7f513c647ccf742d609aeb"
+            ],
+            "index": "pypi",
+            "version": "==0.1.2"
+        },
+        "types-requests": {
+            "hashes": [
+                "sha256:5b1864f1564adb810123c563b4de86236c14058978ec1294b07a988c532cb079"
+            ],
+            "index": "pypi",
+            "version": "==0.1.10"
+        },
+        "types-six": {
+            "hashes": [
+                "sha256:73d0065b688b05baf0433f98338c418a5a9887a7527c0bd9482ecd34fe5bb104"
+            ],
+            "index": "pypi",
+            "version": "==0.1.6"
+        },
+        "types-toml": {
+            "hashes": [
+                "sha256:ccebb129f6d68f49fbeb0efd000d48098b3f62885f0dbe44ad001e8b9c0b62ff"
+            ],
+            "index": "pypi",
+            "version": "==0.1.1"
         },
         "typing-extensions": {
             "hashes": [
