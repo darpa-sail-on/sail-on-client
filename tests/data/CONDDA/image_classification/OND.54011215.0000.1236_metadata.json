@@ -1,0 +1,10 @@
+{
+  "domain": "image_classification",
+  "protocol": "OND",
+  "known_classes": 414,
+  "max_novel_classes": 2,
+  "round_size": 100,
+  "threshold": 0.5,
+  "red_light": "known_unknown_classes/images/val/00008/00081.JPEG",
+  "feedback_max_ids": 10
+}

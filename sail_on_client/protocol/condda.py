@@ -3,7 +3,11 @@
 from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
-from sail_on_client.utils import safe_remove, safe_remove_results
+from sail_on_client.utils import (
+    safe_remove,
+    safe_remove_results,
+    update_harness_parameters,
+)
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from itertools import count
@@ -43,6 +47,7 @@ class Condda(BaseProtocol):
         with open(config_file, "r") as f:
             overriden_config = json.load(f)
         self.config = ConddaConfig(overriden_config)
+        self.harness = update_harness_parameters(harness, self.config["harness_config"])
 
     def run_protocol(self) -> None:
         """Run protocol."""
@@ -128,15 +133,25 @@ class Condda(BaseProtocol):
                 if self.config["use_saved_features"]:
                     feature_dir = self.config["feature_save_dir"]
                     if os.path.isdir(feature_dir):
-                        test_features = pkl.load(
-                            open(
-                                os.path.join(
-                                    feature_dir,
-                                    f"{test_id}_{algorithm_name}_features.pkl",
-                                ),
-                                "rb",
+                        if self.config["use_consolidated_features"]:
+                            test_features = pkl.load(
+                                open(
+                                    os.path.join(
+                                        feature_dir, f"{algorithm_name}_features.pkl",
+                                    ),
+                                    "rb",
+                                )
                             )
-                        )
+                        else:
+                            test_features = pkl.load(
+                                open(
+                                    os.path.join(
+                                        feature_dir,
+                                        f"{test_id}_{algorithm_name}_features.pkl",
+                                    ),
+                                    "rb",
+                                )
+                            )
                     else:
                         test_features = pkl.load(open(feature_dir, "rb"))
 
