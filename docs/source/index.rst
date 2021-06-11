@@ -9,7 +9,7 @@ Welcome to Sail-On Client's documentation!
 Release v\ |version| (:ref:`Installation <install>`)
 
 **Sail-On Client** is a library used for supporting evaluation of open world algorithms
-in `DARPA SAIL-ON`_. The library is based update work supported by DARPA under
+in `DARPA SAIL-ON`_. The library is based on the work supported by DARPA under
 Contract No. HR001120C0055 and is licensed under `APACHE-V2 LICENSE`_.
 
 Sail-On Client is being developed as an open source library to support evaluating **vision centric**
