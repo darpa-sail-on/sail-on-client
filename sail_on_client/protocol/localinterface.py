@@ -219,7 +219,7 @@ class LocalInterface(Harness):
             Path to a file with the results
         """
         gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
-        gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1)
+        gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1, quotechar="|")
         info = get_session_info(str(self.result_directory), session_id)
         protocol = info["created"]["protocol"]
         domain = info["created"]["domain"]
@@ -234,7 +234,9 @@ class LocalInterface(Harness):
             f"{session_id}.{test_id}_classification.csv",
         )
 
-        classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+        classifications = pd.read_csv(
+            classification_file_id, sep=",", header=None, quotechar="|"
+        )
         gt_round = gt.iloc[round_id * round_size : (round_id + 1) * round_size]
         classification_round = classifications[
             round_id * round_size : (round_id + 1) * round_size
@@ -266,7 +268,7 @@ class LocalInterface(Harness):
             Path to a file with the results
         """
         gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
-        gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1)
+        gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1, quotechar="|")
         info = get_session_info(str(self.result_directory), session_id)
         protocol = info["created"]["protocol"]
         domain = info["created"]["domain"]
@@ -278,7 +280,7 @@ class LocalInterface(Harness):
             domain,
             f"{session_id}.{test_id}_detection.csv",
         )
-        detections = pd.read_csv(detection_file_id, sep=",", header=None)
+        detections = pd.read_csv(detection_file_id, sep=",", header=None, quotechar="|")
         classification_file_id = os.path.join(
             self.result_directory,
             protocol,
@@ -286,7 +288,9 @@ class LocalInterface(Harness):
             f"{session_id}.{test_id}_classification.csv",
         )
 
-        classifications = pd.read_csv(classification_file_id, sep=",", header=None)
+        classifications = pd.read_csv(
+            classification_file_id, sep=",", header=None, quotechar="|"
+        )
         if baseline_session_id is not None:
             baseline_classification_file_id = os.path.join(
                 self.result_directory,
