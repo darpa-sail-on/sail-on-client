@@ -314,7 +314,7 @@ class ParInterface(Harness):
         Returns:
             None
         """
-        requests.get(
+        requests.delete(
             f"{self.api_url}/test",
             params={"test_id": test_id, "session_id": session_id},
         )
