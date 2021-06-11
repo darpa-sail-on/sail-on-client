@@ -141,6 +141,8 @@ class ParInterface(Harness):
         self._check_response(response)
         return response.json()["session_id"]
 
+    @retry(stop=stop_after_attempt(5), wait=wait_fixed(2),
+           reraise=True, before_sleep=before_sleep_log(log, logging.INFO))
     def resume_session(self, session_id: str) -> List[str]:
         """
         Get finished test from an existing session.
