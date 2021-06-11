@@ -37,7 +37,7 @@ class ParInterface(Harness):
 
     def _check_response(self, response: Response) -> None:
         """
-        Helper function to parse errors that present in the server response.
+        Parse errors that present in the server response.
 
         Args:
             response: The response object obtained from the server
