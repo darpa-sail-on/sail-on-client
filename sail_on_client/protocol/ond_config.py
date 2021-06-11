@@ -41,6 +41,8 @@ class OndConfig(scfg.Config):
         "saved_attributes": {},
         "skip_stage": [],
         "hints": [],
+        "resume_session": scfg.Value(False, help="Flag to resume session"),
+        "resumed_session_ids": {},
         "detectors": {
             "has_baseline": False,
             "has_reaction_baseline": False,

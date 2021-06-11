@@ -74,18 +74,31 @@ class Condda(BaseProtocol):
                 detector_threshold = float(algorithm_toolset["detection_threshold"])
             else:
                 detector_threshold = 0.5
-            session_id = self.harness.session_request(
-                self.config["test_ids"],
-                "CONDDA",
-                self.config["domain"],
-                f"{novelty_detector_version}.{novelty_detector_class}",
-                self.config["hints"],
-                detector_threshold,
-            )
+            test_ids = self.config["test_ids"]
+            if self.config["resume_session"]:
+                if algorithm_name in self.config["resumed_session_ids"]:
+                    session_id = self.config["resumed_session_ids"][algorithm_name]
+                else:
+                    raise ValueError(f"Failed to resume session for {algorithm_name}")
+                finished_test = self.harness.resume_session(session_id)
+                remaining_tests = []
+                for test_id in test_ids:
+                    if test_id not in finished_test:
+                        remaining_tests.append(test_id)
+                test_ids = remaining_tests
+            else:
+                session_id = self.harness.session_request(
+                    test_ids,
+                    "CONDDA",
+                    self.config["domain"],
+                    f"{novelty_detector_version}.{novelty_detector_class}",
+                    self.config["hints"],
+                    detector_threshold,
+                )
             sessions[algorithm_name] = session_id
         for algorithm_name, session_id in sessions.items():
             log.info(f"New session: {session_id} for algorithm: {algorithm_name}")
-            for test_id in self.config["test_ids"]:
+            for test_id in test_ids:
                 self.metadata = self.harness.get_test_metadata(session_id, test_id)
                 self.toolset["test_id"] = test_id
                 self.toolset["test_type"] = ""

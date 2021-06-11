@@ -7,7 +7,7 @@ from sail_on_client.evaluate import create_metric_instance
 from sailon_tinker_launcher.deprecated_tinker.harness import Harness
 
 from tempfile import TemporaryDirectory
-from typing import Any, Dict, Union
+from typing import Any, Dict, Union, List
 import os
 import io
 import logging
@@ -105,6 +105,18 @@ class LocalInterface(Harness):
             hints,
             detection_threshold,
         )
+
+    def resume_session(self, session_id: str) -> List[str]:
+        """
+        Get finished test from an existing session.
+
+        Arguments:
+            -session id : session id that was started but not terminated
+
+        Returns:
+            list of tests finished in the session
+        """
+        return self.file_provider.latest_session_info(session_id)["finished_tests"]
 
     def dataset_request(self, test_id: str, round_id: int, session_id: str) -> str:
         """
