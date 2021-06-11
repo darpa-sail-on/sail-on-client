@@ -15,8 +15,6 @@ from tenacity import (
     retry,
     stop_after_attempt,
     wait_fixed,
-    retry_if_exception_type,
-    after_log,
     before_sleep_log,
 )
 from json import JSONDecodeError
