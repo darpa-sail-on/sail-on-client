@@ -19,20 +19,20 @@ Installation with Pipenv ( Recommended )
 
 1. Clone the repositories associated with different components in a working directory::
 
-      $ git clone https://github.com/tinker-engine/tinker-engine.git
-      $ git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
-      $ git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
-      $ git clone https://github.com/darpa-sail-on/Sail-On-API.git
-      $ git clone https://github.com/darpa-sail-on/sail-on-client.git
+      git clone https://github.com/tinker-engine/tinker-engine.git
+      git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
+      git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
+      git clone https://github.com/darpa-sail-on/Sail-On-API.git
+      git clone https://github.com/darpa-sail-on/sail-on-client.git
 
    This would create tinker-engine, sailon_tinker_launcher, Sail_On_Evaluate,
    Sail-On-API and sail-on-client directories in your working directory
 
 2. Install the different components in a virtual environment::
 
-      $ cd ../sail-on-client
-      $ pipenv install
-      $ pipenv shell
+      cd ../sail-on-client
+      pipenv install
+      pipenv shell
 
 
 Installation without Pipfile
@@ -48,77 +48,77 @@ Install Tinker Engine
 
 1. Clone the `tinker-engine`_ repository::
 
-      $ git clone https://github.com/tinker-engine/tinker-engine.git
+      git clone https://github.com/tinker-engine/tinker-engine.git
 
    This would create a directory called tinker-engine in your working directory
 
 2. Install the dependencies of the tinker-engine in a virtual environment::
 
-     $ python -m venv sail-on-client-env
-     $ source sail-on-client-env/bin/activate
-     $ cd tinker-engine
-     $ pip install -r requirements.txt
+     python -m venv sail-on-client-env
+     source sail-on-client-env/bin/activate
+     cd tinker-engine
+     pip install -r requirements.txt
 
    This would create a virtual environment and activate the environment. Please
    use this virtual environment for installing all other repositories.
 
 3. Install the tinker-engine in the virtual environment::
 
-     $ pip install -e .
+     pip install -e .
 
 Install Sail-On Server
 """"""""""""""""""""""
 
 1. Clone the `Sail-On`_ repository::
 
-      $ git clone https://github.com/darpa-sail-on/Sail-On-API.git
+      git clone https://github.com/darpa-sail-on/Sail-On-API.git
 
    This would create a directory called sail-on in your working directory
 
 2. Go into the sail-on directory and install the dependencies for the server using::
 
-     $ cd Sail-On-API
-     $ pip install -r requirements.txt
+     cd Sail-On-API
+     pip install -r requirements.txt
 
 3. Install the server::
 
-     $ pip install -e .
+     pip install -e .
 
 Install Sail_On_Evaluate
 """"""""""""""""""""""""
 
 1. Clone `Sail_On_Evaluate`_ repository::
 
-      $ git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
+      git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
 
    This would create a directory called Sail_On_Evaluate in your working directory
 
 2. Go into the directory for metric code and install the dependencies using::
 
-     $ cd Sail_On_Evaluate
-     $ pip install -r requirements.txt
+     cd Sail_On_Evaluate
+     pip install -r requirements.txt
 
 3. Install metric using::
 
-     $ pip install -e .
+     pip install -e .
 
 Install sailon_tinker_launcher
 """"""""""""""""""""""""""""""
 
 1. Clone `sailon_tinker_launcher`_ repository::
 
-      $ git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
+      git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
 
    This would create a directory called sailon_tinker_launcher in your working directory
 
 2. Go into the directory for the launcher and install the dependencies using::
 
-     $ cd sailon_tinker_launcher
-     $ pip install -r requirements.txt
+     cd sailon_tinker_launcher
+     pip install -r requirements.txt
 
 3. Install sailon_tinker_launcher using::
 
-     $ pip install -e .
+     pip install -e .
 
 
 Install Sail-On Client
@@ -126,19 +126,18 @@ Install Sail-On Client
 
 1. Clone the `sail-on-client`_ repository::
 
-      $ git clone https://github.com/darpa-sail-on/sail-on-client.git
+      git clone https://github.com/darpa-sail-on/sail-on-client.git
 
    This would create a directory called sail-on-client in your working directory
 
 2. Go into the sail-on-client directory and install the dependencies for the client using::
 
-     $ cd sail-on-client
-     $ pip install -r requirements.txt
-
+     cd sail-on-client
+     pip install -r requirements.txt
 
 3. Install the client using::
 
-     $ pip install -e .
+     pip install -e .
 
 
 .. Appendix 1: Links
