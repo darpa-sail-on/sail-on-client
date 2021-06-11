@@ -234,7 +234,9 @@ class LocalInterface(Harness):
             f"{session_id}.{test_id}_classification.csv",
         )
 
-        classifications = pd.read_csv(classification_file_id, sep=",", header=None, quotechar="|")
+        classifications = pd.read_csv(
+            classification_file_id, sep=",", header=None, quotechar="|"
+        )
         gt_round = gt.iloc[round_id * round_size : (round_id + 1) * round_size]
         classification_round = classifications[
             round_id * round_size : (round_id + 1) * round_size
@@ -286,7 +288,9 @@ class LocalInterface(Harness):
             f"{session_id}.{test_id}_classification.csv",
         )
 
-        classifications = pd.read_csv(classification_file_id, sep=",", header=None, quotechar="|")
+        classifications = pd.read_csv(
+            classification_file_id, sep=",", header=None, quotechar="|"
+        )
         if baseline_session_id is not None:
             baseline_classification_file_id = os.path.join(
                 self.result_directory,
