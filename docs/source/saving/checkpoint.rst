@@ -44,6 +44,10 @@ Sample Adapter
 Sample Configuration
 ^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+    The configuration options used for saving attributes are highlighted in the
+    examples below.
+
 .. literalinclude:: ../../../config/ond_12_with_rd_nd_save.json
    :language: json
    :lines: 6-16

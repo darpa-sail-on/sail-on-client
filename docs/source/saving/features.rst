@@ -12,6 +12,10 @@ configurations on the `config`_ directory for an example usage.
 Sample Configuration
 --------------------
 
+.. note::
+    The configuration options used for saving features are highlighted in the
+    examples below.
+
 Saving Features
 ^^^^^^^^^^^^^^^
 

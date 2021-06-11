@@ -63,6 +63,9 @@ Sample Detector
 Registering the Detector
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+    The registration is highlighted below.
+
 .. literalinclude:: ../../../setup.py
    :language: python
    :lines: 29-43
