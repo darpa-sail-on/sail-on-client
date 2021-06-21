@@ -17,7 +17,7 @@ def _get_all_subclasses(cls: Any) -> List[Any]:
 
 
 class ApiError(Exception):
-    """Base class for all serverside error conditions."""
+    """Base class for all server side error conditions."""
 
     reason = "Unknown"
     msg = ""
@@ -27,18 +27,38 @@ class ApiError(Exception):
     def __init__(
         self, reason: str, msg: str, stack_trace: str = "stack trace unavailable"
     ):
-        """Initialize the error object."""
+        """
+        Initialize the api error object.
+
+        Args:
+            reason: Cause for the error
+            msg: Additional message associated with the error
+            stack_trace: Stack trace associated with the error
+
+        Returns:
+            None
+        """
         self.reason = reason
         self.msg = msg
         self.stack_trace = stack_trace
 
     @staticmethod
     def error_classes() -> List[Any]:
-        """Return all error classes in the system."""
+        """
+        Return all error classes in the system.
+
+        Returns:
+            List of subclasses of server error
+        """
         return _get_all_subclasses(ApiError)
 
     def flask_response(self) -> Tuple[Dict[str, str], int]:
-        """Convert the object to a Flask response."""
+        """
+        Convert the object to a Flask response.
+
+        Returns:
+            Tuple of response obtained from server and error code
+        """
         response = {
             "reason": self.reason,
             "message": self.msg,
@@ -56,7 +76,17 @@ class ServerError(ApiError):
     def __init__(
         self, reason: str, msg: str, stack_trace: str = "stack trace unavailable"
     ):
-        """Initialize."""
+        """
+        Initialize the server error object.
+
+        Args:
+            reason: Cause for the error
+            msg: Additional message associated with the error
+            stack_trace: Stack trace associated with the error
+
+        Returns:
+            None
+        """
         super().__init__(reason, msg, stack_trace)
 
 
@@ -68,7 +98,17 @@ class RoundError(ServerError):
     def __init__(
         self, reason: str, msg: str, stack_trace: str = "stack trace unavailable"
     ):
-        """Initialize."""
+        """
+        Initialize the round error object.
+
+        Args:
+            reason: Cause for the error
+            msg: Additional message associated with the error
+            stack_trace: Stack trace associated with the error
+
+        Returns:
+            None
+        """
         super().__init__(reason, msg, stack_trace)
 
 
@@ -80,5 +120,15 @@ class ProtocolError(ApiError):
     def __init__(
         self, reason: str, msg: str, stack_trace: str = "stack trace unavailable"
     ):
-        """Initialize the error object."""
+        """
+        Initialize the Protocol error object.
+
+        Args:
+            reason: Cause for the error
+            msg: Additional message associated with the error
+            stack_trace: Stack trace associated with the error
+
+        Returns:
+            None
+        """
         super().__init__(reason, msg, stack_trace)

@@ -29,6 +29,7 @@ class LocalInterface(Harness):
             config_file: Name of the config file that provides parameter
                          to the interface
             config_folder: The directory where configfile is present
+
         Returns:
             None
         """
@@ -67,6 +68,7 @@ class LocalInterface(Harness):
             domain : problem domain for the tests
             detector_seed : A seed provided by the novelty detector
             test_assumptions : Assumptions used by the detector
+
         Returns:
             Filename of file containing test ids
         """
@@ -88,12 +90,13 @@ class LocalInterface(Harness):
         Create a new session to evaluate the detector using an empirical protocol.
 
         Args:
-            test_ids   : list of tests being evaluated in this session
-            protocol   : string indicating which protocol is being evaluated
-            domain     : string indicating which domain is being evaluated
-            novelty_detector_version : string indicating the version of the novelty detector being evaluated
-            hints      : Hints used for the session
-            detection_threshold      : Detection threshold for the session
+            test_ids: List of tests being evaluated in this session
+            protocol: String indicating which protocol is being evaluated
+            domain: String indicating which domain is being evaluated
+            novelty_detector_version: The novelty detector being evaluated
+            hints: Hints used for the session
+            detection_threshold: Detection threshold for the session
+
         Returns:
             A session identifier provided by the server
         """
@@ -110,11 +113,11 @@ class LocalInterface(Harness):
         """
         Get finished test from an existing session.
 
-        Arguments:
-            -session id : session id that was started but not terminated
+        Args:
+            session id : Session id that was started but not terminated
 
         Returns:
-            list of tests finished in the session
+            List of tests finished in the session
         """
         return self.file_provider.latest_session_info(session_id)["finished_tests"]
 
@@ -123,9 +126,9 @@ class LocalInterface(Harness):
         Request data for evaluation.
 
         Args:
-            test_id    : the test being evaluated at this moment.
-            round_id   : the sequential number of the round being evaluated
-            session_id : the identifier provided by the server for a single experiment
+            test_id: The test being evaluated at this moment.
+            round_id: The sequential number of the round being evaluated
+            session_id: The identifier provided by the server for a single experiment
 
         Returns:
             Filename of a file containing a list of image files (including full path for each)
@@ -155,11 +158,11 @@ class LocalInterface(Harness):
         Get Labels from the server based provided one or more example ids.
 
         Args:
-            feedback_ids   : List of media ids for which feedback is required
-            feedback_type  : protocols constants with the values: label, detection, characterization
-            test_id        : the id of the test currently being evaluated
-            round_id       : the sequential number of the round being evaluated
-            session_id     : the id provided by a server denoting a session
+            feedback_ids: List of media ids for which feedback is required
+            feedback_type: Protocols constants with the values: label, detection, characterization
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
 
         Returns:
             Path to a file containing containing requested feedback
@@ -184,10 +187,10 @@ class LocalInterface(Harness):
         Post client detector predictions for the dataset.
 
         Args:
-            result_files : A dictionary of results with protocol constant as key and file path as value
-            test_id        : the id of the test currently being evaluated
-            round_id       : the sequential number of the round being evaluated
-            session_id     : the id provided by a server denoting a session
+            result_files: A dictionary of results with protocol constant as key and file path as value
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
 
         Returns:
             None
@@ -211,9 +214,9 @@ class LocalInterface(Harness):
         Get results for round(s).
 
         Args:
-            test_id        : the id of the test currently being evaluated
-            round_id       : the sequential number of the round being evaluated
-            session_id     : the id provided by a server denoting a session
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
 
         Returns:
             Path to a file with the results
@@ -260,9 +263,9 @@ class LocalInterface(Harness):
         Get results for test(s).
 
         Args:
-            test_id        : the id of the test currently being evaluated
-            round_id       : the sequential number of the round being evaluated
-            session_id     : the id provided by a server denoting a session
+            test_id: The id of the test currently being evaluated
+            round_id: The sequential number of the round being evaluated
+            session_id: The id provided by a server denoting a session
 
         Returns:
             Path to a file with the results
@@ -373,11 +376,11 @@ class LocalInterface(Harness):
         Retrieve the metadata json for the specified test.
 
         Args:
-            session_id        : the id of the session currently being evaluated
-            test_id           : the id of the test currently being evaluated
+            session_id: The id of the session currently being evaluated
+            test_id: The id of the test currently being evaluated
 
         Returns:
-            A json file containing metadata
+            A dictionary containing metadata
         """
         return self.file_provider.get_test_metadata(session_id, test_id)
 
@@ -386,8 +389,8 @@ class LocalInterface(Harness):
         Mark test as completed.
 
         Args:
-            session_id        : the id of the session currently being evaluated
-            test_id           : the id of the test currently being evaluated
+            session_id: The id of the session currently being evaluated
+            test_id: The id of the test currently being evaluated
 
         Returns:
             None
@@ -399,7 +402,7 @@ class LocalInterface(Harness):
         Terminate the session after the evaluation for the protocol is complete.
 
         Args:
-            session_id     : the id provided by a server denoting a session
+            session_id: The id provided by a server denoting a session
 
         Returns: None
         """

@@ -37,7 +37,18 @@ The protocols assumes that the algorithm have the following functions during eva
 Adapters And Toolset
 --------------------
 
-TBD
+Rather than enforcing a strict API for the functions required by the algorithms,
+sail on client provides adapters to fulfill input-output requirements of an algorithm.
+The adapters are provided a dictionary of the global state maintained by the protocol.
+This dictionary is called `toolset`. The algorithm can select data from the `toolset`
+to execute different steps associated with the algorithm.
+
+Sample Adapter
+^^^^^^^^^^^^^^
+
+.. literalinclude:: ../../../sail_on_client/mock.py
+   :language: python
+   :lines: 154-178
 
 Sample Detector and Registration
 --------------------------------
@@ -45,16 +56,20 @@ Sample Detector and Registration
 Sample Detector
 ^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../../sail_on_client/mock.py
+.. literalinclude:: ../../../sail_on_client/mock.py
    :language: python
+   :lines: 15-120
 
 Registering the Detector
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../../setup.py
+.. note::
+    The registration is highlighted below.
+
+.. literalinclude:: ../../../setup.py
    :language: python
-   :lines: 11-30
-   :emphasize-lines: 20
+   :lines: 29-43
+   :emphasize-lines: 10-14
 
 .. Appendix 1: Links
 
