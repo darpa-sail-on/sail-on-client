@@ -22,6 +22,10 @@ coverage = ">=5.2.1"
 sphinx-press-theme = "==0.5.1"
 sphinx-autodoc-typehints = ">=1.11.0"
 Sphinx = ">=3.2.1"
+types-pkg-resources = "==0.1.2"
+types-requests = "==0.1.10"
+types-six = "==0.1.6"
+types-toml = "==0.1.1"
 
 [packages]
 scriptconfig = "==0.5.6"
@@ -42,6 +46,7 @@ cachetools = "==4.1.1"
 gunicorn = ">=20.0.4"
 matplotlib = ">=3.2.2"
 torch = ">=1.6.0"
+tenacity = ">=7.0.0"
 tinker-engine = {editable = true, path = "./../tinker-engine"}
 sail-on = {editable = true, path = "./../Sail-On-API"}
 sailon-tinker-launcher = {editable = true, path = "./../sailon_tinker_launcher"}
@@ -61,5 +66,6 @@ format = "black ."
 test-with-coverage = "coverage run --source=. -m pytest tests"
 coverage-report = "coverage report -m"
 coverage-xml = "coverage xml"
+get-missing-types = "mypy --install-types"
 typecheck = "mypy -p sail_on_client --disallow-untyped-defs"
 docs = "sphinx-build docs/source/ docs/build/html/"
