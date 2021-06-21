@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Saving And Restoring Features for Algorithm</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="Saving And Restoring Attributes of Algorithm" href="checkpoint.html" />
+  <link rel="prev" title="Plugins" href="../plugins/plugins.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link ">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link  router-link-active">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link ">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link  router-link-active">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Saving And Restoring Features for Algorithm</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#introduction" class="reference internal">Introduction</a></li>
+                
+                  <li class="toctree-l2"><a href="#sample-configuration" class="reference internal">Sample Configuration</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="checkpoint_api.html" class="reference internal ">Checkpoint API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Saving And Restoring Features for Algorithm</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="../plugins/plugins.html"
+       title="previous chapter">← Plugins</a>
+  </li>
+  <li class="next">
+    <a href="checkpoint.html"
+       title="next chapter">Saving And Restoring Attributes of Algorithm →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <section id="saving-and-restoring-features-for-algorithm">
+<h1>Saving And Restoring Features for Algorithm<a class="headerlink" href="#saving-and-restoring-features-for-algorithm" title="Permalink to this headline">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>We rely on configuration options to save and restore features associated with
+an algorithm. Refer to <cite>gae_nd_graph_fe.json</cite> and <cite>gae_nd_graph_precomputed.json</cite>
+configurations on the <a class="reference external" href="https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/tree/master/config">config</a> directory for an example usage.</p>
+</section>
+<section id="sample-configuration">
+<h2>Sample Configuration<a class="headerlink" href="#sample-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The configuration options used for saving features are highlighted in the
+examples below.</p>
+</div>
+<section id="saving-features">
+<h3>Saving Features<a class="headerlink" href="#saving-features" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;test_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;OND.0.90001.2100554&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;dataset_root&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;feature_extraction_only&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+</span><span class="hll">  <span class="nt">&quot;save_features&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+</span><span class="hll">  <span class="nt">&quot;save_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;GAE-features&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;detectors&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;has_reaction_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;has_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;csv_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="nt">&quot;detection_threshold&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="nt">&quot;detector_configs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;gae_nd&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;feature_extractor_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;backbone_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d-50&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;graph_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+          <span class="nt">&quot;no_cuda&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;hidden_dims&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">128</span> <span class="p">],</span>
+          <span class="nt">&quot;hidden&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;in_dim&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+          <span class="nt">&quot;num_heads&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span> <span class="p">],</span>
+          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;feature&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;graph_classes&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
+          <span class="nt">&quot;feature_type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;evm_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;weight_path&quot;</span><span class="p">:</span>  <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;number_of_unknown_to_crate_evm&quot;</span><span class="p">:</span> <span class="mi">7</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;characterization_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;clustering_type&quot;</span><span class="p">:</span> <span class="s2">&quot;FINCH&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;number_of_unknown_to_strat_clustering&quot;</span><span class="p">:</span> <span class="mi">50</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;dataloader_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;sample_size&quot;</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
+          <span class="nt">&quot;mean&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">114.7748</span><span class="p">,</span> <span class="mf">107.7354</span><span class="p">,</span> <span class="mf">99.475</span> <span class="p">],</span>
+          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="nt">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;n_threads&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">88</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="restore-features">
+<h3>Restore Features<a class="headerlink" href="#restore-features" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;test_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">&quot;OND.0.90001.2100554&quot;</span>
+  <span class="p">],</span>
+  <span class="nt">&quot;dataset_root&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="hll">  <span class="nt">&quot;feature_extraction_only&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+</span><span class="hll">  <span class="nt">&quot;save_features&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+</span><span class="hll">  <span class="nt">&quot;use_saved_features&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+</span><span class="hll">  <span class="nt">&quot;save_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;GAE-features&quot;</span><span class="p">,</span>
+</span>  <span class="nt">&quot;detectors&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;has_reaction_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;has_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;csv_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="nt">&quot;detection_threshold&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="nt">&quot;detector_configs&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;gae_nd&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;feature_extractor_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;backbone_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d-50&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;graph_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+          <span class="nt">&quot;no_cuda&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;hidden_dims&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">128</span> <span class="p">],</span>
+          <span class="nt">&quot;hidden&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;in_dim&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+          <span class="nt">&quot;num_heads&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span> <span class="p">],</span>
+          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;feature&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;graph_classes&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
+          <span class="nt">&quot;feature_type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;evm_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;weight_path&quot;</span><span class="p">:</span>  <span class="s2">&quot;&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;number_of_unknown_to_crate_evm&quot;</span><span class="p">:</span> <span class="mi">7</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;characterization_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;clustering_type&quot;</span><span class="p">:</span> <span class="s2">&quot;FINCH&quot;</span><span class="p">,</span>
+          <span class="nt">&quot;number_of_unknown_to_strat_clustering&quot;</span><span class="p">:</span> <span class="mi">50</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;dataloader_params&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&quot;sample_size&quot;</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
+          <span class="nt">&quot;mean&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">114.7748</span><span class="p">,</span> <span class="mf">107.7354</span><span class="p">,</span> <span class="mf">99.475</span> <span class="p">],</span>
+          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+          <span class="nt">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="nt">&quot;n_threads&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">88</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="../plugins/plugins.html"
+       title="previous chapter">← Plugins</a>
+  </li>
+  <li class="next">
+    <a href="checkpoint.html"
+       title="next chapter">Saving And Restoring Attributes of Algorithm →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

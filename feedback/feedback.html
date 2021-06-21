@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Feedback</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="Feedback API" href="feedback_api.html" />
+  <link rel="prev" title="Metric API" href="../metrics/metric_api.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link  router-link-active">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link  router-link-active">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Feedback</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#introduction" class="reference internal">Introduction</a></li>
+                
+                  <li class="toctree-l2"><a href="#feedback-across-domains" class="reference internal">Feedback Across Domains</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="feedback_api.html" class="reference internal ">Feedback API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Feedback</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="../metrics/metric_api.html"
+       title="previous chapter">← Metric API</a>
+  </li>
+  <li class="next">
+    <a href="feedback_api.html"
+       title="next chapter">Feedback API →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <section id="feedback">
+<h1>Feedback<a class="headerlink" href="#feedback" title="Permalink to this headline">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>To facilitate adaption when novelty is introduced, Sail On agents can use feedback.
+The feedback is assumed to be in the same space as the predictions. Thus for OND,
+feeback is provided in K+1 space and for CONDDA feedback is provided in K+D+1 space.
+For example, if the space of prediction is novel vs. not novel, the feedback
+for a sample would be novel/not novel; if prediction is one of K+1 classes (K + unknown),
+the feedback will be correct class from K+1.</p>
+<p>Feedback can be requested for any sample in the last batch after the TA2 declares
+that novelty has been introduced and has submitted a prediction for it.
+Feedback is budgeted for every round for the protocols and for evaluation 10%
+feedback is provided by novelty generators.</p>
+</section>
+<section id="feedback-across-domains">
+<h2>Feedback Across Domains<a class="headerlink" href="#feedback-across-domains" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 9%" />
+<col style="width: 34%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Domain</p></th>
+<th class="head"><p>Protocol</p></th>
+<th class="head"><p>Outputs</p></th>
+<th class="head"><p>Feedback</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>Image Classification</p></td>
+<td><p>OND</p></td>
+<td><p>Class Predictions (K+1)</p></td>
+<td><p>One hot class vector in [K+1] dimension</p></td>
+</tr>
+<tr class="row-odd"><td><p>CONDDA</p></td>
+<td><p>Characterization Predictions (K+D+1)</p></td>
+<td><p>Not defined yet</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>Document Transcription</p></td>
+<td><p>OND</p></td>
+<td><p>Class Predictions (K+1)</p></td>
+<td><p>One hot class vector in [K+1] dimension</p></td>
+</tr>
+<tr class="row-odd"><td><p>OND</p></td>
+<td><p>Class Predictions (K+1)</p></td>
+<td><p>Levenshtein Distance</p></td>
+</tr>
+<tr class="row-even"><td><p>CONDDA</p></td>
+<td><p>Characterization Predictions (K+D+1)</p></td>
+<td><p>Not defined yet</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><p>Activity Recognition</p></td>
+<td><p>OND</p></td>
+<td><p>Class Predictions (K+1)</p></td>
+<td><p>One hot class vector in [K+1] dimension</p></td>
+</tr>
+<tr class="row-even"><td><p>CONDDA</p></td>
+<td><p>Characterization Predictions (K+D+1)</p></td>
+<td><p>Not defined yet</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="../metrics/metric_api.html"
+       title="previous chapter">← Metric API</a>
+  </li>
+  <li class="next">
+    <a href="feedback_api.html"
+       title="next chapter">Feedback API →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

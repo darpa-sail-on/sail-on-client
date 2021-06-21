@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Protocol API</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="Interface" href="../interfaces/interface.html" />
+  <link rel="prev" title="Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)" href="condda.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link  router-link-active">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link ">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link  router-link-active">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link ">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link ">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 "><a href="ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Protocol API</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#ond-api" class="reference internal">OND API</a></li>
+                
+                  <li class="toctree-l2"><a href="#condda-api" class="reference internal">CONDDA API</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Protocol API</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="condda.html"
+       title="previous chapter">← Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+  </li>
+  <li class="next">
+    <a href="../interfaces/interface.html"
+       title="next chapter">Interface →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <section id="protocol-api">
+<h1>Protocol API<a class="headerlink" href="#protocol-api" title="Permalink to this headline">¶</a></h1>
+<section id="ond-api">
+<h2>OND API<a class="headerlink" href="#ond-api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_protocol.</span></span><span class="sig-name descname"><span class="pre">SailOn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn" title="Permalink to this definition">¶</a></dt>
+<dd><p>OND protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.get_algorithm">
+<span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.get_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a single algorithm file and instantiate the relevant object therefrom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algotype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – (option 1) This is a string that contains either an absolute or relative path to the
+desired algorithm file. If the path is relative, then the location of
+the file is determined using the self.algorithmsbase directory and
+appending the algotype string to it to generate the absolute file path.</p></li>
+<li><p><strong>algotype</strong> – (option 2) This is a string that names a plugin that has been pip installed. This
+function will attempt to load using the plugin if a file with a matching name to
+algotype can’t be found.</p></li>
+<li><p><strong>toolset</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – This is a dict() containing the initialization information for the algorithm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a single instantiated object of the desired algorithm class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a protocol from a Python file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.load_from_plugin">
+<span class="sig-name descname"><span class="pre">load_from_plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.load_from_plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an algorithm from a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.run_protocol">
+<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.run_protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="condda-api">
+<h2>CONDDA API<a class="headerlink" href="#condda-api" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda.</span></span><span class="sig-name descname"><span class="pre">Condda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda" title="Permalink to this definition">¶</a></dt>
+<dd><p>CONDDA protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.get_algorithm">
+<span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.get_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a single algorithm file and instantiate the relevant object therefrom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algotype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – (option 1) This is a string that contains either an absolute or relative path to the
+desired algorithm file. If the path is relative, then the location of
+the file is determined using the self.algorithmsbase directory and
+appending the algotype string to it to generate the absolute file path.</p></li>
+<li><p><strong>algotype</strong> – (option 2) This is a string that names a plugin that has been pip installed. This
+function will attempt to load using the plugin if a file with a matching name to
+algotype can’t be found.</p></li>
+<li><p><strong>toolset</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – This is a dict() containing the initialization information for the algorithm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a single instantiated object of the desired algorithm class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a protocol from a Python file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.load_from_plugin">
+<span class="sig-name descname"><span class="pre">load_from_plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.load_from_plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an algorithm from a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.run_protocol">
+<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.run_protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="condda.html"
+       title="previous chapter">← Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+  </li>
+  <li class="next">
+    <a href="../interfaces/interface.html"
+       title="next chapter">Interface →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

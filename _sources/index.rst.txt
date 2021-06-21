@@ -9,15 +9,8 @@ Welcome to Sail-On Client's documentation!
 Release v\ |version| (:ref:`Installation <install>`)
 
 **Sail-On Client** is a library used for supporting evaluation of open world algorithms
-in `DARPA SAIL-ON`_. The library is based update work supported by DARPA under
-Contract No. HR001120C0055 and is licensed under `APACHE-V2 LICENSE`_.::
-
-  The Science of Artificial Intelligence and Learning for Open-world Novelty (SAIL-ON)
-  program intends to research and develop the underlying scientific principles,
-  general engineering techniques, and algorithms needed to create AI systems
-  that act appropriately and effectively in novel situations that occur in open
-  worlds.
-  -- SAIL-ON Website
+in `DARPA SAIL-ON`_. The library is based on the work supported by DARPA under
+Contract No. HR001120C0055 and is licensed under `APACHE-V2 LICENSE`_.
 
 Sail-On Client is being developed as an open source library to support evaluating **vision centric**
 open world agents. This involves communicating with evaluation server across a RESTful interface,
@@ -45,8 +38,6 @@ User Guide
    :maxdepth: 2
 
    user/install
-   user/cli
-   user/running_algorithms
 
 Empirical Protocols
 -------------------
@@ -56,6 +47,7 @@ Empirical Protocols
 
    protocols/ond
    protocols/condda
+   protocols/protocol_api
 
 Interfaces
 ----------
@@ -63,32 +55,45 @@ Interfaces
 .. toctree::
    :maxdepth: 2
 
-   interfaces/parinterface
-   interfaces/localinterface
+   interfaces/interface
+   interfaces/interface_api
+
+Metrics
+-------
+
+.. toctree::
+   :maxdepth: 2
+
+   metrics/metric_formulation
+   metrics/metric_api
+
+Feedback
+--------
+
+.. toctree::
+   :maxdepth: 2
+
+   feedback/feedback
+   feedback/feedback_api
 
 Plugins
 -------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   plugins
+   plugins/plugins
 
 Saving and Restoring Models
 ---------------------------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   saving
+   saving/features
+   saving/checkpoint
+   saving/checkpoint_api
 
-API Documentation
------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   api
 
 Indices and tables
 ==================

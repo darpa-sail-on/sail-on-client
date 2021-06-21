@@ -13,22 +13,19 @@ novelty (e.g., discover new classes) and accordingly add those as separate
 classes in the prediction space (i.e., one of D discovered classes).
 
 
-Image Classification Domain
----------------------------
-
 Prediction Space
-^^^^^^^^^^^^^^^^
+----------------
 
 1. Binary Classification Score: :math:`P_{world\_changed}`
 2. K + D + 1 Characterization Score: :math:`P_{class} = [ p_{unknown}, p_1, ..., p_k, p_{cluster0}, ..., p_{clusterU}]`
 
 WorkFlow For CONDDA
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 This section provides detailed workflow of the system in the evaluation condition
 
 CONDDA Workflow With Red Light
-""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. figure:: ../images/CONDDA-Updated.png
    :alt: Workflow for CONDDA without red light
@@ -37,7 +34,7 @@ CONDDA Workflow With Red Light
 
 
 CONDDA Workflow With Red Light
-""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. figure:: ../images/CONDDA-With-Red-Light-Updated.png
    :alt: Workflow for CONDDA with red light
