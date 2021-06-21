@@ -272,7 +272,6 @@ jobs:
 
   pages:
     needs: build
-    if: github.event.pull_request.merged == true
     name: Generate documentation and upload it on pages
     runs-on: ubuntu-latest
     steps:
