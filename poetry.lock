@@ -1250,6 +1250,20 @@ typing_extensions = ">=3.7.4.2"
 dev = ["black (==19.10b0)", "isort (==5.5.3)", "mypy (>=0.782)", "pre-commit (>=1.15.2)", "pytest-cov (>=2.6.1)", "coverage[toml] (>=5.1)", "pytest (>=4.3.0)", "pylint (>=2.6.0)"]
 
 [[package]]
+name = "tenacity"
+version = "7.0.0"
+description = "Retry code until it succeeds"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.9.0"
+
+[package.extras]
+doc = ["reno", "sphinx", "tornado (>=4.5)"]
+
+[[package]]
 name = "threadpoolctl"
 version = "2.1.0"
 description = "threadpoolctl"
@@ -1318,6 +1332,38 @@ telegram = ["requests"]
 name = "typed-ast"
 version = "1.4.3"
 description = "a fork of Python 2 and 3 ast modules with type comment support"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-pkg-resources"
+version = "0.1.3"
+description = "Typing stubs for pkg_resources"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-requests"
+version = "2.25.0"
+description = "Typing stubs for requests"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-six"
+version = "0.1.7"
+description = "Typing stubs for six"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "types-toml"
+version = "0.1.3"
+description = "Typing stubs for toml"
 category = "dev"
 optional = false
 python-versions = "*"
@@ -1395,7 +1441,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "616a55a3abca7f0fcbdb7b02a1da2105fcde1018c4981b8dc3a12cfffbb77a85"
+content-hash = "4abdc6e30873226c371ce7e14d2b3e7c5eae2bf1d8571700414450d91efb0e57"
 
 [metadata.files]
 alabaster = [
@@ -2132,6 +2178,10 @@ sphinxcontrib-serializinghtml = [
 submitit = [
     {file = "submitit-1.3.3.tar.gz", hash = "sha256:efaa77b2df9ea9ee02545478cbfc377853ddf8016bff59df6988bebcf51ffa7e"},
 ]
+tenacity = [
+    {file = "tenacity-7.0.0-py2.py3-none-any.whl", hash = "sha256:a0ce48587271515db7d3a5e700df9ae69cce98c4b57c23a4886da15243603dd8"},
+    {file = "tenacity-7.0.0.tar.gz", hash = "sha256:5bd16ef5d3b985647fe28dfa6f695d343aa26479a04e8792b9d3c8f49e361ae1"},
+]
 threadpoolctl = [
     {file = "threadpoolctl-2.1.0-py3-none-any.whl", hash = "sha256:38b74ca20ff3bb42caca8b00055111d74159ee95c4370882bbff2b93d24da725"},
     {file = "threadpoolctl-2.1.0.tar.gz", hash = "sha256:ddc57c96a38beb63db45d6c159b5ab07b6bced12c45a1f07b2b92f272aebfa6b"},
@@ -2200,6 +2250,22 @@ typed-ast = [
     {file = "typed_ast-1.4.3-cp39-cp39-win32.whl", hash = "sha256:209596a4ec71d990d71d5e0d312ac935d86930e6eecff6ccc7007fe54d703808"},
     {file = "typed_ast-1.4.3-cp39-cp39-win_amd64.whl", hash = "sha256:9c6d1a54552b5330bc657b7ef0eae25d00ba7ffe85d9ea8ae6540d2197a3788c"},
     {file = "typed_ast-1.4.3.tar.gz", hash = "sha256:fb1bbeac803adea29cedd70781399c99138358c26d05fcbd23c13016b7f5ec65"},
+]
+types-pkg-resources = [
+    {file = "types-pkg_resources-0.1.3.tar.gz", hash = "sha256:834a9b8d3dbea343562fd99d5d3359a726f6bf9d3733bccd2b4f3096fbab9dae"},
+    {file = "types_pkg_resources-0.1.3-py2.py3-none-any.whl", hash = "sha256:0cb9972cee992249f93fff1a491bf2dc3ce674e5a1926e27d4f0866f7d9b6d9c"},
+]
+types-requests = [
+    {file = "types-requests-2.25.0.tar.gz", hash = "sha256:ee0d0c507210141b7d5b8639cc43eaa726084178775db2a5fb06fbf85c185808"},
+    {file = "types_requests-2.25.0-py3-none-any.whl", hash = "sha256:fa5c1e5e832ff6193507d8da7e1159281383908ee193a2f4b37bc08140b51844"},
+]
+types-six = [
+    {file = "types-six-0.1.7.tar.gz", hash = "sha256:254484e024fbef5aafd6eee80642d713e3c240e12103dbd0f41e1f602402ff35"},
+    {file = "types_six-0.1.7-py2.py3-none-any.whl", hash = "sha256:ec2b7b1bcc521b3741f9317eca8fb3bfd0e39efe427231d57b37ad40af418a5e"},
+]
+types-toml = [
+    {file = "types-toml-0.1.3.tar.gz", hash = "sha256:33ebe67bebaec55a123ecbaa2bd98fe588335d8d8dda2c7ac53502ef5a81a79a"},
+    {file = "types_toml-0.1.3-py2.py3-none-any.whl", hash = "sha256:d4add39a90993173d49ff0b069edd122c66ad4cf5c01082b590e380ca670ee1a"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.0-py2-none-any.whl", hash = "sha256:0ac0f89795dd19de6b97debb0c6af1c70987fd80a2d62d1958f7e56fcc31b497"},

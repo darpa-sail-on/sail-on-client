@@ -30,6 +30,7 @@ sail-on = {path = "../Sail-On-API"}
 sail-on-evaluate = {path = "../Sail_On_Evaluate"}
 sailon-tinker-launcher = {path = "../sailon_tinker_launcher"}
 poetry-dynamic-versioning = "^0.13.0"
+tenacity = "^7.0.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = ">=3.7"
@@ -50,6 +51,10 @@ coverage = ">=5.2.1"
 sphinx-press-theme = "==0.5.1"
 sphinx-autodoc-typehints = ">=1.11.0"
 Sphinx = ">=3.2.1"
+types-pkg-resources = "^0.1.3"
+types-requests = "^2.25.0"
+types-six = "^0.1.7"
+types-toml = "^0.1.3"
 
 [tool.poetry-dynamic-versioning]
 enable = true
