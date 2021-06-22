@@ -169,6 +169,17 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "dunamai"
+version = "1.5.5"
+description = "Dynamic version generation"
+category = "main"
+optional = false
+python-versions = ">=3.5,<4.0"
+
+[package.dependencies]
+setuptools = ">=8.0"
+
+[[package]]
 name = "eradicate"
 version = "1.0"
 description = "Removes commented-out code."
@@ -784,6 +795,19 @@ importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 dev = ["pre-commit", "tox"]
 
 [[package]]
+name = "poetry-dynamic-versioning"
+version = "0.13.0"
+description = "Plugin for Poetry to enable dynamic versioning based on VCS tags"
+category = "main"
+optional = false
+python-versions = ">=3.5,<4.0"
+
+[package.dependencies]
+dunamai = ">=1.5,<2.0"
+jinja2 = {version = ">=2.11.1,<4", markers = "python_version >= \"3.6\" and python_version < \"4.0\""}
+tomlkit = ">=0.4"
+
+[[package]]
 name = "py"
 version = "1.10.0"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
@@ -1259,6 +1283,14 @@ optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
+name = "tomlkit"
+version = "0.7.2"
+description = "Style preserving TOML library"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+
+[[package]]
 name = "torch"
 version = "1.9.0"
 description = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
@@ -1363,7 +1395,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=1.2.3)", "pytest-flake8", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "03cd7f9ff0ed4a2ca9d568790de946d51e34934cd295cbe03972e96c2dee5d9b"
+content-hash = "616a55a3abca7f0fcbdb7b02a1da2105fcde1018c4981b8dc3a12cfffbb77a85"
 
 [metadata.files]
 alabaster = [
@@ -1482,6 +1514,10 @@ cycler = [
 docutils = [
     {file = "docutils-0.17.1-py2.py3-none-any.whl", hash = "sha256:cf316c8370a737a022b72b56874f6602acf974a37a9fba42ec2876387549fc61"},
     {file = "docutils-0.17.1.tar.gz", hash = "sha256:686577d2e4c32380bb50cbb22f575ed742d58168cee37e99117a854bcd88f125"},
+]
+dunamai = [
+    {file = "dunamai-1.5.5-py3-none-any.whl", hash = "sha256:525ac30db6ca4f8e48b9f198c2e8fbc2a9ce3ea189768361c621ea635212ee49"},
+    {file = "dunamai-1.5.5.tar.gz", hash = "sha256:32f30db71e8fd1adeb42fac45c04433680e47a28298447cd30304e0bba95a7dd"},
 ]
 eradicate = [
     {file = "eradicate-1.0.tar.gz", hash = "sha256:4ffda82aae6fd49dfffa777a857cb758d77502a1f2e0f54c9ac5155a39d2d01a"},
@@ -1858,6 +1894,10 @@ pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
+poetry-dynamic-versioning = [
+    {file = "poetry-dynamic-versioning-0.13.0.tar.gz", hash = "sha256:52e64165c811573e719b43310a09416c894afa6662a4035de5d888199ee49760"},
+    {file = "poetry_dynamic_versioning-0.13.0-py3-none-any.whl", hash = "sha256:46754061380ac772f49f60036471223804edc5a07b6aaee96e0a0793b1efae6a"},
+]
 py = [
     {file = "py-1.10.0-py2.py3-none-any.whl", hash = "sha256:3b80836aa6d1feeaa108e046da6423ab8f6ceda6468545ae8d02d9d58d18818a"},
     {file = "py-1.10.0.tar.gz", hash = "sha256:21b81bda15b66ef5e1a777a21c4dcd9c20ad3efd0b3f817e7a809035269e1bd3"},
@@ -2100,6 +2140,10 @@ tinker-engine = []
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},
     {file = "toml-0.10.2.tar.gz", hash = "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"},
+]
+tomlkit = [
+    {file = "tomlkit-0.7.2-py2.py3-none-any.whl", hash = "sha256:173ad840fa5d2aac140528ca1933c29791b79a374a0861a80347f42ec9328117"},
+    {file = "tomlkit-0.7.2.tar.gz", hash = "sha256:d7a454f319a7e9bd2e249f239168729327e4dd2d27b17dc68be264ad1ce36754"},
 ]
 torch = [
     {file = "torch-1.9.0-cp36-cp36m-manylinux1_x86_64.whl", hash = "sha256:3a2d070cf28860d285d4ab156f3954c0c1d12f4c037aa312a7c029227c0d106b"},

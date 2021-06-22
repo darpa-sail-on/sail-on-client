@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sail-on-client"
-version = "0.15.0+28.g290a5c0"
+version = "0.15.0+29.7963669"
 description = "Client and Protocols for DARPA sail-on"
 authors = ["Your Name <you@example.com>"]
 license = "Apache-2.0"
@@ -29,6 +29,7 @@ tinker-engine = {path = "../tinker-engine"}
 sail-on = {path = "../Sail-On-API"}
 sail-on-evaluate = {path = "../Sail_On_Evaluate"}
 sailon-tinker-launcher = {path = "../sailon_tinker_launcher"}
+poetry-dynamic-versioning = "^0.13.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = ">=3.7"
@@ -50,6 +51,14 @@ sphinx-press-theme = "==0.5.1"
 sphinx-autodoc-typehints = ">=1.11.0"
 Sphinx = ">=3.2.1"
 
+[tool.poetry-dynamic-versioning]
+enable = true
+style = "pep440"
+vcs = "git"
+pattern = "^(?P<base>\\d+\\.\\d+\\.\\d+)(-?((?P<stage>[a-zA-Z]+)\\.?(?P<revision>\\d+)?))?"
+format = "{base}+{distance}.{commit}"
+
+
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
 build-backend = "poetry.core.masonry.api"
