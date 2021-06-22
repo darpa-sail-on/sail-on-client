@@ -11,4 +11,6 @@ version_pattern = r"""
 
 format = "{base}+{distance}.{commit}"
 
-_dynamic_version = Version.from_any_vcs(pattern=version_pattern).serialize(format=format, style=Style.Pep440)
+_dynamic_version = Version.from_any_vcs(pattern=version_pattern).serialize(
+    format=format, style=Style.Pep440
+)
