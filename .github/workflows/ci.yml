@@ -231,7 +231,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
