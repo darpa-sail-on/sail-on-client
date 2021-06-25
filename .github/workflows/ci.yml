@@ -67,9 +67,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           hwr_novelty_detector
-           evm_based_novelty_detector
-           graph-autoencoder
            sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
@@ -118,9 +115,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           hwr_novelty_detector
-           evm_based_novelty_detector
-           graph-autoencoder
            sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
@@ -173,9 +167,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           hwr_novelty_detector
-           evm_based_novelty_detector
-           graph-autoencoder
            sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
@@ -228,9 +219,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           hwr_novelty_detector
-           evm_based_novelty_detector
-           graph-autoencoder
            sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
@@ -297,9 +285,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           hwr_novelty_detector
-           evm_based_novelty_detector
-           graph-autoencoder
            sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
