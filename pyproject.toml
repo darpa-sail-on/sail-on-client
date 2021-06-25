@@ -63,6 +63,14 @@ vcs = "git"
 pattern = "^(?P<base>\\d+\\.\\d+\\.\\d+)(-?((?P<stage>[a-zA-Z]+)\\.?(?P<revision>\\d+)?))?"
 format = "{base}+{distance}.{commit}"
 
+[tool.poetry.plugins."tinker_test"]
+MockDetector = "sail_on_client.mock:MockDetector"
+PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
+BaselinePreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
+
+[tool.poetry.plugins."tinker"]
+MockDetector = "sail_on_client.mock:MockDetector"
+PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
