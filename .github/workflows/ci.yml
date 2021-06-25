@@ -80,7 +80,7 @@ jobs:
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install --no-interactive
+        run: poetry install --no-interaction
         working-directory: sail-on-client
 
   lint:
@@ -129,7 +129,7 @@ jobs:
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install --no-interactive
+        run: poetry install --no-interaction
         working-directory: sail-on-client
 
       - name: Run linting
@@ -182,7 +182,7 @@ jobs:
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install --no-interactive
+        run: poetry install --no-interaction
         working-directory: sail-on-client
 
       - name: Run typechecking
@@ -235,7 +235,7 @@ jobs:
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install --no-interactive
+        run: poetry install --no-interaction
         working-directory: sail-on-client
 
       - name: Run Test with coverage
@@ -301,7 +301,7 @@ jobs:
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install --no-interactive
+        run: poetry install --no-interaction
         working-directory: sail-on-client
 
       - name: Generate docs
