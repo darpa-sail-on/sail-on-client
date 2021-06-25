@@ -28,7 +28,7 @@ nltk = "3.5"
 tinker-engine = {path = "../tinker-engine"}
 sail-on = {path = "../Sail-On-API"}
 sail-on-evaluate = {path = "../Sail_On_Evaluate"}
-sailon-tinker-launcher = {path = "../sailon_tinker_launcher"}
+sailon_tinker_launcher = {path = "../sailon_tinker_launcher"}
 poetry-dynamic-versioning = "^0.13.0"
 tenacity = "^7.0.0"
 
