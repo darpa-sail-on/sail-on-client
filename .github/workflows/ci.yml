@@ -35,24 +35,6 @@ jobs:
           repository: darpa-sail-on/sail_on_evaluate
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: Sail_On_Evaluate
-      - name: Checkout hwr novelty detector
-        uses: actions/checkout@v2
-        with:
-          repository: darpa-sail-on/hwr_novelty_detector
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: hwr_novelty_detector
-      - name: Checkout evm based novelty detector
-        uses: actions/checkout@v2
-        with:
-          repository: darpa-sail-on/evm_based_novelty_detector
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: evm_based_novelty_detector
-      - name: Checkout graph autoencoder
-        uses: actions/checkout@v2
-        with:
-          repository: darpa-sail-on/graph-autoencoder
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: graph-autoencoder
       - name: Checkout sail on tinker launcher
         uses: actions/checkout@v2
         with:
@@ -66,12 +48,16 @@ jobs:
           python-version: '3.7'
           architecture: 'x64'
 
-      - name: Install pipenv
-        run: pip install pipenv
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
 
-      - name: Capture pipenv version
-        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
-        id: pipenv-version
+      - name: Capture poetry version
+        run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
+        id: poetry-version
 
       - name: Cache additional repositories
         uses: actions/cache@v2
@@ -85,18 +71,18 @@ jobs:
            evm_based_novelty_detector
            graph-autoencoder
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Cache Pipenv environment
+      - name: Cache Poetry environment
         uses: actions/cache@v2
-        id: pipenv-cache
+        id: poetry-cache
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          path: ~/.local/share/poetry-virtualenvs
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Install Using Pipenv
-        if: steps.pipenv-cache.outputs.cache-hit != 'true'
-        run: pipenv install --dev
+      - name: Install Using Poetry
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
         working-directory: sail-on-client
 
   lint:
@@ -114,12 +100,16 @@ jobs:
           python-version: '3.7'
           architecture: 'x64'
 
-      - name: Install pipenv
-        run: pip install pipenv
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
 
-      - name: Capture pipenv version
-        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
-        id: pipenv-version
+      - name: Capture poetry version
+        run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
+        id: poetry-version
 
       - name: Cache additional repositories
         uses: actions/cache@v2
@@ -132,22 +122,22 @@ jobs:
            evm_based_novelty_detector
            graph-autoencoder
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Cache Pipenv environment
-        id: pipenv-cache
+        id: poetry-cache
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          path: ~/.local/share/poetry-virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Install Using Pipenv
-        if: steps.pipenv-cache.outputs.cache-hit != 'true'
-        run: pipenv install --dev
+      - name: Install Using Poetry
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
         working-directory: sail-on-client
 
       - name: Run linting
-        run: pipenv run lint
+        run: poetry run flake8
         working-directory: sail-on-client
 
   typecheck:
@@ -165,12 +155,16 @@ jobs:
           python-version: '3.7'
           architecture: 'x64'
 
-      - name: Install pipenv
-        run: pip install pipenv
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
 
-      - name: Capture pipenv version
-        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
-        id: pipenv-version
+      - name: Capture poetry version
+        run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
+        id: poetry-version
 
       - name: Cache additional repositories
         uses: actions/cache@v2
@@ -183,22 +177,22 @@ jobs:
            evm_based_novelty_detector
            graph-autoencoder
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Cache Pipenv environment
-        id: pipenv-cache
+      - name: Cache Poetry environment
+        id: poetry-cache
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          path: ~/.local/share/poetry-virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Install Using Pipenv
-        if: steps.pipenv-cache.outputs.cache-hit != 'true'
-        run: pipenv install --dev
+      - name: Install Using Poetry
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
         working-directory: sail-on-client
 
       - name: Run typechecking
-        run: pipenv run typecheck
+        run: poetry run mypy -p sail_on_client --disallow-untyped-defs
         working-directory: sail-on-client
 
   test-with-coverage:
@@ -216,12 +210,16 @@ jobs:
           python-version: '3.7'
           architecture: 'x64'
 
-      - name: Install pipenv
-        run: pip install pipenv
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
 
-      - name: Capture pipenv version
-        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
-        id: pipenv-version
+      - name: Capture poetry version
+        run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
+        id: poetry-version
 
       - name: Cache additional repositories
         uses: actions/cache@v2
@@ -234,32 +232,28 @@ jobs:
            evm_based_novelty_detector
            graph-autoencoder
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Cache Pipenv environment
-        id: pipenv-cache
+      - name: Cache Poetry environment
+        id: poetry-cache
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          path: ~/.local/share/poetry-virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Install Using Pipenv
-        if: steps.pipenv-cache.outputs.cache-hit != 'true'
-        run: pipenv install --dev
-        working-directory: sail-on-client
-
-      - name: Install Sail On Client Explicitly
-        run: pip install -e .
+      - name: Install Using Poetry
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
         working-directory: sail-on-client
 
       - name: Run Test with coverage
-        run: pipenv run test-with-coverage
+        run: poetry run coverage run --source=. -m pytest tests
         working-directory: sail-on-client
 
       - name: Generate coverage report
         run: |
-          pipenv run coverage-report
-          pipenv run coverage-xml
+          poetry run coverage report -m
+          coverage xml
         working-directory: sail-on-client
 
       - name: Upload coverage report to code cov
@@ -285,12 +279,16 @@ jobs:
           python-version: '3.7'
           architecture: 'x64'
 
-      - name: Install pipenv
-        run: pip install pipenv
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
 
-      - name: Capture pipenv version
-        run: echo "::set-output name=pipenv-version::$(pipenv --version | sed 's/,//g')"
-        id: pipenv-version
+      - name: Capture poetry version
+        run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
+        id: poetry-version
 
       - name: Cache additional repositories
         uses: actions/cache@v2
@@ -303,22 +301,22 @@ jobs:
            evm_based_novelty_detector
            graph-autoencoder
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Cache Pipenv environment
-        id: pipenv-cache
+      - name: Cache poetry environment
+        id: poetry-cache
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/virtualenvs
-          key: ${{ runner.os }}-pipenv-${{ hashFiles('sail-on-client/Pipfile.lock') }}-${{ steps.pipenv-version.outputs.pipenv-version }}-${{ secrets.CACHE_VERSION }}
+          path: ~/.local/share/poetry-virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
-      - name: Install Using Pipenv
-        if: steps.pipenv-cache.outputs.cache-hit != 'true'
-        run: pipenv install --dev
+      - name: Install Using Poetry
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
         working-directory: sail-on-client
 
       - name: Generate docs
-        run: pipenv run docs
+        run: poetry run sphinx-build docs/source/ docs/build/html/
         working-directory: sail-on-client
 
       - name: Upload docs
