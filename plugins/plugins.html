@@ -551,23 +551,6 @@ to execute different steps associated with the algorithm.</p>
 <p class="admonition-title">Note</p>
 <p>The registration is highlighted below.</p>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="c1"># Note: The entrypoint for tinker is &quot;tinker&quot; not &quot;tinker_test&quot; the dummy entrypoint</span>
-    <span class="c1"># is being used because the CI tries and fails to load algorithms that requires libcuda</span>
-    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;tinker_test&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;MockDetector = sail_on_client.mock:MockDetector&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;PreComputedDetector = sail_on_client.pre_computed_detector:PreComputedDetector&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;BaselinePreComputedDetector = sail_on_client.pre_computed_detector:PreComputedDetector&quot;</span><span class="p">,</span>
-        <span class="p">],</span>
-<span class="hll">        <span class="s2">&quot;tinker&quot;</span><span class="p">:</span> <span class="p">[</span>
-</span><span class="hll">            <span class="s2">&quot;MockDetector = sail_on_client.mock:MockDetector&quot;</span><span class="p">,</span>
-</span><span class="hll">            <span class="s2">&quot;PreComputedDetector = sail_on_client.pre_computed_detector:PreComputedDetector&quot;</span><span class="p">,</span>
-</span><span class="hll">        <span class="p">],</span>
-</span><span class="hll">    <span class="p">},</span>
-</span><span class="p">)</span>
-</pre></div>
-</div>
 </section>
 </section>
 </section>
