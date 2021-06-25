@@ -79,7 +79,7 @@ jobs:
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
-        run: poetry install
+        run: poetry install -vvv
         working-directory: sail-on-client
 
   lint:
