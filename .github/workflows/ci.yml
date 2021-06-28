@@ -72,14 +72,15 @@ jobs:
            Sail-On-API
            Sail_On_Evaluate
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
+
 
       - name: Cache Poetry environment
         uses: actions/cache@v2
         id: poetry-cache
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
       - name: Install Using Poetry
         run: poetry install --no-interaction
@@ -124,14 +125,14 @@ jobs:
            Sail-On-API
            Sail_On_Evaluate
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Cache Pipenv environment
         id: poetry-cache
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
@@ -181,14 +182,14 @@ jobs:
            Sail-On-API
            Sail_On_Evaluate
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Cache Poetry environment
         id: poetry-cache
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
@@ -241,14 +242,14 @@ jobs:
            Sail-On-API
            Sail_On_Evaluate
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
       - name: Cache Poetry environment
         id: poetry-cache
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
@@ -317,14 +318,14 @@ jobs:
            Sail-On-API
            Sail_On_Evaluate
            sailon_tinker_launcher
-          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Cache poetry environment
         id: poetry-cache
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
