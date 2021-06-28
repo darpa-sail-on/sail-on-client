@@ -262,7 +262,7 @@ jobs:
       - name: Generate coverage report
         run: |
           poetry run coverage report -m
-          coverage xml
+          poetry run coverage xml
         working-directory: sail-on-client
 
       - name: Upload coverage report to code cov
