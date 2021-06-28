@@ -207,6 +207,7 @@ jobs:
   test-with-coverage:
     needs: build
     strategy:
+      fail-fast: false
       matrix:
         python-version: [ '3.7.10', '3.8.10', '3.9.5' ]
     name: Run test and generate coverage report on sail on client for python ${{ matrix.python-version }}
