@@ -259,6 +259,10 @@ jobs:
         run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
+      - name: Explicitly activate particular environment
+        run: poetry env use ${{ matrix.python-version }}
+        working-directory: sail-on-client
+
       - name: Run Test with coverage
         run: poetry run coverage run --source=. -m pytest tests
         working-directory: sail-on-client
