@@ -271,7 +271,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Upload coverage report to code cov
-        if matrix.python-version == '3.7.10'
+        if: matrix.python-version == '3.7.10'
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
