@@ -82,7 +82,6 @@ jobs:
           key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}
 
       - name: Install Using Poetry
-        if: steps.poetry-cache.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
         working-directory: sail-on-client
 
