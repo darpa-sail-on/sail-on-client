@@ -241,6 +241,7 @@ jobs:
 
       - name: Update pip
         run: poetry run pip install -U pip setuptools
+        working-directory: sail-on-client
 
       - name: Run Test with coverage
         run: poetry run coverage run --source=. -m pytest tests
