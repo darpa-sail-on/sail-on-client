@@ -364,15 +364,413 @@
 <h1>Feedback API<a class="headerlink" href="#feedback-api" title="Permalink to this headline">¶</a></h1>
 <section id="base-class-for-feedback">
 <h2>Base Class for Feedback<a class="headerlink" href="#base-class-for-feedback" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.feedback.</span></span><span class="sig-name descname"><span class="pre">Feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for Feedback.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.deposit_income">
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get income for a round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_budget">
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current budget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_feedback">
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Either a dataframe or dictionary with score if the request is valid
+for the current round.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_labeled_feedback">
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get labeled feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_score_feedback">
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="activity-recognition-feedback">
 <h2>Activity Recognition Feedback<a class="headerlink" href="#activity-recognition-feedback" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.activity_recognition_feedback.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedback for activity recognition.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.deposit_income">
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get income for a round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_budget">
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current budget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback">
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Either a dataframe or dictionary with score if the request is valid
+for the current round.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_labeled_feedback">
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get labeled feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_score_feedback">
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="document-transcription-feedback">
 <h2>Document Transcription Feedback<a class="headerlink" href="#document-transcription-feedback" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.document_transcription_feedback.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedback for document transcription.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.deposit_income">
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get income for a round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_budget">
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current budget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_feedback">
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Either a dataframe or dictionary with score if the request is valid
+for the current round.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_labeled_feedback">
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get labeled feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_levenshtein_feedback">
+<span class="sig-name descname"><span class="pre">get_levenshtein_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_levenshtein_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get levenshtein feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary containing levenshtein score or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_score_feedback">
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="image-classification-feedback">
 <h2>Image Classification Feedback<a class="headerlink" href="#image-classification-feedback" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.image_classification_feedback.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedback for image classification.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.deposit_income">
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get income for a round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_budget">
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get current budget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_feedback">
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Either a dataframe or dictionary with score if the request is valid
+for the current round.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_labeled_feedback">
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get labeled feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.2.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_score_feedback">
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List if indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dictionary with the accuracy value or None if
+feedback is requested for an older round</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
