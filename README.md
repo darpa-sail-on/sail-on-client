@@ -25,7 +25,7 @@ Client and Protocols for DARPA sail-on
     ```
       pip install poetry-dyanmic-versioning
     ```
-    Note: This is required before the package is built since poetry does not support plugins yet in a stable release.
+    Note: This is required before the package is built since poetry does not support plugins yet.
     This issue would be addressed in the next minor release.
 
 3. Clone the repositories associated with different components in a working directory
@@ -44,6 +44,7 @@ Client and Protocols for DARPA sail-on
    ```
      cd sail-on-client
      poetry install
+     poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
      poetry shell
    ```
 
