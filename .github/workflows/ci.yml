@@ -83,6 +83,10 @@ jobs:
         run: poetry install --no-interaction
         working-directory: sail-on-client
 
+      - name: Install Local Dependencies
+        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+        working-directory: sail-on-client
+
   lint:
     needs: build
     name: Run linting on sail on client
@@ -130,6 +134,10 @@ jobs:
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
+        working-directory: sail-on-client
+
+      - name: Install Local Dependencies
+        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Run linting
@@ -183,6 +191,10 @@ jobs:
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
+        working-directory: sail-on-client
+
+      - name: Install Local Dependencies
+        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Run typechecking
@@ -239,8 +251,8 @@ jobs:
         run: poetry install --no-interaction
         working-directory: sail-on-client
 
-      - name: Update pip
-        run: poetry run pip install -U pip setuptools
+      - name: Install Local Dependencies
+        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Run Test with coverage
@@ -308,6 +320,10 @@ jobs:
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
+        working-directory: sail-on-client
+
+      - name: Install Local Dependencies
+        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Generate docs
