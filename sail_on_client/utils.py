@@ -65,19 +65,10 @@ def merge_dictionaries(base_dict, other_dict, exclude_keys) -> Dict:
     """
     Shallow merge for two dictionaries taking into account that certain keys should be skipped.
     """
-    merged_dict = {}
-    all_keys = set(base_dict.keys()).union(set(other_dict.keys()))
-    all_included_keys = all_keys.difference(set(exclude_keys))
-    for key in all_included_keys:
-        if key in base_dict and key in other_dict:
-            merged_dict[key] = base_dict[key]
-            merged_dict[key].update(other_dict[key])
-        elif key in base_dict:
-            merged_dict[key] = base_dict[key]
-        elif key in other_dict:
-            merged_dict[key] = other_dict[key]
-        else:
-            raise ValueError(f"Trying to use merge values for {key}. However it is not present in either dictionary")
+    merged_dict = base_dict.copy()
+    included_keys = set(other_dict.keys()).difference(set(exclude_keys))
+    for key in included_keys:
+        merged_dict[key] = other_dict[key]
     return merged_dict
 
 
