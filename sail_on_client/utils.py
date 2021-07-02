@@ -4,9 +4,10 @@ import os
 import numpy as np
 import logging
 import json
+import functools
 from sailon_tinker_launcher.deprecated_tinker import harness
 
-from typing import Dict, Any
+from typing import Dict, Any, Callable, List
 
 log = logging.getLogger(__name__)
 
@@ -38,7 +39,6 @@ def safe_remove_results(results: dict) -> None:
     for result_files in results.values():
         safe_remove(result_files)
 
-
 def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harness:
     """
     Update parameters in a harness.
@@ -59,6 +59,64 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
     if hasattr(ip_harness, "update_provider"):
         ip_harness.update_provider()
     return ip_harness
+
+
+def merge_dictionaries(base_dict, other_dict, exclude_keys) -> Dict:
+    """
+    Shallow merge for two dictionaries taking into account that certain keys should be skipped.
+    """
+    merged_dict = {}
+    all_keys = set(base_dict.keys()).union(set(other_dict.keys()))
+    all_included_keys = all_keys.difference(set(exclude_keys))
+    for key in all_included_keys:
+        if key in base_dict and key in other_dict:
+            merged_dict[key] = base_dict[key]
+            merged_dict[key].update(other_dict[key])
+        elif key in base_dict:
+            merged_dict[key] = base_dict[key]
+        elif key in other_dict:
+            merged_dict[key] = other_dict[key]
+        else:
+            raise ValueError(f"Trying to use merge values for {key}. However it is not present in either dictionary")
+    return merged_dict
+
+
+def skip_stage(stage_name: str,
+               skip_return: Any = None) -> Callable:
+    """
+    A decorator for skipping stages in the protocol.
+
+    Args:
+        stage_name: Name of the stage that is covered by the decorated function
+        skip_stages: List of stages that should be skipped
+        skip_return: Optional return types when the stage is skipped
+
+    Returns:
+        Decorated function call
+    """
+    def skip_stage_decorator(stage_fn: Callable) -> Callable:
+        """
+        Wrapper to capturing the stage function
+
+        Args:
+            stage_fn: The callable function that would be wrapped
+
+        Returns:
+            Wrapped function
+        """
+        @functools.wraps(stage_fn)
+        def skip_stage_fn(self, *args, **kwargs):
+            if hasattr(self, "skip_stages"):
+                skip_stages = self.skip_stages
+            else:
+                raise ValueError("The class does not skip_stages")
+
+            if stage_name in skip_stages:
+                return skip_return
+            else:
+                return stage_fn(self, *args, **kwargs)
+        return skip_stage_fn
+    return skip_stage_decorator
 
 
 class NumpyEncoder(json.JSONEncoder):

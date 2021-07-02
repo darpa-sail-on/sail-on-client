@@ -55,6 +55,7 @@ class PreComputedDetector(BaseAlgorithm):
             None
         """
         self.round_idx = {"detection": 0, "classification": 0}
+        self.test_id = toolset["test_id"]
 
     def _get_test_info_from_toolset(self, toolset: Dict) -> Tuple:
         """
@@ -67,9 +68,9 @@ class PreComputedDetector(BaseAlgorithm):
             tuple containing test id and round id (optionally)
         """
         if self.has_roundwise_file:
-            return (toolset["test_id"], toolset["round_id"])
+            return (self.test_id, toolset["round_id"])
         else:
-            return toolset["test_id"]
+            return self.test_id
 
     def _get_result_path(self, toolset: Dict, step_descriptor: str) -> str:
         """

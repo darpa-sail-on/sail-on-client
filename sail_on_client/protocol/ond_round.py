@@ -1,0 +1,220 @@
+"""Round for OND."""
+
+import logging
+from typing import List, Any, Tuple, Dict, Union
+
+from sail_on_client.protocol.ond_dataclasses import (
+        FeatureExtractionParams,
+        WorldChangeDetectionParams,
+        NoveltyClassificationParams,
+        NoveltyAdaptationParams,
+)
+from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.utils import skip_stage, safe_remove
+
+
+log = logging.getLogger(__name__)
+
+
+class ONDRound:
+    """Class Representing A Round in OND."""
+
+    def __init__(
+                self,
+                algorithm_instance: Any,
+                data_root: str,
+                features_dict: Dict,
+                harness: Union[LocalInterface, ParInterface],
+                is_eval_roundwise_enabled: bool,
+                logit_dict: Dict,
+                redlight_instance: str,
+                session_id: str,
+                skip_stages: List[str],
+                test_id: str) -> None:
+        """
+        Constructor for creating a round for OND.
+
+        Args:
+            algorithm_instance: An instance of algorithm
+            data_root: Root directory of the data
+            features_dict: Dictionary with features for the entire dataset
+            harness: An instance of the harness used for T&E
+            is_eval_roundwise_enabled: Flag to check if evaluate is enabled for a round
+            logit_dict: Dictionary with logits for the entire dataset
+            redlight_instance: The instance when the world changes
+            session_id: Session id associated with the algorithm
+            skip_stages: List of stages that are skipped
+            test_id: Test id associated with the round
+
+        Returns:
+            None
+        """
+        self.data_root = data_root
+        self.features_dict = features_dict
+        self.harness = harness
+        self.is_eval_roundwise_enabled = is_eval_roundwise_enabled
+        self.logit_dict = logit_dict
+        self.redlight_instance = redlight_instance
+        self.session_id = session_id
+        self.skip_stages = skip_stages
+        self.test_id = test_id
+
+    @staticmethod
+    def get_instance_ids(dataset_path: str) -> List[str]:
+        """
+        Get instance ids from the dataset.
+
+        Args:
+            dataset_path: Path to text file with instances used in a round
+
+        Returns:
+            List of instance ids from the dataset
+        """
+        with open(dataset_path, "r") as dataset:
+            instance_ids = dataset.readlines()
+            instance_ids = [instance_id.strip() for instance_id in instance_ids]
+        return instance_ids
+
+    @skip_stage("FeatureExtraction", ({}, {}))
+    def _run_feature_extraction(
+            self,
+            algorithm: Any,
+            fe_params: FeatureExtractionParams,
+            instance_ids: List[str]) -> Tuple[Dict, Dict]:
+        """
+        Private helper function for running feature extraction.
+
+        Args:
+            algorithm: An instance of the algorithm
+            fe_params: An instance of dataclass with parameters for feature extraction
+            instance_ids: Identifiers associated with data for a round
+
+        Returns:
+            Tuple for feature and logit dictionary for a round
+        """
+        rfeature_dict, rlogit_dict = {}, {}
+        if len(self.features_dict) > 0 and len(self.logit_dict) > 0:
+            for instance_id in instance_ids:
+                rfeature_dict = self.features_dict[instance_id]
+                rlogit_dict = self.logit_dict[instance_id]
+        else:
+            fe_toolset = fe_params.get_toolset()
+            rfeature_dict, rlogit_dict = algorithm.execute(fe_toolset,
+                                                           "FeatureExtraction")
+        self.rfeature_dict, self.rlogit_dict = rfeature_dict, rlogit_dict
+        return rfeature_dict, rlogit_dict
+
+    @skip_stage("WorldDetection")
+    def _run_world_change_detection(
+            self,
+            algorithm: Any,
+            wcd_params: WorldChangeDetectionParams,
+            round_id: int,
+            ) -> None:
+        """
+        Private helper function for detecting that the world has changed.
+
+        Args:
+            algorithm: An instance of the algorithm
+            wcd_params: An instance of dataclass with parameters for world change detection
+            round_id: Identifier for a round
+
+        Returns:
+            None
+        """
+        wd_result = algorithm.execute(wcd_params.get_toolset(), "WorldDetection")
+        self.harness.post_results({"detection": wd_result}, self.test_id, round_id,
+                                  self.session_id)
+        safe_remove(wd_result)
+
+    @skip_stage("NoveltyClassification")
+    def _run_novelty_classification(
+            self,
+            algorithm: Any,
+            nc_params: NoveltyClassificationParams,
+            round_id: int) -> None:
+        """
+        Private helper function for novelty classification.
+
+        Args:
+            algorithm: An instance of the algorithm
+            nc_params: An instance of dataclass with parameters for novelty classification
+            round_id: Identifier for a round
+
+        Returns:
+            None
+        """
+        ncl_result = algorithm.execute(nc_params.get_toolset(), "NoveltyClassification")
+        self.harness.post_results({"classification": ncl_result}, self.test_id,
+                                  round_id, self.session_id)
+        safe_remove(ncl_result)
+
+    @skip_stage("EvaluateRoundwise")
+    def _evaluate_roundwise(round_id: int) -> Dict:
+        """
+        Compute roundwise accuracy.
+
+        Args:
+            round_id: Identifier for a round
+
+        Returns:
+            Dictionary with accuracy metrics for round
+        """
+        return self.harness.evaluate_round_wise(self.test_id, round_id, self.session_id)
+
+    @skip_stage("NoveltyAdaptation")
+    def _run_novelty_adaptation(
+            self,
+            algorithm: Any,
+            na_params: NoveltyAdaptationParams) -> None:
+        """
+        Private helper function for adaptation.
+
+        Args:
+            algorithm: An instance of the algorithm
+            na_params: An instance of dataclass with parameters for adaptation
+
+        Returns:
+            None
+        """
+        return algorithm.execute(na_params.get_toolset(), "NoveltyAdaption")
+
+    def __call__(
+            self,
+            algorithm: Any,
+            dataset: str,
+            round_id: int) -> Union[Dict, None]:
+        """
+        Core logic for running round in OND.
+
+        Args:
+            algorithm: An instance of the algorithm
+            dataset: Path to a file with the dataset for the round
+            round_id: An Identifier for a round
+
+        Returns:
+            Score for the round
+        """
+        # Run feature extraction
+        fe_params = FeatureExtractionParams(dataset,
+                                            self.data_root,
+                                            self.redlight_instance,
+                                            round_id)
+        instance_ids = ONDRound.get_instance_ids(dataset)
+        rfeature_dict, rlogit_dict = self._run_feature_extraction(algorithm,
+                                                                  fe_params,
+                                                                  instance_ids)
+        # Run World Change Detection
+        wc_params = WorldChangeDetectionParams(rfeature_dict, rlogit_dict, round_id)
+        self._run_world_change_detection(algorithm, wc_params, round_id)
+        # Run Novelty Classification
+        nc_params = NoveltyClassificationParams(rfeature_dict, rlogit_dict, round_id)
+        self._run_novelty_classification(algorithm, nc_params, round_id)
+        # Compute metrics for the round
+        round_score = self._evaluate_roundwise(round_id)
+
+        na_params = NoveltyAdaptationParams(round_id)
+        self._run_novelty_adaptation(algorithm, na_params)
+
+        return round_score

@@ -3,25 +3,22 @@
 from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 
 from sail_on_client.protocol.ond_config import OndConfig
-from sail_on_client.errors import RoundError
 from sail_on_client.utils import (
     safe_remove,
-    safe_remove_results,
     update_harness_parameters,
+    NumpyEncoder
 )
 from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.feedback import create_feedback_instance
-from sail_on_client.utils import NumpyEncoder
-from itertools import count
+from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes
+from sail_on_client.protocol.ond_test import ONDTest
+from sail_on_client.utils import skip_stage
+
 import os
 import json
 import sys
 import logging
 
-import pickle as pkl
-import ubelt as ub  # type: ignore
-
-from typing import Dict, Any
+from typing import Dict, List, Any
 
 log = logging.getLogger(__name__)
 
@@ -48,7 +45,6 @@ class SailOn(BaseProtocol):
         Returns:
             None
         """
-
         BaseProtocol.__init__(
             self, discovered_plugins, algorithmsdirectory, harness, config_file
         )
@@ -61,285 +57,275 @@ class SailOn(BaseProtocol):
         self.config = OndConfig(overriden_config)
         self.harness = update_harness_parameters(harness, self.config["harness_config"])
 
+    def create_algorithm_attributes(
+            self,
+            algorithm_name: str,
+            algorithm_param: Dict,
+            baseline_algorithm_name: str,
+            has_baseline: bool,
+            has_reaction_baseline: bool,
+            test_ids) -> AlgorithmAttributes:
+        """
+        Create an instance of algorithm attributes.
+
+        Args:
+            algorithm_name: Name of the algorithm
+            algorithm_param: Parameters for the algorithm
+            baseline_algorithm_name: Name of the baseline algorithm
+            has_baseline: Flag to check if a baseline is present in the config
+            has_reaction_baseline: Flag to check if a reaction baseline is present in the config
+            test_ids: List of test
+
+        Returns:
+            An instance of AlgorithmAttributes
+        """
+        algorithm_instance = self.get_algorithm(
+            algorithm_name,
+            algorithm_param,
+        )
+        is_baseline = algorithm_name == baseline_algorithm_name
+        session_id = self.config.get("resumed_session_ids", {}).get(algorithm_name, "")
+        return AlgorithmAttributes(
+                algorithm_name,
+                algorithm_param.get("detection_threshold", 0.5),
+                algorithm_instance,
+                has_baseline and is_baseline,
+                has_reaction_baseline and is_baseline,
+                algorithm_param.get("package_name", None),
+                algorithm_param,
+                session_id,
+                test_ids)
+
+    def create_algorithm_session(
+            self,
+            algorithm_attributes: AlgorithmAttributes,
+            domain: str,
+            hints: List[str],
+            has_a_session) -> AlgorithmAttributes:
+        """
+        Create/resume session for an algorithm.
+
+        Args:
+            algorithm_attributes: An instance of AlgorithmAttributes
+            domain: Domain for the algorithm
+            hints: List of hints used in the session
+            has_a_session: Already has a session and we want to resume it
+
+        Returns:
+            An AlgorithmAttributes object with updated session id or test id
+        """
+        test_ids = algorithm_attributes.test_ids
+        named_version = algorithm_attributes.named_version()
+        detection_threshold = algorithm_attributes.detection_threshold
+
+        if has_a_session:
+            session_id = algorithm_attributes.session_id
+            finished_test = self.harness.resume_session(session_id)
+            algorithm_attributes.remove_completed_tests(finished_test)
+            log.info(f"Resumed session {session_id} for {algorithm_attributes.name}")
+        else:
+            session_id = self.harness.session_request(
+                test_ids,
+                "OND",
+                domain,
+                named_version,
+                hints,
+                detection_threshold,
+            )
+            algorithm_attributes.session_id = session_id
+            log.info(f"Created session {session_id} for {algorithm_attributes.name}")
+        return algorithm_attributes
+
+    def _find_baseline_session_id(
+            self,
+            algorithms_attributes: List[AlgorithmAttributes]) -> str:
+        """
+        Find baseline session id based on the attributes of algorithms.
+
+        Args:
+            algorithms_attributes: List of algorithm attributes
+
+        Returns:
+            Baseline session id
+        """
+        for algorithm_attributes in algorithms_attributes:
+            if algorithm_attributes.is_baseline or algorithm_attributes.is_reaction_baseline:
+                return algorithm_attributes.session_id
+        raise Exception("Failed to find baseline, this is required to compute reaction perfomance")
+
+    @skip_stage("EvaluateAlgorithms")
+    def _evaluate_algorithms(
+            self,
+            algorithms_attributes: List[AlgorithmAttributes],
+            algorithm_scores: Dict,
+            save_dir: str) -> None:
+        """
+        Evaluate algorithms after all tests have been submitted.
+
+        Args:
+            algorithms_attributes: All algorithms present in the config
+            algorithm_scores: Scores for round wise evaluation
+            save_dir: Directory where the scores are stored
+
+        Returns:
+            None
+        """
+        baseline_session_id = self._find_baseline_session_id(algorithms_attributes)
+        for algorithm_attributes in algorithms_attributes:
+            if algorithm_attributes.is_baseline or algorithm_attributes.is_reaction_baseline:
+                continue
+            session_id = algorithm_attributes.session_id
+            test_ids = algorithm_attributes.test_ids
+            algorithm_name = algorithm_attributes.name
+            test_scores = algorithm_scores[algorithm_name]
+            log.info(f"Started evaluating {algorithm_name}")
+            for test_id in test_ids:
+                score = self.harness.evaluate(
+                    test_id, 0, session_id, baseline_session_id
+                )
+                score.update(test_scores[test_id])
+                with open(os.path.join(save_dir,
+                          f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
+                    log.info(f"Saving results in {save_dir}")
+                    json.dump(score, f, indent=4, cls=NumpyEncoder)  # type: ignore
+            log.info(f"Finished evaluating {algorithm_name}")
+
+    def update_skip_stages(
+            self,
+            skip_stages: List[str],
+            is_eval_enabled: bool,
+            is_eval_roundwise_enabled: bool,
+            use_feedback: bool,
+            save_features: bool,
+            feature_extraction_only: bool) -> List[str]:
+        """
+        Update skip stages based on the boolean values in config.
+
+        Args:
+            skip_stages: List of skip stages specified in the config
+            is_eval_enabled: Flag to enable evaluation
+            is_eval_roundwise_enabled: Flag to enable evaluation in every round
+            use_feedback: Flag to enable using feedback
+            save_features: Flag to enable saving features
+            feature_extraction_only: Flag to only run feature extraction
+
+        Returns:
+            Update list of skip stages
+        """
+        if not is_eval_enabled:
+            skip_stages.append("EvaluateAlgorithms")
+            skip_stages.append("EvaluateRoundwise")
+        if not is_eval_roundwise_enabled:
+            skip_stages.append("EvaluateRoundwise")
+        if not use_feedback:
+            skip_stages.append("CreateFeedbackInstance")
+            skip_stages.append("NoveltyAdaptation")
+        if not save_features:
+            skip_stages.append("SaveFeatures")
+        if feature_extraction_only:
+            skip_stages.append("CreateFeedbackInstance")
+            skip_stages.append("WorldDetection")
+            skip_stages.append("NoveltyClassification")
+            skip_stages.append("NoveltyAdaptation")
+            skip_stages.append("NoveltyCharacterization")
+        return skip_stages
+
     def run_protocol(self) -> None:
         """Run the protocol."""
         log.info("Starting OND")
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
-        algorithm_names = self.config["detectors"]["detector_configs"].keys()
-        algorithms = {}
-        sessions = {}
-        baseline_session_id = None
-        has_reaction_baseline = self.config["detectors"]["has_reaction_baseline"]
-        has_baseline = self.config["detectors"]["has_baseline"]
-        save_dir = self.config["detectors"]["csv_folder"]
-        # Create sessions an instances of all the algorithms
+        detector_params = self.config["detectors"]
+        has_reaction_baseline = detector_params["has_reaction_baseline"]
+        has_baseline = detector_params["has_baseline"]
+        save_dir = detector_params["csv_folder"]
+        algorithm_params = detector_params["detector_configs"]
+        algorithm_names = algorithm_params.keys()
+        baseline_algorithm_name = detector_params.get("baseline_class", None)
+        test_ids = self.config["test_ids"]
+        domain = self.config["domain"]
+        hints = self.config["hints"]
+        resume_session = self.config["resume_session"]
+        is_eval_enabled = self.config["is_eval_enabled"]
+        is_eval_roundwise_enabled = self.config["is_eval_roundwise_enabled"]
+        data_root = self.config["dataset_root"]
+        save_dir = self.config["save_dir"]
+        save_features = self.config["save_features"]
+        use_feedback = self.config["use_feedback"]
+        feedback_type = self.config["feedback_type"]
+        use_saved_features = self.config["use_saved_features"]
+        use_consolidated_features = self.config["use_consolidated_features"]
+        feature_extraction_only = self.config["feature_extraction_only"]
+        self.skip_stages = self.config["skip_stages"]
+        self.skip_stages = self.update_skip_stages(self.skip_stages,
+                                                   is_eval_enabled,
+                                                   is_eval_roundwise_enabled,
+                                                   use_feedback,
+                                                   save_features,
+                                                   feature_extraction_only)
+
+        algorithms_attributes = []
+
+        # Populate most of the attributes for the algorithm
         for algorithm_name in algorithm_names:
-            algorithm = self.get_algorithm(
-                algorithm_name,
-                self.config["detectors"]["detector_configs"][algorithm_name],
+            algorithm_param = algorithm_params[algorithm_name]
+            algorithm_attributes = self.create_algorithm_attributes(
+                        algorithm_name,
+                        algorithm_param,
+                        baseline_algorithm_name,
+                        has_baseline,
+                        has_reaction_baseline,
+                        test_ids
+                    )
+            # Add common parameters to algorithm specific config with some exclusions
+            algorithm_attributes.merge_detector_params(detector_params,
+                                                       ["has_baseline",
+                                                        "has_reaction_baseline",
+                                                        "baseline_class",
+                                                        "detector_configs"])
+            log.info(f"Consolidating attributes for {algorithm_name}")
+            algorithms_attributes.append(algorithm_attributes)
+
+        # Create sessions an instances of all the algorithms and populate
+        # session_id for algorithm attributes
+        for algorithm_attributes in algorithms_attributes:
+            self.create_algorithm_session(
+                    algorithm_attributes,
+                    domain,
+                    hints,
+                    resume_session
             )
-            algorithms[algorithm_name] = algorithm
-            algorithm_toolset = self.config["detectors"]["detector_configs"][
-                algorithm_name
-            ]
-            # TODO: fix the version below
-            novelty_detector_version = "1.0.0"
-            novelty_detector_class = algorithm_name
-            test_ids = self.config["test_ids"]
-            if "detection_threshold" in algorithm_toolset:
-                detector_threshold = float(algorithm_toolset["detection_threshold"])
-            else:
-                detector_threshold = 0.5
-            if self.config["resume_session"]:
-                if algorithm_name in self.config["resumed_session_ids"]:
-                    session_id = self.config["resumed_session_ids"][algorithm_name]
-                else:
-                    raise ValueError(f"Failed to resume session for {algorithm_name}")
-                finished_test = self.harness.resume_session(session_id)
-                remaining_tests = []
-                for test_id in test_ids:
-                    if test_id not in finished_test:
-                        remaining_tests.append(test_id)
-                test_ids = remaining_tests
-            else:
-                session_id = self.harness.session_request(
-                    test_ids,
-                    "OND",
-                    self.config["domain"],
-                    f"{novelty_detector_version}.{novelty_detector_class}",
-                    self.config["hints"],
-                    detector_threshold,
-                )
-            if (
-                has_baseline or has_reaction_baseline
-            ) and algorithm_name == self.config["detectors"]["baseline_class"]:
-                baseline_session_id = session_id
-            sessions[algorithm_name] = session_id
+
+        # Run tests for all the algorithms
         algorithm_scores = {}
-        for algorithm_name, session_id in sessions.items():
+        for algorithm_attributes in algorithms_attributes:
+            algorithm_name = algorithm_attributes.name
+            session_id = algorithm_attributes.session_id
+            test_ids = algorithm_attributes.test_ids
+            log.info(f"Starting session: {session_id} for algorithm: {algorithm_name}")
+            skip_stages = self.skip_stages.copy()
+            if algorithm_attributes.is_reaction_baseline:
+                skip_stages.append("WorldDetection")
+                skip_stages.append("NoveltyCharacterization")
+            ond_test = ONDTest(algorithm_attributes, data_root, domain, feedback_type,
+                               self.harness, is_eval_roundwise_enabled, False,
+                               save_dir, save_features, session_id, skip_stages,
+                               use_consolidated_features, use_feedback,
+                               use_saved_features)
             test_scores = {}
-            log.info(f"New session: {session_id} for algorithm: {algorithm_name}")
             for test_id in test_ids:
-                test_score = {}
-                self.toolset["test_id"] = test_id
-                self.toolset["test_type"] = ""
-                if self.config["save_attributes"]:
-                    self.toolset["attributes"] = {}
-                self.toolset["metadata"] = self.harness.get_test_metadata(
-                    session_id, test_id
-                )
-                if "red_light" in self.toolset["metadata"]:
-                    self.toolset["redlight_image"] = self.toolset["metadata"][
-                        "red_light"
-                    ]
-                else:
-                    self.toolset["redlight_image"] = ""
-
-                algorithm_toolset = {}
-                for config_name, config_value in self.config["detectors"].items():
-                    if (
-                        config_name == "has_baseline"
-                        or config_name == "has_reaction_baseline"
-                        or config_name == "baseline_class"
-                    ):
-                        continue
-                    elif config_name == "detector_configs":
-                        algorithm_toolset.update(config_value[algorithm_name])
-                    else:
-                        algorithm_toolset[config_name] = config_value
-
-                algorithm_toolset["session_id"] = session_id
-                algorithm_toolset["test_id"] = test_id
-                algorithm_toolset["test_type"] = ""
-
-                # Initialize feedback object for the domains
-                if "feedback_params" in algorithm_toolset:
-                    log.info("Creating Feedback object")
-                    feedback_params = algorithm_toolset["feedback_params"]
-                    feedback_params["interface"] = self.harness
-                    feedback_params["session_id"] = session_id
-                    feedback_params["test_id"] = test_id
-                    feedback_params["feedback_type"] = self.config["feedback_type"]
-                    algorithm_toolset["FeedbackInstance"] = create_feedback_instance(
-                        self.config["domain"], feedback_params
-                    )
-                algorithms[algorithm_name].execute(algorithm_toolset, "Initialize")
-                self.toolset["image_features"] = {}
-                self.toolset["dataset_root"] = self.config["dataset_root"]
-                self.toolset["dataset_ids"] = []
-
-                log.info(f"Start test: {self.toolset['test_id']}")
-                if (
-                    self.config["save_features"]
-                    and not self.config["use_saved_features"]
-                ):
-                    test_features: Dict[str, Dict] = {
-                        "features_dict": {},
-                        "logit_dict": {},
-                    }
-                if self.config["use_saved_features"]:
-                    feature_dir = self.config["save_dir"]
-                    if os.path.isdir(feature_dir):
-                        if self.config["use_consolidated_features"]:
-                            test_features = pkl.load(
-                                open(
-                                    os.path.join(
-                                        feature_dir, f"{algorithm_name}_features.pkl",
-                                    ),
-                                    "rb",
-                                )
-                            )
-                        else:
-                            test_features = pkl.load(
-                                open(
-                                    os.path.join(
-                                        feature_dir,
-                                        f"{test_id}_{algorithm_name}_features.pkl",
-                                    ),
-                                    "rb",
-                                )
-                            )
-                    else:
-                        test_features = pkl.load(open(feature_dir, "rb"))
-                    features_dict = test_features["features_dict"]
-                    logit_dict = test_features["logit_dict"]
-
-                for round_id in count(0):
-                    self.toolset["round_id"] = round_id
-
-                    log.info(f"Start round: {self.toolset['round_id']}")
-                    # see if there is another round available
-                    try:
-                        self.toolset["dataset"] = self.harness.dataset_request(
-                            test_id, round_id, session_id
-                        )
-                    except RoundError:
-                        # no more rounds available, this test is done.
-                        break
-
-                    with open(self.toolset["dataset"], "r") as dataset:
-                        dataset_ids = dataset.readlines()
-                        image_ids = [image_id.strip() for image_id in dataset_ids]
-                        self.toolset["dataset_ids"].extend(image_ids)
-                    if self.config["use_saved_features"]:
-                        self.toolset["features_dict"] = {}
-                        self.toolset["logit_dict"] = {}
-                        for image_id in image_ids:
-                            self.toolset["features_dict"][image_id] = features_dict[
-                                image_id
-                            ]
-                            self.toolset["logit_dict"][image_id] = logit_dict[image_id]
-                    else:
-                        (
-                            self.toolset["features_dict"],
-                            self.toolset["logit_dict"],
-                        ) = algorithms[algorithm_name].execute(
-                            self.toolset, "FeatureExtraction"
-                        )
-                        if self.config["save_features"]:
-                            test_features["features_dict"].update(
-                                self.toolset["features_dict"]
-                            )
-                            test_features["logit_dict"].update(
-                                self.toolset["logit_dict"]
-                            )
-                            if self.config["feature_extraction_only"]:
-                                continue
-
-                    results: Dict[str, Any] = {}
-                    if not has_reaction_baseline or session_id != baseline_session_id:
-                        results["detection"] = algorithms[algorithm_name].execute(
-                            self.toolset, "WorldDetection"
-                        )
-
-                    ncl_results = algorithms[algorithm_name].execute(
-                        self.toolset, "NoveltyClassification"
-                    )
-
-                    if isinstance(ncl_results, dict):
-                        results.update(ncl_results)
-                    else:
-                        results["classification"] = ncl_results
-
-                    self.harness.post_results(results, test_id, round_id, session_id)
-                    if (
-                        self.config["is_eval_enabled"]
-                        and self.config["is_eval_roundwise_enabled"]
-                    ):
-                        round_score = self.harness.evaluate_round_wise(
-                            test_id, round_id, session_id
-                        )
-                        test_score.update(round_score)
-                    if has_reaction_baseline and session_id == baseline_session_id:
-                        continue
-
-                    if self.toolset["use_feedback"]:
-                        algorithms[algorithm_name].execute(
-                            self.toolset, "NoveltyAdaption"
-                        )
-                    log.info(f"Round complete: {self.toolset['round_id']}")
-
-                    # cleanup the round files
-                    safe_remove(self.toolset["dataset"])
-                    safe_remove_results(results)
-
-                if (
-                    self.config["save_features"]
-                    and not self.config["use_saved_features"]
-                ):
-                    feature_dir = self.config["save_dir"]
-                    ub.ensuredir(feature_dir)
-                    feature_path = os.path.join(
-                        feature_dir, f"{test_id}_{algorithm_name}_features.pkl"
-                    )
-                    log.info(f"Saving features in {feature_path}")
-                    with open(feature_path, "wb") as f:
-                        pkl.dump(test_features, f)
-                    if self.config["feature_extraction_only"]:
-                        continue
-
-                if self.config["save_attributes"]:
-                    attribute_dir = self.config["save_dir"]
-                    ub.ensuredir(attribute_dir)
-                    attribute_path = os.path.join(
-                        attribute_dir, f"{test_id}_attribute.pkl"
-                    )
-                    log.info(f"Saving features in {attribute_path}")
-                    with open(attribute_path, "wb") as f:
-                        pkl.dump(self.toolset["attributes"], f)
-
-                if has_reaction_baseline and session_id == baseline_session_id:
-                    log.info(f"Test complete without characterization: {test_id}")
-                    test_scores[test_id] = test_score
-                    self.harness.complete_test(session_id, test_id)
-                else:
-                    results = {}
-                    characterization_results = algorithms[algorithm_name].execute(
-                        self.toolset, "NoveltyCharacterization"
-                    )
-                    if isinstance(characterization_results, dict):
-                        results.update(characterization_results)
-                        self.harness.post_results(results, test_id, 0, session_id)
-                    else:
-                        results["characterization"] = characterization_results
-                        if results["characterization"] is not None:
-                            self.harness.post_results(results, test_id, 0, session_id)
-
-                    log.info(f"Test complete: {test_id}")
-                    test_scores[test_id] = test_score
-                    self.harness.complete_test(session_id, test_id)
+                log.info(f"Start test: {test_id}")
+                test_score = ond_test(test_id)
+                test_scores[test_id] = test_score
+                log.info(f"Test complete: {test_id}")
             algorithm_scores[algorithm_name] = test_scores
-        for algorithm_name, session_id in sessions.items():
-            for test_id in self.config["test_ids"]:
-                if session_id != baseline_session_id and self.config["is_eval_enabled"]:
-                    score = self.harness.evaluate(
-                        test_id, 0, session_id, baseline_session_id
-                    )
-                    score.update(algorithm_scores[algorithm_name][test_id])
-                    with open(os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
-                        log.info(f"Saving results in {save_dir}")
-                        json.dump(score, f, indent=4, cls=NumpyEncoder)  # type: ignore
 
-            log.info(f"Session ended for {algorithm_name}: {session_id}")
+        # Evaluate algorithms
+        self._evaluate_algorithms(algorithms_attributes, algorithm_scores, save_dir)
+
+        # Terminate algorithms
+        for algorithm_attributes in algorithms_attributes:
+            algorithm_name = algorithm_attributes.name
+            session_id = algorithm_attributes.session_id
             self.harness.terminate_session(session_id)
+            log.info(f"Session ended for {algorithm_name}: {session_id}")
