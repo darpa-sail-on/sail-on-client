@@ -2,7 +2,7 @@
 
 from tempfile import TemporaryDirectory
 from sail_on_client.protocol.localinterface import LocalInterface
-from sail_on_client.utils import update_harness_parameters
+from sail_on_client.utils.utils import update_harness_parameters
 
 
 def test_update_harness_paramerters(get_interface_params):

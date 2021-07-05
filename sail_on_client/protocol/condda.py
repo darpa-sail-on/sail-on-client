@@ -3,7 +3,7 @@
 from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.errors import RoundError
-from sail_on_client.utils import (
+from sail_on_client.utils.utils import (
     safe_remove,
     safe_remove_results,
     update_harness_parameters,

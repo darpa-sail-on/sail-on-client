@@ -15,7 +15,8 @@ from sail_on_client.feedback.document_transcription_feedback import DocumentTran
 from sail_on_client.feedback.activity_recognition_feedback import ActivityRecognitionFeedback
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
-from sail_on_client.utils import skip_stage, safe_remove
+from sail_on_client.utils.utils import safe_remove
+from sail_on_client.utils.decorators import skip_stage
 from sail_on_client.errors import RoundError
 
 

@@ -3,15 +3,15 @@
 from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 
 from sail_on_client.protocol.ond_config import OndConfig
-from sail_on_client.utils import (
+from sail_on_client.utils.utils import (
     safe_remove,
     update_harness_parameters,
-    NumpyEncoder
 )
+from sail_on_client.utils.numpy_encoder import NumpyEncoder
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes
 from sail_on_client.protocol.ond_test import ONDTest
-from sail_on_client.utils import skip_stage
+from sail_on_client.utils.decorators import skip_stage
 
 import os
 import json

@@ -3,7 +3,7 @@
 from dataclasses import dataclass
 import logging
 from typing import Dict, List, Any, Union
-from sail_on_client.utils import merge_dictionaries
+from sail_on_client.utils.utils import merge_dictionaries
 from sail_on_client.feedback.image_classification_feedback import ImageClassificationFeedback
 from sail_on_client.feedback.document_transcription_feedback import DocumentTranscriptionFeedback
 from sail_on_client.feedback.activity_recognition_feedback import ActivityRecognitionFeedback
