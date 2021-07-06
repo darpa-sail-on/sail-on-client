@@ -308,10 +308,8 @@ class SailOn(BaseProtocol):
                 skip_stages.append("WorldDetection")
                 skip_stages.append("NoveltyCharacterization")
             ond_test = ONDTest(algorithm_attributes, data_root, domain, feedback_type,
-                               self.harness, is_eval_roundwise_enabled, False,
-                               save_dir, save_features, session_id, skip_stages,
-                               use_consolidated_features, use_feedback,
-                               use_saved_features)
+                               self.harness, save_dir, session_id, skip_stages,
+                               use_consolidated_features, use_saved_features)
             test_scores = {}
             for test_id in test_ids:
                 log.info(f"Start test: {test_id}")

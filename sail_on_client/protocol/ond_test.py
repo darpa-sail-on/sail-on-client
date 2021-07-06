@@ -30,14 +30,10 @@ class ONDTest:
             domain: str,
             feedback_type: str,
             harness: Union[LocalInterface, ParInterface],
-            is_eval_roundwise_enabled: bool,
-            save_attributes: bool,
             save_dir: str,
-            save_features: bool,
             session_id: str,
             skip_stages: List[str],
             use_consolidated_features: bool,
-            use_feedback: bool,
             use_saved_features: bool) -> None:
 
         """
@@ -45,10 +41,15 @@ class ONDTest:
 
         Args:
             algorithm_attributes: An instance of algorithm_attributes
-            test_id: Test id for the test
             data_root: Root directory for the dataset
-            domain: Name of the domain
+            domain: Name of the domain for the test
+            feedback_type: Type of feedback used in the test
             harness: An Instance of harness used for T&E
+            save_dir: The directory where features are saved
+            session_id: Session identifier for the test
+            skip_stages: List of stages that would be skipped
+            use_consolidated_features: Flag for using consolidated features
+            use_saved_features: Flag for using saved features
 
         Returns:
             None
@@ -58,14 +59,10 @@ class ONDTest:
         self.domain = domain
         self.feedback_type = feedback_type
         self.harness = harness
-        self.is_eval_roundwise_enabled = is_eval_roundwise_enabled
-        self.save_attributes = save_attributes
         self.save_dir = save_dir
-        self.save_features = save_features
         self.session_id = session_id
         self.skip_stages = skip_stages
         self.use_consolidated_features = use_consolidated_features
-        self.use_feedback = use_feedback
         self.use_saved_features = use_saved_features
 
     @skip_stage("CreateFeedbackInstance")
@@ -214,9 +211,8 @@ class ONDTest:
 
         # Initialize Round
         round_instance = ONDRound(algorithm_instance, self.data_root, features_dict,
-                                  self.harness, self.is_eval_roundwise_enabled,
-                                  logit_dict, redlight_instance, self.session_id,
-                                  self.skip_stages, test_id)
+                                  self.harness, logit_dict, redlight_instance,
+                                  self.session_id, self.skip_stages, test_id)
         aggregated_features_dict: Dict = {}
         aggregated_logit_dict: Dict = {}
         test_score = {}
@@ -232,7 +228,7 @@ class ONDTest:
             except RoundError:
                 # no more rounds available, this test is done.
                 break
-            round_score = round_instance(algorithm_instance, dataset, round_id)
+            round_score = round_instance(dataset, round_id)
             test_instances.extend(ONDRound.get_instance_ids(dataset))
             if round_score:
                 test_score[f"Round {round_id}"] = round_score

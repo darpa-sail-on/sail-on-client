@@ -23,11 +23,10 @@ class ONDRound:
 
     def __init__(
                 self,
-                algorithm_instance: Any,
+                algorithm: Any,
                 data_root: str,
                 features_dict: Dict,
                 harness: Union[LocalInterface, ParInterface],
-                is_eval_roundwise_enabled: bool,
                 logit_dict: Dict,
                 redlight_instance: str,
                 session_id: str,
@@ -37,11 +36,10 @@ class ONDRound:
         Constructor for creating a round for OND.
 
         Args:
-            algorithm_instance: An instance of algorithm
+            algorithm: An instance of algorithm
             data_root: Root directory of the data
             features_dict: Dictionary with features for the entire dataset
             harness: An instance of the harness used for T&E
-            is_eval_roundwise_enabled: Flag to check if evaluate is enabled for a round
             logit_dict: Dictionary with logits for the entire dataset
             redlight_instance: The instance when the world changes
             session_id: Session id associated with the algorithm
@@ -51,10 +49,10 @@ class ONDRound:
         Returns:
             None
         """
+        self.algorithm = algorithm
         self.data_root = data_root
         self.features_dict = features_dict
         self.harness = harness
-        self.is_eval_roundwise_enabled = is_eval_roundwise_enabled
         self.logit_dict = logit_dict
         self.redlight_instance = redlight_instance
         self.session_id = session_id
@@ -80,14 +78,12 @@ class ONDRound:
     @skip_stage("FeatureExtraction", ({}, {}))
     def _run_feature_extraction(
             self,
-            algorithm: Any,
             fe_params: FeatureExtractionParams,
             instance_ids: List[str]) -> Tuple[Dict, Dict]:
         """
         Private helper function for running feature extraction.
 
         Args:
-            algorithm: An instance of the algorithm
             fe_params: An instance of dataclass with parameters for feature extraction
             instance_ids: Identifiers associated with data for a round
 
@@ -101,15 +97,14 @@ class ONDRound:
                 rlogit_dict = self.logit_dict[instance_id]
         else:
             fe_toolset = fe_params.get_toolset()
-            rfeature_dict, rlogit_dict = algorithm.execute(fe_toolset,
-                                                           "FeatureExtraction")
+            rfeature_dict, rlogit_dict = self.algorithm.execute(fe_toolset,
+                                                                "FeatureExtraction")
         self.rfeature_dict, self.rlogit_dict = rfeature_dict, rlogit_dict
         return rfeature_dict, rlogit_dict
 
     @skip_stage("WorldDetection")
     def _run_world_change_detection(
             self,
-            algorithm: Any,
             wcd_params: WorldChangeDetectionParams,
             round_id: int,
             ) -> None:
@@ -117,14 +112,14 @@ class ONDRound:
         Private helper function for detecting that the world has changed.
 
         Args:
-            algorithm: An instance of the algorithm
             wcd_params: An instance of dataclass with parameters for world change detection
             round_id: Identifier for a round
 
         Returns:
             None
         """
-        wd_result = algorithm.execute(wcd_params.get_toolset(), "WorldDetection")
+        wd_result = self.algorithm.execute(wcd_params.get_toolset(),
+                                           "WorldDetection")
         self.harness.post_results({"detection": wd_result}, self.test_id, round_id,
                                   self.session_id)
         safe_remove(wd_result)
@@ -132,27 +127,26 @@ class ONDRound:
     @skip_stage("NoveltyClassification")
     def _run_novelty_classification(
             self,
-            algorithm: Any,
             nc_params: NoveltyClassificationParams,
             round_id: int) -> None:
         """
         Private helper function for novelty classification.
 
         Args:
-            algorithm: An instance of the algorithm
             nc_params: An instance of dataclass with parameters for novelty classification
             round_id: Identifier for a round
 
         Returns:
             None
         """
-        ncl_result = algorithm.execute(nc_params.get_toolset(), "NoveltyClassification")
+        ncl_result = self.algorithm.execute(nc_params.get_toolset(),
+                                            "NoveltyClassification")
         self.harness.post_results({"classification": ncl_result}, self.test_id,
                                   round_id, self.session_id)
         safe_remove(ncl_result)
 
     @skip_stage("EvaluateRoundwise")
-    def _evaluate_roundwise(round_id: int) -> Dict:
+    def _evaluate_roundwise(self, round_id: int) -> Dict:
         """
         Compute roundwise accuracy.
 
@@ -167,23 +161,20 @@ class ONDRound:
     @skip_stage("NoveltyAdaptation")
     def _run_novelty_adaptation(
             self,
-            algorithm: Any,
             na_params: NoveltyAdaptationParams) -> None:
         """
         Private helper function for adaptation.
 
         Args:
-            algorithm: An instance of the algorithm
             na_params: An instance of dataclass with parameters for adaptation
 
         Returns:
             None
         """
-        return algorithm.execute(na_params.get_toolset(), "NoveltyAdaption")
+        return self.algorithm.execute(na_params.get_toolset(), "NoveltyAdaption")
 
     def __call__(
             self,
-            algorithm: Any,
             dataset: str,
             round_id: int) -> Union[Dict, None]:
         """
@@ -203,19 +194,18 @@ class ONDRound:
                                             self.redlight_instance,
                                             round_id)
         instance_ids = ONDRound.get_instance_ids(dataset)
-        rfeature_dict, rlogit_dict = self._run_feature_extraction(algorithm,
-                                                                  fe_params,
+        rfeature_dict, rlogit_dict = self._run_feature_extraction(fe_params,
                                                                   instance_ids)
         # Run World Change Detection
         wc_params = WorldChangeDetectionParams(rfeature_dict, rlogit_dict, round_id)
-        self._run_world_change_detection(algorithm, wc_params, round_id)
+        self._run_world_change_detection(wc_params, round_id)
         # Run Novelty Classification
         nc_params = NoveltyClassificationParams(rfeature_dict, rlogit_dict, round_id)
-        self._run_novelty_classification(algorithm, nc_params, round_id)
+        self._run_novelty_classification(nc_params, round_id)
         # Compute metrics for the round
         round_score = self._evaluate_roundwise(round_id)
 
         na_params = NoveltyAdaptationParams(round_id)
-        self._run_novelty_adaptation(algorithm, na_params)
+        self._run_novelty_adaptation(na_params)
 
         return round_score
