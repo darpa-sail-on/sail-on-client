@@ -9,10 +9,7 @@ import ubelt as ub
 
 from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes, InitializeParams, NoveltyCharacterizationParams
 from sail_on_client.protocol.ond_round import ONDRound
-from sail_on_client.feedback import create_feedback_instance
-from sail_on_client.feedback.image_classification_feedback import ImageClassificationFeedback
-from sail_on_client.feedback.document_transcription_feedback import DocumentTranscriptionFeedback
-from sail_on_client.feedback.activity_recognition_feedback import ActivityRecognitionFeedback
+from sail_on_client.feedback import create_feedback_instance, feedback_type
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.utils.utils import safe_remove
@@ -72,9 +69,7 @@ class ONDTest:
         self.use_saved_features = use_saved_features
 
     @skip_stage("CreateFeedbackInstance")
-    def _create_feedback_instance(self, test_id) -> Union[ImageClassificationFeedback,
-                                                          DocumentTranscriptionFeedback,
-                                                          ActivityRecognitionFeedback]:
+    def _create_feedback_instance(self, test_id) -> feedback_type:
         """
         Private function for creating feedback object.
 
