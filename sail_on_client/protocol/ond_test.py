@@ -79,12 +79,12 @@ class ONDTest:
         algorithm_parameters = self.algorithm_attributes.parameters
         feedback_params = algorithm_parameters["feedback_params"]
         log.info("Creating Feedback object")
-        feedback_params = {
+        feedback_params.update({
                 "interface": self.harness,
                 "session_id": self.session_id,
                 "test_id": test_id,
                 "feedback_type": self.feedback_type
-                }
+                })
         feedback_instance = create_feedback_instance(
             self.domain, feedback_params
         )
