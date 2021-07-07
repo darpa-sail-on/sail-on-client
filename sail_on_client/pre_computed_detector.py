@@ -22,6 +22,7 @@ class PreComputedDetector(BaseAlgorithm):
         """
         BaseAlgorithm.__init__(self, toolset)
         self.cache_dir = toolset["cache_dir"]
+        self.round_size = toolset["round_size"]
         self.has_roundwise_file = toolset["has_roundwise_file"]
         self.algorithm_name = toolset["algorithm_name"]
         self.step_dict: Dict[str, Callable] = {
@@ -123,7 +124,7 @@ class PreComputedDetector(BaseAlgorithm):
             Tuple of dictionary
         """
         self.dataset = toolset["dataset"]
-        self.round_size = pd.read_csv(self.dataset, header=None).shape[0]
+        pd.read_csv(self.dataset, header=None).shape[0]
         return {}, {}
 
     def _world_detection(self, toolset: Dict) -> str:
