@@ -14,6 +14,7 @@ def precomputed_detector():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": False,
     }
     return PreComputedDetector(init_toolset)
@@ -27,6 +28,7 @@ def precomputed_detector_with_round():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": True,
     }
     return PreComputedDetector(init_toolset)
@@ -40,6 +42,7 @@ def precomputed_detector_with_features():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": False,
     }
     precomputed_detector = PreComputedDetector(init_toolset)
@@ -62,6 +65,7 @@ def precomputed_detector_with_features_with_round():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": True,
     }
     precomputed_detector = PreComputedDetector(init_toolset)
@@ -88,11 +92,13 @@ def test_init():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": False,
     }
     init_toolset_with_round = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": True,
     }
     precomputed_detector = PreComputedDetector(init_toolset)
