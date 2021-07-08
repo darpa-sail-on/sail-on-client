@@ -32,7 +32,7 @@ class ConddaConfig(scfg.Config):
             False, help="Use attributes saved in save dir"
         ),
         "saved_attributes": {},
-        "skip_stage": [],
+        "skip_stages": [],
         "hints": [],
         "resume_session": scfg.Value(False, help="Flag to resume session"),
         "resumed_session_ids": {},
