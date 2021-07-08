@@ -15,6 +15,8 @@ from pkg_resources import DistributionNotFound
 
 from sail_on.api import server
 from sail_on.api.file_provider import FileProvider
+from sail_on_client.pre_computed_detector import PreComputedDetector
+from sail_on_client.protocol.localinterface import LocalInterface
 
 log = logging.getLogger(__name__)
 
@@ -115,3 +117,33 @@ def discoverable_plugins():
         except (DistributionNotFound, ImportError):
             log.exception(f"Plugin {entry_point.name} not found")
     return discovered_plugins
+
+
+@pytest.fixture(scope="function")
+def harness_instance():
+    """Fixture for creating an instance of harness."""
+    test_dir = os.path.dirname(__file__)
+    data_dir = os.path.join(test_dir, "data")
+    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
+    gt_config = os.path.join(gt_dir, "activity_recognition.json")
+    with TemporaryDirectory() as config_folder:
+        dummy_config = {
+                "data_dir": f"{data_dir}",
+                "gt_dir": f"{gt_dir}",
+                "gt_config": f"{gt_config}"
+        }
+        config_name = "test_ond_config.json"
+        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
+        local_interface = LocalInterface(config_name, config_folder)
+    return local_interface
+
+
+@pytest.fixture(scope="function")
+def algorithm_instance():
+    """Fixture for creating a config for algorithm."""
+    test_dir = os.path.dirname(__file__)
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+    return PreComputedDetector({"cache_dir": cache_dir,
+                                "algorithm_name": "PreComputedDetector",
+                                "round_size": 32,
+                                "has_roundwise_file": False})
