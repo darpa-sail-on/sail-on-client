@@ -2,7 +2,10 @@
 name = "sail-on-client"
 version = "0.15.0+29.7963669"
 description = "Client and Protocols for DARPA sail-on"
-authors = ["Your Name <you@example.com>"]
+authors = ["Ameya Shringi <ameya.shringi@kitware.com>",
+           "Christopher Funk <christopher.funk@kitware.com>",
+           "Roni Choudhury <roni.choudhury@kitware.com>",
+           "Adam Kaufman <adam_kaufman@partech.com>"]
 license = "Apache-2.0"
 readme = "README.md"
 packages = [{include = "sail_on_client"}]
