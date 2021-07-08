@@ -93,8 +93,8 @@ class ONDRound:
         rfeature_dict, rlogit_dict = {}, {}
         if len(self.features_dict) > 0 and len(self.logit_dict) > 0:
             for instance_id in instance_ids:
-                rfeature_dict = self.features_dict[instance_id]
-                rlogit_dict = self.logit_dict[instance_id]
+                rfeature_dict[instance_id] = self.features_dict[instance_id]
+                rlogit_dict[instance_id] = self.logit_dict[instance_id]
         else:
             fe_toolset = fe_params.get_toolset()
             rfeature_dict, rlogit_dict = self.algorithm.execute(fe_toolset,
