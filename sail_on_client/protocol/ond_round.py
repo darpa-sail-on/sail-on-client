@@ -4,11 +4,14 @@ import logging
 from typing import List, Any, Tuple, Dict, Union
 
 from sail_on_client.protocol.ond_dataclasses import (
-        FeatureExtractionParams,
-        WorldChangeDetectionParams,
         NoveltyClassificationParams,
         NoveltyAdaptationParams,
 )
+from sail_on_client.protocol.visual_dataclasses import (
+        FeatureExtractionParams,
+        WorldChangeDetectionParams,
+)
+from sail_on_client.protocol.visual_round import VisualRound
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.utils.utils import safe_remove
@@ -18,8 +21,8 @@ from sail_on_client.utils.decorators import skip_stage
 log = logging.getLogger(__name__)
 
 
-class ONDRound:
-    """Class Representing A Round in OND."""
+class ONDRound(VisualRound):
+    """Class Representing a round in OND."""
 
     def __init__(
                 self,
@@ -33,7 +36,7 @@ class ONDRound:
                 skip_stages: List[str],
                 test_id: str) -> None:
         """
-        Constructor for creating a round for OND.
+        Construct round for OND.
 
         Args:
             algorithm: An instance of algorithm
@@ -49,80 +52,8 @@ class ONDRound:
         Returns:
             None
         """
-        self.algorithm = algorithm
-        self.data_root = data_root
-        self.features_dict = features_dict
-        self.harness = harness
-        self.logit_dict = logit_dict
-        self.redlight_instance = redlight_instance
-        self.session_id = session_id
-        self.skip_stages = skip_stages
-        self.test_id = test_id
-
-    @staticmethod
-    def get_instance_ids(dataset_path: str) -> List[str]:
-        """
-        Get instance ids from the dataset.
-
-        Args:
-            dataset_path: Path to text file with instances used in a round
-
-        Returns:
-            List of instance ids from the dataset
-        """
-        with open(dataset_path, "r") as dataset:
-            instance_ids = dataset.readlines()
-            instance_ids = [instance_id.strip() for instance_id in instance_ids]
-        return instance_ids
-
-    @skip_stage("FeatureExtraction", ({}, {}))
-    def _run_feature_extraction(
-            self,
-            fe_params: FeatureExtractionParams,
-            instance_ids: List[str]) -> Tuple[Dict, Dict]:
-        """
-        Private helper function for running feature extraction.
-
-        Args:
-            fe_params: An instance of dataclass with parameters for feature extraction
-            instance_ids: Identifiers associated with data for a round
-
-        Returns:
-            Tuple for feature and logit dictionary for a round
-        """
-        rfeature_dict, rlogit_dict = {}, {}
-        if len(self.features_dict) > 0 and len(self.logit_dict) > 0:
-            for instance_id in instance_ids:
-                rfeature_dict[instance_id] = self.features_dict[instance_id]
-                rlogit_dict[instance_id] = self.logit_dict[instance_id]
-        else:
-            fe_toolset = fe_params.get_toolset()
-            rfeature_dict, rlogit_dict = self.algorithm.execute(fe_toolset,
-                                                                "FeatureExtraction")
-        self.rfeature_dict, self.rlogit_dict = rfeature_dict, rlogit_dict
-        return rfeature_dict, rlogit_dict
-
-    @skip_stage("WorldDetection")
-    def _run_world_change_detection(
-            self,
-            wcd_params: WorldChangeDetectionParams,
-            round_id: int,
-            ) -> None:
-        """
-        Private helper function for detecting that the world has changed.
-
-        Args:
-            wcd_params: An instance of dataclass with parameters for world change detection
-            round_id: Identifier for a round
-
-        Returns:
-            None
-        """
-        wd_result = self.algorithm.execute(wcd_params.get_toolset(),
-                                           "WorldDetection")
-        self.harness.post_results({"detection": wd_result}, self.test_id, round_id,
-                                  self.session_id)
-        safe_remove(wd_result)
+        super().__init__(algorithm, data_root, features_dict, harness, logit_dict,
+                         redlight_instance, session_id, skip_stages, test_id)
 
     @skip_stage("NoveltyClassification")
     def _run_novelty_classification(

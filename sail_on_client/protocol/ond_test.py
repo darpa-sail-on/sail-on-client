@@ -9,6 +9,7 @@ import ubelt as ub
 
 from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes, InitializeParams, NoveltyCharacterizationParams
 from sail_on_client.protocol.ond_round import ONDRound
+from sail_on_client.protocol.visual_test import VisualTest
 from sail_on_client.feedback import create_feedback_instance, feedback_type
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
@@ -20,7 +21,7 @@ from sail_on_client.errors import RoundError
 log = logging.getLogger(__name__)
 
 
-class ONDTest:
+class ONDTest(VisualTest):
     """Class Representing OND test."""
 
     def __init__(
@@ -35,7 +36,6 @@ class ONDTest:
             skip_stages: List[str],
             use_consolidated_features: bool,
             use_saved_features: bool) -> None:
-
         """
         Constructor for test for OND.
 
@@ -54,16 +54,16 @@ class ONDTest:
         Returns:
             None
         """
-        self.algorithm_attributes = algorithm_attributes
-        self.data_root = data_root
-        self.domain = domain
+        super().__init__(algorithm_attributes,
+                         data_root,
+                         domain,
+                         harness,
+                         save_dir,
+                         session_id,
+                         skip_stages,
+                         use_consolidated_features,
+                         use_saved_features)
         self.feedback_type = feedback_type
-        self.harness = harness
-        self.save_dir = save_dir
-        self.session_id = session_id
-        self.skip_stages = skip_stages
-        self.use_consolidated_features = use_consolidated_features
-        self.use_saved_features = use_saved_features
 
     @skip_stage("CreateFeedbackInstance")
     def _create_feedback_instance(self, test_id) -> feedback_type:
@@ -89,80 +89,6 @@ class ONDTest:
             self.domain, feedback_params
         )
         return feedback_instance
-
-    def _restore_features(
-            self,
-            test_id: str) -> Tuple[Dict, Dict]:
-        """
-        Private function to _restore_features.
-
-        Args:
-           test_id: An identifier for the test
-
-        Returns:
-            Tuple of dictionary with features and logits obtained from the feature extractor
-        """
-        features_dict: Dict = {}
-        logit_dict: Dict = {}
-        algorithm_name = self.algorithm_attributes.name
-        if self.use_saved_features:
-            if os.path.isdir(self.save_dir):
-                if self.use_consolidated_features:
-                    feature_fname = f"{algorithm_name}_features.pkl"
-                else:
-                    feature_fname = f"{test_id}_{algorithm_name}_features.pkl"
-                feature_path = os.path.join(self.save_dir, feature_fname)
-                test_features = pkl.load(open(feature_path, "rb"))
-            else:
-                test_features = pkl.load(open(self.save_dir, "rb"))
-            features_dict = test_features["features_dict"]
-            logit_dict = test_features["logit_dict"]
-        return features_dict, logit_dict
-
-    def _aggregate_features_across_round(
-            self,
-            round_instance: ONDRound,
-            feature_dict: Dict,
-            logit_dict: Dict) -> Tuple[Dict, Dict]:
-        """
-        Aggregate features across multiple rounds.
-
-        Args:
-            round_instance: Instance of ond round
-            feature_dict: Aggregated features until this function was called
-            logit_dict: Aggregated logit until this function was called
-
-        Return:
-            Tuple of features and logits with features and logits from the round
-        """
-        feature_dict.update(getattr(round_instance, "rfeature_dict", {}))
-        logit_dict.update(getattr(round_instance, "rlogit_dict", {}))
-        return feature_dict, logit_dict
-
-    @skip_stage("SaveFeatures")
-    def _save_features(self,
-                       test_id: str,
-                       feature_dict: Dict,
-                       logit_dict: Dict) -> None:
-        """
-        Save features for a test.
-
-        Args:
-            test_id: An identifier for the test
-            feature_dict: Features for the test
-            logit_dict: Logit for the test
-
-        Return:
-            None
-        """
-        ub.ensuredir(self.save_dir)
-        algorithm_name = self.algorithm_attributes.name
-        feature_path = os.path.join(
-            self.save_dir, f"{test_id}_{algorithm_name}_features.pkl"
-        )
-        log.info(f"Saving features in {feature_path}")
-        with open(feature_path, "wb") as f:
-            pkl.dump({"features_dict": feature_dict, "logit_dict": logit_dict}, f)
 
     @skip_stage("NoveltyCharacterization")
     def _run_novelty_characterization(self,

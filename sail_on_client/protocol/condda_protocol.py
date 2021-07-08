@@ -1,18 +1,14 @@
 """CONDDA protocol."""
 
-from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
+from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
-from sail_on_client.errors import RoundError
 from sail_on_client.utils.utils import (
-    safe_remove,
     update_harness_parameters,
 )
-from sail_on_client.utils.numpy_encoder import NumpyEncoder
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes
 from sail_on_client.protocol.condda_test import CONDDATest
-from sail_on_client.utils.decorators import skip_stage
 
 import os
 import json
@@ -24,7 +20,7 @@ from typing import Dict, Any, Union, List
 log = logging.getLogger(__name__)
 
 
-class Condda(BaseProtocol):
+class Condda(VisualProtocol):
     """CONDDA protocol."""
 
     def __init__(
@@ -47,8 +43,8 @@ class Condda(BaseProtocol):
             None
         """
 
-        BaseProtocol.__init__(
-            self, discovered_plugins, algorithmsdirectory, harness, config_file
+        super().__init__(
+            discovered_plugins, algorithmsdirectory, harness, config_file
         )
         if not os.path.exists(config_file):
             log.error(f"{config_file} does not exist")
@@ -91,46 +87,6 @@ class Condda(BaseProtocol):
                 algorithm_param,
                 session_id,
                 test_ids)
-
-    def create_algorithm_session(
-            self,
-            algorithm_attributes: AlgorithmAttributes,
-            domain: str,
-            hints: List[str],
-            has_a_session) -> AlgorithmAttributes:
-        """
-        Create/resume session for an algorithm.
-
-        Args:
-            algorithm_attributes: An instance of AlgorithmAttributes
-            domain: Domain for the algorithm
-            hints: List of hints used in the session
-            has_a_session: Already has a session and we want to resume it
-
-        Returns:
-            An AlgorithmAttributes object with updated session id or test id
-        """
-        test_ids = algorithm_attributes.test_ids
-        named_version = algorithm_attributes.named_version()
-        detection_threshold = algorithm_attributes.detection_threshold
-
-        if has_a_session:
-            session_id = algorithm_attributes.session_id
-            finished_test = self.harness.resume_session(session_id)
-            algorithm_attributes.remove_completed_tests(finished_test)
-            log.info(f"Resumed session {session_id} for {algorithm_attributes.name}")
-        else:
-            session_id = self.harness.session_request(
-                test_ids,
-                "CONDDA",
-                domain,
-                named_version,
-                hints,
-                detection_threshold,
-            )
-            algorithm_attributes.session_id = session_id
-            log.info(f"Created session {session_id} for {algorithm_attributes.name}")
-        return algorithm_attributes
 
     def update_skip_stages(
             self,
@@ -198,13 +154,13 @@ class Condda(BaseProtocol):
 
         # Create sessions an instances of all the algorithms and populate
         # session_id for algorithm attributes
-        for algorithm_attributes in algorithms_attributes:
-            self.create_algorithm_session(
-                    algorithm_attributes,
-                    domain,
-                    hints,
-                    resume_session
-            )
+        for idx, algorithm_attributes in enumerate(algorithms_attributes):
+            algorithms_attributes[idx] = self.create_algorithm_session(
+                                                            algorithm_attributes,
+                                                            domain,
+                                                            hints,
+                                                            resume_session,
+                                                            "CONDDA")
 
         # Run tests for all the algorithms
         for algorithm_attributes in algorithms_attributes:

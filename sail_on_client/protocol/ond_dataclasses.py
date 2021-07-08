@@ -105,52 +105,6 @@ class InitializeParams:
 
 
 @dataclass
-class FeatureExtractionParams:
-    """Class for storing feature extraction parameters associated with an algorithm."""
-
-    dataset: str
-    data_root: str
-    redlight_image: str
-    round_id: int
-
-    def get_toolset(self) -> Dict:
-        """
-        Convert the data present in the class into a dictionary
-
-        Returns
-            A dictionary with data associated with the class
-        """
-        return {
-            "dataset": self.dataset,
-            "dataset_root": self.data_root,
-            "round_id": self.round_id,
-            "redlight_image": self.redlight_image
-        }
-
-
-@dataclass
-class WorldChangeDetectionParams:
-    """Class for storing parameters associated world change in an algorithm."""
-
-    features_dict: Dict
-    logit_dict: Dict
-    round_id: int
-
-    def get_toolset(self) -> Dict:
-        """
-        Convert the data present in the class into a dictionary
-
-        Returns
-            A dictionary with data associated with the class
-        """
-        return {
-            "features_dict": self.features_dict,
-            "logit_dict": self.logit_dict,
-            "round_id": self.round_id,
-        }
-
-
-@dataclass
 class NoveltyClassificationParams:
     """Class for storing parameters associated novelty classification in an algorithm."""
 

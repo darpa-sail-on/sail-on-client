@@ -1,10 +1,8 @@
 """OND protocol."""
 
-from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
-
+from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.protocol.ond_config import OndConfig
 from sail_on_client.utils.utils import (
-    safe_remove,
     update_harness_parameters,
 )
 from sail_on_client.utils.numpy_encoder import NumpyEncoder
@@ -16,7 +14,6 @@ from sail_on_client.utils.decorators import skip_stage
 
 import os
 import json
-import sys
 import logging
 
 from typing import Dict, List, Any, Union
@@ -24,7 +21,7 @@ from typing import Dict, List, Any, Union
 log = logging.getLogger(__name__)
 
 
-class SailOn(BaseProtocol):
+class SailOn(VisualProtocol):
     """OND protocol."""
 
     def __init__(
@@ -35,7 +32,7 @@ class SailOn(BaseProtocol):
         config_file: str,
     ) -> None:
         """
-        Initialize ond protocol object.
+        Construct OND protocol.
 
         Args:
             discovered_plugins: Dict of algorithms that can be used by the protocols
@@ -46,13 +43,9 @@ class SailOn(BaseProtocol):
         Returns:
             None
         """
-        BaseProtocol.__init__(
-            self, discovered_plugins, algorithmsdirectory, harness, config_file
-        )
-        if not os.path.exists(config_file):
-            log.error(f"{config_file} does not exist")
-            sys.exit(1)
-
+        super().__init__(discovered_plugins,
+                         algorithmsdirectory,
+                         harness, config_file)
         with open(config_file, "r") as f:
             overriden_config = json.load(f)
         self.config = OndConfig(overriden_config)
@@ -96,46 +89,6 @@ class SailOn(BaseProtocol):
                 algorithm_param,
                 session_id,
                 test_ids)
-
-    def create_algorithm_session(
-            self,
-            algorithm_attributes: AlgorithmAttributes,
-            domain: str,
-            hints: List[str],
-            has_a_session) -> AlgorithmAttributes:
-        """
-        Create/resume session for an algorithm.
-
-        Args:
-            algorithm_attributes: An instance of AlgorithmAttributes
-            domain: Domain for the algorithm
-            hints: List of hints used in the session
-            has_a_session: Already has a session and we want to resume it
-
-        Returns:
-            An AlgorithmAttributes object with updated session id or test id
-        """
-        test_ids = algorithm_attributes.test_ids
-        named_version = algorithm_attributes.named_version()
-        detection_threshold = algorithm_attributes.detection_threshold
-
-        if has_a_session:
-            session_id = algorithm_attributes.session_id
-            finished_test = self.harness.resume_session(session_id)
-            algorithm_attributes.remove_completed_tests(finished_test)
-            log.info(f"Resumed session {session_id} for {algorithm_attributes.name}")
-        else:
-            session_id = self.harness.session_request(
-                test_ids,
-                "OND",
-                domain,
-                named_version,
-                hints,
-                detection_threshold,
-            )
-            algorithm_attributes.session_id = session_id
-            log.info(f"Created session {session_id} for {algorithm_attributes.name}")
-        return algorithm_attributes
 
     def _find_baseline_session_id(
             self,
@@ -289,13 +242,14 @@ class SailOn(BaseProtocol):
 
         # Create sessions an instances of all the algorithms and populate
         # session_id for algorithm attributes
-        for algorithm_attributes in algorithms_attributes:
-            self.create_algorithm_session(
-                    algorithm_attributes,
-                    domain,
-                    hints,
-                    resume_session
-            )
+        for idx, algorithm_attributes in enumerate(algorithms_attributes):
+            algorithms_attributes[idx] = self.create_algorithm_session(
+                                                            algorithm_attributes,
+                                                            domain,
+                                                            hints,
+                                                            resume_session,
+                                                            "OND"
+                                                    )
 
         # Run tests for all the algorithms
         algorithm_scores = {}
