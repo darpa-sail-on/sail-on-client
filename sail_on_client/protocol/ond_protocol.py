@@ -9,6 +9,7 @@ from sail_on_client.utils.utils import (
 )
 from sail_on_client.utils.numpy_encoder import NumpyEncoder
 from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes
 from sail_on_client.protocol.ond_test import ONDTest
 from sail_on_client.utils.decorators import skip_stage
@@ -18,7 +19,7 @@ import json
 import sys
 import logging
 
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Union
 
 log = logging.getLogger(__name__)
 
@@ -30,7 +31,7 @@ class SailOn(BaseProtocol):
         self,
         discovered_plugins: Dict[str, Any],
         algorithmsdirectory: str,
-        harness: ParInterface,
+        harness: Union[ParInterface, LocalInterface],
         config_file: str,
     ) -> None:
         """
