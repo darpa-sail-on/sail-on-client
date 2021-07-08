@@ -5,7 +5,7 @@ import json
 import pytest
 import os
 
-from sail_on_client.protocol.condda import Condda
+from sail_on_client.protocol.condda_protocol import Condda
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 
