@@ -1,7 +1,7 @@
 """Decorators for sail-on-client."""
 
 import functools
-from typing import Any, Callable
+from typing import Any, AnyStr, Callable
 
 
 def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
@@ -29,7 +29,7 @@ def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
         """
 
         @functools.wraps(stage_fn)
-        def skip_stage_fn(self, *args, **kwargs):
+        def skip_stage_fn(self: Any, *args: AnyStr, **kwargs: AnyStr) -> Any:
             if hasattr(self, "skip_stages"):
                 skip_stages = self.skip_stages
             else:

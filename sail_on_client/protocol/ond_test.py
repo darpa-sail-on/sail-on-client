@@ -70,7 +70,7 @@ class ONDTest(VisualTest):
         self.feedback_type = feedback_type
 
     @skip_stage("CreateFeedbackInstance")
-    def _create_feedback_instance(self, test_id) -> feedback_type:
+    def _create_feedback_instance(self, test_id: str) -> feedback_type:
         """
         Private function for creating feedback object.
 
@@ -95,7 +95,9 @@ class ONDTest(VisualTest):
         return feedback_instance
 
     @skip_stage("NoveltyCharacterization")
-    def _run_novelty_characterization(self, algorithm: Any, nc_params, test_id) -> None:
+    def _run_novelty_characterization(
+        self, algorithm: Any, nc_params: NoveltyCharacterizationParams, test_id: str
+    ) -> None:
         characterization_results = algorithm.execute(
             nc_params.get_toolset(), "NoveltyCharacterization"
         )

@@ -52,7 +52,7 @@ class Condda(VisualProtocol):
         self.harness = update_harness_parameters(harness, self.config["harness_config"])
 
     def create_algorithm_attributes(
-        self, algorithm_name: str, algorithm_param: Dict, test_ids
+        self, algorithm_name: str, algorithm_param: Dict, test_ids: List[str]
     ) -> AlgorithmAttributes:
         """
         Create an instance of algorithm attributes.
@@ -79,6 +79,49 @@ class Condda(VisualProtocol):
             session_id,
             test_ids,
         )
+
+    def create_algorithm_session(
+        self,
+        algorithm_attributes: AlgorithmAttributes,
+        domain: str,
+        hints: List[str],
+        has_a_session: bool,
+        protocol_name: str,
+    ) -> AlgorithmAttributes:
+        """
+        Create/resume session for an algorithm.
+
+        Args:
+            algorithm_attributes: An instance of AlgorithmAttributes
+            domain: Domain for the algorithm
+            hints: List of hints used in the session
+            has_a_session: Already has a session and we want to resume it
+            protocol_name: Name of the algorithm
+
+        Returns:
+            An AlgorithmAttributes object with updated session id or test id
+        """
+        test_ids = algorithm_attributes.test_ids
+        named_version = algorithm_attributes.named_version()
+        detection_threshold = algorithm_attributes.detection_threshold
+
+        if has_a_session:
+            session_id = algorithm_attributes.session_id
+            finished_test = self.harness.resume_session(session_id)
+            algorithm_attributes.remove_completed_tests(finished_test)
+            log.info(f"Resumed session {session_id} for {algorithm_attributes.name}")
+        else:
+            session_id = self.harness.session_request(
+                test_ids,
+                protocol_name,
+                domain,
+                named_version,
+                hints,
+                detection_threshold,
+            )
+            algorithm_attributes.session_id = session_id
+            log.info(f"Created session {session_id} for {algorithm_attributes.name}")
+        return algorithm_attributes
 
     def update_skip_stages(
         self, skip_stages: List[str], save_features: bool, feature_extraction_only: bool

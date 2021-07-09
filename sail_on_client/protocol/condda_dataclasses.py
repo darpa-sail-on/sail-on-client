@@ -6,7 +6,7 @@ from typing import Dict, List, Any
 from sail_on_client.utils.utils import merge_dictionaries
 
 try:
-    from importlib.metadata import version, PackageNotFoundError
+    from importlib.metadata import version, PackageNotFoundError  # type:ignore
 except ModuleNotFoundError:
     from importlib_metadata import version, PackageNotFoundError
 
