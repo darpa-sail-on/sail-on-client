@@ -60,7 +60,7 @@ class AlgorithmAttributes:
         self.test_ids = list(test_set ^ ftest_set)
 
     def merge_detector_params(
-        self, detector_params: Dict, exclude_keys: List = []
+        self, detector_params: Dict, exclude_keys: List = None
     ) -> None:
         """
         Merge common parameters with algorithm specific parameters with exclusions.
@@ -72,6 +72,8 @@ class AlgorithmAttributes:
         Returns:
             None
         """
+        if not exclude_keys:
+            exclude_keys = []
         self.parameters = merge_dictionaries(
             self.parameters, detector_params, exclude_keys
         )
@@ -109,7 +111,7 @@ class NoveltyCharacterizationParams:
 
     def get_toolset(self) -> Dict:
         """
-        Convert the data present in the class into a dictionary
+        Convert the data present in the class into a dictionary.
 
         Returns
             A dictionary with data associated with the class

@@ -6,7 +6,7 @@ from typing import Any, Callable
 
 def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
     """
-    Decorator for skipping stages in the protocol.
+    Skip stages in the protocol.
 
     Args:
         stage_name: Name of the stage that is covered by the decorated function
@@ -19,7 +19,7 @@ def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
 
     def skip_stage_decorator(stage_fn: Callable) -> Callable:
         """
-        Wrapper to capturing the stage function
+        Capture the stage function.
 
         Args:
             stage_fn: The callable function that would be wrapped

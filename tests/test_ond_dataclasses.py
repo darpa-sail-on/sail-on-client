@@ -2,7 +2,6 @@
 
 import pytest
 import uuid
-from sail_on_client import __version__
 from sail_on_client.mock import MockDetector
 from sail_on_client.protocol.ond_dataclasses import (
     AlgorithmAttributes,

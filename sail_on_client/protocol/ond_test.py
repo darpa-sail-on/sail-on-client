@@ -1,11 +1,8 @@
 """Test for OND."""
 
 import logging
-import os
-import pickle as pkl
 from itertools import count
-from typing import Union, Tuple, Dict, Any, List
-import ubelt as ub
+from typing import Union, Dict, Any, List
 
 from sail_on_client.protocol.ond_dataclasses import (
     AlgorithmAttributes,
@@ -42,7 +39,7 @@ class ONDTest(VisualTest):
         use_saved_features: bool,
     ) -> None:
         """
-        Constructor for test for OND.
+        Construct test for OND.
 
         Args:
             algorithm_attributes: An instance of algorithm_attributes

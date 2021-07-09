@@ -1,11 +1,10 @@
 """Round for CONDDA."""
 
 import logging
-from typing import Union, List, Dict, Any, Tuple
+from typing import Union, List, Dict, Any
 
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
-from sail_on_client.utils.utils import safe_remove
 from sail_on_client.utils.decorators import skip_stage
 from sail_on_client.protocol.visual_round import VisualRound
 from sail_on_client.protocol.condda_dataclasses import NoveltyCharacterizationParams

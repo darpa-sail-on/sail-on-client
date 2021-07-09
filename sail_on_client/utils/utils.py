@@ -4,7 +4,7 @@ import os
 import logging
 from sailon_tinker_launcher.deprecated_tinker import harness
 
-from typing import Dict
+from typing import Dict, List
 
 log = logging.getLogger(__name__)
 
@@ -59,9 +59,17 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
     return ip_harness
 
 
-def merge_dictionaries(base_dict, other_dict, exclude_keys) -> Dict:
+def merge_dictionaries(base_dict: Dict, other_dict: Dict, exclude_keys: List) -> Dict:
     """
     Shallow merge for two dictionaries with certain keys would be skipped.
+
+    Args:
+        base_dict: Dictionary with defaults
+        other_dict: Dictionary with arguments that are added or overriden
+        exclude_keys: Keys in other dict that shouldn't be used in the merge
+
+    Returns:
+        Dictionary with parameters obtained by merging two dictionaries
     """
     merged_dict = base_dict.copy()
     included_keys = set(other_dict.keys()).difference(set(exclude_keys))

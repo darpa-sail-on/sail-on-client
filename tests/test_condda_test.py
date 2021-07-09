@@ -17,7 +17,7 @@ def create_algorithm_attribute(
     algorithm_name, instance, parameters, session_id, test_ids
 ):
     """
-    Helper function to create algorithm attributes
+    Create algorithm attributes.
 
     Args:
         algorithm_name: Name of the algorithm

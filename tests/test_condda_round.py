@@ -1,7 +1,6 @@
 """Tests for CONDDARound."""
 
 import numpy as np
-import pytest
 
 from sail_on_client.protocol.condda_round import CONDDARound
 

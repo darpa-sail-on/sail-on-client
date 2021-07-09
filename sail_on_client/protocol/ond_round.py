@@ -1,7 +1,7 @@
 """Round for OND."""
 
 import logging
-from typing import List, Any, Tuple, Dict, Union
+from typing import List, Any, Dict, Union
 
 from sail_on_client.protocol.ond_dataclasses import (
     NoveltyClassificationParams,

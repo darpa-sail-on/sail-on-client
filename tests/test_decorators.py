@@ -1,6 +1,5 @@
 """Test for skipping stages."""
 
-import pytest
 from sail_on_client.utils.decorators import skip_stage
 from typing import List
 
@@ -10,7 +9,7 @@ class SkipableIncrement:
 
     def __init__(self, x: int) -> None:
         """
-        Constructor for incrementing initial value.
+        Construct SkipableIncrement.
 
         Args:
             x: Initial value that would be incremented

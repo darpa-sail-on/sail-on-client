@@ -2,9 +2,7 @@
 
 from dataclasses import dataclass
 import logging
-from typing import Dict, List, Any, Union
-
-from sail_on_client.utils.utils import merge_dictionaries
+from typing import Dict
 
 
 log = logging.getLogger(__name__)
@@ -21,7 +19,7 @@ class FeatureExtractionParams:
 
     def get_toolset(self) -> Dict:
         """
-        Convert the data present in the class into a dictionary
+        Convert the data present in the class into a dictionary.
 
         Returns
             A dictionary with data associated with the class
@@ -44,7 +42,7 @@ class WorldChangeDetectionParams:
 
     def get_toolset(self) -> Dict:
         """
-        Convert the data present in the class into a dictionary
+        Convert the data present in the class into a dictionary.
 
         Returns
             A dictionary with data associated with the class

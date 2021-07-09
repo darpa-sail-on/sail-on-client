@@ -10,7 +10,6 @@ import logging
 import os
 import shutil
 import torch
-from tempfile import TemporaryDirectory
 
 log = logging.getLogger(__name__)
 
