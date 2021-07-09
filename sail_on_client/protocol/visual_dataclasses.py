@@ -30,7 +30,7 @@ class FeatureExtractionParams:
             "dataset": self.dataset,
             "dataset_root": self.data_root,
             "round_id": self.round_id,
-            "redlight_image": self.redlight_image
+            "redlight_image": self.redlight_image,
         }
 
 

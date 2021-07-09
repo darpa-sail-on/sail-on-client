@@ -2,9 +2,7 @@
 
 from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
-from sail_on_client.utils.utils import (
-    update_harness_parameters,
-)
+from sail_on_client.utils.utils import update_harness_parameters
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes
@@ -43,9 +41,7 @@ class Condda(VisualProtocol):
             None
         """
 
-        super().__init__(
-            discovered_plugins, algorithmsdirectory, harness, config_file
-        )
+        super().__init__(discovered_plugins, algorithmsdirectory, harness, config_file)
         if not os.path.exists(config_file):
             log.error(f"{config_file} does not exist")
             sys.exit(1)
@@ -56,10 +52,8 @@ class Condda(VisualProtocol):
         self.harness = update_harness_parameters(harness, self.config["harness_config"])
 
     def create_algorithm_attributes(
-            self,
-            algorithm_name: str,
-            algorithm_param: Dict,
-            test_ids) -> AlgorithmAttributes:
+        self, algorithm_name: str, algorithm_param: Dict, test_ids
+    ) -> AlgorithmAttributes:
         """
         Create an instance of algorithm attributes.
 
@@ -74,25 +68,21 @@ class Condda(VisualProtocol):
         Returns:
             An instance of AlgorithmAttributes
         """
-        algorithm_instance = self.get_algorithm(
-            algorithm_name,
-            algorithm_param,
-        )
+        algorithm_instance = self.get_algorithm(algorithm_name, algorithm_param,)
         session_id = self.config.get("resumed_session_ids", {}).get(algorithm_name, "")
         return AlgorithmAttributes(
-                algorithm_name,
-                algorithm_param.get("detection_threshold", 0.5),
-                algorithm_instance,
-                algorithm_param.get("package_name", None),
-                algorithm_param,
-                session_id,
-                test_ids)
+            algorithm_name,
+            algorithm_param.get("detection_threshold", 0.5),
+            algorithm_instance,
+            algorithm_param.get("package_name", None),
+            algorithm_param,
+            session_id,
+            test_ids,
+        )
 
     def update_skip_stages(
-            self,
-            skip_stages: List[str],
-            save_features: bool,
-            feature_extraction_only: bool) -> List[str]:
+        self, skip_stages: List[str], save_features: bool, feature_extraction_only: bool
+    ) -> List[str]:
         """
         Update skip stages based on the boolean values in config.
 
@@ -134,21 +124,21 @@ class Condda(VisualProtocol):
         use_consolidated_features = self.config["use_consolidated_features"]
         feature_extraction_only = self.config["feature_extraction_only"]
         self.skip_stages = self.config["skip_stages"]
-        self.skip_stages = self.update_skip_stages(self.skip_stages,
-                                                   save_features,
-                                                   feature_extraction_only)
+        self.skip_stages = self.update_skip_stages(
+            self.skip_stages, save_features, feature_extraction_only
+        )
 
         algorithms_attributes = []
         # Populate most of the attributes for the algorithm
         for algorithm_name in algorithm_names:
             algorithm_param = algorithm_params[algorithm_name]
             algorithm_attributes = self.create_algorithm_attributes(
-                        algorithm_name,
-                        algorithm_param,
-                        test_ids)
+                algorithm_name, algorithm_param, test_ids
+            )
             # Add common parameters to algorithm specific config with some exclusions
-            algorithm_attributes.merge_detector_params(detector_params,
-                                                       ["detector_configs"])
+            algorithm_attributes.merge_detector_params(
+                detector_params, ["detector_configs"]
+            )
             log.info(f"Consolidating attributes for {algorithm_name}")
             algorithms_attributes.append(algorithm_attributes)
 
@@ -156,11 +146,8 @@ class Condda(VisualProtocol):
         # session_id for algorithm attributes
         for idx, algorithm_attributes in enumerate(algorithms_attributes):
             algorithms_attributes[idx] = self.create_algorithm_session(
-                                                            algorithm_attributes,
-                                                            domain,
-                                                            hints,
-                                                            resume_session,
-                                                            "CONDDA")
+                algorithm_attributes, domain, hints, resume_session, "CONDDA"
+            )
 
         # Run tests for all the algorithms
         for algorithm_attributes in algorithms_attributes:
@@ -169,9 +156,17 @@ class Condda(VisualProtocol):
             test_ids = algorithm_attributes.test_ids
             log.info(f"Starting session: {session_id} for algorithm: {algorithm_name}")
             skip_stages = self.skip_stages.copy()
-            condda_test = CONDDATest(algorithm_attributes, data_root, domain,
-                                     self.harness, save_dir, session_id, skip_stages,
-                                     use_consolidated_features, use_saved_features)
+            condda_test = CONDDATest(
+                algorithm_attributes,
+                data_root,
+                domain,
+                self.harness,
+                save_dir,
+                session_id,
+                skip_stages,
+                use_consolidated_features,
+                use_saved_features,
+            )
             for test_id in test_ids:
                 log.info(f"Start test: {test_id}")
                 condda_test(test_id)

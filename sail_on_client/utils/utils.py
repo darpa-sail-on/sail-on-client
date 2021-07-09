@@ -36,6 +36,7 @@ def safe_remove_results(results: dict) -> None:
     for result_files in results.values():
         safe_remove(result_files)
 
+
 def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harness:
     """
     Update parameters in a harness.

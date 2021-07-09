@@ -2,9 +2,7 @@
 
 from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.protocol.ond_config import OndConfig
-from sail_on_client.utils.utils import (
-    update_harness_parameters,
-)
+from sail_on_client.utils.utils import update_harness_parameters
 from sail_on_client.utils.numpy_encoder import NumpyEncoder
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
@@ -43,22 +41,21 @@ class SailOn(VisualProtocol):
         Returns:
             None
         """
-        super().__init__(discovered_plugins,
-                         algorithmsdirectory,
-                         harness, config_file)
+        super().__init__(discovered_plugins, algorithmsdirectory, harness, config_file)
         with open(config_file, "r") as f:
             overriden_config = json.load(f)
         self.config = OndConfig(overriden_config)
         self.harness = update_harness_parameters(harness, self.config["harness_config"])
 
     def create_algorithm_attributes(
-            self,
-            algorithm_name: str,
-            algorithm_param: Dict,
-            baseline_algorithm_name: str,
-            has_baseline: bool,
-            has_reaction_baseline: bool,
-            test_ids) -> AlgorithmAttributes:
+        self,
+        algorithm_name: str,
+        algorithm_param: Dict,
+        baseline_algorithm_name: str,
+        has_baseline: bool,
+        has_reaction_baseline: bool,
+        test_ids,
+    ) -> AlgorithmAttributes:
         """
         Create an instance of algorithm attributes.
 
@@ -73,26 +70,24 @@ class SailOn(VisualProtocol):
         Returns:
             An instance of AlgorithmAttributes
         """
-        algorithm_instance = self.get_algorithm(
-            algorithm_name,
-            algorithm_param,
-        )
+        algorithm_instance = self.get_algorithm(algorithm_name, algorithm_param,)
         is_baseline = algorithm_name == baseline_algorithm_name
         session_id = self.config.get("resumed_session_ids", {}).get(algorithm_name, "")
         return AlgorithmAttributes(
-                algorithm_name,
-                algorithm_param.get("detection_threshold", 0.5),
-                algorithm_instance,
-                has_baseline and is_baseline,
-                has_reaction_baseline and is_baseline,
-                algorithm_param.get("package_name", None),
-                algorithm_param,
-                session_id,
-                test_ids)
+            algorithm_name,
+            algorithm_param.get("detection_threshold", 0.5),
+            algorithm_instance,
+            has_baseline and is_baseline,
+            has_reaction_baseline and is_baseline,
+            algorithm_param.get("package_name", None),
+            algorithm_param,
+            session_id,
+            test_ids,
+        )
 
     def _find_baseline_session_id(
-            self,
-            algorithms_attributes: List[AlgorithmAttributes]) -> str:
+        self, algorithms_attributes: List[AlgorithmAttributes]
+    ) -> str:
         """
         Find baseline session id based on the attributes of algorithms.
 
@@ -103,16 +98,22 @@ class SailOn(VisualProtocol):
             Baseline session id
         """
         for algorithm_attributes in algorithms_attributes:
-            if algorithm_attributes.is_baseline or algorithm_attributes.is_reaction_baseline:
+            if (
+                algorithm_attributes.is_baseline
+                or algorithm_attributes.is_reaction_baseline
+            ):
                 return algorithm_attributes.session_id
-        raise Exception("Failed to find baseline, this is required to compute reaction perfomance")
+        raise Exception(
+            "Failed to find baseline, this is required to compute reaction perfomance"
+        )
 
     @skip_stage("EvaluateAlgorithms")
     def _evaluate_algorithms(
-            self,
-            algorithms_attributes: List[AlgorithmAttributes],
-            algorithm_scores: Dict,
-            save_dir: str) -> None:
+        self,
+        algorithms_attributes: List[AlgorithmAttributes],
+        algorithm_scores: Dict,
+        save_dir: str,
+    ) -> None:
         """
         Evaluate algorithms after all tests have been submitted.
 
@@ -126,7 +127,10 @@ class SailOn(VisualProtocol):
         """
         baseline_session_id = self._find_baseline_session_id(algorithms_attributes)
         for algorithm_attributes in algorithms_attributes:
-            if algorithm_attributes.is_baseline or algorithm_attributes.is_reaction_baseline:
+            if (
+                algorithm_attributes.is_baseline
+                or algorithm_attributes.is_reaction_baseline
+            ):
                 continue
             session_id = algorithm_attributes.session_id
             test_ids = algorithm_attributes.test_ids
@@ -138,20 +142,22 @@ class SailOn(VisualProtocol):
                     test_id, 0, session_id, baseline_session_id
                 )
                 score.update(test_scores[test_id])
-                with open(os.path.join(save_dir,
-                          f"{test_id}_{algorithm_name}.json"), "w") as f:  # type: ignore
+                with open(
+                    os.path.join(save_dir, f"{test_id}_{algorithm_name}.json"), "w"
+                ) as f:  # type: ignore
                     log.info(f"Saving results in {save_dir}")
                     json.dump(score, f, indent=4, cls=NumpyEncoder)  # type: ignore
             log.info(f"Finished evaluating {algorithm_name}")
 
     def update_skip_stages(
-            self,
-            skip_stages: List[str],
-            is_eval_enabled: bool,
-            is_eval_roundwise_enabled: bool,
-            use_feedback: bool,
-            save_features: bool,
-            feature_extraction_only: bool) -> List[str]:
+        self,
+        skip_stages: List[str],
+        is_eval_enabled: bool,
+        is_eval_roundwise_enabled: bool,
+        use_feedback: bool,
+        save_features: bool,
+        feature_extraction_only: bool,
+    ) -> List[str]:
         """
         Update skip stages based on the boolean values in config.
 
@@ -211,12 +217,14 @@ class SailOn(VisualProtocol):
         use_consolidated_features = self.config["use_consolidated_features"]
         feature_extraction_only = self.config["feature_extraction_only"]
         self.skip_stages = self.config["skip_stages"]
-        self.skip_stages = self.update_skip_stages(self.skip_stages,
-                                                   is_eval_enabled,
-                                                   is_eval_roundwise_enabled,
-                                                   use_feedback,
-                                                   save_features,
-                                                   feature_extraction_only)
+        self.skip_stages = self.update_skip_stages(
+            self.skip_stages,
+            is_eval_enabled,
+            is_eval_roundwise_enabled,
+            use_feedback,
+            save_features,
+            feature_extraction_only,
+        )
 
         algorithms_attributes = []
 
@@ -224,19 +232,23 @@ class SailOn(VisualProtocol):
         for algorithm_name in algorithm_names:
             algorithm_param = algorithm_params[algorithm_name]
             algorithm_attributes = self.create_algorithm_attributes(
-                        algorithm_name,
-                        algorithm_param,
-                        baseline_algorithm_name,
-                        has_baseline,
-                        has_reaction_baseline,
-                        test_ids
-                    )
+                algorithm_name,
+                algorithm_param,
+                baseline_algorithm_name,
+                has_baseline,
+                has_reaction_baseline,
+                test_ids,
+            )
             # Add common parameters to algorithm specific config with some exclusions
-            algorithm_attributes.merge_detector_params(detector_params,
-                                                       ["has_baseline",
-                                                        "has_reaction_baseline",
-                                                        "baseline_class",
-                                                        "detector_configs"])
+            algorithm_attributes.merge_detector_params(
+                detector_params,
+                [
+                    "has_baseline",
+                    "has_reaction_baseline",
+                    "baseline_class",
+                    "detector_configs",
+                ],
+            )
             log.info(f"Consolidating attributes for {algorithm_name}")
             algorithms_attributes.append(algorithm_attributes)
 
@@ -244,12 +256,8 @@ class SailOn(VisualProtocol):
         # session_id for algorithm attributes
         for idx, algorithm_attributes in enumerate(algorithms_attributes):
             algorithms_attributes[idx] = self.create_algorithm_session(
-                                                            algorithm_attributes,
-                                                            domain,
-                                                            hints,
-                                                            resume_session,
-                                                            "OND"
-                                                    )
+                algorithm_attributes, domain, hints, resume_session, "OND"
+            )
 
         # Run tests for all the algorithms
         algorithm_scores = {}
@@ -262,9 +270,18 @@ class SailOn(VisualProtocol):
             if algorithm_attributes.is_reaction_baseline:
                 skip_stages.append("WorldDetection")
                 skip_stages.append("NoveltyCharacterization")
-            ond_test = ONDTest(algorithm_attributes, data_root, domain, feedback_type,
-                               self.harness, save_dir, session_id, skip_stages,
-                               use_consolidated_features, use_saved_features)
+            ond_test = ONDTest(
+                algorithm_attributes,
+                data_root,
+                domain,
+                feedback_type,
+                self.harness,
+                save_dir,
+                session_id,
+                skip_stages,
+                use_consolidated_features,
+                use_saved_features,
+            )
             test_scores = {}
             for test_id in test_ids:
                 log.info(f"Start test: {test_id}")

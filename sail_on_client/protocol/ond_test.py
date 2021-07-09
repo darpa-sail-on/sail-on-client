@@ -7,7 +7,11 @@ from itertools import count
 from typing import Union, Tuple, Dict, Any, List
 import ubelt as ub
 
-from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes, InitializeParams, NoveltyCharacterizationParams
+from sail_on_client.protocol.ond_dataclasses import (
+    AlgorithmAttributes,
+    InitializeParams,
+    NoveltyCharacterizationParams,
+)
 from sail_on_client.protocol.ond_round import ONDRound
 from sail_on_client.protocol.visual_test import VisualTest
 from sail_on_client.feedback import create_feedback_instance, feedback_type
@@ -25,17 +29,18 @@ class ONDTest(VisualTest):
     """Class Representing OND test."""
 
     def __init__(
-            self,
-            algorithm_attributes: AlgorithmAttributes,
-            data_root: str,
-            domain: str,
-            feedback_type: str,
-            harness: Union[LocalInterface, ParInterface],
-            save_dir: str,
-            session_id: str,
-            skip_stages: List[str],
-            use_consolidated_features: bool,
-            use_saved_features: bool) -> None:
+        self,
+        algorithm_attributes: AlgorithmAttributes,
+        data_root: str,
+        domain: str,
+        feedback_type: str,
+        harness: Union[LocalInterface, ParInterface],
+        save_dir: str,
+        session_id: str,
+        skip_stages: List[str],
+        use_consolidated_features: bool,
+        use_saved_features: bool,
+    ) -> None:
         """
         Constructor for test for OND.
 
@@ -54,15 +59,17 @@ class ONDTest(VisualTest):
         Returns:
             None
         """
-        super().__init__(algorithm_attributes,
-                         data_root,
-                         domain,
-                         harness,
-                         save_dir,
-                         session_id,
-                         skip_stages,
-                         use_consolidated_features,
-                         use_saved_features)
+        super().__init__(
+            algorithm_attributes,
+            data_root,
+            domain,
+            harness,
+            save_dir,
+            session_id,
+            skip_stages,
+            use_consolidated_features,
+            use_saved_features,
+        )
         self.feedback_type = feedback_type
 
     @skip_stage("CreateFeedbackInstance")
@@ -79,27 +86,27 @@ class ONDTest(VisualTest):
         algorithm_parameters = self.algorithm_attributes.parameters
         feedback_params = algorithm_parameters["feedback_params"]
         log.info("Creating Feedback object")
-        feedback_params.update({
+        feedback_params.update(
+            {
                 "interface": self.harness,
                 "session_id": self.session_id,
                 "test_id": test_id,
-                "feedback_type": self.feedback_type
-                })
-        feedback_instance = create_feedback_instance(
-            self.domain, feedback_params
+                "feedback_type": self.feedback_type,
+            }
         )
+        feedback_instance = create_feedback_instance(self.domain, feedback_params)
         return feedback_instance
 
     @skip_stage("NoveltyCharacterization")
-    def _run_novelty_characterization(self,
-                                      algorithm: Any,
-                                      nc_params, test_id) -> None:
-        characterization_results = algorithm.execute(nc_params.get_toolset(),
-                                                     "NoveltyCharacterization")
+    def _run_novelty_characterization(self, algorithm: Any, nc_params, test_id) -> None:
+        characterization_results = algorithm.execute(
+            nc_params.get_toolset(), "NoveltyCharacterization"
+        )
         if characterization_results:
             if isinstance(characterization_results, dict):
-                self.harness.post_results(characterization_results,
-                                          test_id, 0, self.session_id)
+                self.harness.post_results(
+                    characterization_results, test_id, 0, self.session_id
+                )
             else:
                 results = {"characterization": characterization_results}
                 self.harness.post_results(results, test_id, 0, self.session_id)
@@ -116,9 +123,7 @@ class ONDTest(VisualTest):
         Returns:
             Score for the test
         """
-        metadata = self.harness.get_test_metadata(
-            self.session_id, test_id
-        )
+        metadata = self.harness.get_test_metadata(self.session_id, test_id)
         redlight_instance = metadata.get("red_light", "")
         # Initialize feedback object for the domains
         feedback_instance = self._create_feedback_instance(test_id)
@@ -126,19 +131,26 @@ class ONDTest(VisualTest):
         # Initialize algorithm
         algorithm_instance = self.algorithm_attributes.instance
         algorithm_parameters = self.algorithm_attributes.parameters
-        algorithm_init_params = InitializeParams(algorithm_parameters,
-                                                 self.session_id,
-                                                 test_id,
-                                                 feedback_instance)
+        algorithm_init_params = InitializeParams(
+            algorithm_parameters, self.session_id, test_id, feedback_instance
+        )
         algorithm_instance.execute(algorithm_init_params.get_toolset(), "Initialize")
 
         # Restore features
         features_dict, logit_dict = self._restore_features(test_id)
 
         # Initialize Round
-        round_instance = ONDRound(algorithm_instance, self.data_root, features_dict,
-                                  self.harness, logit_dict, redlight_instance,
-                                  self.session_id, self.skip_stages, test_id)
+        round_instance = ONDRound(
+            algorithm_instance,
+            self.data_root,
+            features_dict,
+            self.harness,
+            logit_dict,
+            redlight_instance,
+            self.session_id,
+            self.skip_stages,
+            test_id,
+        )
         aggregated_features_dict: Dict = {}
         aggregated_logit_dict: Dict = {}
         test_score = {}
@@ -158,10 +170,12 @@ class ONDTest(VisualTest):
             test_instances.extend(ONDRound.get_instance_ids(dataset))
             if round_score:
                 test_score[f"Round {round_id}"] = round_score
-            aggregated_features_dict, aggregated_logit_dict = \
-                    self._aggregate_features_across_round(round_instance,
-                                                          aggregated_features_dict,
-                                                          aggregated_logit_dict)
+            (
+                aggregated_features_dict,
+                aggregated_logit_dict,
+            ) = self._aggregate_features_across_round(
+                round_instance, aggregated_features_dict, aggregated_logit_dict
+            )
             # cleanup the dataset file for the round
             safe_remove(dataset)
             log.info(f"Round complete: {round_id}")

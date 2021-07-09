@@ -128,9 +128,9 @@ def harness_instance():
     gt_config = os.path.join(gt_dir, "activity_recognition.json")
     with TemporaryDirectory() as config_folder:
         dummy_config = {
-                "data_dir": f"{data_dir}",
-                "gt_dir": f"{gt_dir}",
-                "gt_config": f"{gt_config}"
+            "data_dir": f"{data_dir}",
+            "gt_dir": f"{gt_dir}",
+            "gt_config": f"{gt_config}",
         }
         config_name = "test_ond_config.json"
         json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
@@ -143,7 +143,11 @@ def algorithm_instance():
     """Fixture for creating a config for algorithm."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    return PreComputedDetector({"cache_dir": cache_dir,
-                                "algorithm_name": "PreComputedDetector",
-                                "round_size": 32,
-                                "has_roundwise_file": False})
+    return PreComputedDetector(
+        {
+            "cache_dir": cache_dir,
+            "algorithm_name": "PreComputedDetector",
+            "round_size": 32,
+            "has_roundwise_file": False,
+        }
+    )

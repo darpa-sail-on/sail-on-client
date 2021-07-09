@@ -4,8 +4,8 @@ import logging
 from typing import List, Any, Tuple, Dict, Union
 
 from sail_on_client.protocol.visual_dataclasses import (
-        FeatureExtractionParams,
-        WorldChangeDetectionParams,
+    FeatureExtractionParams,
+    WorldChangeDetectionParams,
 )
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
@@ -20,16 +20,17 @@ class VisualRound:
     """Class with common elements for visual protocols."""
 
     def __init__(
-            self,
-            algorithm: Any,
-            data_root: str,
-            features_dict: Dict,
-            harness: Union[LocalInterface, ParInterface],
-            logit_dict: Dict,
-            redlight_instance: str,
-            session_id: str,
-            skip_stages: List[str],
-            test_id: str) -> None:
+        self,
+        algorithm: Any,
+        data_root: str,
+        features_dict: Dict,
+        harness: Union[LocalInterface, ParInterface],
+        logit_dict: Dict,
+        redlight_instance: str,
+        session_id: str,
+        skip_stages: List[str],
+        test_id: str,
+    ) -> None:
         """
         Construct VisualRound.
 
@@ -75,9 +76,8 @@ class VisualRound:
 
     @skip_stage("FeatureExtraction", ({}, {}))
     def _run_feature_extraction(
-            self,
-            fe_params: FeatureExtractionParams,
-            instance_ids: List[str]) -> Tuple[Dict, Dict]:
+        self, fe_params: FeatureExtractionParams, instance_ids: List[str]
+    ) -> Tuple[Dict, Dict]:
         """
         Private helper function for running feature extraction.
 
@@ -95,17 +95,16 @@ class VisualRound:
                 rlogit_dict[instance_id] = self.logit_dict[instance_id]
         else:
             fe_toolset = fe_params.get_toolset()
-            rfeature_dict, rlogit_dict = self.algorithm.execute(fe_toolset,
-                                                                "FeatureExtraction")
+            rfeature_dict, rlogit_dict = self.algorithm.execute(
+                fe_toolset, "FeatureExtraction"
+            )
         self.rfeature_dict, self.rlogit_dict = rfeature_dict, rlogit_dict
         return rfeature_dict, rlogit_dict
 
     @skip_stage("WorldDetection")
     def _run_world_change_detection(
-            self,
-            wcd_params: WorldChangeDetectionParams,
-            round_id: int,
-            ) -> None:
+        self, wcd_params: WorldChangeDetectionParams, round_id: int,
+    ) -> None:
         """
         Private helper function for detecting that the world has changed.
 
@@ -116,8 +115,8 @@ class VisualRound:
         Returns:
             None
         """
-        wd_result = self.algorithm.execute(wcd_params.get_toolset(),
-                                           "WorldDetection")
-        self.harness.post_results({"detection": wd_result}, self.test_id, round_id,
-                                  self.session_id)
+        wd_result = self.algorithm.execute(wcd_params.get_toolset(), "WorldDetection")
+        self.harness.post_results(
+            {"detection": wd_result}, self.test_id, round_id, self.session_id
+        )
         safe_remove(wd_result)

@@ -6,9 +6,9 @@ import uuid
 from sail_on_client import __version__
 from sail_on_client.mock import MockDetector
 from sail_on_client.protocol.condda_dataclasses import (
-        AlgorithmAttributes,
-        InitializeParams,
-        NoveltyCharacterizationParams
+    AlgorithmAttributes,
+    InitializeParams,
+    NoveltyCharacterizationParams,
 )
 
 
@@ -39,11 +39,7 @@ def initialize_params():
 @pytest.fixture(scope="function")
 def novelty_characterization_params():
     """Fixture for providing parameters for initialize NoveltyCharacterizationParams."""
-    return {
-        "features_dict": {},
-        "logit_dict": {},
-        "round_id": 0
-    }
+    return {"features_dict": {}, "logit_dict": {}, "round_id": 0}
 
 
 def test_algorithm_attributes_initialize(algorithm_attributes_params):
@@ -103,8 +99,9 @@ def test_algorithm_attributes_merge_detector_params(algorithm_attributes_params)
     assert algorithm_attributes.parameters == {"param1": "foo", "param2": "bar"}
     algorithm_attributes.merge_detector_params({"param1": "bar"})
     assert algorithm_attributes.parameters == {"param1": "bar", "param2": "bar"}
-    algorithm_attributes.merge_detector_params({"param1": "foo", "param2": "foo"},
-                                               exclude_keys=["param2"])
+    algorithm_attributes.merge_detector_params(
+        {"param1": "foo", "param2": "foo"}, exclude_keys=["param2"]
+    )
     assert algorithm_attributes.parameters == {"param1": "foo", "param2": "bar"}
 
 
@@ -132,11 +129,13 @@ def test_initialize_params_get_toolset(initialize_params):
         None
     """
     init_params = InitializeParams(**initialize_params)
-    assert init_params.get_toolset() == {"param1": "foo",
-                                         "param2": "bar",
-                                         "session_id": initialize_params["session_id"],
-                                         "test_id": "CONDDA.9.90001.2100554",
-                                         "test_type": ""}
+    assert init_params.get_toolset() == {
+        "param1": "foo",
+        "param2": "bar",
+        "session_id": initialize_params["session_id"],
+        "test_id": "CONDDA.9.90001.2100554",
+        "test_type": "",
+    }
 
 
 def test_novelty_characterization_initialize(novelty_characterization_params):
@@ -164,7 +163,7 @@ def test_novelty_characterization_params_get_toolset(novelty_characterization_pa
     """
     nc_params = NoveltyCharacterizationParams(**novelty_characterization_params)
     assert nc_params.get_toolset() == {
-            "features_dict": {},
-            "logit_dict": {},
-            "round_id": 0
-            }
+        "features_dict": {},
+        "logit_dict": {},
+        "round_id": 0,
+    }

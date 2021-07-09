@@ -16,6 +16,7 @@ def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
     Returns:
         Decorated function call
     """
+
     def skip_stage_decorator(stage_fn: Callable) -> Callable:
         """
         Wrapper to capturing the stage function
@@ -26,6 +27,7 @@ def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
         Returns:
             Wrapped function
         """
+
         @functools.wraps(stage_fn)
         def skip_stage_fn(self, *args, **kwargs):
             if hasattr(self, "skip_stages"):
@@ -37,5 +39,7 @@ def skip_stage(stage_name: str, skip_return: Any = None) -> Callable:
                 return skip_return
             else:
                 return stage_fn(self, *args, **kwargs)
+
         return skip_stage_fn
+
     return skip_stage_decorator

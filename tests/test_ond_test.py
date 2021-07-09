@@ -14,9 +14,15 @@ FEEDBACK_TYPE = "classification"
 ALGORITHM_NAME = "PreComputedDetector"
 
 
-def create_algorithm_attribute(algorithm_name, instance, is_baseline,
-                               is_reaction_baseline,
-                               parameters, session_id, test_ids):
+def create_algorithm_attribute(
+    algorithm_name,
+    instance,
+    is_baseline,
+    is_reaction_baseline,
+    parameters,
+    session_id,
+    test_ids,
+):
     """
     Helper function to create algorithm attributes
 
@@ -32,15 +38,17 @@ def create_algorithm_attribute(algorithm_name, instance, is_baseline,
     Returns:
         An instance of AlgorithmAttributes
     """
-    return AlgorithmAttributes(algorithm_name,
-                               0.5,
-                               instance,
-                               is_baseline,
-                               is_reaction_baseline,
-                               "sail-on-client",
-                               parameters,
-                               session_id,
-                               test_ids)
+    return AlgorithmAttributes(
+        algorithm_name,
+        0.5,
+        instance,
+        is_baseline,
+        is_reaction_baseline,
+        "sail-on-client",
+        parameters,
+        session_id,
+        test_ids,
+    )
 
 
 def create_temp_features(save_dir, test_id):
@@ -54,8 +62,10 @@ def create_temp_features(save_dir, test_id):
         temporary directory where features are stored
     """
     data_dir = os.path.join(os.path.dirname(__file__), "data", PROTOCOL, DOMAIN)
-    instance_ids = map(lambda x: x.strip(),
-                       open(os.path.join(data_dir, f"{test_id}.csv"), "r").readlines())
+    instance_ids = map(
+        lambda x: x.strip(),
+        open(os.path.join(data_dir, f"{test_id}.csv"), "r").readlines(),
+    )
     pkl_path = os.path.join(save_dir, f"{ALGORITHM_NAME}_features.pkl")
     features = {"features_dict": {}, "logit_dict": {}}
     for instance_id in instance_ids:
@@ -77,22 +87,30 @@ def test_initialize(harness_instance, algorithm_instance):
         None
     """
     test_ids = ["OND.10.90001.2100554"]
-    algorithm_attribute = create_algorithm_attribute(ALGORITHM_NAME,
-                                                     algorithm_instance,
-                                                     False,
-                                                     False,
-                                                     {},
-                                                     "",
-                                                     test_ids)
-    session_id = harness_instance.session_request(test_ids,
-                                                  PROTOCOL,
-                                                  DOMAIN,
-                                                  algorithm_attribute.named_version(),
-                                                  [],
-                                                  algorithm_attribute.detection_threshold)
+    algorithm_attribute = create_algorithm_attribute(
+        ALGORITHM_NAME, algorithm_instance, False, False, {}, "", test_ids
+    )
+    session_id = harness_instance.session_request(
+        test_ids,
+        PROTOCOL,
+        DOMAIN,
+        algorithm_attribute.named_version(),
+        [],
+        algorithm_attribute.detection_threshold,
+    )
     algorithm_attribute.session_id = session_id
-    ONDTest(algorithm_attribute, "", DOMAIN, FEEDBACK_TYPE,
-            harness_instance, "", session_id, [], False, False)
+    ONDTest(
+        algorithm_attribute,
+        "",
+        DOMAIN,
+        FEEDBACK_TYPE,
+        harness_instance,
+        "",
+        session_id,
+        [],
+        False,
+        False,
+    )
 
 
 def test_call(harness_instance, algorithm_instance):
@@ -108,23 +126,36 @@ def test_call(harness_instance, algorithm_instance):
     """
     test_ids = ["OND.10.90001.2100554"]
     feedback_params = {"first_budget": 4, "income_per_batch": 4, "maximum_budget": 4}
-    algorithm_attribute = create_algorithm_attribute(ALGORITHM_NAME,
-                                                     algorithm_instance,
-                                                     False,
-                                                     False,
-                                                     {"feedback_params": feedback_params},
-                                                     "",
-                                                     test_ids)
-    session_id = harness_instance.session_request(test_ids,
-                                                  PROTOCOL,
-                                                  DOMAIN,
-                                                  algorithm_attribute.named_version(),
-                                                  [],
-                                                  algorithm_attribute.detection_threshold)
+    algorithm_attribute = create_algorithm_attribute(
+        ALGORITHM_NAME,
+        algorithm_instance,
+        False,
+        False,
+        {"feedback_params": feedback_params},
+        "",
+        test_ids,
+    )
+    session_id = harness_instance.session_request(
+        test_ids,
+        PROTOCOL,
+        DOMAIN,
+        algorithm_attribute.named_version(),
+        [],
+        algorithm_attribute.detection_threshold,
+    )
     algorithm_attribute.session_id = session_id
-    ond_test = ONDTest(algorithm_attribute, "", DOMAIN,
-                       "classification", harness_instance, "",
-                       session_id, [], False, False)
+    ond_test = ONDTest(
+        algorithm_attribute,
+        "",
+        DOMAIN,
+        "classification",
+        harness_instance,
+        "",
+        session_id,
+        [],
+        False,
+        False,
+    )
     ond_test(test_ids[0])
 
 
@@ -141,23 +172,36 @@ def test_call_with_features(harness_instance, algorithm_instance):
     """
     test_ids = ["OND.10.90001.2100554"]
     feedback_params = {"first_budget": 4, "income_per_batch": 4, "maximum_budget": 4}
-    algorithm_attribute = create_algorithm_attribute(ALGORITHM_NAME,
-                                                     algorithm_instance,
-                                                     False,
-                                                     False,
-                                                     {"feedback_params": feedback_params},
-                                                     "",
-                                                     test_ids)
-    session_id = harness_instance.session_request(test_ids,
-                                                  PROTOCOL,
-                                                  DOMAIN,
-                                                  algorithm_attribute.named_version(),
-                                                  [],
-                                                  algorithm_attribute.detection_threshold)
+    algorithm_attribute = create_algorithm_attribute(
+        ALGORITHM_NAME,
+        algorithm_instance,
+        False,
+        False,
+        {"feedback_params": feedback_params},
+        "",
+        test_ids,
+    )
+    session_id = harness_instance.session_request(
+        test_ids,
+        PROTOCOL,
+        DOMAIN,
+        algorithm_attribute.named_version(),
+        [],
+        algorithm_attribute.detection_threshold,
+    )
     with TemporaryDirectory() as tempdirectory:
         create_temp_features(tempdirectory, test_ids[0])
         algorithm_attribute.session_id = session_id
-        ond_test = ONDTest(algorithm_attribute, "", DOMAIN,
-                           FEEDBACK_TYPE, harness_instance, tempdirectory,
-                           session_id, [], True, True)
+        ond_test = ONDTest(
+            algorithm_attribute,
+            "",
+            DOMAIN,
+            FEEDBACK_TYPE,
+            harness_instance,
+            tempdirectory,
+            session_id,
+            [],
+            True,
+            True,
+        )
         ond_test(test_ids[0])

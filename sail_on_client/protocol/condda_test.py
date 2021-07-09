@@ -4,7 +4,10 @@ import logging
 from itertools import count
 from typing import Union, Dict, List
 
-from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes, InitializeParams
+from sail_on_client.protocol.condda_dataclasses import (
+    AlgorithmAttributes,
+    InitializeParams,
+)
 from sail_on_client.protocol.visual_test import VisualTest
 from sail_on_client.protocol.condda_round import CONDDARound
 from sail_on_client.protocol.parinterface import ParInterface
@@ -20,16 +23,17 @@ class CONDDATest(VisualTest):
     """Class representing CONDDA Test."""
 
     def __init__(
-            self,
-            algorithm_attributes: AlgorithmAttributes,
-            data_root: str,
-            domain: str,
-            harness: Union[LocalInterface, ParInterface],
-            save_dir: str,
-            session_id: str,
-            skip_stages: List[str],
-            use_consolidated_features: bool,
-            use_saved_features: bool) -> None:
+        self,
+        algorithm_attributes: AlgorithmAttributes,
+        data_root: str,
+        domain: str,
+        harness: Union[LocalInterface, ParInterface],
+        save_dir: str,
+        session_id: str,
+        skip_stages: List[str],
+        use_consolidated_features: bool,
+        use_saved_features: bool,
+    ) -> None:
         """
         Construct test for CONDDA.
 
@@ -47,15 +51,17 @@ class CONDDATest(VisualTest):
         Returns:
             None
         """
-        super().__init__(algorithm_attributes,
-                         data_root,
-                         domain,
-                         harness,
-                         save_dir,
-                         session_id,
-                         skip_stages,
-                         use_consolidated_features,
-                         use_saved_features)
+        super().__init__(
+            algorithm_attributes,
+            data_root,
+            domain,
+            harness,
+            save_dir,
+            session_id,
+            skip_stages,
+            use_consolidated_features,
+            use_saved_features,
+        )
 
     def __call__(self, test_id: str) -> None:
         """
@@ -67,25 +73,31 @@ class CONDDATest(VisualTest):
         Returns:
             Score for the test
         """
-        metadata = self.harness.get_test_metadata(
-            self.session_id, test_id
-        )
+        metadata = self.harness.get_test_metadata(self.session_id, test_id)
         redlight_instance = metadata.get("red_light", "")
         # Initialize algorithm
         algorithm_instance = self.algorithm_attributes.instance
         algorithm_parameters = self.algorithm_attributes.parameters
-        algorithm_init_params = InitializeParams(algorithm_parameters,
-                                                 self.session_id,
-                                                 test_id)
+        algorithm_init_params = InitializeParams(
+            algorithm_parameters, self.session_id, test_id
+        )
         algorithm_instance.execute(algorithm_init_params.get_toolset(), "Initialize")
 
         # Restore features
         features_dict, logit_dict = self._restore_features(test_id)
 
         # Initialize Round
-        round_instance = CONDDARound(algorithm_instance, self.data_root, features_dict,
-                                     self.harness, logit_dict, redlight_instance,
-                                     self.session_id, self.skip_stages, test_id)
+        round_instance = CONDDARound(
+            algorithm_instance,
+            self.data_root,
+            features_dict,
+            self.harness,
+            logit_dict,
+            redlight_instance,
+            self.session_id,
+            self.skip_stages,
+            test_id,
+        )
         aggregated_features_dict: Dict = {}
         aggregated_logit_dict: Dict = {}
         # Run algorithm for multiple rounds
@@ -100,10 +112,12 @@ class CONDDATest(VisualTest):
                 # no more rounds available, this test is done.
                 break
             round_instance(dataset, round_id)
-            aggregated_features_dict, aggregated_logit_dict = \
-                    self._aggregate_features_across_round(round_instance,
-                                                          aggregated_features_dict,
-                                                          aggregated_logit_dict)
+            (
+                aggregated_features_dict,
+                aggregated_logit_dict,
+            ) = self._aggregate_features_across_round(
+                round_instance, aggregated_features_dict, aggregated_logit_dict
+            )
             # cleanup the dataset file for the round
             safe_remove(dataset)
             log.info(f"Round complete: {round_id}")

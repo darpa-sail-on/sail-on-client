@@ -4,9 +4,15 @@ from dataclasses import dataclass
 import logging
 from typing import Dict, List, Any, Union
 from sail_on_client.utils.utils import merge_dictionaries
-from sail_on_client.feedback.image_classification_feedback import ImageClassificationFeedback
-from sail_on_client.feedback.document_transcription_feedback import DocumentTranscriptionFeedback
-from sail_on_client.feedback.activity_recognition_feedback import ActivityRecognitionFeedback
+from sail_on_client.feedback.image_classification_feedback import (
+    ImageClassificationFeedback,
+)
+from sail_on_client.feedback.document_transcription_feedback import (
+    DocumentTranscriptionFeedback,
+)
+from sail_on_client.feedback.activity_recognition_feedback import (
+    ActivityRecognitionFeedback,
+)
 
 try:
     from importlib.metadata import version, PackageNotFoundError
@@ -44,7 +50,9 @@ class AlgorithmAttributes:
                 log.warn("No package_name provided. Using 0.0.1 as stand in.")
                 version_number = "0.0.1"
         except PackageNotFoundError:
-            log.warn("Failed to detect the version of the algorithm. Using 0.0.1 as stand in.")
+            log.warn(
+                "Failed to detect the version of the algorithm. Using 0.0.1 as stand in."
+            )
             version_number = "0.0.1"
         return f"{self.name}-{version_number}"
 
@@ -62,7 +70,9 @@ class AlgorithmAttributes:
         ftest_set = set(finished_tests)
         self.test_ids = list(test_set ^ ftest_set)
 
-    def merge_detector_params(self, detector_params: Dict, exclude_keys: List=[]) -> None:
+    def merge_detector_params(
+        self, detector_params: Dict, exclude_keys: List = []
+    ) -> None:
         """
         Merge common parameters with algorithm specific parameters with exclusions.
 
@@ -73,7 +83,9 @@ class AlgorithmAttributes:
         Returns:
             None
         """
-        self.parameters = merge_dictionaries(self.parameters, detector_params, exclude_keys)
+        self.parameters = merge_dictionaries(
+            self.parameters, detector_params, exclude_keys
+        )
 
 
 @dataclass
@@ -83,10 +95,12 @@ class InitializeParams:
     parameters: Dict
     session_id: str
     test_id: str
-    feedback_instance: Union[ImageClassificationFeedback,
-                             DocumentTranscriptionFeedback,
-                             ActivityRecognitionFeedback,
-                             None]
+    feedback_instance: Union[
+        ImageClassificationFeedback,
+        DocumentTranscriptionFeedback,
+        ActivityRecognitionFeedback,
+        None,
+    ]
 
     def get_toolset(self) -> Dict:
         """
@@ -147,6 +161,7 @@ class NoveltyAdaptationParams:
 @dataclass
 class NoveltyCharacterizationParams:
     """Class for storing parameters associated novelty characterization with an algorithm."""
+
     dataset_ids: List[str]
 
     def get_toolset(self) -> Dict:
@@ -156,6 +171,4 @@ class NoveltyCharacterizationParams:
         Returns
             A dictionary with data associated with the class
         """
-        return {
-            "dataset_ids": self.dataset_ids
-        }
+        return {"dataset_ids": self.dataset_ids}

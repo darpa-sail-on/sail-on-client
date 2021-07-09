@@ -4,12 +4,12 @@ import logging
 from typing import List, Any, Tuple, Dict, Union
 
 from sail_on_client.protocol.ond_dataclasses import (
-        NoveltyClassificationParams,
-        NoveltyAdaptationParams,
+    NoveltyClassificationParams,
+    NoveltyAdaptationParams,
 )
 from sail_on_client.protocol.visual_dataclasses import (
-        FeatureExtractionParams,
-        WorldChangeDetectionParams,
+    FeatureExtractionParams,
+    WorldChangeDetectionParams,
 )
 from sail_on_client.protocol.visual_round import VisualRound
 from sail_on_client.protocol.parinterface import ParInterface
@@ -25,16 +25,17 @@ class ONDRound(VisualRound):
     """Class Representing a round in OND."""
 
     def __init__(
-                self,
-                algorithm: Any,
-                data_root: str,
-                features_dict: Dict,
-                harness: Union[LocalInterface, ParInterface],
-                logit_dict: Dict,
-                redlight_instance: str,
-                session_id: str,
-                skip_stages: List[str],
-                test_id: str) -> None:
+        self,
+        algorithm: Any,
+        data_root: str,
+        features_dict: Dict,
+        harness: Union[LocalInterface, ParInterface],
+        logit_dict: Dict,
+        redlight_instance: str,
+        session_id: str,
+        skip_stages: List[str],
+        test_id: str,
+    ) -> None:
         """
         Construct round for OND.
 
@@ -52,14 +53,22 @@ class ONDRound(VisualRound):
         Returns:
             None
         """
-        super().__init__(algorithm, data_root, features_dict, harness, logit_dict,
-                         redlight_instance, session_id, skip_stages, test_id)
+        super().__init__(
+            algorithm,
+            data_root,
+            features_dict,
+            harness,
+            logit_dict,
+            redlight_instance,
+            session_id,
+            skip_stages,
+            test_id,
+        )
 
     @skip_stage("NoveltyClassification")
     def _run_novelty_classification(
-            self,
-            nc_params: NoveltyClassificationParams,
-            round_id: int) -> None:
+        self, nc_params: NoveltyClassificationParams, round_id: int
+    ) -> None:
         """
         Private helper function for novelty classification.
 
@@ -70,10 +79,12 @@ class ONDRound(VisualRound):
         Returns:
             None
         """
-        ncl_result = self.algorithm.execute(nc_params.get_toolset(),
-                                            "NoveltyClassification")
-        self.harness.post_results({"classification": ncl_result}, self.test_id,
-                                  round_id, self.session_id)
+        ncl_result = self.algorithm.execute(
+            nc_params.get_toolset(), "NoveltyClassification"
+        )
+        self.harness.post_results(
+            {"classification": ncl_result}, self.test_id, round_id, self.session_id
+        )
         safe_remove(ncl_result)
 
     @skip_stage("EvaluateRoundwise")
@@ -90,9 +101,7 @@ class ONDRound(VisualRound):
         return self.harness.evaluate_round_wise(self.test_id, round_id, self.session_id)
 
     @skip_stage("NoveltyAdaptation")
-    def _run_novelty_adaptation(
-            self,
-            na_params: NoveltyAdaptationParams) -> None:
+    def _run_novelty_adaptation(self, na_params: NoveltyAdaptationParams) -> None:
         """
         Private helper function for adaptation.
 
@@ -104,10 +113,7 @@ class ONDRound(VisualRound):
         """
         return self.algorithm.execute(na_params.get_toolset(), "NoveltyAdaption")
 
-    def __call__(
-            self,
-            dataset: str,
-            round_id: int) -> Union[Dict, None]:
+    def __call__(self, dataset: str, round_id: int) -> Union[Dict, None]:
         """
         Core logic for running round in OND.
 
@@ -120,13 +126,13 @@ class ONDRound(VisualRound):
             Score for the round
         """
         # Run feature extraction
-        fe_params = FeatureExtractionParams(dataset,
-                                            self.data_root,
-                                            self.redlight_instance,
-                                            round_id)
+        fe_params = FeatureExtractionParams(
+            dataset, self.data_root, self.redlight_instance, round_id
+        )
         instance_ids = ONDRound.get_instance_ids(dataset)
-        rfeature_dict, rlogit_dict = self._run_feature_extraction(fe_params,
-                                                                  instance_ids)
+        rfeature_dict, rlogit_dict = self._run_feature_extraction(
+            fe_params, instance_ids
+        )
         # Run World Change Detection
         wc_params = WorldChangeDetectionParams(rfeature_dict, rlogit_dict, round_id)
         self._run_world_change_detection(wc_params, round_id)

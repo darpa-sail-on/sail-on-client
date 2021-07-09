@@ -10,8 +10,12 @@ from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.protocol.visual_round import VisualRound
 from sail_on_client.utils.decorators import skip_stage
-from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes as ONDAlgorithmAttributes
-from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes as CONDDAAlgorithmAttributes
+from sail_on_client.protocol.ond_dataclasses import (
+    AlgorithmAttributes as ONDAlgorithmAttributes,
+)
+from sail_on_client.protocol.condda_dataclasses import (
+    AlgorithmAttributes as CONDDAAlgorithmAttributes,
+)
 
 
 log = logging.getLogger(__name__)
@@ -21,16 +25,17 @@ class VisualTest:
     """Class representing test in visual protocol."""
 
     def __init__(
-            self,
-            algorithm_attributes: Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes],
-            data_root: str,
-            domain: str,
-            harness: Union[LocalInterface, ParInterface],
-            save_dir: str,
-            session_id: str,
-            skip_stages: List[str],
-            use_consolidated_features: bool,
-            use_saved_features: bool) -> None:
+        self,
+        algorithm_attributes: Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes],
+        data_root: str,
+        domain: str,
+        harness: Union[LocalInterface, ParInterface],
+        save_dir: str,
+        session_id: str,
+        skip_stages: List[str],
+        use_consolidated_features: bool,
+        use_saved_features: bool,
+    ) -> None:
         """
         Construct visual test.
 
@@ -59,9 +64,7 @@ class VisualTest:
         self.use_consolidated_features = use_consolidated_features
         self.use_saved_features = use_saved_features
 
-    def _restore_features(
-            self,
-            test_id: str) -> Tuple[Dict, Dict]:
+    def _restore_features(self, test_id: str) -> Tuple[Dict, Dict]:
         """
         Private function to _restore_features.
 
@@ -89,10 +92,8 @@ class VisualTest:
         return features_dict, logit_dict
 
     def _aggregate_features_across_round(
-            self,
-            round_instance: VisualRound,
-            feature_dict: Dict,
-            logit_dict: Dict) -> Tuple[Dict, Dict]:
+        self, round_instance: VisualRound, feature_dict: Dict, logit_dict: Dict
+    ) -> Tuple[Dict, Dict]:
         """
         Aggregate features across multiple rounds.
 
@@ -109,10 +110,9 @@ class VisualTest:
         return feature_dict, logit_dict
 
     @skip_stage("SaveFeatures")
-    def _save_features(self,
-                       test_id: str,
-                       feature_dict: Dict,
-                       logit_dict: Dict) -> None:
+    def _save_features(
+        self, test_id: str, feature_dict: Dict, logit_dict: Dict
+    ) -> None:
         """
         Save features for a test.
 

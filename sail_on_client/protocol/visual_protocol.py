@@ -7,8 +7,12 @@ from typing import Dict, List, Any, Union
 
 from sail_on_client.protocol.parinterface import ParInterface
 from sail_on_client.protocol.localinterface import LocalInterface
-from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes as ONDAlgorithmAttributes
-from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes as CONDDAAlgorithmAttributes
+from sail_on_client.protocol.ond_dataclasses import (
+    AlgorithmAttributes as ONDAlgorithmAttributes,
+)
+from sail_on_client.protocol.condda_dataclasses import (
+    AlgorithmAttributes as CONDDAAlgorithmAttributes,
+)
 from sailon_tinker_launcher.deprecated_tinker.baseprotocol import BaseProtocol
 
 
@@ -45,12 +49,13 @@ class VisualProtocol(BaseProtocol):
             sys.exit(1)
 
     def create_algorithm_session(
-            self,
-            algorithm_attributes: Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes],
-            domain: str,
-            hints: List[str],
-            has_a_session,
-            protocol_name: str) -> Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes]:
+        self,
+        algorithm_attributes: Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes],
+        domain: str,
+        hints: List[str],
+        has_a_session,
+        protocol_name: str,
+    ) -> Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes]:
         """
         Create/resume session for an algorithm.
 

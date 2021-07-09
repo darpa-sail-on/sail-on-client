@@ -119,7 +119,9 @@ def test_initialize(precomputed_detector, precomputed_detector_with_round):
         None
     """
     precomputed_detector.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
-    precomputed_detector_with_round.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
+    precomputed_detector_with_round.execute(
+        {"test_id": "OND.10.90001.2100554"}, "Initialize"
+    )
 
 
 def test_feature_extraction(precomputed_detector):
