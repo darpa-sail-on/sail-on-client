@@ -180,7 +180,7 @@ def test_get_score_feedback(
         10, 10, 10, par_interface, session_id, test_id, protocol_constant
     )
     df_score = feedback.get_feedback(0, list(range(10)), feedback_image_ids)
-    assert df_score[1][0] == 0.1987951807228915
+    assert df_score[1][0] == 0.1987951807228916
 
 
 @pytest.mark.parametrize(

@@ -14,12 +14,21 @@ Client and Protocols for DARPA sail-on
 ## Requirements
 
 1. [Python 3.7](https://www.python.org/downloads/release/python-370/)
-2. [pipenv](https://pipenv.pypa.io/en/latest/)
+2. [Poetry >= 1.1.0](https://github.com/python-poetry/poetry)
+3. [poetry-dynamic-versioning](https://github.com/mtkennerly/poetry-dynamic-versioning)
 
 ## Installation
 
-### Installation with pipenv ( Recommended )
-1. Clone the repositories associated with different components in a working directory
+1. Install Poetry following the instructions available in the [installation page](https://python-poetry.org/docs/#installation)
+
+2. Install poetry dynamic versioning using
+    ```
+      pip install poetry-dyanmic-versioning
+    ```
+    Note: This is required before the package is built since poetry does not support plugins yet.
+    This issue would be addressed in the next minor release.
+
+3. Clone the repositories associated with different components in a working directory
     ```
       git clone https://github.com/tinker-engine/tinker-engine.git
       git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
@@ -31,110 +40,12 @@ Client and Protocols for DARPA sail-on
    Sail-On-API and sail-on-client directories in your working directory
 
 
-2. Install the different components in a virtual environment
+4. Install the different components in a virtual environment
    ```
      cd sail-on-client
-     pipenv install
-     pipenv shell
-   ```
-
-### Installation without pipenv
-The installation requires cloning and installing multiple repositories. Thus after
-following the instructions for a repository, please move back to your
-your working directory.
-
-#### Install Tinker Engine
-1. Clone the [tinker-engine](https://github.com/tinker-engine) repository
-   ```
-   git clone https://github.com/tinker-engine/tinker-engine.git
-   ```
-   This would create a directory called tinker-engine in your working directory
-
-2. Install the dependencies of the tinker-engine in a virtual environment
-   ```
-   python -m venv sail-on-client-env
-   source sail-on-client-env/bin/activate
-   cd tinker-engine
-   pip install -r requirements.txt
-   ```
-   This would create a virtual environment and activate the environment. Please
-   use this virtual environment for installing all other repositories.
-
-3. Install the tinker-engine in the virtual environment
-   ```
-   pip install -e .
-   ```
-
-#### Install Sail-On Server
-1. Clone the [sail-on-api](https://github.com/darpa-sail-on/Sail-On-API) repository
-   ```
-    git clone https://github.com/darpa-sail-on/Sail-On-API.git
-   ```
-   This would create a directory called sail-on in your working directory
-
-2. Install the dependencies for the server using
-   ```
-    cd Sail-On-API
-    pip install -r requirements.txt
-   ```
-
-3. Install the server
-   ```
-    pip install -e .
-   ```
-
-#### Install Metric Code
-1. Clone [metric](https://github.com/darpa-sail-on/Sail_On_Evaluate) repository
-   ```
-     git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
-   ```
-   This would create a directory called Sail_On_Evaluate in your working directory
-
-2. Install the dependencies using
-   ```
-     cd Sail_On_Evaluate
-     pip install -r requirements.txt
-   ```
-
-3. Install the metric repository using
-    ```
-      pip install -e .
-    ```
-
-#### Install Launcher Code
-1. Clone [sailon_tinker_launcher](https://github.com/darpa-sail-on/sailon_tinker_launcher) repository
-   ```
-     git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
-   ```
-   This would create a directory called sailon_tinker_launcher in your working directory
-
-2. Install the dependencies using
-   ```
-     cd sailon_tinker_launcher
-     pip install -r requirements.txt
-   ```
-
-3. Install the launcher repository using
-    ```
-      pip install -e .
-    ```
-
-#### Install Sail-On Client
-1. Clone the [sail-on-client](https://github.com/darpa-sail-on/sail-on-client) repository
-   ```
-    git clone https://github.com/darpa-sail-on/sail-on-client.git
-   ```
-   This would create a directory called sail-on-client in your working directory
-
-2. Go into the sail-on-client directory and install the dependencies for the client using
-   ```
-    cd sail-on-client
-    pip install -r requirements.txt
-   ```
-
-3. Install the client using
-   ```
-    pip install -e .
+     poetry install
+     poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+     poetry shell
    ```
 
 
@@ -148,13 +59,13 @@ in sail_on_client/protocol/configuration.json and skip step 1 of running the ser
 
 
 ## Semantic Versioning
-We use [python versioneer](https://github.com/python-versioneer/python-versioneer) to maintain the version for the python package and release.
+We use [poetry dynamic versioning](https://github.com/mtkennerly/poetry-dynamic-versioning) to maintain the version for the python package and release.
 It uses tag information available in git to generate a version dynamically, for more information please refer to
 [versioneer theory of operation](https://github.com/python-versioneer/python-versioneer#theory-of-operation). Please push a [semantic version](https://semver.org/)
 tag once the Pull request is approved and merged. For example, if the most recent tag on master is 0.1.0 and your branch is making minor changes
 then pushing a tag 0.2.0 would update the version for the python package.
 
-Note: Versioneer generates the versions using the most recent tag information,
+Note: Dynamic versioning generates the versions using the most recent tag information,
 thus all commits in your branch would be versioned using the following [scheme](https://github.com/python-versioneer/python-versioneer#version-string-flavors).
 
 ## Acknowledgement of Support and Disclaimer
