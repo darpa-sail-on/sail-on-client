@@ -211,6 +211,8 @@
             
               <ul>
                 
+                  <li class="toctree-l2"><a href="#visual-protocol-api" class="reference internal">Visual Protocol API</a></li>
+                
                   <li class="toctree-l2"><a href="#ond-api" class="reference internal">OND API</a></li>
                 
                   <li class="toctree-l2"><a href="#condda-api" class="reference internal">CONDDA API</a></li>
@@ -358,12 +360,481 @@
             
   <section id="protocol-api">
 <h1>Protocol API<a class="headerlink" href="#protocol-api" title="Permalink to this headline">¶</a></h1>
+<section id="visual-protocol-api">
+<h2>Visual Protocol API<a class="headerlink" href="#visual-protocol-api" title="Permalink to this headline">¶</a></h2>
+<p>Interfaces that are common across OND and CONDDA protocol</p>
+<section id="visual-protocol-dataclasses">
+<h3>Visual Protocol Dataclasses<a class="headerlink" href="#visual-protocol-dataclasses" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">FeatureExtractionParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_image</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing feature extraction parameters associated with an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">WorldChangeDetectionParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated world change in an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="visual-round">
+<h3>Visual Round<a class="headerlink" href="#visual-round" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_round.</span></span><span class="sig-name descname"><span class="pre">VisualRound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class with common elements for visual protocols.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound._run_feature_extraction">
+<span class="sig-name descname"><span class="pre">_run_feature_extraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fe_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound._run_feature_extraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private helper function for running feature extraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fe_params</strong> (<a class="reference internal" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams" title="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">FeatureExtractionParams</span></code></a>) – An instance of dataclass with parameters for feature extraction</p></li>
+<li><p><strong>instance_ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Identifiers associated with data for a round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tuple for feature and logit dictionary for a round</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound._run_world_change_detection">
+<span class="sig-name descname"><span class="pre">_run_world_change_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wcd_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound._run_world_change_detection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private helper function for detecting that the world has changed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wcd_params</strong> (<a class="reference internal" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams" title="sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">WorldChangeDetectionParams</span></code></a>) – An instance of dataclass with parameters for world change detection</p></li>
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Identifier for a round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound.get_instance_ids">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound.get_instance_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get instance ids from the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Path to text file with instances used in a round</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of instance ids from the dataset</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="visual-test">
+<h3>Visual Test<a class="headerlink" href="#visual-test" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_test.</span></span><span class="sig-name descname"><span class="pre">VisualTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class representing test in visual protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest._restore_features">
+<span class="sig-name descname"><span class="pre">_restore_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest._restore_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private function to restore features.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An identifier for the test</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tuple of dictionary with features and logits obtained from the feature extractor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest._save_features">
+<span class="sig-name descname"><span class="pre">_save_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest._save_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save features for a test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An identifier for the test</p></li>
+<li><p><strong>feature_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Features for the test</p></li>
+<li><p><strong>logit_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Logit for the test</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="visual-protocol">
+<h3>Visual Protocol<a class="headerlink" href="#visual-protocol" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_protocol.</span></span><span class="sig-name descname"><span class="pre">VisualProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Protocol for visual tasks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.get_algorithm">
+<span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a single algorithm file and instantiate the relevant object therefrom.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algotype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – (option 1) This is a string that contains either an absolute or relative path to the
+desired algorithm file. If the path is relative, then the location of
+the file is determined using the self.algorithmsbase directory and
+appending the algotype string to it to generate the absolute file path.</p></li>
+<li><p><strong>algotype</strong> – (option 2) This is a string that names a plugin that has been pip installed. This
+function will attempt to load using the plugin if a file with a matching name to
+algotype can’t be found.</p></li>
+<li><p><strong>toolset</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]) – This is a dict() containing the initialization information for the algorithm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a single instantiated object of the desired algorithm class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a protocol from a Python file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.load_from_plugin">
+<span class="sig-name descname"><span class="pre">load_from_plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.load_from_plugin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load an algorithm from a plugin.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseAlgorithm</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.run_protocol">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.run_protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the protocol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 <section id="ond-api">
 <h2>OND API<a class="headerlink" href="#ond-api" title="Permalink to this headline">¶</a></h2>
+<section id="ond-dataclasses">
+<h3>OND Dataclasses<a class="headerlink" href="#ond-dataclasses" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing attributes of algorithm present in the protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params">
+<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge common parameters with algorithm specific parameters with exclusions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>detector_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Dictionary of common parameters</p></li>
+<li><p><strong>exclude_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]) – List of keys that should be excluded in the merge</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version">
+<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute version of an algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string containing name and the version number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests">
+<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove finished tests from test_ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>finished_tests</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of tests that are complete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters that are used to initialize the algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyClassificationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated novelty classification in an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated novelty characterization with an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="ond-round">
+<h3>OND Round<a class="headerlink" href="#ond-round" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ond-test">
+<h3>OND Test<a class="headerlink" href="#ond-test" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_test.</span></span><span class="sig-name descname"><span class="pre">ONDTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class Representing OND test.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Core logic for running test in OND.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An identifier for the test</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Score for the test</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest._create_feedback_instance">
+<span class="sig-name descname"><span class="pre">_create_feedback_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest._create_feedback_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Private function for creating feedback object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An identifier for the test</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="../feedback/feedback_api.html#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback" title="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback"><code class="xref py py-class docutils literal notranslate"><span class="pre">ActivityRecognitionFeedback</span></code></a>, <a class="reference internal" href="../feedback/feedback_api.html#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback" title="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback"><code class="xref py py-class docutils literal notranslate"><span class="pre">DocumentTranscriptionFeedback</span></code></a>, <a class="reference internal" href="../feedback/feedback_api.html#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback" title="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback"><code class="xref py py-class docutils literal notranslate"><span class="pre">ImageClassificationFeedback</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An instance of feedback for the domain</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="ond-protocol">
+<h3>OND Protocol<a class="headerlink" href="#ond-protocol" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_protocol.</span></span><span class="sig-name descname"><span class="pre">SailOn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn" title="Permalink to this definition">¶</a></dt>
 <dd><p>OND protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn._evaluate_algorithms">
+<span class="sig-name descname"><span class="pre">_evaluate_algorithms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn._evaluate_algorithms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate algorithms after all tests have been submitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithms_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a>]) – All algorithms present in the config</p></li>
+<li><p><strong>algorithm_scores</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Scores for round wise evaluation</p></li>
+<li><p><strong>save_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Directory where the scores are stored</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.create_algorithm_attributes">
+<span class="sig-name descname"><span class="pre">create_algorithm_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.create_algorithm_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an instance of algorithm attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithm_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the algorithm</p></li>
+<li><p><strong>algorithm_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Parameters for the algorithm</p></li>
+<li><p><strong>baseline_algorithm_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the baseline algorithm</p></li>
+<li><p><strong>has_baseline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to check if a baseline is present in the config</p></li>
+<li><p><strong>has_reaction_baseline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to check if a reaction baseline is present in the config</p></li>
+<li><p><strong>test_ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of test</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An instance of AlgorithmAttributes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.create_algorithm_session">
+<span class="sig-name descname"><span class="pre">create_algorithm_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_a_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.create_algorithm_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create/resume session for an algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithm_attributes</strong> (<a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a>) – An instance of AlgorithmAttributes</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Domain for the algorithm</p></li>
+<li><p><strong>hints</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of hints used in the session</p></li>
+<li><p><strong>has_a_session</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Already has a session and we want to resume it</p></li>
+<li><p><strong>protocol_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An AlgorithmAttributes object with updated session id or test id</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.get_algorithm">
 <span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.get_algorithm" title="Permalink to this definition">¶</a></dt>
@@ -423,18 +894,223 @@ algotype can’t be found.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.SailOn.update_skip_stages">
+<span class="sig-name descname"><span class="pre">update_skip_stages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_feedback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.SailOn.update_skip_stages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update skip stages based on the boolean values in config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skip_stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of skip stages specified in the config</p></li>
+<li><p><strong>is_eval_enabled</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to enable evaluation</p></li>
+<li><p><strong>is_eval_roundwise_enabled</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to enable evaluation in every round</p></li>
+<li><p><strong>use_feedback</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to enable using feedback</p></li>
+<li><p><strong>save_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to enable saving features</p></li>
+<li><p><strong>feature_extraction_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to only run feature extraction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Update list of skip stages</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
+</section>
 <section id="condda-api">
 <h2>CONDDA API<a class="headerlink" href="#condda-api" title="Permalink to this headline">¶</a></h2>
+<section id="condda-dataclasses">
+<h3>CONDDA Dataclasses<a class="headerlink" href="#condda-dataclasses" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda.</span></span><span class="sig-name descname"><span class="pre">Condda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing attributes of algorithm present in the protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.merge_detector_params">
+<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge common parameters with algorithm specific parameters with exclusions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>detector_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Dictionary of common parameters</p></li>
+<li><p><strong>exclude_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]) – List of keys that should be excluded in the merge</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.named_version">
+<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute version of an algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string containing name and the version number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.remove_completed_tests">
+<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove finished tests from test_ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>finished_tests</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of tests that are complete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.InitializeParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters that are used to initialize the algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.InitializeParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated novelty characterization with an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="condda-round">
+<h3>CONDDA Round<a class="headerlink" href="#condda-round" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="condda-test">
+<h3>CONDDA Test<a class="headerlink" href="#condda-test" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="id0">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_test.</span></span><span class="sig-name descname"><span class="pre">ONDTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class Representing OND test.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Core logic for running test in OND.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – An identifier for the test</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Score for the test</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="condda-protocol">
+<h3>CONDDA Protocol<a class="headerlink" href="#condda-protocol" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_protocol.</span></span><span class="sig-name descname"><span class="pre">Condda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">discovered_plugins</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithmsdirectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda" title="Permalink to this definition">¶</a></dt>
 <dd><p>CONDDA protocol.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.get_algorithm">
-<span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.get_algorithm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.create_algorithm_attributes">
+<span class="sig-name descname"><span class="pre">create_algorithm_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.create_algorithm_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an instance of algorithm attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithm_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the algorithm</p></li>
+<li><p><strong>algorithm_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Parameters for the algorithm</p></li>
+<li><p><strong>baseline_algorithm_name</strong> – Name of the baseline algorithm</p></li>
+<li><p><strong>has_baseline</strong> – Flag to check if a baseline is present in the config</p></li>
+<li><p><strong>has_reaction_baseline</strong> – Flag to check if a reaction baseline is present in the config</p></li>
+<li><p><strong>test_ids</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of test</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An instance of AlgorithmAttributes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.create_algorithm_session">
+<span class="sig-name descname"><span class="pre">create_algorithm_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_a_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.create_algorithm_session" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create/resume session for an algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>algorithm_attributes</strong> (<a class="reference internal" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a>) – An instance of AlgorithmAttributes</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Domain for the algorithm</p></li>
+<li><p><strong>hints</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of hints used in the session</p></li>
+<li><p><strong>has_a_session</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Already has a session and we want to resume it</p></li>
+<li><p><strong>protocol_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the algorithm</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>An AlgorithmAttributes object with updated session id or test id</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.get_algorithm">
+<span class="sig-name descname"><span class="pre">get_algorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_algorithm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a single algorithm file and instantiate the relevant object therefrom.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -459,8 +1135,8 @@ algotype can’t be found.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.load_from_file">
-<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.load_from_file">
+<span class="sig-name descname"><span class="pre">load_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algofile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.load_from_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a protocol from a Python file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -470,8 +1146,8 @@ algotype can’t be found.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.load_from_plugin">
-<span class="sig-name descname"><span class="pre">load_from_plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.load_from_plugin" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.load_from_plugin">
+<span class="sig-name descname"><span class="pre">load_from_plugin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algotype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.load_from_plugin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load an algorithm from a plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -481,8 +1157,8 @@ algotype can’t be found.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.protocol.condda.Condda.run_protocol">
-<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda.Condda.run_protocol" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.run_protocol">
+<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.run_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -491,8 +1167,33 @@ algotype can’t be found.</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.update_skip_stages">
+<span class="sig-name descname"><span class="pre">update_skip_stages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.update_skip_stages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update skip stages based on the boolean values in config.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>skip_stages</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of skip stages specified in the config</p></li>
+<li><p><strong>is_eval_enabled</strong> – Flag to enable evaluation</p></li>
+<li><p><strong>is_eval_roundwise_enabled</strong> – Flag to enable evaluation in every round</p></li>
+<li><p><strong>use_feedback</strong> – Flag to enable using feedback</p></li>
+<li><p><strong>save_features</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to enable saving features</p></li>
+<li><p><strong>feature_extraction_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Flag to only run feature extraction</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Update list of skip stages</p>
+</dd>
+</dl>
 </dd></dl>
 
+</dd></dl>
+
+</section>
 </section>
 </section>
 
