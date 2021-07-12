@@ -70,7 +70,9 @@ def test_initialize(protocol_name):
     assert arm_metrics.protocol == protocol_name
 
 
-def test_m_acc(arm_metrics, detection_files, classification_file, expected_ic_m_acc_values):
+def test_m_acc(
+    arm_metrics, detection_files, classification_file, expected_ic_m_acc_values
+):
     """
     Test m_acc computation.
 
@@ -94,8 +96,12 @@ def test_m_acc(arm_metrics, detection_files, classification_file, expected_ic_m_
     assert m_acc == expected_ic_m_acc_values
 
 
-def test_m_acc_round_wise(arm_metrics, detection_files, classification_file,
-                          expected_ic_m_acc_roundwise_values):
+def test_m_acc_round_wise(
+    arm_metrics,
+    detection_files,
+    classification_file,
+    expected_ic_m_acc_roundwise_values,
+):
     """
     Test m_acc computation for a round.
 
@@ -181,6 +187,7 @@ def test_m_ndp_pre(arm_metrics, detection_files, expected_ic_m_ndp_pre_values):
     m_ndp_pre = arm_metrics.m_ndp_pre(detection[1], gt[arm_metrics.detection_id])
     assert m_ndp_pre == expected_ic_m_ndp_pre_values
 
+
 def test_m_ndp_post(arm_metrics, detection_files, expected_ic_m_ndp_post_values):
     """
     Test m_ndp_post computation.
@@ -198,8 +205,9 @@ def test_m_ndp_post(arm_metrics, detection_files, expected_ic_m_ndp_post_values)
     assert m_ndp_post == expected_ic_m_ndp_post_values
 
 
-def test_m_ndp_failed_reaction(arm_metrics, detection_files, classification_file,
-        expected_ic_m_ndp_failed_values):
+def test_m_ndp_failed_reaction(
+    arm_metrics, detection_files, classification_file, expected_ic_m_ndp_failed_values
+):
     """
     Test m_ndp_failed_reaction computation.
 
@@ -266,7 +274,11 @@ def test_is_cdt_and_is_early(arm_metrics, detection_files):
 
 
 def test_m_nrp(
-    arm_metrics, detection_files, classification_file, baseline_classification_file, expected_ic_m_nrp_values
+    arm_metrics,
+    detection_files,
+    classification_file,
+    baseline_classification_file,
+    expected_ic_m_nrp_values,
 ):
     """
     Test novelty reaction performance.

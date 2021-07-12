@@ -1,11 +1,11 @@
-"""Expected values for different metrics used activity recognition evaluation."""
+"""values for different metrics used activity recognition evaluation."""
 
 import pytest
 
 
 @pytest.fixture(scope="function")
 def expected_ar_m_acc_values():
-    """Expected Values for m_acc."""
+    """Values for m_acc."""
     return {
         "full_top1": 0.1988,
         "full_top3": 0.25602,
@@ -26,7 +26,7 @@ def expected_ar_m_acc_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_acc_roundwise_values():
-    """Expected Values for m_acc for a round."""
+    """Values for m_acc for a round."""
     return {
         "top1_accuracy_round_0": 0.1988,
         "top3_accuracy_round_0": 0.25602,
@@ -35,7 +35,7 @@ def expected_ar_m_acc_roundwise_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_num_values():
-    """Expected Values for m_num."""
+    """Values for m_num."""
     return {
         "0.175": 14,
         "0.225": 14,
@@ -51,7 +51,7 @@ def expected_ar_m_num_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_num_stats_values():
-    """Expected Values for m_num_stats."""
+    """Values for m_num_stats."""
     return {
         "GT_indx": 117,
         "P_indx_0.175": 161,
@@ -68,7 +68,7 @@ def expected_ar_m_num_stats_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_ndp_values():
-    """Expected Values for m_ndp."""
+    """Values for m_ndp."""
     return {
         "accuracy_0.175": 0.6988,
         "precision_0.175": 0.49419,
@@ -147,7 +147,7 @@ def expected_ar_m_ndp_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_ndp_pre_values():
-    """Expected Values for m_ndp_pre."""
+    """Values for m_ndp_pre."""
     return {
         "accuracy_0.175": 1.0,
         "precision_0.175": 0.0,
@@ -226,7 +226,7 @@ def expected_ar_m_ndp_pre_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_ndp_post_values():
-    """Expected Values for m_ndp_post."""
+    """Values for m_ndp_post."""
     return {
         "accuracy_0.175": 0.53704,
         "precision_0.175": 0.49419,
@@ -305,7 +305,7 @@ def expected_ar_m_ndp_post_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_ndp_failed_values():
-    """Expected Values for m_ndp_failed."""
+    """Values for m_ndp_failed."""
     return {
         "top1_accuracy_0.175": 0.65789,
         "top1_precision_0.175": 0.24348,
@@ -456,7 +456,7 @@ def expected_ar_m_ndp_failed_values():
 
 @pytest.fixture(scope="function")
 def expected_ar_m_nrp_values():
-    """Expected Values for m_nrp."""
+    """Values for m_nrp."""
     return {
         "M_nrp_post_top3": 35.490533212603395,
         "M_nrp_post_top1": 31.505808941253743,

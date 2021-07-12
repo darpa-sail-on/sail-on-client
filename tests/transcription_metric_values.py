@@ -1,11 +1,11 @@
-"""Expected values of transcription metrics."""
+"""values of transcription metrics."""
 
 import pytest
 
 
 @pytest.fixture(scope="function")
 def expected_dt_m_acc_values():
-    """Expected Values for m_acc."""
+    """Values for m_acc."""
     return {
         "full_top1": 0.76953,
         "full_top3": 0.91211,
@@ -32,7 +32,7 @@ def expected_dt_m_acc_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_num_values():
-    """Expected Values for m_num."""
+    """Values for m_num."""
     return {
         "0.175": 1,
         "0.225": 1,
@@ -48,13 +48,13 @@ def expected_dt_m_num_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_acc_roundwise_values():
-    """Expected m_acc values for a round."""
+    """m_acc values for a round."""
     return {"top1_accuracy_round_0": 0.76953, "top3_accuracy_round_0": 0.91211}
 
 
 @pytest.fixture(scope="function")
 def expected_dt_m_num_stats_values():
-    """Expected Values for m_num_stats."""
+    """Values for m_num_stats."""
     return {
         "GT_indx": 270,
         "P_indx_0.175": 1,
@@ -71,7 +71,7 @@ def expected_dt_m_num_stats_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_ndp_values():
-    """Expected Values for m_ndp."""
+    """Values for m_ndp."""
     return {
         "accuracy_0.175": 0.63086,
         "precision_0.175": 0.38889,
@@ -150,7 +150,7 @@ def expected_dt_m_ndp_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_ndp_pre_values():
-    """Expected Values for m_ndp_pre."""
+    """Values for m_ndp_pre."""
     return {
         "accuracy_0.175": 0.5316,
         "precision_0.175": 0.0,
@@ -229,7 +229,7 @@ def expected_dt_m_ndp_pre_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_ndp_post_values():
-    """Expected Values for m_ndp_post."""
+    """Values for m_ndp_post."""
     return {
         "accuracy_0.175": 0.74074,
         "precision_0.175": 0.66111,
@@ -308,7 +308,7 @@ def expected_dt_m_ndp_post_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_ndp_failed_values():
-    """Expected Values for m_ndp_failed."""
+    """Values for m_ndp_failed."""
     return {
         "top1_accuracy_0.175": 0.22034,
         "top1_precision_0.175": 0.22414,
@@ -459,5 +459,5 @@ def expected_dt_m_ndp_failed_values():
 
 @pytest.fixture(scope="function")
 def expected_dt_m_nrp_values():
-    """Expected Values for m_nrp."""
+    """Values for m_nrp."""
     return {"M_nrp_post_top3": 86.777, "M_nrp_post_top1": 76.446}

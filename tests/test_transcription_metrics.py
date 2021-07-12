@@ -70,7 +70,9 @@ def test_initialize(protocol_name):
     assert dtm_metrics.protocol == protocol_name
 
 
-def test_m_acc(dtm_metrics, detection_files, classification_file, expected_dt_m_acc_values):
+def test_m_acc(
+    dtm_metrics, detection_files, classification_file, expected_dt_m_acc_values
+):
     """
     Test m_acc computation.
 
@@ -94,8 +96,12 @@ def test_m_acc(dtm_metrics, detection_files, classification_file, expected_dt_m_
     assert m_acc == expected_dt_m_acc_values
 
 
-def test_m_acc_round_wise(dtm_metrics, detection_files, classification_file,
-                          expected_dt_m_acc_roundwise_values):
+def test_m_acc_round_wise(
+    dtm_metrics,
+    detection_files,
+    classification_file,
+    expected_dt_m_acc_roundwise_values,
+):
     """
     Test m_acc computation for a round.
 
@@ -199,8 +205,10 @@ def test_m_ndp_post(dtm_metrics, detection_files, expected_dt_m_ndp_post_values)
     m_ndp_post = dtm_metrics.m_ndp_post(detection[1], gt[dtm_metrics.novel_id])
     assert m_ndp_post == expected_dt_m_ndp_post_values
 
-def test_m_ndp_failed_reaction(dtm_metrics, detection_files, classification_file,
-        expected_dt_m_ndp_failed_values):
+
+def test_m_ndp_failed_reaction(
+    dtm_metrics, detection_files, classification_file, expected_dt_m_ndp_failed_values
+):
     """
     Test m_ndp_failed_reaction computation.
 
@@ -262,8 +270,11 @@ def test_is_cdt_and_is_early(dtm_metrics, detection_files):
 
 
 def test_m_nrp(
-    dtm_metrics, detection_files, classification_file, baseline_classification_file,
-    expected_dt_m_nrp_values
+    dtm_metrics,
+    detection_files,
+    classification_file,
+    baseline_classification_file,
+    expected_dt_m_nrp_values,
 ):
     """
     Test novelty reaction performance.
