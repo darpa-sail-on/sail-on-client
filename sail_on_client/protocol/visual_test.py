@@ -66,7 +66,7 @@ class VisualTest:
 
     def _restore_features(self, test_id: str) -> Tuple[Dict, Dict]:
         """
-        Private function to _restore_features.
+        Private function to restore features.
 
         Args:
            test_id: An identifier for the test
