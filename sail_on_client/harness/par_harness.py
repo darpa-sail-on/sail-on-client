@@ -7,7 +7,7 @@ import os
 import traceback
 import logging
 
-from sail_on_client.protocol.test_and_evaluation_harness import TestAndEvaluationHarness
+from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
 from typing import Any, Dict, Union, List
 from requests import Response
 from sail_on_client.errors import ApiError, RoundError
