@@ -1,4 +1,4 @@
-"""Client implementation for Par interface."""
+"""Implementation of T&E Harness for PAR Server."""
 
 import requests
 import json
@@ -7,7 +7,7 @@ import os
 import traceback
 import logging
 
-from sailon_tinker_launcher.deprecated_tinker.harness import Harness
+from sail_on_client.protocol.test_and_evaluation_harness import TestAndEvaluationHarness
 from typing import Any, Dict, Union, List
 from requests import Response
 from sail_on_client.errors import ApiError, RoundError
@@ -22,24 +22,27 @@ from json import JSONDecodeError
 log = logging.getLogger(__name__)
 
 
-class ParInterface(Harness):
-    """Interface to PAR server."""
+class ParHarness(TestAndEvaluationHarness):
+    """Harness for PAR server."""
 
-    def __init__(self, configfile: str, configfolder: str) -> None:
+    def __init__(self, url, save_directory) -> None:
         """
         Initialize a client connection object.
 
         Args:
-            config_file: Name of the config file that provides parameter
-                         to the interface
-            config_folder: The directory where configfile is present
+            url: URL for the server
+            save_directory: A directory to save files
 
         Returns:
             None
         """
-        Harness.__init__(self, configfile, configfolder)
-        self.api_url = self.configuration_data["url"]
-        self.folder = configfolder
+        TestAndEvaluationHarness.__init__(self)
+        self.url = url
+        self.save_directory = save_directory
+
+    def get_config(self):
+        """JSON Compliant representation of the object."""
+        return {"url": self.url, "save_directory": self.save_directory}
 
     def _check_response(self, response: Response) -> None:
         """
@@ -101,7 +104,7 @@ class ParInterface(Harness):
             contents = f.read()
 
         response = requests.get(
-            f"{self.api_url}/test/ids",
+            f"{self.url}/test/ids",
             files={
                 "test_requirements": io.StringIO(json.dumps(payload)),
                 "test_assumptions": io.StringIO(contents),
@@ -111,7 +114,7 @@ class ParInterface(Harness):
         self._check_response(response)
 
         filename = os.path.abspath(
-            os.path.join(self.folder, f"{protocol}.{domain}.{detector_seed}.csv")
+            os.path.join(self.save_directory, f"{protocol}.{domain}.{detector_seed}.csv")
         )
         with open(filename, "w") as f:
             f.write(response.content.decode("utf-8"))
@@ -158,7 +161,7 @@ class ParInterface(Harness):
         ids = "\n".join(test_ids) + "\n"
 
         response = requests.post(
-            f"{self.api_url}/session",
+            f"{self.url}/session",
             files={"test_ids": ids, "configuration": io.StringIO(json.dumps(payload))},
         )
 
@@ -182,7 +185,7 @@ class ParInterface(Harness):
             List of tests finished in the session
         """
         params: Dict[str, str] = {"session_id": session_id}
-        response = requests.get(f"{self.api_url}/session/latest", params=params)
+        response = requests.get(f"{self.url}/session/latest", params=params)
         self._check_response(response)
         return response.json()["finished_tests"]
 
@@ -209,13 +212,13 @@ class ParInterface(Harness):
             "test_id": test_id,
             "round_id": round_id,
         }
-        response = requests.get(f"{self.api_url}/session/dataset", params=params,)
+        response = requests.get(f"{self.url}/session/dataset", params=params,)
         if response.status_code == 204:
             raise RoundError("End of Dataset", "The entire dataset has been requested")
         self._check_response(response)
 
         filename = os.path.abspath(
-            os.path.join(self.folder, f"{session_id}.{test_id}.{round_id}.csv")
+            os.path.join(self.save_directory, f"{session_id}.{test_id}.{round_id}.csv")
         )
         with open(filename, "wb") as f:
             f.write(response.content)
@@ -254,11 +257,11 @@ class ParInterface(Harness):
             "test_id": test_id,
             "feedback_type": feedback_type,
         }
-        response = requests.get(f"{self.api_url}/session/feedback", params=params,)
+        response = requests.get(f"{self.url}/session/feedback", params=params,)
         self._check_response(response)
         filename = os.path.abspath(
             os.path.join(
-                self.folder, f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv"
+                self.save_directory, f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv"
             )
         )
         with open(filename, "wb") as f:
@@ -304,7 +307,7 @@ class ParInterface(Harness):
                 contents = f.read()
                 files[f"{r_type}_file"] = io.StringIO(contents)
 
-        response = requests.post(f"{self.api_url}/session/results", files=files)
+        response = requests.post(f"{self.url}/session/results", files=files)
 
         self._check_response(response)
 
@@ -359,13 +362,13 @@ class ParInterface(Harness):
             "test_id": test_id,
             "round_id": round_id,
         }
-        response = requests.get(f"{self.api_url}/session/evaluations", params=params,)
+        response = requests.get(f"{self.url}/session/evaluations", params=params,)
 
         self._check_response(response)
 
         filename = os.path.abspath(
             os.path.join(
-                self.folder, f"{session_id}.{test_id}.{round_id}_evaluation.csv"
+                self.save_directory, f"{session_id}.{test_id}.{round_id}_evaluation.csv"
             )
         )
 
@@ -392,7 +395,7 @@ class ParInterface(Harness):
             A dictionary containing metadata
         """
         response = requests.get(
-            f"{self.api_url}/test/metadata",
+            f"{self.url}/test/metadata",
             params={"test_id": test_id, "session_id": session_id},
         )
 
@@ -417,7 +420,7 @@ class ParInterface(Harness):
             None
         """
         requests.delete(
-            f"{self.api_url}/test",
+            f"{self.url}/test",
             params={"test_id": test_id, "session_id": session_id},
         )
 
@@ -437,7 +440,7 @@ class ParInterface(Harness):
         Returns: None
         """
         response = requests.delete(
-            f"{self.api_url}/session", params={"session_id": session_id}
+            f"{self.url}/session", params={"session_id": session_id}
         )
 
         self._check_response(response)

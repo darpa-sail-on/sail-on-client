@@ -1,10 +1,10 @@
-"""Client implementation for local interface."""
+"""Implementation of T&E Harness for running experiments locally."""
 
 from sail_on.api.file_provider import FileProvider
 from sail_on.api.file_provider import get_session_info
 from sail_on_client.errors import RoundError as ClientRoundError
 from sail_on_client.evaluate import create_metric_instance
-from sailon_tinker_launcher.deprecated_tinker.harness import Harness
+from sail_on_client.protocol.test_and_evaluation_harness import TestAndEvaluationHarness
 
 from tempfile import TemporaryDirectory
 from typing import Any, Dict, Union, List
@@ -18,31 +18,34 @@ import json
 log = logging.getLogger(__name__)
 
 
-class LocalInterface(Harness):
-    """Interface without any server communication."""
+class LocalHarness(TestAndEvaluationHarness):
+    """Harness without any server communication."""
 
-    def __init__(self, config_file: str, config_folder: str) -> None:
+    def __init__(self, data_dir: str, gt_dir: str = "", gt_config: str = "")-> None:
         """
-        Initialize an object of local interface.
+        Initialize an object of local harness.
 
         Args:
-            config_file: Name of the config file that provides parameter
-                         to the interface
-            config_folder: The directory where configfile is present
+            data_dir: Path to the directory with the data
+            gt_dir: Path to directory with ground truth
+            gt_config: Path to config file with column mapping for ground truth
 
         Returns:
             None
         """
-        Harness.__init__(self, config_file, config_folder)
+        TestAndEvaluationHarness.__init__(self)
         self.temp_dir = TemporaryDirectory()
-        self.data_dir = self.configuration_data["data_dir"]
-        self.gt_dir = self.configuration_data["gt_dir"]
-        # Config file containing column id for ground truth for a particular domain.
-        # Refer to sail-on-client/tests/data/OND/activity_recognition/activity_recognition.json
-        # for an example.
-        self.gt_config = self.configuration_data["gt_config"]
+        self.data_dir = data_dir
+        self.gt_dir = gt_dir
+        self.gt_config = gt_config
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
+
+    def get_config(self):
+        """JSON Compliant representation of the object."""
+        return {"data_dir": self.data_dir,
+                "gt_dir": self.gt_dir,
+                "gt_config": self.gt_config}
 
     def update_provider(self) -> None:
         """
