@@ -159,7 +159,7 @@ class TestAndEvaluationHarness(Configurable, Pluggable):
         round_id: int,
         session_id: str,
         baseline_session_id: str = None,
-    ) -> str:
+    ) -> Dict:
         """
         Get results for test(s).
 
