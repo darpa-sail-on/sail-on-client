@@ -50,63 +50,68 @@ def _read_image_ids(image_ids_path):
     return list(map(str.strip, open(image_ids_path, "r").readlines()))
 
 
-def test_initialize(get_interface_params):
+def test_initialize(get_local_harness_params):
     """
-    Test local interface initialization.
+    Test local harness initialization.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local harness
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    LocalHarness(data_dir, gt_dir, gt_config)
 
 
-def test_test_ids_request(get_interface_params):
+def test_test_ids_request(get_local_harness_params):
     """
     Test request for test ids.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local harness
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    data_dir = f"{os.path.dirname(__file__)}/data"
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
 
-    assumptions_path = os.path.join(os.path.dirname(__file__), "assumptions.json")
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+
+    test_dir = os.path.dirname(__file__)
+    assumptions_path = os.path.join(test_dir, "assumptions.json")
     filename = local_interface.test_ids_request(
         "OND", "image_classification", "5678", assumptions_path
     )
-    expected = os.path.join(data_dir, "OND", "image_classification", TEST_ID_NAME)
+    expected = os.path.join(
+            test_dir, "data", "OND", "image_classification", TEST_ID_NAME
+    )
     assert os.stat(expected).st_size > 5
     assert expected == filename
 
 
-def test_session_request(get_interface_params):
+def test_session_request(get_local_harness_params):
     """
     Test session request.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local harness
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    data_dir = f"{os.path.dirname(__file__)}/data"
-    local_interface = LocalInterface(config_name, config_directory)
-    test_id_path = os.path.join(data_dir, "OND", "image_classification", TEST_ID_NAME)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+
+    test_dir = os.path.dirname(__file__)
+    test_id_path = os.path.join(test_dir, "data", "OND", "image_classification", TEST_ID_NAME)
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     local_interface.session_request(
@@ -118,20 +123,21 @@ def test_session_request(get_interface_params):
     )
 
 
-def test_resume_session(get_interface_params):
+def test_resume_session(get_local_harness_params):
     """
     Test resume session.
 
     Args:
-        get_interface_params (tuple): Tuple to configure par interface
+        get_local_harness_params (tuple): Tuple to configure local harness
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = local_interface.session_request(
         ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", [], 0.5
     )
@@ -152,20 +158,22 @@ def test_resume_session(get_interface_params):
     assert finished_test == ["OND.54011215.0000.1236"]
 
 
-def test_dataset_request(get_interface_params):
+def test_dataset_request(get_local_harness_params):
     """
     Tests for dataset request.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local harness
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+
     session_id = _initialize_session(local_interface, "OND")
     # Test correct dataset request
     filename = local_interface.dataset_request("OND.1.1.1234", 0, session_id)
@@ -181,21 +189,21 @@ def test_dataset_request(get_interface_params):
     "protocol_constant", ["detection", "classification", "characterization"]
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
-def test_post_results(get_interface_params, protocol_constant, protocol_name):
+def test_post_results(get_local_harness_params, protocol_constant, protocol_name):
     """
     Tests for post results.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
         protocol_constant (str): Constants used by the server to identifying results
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, protocol_name)
     result_files = {
         protocol_constant: os.path.join(
@@ -215,22 +223,22 @@ def test_post_results(get_interface_params, protocol_constant, protocol_name):
     ),
 )
 @pytest.mark.parametrize("protocol_name", ["OND", "CONDDA"])
-def test_feedback_request(get_interface_params, feedback_mapping, protocol_name):
+def test_feedback_request(get_local_harness_params, feedback_mapping, protocol_name):
     """
     Tests for feedback request.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol (options: OND and CONDDA)
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, protocol_name)
     # Post results before posting
     result_files = {}
@@ -259,20 +267,21 @@ def test_feedback_request(get_interface_params, feedback_mapping, protocol_name)
     assert expected == response
 
 
-def test_image_classification_evaluate(get_ic_interface_params):
+def test_image_classification_evaluate(get_local_harness_params):
     """
     Test evaluate with rounds.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_ic_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+
     session_id = _initialize_session(local_interface, "OND", "image_classification")
     baseline_session_id = _initialize_session(
         local_interface, "OND", "image_classification"
@@ -307,20 +316,20 @@ def test_image_classification_evaluate(get_ic_interface_params):
     )
 
 
-def test_activity_recognition_evaluate(get_ar_interface_params):
+def test_activity_recognition_evaluate(get_ar_local_harness_params):
     """
     Test evaluate for activity recognition.
 
     Args:
-        get_ar_interface_params (tuple): Tuple to configure local interface
+        get_ar_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_ar_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_ar_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND", "activity_recognition")
     baseline_session_id = _initialize_session(
         local_interface, "OND", "activity_recognition"
@@ -357,20 +366,20 @@ def test_activity_recognition_evaluate(get_ar_interface_params):
     local_interface.evaluate("OND.10.90001.2100554", 0, session_id, baseline_session_id)
 
 
-def test_transcripts_evaluate(get_transcripts_interface_params):
+def test_transcripts_evaluate(get_dt_local_harness_params):
     """
     Test evaluate for transcripts.
 
     Args:
-        get_transcripts_interface_params (tuple): Tuple to configure local interface
+        get_dt_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_transcripts_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_dt_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND", "transcripts")
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "transcripts"
@@ -407,20 +416,20 @@ def test_transcripts_evaluate(get_transcripts_interface_params):
     local_interface.evaluate("OND.0.90001.8714062", 0, session_id, baseline_session_id)
 
 
-def test_image_classification_evaluate_roundwise(get_ic_interface_params):
+def test_image_classification_evaluate_roundwise(get_local_harness_params):
     """
     Test evaluate with rounds.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_ic_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND", "image_classification")
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "image_classification"
@@ -439,56 +448,57 @@ def test_image_classification_evaluate_roundwise(get_ic_interface_params):
     local_interface.evaluate_round_wise("OND.54011215.0000.1236", 0, session_id)
 
 
-def test_complete_test(get_interface_params):
+def test_complete_test(get_local_harness_params):
     """
     Test complete test request.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND")
     local_interface.complete_test(session_id, "OND.10.90001.2100554")
 
 
-def test_terminate_session(get_interface_params):
+def test_terminate_session(get_local_harness_params):
     """
     Test terminate session request.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+
     session_id = _initialize_session(local_interface, "OND")
     local_interface.terminate_session(session_id)
 
 
-def test_get_metadata(get_interface_params):
+def test_get_metadata(get_local_harness_params):
     """
     Test get metadata.
 
     Args:
-        get_interface_params (tuple): Tuple to configure local interface
+        get_local_harness_params (tuple): Tuple to configure local interface
 
     Return:
         None
     """
-    from sail_on_client.protocol.localinterface import LocalInterface
+    from sail_on_client.harness.local_harness import LocalHarness
 
-    config_directory, config_name = get_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
+    data_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND")
     metadata = local_interface.get_test_metadata(session_id, "OND.1.1.1234")
 
