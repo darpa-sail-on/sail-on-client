@@ -1,5 +1,7 @@
 """CONDDA protocol."""
 
+from sail_on_client.agent.condda_agent import CONDDAAgent
+from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
 from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.protocol.condda_config import ConddaConfig
 from sail_on_client.utils.utils import update_harness_parameters
@@ -23,33 +25,74 @@ class Condda(VisualProtocol):
 
     def __init__(
         self,
-        discovered_plugins: Dict[str, Any],
-        algorithmsdirectory: str,
-        harness: Union[ParInterface, LocalInterface],
-        config_file: str,
+        algorithms: Dict[str, CONDDAAgent],
+        dataset_root: str,
+        domain: str,
+        harness: TestAndEvaluationHarness,
+        save_dir: str,
+        seed: str,
+        test_ids: List[str],
+        feature_extraction_only: bool = False,
+        hints: List = [],
+        is_eval_enabled: bool = False,
+        is_eval_roundwise_enabled: bool = False,
+        resume_session: bool = False,
+        resume_session_ids: Dict = {},
+        save_attributes: bool = False,
+        saved_attributes: Dict = {},
+        save_elementwise: bool = False,
+        save_features: bool = False,
+        skip_stages: List = [],
+        use_saved_attributes: bool = False,
+        use_saved_features: bool = False
     ) -> None:
         """
-        Initialize condda protocol object.
+        Initialize CONDDA protocol object.
 
         Args:
-            discovered_plugins: Dict of algorithms that can be used by the protocols
-            algorithmsdirectory: Directory with the algorithms
-            harness: An object for the harness used for T&E
-            config_file: Path to a config file used by the protocol
+            algorithms: Dictionary of algorithms that are used run based on the protocol
+            dataset_root: Root directory of the dataset
+            domain: Domain of the problem
+            save_dir: Directory where results are saved
+            seed: Seed for the experiments
+            test_ids: List of tests
+            feature_extraction_only: Flag to only run feature extraction
+            hints: List of hint provided in the session
+            harness: A harness for test and evaluation
+            is_eval_enabled: Flag to check if evaluation is enabled in session
+            is_eval_roundwise_enabled: Flag to check if evaluation is enabled for rounds
+            resume_session: Flag to resume session
+            resume_session_ids: Dictionary for resuming sessions
+            save_attributes: Flag to save attributes
+            saved_attributes: Dictionary for attributes
+            save_elementwise: Flag to save features elementwise
+            save_features: Flag to save  features
+            skip_stages: List of stages that are skipped
+            use_saved_attributes: Flag to use saved attributes
+            use_saved_features: Flag to use saved features
 
         Returns:
             None
         """
-
-        super().__init__(discovered_plugins, algorithmsdirectory, harness, config_file)
-        if not os.path.exists(config_file):
-            log.error(f"{config_file} does not exist")
-            sys.exit(1)
-
-        with open(config_file, "r") as f:
-            overriden_config = json.load(f)
-        self.config = ConddaConfig(overriden_config)
-        self.harness = update_harness_parameters(harness, self.config["harness_config"])
+        super().__init__(algorithms, harness)
+        self.dataset_root = dataset_root
+        self.domain = domain
+        self.feature_extraction_only = feature_extraction_only
+        self.hints = hints
+        self.is_eval_enabled = is_eval_enabled
+        self.is_eval_roundwise_enabled = is_eval_roundwise_enabled
+        self.resume_session = resume_session
+        self.resume_session_ids = resume_session_ids
+        self.save_attributes = saved_attributes
+        self.saved_attributes = saved_attributes
+        self.save_dir = save_dir
+        self.save_elementwise = save_elementwise
+        self.save_features = save_features
+        self.skip_stages = skip_stages
+        self.seed = seed
+        self.test_ids = test_ids
+        self.use_saved_attributes = use_saved_attributes
+        self.use_saved_features = use_saved_features
 
     def create_algorithm_attributes(
         self, algorithm_name: str, algorithm_param: Dict, test_ids: List[str]
@@ -147,40 +190,29 @@ class Condda(VisualProtocol):
             skip_stages.append("NoveltyCharacterization")
         return skip_stages
 
-    def run_protocol(self) -> None:
-        """Run protocol."""
+    def run_protocol(self, config: Dict) -> None:
+        """
+        Run protocol.
+
+        Args:
+            config: Parameters provided in the config
+
+        Returns:
+            None
+        """
         log.info("Starting CONDDA")
         # provide all of the configuration information in the toolset
         self.toolset.update(self.config)
-        detector_params = self.config["detectors"]
-        save_dir = detector_params["csv_folder"]
-        algorithm_params = detector_params["detector_configs"]
-        algorithm_names = algorithm_params.keys()
-        test_ids = self.config["test_ids"]
-        domain = self.config["domain"]
-        hints = self.config["hints"]
-        resume_session = self.config["resume_session"]
-        data_root = self.config["dataset_root"]
-        save_dir = self.config["save_dir"]
-        save_features = self.config["save_features"]
-        use_saved_features = self.config["use_saved_features"]
-        use_consolidated_features = self.config["use_consolidated_features"]
-        feature_extraction_only = self.config["feature_extraction_only"]
-        self.skip_stages = self.config["skip_stages"]
         self.skip_stages = self.update_skip_stages(
-            self.skip_stages, save_features, feature_extraction_only
+            self.skip_stages, self.save_features, self.feature_extraction_only
         )
-
         algorithms_attributes = []
+        algorithm_params = config["algorithms"]
         # Populate most of the attributes for the algorithm
-        for algorithm_name in algorithm_names:
+        for algorithm_name in self.algorithms.keys():
             algorithm_param = algorithm_params[algorithm_name]
             algorithm_attributes = self.create_algorithm_attributes(
-                algorithm_name, algorithm_param, test_ids
-            )
-            # Add common parameters to algorithm specific config with some exclusions
-            algorithm_attributes.merge_detector_params(
-                detector_params, ["detector_configs"]
+                algorithm_name, algorithm_param, self.test_ids
             )
             log.info(f"Consolidating attributes for {algorithm_name}")
             algorithms_attributes.append(algorithm_attributes)
@@ -189,7 +221,7 @@ class Condda(VisualProtocol):
         # session_id for algorithm attributes
         for idx, algorithm_attributes in enumerate(algorithms_attributes):
             algorithms_attributes[idx] = self.create_algorithm_session(
-                algorithm_attributes, domain, hints, resume_session, "CONDDA"
+                algorithm_attributes, self.domain, self.hints, self.resume_session, "CONDDA"
             )
 
         # Run tests for all the algorithms
@@ -201,14 +233,14 @@ class Condda(VisualProtocol):
             skip_stages = self.skip_stages.copy()
             condda_test = CONDDATest(
                 algorithm_attributes,
-                data_root,
-                domain,
+                self.data_root,
+                self.domain,
                 self.harness,
-                save_dir,
+                self.save_dir,
                 session_id,
                 skip_stages,
-                use_consolidated_features,
-                use_saved_features,
+                self.use_consolidated_features,
+                self.use_saved_features,
             )
             for test_id in test_ids:
                 log.info(f"Start test: {test_id}")
