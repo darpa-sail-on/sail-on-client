@@ -114,7 +114,7 @@ class MockONDAgent(ONDAgent):
         return dst_file
 
 
-class MockONDWithAttributes(MockONDAgent):
+class MockONDAgentWithAttributes(MockONDAgent):
     """Mock Detector for testing checkpointing."""
 
     def __init__(self) -> None:
@@ -158,7 +158,7 @@ class MockONDAdapterWithCheckpoint(MockONDAgent, Checkpointer):
         """
         MockONDAgent.__init__(self)
         Checkpointer.__init__(self, toolset)
-        self.detector = MockONDWithAttributes()
+        self.detector = MockONDAgentWithAttributes()
 
     def get_config(self) -> Dict:
         """
