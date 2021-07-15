@@ -27,7 +27,7 @@ class MockONDAgent(ONDAgent):
             "FeatureExtraction": self.feature_extraction,
             "WorldDetection": self.world_detection,
             "NoveltyClassification": self.novelty_classification,
-            "NoveltyAdaption": self.novelty_adaption,
+            "NoveltyAdaption": self.novelty_adaptation,
             "NoveltyCharacterization": self.novelty_characterization,
         }
 
@@ -86,7 +86,7 @@ class MockONDAgent(ONDAgent):
         shutil.copyfile(self.dataset, dst_file)
         return dst_file
 
-    def novelty_adaption(self, toolset: Dict) -> None:
+    def novelty_adaptation(self, toolset: Dict) -> None:
         """
         Update models based on novelty classification and characterization.
 
@@ -112,6 +112,17 @@ class MockONDAgent(ONDAgent):
         dst_file = os.path.join(dataset_dir, "nc.csv")
         shutil.copyfile(self.dataset, dst_file)
         return dst_file
+
+    def execute(self, toolset: Dict, step_descriptor: str) -> Any:
+        """
+        Execute method used by the protocol to run different steps.
+
+        Args:
+            toolset (dict): Dictionary containing parameters for different steps
+            step_descriptor (str): Name of the step
+        """
+        log.info(f"Executing {step_descriptor}")
+        return self.detector.step_dict[step_descriptor](toolset)
 
 
 class MockONDAgentWithAttributes(MockONDAgent):
