@@ -6,11 +6,12 @@ from sail_on_client.evaluate.activity_recognition import ActivityRecognitionMetr
 from typing import Dict, Union
 
 
-def create_metric_instance(
-    protocol: str, domain: str, gt_config: Dict
-) -> Union[
-    ImageClassificationMetrics, DocumentTranscriptionMetrics, ActivityRecognitionMetrics
-]:
+metric_type = Union[
+    ActivityRecognitionMetrics, DocumentTranscriptionMetrics, ImageClassificationMetrics
+]
+
+
+def create_metric_instance(protocol: str, domain: str, gt_config: Dict) -> metric_type:
     """
     Create an instance of metric object.
 

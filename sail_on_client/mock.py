@@ -7,6 +7,8 @@ from sail_on_client.checkpointer import Checkpointer
 from typing import Dict, Any, Tuple, Callable
 
 import logging
+import os
+import shutil
 import torch
 
 log = logging.getLogger(__name__)
@@ -80,7 +82,10 @@ class MockDetector(BaseAlgorithm):
         Return:
             path to csv file containing the results for change in world
         """
-        return self.dataset
+        dataset_dir = os.path.dirname(self.dataset)
+        dst_file = os.path.join(dataset_dir, "wc.csv")
+        shutil.copyfile(self.dataset, dst_file)
+        return dst_file
 
     def _novelty_classification(self, toolset: str) -> str:
         """
@@ -92,7 +97,10 @@ class MockDetector(BaseAlgorithm):
         Return:
             path to csv file containing the results for novelty classification step
         """
-        return self.dataset
+        dataset_dir = os.path.dirname(self.dataset)
+        dst_file = os.path.join(dataset_dir, "ncl.csv")
+        shutil.copyfile(self.dataset, dst_file)
+        return dst_file
 
     def _novelty_adaption(self, toolset: str) -> None:
         """
@@ -116,7 +124,10 @@ class MockDetector(BaseAlgorithm):
         Return:
             path to csv file containing the results for novelty characterization step
         """
-        return self.dataset
+        dataset_dir = os.path.dirname(self.dataset)
+        dst_file = os.path.join(dataset_dir, "nc.csv")
+        shutil.copyfile(self.dataset, dst_file)
+        return dst_file
 
 
 class MockDetectorWithAttributes(MockDetector):

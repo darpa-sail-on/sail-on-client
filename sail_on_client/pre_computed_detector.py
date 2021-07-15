@@ -22,6 +22,7 @@ class PreComputedDetector(BaseAlgorithm):
         """
         BaseAlgorithm.__init__(self, toolset)
         self.cache_dir = toolset["cache_dir"]
+        self.round_size = toolset["round_size"]
         self.has_roundwise_file = toolset["has_roundwise_file"]
         self.algorithm_name = toolset["algorithm_name"]
         self.step_dict: Dict[str, Callable] = {
@@ -55,6 +56,7 @@ class PreComputedDetector(BaseAlgorithm):
             None
         """
         self.round_idx = {"detection": 0, "classification": 0}
+        self.test_id = toolset["test_id"]
 
     def _get_test_info_from_toolset(self, toolset: Dict) -> Tuple:
         """
@@ -67,9 +69,9 @@ class PreComputedDetector(BaseAlgorithm):
             tuple containing test id and round id (optionally)
         """
         if self.has_roundwise_file:
-            return (toolset["test_id"], toolset["round_id"])
+            return (self.test_id, toolset["round_id"])
         else:
-            return toolset["test_id"]
+            return self.test_id
 
     def _get_result_path(self, toolset: Dict, step_descriptor: str) -> str:
         """
@@ -122,7 +124,7 @@ class PreComputedDetector(BaseAlgorithm):
             Tuple of dictionary
         """
         self.dataset = toolset["dataset"]
-        self.round_size = pd.read_csv(self.dataset, header=None).shape[0]
+        pd.read_csv(self.dataset, header=None).shape[0]
         return {}, {}
 
     def _world_detection(self, toolset: Dict) -> str:

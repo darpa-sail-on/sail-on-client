@@ -29,6 +29,7 @@ def ond_config():
                     "PreComputedDetector": {
                         "cache_dir": cache_dir,
                         "algorithm_name": "PreComputedDetector",
+                        "round_size": 32,
                         "has_roundwise_file": False,
                     }
                 },
@@ -65,6 +66,7 @@ def ond_config_with_feature_extraction():
                     "PreComputedDetector": {
                         "cache_dir": cache_dir,
                         "algorithm_name": "PreComputedDetector",
+                        "round_size": 32,
                         "has_roundwise_file": False,
                     }
                 },
@@ -104,11 +106,13 @@ def ond_config_with_reaction_baseline():
                     "PreComputedDetector": {
                         "cache_dir": cache_dir,
                         "algorithm_name": "PreComputedDetector",
+                        "round_size": 32,
                         "has_roundwise_file": False,
                     },
                     "BaselinePreComputedDetector": {
                         "cache_dir": cache_dir,
                         "algorithm_name": "BaselinePreComputedDetector",
+                        "round_size": 32,
                         "has_roundwise_file": False,
                     },
                 },

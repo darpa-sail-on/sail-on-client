@@ -1,12 +1,10 @@
 """Utility function for sail-on-client."""
 
 import os
-import numpy as np
 import logging
-import json
 from sailon_tinker_launcher.deprecated_tinker import harness
 
-from typing import Dict, Any
+from typing import Dict, List
 
 log = logging.getLogger(__name__)
 
@@ -61,18 +59,20 @@ def update_harness_parameters(ip_harness: harness, new_parameters: Dict) -> harn
     return ip_harness
 
 
-class NumpyEncoder(json.JSONEncoder):
-    """An encoder to convert numpy data types to python primitives."""
+def merge_dictionaries(base_dict: Dict, other_dict: Dict, exclude_keys: List) -> Dict:
+    """
+    Shallow merge for two dictionaries with certain keys would be skipped.
 
-    def default(self, obj: Any) -> Any:
-        """Defaults for numpy types."""
-        if isinstance(obj, np.integer):
-            return int(obj)
-        elif isinstance(obj, np.floating):
-            return float(obj)
-        elif isinstance(obj, np.ndarray):
-            return obj.tolist()
-        elif isinstance(obj, np.bool_):
-            return bool(obj)
-        else:
-            return super(NumpyEncoder, self).default(obj)
+    Args:
+        base_dict: Dictionary with defaults
+        other_dict: Dictionary with arguments that are added or overriden
+        exclude_keys: Keys in other dict that shouldn't be used in the merge
+
+    Returns:
+        Dictionary with parameters obtained by merging two dictionaries
+    """
+    merged_dict = base_dict.copy()
+    included_keys = set(other_dict.keys()).difference(set(exclude_keys))
+    for key in included_keys:
+        merged_dict[key] = other_dict[key]
+    return merged_dict

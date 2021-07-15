@@ -266,7 +266,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Run Test with coverage
-        run: poetry run coverage run --source=. -m pytest tests
+        run: poetry run coverage run --source="./sail_on_client" -m pytest tests
         working-directory: sail-on-client
 
       - name: Generate coverage report

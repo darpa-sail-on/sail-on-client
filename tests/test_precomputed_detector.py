@@ -14,6 +14,7 @@ def precomputed_detector():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": False,
     }
     return PreComputedDetector(init_toolset)
@@ -27,6 +28,7 @@ def precomputed_detector_with_round():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": True,
     }
     return PreComputedDetector(init_toolset)
@@ -40,10 +42,11 @@ def precomputed_detector_with_features():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": False,
     }
     precomputed_detector = PreComputedDetector(init_toolset)
-    precomputed_detector.execute({}, "Initialize")
+    precomputed_detector.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
     dataset = os.path.join(
         test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
     )
@@ -62,10 +65,11 @@ def precomputed_detector_with_features_with_round():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": True,
     }
     precomputed_detector = PreComputedDetector(init_toolset)
-    precomputed_detector.execute({}, "Initialize")
+    precomputed_detector.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
     dataset = os.path.join(
         test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
     )
@@ -88,11 +92,13 @@ def test_init():
     init_toolset = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": False,
     }
     init_toolset_with_round = {
         "cache_dir": cache_dir,
         "algorithm_name": "PreComputedDetector",
+        "round_size": 32,
         "has_roundwise_file": True,
     }
     precomputed_detector = PreComputedDetector(init_toolset)
@@ -112,8 +118,10 @@ def test_initialize(precomputed_detector, precomputed_detector_with_round):
     Return:
         None
     """
-    precomputed_detector.execute({}, "Initialize")
-    precomputed_detector_with_round.execute({}, "Initialize")
+    precomputed_detector.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
+    precomputed_detector_with_round.execute(
+        {"test_id": "OND.10.90001.2100554"}, "Initialize"
+    )
 
 
 def test_feature_extraction(precomputed_detector):
@@ -133,7 +141,8 @@ def test_feature_extraction(precomputed_detector):
     fe_toolset = {
         "dataset": dataset,
     }
-    precomputed_detector.execute({}, "Initialize")
+    init_toolset = {"test_id": "OND.10.90001.2100554"}
+    precomputed_detector.execute(init_toolset, "Initialize")
     precomputed_detector.execute(fe_toolset, "FeatureExtraction")
 
 

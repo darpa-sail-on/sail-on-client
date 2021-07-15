@@ -12,13 +12,14 @@ from sail_on_client.feedback.activity_recognition_feedback import (
 from typing import Dict, Union
 
 
-def create_feedback_instance(
-    domain: str, feedback_config: Dict
-) -> Union[
-    ImageClassificationFeedback,
-    DocumentTranscriptionFeedback,
+feedback_type = Union[
     ActivityRecognitionFeedback,
-]:
+    DocumentTranscriptionFeedback,
+    ImageClassificationFeedback,
+]
+
+
+def create_feedback_instance(domain: str, feedback_config: Dict) -> feedback_type:
     """
     Create an instance of feedback object.
 

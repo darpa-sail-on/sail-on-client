@@ -39,7 +39,7 @@ class OndConfig(scfg.Config):
             False, help="Flag to enable roundwise evaluate"
         ),
         "saved_attributes": {},
-        "skip_stage": [],
+        "skip_stages": [],
         "hints": [],
         "resume_session": scfg.Value(False, help="Flag to resume session"),
         "resumed_session_ids": {},

@@ -1,0 +1,19 @@
+{
+  "protocol": "OND",
+  "known_classes": 88,
+  "novel_classes": 7,
+  "distribution": "flat",
+  "difficulty": "high",
+  "prop_novel": "0.5",
+  "n_rounds": "0",
+  "detection": "512",
+  "red_light": "d97d7aa7-7aeb-454c-b277-cf49e96a42e9.avi",
+  "degree": "1",
+  "representation": "base",
+  "actual_novel_activities": "['CricketShot']",
+  "round_size": 32,
+  "threshold": 0.5,
+  "pre_novelty_batches": 5,
+  "max_novel_classes": 3,
+  "feedback_max_ids": 10
+}
