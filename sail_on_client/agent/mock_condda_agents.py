@@ -1,11 +1,7 @@
-"""Mocks mainly used for testing protocols."""
-
-from __future__ import annotations
-
+"""Mocks mainly used for testing CONDDA."""
 
 from sail_on_client.checkpointer import Checkpointer
-from sail_on_client.agent.ond_agent import ONDAgent
-
+from sail_on_client.agent.condda_agent import CONDDAAgent
 from typing import Dict, Any, Tuple, Callable
 
 import logging
@@ -16,18 +12,17 @@ import torch
 log = logging.getLogger(__name__)
 
 
-class MockONDAgent(ONDAgent):
-    """Mock Detector for OND Protocol."""
+class MockCONDDAAgent(CONDDAAgent):
+    """Mock Detector for CONDDA Protocol."""
 
-    def __init__(self) -> None:
-        """Construct Mock OND Detector."""
+    def __init__(self):
+        """Construct Mock CONDDA Detector."""
         super().__init__()
+
         self.step_dict: Dict[str, Callable] = {
             "Initialize": self.initialize,
             "FeatureExtraction": self.feature_extraction,
             "WorldDetection": self.world_detection,
-            "NoveltyClassification": self.novelty_classification,
-            "NoveltyAdaption": self.novelty_adaption,
             "NoveltyCharacterization": self.novelty_characterization,
         }
 
@@ -42,6 +37,17 @@ class MockONDAgent(ONDAgent):
             None
         """
         pass
+
+    def get_config(self) -> Dict:
+        """
+        Get config for the plugin.
+
+        Returns:
+            Parameters for the agent
+        """
+        config = super().get_config()
+        config.update(self.toolset)
+        return config
 
     def feature_extraction(self, toolset: Dict) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
@@ -71,33 +77,6 @@ class MockONDAgent(ONDAgent):
         shutil.copyfile(self.dataset, dst_file)
         return dst_file
 
-    def novelty_classification(self, toolset: Dict) -> str:
-        """
-        Classify data provided in known classes and unknown class.
-
-        Args:
-            toolset (dict): Dictionary containing parameters for different steps
-
-        Return:
-            path to csv file containing the results for novelty classification step
-        """
-        dataset_dir = os.path.dirname(self.dataset)
-        dst_file = os.path.join(dataset_dir, "ncl.csv")
-        shutil.copyfile(self.dataset, dst_file)
-        return dst_file
-
-    def novelty_adaption(self, toolset: Dict) -> None:
-        """
-        Update models based on novelty classification and characterization.
-
-        Args:
-            toolset (dict): Dictionary containing parameters for different steps
-
-        Return:
-            None
-        """
-        pass
-
     def novelty_characterization(self, toolset: Dict) -> str:
         """
         Characterize novelty by clustering different novel samples.
@@ -114,7 +93,7 @@ class MockONDAgent(ONDAgent):
         return dst_file
 
 
-class MockONDWithAttributes(MockONDAgent):
+class MockCONDDAAgentWithAttributes(MockCONDDAAgent):
     """Mock Detector for testing checkpointing."""
 
     def __init__(self) -> None:
@@ -124,7 +103,8 @@ class MockONDWithAttributes(MockONDAgent):
         Args:
             toolset (dict): Dictionary containing parameters for the constructor
         """
-        MockONDAgent.__init__(self)
+        MockCONDDAAgent.__init__(self)
+
 
     def feature_extraction(
         self, toolset: Dict
@@ -146,7 +126,7 @@ class MockONDWithAttributes(MockONDAgent):
         return {}, {}
 
 
-class MockONDAdapterWithCheckpoint(MockONDAgent, Checkpointer):
+class MockCONDDAAdapterWithCheckpoint(MockCONDDAAgent, Checkpointer):
     """Mock Adapter for testing checkpointing."""
 
     def __init__(self, toolset: Dict) -> None:
@@ -156,9 +136,9 @@ class MockONDAdapterWithCheckpoint(MockONDAgent, Checkpointer):
         Args:
             toolset (dict): Dictionary containing parameters for the constructor
         """
-        MockONDAgent.__init__(self)
+        MockCONDDAAgent.__init__(self)
         Checkpointer.__init__(self, toolset)
-        self.detector = MockONDWithAttributes()
+        self.detector = MockCONDDAAgentWithAttributes()
 
     def get_config(self) -> Dict:
         """
@@ -187,12 +167,12 @@ class MockONDAdapterWithCheckpoint(MockONDAgent, Checkpointer):
         Overriden method to compare two mock adapters.
 
         Args:
-            other (MockONDAdapterWithCheckpoint): Another instance of mock adapter
+            other (MockCONDDAAdapterWithCheckpoint): Another instance of mock adapter
 
         Return:
             True if both instances have same attributes
         """
-        if not isinstance(other, MockONDAdapterWithCheckpoint):
+        if not isinstance(other, MockCONDDAAdapterWithCheckpoint):
             return NotImplemented
 
         return (

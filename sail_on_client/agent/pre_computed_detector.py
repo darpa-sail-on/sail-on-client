@@ -1,6 +1,8 @@
-"""Mocks mainly used for testing protocols."""
+"""Agents that use precomputed values in the protocol."""
 
-from sailon_tinker_launcher.deprecated_tinker.basealgorithm import BaseAlgorithm
+from sail_on_client.agent.visual_agent import VisualAgent
+from sail_on_client.agent.ond_agent import ONDAgent
+from sail_on_client.agent.condda_agent import CONDDAAgent
 from typing import Dict, Any, Tuple, Callable
 
 import logging
@@ -10,42 +12,37 @@ import pandas as pd
 log = logging.getLogger(__name__)
 
 
-class PreComputedDetector(BaseAlgorithm):
+class PreComputedAgent(VisualAgent):
     """Detector for submitting precomputed results."""
 
-    def __init__(self, toolset: Dict) -> None:
+    def __init__(
+            self,
+            algorithm_name,
+            cache_dir,
+            has_roundwise_file,
+            round_size
+    ) -> None:
         """
-        Detector constructor.
+        Construct agent with precomputed results.
 
         Args:
-            toolset (dict): Dictionary containing parameters for the constructor
+            algorithm_name: Name of the algorithm
+            cache_dir: Path to cache directory
+            has_roundwise_file: Flag to determine if the cache has files for rounds
+            round_size: Size of a round
         """
-        BaseAlgorithm.__init__(self, toolset)
-        self.cache_dir = toolset["cache_dir"]
-        self.round_size = toolset["round_size"]
-        self.has_roundwise_file = toolset["has_roundwise_file"]
-        self.algorithm_name = toolset["algorithm_name"]
+        ONDAgent.__init__(self)
+        self.algorithm_name = algorithm_name
+        self.cache_dir = cache_dir
+        self.has_roundwise_file = has_roundwise_file
+        self.round_size = round_size
         self.step_dict: Dict[str, Callable] = {
-            "Initialize": self._initialize,
-            "FeatureExtraction": self._feature_extraction,
-            "WorldDetection": self._world_detection,
-            "NoveltyClassification": self._novelty_classification,
-            "NoveltyAdaption": self._novelty_adaption,
-            "NoveltyCharacterization": self._novelty_characterization,
+            "Initialize": self.initialize,
+            "FeatureExtraction": self.feature_extraction,
+            "WorldDetection": self.world_detection
         }
 
-    def execute(self, toolset: Dict, step_descriptor: str) -> Any:
-        """
-        Execute method used by the protocol to run different steps associated with the algorithm.
-
-        Args:
-            toolset (dict): Dictionary containing parameters for different steps
-            step_descriptor (str): Name of the step
-        """
-        log.info(f"Executing {step_descriptor}")
-        return self.step_dict[step_descriptor](toolset)
-
-    def _initialize(self, toolset: Dict) -> None:
+    def initialize(self, toolset: Dict) -> None:
         """
         Algorithm Initialization.
 
@@ -111,7 +108,7 @@ class PreComputedDetector(BaseAlgorithm):
             round_df.to_csv(round_file_path, index=False, header=False)
             return round_file_path
 
-    def _feature_extraction(
+    def feature_extraction(
         self, toolset: Dict
     ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
@@ -127,7 +124,7 @@ class PreComputedDetector(BaseAlgorithm):
         pd.read_csv(self.dataset, header=None).shape[0]
         return {}, {}
 
-    def _world_detection(self, toolset: Dict) -> str:
+    def world_detection(self, toolset: Dict) -> str:
         """
         Detect change in world ( Novelty has been introduced ).
 
@@ -139,7 +136,35 @@ class PreComputedDetector(BaseAlgorithm):
         """
         return self._generate_step_result(toolset, "detection")
 
-    def _novelty_classification(self, toolset: Dict) -> str:
+
+class PreComputedONDAgent(PreComputedAgent, ONDAgent):
+    """Detector for submitting precomputed results in OND."""
+
+    def __init__(
+            self,
+            algorithm_name,
+            cache_dir,
+            has_roundwise_file,
+            round_size
+    ) -> None:
+        """
+        Construct agent with precomputed results for OND.
+
+        Args:
+            algorithm_name: Name of the algorithm
+            cache_dir: Path to cache directory
+            has_roundwise_file: Flag to determine if the cache has files for rounds
+            round_size: Size of a round
+        """
+        PreComputedAgent.__init__(self, algorithm_name, cache_dir, has_roundwise_file, round_size)
+        ONDAgent.__init__(self)
+        self.step_dict.update({
+            "NoveltyClassification": self.novelty_classification,
+            "NoveltyAdaption": self.novelty_adaption,
+            "NoveltyCharacterization": self.novelty_characterization,
+        })
+
+    def novelty_classification(self, toolset: Dict) -> str:
         """
         Classify data provided in known classes and unknown class.
 
@@ -151,7 +176,7 @@ class PreComputedDetector(BaseAlgorithm):
         """
         return self._generate_step_result(toolset, "classification")
 
-    def _novelty_adaption(self, toolset: Dict) -> None:
+    def novelty_adaption(self, toolset: Dict) -> None:
         """
         Update models based on novelty classification and characterization.
 
@@ -163,7 +188,45 @@ class PreComputedDetector(BaseAlgorithm):
         """
         pass
 
-    def _novelty_characterization(self, toolset: Dict) -> str:
+    def novelty_characterization(self, toolset: Dict) -> str:
+        """
+        Characterize novelty by clustering different novel samples.
+
+        Args:
+            toolset (dict): Dictionary containing parameters for different steps
+
+        Return:
+            path to csv file containing the results for novelty characterization step
+        """
+        return self._get_result_path(toolset, "characterization")
+
+
+class PreComputedCONDDAAgent(PreComputedAgent, CONDDAAgent):
+    """Detector for submitting precomputed results in CONDDA."""
+
+    def __init__(
+            self,
+            algorithm_name,
+            cache_dir,
+            has_roundwise_file,
+            round_size
+    ) -> None:
+        """
+        Construct agent with precomputed results for CONDDA.
+
+        Args:
+            algorithm_name: Name of the algorithm
+            cache_dir: Path to cache directory
+            has_roundwise_file: Flag to determine if the cache has files for rounds
+            round_size: Size of a round
+        """
+        PreComputedAgent.__init__(self, algorithm_name, cache_dir, has_roundwise_file, round_size)
+        ONDAgent.__init__(self)
+        self.step_dict.update({
+            "NoveltyCharacterization": self.novelty_characterization,
+        })
+
+    def novelty_characterization(self, toolset: Dict) -> str:
         """
         Characterize novelty by clustering different novel samples.
 
