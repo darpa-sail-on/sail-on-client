@@ -42,6 +42,16 @@ class PreComputedAgent(VisualAgent):
             "WorldDetection": self.world_detection
         }
 
+    def execute(self, toolset: Dict, step_descriptor: str) -> Any:
+        """
+        Execute method used by the protocol to run different steps associated with the algorithm.
+        Args:
+            toolset (dict): Dictionary containing parameters for different steps
+            step_descriptor (str): Name of the step
+        """
+        log.info(f"Executing {step_descriptor}")
+        return self.step_dict[step_descriptor](toolset)
+
     def initialize(self, toolset: Dict) -> None:
         """
         Algorithm Initialization.
@@ -160,7 +170,7 @@ class PreComputedONDAgent(PreComputedAgent, ONDAgent):
         ONDAgent.__init__(self)
         self.step_dict.update({
             "NoveltyClassification": self.novelty_classification,
-            "NoveltyAdaption": self.novelty_adaption,
+            "NoveltyAdaptation": self.novelty_adaptation,
             "NoveltyCharacterization": self.novelty_characterization,
         })
 
@@ -176,7 +186,7 @@ class PreComputedONDAgent(PreComputedAgent, ONDAgent):
         """
         return self._generate_step_result(toolset, "classification")
 
-    def novelty_adaption(self, toolset: Dict) -> None:
+    def novelty_adaptation(self, toolset: Dict) -> None:
         """
         Update models based on novelty classification and characterization.
 
