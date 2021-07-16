@@ -1,28 +1,28 @@
-Interface
-=========
+Harness
+=======
 
-Interfaces are used for testing and evaluating TA2 agents. The
+Harnesses are used for testing and evaluating TA2 agents. The
 evaluation can be conducted using a server setup by TA1 or by
 providing the files containing ground truth and metadata
-associated with the tests. We support two interfaces for
-sail-on-client
+associated with the tests. We support two harnesses for
+sail-on-client. These harnesses are subclasses of :code:`TestAndEvaluationHarness`.
 
-1. Local Interface
-2. PAR Interface
+Local Harness
+-------------
 
-Local Interface
----------------
+:code:`LocalHarness` is primarily used for replicating the capabilities of
+:code:`ParHarness` without using the server. This allows local testing without
+setting up a server instance locally or via a URL. Since LocalHarness uses
+the files it requires 3 parameters:
 
-:code:`LocalInterface` is primarily used for replicating the capabilities of
-:code:`PARInterface` without using the server. This allows local testing without
-setting up a server instance locally or via a URL. Since LocalInterface uses
-the files directly, the config parameter `data_dir` needs to be specified to
-use this interface.
+1. :code:`data_dir`: Root directory where the data for tests is stored
+2. :code:`gt_dir`: Root directory where ground truth is stored
+3. :code:`gt_config`: A json file with column mapping for ground truth
 
 PAR Interface
 -------------
 
-:code:`ParInterface` is primarily responsible for communicating with the evaluation
+:code:`ParHarness` is primarily responsible for communicating with the evaluation
 server setup by the TA1 team. The interface relies on RESTful api :ref:`(detailed in the next section)<REST API>`  to provide the
 following features
 
