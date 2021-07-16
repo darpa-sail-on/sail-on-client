@@ -49,7 +49,9 @@ class MockCONDDAAgent(CONDDAAgent):
         config.update(self.toolset)
         return config
 
-    def feature_extraction(self, toolset: Dict) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    def feature_extraction(
+        self, toolset: Dict
+    ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
         Feature extraction step for the algorithm.
 
@@ -115,7 +117,6 @@ class MockCONDDAAgentWithAttributes(MockCONDDAAgent):
             toolset (dict): Dictionary containing parameters for the constructor
         """
         MockCONDDAAgent.__init__(self)
-
 
     def feature_extraction(
         self, toolset: Dict

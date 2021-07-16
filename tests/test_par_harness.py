@@ -87,9 +87,7 @@ def test_test_ids_request(server_setup, get_par_harness_params):
     filename = par_interface.test_ids_request(
         "OND", "image_classification", "5678", assumptions_path
     )
-    expected = os.path.join(
-        save_dir , f"OND.image_classification.5678.csv"
-    )
+    expected = os.path.join(save_dir, f"OND.image_classification.5678.csv")
     assert os.stat(expected).st_size > 5
     assert expected == filename
 
@@ -268,8 +266,7 @@ def test_feedback_request(
         session_id,
     )
     expected = os.path.join(
-        save_dir,
-        f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
+        save_dir, f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
     )
     assert expected == response
 

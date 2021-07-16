@@ -105,7 +105,8 @@ def test_get_labelled_feedback(
     required_files = feedback_mapping[1]
     for required_file in required_files:
         result_files[required_file] = os.path.join(
-            result_folder, f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv"
+            result_folder,
+            f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv",
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     ar_feedback = ActivityRecognitionFeedback(
@@ -145,7 +146,8 @@ def test_get_score_feedback(
     required_files = feedback_mapping[1]
     for required_file in required_files:
         result_files[required_file] = os.path.join(
-            result_folder, f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv"
+            result_folder,
+            f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv",
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     feedback = ActivityRecognitionFeedback(
@@ -189,7 +191,8 @@ def test_get_feedback(
     required_files = feedback_mapping[1]
     for required_file in required_files:
         result_files[required_file] = os.path.join(
-            result_folder, f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv"
+            result_folder,
+            f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv",
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     ar_feedback = ActivityRecognitionFeedback(

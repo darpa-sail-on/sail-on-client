@@ -114,7 +114,9 @@ class ParHarness(TestAndEvaluationHarness):
         self._check_response(response)
 
         filename = os.path.abspath(
-            os.path.join(self.save_directory, f"{protocol}.{domain}.{detector_seed}.csv")
+            os.path.join(
+                self.save_directory, f"{protocol}.{domain}.{detector_seed}.csv"
+            )
         )
         with open(filename, "w") as f:
             f.write(response.content.decode("utf-8"))
@@ -261,7 +263,8 @@ class ParHarness(TestAndEvaluationHarness):
         self._check_response(response)
         filename = os.path.abspath(
             os.path.join(
-                self.save_directory, f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv"
+                self.save_directory,
+                f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv",
             )
         )
         with open(filename, "wb") as f:
@@ -420,8 +423,7 @@ class ParHarness(TestAndEvaluationHarness):
             None
         """
         requests.delete(
-            f"{self.url}/test",
-            params={"test_id": test_id, "session_id": session_id},
+            f"{self.url}/test", params={"test_id": test_id, "session_id": session_id},
         )
 
     @retry(

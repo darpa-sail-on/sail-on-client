@@ -37,4 +37,3 @@ class VisualAgent(Algorithm):
             Path to results for detecting that the world has changed.
         """
         pass
-

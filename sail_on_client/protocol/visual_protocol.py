@@ -17,9 +17,7 @@ class VisualProtocol(Protocol):
     """Protocol for visual tasks."""
 
     def __init__(
-        self,
-        algorithms: Dict[str, VisualAgent],
-        harness: TestAndEvaluationHarness
+        self, algorithms: Dict[str, VisualAgent], harness: TestAndEvaluationHarness
     ) -> None:
         """
         Construct visual protocol.
@@ -37,9 +35,7 @@ class VisualProtocol(Protocol):
 
     @classmethod
     def from_config(
-        cls: Type[VisualProtocolType],
-        config_dict: Dict,
-        merge_default: bool = True
+        cls: Type[VisualProtocolType], config_dict: Dict, merge_default: bool = True
     ) -> VisualProtocolType:
         """
         Construct protocol from config.

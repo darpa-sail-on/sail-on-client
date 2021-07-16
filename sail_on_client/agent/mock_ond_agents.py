@@ -43,7 +43,9 @@ class MockONDAgent(ONDAgent):
         """
         pass
 
-    def feature_extraction(self, toolset: Dict) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    def feature_extraction(
+        self, toolset: Dict
+    ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         """
         Feature extraction step for the algorithm.
 

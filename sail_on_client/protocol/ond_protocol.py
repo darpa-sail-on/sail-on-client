@@ -49,7 +49,7 @@ class ONDProtocol(VisualProtocol):
         feedback_type: str = None,
         use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
-        use_saved_features: bool = False
+        use_saved_features: bool = False,
     ) -> None:
         """
         Construct OND protocol.
@@ -112,31 +112,33 @@ class ONDProtocol(VisualProtocol):
 
     def get_config(self) -> Dict:
         config = super().get_config()
-        config.update({
-            "baseline_class": self.baseline_class,
-            "dataset_root": self.dataset_root,
-            "domain": self.domain,
-            "feature_extraction_only": self.feature_extraction_only,
-            "feedback_type": self.feedback_type,
-            "has_baseline": self.has_baseline,
-            "has_reaction_baseline": self.has_reaction_baseline,
-            "hints": self.hints,
-            "is_eval_enabled": self.is_eval_enabled,
-            "is_eval_roundwise_enabled": self.is_eval_roundwise_enabled,
-            "resume_session": self.resume_session,
-            "resumed_session_ids": self.resume_session_ids,
-            "save_attributes": self.save_attributes,
-            "saved_attributes": self.saved_attributes,
-            "save_dir": self.save_dir,
-            "save_elementwise": self.save_elementwise,
-            "save_features": self.save_features,
-            "skip_stages": self.skip_stages,
-            "seed": self.seed,
-            "test_ids": self.test_ids,
-            "use_feedback": self.use_feedback,
-            "use_saved_attributes": self.use_saved_attributes,
-            "use_saved_features": self.use_saved_features
-        })
+        config.update(
+            {
+                "baseline_class": self.baseline_class,
+                "dataset_root": self.dataset_root,
+                "domain": self.domain,
+                "feature_extraction_only": self.feature_extraction_only,
+                "feedback_type": self.feedback_type,
+                "has_baseline": self.has_baseline,
+                "has_reaction_baseline": self.has_reaction_baseline,
+                "hints": self.hints,
+                "is_eval_enabled": self.is_eval_enabled,
+                "is_eval_roundwise_enabled": self.is_eval_roundwise_enabled,
+                "resume_session": self.resume_session,
+                "resumed_session_ids": self.resume_session_ids,
+                "save_attributes": self.save_attributes,
+                "saved_attributes": self.saved_attributes,
+                "save_dir": self.save_dir,
+                "save_elementwise": self.save_elementwise,
+                "save_features": self.save_features,
+                "skip_stages": self.skip_stages,
+                "seed": self.seed,
+                "test_ids": self.test_ids,
+                "use_feedback": self.use_feedback,
+                "use_saved_attributes": self.use_saved_attributes,
+                "use_saved_features": self.use_saved_features,
+            }
+        )
         return config
 
     def create_algorithm_attributes(
@@ -364,7 +366,11 @@ class ONDProtocol(VisualProtocol):
         # session_id for algorithm attributes
         for idx, algorithm_attributes in enumerate(algorithms_attributes):
             algorithms_attributes[idx] = self.create_algorithm_session(
-                algorithm_attributes, self.domain, self.hints, self.resume_session, "OND"
+                algorithm_attributes,
+                self.domain,
+                self.hints,
+                self.resume_session,
+                "OND",
             )
 
         # Run tests for all the algorithms
@@ -399,7 +405,9 @@ class ONDProtocol(VisualProtocol):
             algorithm_scores[algorithm_name] = test_scores
 
         # Evaluate algorithms
-        self._evaluate_algorithms(algorithms_attributes, algorithm_scores, self.save_dir)
+        self._evaluate_algorithms(
+            algorithms_attributes, algorithm_scores, self.save_dir
+        )
 
         # Terminate algorithms
         for algorithm_attributes in algorithms_attributes:

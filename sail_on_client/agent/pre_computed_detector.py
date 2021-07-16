@@ -16,11 +16,7 @@ class PreComputedAgent(VisualAgent):
     """Detector for submitting precomputed results."""
 
     def __init__(
-            self,
-            algorithm_name,
-            cache_dir,
-            has_roundwise_file,
-            round_size
+        self, algorithm_name, cache_dir, has_roundwise_file, round_size
     ) -> None:
         """
         Construct agent with precomputed results.
@@ -39,7 +35,7 @@ class PreComputedAgent(VisualAgent):
         self.step_dict: Dict[str, Callable] = {
             "Initialize": self.initialize,
             "FeatureExtraction": self.feature_extraction,
-            "WorldDetection": self.world_detection
+            "WorldDetection": self.world_detection,
         }
 
     def execute(self, toolset: Dict, step_descriptor: str) -> Any:
@@ -151,11 +147,7 @@ class PreComputedONDAgent(PreComputedAgent, ONDAgent):
     """Detector for submitting precomputed results in OND."""
 
     def __init__(
-            self,
-            algorithm_name,
-            cache_dir,
-            has_roundwise_file,
-            round_size
+        self, algorithm_name, cache_dir, has_roundwise_file, round_size
     ) -> None:
         """
         Construct agent with precomputed results for OND.
@@ -166,13 +158,17 @@ class PreComputedONDAgent(PreComputedAgent, ONDAgent):
             has_roundwise_file: Flag to determine if the cache has files for rounds
             round_size: Size of a round
         """
-        PreComputedAgent.__init__(self, algorithm_name, cache_dir, has_roundwise_file, round_size)
+        PreComputedAgent.__init__(
+            self, algorithm_name, cache_dir, has_roundwise_file, round_size
+        )
         ONDAgent.__init__(self)
-        self.step_dict.update({
-            "NoveltyClassification": self.novelty_classification,
-            "NoveltyAdaptation": self.novelty_adaptation,
-            "NoveltyCharacterization": self.novelty_characterization,
-        })
+        self.step_dict.update(
+            {
+                "NoveltyClassification": self.novelty_classification,
+                "NoveltyAdaptation": self.novelty_adaptation,
+                "NoveltyCharacterization": self.novelty_characterization,
+            }
+        )
 
     def novelty_classification(self, toolset: Dict) -> str:
         """
@@ -215,11 +211,7 @@ class PreComputedCONDDAAgent(PreComputedAgent, CONDDAAgent):
     """Detector for submitting precomputed results in CONDDA."""
 
     def __init__(
-            self,
-            algorithm_name,
-            cache_dir,
-            has_roundwise_file,
-            round_size
+        self, algorithm_name, cache_dir, has_roundwise_file, round_size
     ) -> None:
         """
         Construct agent with precomputed results for CONDDA.
@@ -230,11 +222,13 @@ class PreComputedCONDDAAgent(PreComputedAgent, CONDDAAgent):
             has_roundwise_file: Flag to determine if the cache has files for rounds
             round_size: Size of a round
         """
-        PreComputedAgent.__init__(self, algorithm_name, cache_dir, has_roundwise_file, round_size)
+        PreComputedAgent.__init__(
+            self, algorithm_name, cache_dir, has_roundwise_file, round_size
+        )
         ONDAgent.__init__(self)
-        self.step_dict.update({
-            "NoveltyCharacterization": self.novelty_characterization,
-        })
+        self.step_dict.update(
+            {"NoveltyCharacterization": self.novelty_characterization,}
+        )
 
     def novelty_characterization(self, toolset: Dict) -> str:
         """

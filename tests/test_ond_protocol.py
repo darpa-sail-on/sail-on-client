@@ -35,8 +35,11 @@ def ond_reaction_baseline_params():
     has_reaction_baseline = True
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    baseline_algorithm = {baseline_class: PreComputedONDAgent("BaselinePreComputedONDAgent",
-                                                              cache_dir, False, 32)}
+    baseline_algorithm = {
+        baseline_class: PreComputedONDAgent(
+            "BaselinePreComputedONDAgent", cache_dir, False, 32
+        )
+    }
     return baseline_class, has_reaction_baseline, baseline_algorithm
 
 
@@ -57,8 +60,9 @@ def test_initialize(
     """
     algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = ond_params
-    ONDProtocol(algorithms, dataset_root, domain, ond_harness_instance, save_dir,
-                seed, test_ids)
+    ONDProtocol(
+        algorithms, dataset_root, domain, ond_harness_instance, save_dir, seed, test_ids
+    )
 
 
 def test_run_protocol(
@@ -78,13 +82,18 @@ def test_run_protocol(
     """
     algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = ond_params
-    ond = ONDProtocol(algorithms, dataset_root, domain, ond_harness_instance,
-                      save_dir, seed, test_ids)
+    ond = ONDProtocol(
+        algorithms, dataset_root, domain, ond_harness_instance, save_dir, seed, test_ids
+    )
     ond.run_protocol({})
 
 
 def test_feature_extraction(
-    server_setup, ond_params, ond_fe_params, ond_harness_instance, ond_algorithm_instance
+    server_setup,
+    ond_params,
+    ond_fe_params,
+    ond_harness_instance,
+    ond_algorithm_instance,
 ):
     """
     Test feature extraction only.
@@ -102,15 +111,26 @@ def test_feature_extraction(
     algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = ond_params
     feature_extraction_only, save_features = ond_fe_params
-    ond = ONDProtocol(algorithms, dataset_root, domain, ond_harness_instance,
-                      save_dir, seed, test_ids,
-                      feature_extraction_only=feature_extraction_only,
-                      save_features=save_features)
+    ond = ONDProtocol(
+        algorithms,
+        dataset_root,
+        domain,
+        ond_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+        feature_extraction_only=feature_extraction_only,
+        save_features=save_features,
+    )
     ond.run_protocol({})
 
 
 def test_reaction_baseline(
-    server_setup, ond_params, ond_reaction_baseline_params, ond_harness_instance, ond_algorithm_instance
+    server_setup,
+    ond_params,
+    ond_reaction_baseline_params,
+    ond_harness_instance,
+    ond_algorithm_instance,
 ):
     """
     Test reaction baseline with a detector.
@@ -127,10 +147,23 @@ def test_reaction_baseline(
     """
     algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = ond_params
-    baseline_class, has_reaction_baseline, baseline_algorithm = ond_reaction_baseline_params
+    (
+        baseline_class,
+        has_reaction_baseline,
+        baseline_algorithm,
+    ) = ond_reaction_baseline_params
     algorithms.update(baseline_algorithm)
-    ond = ONDProtocol(algorithms, dataset_root, domain, ond_harness_instance,
-                      save_dir, seed, test_ids, baseline_class=baseline_class,
-                      has_reaction_baseline=has_reaction_baseline,
-                      is_eval_enabled=True, is_eval_roundwise_enabled=True)
+    ond = ONDProtocol(
+        algorithms,
+        dataset_root,
+        domain,
+        ond_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+        baseline_class=baseline_class,
+        has_reaction_baseline=has_reaction_baseline,
+        is_eval_enabled=True,
+        is_eval_roundwise_enabled=True,
+    )
     ond.run_protocol({})

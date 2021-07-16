@@ -44,8 +44,15 @@ def test_initialize(
     """
     algorithms = {"PreComputedCONDDAAgent": condda_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = condda_params
-    Condda(algorithms, dataset_root, domain, condda_harness_instance,
-           save_dir, seed, test_ids)
+    Condda(
+        algorithms,
+        dataset_root,
+        domain,
+        condda_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+    )
 
 
 def test_run_protocol(
@@ -65,13 +72,24 @@ def test_run_protocol(
     """
     algorithms = {"PreComputedCONDDAAgent": condda_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = condda_params
-    condda = Condda(algorithms, dataset_root, domain, condda_harness_instance,
-                    save_dir, seed, test_ids)
+    condda = Condda(
+        algorithms,
+        dataset_root,
+        domain,
+        condda_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+    )
     condda.run_protocol({})
 
 
 def test_feature_extraction(
-    server_setup, condda_params, condda_harness_instance, condda_algorithm_instance, condda_fe_params
+    server_setup,
+    condda_params,
+    condda_harness_instance,
+    condda_algorithm_instance,
+    condda_fe_params,
 ):
     """
     Test feature extraction.
@@ -89,8 +107,15 @@ def test_feature_extraction(
     algorithms = {"PreComputedCONDDAAgent": condda_algorithm_instance}
     dataset_root, domain, seed, test_ids, save_dir = condda_params
     feature_extraction_only, save_features = condda_fe_params
-    condda = Condda(algorithms, dataset_root, domain, condda_harness_instance,
-                    save_dir, seed, test_ids,
-                    feature_extraction_only=feature_extraction_only,
-                    save_features=save_features)
+    condda = Condda(
+        algorithms,
+        dataset_root,
+        domain,
+        condda_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+        feature_extraction_only=feature_extraction_only,
+        save_features=save_features,
+    )
     condda.run_protocol({})

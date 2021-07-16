@@ -28,7 +28,9 @@ def precomputed_ond_agent_with_features():
     """Fixture for creating precomputed detector instance with feature extraction."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    precomputed_ond_agent = PreComputedONDAgent("PreComputedONDAgent", cache_dir, False, 32)
+    precomputed_ond_agent = PreComputedONDAgent(
+        "PreComputedONDAgent", cache_dir, False, 32
+    )
     precomputed_ond_agent.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
     dataset = os.path.join(
         test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
@@ -45,7 +47,9 @@ def precomputed_ond_agent_with_features_with_round():
     """Fixture for creating precomputed detector instance with feature extraction."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    precomputed_ond_agent = PreComputedONDAgent("PreComputedONDAgent", cache_dir, True, 32)
+    precomputed_ond_agent = PreComputedONDAgent(
+        "PreComputedONDAgent", cache_dir, True, 32
+    )
     precomputed_ond_agent.execute({"test_id": "OND.10.90001.2100554"}, "Initialize")
     dataset = os.path.join(
         test_dir, "data", "OND", "activity_recognition", "OND.10.90001.2100554.csv"
@@ -78,11 +82,18 @@ def precomputed_condda_agent_with_features():
     """Fixture for creating precomputed detector instance with feature extraction."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    precomputed_condda_agent = PreComputedCONDDAAgent("PreComputedCONDDAAgent",
-                                                      cache_dir, False, 32)
-    precomputed_condda_agent.execute({"test_id": "CONDDA.10.90001.2100554"}, "Initialize")
+    precomputed_condda_agent = PreComputedCONDDAAgent(
+        "PreComputedCONDDAAgent", cache_dir, False, 32
+    )
+    precomputed_condda_agent.execute(
+        {"test_id": "CONDDA.10.90001.2100554"}, "Initialize"
+    )
     dataset = os.path.join(
-        test_dir, "data", "CONDDA", "activity_recognition", "CONDDA.10.90001.2100554.csv"
+        test_dir,
+        "data",
+        "CONDDA",
+        "activity_recognition",
+        "CONDDA.10.90001.2100554.csv",
     )
     fe_toolset = {
         "dataset": dataset,
@@ -96,10 +107,18 @@ def precomputed_condda_agent_with_features_with_round():
     """Fixture for creating precomputed detector instance with feature extraction."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    precomputed_condda_agent = PreComputedCONDDAAgent("PreComputedCONDDAAgent", cache_dir, True, 32)
-    precomputed_condda_agent.execute({"test_id": "CONDDA.10.90001.2100554"}, "Initialize")
+    precomputed_condda_agent = PreComputedCONDDAAgent(
+        "PreComputedCONDDAAgent", cache_dir, True, 32
+    )
+    precomputed_condda_agent.execute(
+        {"test_id": "CONDDA.10.90001.2100554"}, "Initialize"
+    )
     dataset = os.path.join(
-        test_dir, "data", "CONDDA", "activity_recognition", "CONDDA.10.90001.2100554.csv"
+        test_dir,
+        "data",
+        "CONDDA",
+        "activity_recognition",
+        "CONDDA.10.90001.2100554.csv",
     )
     fe_toolset = {
         "dataset": dataset,
@@ -117,9 +136,13 @@ def test_ond_init():
     """
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    precomputed_ond_agent = PreComputedONDAgent("PreComputedONDAgent", cache_dir, False, 32)
+    precomputed_ond_agent = PreComputedONDAgent(
+        "PreComputedONDAgent", cache_dir, False, 32
+    )
     assert precomputed_ond_agent.algorithm_name == "PreComputedONDAgent"
-    precomputed_ond_agent_with_round = PreComputedONDAgent("PreComputedONDAgent", cache_dir, True, 32)
+    precomputed_ond_agent_with_round = PreComputedONDAgent(
+        "PreComputedONDAgent", cache_dir, True, 32
+    )
     assert precomputed_ond_agent_with_round.has_roundwise_file
 
 
@@ -239,13 +262,19 @@ def test_condda_init():
     """
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    precomputed_condda_agent = PreComputedCONDDAAgent("PreComputedCONDDAAgent", cache_dir, False, 32)
+    precomputed_condda_agent = PreComputedCONDDAAgent(
+        "PreComputedCONDDAAgent", cache_dir, False, 32
+    )
     assert precomputed_condda_agent.algorithm_name == "PreComputedCONDDAAgent"
-    precomputed_condda_agent_with_round = PreComputedCONDDAAgent("PreComputedCONDDAAgent", cache_dir, True, 32)
+    precomputed_condda_agent_with_round = PreComputedCONDDAAgent(
+        "PreComputedCONDDAAgent", cache_dir, True, 32
+    )
     assert precomputed_condda_agent_with_round.has_roundwise_file
 
 
-def test_condda_initialize(precomputed_condda_agent, precomputed_condda_agent_with_round):
+def test_condda_initialize(
+    precomputed_condda_agent, precomputed_condda_agent_with_round
+):
     """
     Test precomputed detector initialize step.
 
@@ -256,7 +285,9 @@ def test_condda_initialize(precomputed_condda_agent, precomputed_condda_agent_wi
     Return:
         None
     """
-    precomputed_condda_agent.execute({"test_id": "CONDDA.10.90001.2100554"}, "Initialize")
+    precomputed_condda_agent.execute(
+        {"test_id": "CONDDA.10.90001.2100554"}, "Initialize"
+    )
     precomputed_condda_agent_with_round.execute(
         {"test_id": "CONDDA.10.90001.2100554"}, "Initialize"
     )
@@ -274,7 +305,11 @@ def test_condda_feature_extraction(precomputed_condda_agent):
     """
     test_dir = os.path.dirname(__file__)
     dataset = os.path.join(
-        test_dir, "data", "CONDDA", "activity_recognition", "CONDDA.10.90001.2100554.csv"
+        test_dir,
+        "data",
+        "CONDDA",
+        "activity_recognition",
+        "CONDDA.10.90001.2100554.csv",
     )
     fe_toolset = {
         "dataset": dataset,
@@ -285,7 +320,8 @@ def test_condda_feature_extraction(precomputed_condda_agent):
 
 
 def test_condda_detection(
-    precomputed_condda_agent_with_features, precomputed_condda_agent_with_features_with_round
+    precomputed_condda_agent_with_features,
+    precomputed_condda_agent_with_features_with_round,
 ):
     """
     Test precomputed detector detection.

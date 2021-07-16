@@ -119,7 +119,9 @@ def condda_harness_instance():
     test_dir = os.path.dirname(__file__)
     data_dir = os.path.join(test_dir, "data")
     gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
-    gt_config = os.path.join(data_dir, "OND", "activity_recognition", "activity_recognition.json")
+    gt_config = os.path.join(
+        data_dir, "OND", "activity_recognition", "activity_recognition.json"
+    )
     local_interface = LocalHarness(data_dir, gt_dir, gt_config)
     return local_interface
 

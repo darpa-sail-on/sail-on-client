@@ -38,7 +38,7 @@ class Condda(VisualProtocol):
         skip_stages: List = [],
         use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
-        use_saved_features: bool = False
+        use_saved_features: bool = False,
     ) -> None:
         """
         Initialize CONDDA protocol object.
@@ -214,7 +214,11 @@ class Condda(VisualProtocol):
         # session_id for algorithm attributes
         for idx, algorithm_attributes in enumerate(algorithms_attributes):
             algorithms_attributes[idx] = self.create_algorithm_session(
-                algorithm_attributes, self.domain, self.hints, self.resume_session, "CONDDA"
+                algorithm_attributes,
+                self.domain,
+                self.hints,
+                self.resume_session,
+                "CONDDA",
             )
 
         # Run tests for all the algorithms

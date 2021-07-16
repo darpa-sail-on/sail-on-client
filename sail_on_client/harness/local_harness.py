@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 class LocalHarness(TestAndEvaluationHarness):
     """Harness without any server communication."""
 
-    def __init__(self, data_dir: str, gt_dir: str = "", gt_config: str = "")-> None:
+    def __init__(self, data_dir: str, gt_dir: str = "", gt_config: str = "") -> None:
         """
         Initialize an object of local harness.
 
@@ -43,9 +43,11 @@ class LocalHarness(TestAndEvaluationHarness):
 
     def get_config(self):
         """JSON Compliant representation of the object."""
-        return {"data_dir": self.data_dir,
-                "gt_dir": self.gt_dir,
-                "gt_config": self.gt_config}
+        return {
+            "data_dir": self.data_dir,
+            "gt_dir": self.gt_dir,
+            "gt_config": self.gt_config,
+        }
 
     def update_provider(self) -> None:
         """

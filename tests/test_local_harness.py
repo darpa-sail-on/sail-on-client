@@ -88,7 +88,7 @@ def test_test_ids_request(get_local_harness_params):
         "OND", "image_classification", "5678", assumptions_path
     )
     expected = os.path.join(
-            test_dir, "data", "OND", "image_classification", TEST_ID_NAME
+        test_dir, "data", "OND", "image_classification", TEST_ID_NAME
     )
     assert os.stat(expected).st_size > 5
     assert expected == filename
@@ -111,7 +111,9 @@ def test_session_request(get_local_harness_params):
     local_interface = LocalHarness(data_dir, gt_dir, gt_config)
 
     test_dir = os.path.dirname(__file__)
-    test_id_path = os.path.join(test_dir, "data", "OND", "image_classification", TEST_ID_NAME)
+    test_id_path = os.path.join(
+        test_dir, "data", "OND", "image_classification", TEST_ID_NAME
+    )
     test_ids = list(map(str.strip, open(test_id_path, "r").readlines()))
     # Testing if session was sucessfully initalized
     local_interface.session_request(
