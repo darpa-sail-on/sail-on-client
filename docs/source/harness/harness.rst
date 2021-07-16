@@ -19,8 +19,8 @@ the files it requires 3 parameters:
 2. :code:`gt_dir`: Root directory where ground truth is stored
 3. :code:`gt_config`: A json file with column mapping for ground truth
 
-PAR Interface
--------------
+PAR Harness
+-----------
 
 :code:`ParHarness` is primarily responsible for communicating with the evaluation
 server setup by the TA1 team. The interface relies on RESTful api :ref:`(detailed in the next section)<REST API>`  to provide the
