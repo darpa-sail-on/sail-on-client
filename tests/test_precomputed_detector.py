@@ -280,7 +280,7 @@ def test_condda_initialize(
 
     Args:
         precomputed_condda_agent (PreComputedCONDDAAgent): An instance of PreComputedCONDDAAgent
-        precomputed_condda_agent_with_round (PreComputedCONDDAAgent): An instance of PreComputedCONDDAAgent with roundwise file
+        precomputed_condda_agent_with_round (PreComputedCONDDAAgent): PreComputedCONDDAAgent with roundwise file
 
     Return:
         None
@@ -328,7 +328,7 @@ def test_condda_detection(
 
     Args:
         precomputed_condda_agent_with_features (PreComputedCONDDAAgent): An instance of PreComputedCONDDAAgent
-        precomputed_condda_agent_with_features_with_round (PreComputedCONDDAAgent): An instance of PreComputedCONDDAAgent
+        precomputed_condda_agent_with_features_with_round (PreComputedCONDDAAgent): PreComputedCONDDAAgent instance
 
     Return:
         None

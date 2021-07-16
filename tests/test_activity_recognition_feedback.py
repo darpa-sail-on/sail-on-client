@@ -1,7 +1,5 @@
 """Tests for Activity Recognition Feedback."""
 
-from tempfile import TemporaryDirectory
-import json
 import pytest
 import os
 

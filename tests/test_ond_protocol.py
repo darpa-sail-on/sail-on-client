@@ -97,13 +97,13 @@ def test_feature_extraction(
 ):
     """
     Test feature extraction only.
+
+    Args:
         server_setup (tuple): Tuple containing url and result directory
         ond_params (tuple): Tuple to configure OND parameters with all defaults
         ond_fe_params (tuple): Tuple to configure OND parameters with feature extraction
         ond_harness_instance: An instance of local harness
         ond_algorithm_instance: An instance of PreComputedONDAgent
-
-    Args:
 
     Return:
         None

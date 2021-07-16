@@ -1,7 +1,7 @@
 """Visual Protocol."""
 
 import logging
-from typing import Dict, Any, TypeVar, Type
+from typing import Dict, TypeVar, Type
 
 from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
 from sail_on_client.agent.visual_agent import VisualAgent

@@ -41,6 +41,7 @@ class PreComputedAgent(VisualAgent):
     def execute(self, toolset: Dict, step_descriptor: str) -> Any:
         """
         Execute method used by the protocol to run different steps associated with the algorithm.
+
         Args:
             toolset (dict): Dictionary containing parameters for different steps
             step_descriptor (str): Name of the step
@@ -227,7 +228,7 @@ class PreComputedCONDDAAgent(PreComputedAgent, CONDDAAgent):
         )
         ONDAgent.__init__(self)
         self.step_dict.update(
-            {"NoveltyCharacterization": self.novelty_characterization,}
+            {"NoveltyCharacterization": self.novelty_characterization}
         )
 
     def novelty_characterization(self, toolset: Dict) -> str:

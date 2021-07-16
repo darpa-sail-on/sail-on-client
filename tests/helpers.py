@@ -4,7 +4,6 @@ import pytest
 import os
 import time
 import shutil
-import json
 import ubelt as ub
 import multiprocessing
 import logging
@@ -131,4 +130,4 @@ def condda_algorithm_instance():
     """Fixture for creating an agent for OND."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    return PreComputedONDAgent("PreComputedCONDDAAgent", cache_dir, False, 32)
+    return PreComputedCONDDAAgent("PreComputedCONDDAAgent", cache_dir, False, 32)

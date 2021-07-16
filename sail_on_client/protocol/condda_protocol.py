@@ -8,7 +8,7 @@ from sail_on_client.protocol.condda_test import CONDDATest
 
 import logging
 
-from typing import Dict, Any, List
+from typing import Dict, List
 
 log = logging.getLogger(__name__)
 
@@ -26,16 +26,16 @@ class Condda(VisualProtocol):
         seed: str,
         test_ids: List[str],
         feature_extraction_only: bool = False,
-        hints: List = [],
+        hints: List = None,
         is_eval_enabled: bool = False,
         is_eval_roundwise_enabled: bool = False,
         resume_session: bool = False,
-        resume_session_ids: Dict = {},
+        resume_session_ids: Dict = None,
         save_attributes: bool = False,
-        saved_attributes: Dict = {},
+        saved_attributes: Dict = None,
         save_elementwise: bool = False,
         save_features: bool = False,
-        skip_stages: List = [],
+        skip_stages: List = None,
         use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
         use_saved_features: bool = False,
@@ -73,17 +73,29 @@ class Condda(VisualProtocol):
         self.dataset_root = dataset_root
         self.domain = domain
         self.feature_extraction_only = feature_extraction_only
-        self.hints = hints
+        if hints is None:
+            self.hints = []
+        else:
+            self.hints = hints
         self.is_eval_enabled = is_eval_enabled
         self.is_eval_roundwise_enabled = is_eval_roundwise_enabled
         self.resume_session = resume_session
-        self.resume_session_ids = resume_session_ids
-        self.save_attributes = saved_attributes
-        self.saved_attributes = saved_attributes
+        if resume_session_ids is None:
+            self.resume_session_ids = {}
+        else:
+            self.resume_session_ids = resume_session_ids
+        self.save_attributes = save_attributes
+        if saved_attributes is None:
+            self.saved_attributes = {}
+        else:
+            self.saved_attributes = saved_attributes
         self.save_dir = save_dir
         self.save_elementwise = save_elementwise
         self.save_features = save_features
-        self.skip_stages = skip_stages
+        if skip_stages is None:
+            self.skip_stages = []
+        else:
+            self.skip_stages = skip_stages
         self.seed = seed
         self.test_ids = test_ids
         self.use_consolidated_features = use_consolidated_features
