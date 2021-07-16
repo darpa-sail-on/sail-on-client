@@ -10,7 +10,7 @@ from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes
 
 DOMAIN = "activity_recognition"
 PROTOCOL = "CONDDA"
-ALGORITHM_NAME = "PreComputedDetector"
+ALGORITHM_NAME = "PreComputedCONDDAAgent"
 
 
 def create_algorithm_attribute(
@@ -64,22 +64,22 @@ def create_temp_features(save_dir, test_id):
         pkl.dump(features, f)
 
 
-def test_initialize(harness_instance, algorithm_instance):
+def test_initialize(condda_harness_instance, condda_algorithm_instance):
     """
     Test initialization of CONDDATest.
 
     Args:
-        harness_instance: Instance of local interface
-        algorithm_instance: Instance of PreComputedDetector
+        condda_harness_instance: Instance of local interface
+        condda_algorithm_instance: Instance of PreComputedDetector
 
     Returns:
         None
     """
     test_ids = ["CONDDA.10.90001.2100554"]
     algorithm_attribute = create_algorithm_attribute(
-        ALGORITHM_NAME, algorithm_instance, {}, "", test_ids
+        ALGORITHM_NAME, condda_algorithm_instance, {}, "", test_ids
     )
-    session_id = harness_instance.session_request(
+    session_id = condda_harness_instance.session_request(
         test_ids,
         PROTOCOL,
         DOMAIN,
@@ -92,7 +92,7 @@ def test_initialize(harness_instance, algorithm_instance):
         algorithm_attribute,
         "",
         DOMAIN,
-        harness_instance,
+        condda_harness_instance,
         "",
         session_id,
         [],
@@ -101,22 +101,22 @@ def test_initialize(harness_instance, algorithm_instance):
     )
 
 
-def test_call(harness_instance, algorithm_instance):
+def test_call(condda_harness_instance, condda_algorithm_instance):
     """
     Test __call__ of CONDDATest.
 
     Args:
-        harness_instance: Instance of local interface
-        algorithm_instance: Instance of PreComputedDetector
+        condda_harness_instance: Instance of local interface
+        condda_algorithm_instance: Instance of PreComputedDetector
 
     Returns:
         None
     """
     test_ids = ["CONDDA.10.90001.2100554"]
     algorithm_attribute = create_algorithm_attribute(
-        ALGORITHM_NAME, algorithm_instance, {}, "", test_ids
+        ALGORITHM_NAME, condda_algorithm_instance, {}, "", test_ids
     )
-    session_id = harness_instance.session_request(
+    session_id = condda_harness_instance.session_request(
         test_ids,
         PROTOCOL,
         DOMAIN,
@@ -129,7 +129,7 @@ def test_call(harness_instance, algorithm_instance):
         algorithm_attribute,
         "",
         DOMAIN,
-        harness_instance,
+        condda_harness_instance,
         "",
         session_id,
         [],
@@ -139,22 +139,22 @@ def test_call(harness_instance, algorithm_instance):
     ond_test(test_ids[0])
 
 
-def test_call_with_features(harness_instance, algorithm_instance):
+def test_call_with_features(condda_harness_instance, condda_algorithm_instance):
     """
     Test __call__ of CONDDATest with features.
 
     Args:
-        harness_instance: Instance of local interface
-        algorithm_instance: Instance of PreComputedDetector
+        condda_harness_instance: Instance of local interface
+        condda_algorithm_instance: Instance of PreComputedDetector
 
     Returns:
         None
     """
     test_ids = ["CONDDA.10.90001.2100554"]
     algorithm_attribute = create_algorithm_attribute(
-        ALGORITHM_NAME, algorithm_instance, {}, "", test_ids
+        ALGORITHM_NAME, condda_algorithm_instance, {}, "", test_ids
     )
-    session_id = harness_instance.session_request(
+    session_id = condda_harness_instance.session_request(
         test_ids,
         PROTOCOL,
         DOMAIN,
@@ -169,7 +169,7 @@ def test_call_with_features(harness_instance, algorithm_instance):
             algorithm_attribute,
             "",
             DOMAIN,
-            harness_instance,
+            condda_harness_instance,
             tempdirectory,
             session_id,
             [],

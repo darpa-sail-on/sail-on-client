@@ -16,6 +16,7 @@ from pkg_resources import DistributionNotFound
 from sail_on.api import server
 from sail_on.api.file_provider import FileProvider
 from sail_on_client.agent.pre_computed_detector import PreComputedONDAgent
+from sail_on_client.agent.pre_computed_detector import PreComputedCONDDAAgent
 from sail_on_client.harness.local_harness import LocalHarness
 
 log = logging.getLogger(__name__)
@@ -110,3 +111,22 @@ def ond_algorithm_instance():
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     return PreComputedONDAgent("PreComputedONDAgent", cache_dir, False, 32)
+
+
+@pytest.fixture(scope="function")
+def condda_harness_instance():
+    """Fixture for creating an instance of harness for OND."""
+    test_dir = os.path.dirname(__file__)
+    data_dir = os.path.join(test_dir, "data")
+    gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
+    gt_config = os.path.join(data_dir, "OND", "activity_recognition", "activity_recognition.json")
+    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    return local_interface
+
+
+@pytest.fixture(scope="function")
+def condda_algorithm_instance():
+    """Fixture for creating an agent for OND."""
+    test_dir = os.path.dirname(__file__)
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+    return PreComputedONDAgent("PreComputedCONDDAAgent", cache_dir, False, 32)

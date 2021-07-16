@@ -3,7 +3,7 @@
 
 import pytest
 import uuid
-from sail_on_client.mock import MockDetector
+from sail_on_client.agent.mock_condda_agents import MockCONDDAAgent
 from sail_on_client.protocol.condda_dataclasses import (
     AlgorithmAttributes,
     InitializeParams,
@@ -15,9 +15,9 @@ from sail_on_client.protocol.condda_dataclasses import (
 def algorithm_attributes_params():
     """Fixture for providing parameters for initializing AlgorithmAttributes."""
     return {
-        "name": "MockDetector",
+        "name": "MockCONDDAAgent",
         "detection_threshold": 0.5,
-        "instance": MockDetector({}),
+        "instance": MockCONDDAAgent(),
         "package_name": "sail-on-client",
         "parameters": {"param1": "foo", "param2": "bar"},
         "session_id": str(uuid.uuid4()),
@@ -65,7 +65,7 @@ def test_algorithm_attributes_named_version(algorithm_attributes_params):
         None
     """
     algorithm_attributes = AlgorithmAttributes(**algorithm_attributes_params)
-    assert "MockDetector" in algorithm_attributes.named_version()
+    assert "MockCONDDAAgent" in algorithm_attributes.named_version()
 
 
 def test_algorithm_attributes_removed_completed_tests(algorithm_attributes_params):

@@ -3,19 +3,12 @@
 from sail_on_client.agent.condda_agent import CONDDAAgent
 from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
 from sail_on_client.protocol.visual_protocol import VisualProtocol
-from sail_on_client.protocol.condda_config import ConddaConfig
-from sail_on_client.utils.utils import update_harness_parameters
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes
 from sail_on_client.protocol.condda_test import CONDDATest
 
-import os
-import json
-import sys
 import logging
 
-from typing import Dict, Any, Union, List
+from typing import Dict, Any, List
 
 log = logging.getLogger(__name__)
 
@@ -43,6 +36,7 @@ class Condda(VisualProtocol):
         save_elementwise: bool = False,
         save_features: bool = False,
         skip_stages: List = [],
+        use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
         use_saved_features: bool = False
     ) -> None:
@@ -68,6 +62,7 @@ class Condda(VisualProtocol):
             save_elementwise: Flag to save features elementwise
             save_features: Flag to save  features
             skip_stages: List of stages that are skipped
+            use_consolidated_features: Flag to use consolidated features
             use_saved_attributes: Flag to use saved attributes
             use_saved_features: Flag to use saved features
 
@@ -91,6 +86,7 @@ class Condda(VisualProtocol):
         self.skip_stages = skip_stages
         self.seed = seed
         self.test_ids = test_ids
+        self.use_consolidated_features = use_consolidated_features
         self.use_saved_attributes = use_saved_attributes
         self.use_saved_features = use_saved_features
 
@@ -111,8 +107,8 @@ class Condda(VisualProtocol):
         Returns:
             An instance of AlgorithmAttributes
         """
-        algorithm_instance = self.get_algorithm(algorithm_name, algorithm_param,)
-        session_id = self.config.get("resumed_session_ids", {}).get(algorithm_name, "")
+        algorithm_instance = self.algorithms[algorithm_name]
+        session_id = self.resume_session_ids.get(algorithm_name, "")
         return AlgorithmAttributes(
             algorithm_name,
             algorithm_param.get("detection_threshold", 0.5),
@@ -201,16 +197,13 @@ class Condda(VisualProtocol):
             None
         """
         log.info("Starting CONDDA")
-        # provide all of the configuration information in the toolset
-        self.toolset.update(self.config)
         self.skip_stages = self.update_skip_stages(
             self.skip_stages, self.save_features, self.feature_extraction_only
         )
         algorithms_attributes = []
-        algorithm_params = config["algorithms"]
         # Populate most of the attributes for the algorithm
         for algorithm_name in self.algorithms.keys():
-            algorithm_param = algorithm_params[algorithm_name]
+            algorithm_param = self.algorithms[algorithm_name].get_config()
             algorithm_attributes = self.create_algorithm_attributes(
                 algorithm_name, algorithm_param, self.test_ids
             )
@@ -233,7 +226,7 @@ class Condda(VisualProtocol):
             skip_stages = self.skip_stages.copy()
             condda_test = CONDDATest(
                 algorithm_attributes,
-                self.data_root,
+                self.dataset_root,
                 self.domain,
                 self.harness,
                 self.save_dir,

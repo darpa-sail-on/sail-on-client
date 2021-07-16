@@ -92,6 +92,17 @@ class MockCONDDAAgent(CONDDAAgent):
         shutil.copyfile(self.dataset, dst_file)
         return dst_file
 
+    def execute(self, toolset: Dict, step_descriptor: str) -> Any:
+        """
+        Execute method used by the protocol to run different steps.
+
+        Args:
+            toolset (dict): Dictionary containing parameters for different steps
+            step_descriptor (str): Name of the step
+        """
+        log.info(f"Executing {step_descriptor}")
+        return self.detector.step_dict[step_descriptor](toolset)
+
 
 class MockCONDDAAgentWithAttributes(MockCONDDAAgent):
     """Mock Detector for testing checkpointing."""
