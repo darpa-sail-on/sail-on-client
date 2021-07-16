@@ -44,10 +44,12 @@ class PreComputedAgent(VisualAgent):
 
     def get_config(self) -> Dict:
         """Return a default configuration dictionary."""
-        return {"algorithm_name": self.algorithm_name,
-                "cache_dir": self.cache_dir,
-                "has_roundwise_file": self.has_roundwise_file,
-                "round_size": self.round_size}
+        return {
+            "algorithm_name": self.algorithm_name,
+            "cache_dir": self.cache_dir,
+            "has_roundwise_file": self.has_roundwise_file,
+            "round_size": self.round_size,
+        }
 
     def execute(self, toolset: Dict, step_descriptor: str) -> Any:
         """

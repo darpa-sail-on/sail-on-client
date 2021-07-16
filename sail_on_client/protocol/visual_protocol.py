@@ -56,7 +56,9 @@ class VisualProtocol(Protocol):
         if not algorithm_configs:
             raise ValueError("No algorithms provided in the config.")
         for algorithm_name, algorithm_config in algorithm_configs.items():
-            config_dict["algorithms"][algorithm_name] = smqtk_generator(algorithm_config)
+            config_dict["algorithms"][algorithm_name] = smqtk_generator(
+                algorithm_config
+            )
         harness_config = config_dict.get("harness", None)
         if not harness_config:
             raise ValueError("Harness parameters not provided in the config.")

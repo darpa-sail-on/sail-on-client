@@ -35,27 +35,25 @@ def condda_protocol_cfg_params():
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     data_dir = os.path.join(test_dir, "data")
     gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
-    gt_config = os.path.join(data_dir, "OND", "activity_recognition", "activity_recognition.json")
+    gt_config = os.path.join(
+        data_dir, "OND", "activity_recognition", "activity_recognition.json"
+    )
     algorithms = {
-            "algorithms": {
-                "PreComputedCONDDAAgent": {
-                    "class": "PreComputedCONDDAAgent",
-                    "config": {
-                        "algorithm_name": "PreComputedCONDDAAgent",
-                        "cache_dir": cache_dir,
-                        "has_roundwise_file": False,
-                        "round_size": 32
-                    }
-                }
-            },
-            "harness": {
-                "class": "LocalHarness",
+        "algorithms": {
+            "PreComputedCONDDAAgent": {
+                "class": "PreComputedCONDDAAgent",
                 "config": {
-                    "data_dir": data_dir,
-                    "gt_dir": gt_dir,
-                    "gt_config": gt_config
-                }
+                    "algorithm_name": "PreComputedCONDDAAgent",
+                    "cache_dir": cache_dir,
+                    "has_roundwise_file": False,
+                    "round_size": 32,
+                },
             }
+        },
+        "harness": {
+            "class": "LocalHarness",
+            "config": {"data_dir": data_dir, "gt_dir": gt_dir, "gt_config": gt_config},
+        },
     }
     return algorithms
 
@@ -100,11 +98,15 @@ def test_condda_from_config(condda_params, condda_protocol_cfg_params):
         None
     """
     dataset_root, domain, seed, test_ids, save_dir = condda_params
-    condda_protocol_cfg_params.update({"dataset_root": dataset_root,
-                                       "domain": domain,
-                                       "seed": seed,
-                                       "test_ids": test_ids,
-                                       "save_dir": save_dir})
+    condda_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
     condda_protocol = Condda.from_config(condda_protocol_cfg_params)
     assert "PreComputedCONDDAAgent" in condda_protocol.algorithms.keys()
     assert isinstance(condda_protocol.harness, LocalHarness)
@@ -122,11 +124,15 @@ def test_condda_get_config(condda_params, condda_protocol_cfg_params):
         None
     """
     dataset_root, domain, seed, test_ids, save_dir = condda_params
-    condda_protocol_cfg_params.update({"dataset_root": dataset_root,
-                                       "domain": domain,
-                                       "seed": seed,
-                                       "test_ids": test_ids,
-                                       "save_dir": save_dir})
+    condda_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
     condda_protocol = Condda.from_config(condda_protocol_cfg_params)
     condda_config = condda_protocol.get_config()
     # Testing the validity of the config by reconstructing the protocol from it

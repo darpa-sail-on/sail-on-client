@@ -53,25 +53,21 @@ def ond_protocol_cfg_params():
     gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
     gt_config = os.path.join(gt_dir, "activity_recognition.json")
     algorithms = {
-            "algorithms": {
-                "PreComputedONDAgent": {
-                    "class": "PreComputedONDAgent",
-                    "config": {
-                        "algorithm_name": "PreComputedONDAgent",
-                        "cache_dir": cache_dir,
-                        "has_roundwise_file": False,
-                        "round_size": 32
-                    }
-                }
-            },
-            "harness": {
-                "class": "LocalHarness",
+        "algorithms": {
+            "PreComputedONDAgent": {
+                "class": "PreComputedONDAgent",
                 "config": {
-                    "data_dir": data_dir,
-                    "gt_dir": gt_dir,
-                    "gt_config": gt_config
-                }
+                    "algorithm_name": "PreComputedONDAgent",
+                    "cache_dir": cache_dir,
+                    "has_roundwise_file": False,
+                    "round_size": 32,
+                },
             }
+        },
+        "harness": {
+            "class": "LocalHarness",
+            "config": {"data_dir": data_dir, "gt_dir": gt_dir, "gt_config": gt_config},
+        },
     }
     return algorithms
 
@@ -110,11 +106,15 @@ def test_ond_from_config(ond_params, ond_protocol_cfg_params):
         None
     """
     dataset_root, domain, seed, test_ids, save_dir = ond_params
-    ond_protocol_cfg_params.update({"dataset_root": dataset_root,
-                                    "domain": domain,
-                                    "seed": seed,
-                                    "test_ids": test_ids,
-                                    "save_dir": save_dir})
+    ond_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
     ond_protocol = ONDProtocol.from_config(ond_protocol_cfg_params)
     assert "PreComputedONDAgent" in ond_protocol.algorithms.keys()
     assert isinstance(ond_protocol.harness, LocalHarness)
@@ -132,11 +132,15 @@ def test_ond_get_config(ond_params, ond_protocol_cfg_params):
         None
     """
     dataset_root, domain, seed, test_ids, save_dir = ond_params
-    ond_protocol_cfg_params.update({"dataset_root": dataset_root,
-                                    "domain": domain,
-                                    "seed": seed,
-                                    "test_ids": test_ids,
-                                    "save_dir": save_dir})
+    ond_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
     ond_protocol = ONDProtocol.from_config(ond_protocol_cfg_params)
     ond_config = ond_protocol.get_config()
     # Testing the validity of the config by reconstructing the protocol from it
