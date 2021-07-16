@@ -1,13 +1,10 @@
 """Tests for OND protocol."""
 
 from tempfile import TemporaryDirectory
-import json
 import pytest
 import os
 
 from sail_on_client.protocol.ond_protocol import ONDProtocol
-from sail_on_client.harness.par_harness import ParHarness
-from sail_on_client.harness.local_harness import LocalHarness
 from sail_on_client.agent.pre_computed_detector import PreComputedONDAgent
 
 
@@ -19,7 +16,7 @@ def ond_params():
         dataset_root = os.path.join(test_dir, "data")
         domain = "activity_recognition"
         seed = "5278"
-        test_ids =  ["OND.10.90001.2100554"]
+        test_ids = ["OND.10.90001.2100554"]
         yield dataset_root, domain, seed, test_ids, save_dir
 
 
