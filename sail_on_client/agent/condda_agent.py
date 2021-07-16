@@ -8,7 +8,7 @@ from abc import abstractmethod
 class CONDDAAgent(VisualAgent):
     """Abstract class for OND agent."""
 
-    def get_config(self):
+    def get_config(self) -> Dict:
         """Return a default configuration dictionary."""
         return {}
 

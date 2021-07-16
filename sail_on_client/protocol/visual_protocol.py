@@ -3,8 +3,10 @@
 import logging
 from typing import Dict, TypeVar, Type
 
-from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
-from sail_on_client.agent.visual_agent import VisualAgent
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
+from sail_on_client.agent.visual_agent import VisualAgentType
 from tinker.protocol import Protocol
 from tinker.configuration import smqtk_generator
 
@@ -17,7 +19,9 @@ class VisualProtocol(Protocol):
     """Protocol for visual tasks."""
 
     def __init__(
-        self, algorithms: Dict[str, VisualAgent], harness: TestAndEvaluationHarness
+        self,
+        algorithms: Dict[str, VisualAgentType],
+        harness: TestAndEvaluationHarnessType,
     ) -> None:
         """
         Construct visual protocol.

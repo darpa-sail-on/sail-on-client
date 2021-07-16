@@ -6,8 +6,9 @@ import pickle as pkl
 from typing import Union, Tuple, Dict, List
 import ubelt as ub
 
-from sail_on_client.harness.par_harness import ParHarness
-from sail_on_client.harness.local_harness import LocalHarness
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.protocol.visual_round import VisualRound
 from sail_on_client.utils.decorators import skip_stage
 from sail_on_client.protocol.ond_dataclasses import (
@@ -29,7 +30,7 @@ class VisualTest:
         algorithm_attributes: Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes],
         data_root: str,
         domain: str,
-        harness: Union[LocalHarness, ParHarness],
+        harness: TestAndEvaluationHarnessType,
         save_dir: str,
         session_id: str,
         skip_stages: List[str],

@@ -1,7 +1,9 @@
 """OND protocol."""
 
 from sail_on_client.agent.ond_agent import ONDAgent
-from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.utils.numpy_encoder import NumpyEncoder
 from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes
@@ -25,11 +27,11 @@ class ONDProtocol(VisualProtocol):
         algorithms: Dict[str, ONDAgent],
         dataset_root: str,
         domain: str,
-        harness: TestAndEvaluationHarness,
+        harness: TestAndEvaluationHarnessType,
         save_dir: str,
         seed: str,
         test_ids: List[str],
-        baseline_class: str = None,
+        baseline_class: str = "",
         feature_extraction_only: bool = False,
         has_baseline: bool = False,
         has_reaction_baseline: bool = False,
@@ -44,7 +46,7 @@ class ONDProtocol(VisualProtocol):
         save_features: bool = False,
         skip_stages: List = None,
         use_feedback: bool = False,
-        feedback_type: str = None,
+        feedback_type: str = "classification",
         use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
         use_saved_features: bool = False,

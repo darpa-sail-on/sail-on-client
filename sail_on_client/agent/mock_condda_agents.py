@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 class MockCONDDAAgent(CONDDAAgent):
     """Mock Detector for CONDDA Protocol."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Construct Mock CONDDA Detector."""
         super().__init__()
 
@@ -45,9 +45,7 @@ class MockCONDDAAgent(CONDDAAgent):
         Returns:
             Parameters for the agent
         """
-        config = super().get_config()
-        config.update(self.toolset)
-        return config
+        return {}
 
     def feature_extraction(
         self, toolset: Dict
@@ -103,7 +101,7 @@ class MockCONDDAAgent(CONDDAAgent):
             step_descriptor (str): Name of the step
         """
         log.info(f"Executing {step_descriptor}")
-        return self.detector.step_dict[step_descriptor](toolset)
+        return self.step_dict[step_descriptor](toolset)
 
 
 class MockCONDDAAgentWithAttributes(MockCONDDAAgent):

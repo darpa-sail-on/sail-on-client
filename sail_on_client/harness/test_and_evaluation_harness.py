@@ -2,7 +2,11 @@
 
 from smqtk_core import Configurable, Pluggable
 from abc import abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict, Any, TypeVar
+
+TestAndEvaluationHarnessType = TypeVar(
+    "TestAndEvaluationHarnessType", bound="TestAndEvaluationHarness"
+)
 
 
 class TestAndEvaluationHarness(Configurable, Pluggable):
@@ -13,7 +17,7 @@ class TestAndEvaluationHarness(Configurable, Pluggable):
         """Determine if this class with be detected by SMQTK's plugin."""
         return True
 
-    def get_config(self):
+    def get_config(self) -> Dict:
         """Return a default configuration dictionary."""
         return {}
 

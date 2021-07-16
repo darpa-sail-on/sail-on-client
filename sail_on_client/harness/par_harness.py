@@ -25,7 +25,7 @@ log = logging.getLogger(__name__)
 class ParHarness(TestAndEvaluationHarness):
     """Harness for PAR server."""
 
-    def __init__(self, url, save_directory) -> None:
+    def __init__(self, url: str, save_directory: str) -> None:
         """
         Initialize a client connection object.
 
@@ -40,7 +40,7 @@ class ParHarness(TestAndEvaluationHarness):
         self.url = url
         self.save_directory = save_directory
 
-    def get_config(self):
+    def get_config(self) -> Dict:
         """JSON Compliant representation of the object."""
         return {"url": self.url, "save_directory": self.save_directory}
 
@@ -368,17 +368,7 @@ class ParHarness(TestAndEvaluationHarness):
         response = requests.get(f"{self.url}/session/evaluations", params=params,)
 
         self._check_response(response)
-
-        filename = os.path.abspath(
-            os.path.join(
-                self.save_directory, f"{session_id}.{test_id}.{round_id}_evaluation.csv"
-            )
-        )
-
-        with open(filename, "w") as f:
-            f.write(response.content.decode("utf-8"))
-
-        return filename
+        return json.loads(response.text)
 
     @retry(
         stop=stop_after_attempt(5),

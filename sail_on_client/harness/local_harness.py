@@ -41,7 +41,7 @@ class LocalHarness(TestAndEvaluationHarness):
         self.result_directory = self.temp_dir.name
         self.file_provider = FileProvider(self.data_dir, self.result_directory)
 
-    def get_config(self):
+    def get_config(self) -> Dict:
         """JSON Compliant representation of the object."""
         return {
             "data_dir": self.data_dir,

@@ -16,7 +16,11 @@ class PreComputedAgent(VisualAgent):
     """Detector for submitting precomputed results."""
 
     def __init__(
-        self, algorithm_name, cache_dir, has_roundwise_file, round_size
+        self,
+        algorithm_name: str,
+        cache_dir: str,
+        has_roundwise_file: bool,
+        round_size: int,
     ) -> None:
         """
         Construct agent with precomputed results.
@@ -148,7 +152,11 @@ class PreComputedONDAgent(PreComputedAgent, ONDAgent):
     """Detector for submitting precomputed results in OND."""
 
     def __init__(
-        self, algorithm_name, cache_dir, has_roundwise_file, round_size
+        self,
+        algorithm_name: str,
+        cache_dir: str,
+        has_roundwise_file: bool,
+        round_size: int,
     ) -> None:
         """
         Construct agent with precomputed results for OND.
@@ -212,7 +220,11 @@ class PreComputedCONDDAAgent(PreComputedAgent, CONDDAAgent):
     """Detector for submitting precomputed results in CONDDA."""
 
     def __init__(
-        self, algorithm_name, cache_dir, has_roundwise_file, round_size
+        self,
+        algorithm_name: str,
+        cache_dir: str,
+        has_roundwise_file: bool,
+        round_size: int,
     ) -> None:
         """
         Construct agent with precomputed results for CONDDA.

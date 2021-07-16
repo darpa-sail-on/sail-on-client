@@ -1,14 +1,15 @@
 """Round for visual protocol."""
 
 import logging
-from typing import List, Any, Tuple, Dict, Union
+from typing import List, Any, Tuple, Dict
 
 from sail_on_client.protocol.visual_dataclasses import (
     FeatureExtractionParams,
     WorldChangeDetectionParams,
 )
-from sail_on_client.harness.local_harness import LocalHarness
-from sail_on_client.harness.par_harness import ParHarness
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.utils.utils import safe_remove
 from sail_on_client.utils.decorators import skip_stage
 
@@ -24,7 +25,7 @@ class VisualRound:
         algorithm: Any,
         data_root: str,
         features_dict: Dict,
-        harness: Union[LocalHarness, ParHarness],
+        harness: TestAndEvaluationHarnessType,
         logit_dict: Dict,
         redlight_instance: str,
         session_id: str,

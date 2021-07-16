@@ -1,7 +1,9 @@
 """CONDDA protocol."""
 
 from sail_on_client.agent.condda_agent import CONDDAAgent
-from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.protocol.condda_dataclasses import AlgorithmAttributes
 from sail_on_client.protocol.condda_test import CONDDATest
@@ -21,7 +23,7 @@ class Condda(VisualProtocol):
         algorithms: Dict[str, CONDDAAgent],
         dataset_root: str,
         domain: str,
-        harness: TestAndEvaluationHarness,
+        harness: TestAndEvaluationHarnessType,
         save_dir: str,
         seed: str,
         test_ids: List[str],

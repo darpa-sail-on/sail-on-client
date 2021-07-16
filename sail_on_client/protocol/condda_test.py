@@ -2,7 +2,7 @@
 
 import logging
 from itertools import count
-from typing import Union, Dict, List
+from typing import Dict, List
 
 from sail_on_client.protocol.condda_dataclasses import (
     AlgorithmAttributes,
@@ -10,8 +10,9 @@ from sail_on_client.protocol.condda_dataclasses import (
 )
 from sail_on_client.protocol.visual_test import VisualTest
 from sail_on_client.protocol.condda_round import CONDDARound
-from sail_on_client.harness.local_harness import LocalHarness
-from sail_on_client.harness.par_harness import ParHarness
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.utils.utils import safe_remove
 from sail_on_client.errors import RoundError
 
@@ -27,7 +28,7 @@ class CONDDATest(VisualTest):
         algorithm_attributes: AlgorithmAttributes,
         data_root: str,
         domain: str,
-        harness: Union[LocalHarness, ParHarness],
+        harness: TestAndEvaluationHarnessType,
         save_dir: str,
         session_id: str,
         skip_stages: List[str],

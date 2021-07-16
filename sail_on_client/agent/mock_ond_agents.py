@@ -124,7 +124,7 @@ class MockONDAgent(ONDAgent):
             step_descriptor (str): Name of the step
         """
         log.info(f"Executing {step_descriptor}")
-        return self.detector.step_dict[step_descriptor](toolset)
+        return self.step_dict[step_descriptor](toolset)
 
 
 class MockONDAgentWithAttributes(MockONDAgent):
