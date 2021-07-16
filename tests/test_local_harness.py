@@ -338,13 +338,13 @@ def test_activity_recognition_evaluate(get_ar_local_harness_params):
         os.path.dirname(__file__), "mock_results", "activity_recognition"
     )
     detection_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_PreComputedDetector_detection.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedONDAgent_detection.csv"
     )
     classification_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_PreComputedDetector_classification.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedONDAgent_classification.csv"
     )
     characterization_file_id = os.path.join(
-        result_folder, "OND.10.90001.2100554_PreComputedDetector_characterization.csv"
+        result_folder, "OND.10.90001.2100554_PreComputedONDAgent_characterization.csv"
     )
     results = {
         "detection": detection_file_id,
@@ -353,7 +353,7 @@ def test_activity_recognition_evaluate(get_ar_local_harness_params):
     }
     baseline_classification_file_id = os.path.join(
         result_folder,
-        "OND.10.90001.2100554_BaselinePreComputedDetector_classification.csv",
+        "OND.10.90001.2100554_BaselinePreComputedONDAgent_classification.csv",
     )
     baseline_result = {
         "classification": baseline_classification_file_id,
