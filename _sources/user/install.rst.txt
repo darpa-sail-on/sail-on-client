@@ -34,7 +34,6 @@ Installation with Poetry
 1. Clone the repositories associated with different components in a working directory::
 
       git clone https://github.com/tinker-engine/tinker-engine.git
-      git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
       git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
       git clone https://github.com/darpa-sail-on/Sail-On-API.git
       git clone https://github.com/darpa-sail-on/sail-on-client.git
@@ -46,13 +45,13 @@ Installation with Poetry
 
       cd sail-on-client
       poetry install
-      poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+      poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
       poetry shell
 
 
 .. Appendix 1: Links
 
-.. _Python 3.7: https://www.python.org/downloads/release/python-370/
+.. _Python: https://www.python.org/downloads/release/python-370/
 .. _installation page: https://python-poetry.org/docs/#installation https://pipenv.pypa.io/en/latest/
 .. _poetry-dynamic-versioning: https://github.com/mtkennerly/poetry-dynamic-versioning
 .. _Poetry: https://github.com/python-poetry/poetry
@@ -61,5 +60,3 @@ Installation with Poetry
 .. _Sail_On_Evaluate: https://github.com/darpa-sail-on/Sail_On_Evaluate
 .. _sailon_tinker_launcher: https://github.com/darpa-sail-on/sailon_tinker_launcher
 .. _sail-on-client: https://github.com/darpa-sail-on/sail-on-client
-
-

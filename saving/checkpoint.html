@@ -221,13 +221,13 @@
       </p>
       <ul class="">
         
-          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
+          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
 
             
           </li>
 
         
-          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
+          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
 
             
           </li>
@@ -382,69 +382,76 @@ the original sequence. This would result in undefined behavior.</p>
 <h2>Sample Detector, Adapter and Configuration Parameters<a class="headerlink" href="#sample-detector-adapter-and-configuration-parameters" title="Permalink to this headline">¶</a></h2>
 <section id="sample-detector">
 <h3>Sample Detector<a class="headerlink" href="#sample-detector" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-        <span class="n">Args</span><span class="p">:</span>
-            <span class="n">toolset</span> <span class="p">(</span><span class="nb">dict</span><span class="p">):</span> <span class="n">Dictionary</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="k">for</span> <span class="n">different</span> <span class="n">steps</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAgentWithAttributes</span><span class="p">(</span><span class="n">MockONDAgent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mock Detector for testing checkpointing.&quot;&quot;&quot;</span>
 
-        <span class="n">Return</span><span class="p">:</span>
-            <span class="n">path</span> <span class="n">to</span> <span class="n">csv</span> <span class="n">file</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">results</span> <span class="k">for</span> <span class="n">novelty</span> <span class="n">characterization</span> <span class="n">step</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        dataset_dir = os.path.dirname(self.dataset)</span>
-<span class="sd">        dst_file = os.path.join(dataset_dir, &quot;nc.csv&quot;)</span>
-<span class="sd">        shutil.copyfile(self.dataset, dst_file)</span>
-<span class="sd">        return dst_file</span>
+<span class="sd">        Detector constructor.</span>
 
-
-<span class="sd">class MockDetectorWithAttributes(MockDetector):</span>
-<span class="sd">    &quot;&quot;&quot;</span><span class="n">Mock</span> <span class="n">Detector</span> <span class="k">for</span> <span class="n">testing</span> <span class="n">checkpointing</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
-
-<span class="s2">    def __init__(self, toolset: Dict) -&gt; None:</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-        <span class="n">Detector</span> <span class="n">constructor</span><span class="o">.</span>
-
-        <span class="n">Args</span><span class="p">:</span>
-            <span class="n">toolset</span> <span class="p">(</span><span class="nb">dict</span><span class="p">):</span> <span class="n">Dictionary</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="k">for</span> <span class="n">the</span> <span class="n">constructor</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        MockDetector.__init__(self, toolset)</span>
-
-<span class="sd">    def _feature_extraction(</span>
-<span class="sd">        self, toolset: Dict</span>
-<span class="sd">    ) -&gt; Tuple[Dict[str, Any], Dict[str, Any]]:</span>
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for the constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Feature</span> <span class="n">extraction</span> <span class="n">step</span> <span class="k">for</span> <span class="n">the</span> <span class="n">algorithm</span><span class="o">.</span>
+        <span class="n">MockONDAgent</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-        <span class="n">Args</span><span class="p">:</span>
-            <span class="n">toolset</span> <span class="p">(</span><span class="nb">dict</span><span class="p">):</span> <span class="n">Dictionary</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="k">for</span> <span class="n">different</span> <span class="n">steps</span>
+    <span class="k">def</span> <span class="nf">feature_extraction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Feature extraction step for the algorithm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            Tuple of dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_dict</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_dict&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_list</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_list&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_tuple</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_tuple&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_tensor</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_tensor&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_val</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_val&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{},</span> <span class="p">{}</span>
 </pre></div>
 </div>
 </section>
 <section id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-        <span class="n">Return</span><span class="p">:</span>
-            <span class="n">Tuple</span> <span class="n">of</span> <span class="n">dictionary</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">MockONDAgent</span><span class="p">,</span> <span class="n">Checkpointer</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mock Adapter for testing checkpointing.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        self.dummy_dict = toolset[&quot;dummy_dict&quot;]</span>
-<span class="sd">        self.dummy_list = toolset[&quot;dummy_list&quot;]</span>
-<span class="sd">        self.dummy_tuple = toolset[&quot;dummy_tuple&quot;]</span>
-<span class="sd">        self.dummy_tensor = toolset[&quot;dummy_tensor&quot;]</span>
-<span class="sd">        self.dummy_val = toolset[&quot;dummy_val&quot;]</span>
-<span class="sd">        return {}, {}</span>
+<span class="sd">        Detector constructor.</span>
 
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for the constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">MockONDAgent</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">Checkpointer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detector</span> <span class="o">=</span> <span class="n">MockONDAgentWithAttributes</span><span class="p">()</span>
 
-<span class="sd">class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):</span>
-<span class="sd">    &quot;&quot;&quot;</span><span class="n">Mock</span> <span class="n">Adapter</span> <span class="k">for</span> <span class="n">testing</span> <span class="n">checkpointing</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get config for the plugin.</span>
 
-<span class="s2">    def __init__(self, toolset: Dict) -&gt; None:</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-        <span class="n">Detector</span> <span class="n">constructor</span><span class="o">.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Parameters for the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">config</span>
 
-        <span class="n">Args</span><span class="p">:</span>
-            <span class="n">toolset</span> <span class="p">(</span><span class="nb">dict</span><span class="p">):</span> <span class="n">Dictionary</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="k">for</span> <span class="n">the</span> <span class="n">constructor</span>
-        <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        BaseAlgorithm.__init__(self, toolset)</span>
-<span class="s2">        Checkpointer.__init__(self, toolset)</span>
-<span class="s2">        self.detector = MockDetectorWithAttributes(toolset)</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute method used by the protocol to run different steps.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+<span class="sd">            step_descriptor (str): Name of the step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">step_dict</span><span class="p">[</span><span class="n">step_descriptor</span><span class="p">](</span><span class="n">toolset</span><span class="p">)</span>
 
 </pre></div>
 </div>

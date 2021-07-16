@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+      <title>Harness</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
+          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="Harness API" href="harness_api.html" />
+  <link rel="prev" title="Protocol API" href="../protocols/protocol_api.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <span class="site-name">Sail-On Client</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link  router-link-active">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link ">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#user-guide"
+         class="nav-link ">
+         user guide
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#empirical-protocols"
+         class="nav-link ">
+         empirical protocols
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#interfaces"
+         class="nav-link  router-link-active">
+         interfaces
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#metrics"
+         class="nav-link ">
+         metrics
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#feedback"
+         class="nav-link ">
+         feedback
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#plugins"
+         class="nav-link ">
+         plugins
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#saving-and-restoring-models"
+         class="nav-link ">
+         saving and restoring models
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 current"><a href="#" class="reference internal current">Harness</a>
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#local-harness" class="reference internal">Local Harness</a></li>
+                
+                  <li class="toctree-l2"><a href="#par-harness" class="reference internal">PAR Harness</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="harness_api.html" class="reference internal ">Harness API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+    <li>Harness</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="../protocols/protocol_api.html"
+       title="previous chapter">← Protocol API</a>
+  </li>
+  <li class="next">
+    <a href="harness_api.html"
+       title="next chapter">Harness API →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <section id="harness">
+<h1>Harness<a class="headerlink" href="#harness" title="Permalink to this headline">¶</a></h1>
+<p>Harnesses are used for testing and evaluating TA2 agents. The
+evaluation can be conducted using a server setup by TA1 or by
+providing the files containing ground truth and metadata
+associated with the tests. We support two harnesses for
+sail-on-client. These harnesses are subclasses of <code class="code docutils literal notranslate"><span class="pre">TestAndEvaluationHarness</span></code>.</p>
+<section id="local-harness">
+<h2>Local Harness<a class="headerlink" href="#local-harness" title="Permalink to this headline">¶</a></h2>
+<p><code class="code docutils literal notranslate"><span class="pre">LocalHarness</span></code> is primarily used for replicating the capabilities of
+<code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> without using the server. This allows local testing without
+setting up a server instance locally or via a URL. Since LocalHarness uses
+the files it requires 3 parameters:</p>
+<ol class="arabic simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">data_dir</span></code>: Root directory where the data for tests is stored</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">gt_dir</span></code>: Root directory where ground truth is stored</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">gt_config</span></code>: A json file with column mapping for ground truth</p></li>
+</ol>
+</section>
+<section id="par-harness">
+<h2>PAR Harness<a class="headerlink" href="#par-harness" title="Permalink to this headline">¶</a></h2>
+<p><code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> is primarily responsible for communicating with the evaluation
+server setup by the TA1 team. The interface relies on RESTful api <a class="reference internal" href="#rest-api"><span class="std std-ref">(detailed in the next section)</span></a>  to provide the
+following features</p>
+<ol class="arabic simple">
+<li><p>Support batch inquiry (also called rounds) with full data set response.</p></li>
+<li><p>Support batch response for evaluation.</p></li>
+<li><p>Answer requests for multiple dataset types.</p></li>
+<li><p>Includes option for ‘hints’ accompanying datasets.</p></li>
+<li><p>Can accept additional meta-data along with annotations, labels and localization data
+(e.g time intervals for video) along with class and certainty scores.</p></li>
+<li><p>Provide feedback as requested by the algorithm after the results for a batch have been
+submitted.</p></li>
+</ol>
+<section id="rest-api">
+<h3>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline">¶</a></h3>
+<p>This section provides a detailed description of the RESTful api used for communication.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 7%" />
+<col style="width: 26%" />
+<col style="width: 28%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Request Name</p></th>
+<th class="head"><p>Request Type</p></th>
+<th class="head"><p>Definition</p></th>
+<th class="head"><p>Request Data</p></th>
+<th class="head"><p>Response Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Test Request</p></td>
+<td><p>GET</p></td>
+<td><p>TA2 Requests for Test Identifiers
+as part of a series of individual tests.</p></td>
+<td><ol class="arabic simple">
+<li><p>Protocol: Empirical protocol</p></li>
+<li><p>Domain: Problem domain.</p></li>
+<li><p>Detector Seed</p></li>
+<li><p>JSON file: Test Assumptions (if any)</p></li>
+</ol>
+</td>
+<td><p>1. CSV file containing: Test ID(s) with the
+following naming convention: Protocol.Group.Run.Seed</p></td>
+</tr>
+<tr class="row-odd"><td><p>New Session</p></td>
+<td><p>POST</p></td>
+<td><p>Create a new session to evaluate the
+detector using an empirical protocol.</p></td>
+<td><ol class="arabic simple">
+<li><p>Test ID(s) obtained from test request.</p></li>
+<li><p>Protocol</p></li>
+<li><p>Novelty Detector Version</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>Session ID: A unique identifier that the
+server associated with the client</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td><p>Dataset Request</p></td>
+<td><p>GET</p></td>
+<td><p>Request data for evaluation.</p></td>
+<td><ol class="arabic simple">
+<li><p>Session ID</p></li>
+<li><p>Test ID</p></li>
+<li><p>Round ID (where applicable per protocol)</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>CSV of Dataset URIs. Each URI identifies the media
+to be used. It may be location specific (e.g. S3)
+or independent, assuming a shared repository.</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Get Feedback</p></td>
+<td><p>GET</p></td>
+<td><dl class="simple">
+<dt>Get Feedback from the server based on</dt><dd><p>one or more example ids</p>
+</dd>
+</dl>
+</td>
+<td><ol class="arabic simple">
+<li><p>Session ID</p></li>
+<li><p>Test ID</p></li>
+<li><p>Round Number</p></li>
+<li><p>Example IDs</p></li>
+<li><p>Feedback type: Detection,  Characterization, Label</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>CSV file for detection and characterization feedback
+in accordance with the feedback space specified by
+the protocol.</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td><p>Get Metadata</p></td>
+<td><p>GET</p></td>
+<td><p>Get metadata for a test</p></td>
+<td><ol class="arabic simple">
+<li><p>Test ID</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>JSON File containing the metadata.</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Post Results</p></td>
+<td><p>POST</p></td>
+<td><p>Post client detector predictions for the dataset.</p></td>
+<td><ol class="arabic simple">
+<li><p>Session ID</p></li>
+<li><p>Test ID</p></li>
+<li><p>Round ID (where applicable)</p></li>
+<li><p>Result Files: (CSV)</p></li>
+<li><p>Protocol constant: Characterization/Detection</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>Result acknowledgement.</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-even"><td><p>Evaluation</p></td>
+<td><p>GET</p></td>
+<td><p>Get results for test(s)</p></td>
+<td><ol class="arabic simple">
+<li><p>Session ID</p></li>
+<li><p>Test ID</p></li>
+<li><p>Round ID (where applicable )</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>Score or None.</p></li>
+</ol>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Terminate Session</p></td>
+<td><p>DELETE</p></td>
+<td><dl class="simple">
+<dt>Terminate the session after the evaluation</dt><dd><p>for the protocol is complete</p>
+</dd>
+</dl>
+</td>
+<td><ol class="arabic simple">
+<li><p>Session ID</p></li>
+<li><p>Logs for the session</p></li>
+</ol>
+</td>
+<td><ol class="arabic simple">
+<li><p>Acknowledgement of session termination.</p></li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="../protocols/protocol_api.html"
+       title="previous chapter">← Protocol API</a>
+  </li>
+  <li class="next">
+    <a href="harness_api.html"
+       title="next chapter">Harness API →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Kitware INC..
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>
