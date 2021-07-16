@@ -7,8 +7,8 @@ from sail_on_client.protocol.visual_dataclasses import (
     FeatureExtractionParams,
     WorldChangeDetectionParams,
 )
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.harness.local_harness import LocalHarness
+from sail_on_client.harness.par_harness import ParHarness
 from sail_on_client.utils.utils import safe_remove
 from sail_on_client.utils.decorators import skip_stage
 
@@ -24,7 +24,7 @@ class VisualRound:
         algorithm: Any,
         data_root: str,
         features_dict: Dict,
-        harness: Union[LocalInterface, ParInterface],
+        harness: Union[LocalHarness, ParHarness],
         logit_dict: Dict,
         redlight_instance: str,
         session_id: str,

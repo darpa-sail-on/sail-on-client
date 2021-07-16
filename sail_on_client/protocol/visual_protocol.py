@@ -31,7 +31,7 @@ class VisualProtocol(Protocol):
         Returns:
             None
         """
-        super().__init__(self)
+        super().__init__()
         self.algorithms = algorithms
         self.harness = harness
 

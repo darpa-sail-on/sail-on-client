@@ -15,7 +15,7 @@ from pkg_resources import DistributionNotFound
 
 from sail_on.api import server
 from sail_on.api.file_provider import FileProvider
-from sail_on_client.agent.pre_computed_detector import PreComputedAgent
+from sail_on_client.agent.pre_computed_detector import PreComputedONDAgent
 from sail_on_client.harness.local_harness import LocalHarness
 
 log = logging.getLogger(__name__)
@@ -94,8 +94,8 @@ def discoverable_plugins():
 
 
 @pytest.fixture(scope="function")
-def harness_instance():
-    """Fixture for creating an instance of harness."""
+def ond_harness_instance():
+    """Fixture for creating an instance of harness for OND."""
     test_dir = os.path.dirname(__file__)
     data_dir = os.path.join(test_dir, "data")
     gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
@@ -105,15 +105,8 @@ def harness_instance():
 
 
 @pytest.fixture(scope="function")
-def algorithm_instance():
-    """Fixture for creating a config for algorithm."""
+def ond_algorithm_instance():
+    """Fixture for creating an agent for OND."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    return PreComputedAgent(
-        {
-            "cache_dir": cache_dir,
-            "algorithm_name": "PreComputedAgent",
-            "round_size": 32,
-            "has_roundwise_file": False,
-        }
-    )
+    return PreComputedONDAgent("PreComputedONDAgent", cache_dir, False, 32)

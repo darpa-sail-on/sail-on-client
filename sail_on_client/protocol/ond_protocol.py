@@ -25,14 +25,13 @@ class ONDProtocol(VisualProtocol):
     def __init__(
         self,
         algorithms: Dict[str, ONDAgent],
-        baseline_class: str,
         dataset_root: str,
         domain: str,
         harness: TestAndEvaluationHarness,
         save_dir: str,
         seed: str,
-        feedback_type: str,
         test_ids: List[str],
+        baseline_class: str = None,
         feature_extraction_only: bool = False,
         has_baseline: bool = False,
         has_reaction_baseline: bool = False,
@@ -47,6 +46,8 @@ class ONDProtocol(VisualProtocol):
         save_features: bool = False,
         skip_stages: List = [],
         use_feedback: bool = False,
+        feedback_type: str = None,
+        use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
         use_saved_features: bool = False
     ) -> None:
@@ -104,6 +105,7 @@ class ONDProtocol(VisualProtocol):
         self.skip_stages = skip_stages
         self.seed = seed
         self.test_ids = test_ids
+        self.use_consolidated_features = use_consolidated_features
         self.use_feedback = use_feedback
         self.use_saved_attributes = use_saved_attributes
         self.use_saved_features = use_saved_features
@@ -160,9 +162,9 @@ class ONDProtocol(VisualProtocol):
         Returns:
             An instance of AlgorithmAttributes
         """
-        algorithm_instance = self.get_algorithm(algorithm_name, algorithm_param,)
+        algorithm_instance = self.algorithms[algorithm_name]
         is_baseline = algorithm_name == baseline_algorithm_name
-        session_id = self.config.get("resumed_session_ids", {}).get(algorithm_name, "")
+        session_id = self.resume_session_ids.get(algorithm_name, "")
         return AlgorithmAttributes(
             algorithm_name,
             algorithm_param.get("detection_threshold", 0.5),
@@ -334,8 +336,6 @@ class ONDProtocol(VisualProtocol):
             None
         """
         log.info("Starting OND")
-        # provide all of the configuration information in the toolset
-        self.toolset.update(self.config)
         self.skip_stages = self.update_skip_stages(
             self.skip_stages,
             self.is_eval_enabled,
@@ -346,10 +346,9 @@ class ONDProtocol(VisualProtocol):
         )
 
         algorithms_attributes = []
-        algorithm_params = config["algorithms"]
         # Populate most of the attributes for the algorithm
         for algorithm_name in self.algorithms.keys():
-            algorithm_param = algorithm_params[algorithm_name]
+            algorithm_param = self.algorithms[algorithm_name].get_config()
             algorithm_attributes = self.create_algorithm_attributes(
                 algorithm_name,
                 algorithm_param,
@@ -381,7 +380,7 @@ class ONDProtocol(VisualProtocol):
                 skip_stages.append("NoveltyCharacterization")
             ond_test = ONDTest(
                 algorithm_attributes,
-                self.data_root,
+                self.dataset_root,
                 self.domain,
                 self.feedback_type,
                 self.harness,

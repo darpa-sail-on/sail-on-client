@@ -75,22 +75,22 @@ def create_temp_features(save_dir, test_id):
         pkl.dump(features, f)
 
 
-def test_initialize(harness_instance, algorithm_instance):
+def test_initialize(ond_harness_instance, ond_algorithm_instance):
     """
     Test initialization of ONDTest.
 
     Args:
-        harness_instance: Instance of local interface
-        algorithm_instance: Instance of PreComputedDetector
+        ond_harness_instance: Instance of local interface
+        ond_algorithm_instance: Instance of PreComputedDetector
 
     Returns:
         None
     """
     test_ids = ["OND.10.90001.2100554"]
     algorithm_attribute = create_algorithm_attribute(
-        ALGORITHM_NAME, algorithm_instance, False, False, {}, "", test_ids
+        ALGORITHM_NAME, ond_algorithm_instance, False, False, {}, "", test_ids
     )
-    session_id = harness_instance.session_request(
+    session_id = ond_harness_instance.session_request(
         test_ids,
         PROTOCOL,
         DOMAIN,
@@ -104,7 +104,7 @@ def test_initialize(harness_instance, algorithm_instance):
         "",
         DOMAIN,
         FEEDBACK_TYPE,
-        harness_instance,
+        ond_harness_instance,
         "",
         session_id,
         [],
@@ -113,13 +113,13 @@ def test_initialize(harness_instance, algorithm_instance):
     )
 
 
-def test_call(harness_instance, algorithm_instance):
+def test_call(ond_harness_instance, ond_algorithm_instance):
     """
     Test __call__ of ONDTest.
 
     Args:
-        harness_instance: Instance of local interface
-        algorithm_instance: Instance of PreComputedDetector
+        ond_harness_instance: Instance of local interface
+        ond_algorithm_instance: Instance of PreComputedDetector
 
     Returns:
         None
@@ -128,14 +128,14 @@ def test_call(harness_instance, algorithm_instance):
     feedback_params = {"first_budget": 4, "income_per_batch": 4, "maximum_budget": 4}
     algorithm_attribute = create_algorithm_attribute(
         ALGORITHM_NAME,
-        algorithm_instance,
+        ond_algorithm_instance,
         False,
         False,
         {"feedback_params": feedback_params},
         "",
         test_ids,
     )
-    session_id = harness_instance.session_request(
+    session_id = ond_harness_instance.session_request(
         test_ids,
         PROTOCOL,
         DOMAIN,
@@ -149,7 +149,7 @@ def test_call(harness_instance, algorithm_instance):
         "",
         DOMAIN,
         "classification",
-        harness_instance,
+        ond_harness_instance,
         "",
         session_id,
         [],
@@ -159,13 +159,13 @@ def test_call(harness_instance, algorithm_instance):
     ond_test(test_ids[0])
 
 
-def test_call_with_features(harness_instance, algorithm_instance):
+def test_call_with_features(ond_harness_instance, ond_algorithm_instance):
     """
     Test __call__ of ONDTest with features.
 
     Args:
-        harness_instance: Instance of local interface
-        algorithm_instance: Instance of PreComputedDetector
+        ond_harness_instance: Instance of local interface
+        ond_algorithm_instance: Instance of PreComputedDetector
 
     Returns:
         None
@@ -174,14 +174,14 @@ def test_call_with_features(harness_instance, algorithm_instance):
     feedback_params = {"first_budget": 4, "income_per_batch": 4, "maximum_budget": 4}
     algorithm_attribute = create_algorithm_attribute(
         ALGORITHM_NAME,
-        algorithm_instance,
+        ond_algorithm_instance,
         False,
         False,
         {"feedback_params": feedback_params},
         "",
         test_ids,
     )
-    session_id = harness_instance.session_request(
+    session_id = ond_harness_instance.session_request(
         test_ids,
         PROTOCOL,
         DOMAIN,
@@ -197,7 +197,7 @@ def test_call_with_features(harness_instance, algorithm_instance):
             "",
             DOMAIN,
             FEEDBACK_TYPE,
-            harness_instance,
+            ond_harness_instance,
             tempdirectory,
             session_id,
             [],
