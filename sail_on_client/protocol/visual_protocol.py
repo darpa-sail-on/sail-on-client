@@ -1,7 +1,7 @@
 """Visual Protocol."""
 
 import logging
-from typing import Dict, TypeVar, Type
+from typing import Dict, TypeVar, Type, Any
 
 from sail_on_client.harness.test_and_evaluation_harness import (
     TestAndEvaluationHarnessType,
@@ -56,12 +56,11 @@ class VisualProtocol(Protocol):
         if not algorithm_configs:
             raise ValueError("No algorithms provided in the config.")
         for algorithm_name, algorithm_config in algorithm_configs.items():
-            config_dict[algorithm_name] = smqtk_generator(algorithm_config)
-
+            config_dict["algorithms"][algorithm_name] = smqtk_generator(algorithm_config)
         harness_config = config_dict.get("harness", None)
         if not harness_config:
             raise ValueError("Harness parameters not provided in the config.")
-        config_dict["harness"] = smqtk_generator(algorithm_config)
+        config_dict["harness"] = smqtk_generator(harness_config)
         return super().from_config(config_dict, merge_default=merge_default)
 
     def get_config(self) -> Dict:
@@ -71,8 +70,12 @@ class VisualProtocol(Protocol):
         Returns:
             Dictionary with json compliant representation of the protocol
         """
-        cfg = {}
+        cfg: Dict[str, Any] = {"algorithms": {}}
         for algorithm_name, algorithm in self.algorithms.items():
-            cfg[algorithm_name] = algorithm.get_config()
-        cfg["harness"] = self.harness.get_config()
+            cfg["algorithms"][algorithm_name] = {}
+            cfg["algorithms"][algorithm_name]["config"] = algorithm.get_config()
+            cfg["algorithms"][algorithm_name]["class"] = algorithm.__class__.__name__
+        cfg["harness"] = {}
+        cfg["harness"]["config"] = self.harness.get_config()
+        cfg["harness"]["class"] = self.harness.__class__.__name__
         return cfg

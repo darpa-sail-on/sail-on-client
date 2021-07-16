@@ -138,7 +138,7 @@ class ONDProtocol(VisualProtocol):
                 "is_eval_enabled": self.is_eval_enabled,
                 "is_eval_roundwise_enabled": self.is_eval_roundwise_enabled,
                 "resume_session": self.resume_session,
-                "resumed_session_ids": self.resume_session_ids,
+                "resume_session_ids": self.resume_session_ids,
                 "save_attributes": self.save_attributes,
                 "saved_attributes": self.saved_attributes,
                 "save_dir": self.save_dir,

@@ -5,6 +5,7 @@ import pytest
 import os
 
 from sail_on_client.protocol.condda_protocol import Condda
+from sail_on_client.harness.local_harness import LocalHarness
 
 
 @pytest.fixture(scope="function")
@@ -25,6 +26,38 @@ def condda_fe_params():
     feature_extraction_only = True
     save_features = True
     return feature_extraction_only, save_features
+
+
+@pytest.fixture(scope="function")
+def condda_protocol_cfg_params():
+    """Fixture for creating algorithm cfg."""
+    test_dir = os.path.dirname(__file__)
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+    data_dir = os.path.join(test_dir, "data")
+    gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
+    gt_config = os.path.join(data_dir, "OND", "activity_recognition", "activity_recognition.json")
+    algorithms = {
+            "algorithms": {
+                "PreComputedCONDDAAgent": {
+                    "class": "PreComputedCONDDAAgent",
+                    "config": {
+                        "algorithm_name": "PreComputedCONDDAAgent",
+                        "cache_dir": cache_dir,
+                        "has_roundwise_file": False,
+                        "round_size": 32
+                    }
+                }
+            },
+            "harness": {
+                "class": "LocalHarness",
+                "config": {
+                    "data_dir": data_dir,
+                    "gt_dir": gt_dir,
+                    "gt_config": gt_config
+                }
+            }
+    }
+    return algorithms
 
 
 def test_initialize(
@@ -53,6 +86,51 @@ def test_initialize(
         seed,
         test_ids,
     )
+
+
+def test_condda_from_config(condda_params, condda_protocol_cfg_params):
+    """
+    Test from_config in ond_protocol.
+
+    Args:
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_protocol_cfg_params: dictionary with the algorithms
+
+    Returns:
+        None
+    """
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    condda_protocol_cfg_params.update({"dataset_root": dataset_root,
+                                       "domain": domain,
+                                       "seed": seed,
+                                       "test_ids": test_ids,
+                                       "save_dir": save_dir})
+    condda_protocol = Condda.from_config(condda_protocol_cfg_params)
+    assert "PreComputedCONDDAAgent" in condda_protocol.algorithms.keys()
+    assert isinstance(condda_protocol.harness, LocalHarness)
+
+
+def test_condda_get_config(condda_params, condda_protocol_cfg_params):
+    """
+    Test from_config in condda_protocol.
+
+    Args:
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_protocol_cfg_params: dictionary with the algorithms
+
+    Returns:
+        None
+    """
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    condda_protocol_cfg_params.update({"dataset_root": dataset_root,
+                                       "domain": domain,
+                                       "seed": seed,
+                                       "test_ids": test_ids,
+                                       "save_dir": save_dir})
+    condda_protocol = Condda.from_config(condda_protocol_cfg_params)
+    condda_config = condda_protocol.get_config()
+    # Testing the validity of the config by reconstructing the protocol from it
+    Condda.from_config(condda_config)
 
 
 def test_run_protocol(
