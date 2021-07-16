@@ -9,8 +9,6 @@ import multiprocessing
 import logging
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from pkg_resources import iter_entry_points
-from pkg_resources import DistributionNotFound
 
 from sail_on.api import server
 from sail_on.api.file_provider import FileProvider
@@ -74,23 +72,6 @@ def get_dt_local_harness_params():
     gt_dir = f"{data_dir}/OND/transcripts"
     gt_config = f"{data_dir}/OND/transcripts/transcripts.json"
     return data_dir, gt_dir, gt_config
-
-
-@pytest.fixture(scope="function")
-def discoverable_plugins():
-    """
-    Fixture to replicate plugin discovery from framework.
-
-    TODO: Replace this with a function call from framework
-    """
-    discovered_plugins = {}
-    for entry_point in iter_entry_points("tinker_test"):
-        try:
-            ep = entry_point.load()
-            discovered_plugins[entry_point.name] = ep
-        except (DistributionNotFound, ImportError):
-            log.exception(f"Plugin {entry_point.name} not found")
-    return discovered_plugins
 
 
 @pytest.fixture(scope="function")
