@@ -55,6 +55,7 @@ in sail_on_client/protocol/configuration.json and skip step 1 of running the ser
 
 1. [Instructions for running M6 Algorithms](M6-ALGO.md)
 1. [Instructions for running M12 Algorithms](M12-ALGO.md)
+1. [Instructions for running M18 Algorithms](M18-ALGO.md)
 
 
 ## Semantic Versioning
