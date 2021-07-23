@@ -5,7 +5,7 @@ import pytest
 import os
 
 from sail_on_client.protocol.ond_protocol import ONDProtocol
-from sail_on_client.agent.pre_computed_detector import PreComputedONDAgent
+from sail_on_client.agent.pre_computed_reaction_agent import PreComputedONDReactionAgent
 from sail_on_client.harness.local_harness import LocalHarness
 
 
@@ -32,12 +32,12 @@ def ond_fe_params():
 @pytest.fixture
 def ond_reaction_baseline_params():
     """Fixture to create a reaction baseline."""
-    baseline_class = "BaselinePreComputedONDDetector"
+    baseline_class = "PreComputedONDReactionAgent"
     has_reaction_baseline = True
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     baseline_algorithm = {
-        baseline_class: PreComputedONDAgent(
+        baseline_class: PreComputedONDReactionAgent(
             "BaselinePreComputedONDAgent", cache_dir, False, 32
         )
     }

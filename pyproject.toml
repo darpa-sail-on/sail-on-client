@@ -58,6 +58,7 @@ MockCONDDAAgent = "sail_on_client.agent.mock_condda_agents:MockCONDDAAgent"
 MockCONDDAAgentWithAttributes = "sail_on_client.agent.mock_condda_agents:MockCONDDAAgentWithAttributes"
 MockCONDDAAdapterWithCheckpoint = "sail_on_client.agent.mock_condda_agents:MockCONDDAAdapterWithCheckpoint"
 PreComputedONDAgent = "sail_on_client.agent.pre_computed_detector:PreComputedONDAgent"
+PreComputedONDReactionAgent = "sail_on_client.agent.pre_computed_reaction_agent.PreComputedONDReactionAgent"
 PreComputedCONDDAAgent = "sail_on_client.agent.pre_computed_detector:PreComputedCONDDAAgent"
 
 
