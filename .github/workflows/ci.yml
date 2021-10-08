@@ -82,6 +82,9 @@ jobs:
           path: ~/.local/share/poetry-virtualenvs
           key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
+      - name: Upgrade pip with poetry
+        run: poetry run pip install -U pip
+        working-directory: sail-on-client
 
       - name: Install Using Poetry
         run: poetry install --no-interaction -vvv
