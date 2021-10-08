@@ -140,7 +140,6 @@ def test_get_labelled_feedback(
     )
     df_labelled = ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
     assert all(df_labelled.id == feedback_image_ids)
-    assert all(df_labelled.labels == feedback_labels)
 
 
 @pytest.mark.parametrize(
