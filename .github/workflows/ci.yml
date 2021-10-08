@@ -119,7 +119,7 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: false
           virtualenvs-path: ~/.local/share/poetry-virtualenvs
-          version: 1.2.0a1
+          version: 1.1.11
 
       - name: Capture poetry version
         run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
@@ -176,7 +176,7 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: false
           virtualenvs-path: ~/.local/share/poetry-virtualenvs
-          version: 1.2.0a1
+          version: 1.1.11
 
       - name: Capture poetry version
         run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
@@ -237,7 +237,7 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: false
           virtualenvs-path: ~/.local/share/poetry-virtualenvs
-          version: 1.2.0a1
+          version: 1.1.11
 
       - name: Capture poetry version
         run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
@@ -313,7 +313,7 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: false
           virtualenvs-path: ~/.local/share/poetry-virtualenvs
-          version: 1.2.0a1
+          version: 1.1.11
 
       - name: Capture poetry version
         run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
