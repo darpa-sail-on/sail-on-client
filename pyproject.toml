@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sail-on-client"
-version = "0.15.0+29.7963669"
+version = "0.18.0"
 description = "Client and Protocols for DARPA sail-on"
 authors = ["Ameya Shringi <ameya.shringi@kitware.com>",
            "Christopher Funk <christopher.funk@kitware.com>",
@@ -20,7 +20,6 @@ importlib-metadata = ">=1.6.0"
 ubelt = "==0.9.2"
 torch = "^1.6.0"
 nltk = "3.5" # Retaining nltk since anything above 3.5 is broken until https://github.com/nltk/nltk/pull/2720 is released
-poetry-dynamic-versioning = "^0.13.0"
 tenacity = "^7.0.0"
 matplotlib = "^3.2.2"
 
@@ -48,13 +47,6 @@ types-requests = "^2.25.0"
 types-six = "^0.1.7"
 types-toml = "^0.1.3"
 
-[tool.poetry-dynamic-versioning]
-enable = true
-style = "pep440"
-vcs = "git"
-pattern = "^(?P<base>\\d+\\.\\d+\\.\\d+)(-?((?P<stage>[a-zA-Z]+)\\.?(?P<revision>\\d+)?))?"
-format = "{base}+{distance}.{commit}"
-
 [tool.poetry.plugins."tinker_test"]
 MockDetector = "sail_on_client.mock:MockDetector"
 PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
@@ -65,5 +57,5 @@ MockDetector = "sail_on_client.mock:MockDetector"
 PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
 
 [build-system]
-requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+requires = ["setuptools", "poetry-core==1.0.4"]
 build-backend = "poetry.core.masonry.api"
