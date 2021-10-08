@@ -65,5 +65,5 @@ MockDetector = "sail_on_client.mock:MockDetector"
 PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
 
 [build-system]
-requires = ["poetry-core==1.0.4", "poetry-dynamic-versioning"]
+requires = ["setuptools", "poetry-core==1.0.4", "poetry-dynamic-versioning"]
 build-backend = "poetry.core.masonry.api"
