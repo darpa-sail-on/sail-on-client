@@ -221,13 +221,13 @@
       </p>
       <ul class="">
         
-          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
+          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
 
             
           </li>
 
         
-          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
+          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
 
             
           </li>
@@ -378,12 +378,12 @@
 <li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – ground truth detections</p></li>
 <li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – class predictions</p></li>
 <li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – ground truth classes</p></li>
-<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
-<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
+<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
@@ -403,7 +403,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy for a round</p>
@@ -424,7 +424,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Accuracy on novely samples</p>
@@ -439,9 +439,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
-<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
-<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
+<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
 </ul>
 </dd>
 </dl>
@@ -451,7 +451,7 @@
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -468,7 +468,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
@@ -490,7 +490,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
@@ -510,7 +510,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance post novelty.</p>
@@ -530,7 +530,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
@@ -550,7 +550,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -570,7 +570,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
@@ -594,15 +594,15 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
-<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
@@ -617,13 +617,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes</p></li>
-<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy for a round</p>
@@ -638,13 +638,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Accuracy on novely samples</p>
@@ -659,9 +659,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
-<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
-<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
+<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
 </ul>
 </dd>
 </dl>
@@ -671,7 +671,7 @@
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -688,7 +688,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
@@ -703,14 +703,14 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
@@ -730,7 +730,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance post novelty.</p>
@@ -750,7 +750,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
@@ -765,12 +765,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ta2_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for the agent</p></li>
-<li><p><strong>baseline_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for baseline</p></li>
+<li><p><strong>ta2_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for the agent</p></li>
+<li><p><strong>baseline_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for baseline</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Reaction performance for the agent</p>
@@ -785,12 +785,12 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -810,7 +810,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
@@ -834,15 +834,15 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X class idx])</p></li>
-<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
-<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
+<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
@@ -857,13 +857,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes</p></li>
-<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy for a round</p>
@@ -880,13 +880,13 @@ computes top-K accuracy for only the novel samples</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X class idx])</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Accuracy on novely samples</p>
@@ -901,9 +901,9 @@ computes top-K accuracy for only the novel samples</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
-<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
-<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
+<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
 </ul>
 </dd>
 </dl>
@@ -913,7 +913,7 @@ computes top-K accuracy for only the novel samples</p>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -932,7 +932,7 @@ detection performance over the entire test.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
@@ -950,14 +950,14 @@ incorrect k-class predictions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X novel])</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X class idx])</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
@@ -977,7 +977,7 @@ with post_novelty. This computes from the first GT novel sample.
 :param gt_novel: ground truth detections (Dimension: [img X detection])</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Dictionary containing detection performance post novelty.</p>
@@ -1000,7 +1000,7 @@ and is just added for completion. Should always be 0 since no possible TP.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
@@ -1015,12 +1015,12 @@ and is just added for completion. Should always be 0 since no possible TP.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ta2_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for the agent</p></li>
-<li><p><strong>baseline_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for baseline</p></li>
+<li><p><strong>ta2_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for the agent</p></li>
+<li><p><strong>baseline_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for baseline</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Reaction performance for the agent</p>
@@ -1038,12 +1038,12 @@ first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X novel])</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -1065,7 +1065,7 @@ number of GT novel samples needed to predict the first true positive.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
@@ -1089,15 +1089,15 @@ number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])</p></li>
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X detection, classification])</p></li>
-<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
-<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X detection, classification])</p></li>
+<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</p>
@@ -1112,13 +1112,13 @@ number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – class predictions</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes</p></li>
-<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing top1, top3 accuracy for a round</p>
@@ -1134,16 +1134,16 @@ number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X  prob that sample is novel, prob of known classes])
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X  prob that sample is novel, prob of known classes])
 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension: [img X classification])
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X classification])
 Nx1 vector with ground-truth class for each sample</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: N X [img, classification])
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: N X [img, classification])
 Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Accuracy on novely samples</p>
@@ -1158,9 +1158,9 @@ Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p><
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
-<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
-<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
+<li><p><strong>gt_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when novelty is introduced</p></li>
+<li><p><strong>ta2_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Index when change is detected</p></li>
+<li><p><strong>test_len</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Length of test</p></li>
 </ul>
 </dd>
 </dl>
@@ -1170,7 +1170,7 @@ Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p><
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1189,13 +1189,13 @@ Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p><
 Nx1 vector with each element corresponding to probability of it being novel</p></li>
 <li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – ground truth detections (Dimension: [img X detection])
 Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the mode to compute the test.  if ‘full_test’ computes on all test samples,
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – the mode to compute the test.  if ‘full_test’ computes on all test samples,
 if ‘post_novelty’ computes from first GT novel sample.  If ‘pre_novelty’, only calculate
 before first novel sample.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing novelty detection performance over the test.</p>
@@ -1212,20 +1212,20 @@ before first novel sample.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X novel])
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])
 Nx1 vector with each element corresponding to probability of novelty</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])
 Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
-<li><p><strong>p_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
-<li><p><strong>gt_class</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth classes (Dimension:  [img X classification])
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension:  [img X classification])
 Nx1 vector with ground-truth class for each sample</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – if ‘full_test’ computes on all test samples, if ‘post_novelty’ computes from the first GT
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – if ‘full_test’ computes on all test samples, if ‘post_novelty’ computes from the first GT
 novel sample.  If ‘pre_novelty’, than everything before novelty introduced.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</p>
@@ -1249,7 +1249,7 @@ novel sample.  If ‘pre_novelty’, than everything before novelty introduced.<
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance post novelty.</p>
@@ -1274,7 +1274,7 @@ and is just added for completion.  Should always be 0 since no possible TP.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing detection performance pre novelty.</p>
@@ -1289,12 +1289,12 @@ and is just added for completion.  Should always be 0 since no possible TP.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>ta2_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for the agent</p></li>
-<li><p><strong>baseline_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for baseline</p></li>
+<li><p><strong>ta2_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for the agent</p></li>
+<li><p><strong>baseline_acc</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Accuracy scores for baseline</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Reaction performance for the agent</p>
@@ -1311,14 +1311,14 @@ The method computes the number of GT novel samples needed to predict the first t
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – detection predictions (Dimension: [img X novel])
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])
 Nx1 vector with each element corresponding to probability of novelty</p></li>
-<li><p><strong>gt_novel</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>) – ground truth detections (Dimension: [img X detection])
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])
 Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -1344,7 +1344,7 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Dictionary containing indices for novelty introduction and change in world prediction.</p>
@@ -1372,7 +1372,7 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Kitware INC..
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
             </div>
           </div>

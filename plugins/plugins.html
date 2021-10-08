@@ -221,13 +221,13 @@
       </p>
       <ul class="">
         
-          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
+          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
 
             
           </li>
 
         
-          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
+          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
 
             
           </li>
@@ -293,7 +293,7 @@
                 
                   <li class="toctree-l2"><a href="#functions-used-by-the-protocol" class="reference internal">Functions Used By the Protocol</a></li>
                 
-                  <li class="toctree-l2"><a href="#adapters" class="reference internal">Adapters</a></li>
+                  <li class="toctree-l2"><a href="#adapters-and-toolset" class="reference internal">Adapters And Toolset</a></li>
                 
                   <li class="toctree-l2"><a href="#sample-detector-and-registration" class="reference internal">Sample Detector and Registration</a></li>
                 
@@ -394,48 +394,39 @@ it had provided results for <code class="code docutils literal notranslate"><spa
 <code class="code docutils literal notranslate"><span class="pre">NoveltyCharacterization</span></code> depending on the protocol.</p></li>
 </ol>
 </section>
-<section id="adapters">
-<h2>Adapters<a class="headerlink" href="#adapters" title="Permalink to this headline">¶</a></h2>
+<section id="adapters-and-toolset">
+<h2>Adapters And Toolset<a class="headerlink" href="#adapters-and-toolset" title="Permalink to this headline">¶</a></h2>
 <p>Rather than enforcing a strict API for the functions required by the algorithms,
 sail on client provides adapters to fulfill input-output requirements of an algorithm.
-The adapters are provided a dictionary with the parameters obtained from the harness.</p>
+The adapters are provided a dictionary of the global state maintained by the protocol.
+This dictionary is called <cite>toolset</cite>. The algorithm can select data from the <cite>toolset</cite>
+to execute different steps associated with the algorithm.</p>
 <section id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">MockONDAgent</span><span class="p">,</span> <span class="n">Checkpointer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Mock Adapter for testing checkpointing.&quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>        <span class="n">Return</span><span class="p">:</span>
+            <span class="n">Tuple</span> <span class="n">of</span> <span class="n">dictionary</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Detector constructor.</span>
+<span class="sd">        self.dummy_dict = toolset[&quot;dummy_dict&quot;]</span>
+<span class="sd">        self.dummy_list = toolset[&quot;dummy_list&quot;]</span>
+<span class="sd">        self.dummy_tuple = toolset[&quot;dummy_tuple&quot;]</span>
+<span class="sd">        self.dummy_tensor = toolset[&quot;dummy_tensor&quot;]</span>
+<span class="sd">        self.dummy_val = toolset[&quot;dummy_val&quot;]</span>
+<span class="sd">        return {}, {}</span>
 
-<span class="sd">        Args:</span>
-<span class="sd">            toolset (dict): Dictionary containing parameters for the constructor</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">MockONDAgent</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">Checkpointer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">detector</span> <span class="o">=</span> <span class="n">MockONDAgentWithAttributes</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get config for the plugin.</span>
+<span class="sd">class MockAdapterWithCheckpoint(BaseAlgorithm, Checkpointer):</span>
+<span class="sd">    &quot;&quot;&quot;</span><span class="n">Mock</span> <span class="n">Adapter</span> <span class="k">for</span> <span class="n">testing</span> <span class="n">checkpointing</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
 
-<span class="sd">        Returns:</span>
-<span class="sd">            Parameters for the agent</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">config</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">config</span>
+<span class="s2">    def __init__(self, toolset: Dict) -&gt; None:</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="n">Detector</span> <span class="n">constructor</span><span class="o">.</span>
 
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Execute method used by the protocol to run different steps.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
-<span class="sd">            step_descriptor (str): Name of the step</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">step_dict</span><span class="p">[</span><span class="n">step_descriptor</span><span class="p">](</span><span class="n">toolset</span><span class="p">)</span>
+        <span class="n">Args</span><span class="p">:</span>
+            <span class="n">toolset</span> <span class="p">(</span><span class="nb">dict</span><span class="p">):</span> <span class="n">Dictionary</span> <span class="n">containing</span> <span class="n">parameters</span> <span class="k">for</span> <span class="n">the</span> <span class="n">constructor</span>
+        <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        BaseAlgorithm.__init__(self, toolset)</span>
+<span class="s2">        Checkpointer.__init__(self, toolset)</span>
+<span class="s2">        self.detector = MockDetectorWithAttributes(toolset)</span>
 
 </pre></div>
 </div>
@@ -445,22 +436,40 @@ The adapters are provided a dictionary with the parameters obtained from the har
 <h2>Sample Detector and Registration<a class="headerlink" href="#sample-detector-and-registration" title="Permalink to this headline">¶</a></h2>
 <section id="sample-detector">
 <h3>Sample Detector<a class="headerlink" href="#sample-detector" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAgent</span><span class="p">(</span><span class="n">ONDAgent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Mock Detector for OND Protocol.&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Construct Mock OND Detector.&quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">MockDetector</span><span class="p">(</span><span class="n">BaseAlgorithm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mock Detector for testing image classification protocols.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detector constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for the constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">BaseAlgorithm</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;Initialize&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">,</span>
-            <span class="s2">&quot;FeatureExtraction&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_extraction</span><span class="p">,</span>
-            <span class="s2">&quot;WorldDetection&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">world_detection</span><span class="p">,</span>
-            <span class="s2">&quot;NoveltyClassification&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">novelty_classification</span><span class="p">,</span>
-            <span class="s2">&quot;NoveltyAdaption&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">novelty_adaptation</span><span class="p">,</span>
-            <span class="s2">&quot;NoveltyCharacterization&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">novelty_characterization</span><span class="p">,</span>
+            <span class="s2">&quot;Initialize&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialize</span><span class="p">,</span>
+            <span class="s2">&quot;FeatureExtraction&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_feature_extraction</span><span class="p">,</span>
+            <span class="s2">&quot;WorldDetection&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_world_detection</span><span class="p">,</span>
+            <span class="s2">&quot;NoveltyClassification&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_novelty_classification</span><span class="p">,</span>
+            <span class="s2">&quot;NoveltyAdaption&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_novelty_adaption</span><span class="p">,</span>
+            <span class="s2">&quot;NoveltyCharacterization&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_novelty_characterization</span><span class="p">,</span>
         <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute method used by the protocol to run different steps associated with the algorithm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+<span class="sd">            step_descriptor (str): Name of the step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_dict</span><span class="p">[</span><span class="n">step_descriptor</span><span class="p">](</span><span class="n">toolset</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Algorithm Initialization.</span>
 
@@ -472,7 +481,7 @@ The adapters are provided a dictionary with the parameters obtained from the har
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">feature_extraction</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">_feature_extraction</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -487,7 +496,7 @@ The adapters are provided a dictionary with the parameters obtained from the har
         <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">{},</span> <span class="p">{}</span>
 
-    <span class="k">def</span> <span class="nf">world_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_world_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detect change in world ( Novelty has been introduced ).</span>
 
@@ -502,7 +511,7 @@ The adapters are provided a dictionary with the parameters obtained from the har
         <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dst_file</span>
 
-    <span class="k">def</span> <span class="nf">novelty_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_novelty_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Classify data provided in known classes and unknown class.</span>
 
@@ -517,7 +526,7 @@ The adapters are provided a dictionary with the parameters obtained from the har
         <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">dst_file</span>
 
-    <span class="k">def</span> <span class="nf">novelty_adaptation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_novelty_adaption</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update models based on novelty classification and characterization.</span>
 
@@ -529,32 +538,9 @@ The adapters are provided a dictionary with the parameters obtained from the har
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="nf">novelty_characterization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Characterize novelty by clustering different novel samples.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
-
-<span class="sd">        Return:</span>
-<span class="sd">            path to csv file containing the results for novelty characterization step</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
-        <span class="n">dst_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;nc.csv&quot;</span><span class="p">)</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">dst_file</span>
-
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Execute method used by the protocol to run different steps.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
-<span class="sd">            step_descriptor (str): Name of the step</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_dict</span><span class="p">[</span><span class="n">step_descriptor</span><span class="p">](</span><span class="n">toolset</span><span class="p">)</span>
-
+    <span class="k">def</span> <span class="nf">_novelty_characterization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Characterize novelty by clustering different novel samples.</span>
 
 </pre></div>
 </div>
@@ -564,19 +550,6 @@ The adapters are provided a dictionary with the parameters obtained from the har
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The registration is highlighted below.</p>
-</div>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry.plugins.&quot;smqtk_plugins&quot;]</span>
-<span class="n">LocalHarness</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.harness.local_harness:LocalHarness&quot;</span>
-<span class="n">ParHarness</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.harness.par_harness:ParHarness&quot;</span>
-<span class="n">MockONDAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_ond_agents:MockONDAgent&quot;</span>
-<span class="n">MockONDAgentWithAttributes</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_ond_agents:MockONDAgentWithAttributes&quot;</span>
-<span class="hll"><span class="n">MockONDAdapterWithCheckpoint</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_ond_agents:MockONDAdapterWithCheckpoint&quot;</span>
-</span><span class="n">MockCONDDAAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents:MockCONDDAAgent&quot;</span>
-<span class="n">MockCONDDAAgentWithAttributes</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents:MockCONDDAAgentWithAttributes&quot;</span>
-<span class="n">MockCONDDAAdapterWithCheckpoint</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents:MockCONDDAAdapterWithCheckpoint&quot;</span>
-<span class="n">PreComputedONDAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_detector:PreComputedONDAgent&quot;</span>
-<span class="n">PreComputedCONDDAAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_detector:PreComputedCONDDAAgent&quot;</span>
-</pre></div>
 </div>
 </section>
 </section>
@@ -597,7 +570,7 @@ The adapters are provided a dictionary with the parameters obtained from the har
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Kitware INC..
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.0.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
             </div>
           </div>
