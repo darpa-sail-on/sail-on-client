@@ -82,6 +82,10 @@ jobs:
           path: ~/.local/share/poetry-virtualenvs
           key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
+      - name: Install Using Poetry Core
+        run: poetry run pip install poetry-core==1.0.4
+        working-directory: sail-on-client
+
       - name: Install Using Poetry
         run: poetry install --no-interaction -vvv
         working-directory: sail-on-client
@@ -163,12 +167,12 @@ jobs:
           architecture: 'x64'
 
       - name: Install poetry
-        uses: snok/install-poetry@v1.1
+        uses: snok/install-poetry@v1.1.6
         with:
           virtualenvs-create: true
           virtualenvs-in-project: false
           virtualenvs-path: ~/.local/share/poetry-virtualenvs
-          version: 1.1.11
+          version: 1.2.0a1
 
       - name: Capture poetry version
         run: echo "::set-output name=poetry-version::$(poetry --version | sed 's/[()]//g')"
