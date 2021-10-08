@@ -83,7 +83,7 @@ jobs:
           key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
       - name: Install Using Poetry
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction -vvv
         working-directory: sail-on-client
 
       - name: Install Local Dependencies
