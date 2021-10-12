@@ -29,16 +29,16 @@ Sample Detector, Adapter and Configuration Parameters
 Sample Detector
 ^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../../../sail_on_client/mock.py
+.. literalinclude:: ../../../sail_on_client/agent/mock_ond_agents.py
    :language: python
-   :lines: 120-152
+   :lines: 130-159
 
 Sample Adapter
 ^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../../../sail_on_client/mock.py
+.. literalinclude:: ../../../sail_on_client/agent/mock_ond_agents.py
    :language: python
-   :lines: 153-178
+   :lines: 162-197
 
 
 Sample Configuration

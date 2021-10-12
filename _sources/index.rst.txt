@@ -55,8 +55,8 @@ Interfaces
 .. toctree::
    :maxdepth: 2
 
-   interfaces/interface
-   interfaces/interface_api
+   harness/harness
+   harness/harness_api
 
 Metrics
 -------

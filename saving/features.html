@@ -221,13 +221,13 @@
       </p>
       <ul class="">
         
-          <li class="toctree-l1 "><a href="../interfaces/interface.html" class="reference internal ">Interface</a>
+          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
 
             
           </li>
 
         
-          <li class="toctree-l1 "><a href="../interfaces/interface_api.html" class="reference internal ">Interface API</a>
+          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
 
             
           </li>
@@ -373,122 +373,9 @@ examples below.</p>
 </div>
 <section id="saving-features">
 <h3>Saving Features<a class="headerlink" href="#saving-features" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;test_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;OND.0.90001.2100554&quot;</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;dataset_root&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="hll">  <span class="nt">&quot;feature_extraction_only&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-</span><span class="hll">  <span class="nt">&quot;save_features&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-</span><span class="hll">  <span class="nt">&quot;save_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;GAE-features&quot;</span><span class="p">,</span>
-</span>  <span class="nt">&quot;detectors&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;has_reaction_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;has_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;csv_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="nt">&quot;detection_threshold&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nt">&quot;detector_configs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;gae_nd&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;feature_extractor_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;backbone_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d-50&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;graph_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
-          <span class="nt">&quot;no_cuda&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;hidden_dims&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">128</span> <span class="p">],</span>
-          <span class="nt">&quot;hidden&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;in_dim&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-          <span class="nt">&quot;num_heads&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span> <span class="p">],</span>
-          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
-          <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;feature&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;graph_classes&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
-          <span class="nt">&quot;feature_type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;evm_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;weight_path&quot;</span><span class="p">:</span>  <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;number_of_unknown_to_crate_evm&quot;</span><span class="p">:</span> <span class="mi">7</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;characterization_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;clustering_type&quot;</span><span class="p">:</span> <span class="s2">&quot;FINCH&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;number_of_unknown_to_strat_clustering&quot;</span><span class="p">:</span> <span class="mi">50</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;dataloader_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;sample_size&quot;</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
-          <span class="nt">&quot;mean&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">114.7748</span><span class="p">,</span> <span class="mf">107.7354</span><span class="p">,</span> <span class="mf">99.475</span> <span class="p">],</span>
-          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
-          <span class="nt">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="nt">&quot;n_threads&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">88</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 <section id="restore-features">
 <h3>Restore Features<a class="headerlink" href="#restore-features" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
-  <span class="nt">&quot;test_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="s2">&quot;OND.0.90001.2100554&quot;</span>
-  <span class="p">],</span>
-  <span class="nt">&quot;dataset_root&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-<span class="hll">  <span class="nt">&quot;feature_extraction_only&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-</span><span class="hll">  <span class="nt">&quot;save_features&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-</span><span class="hll">  <span class="nt">&quot;use_saved_features&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-</span><span class="hll">  <span class="nt">&quot;save_dir&quot;</span><span class="p">:</span> <span class="s2">&quot;GAE-features&quot;</span><span class="p">,</span>
-</span>  <span class="nt">&quot;detectors&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;has_reaction_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;has_baseline&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;csv_folder&quot;</span><span class="p">:</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;cores&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-    <span class="nt">&quot;detection_threshold&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nt">&quot;detector_configs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;gae_nd&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;feature_extractor_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;backbone_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;arch&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d-50&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;graph_weight_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;i3d&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
-          <span class="nt">&quot;no_cuda&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;hidden_dims&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">128</span> <span class="p">],</span>
-          <span class="nt">&quot;hidden&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;in_dim&quot;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
-          <span class="nt">&quot;num_heads&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span> <span class="p">],</span>
-          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
-          <span class="nt">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;feature&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;graph_classes&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
-          <span class="nt">&quot;feature_type&quot;</span><span class="p">:</span> <span class="s2">&quot;graph&quot;</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;evm_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;weight_path&quot;</span><span class="p">:</span>  <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;number_of_unknown_to_crate_evm&quot;</span><span class="p">:</span> <span class="mi">7</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;characterization_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;clustering_type&quot;</span><span class="p">:</span> <span class="s2">&quot;FINCH&quot;</span><span class="p">,</span>
-          <span class="nt">&quot;number_of_unknown_to_strat_clustering&quot;</span><span class="p">:</span> <span class="mi">50</span>
-        <span class="p">},</span>
-        <span class="nt">&quot;dataloader_params&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="nt">&quot;sample_size&quot;</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
-          <span class="nt">&quot;mean&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">114.7748</span><span class="p">,</span> <span class="mf">107.7354</span><span class="p">,</span> <span class="mf">99.475</span> <span class="p">],</span>
-          <span class="nt">&quot;sample_duration&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
-          <span class="nt">&quot;batch_size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="nt">&quot;n_threads&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-          <span class="nt">&quot;n_classes&quot;</span><span class="p">:</span> <span class="mi">88</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </section>
 </section>
 </section>
