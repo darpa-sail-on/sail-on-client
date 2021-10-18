@@ -1,232 +1,251 @@
 """Tests for OND protocol."""
 
 from tempfile import TemporaryDirectory
-import json
 import pytest
 import os
 
-from sail_on_client.protocol.ond_protocol import SailOn
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.protocol.ond_protocol import ONDProtocol
+from sail_on_client.agent.pre_computed_reaction_agent import PreComputedONDReactionAgent
+from sail_on_client.harness.local_harness import LocalHarness
 
 
 @pytest.fixture(scope="function")
-def ond_config():
-    """Fixture to create a temporal directory and create a json file in it."""
-    test_dir = os.path.dirname(__file__)
-    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    data_dir = os.path.join(test_dir, "data")
-    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
-    gt_config = os.path.join(gt_dir, "activity_recognition")
-    with TemporaryDirectory() as config_folder:
-        dummy_config = {
-            "domain": "activity_recognition",
-            "test_ids": ["OND.10.90001.2100554"],
-            "detectors": {
-                "has_baseline": False,
-                "has_reaction_baseline": False,
-                "detector_configs": {
-                    "PreComputedDetector": {
-                        "cache_dir": cache_dir,
-                        "algorithm_name": "PreComputedDetector",
-                        "round_size": 32,
-                        "has_roundwise_file": False,
-                    }
-                },
-                "csv_folder": "",
-            },
-            "harness_config": {
-                "url": "http://localhost:3307",
-                "data_dir": f"{data_dir}",
-                "gt_dir": f"{gt_dir}",
-                "gt_config": f"{gt_config}",
-            },
-        }
-        config_name = "test_ond_config.json"
-        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
-        yield os.path.join(config_folder, config_name)
+def ond_params():
+    """Fixture to create a provide parameters for OND Protocol."""
+    with TemporaryDirectory() as save_dir:
+        test_dir = os.path.dirname(__file__)
+        dataset_root = os.path.join(test_dir, "data")
+        domain = "activity_recognition"
+        seed = "5278"
+        test_ids = ["OND.10.90001.2100554"]
+        yield dataset_root, domain, seed, test_ids, save_dir
 
 
 @pytest.fixture(scope="function")
-def ond_config_with_feature_extraction():
+def ond_fe_params():
     """Fixture to create a config file for feature extraction."""
+    feature_extraction_only = True
+    save_features = True
+    return feature_extraction_only, save_features
+
+
+@pytest.fixture
+def ond_reaction_baseline_params():
+    """Fixture to create a reaction baseline."""
+    baseline_class = "PreComputedONDReactionAgent"
+    has_reaction_baseline = True
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    data_dir = os.path.join(test_dir, "data")
-    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
-    gt_config = os.path.join(gt_dir, "activity_recognition.json")
-    with TemporaryDirectory() as config_folder:
-        dummy_config = {
-            "domain": "activity_recognition",
-            "test_ids": ["OND.10.90001.2100554"],
-            "detectors": {
-                "has_baseline": False,
-                "has_reaction_baseline": False,
-                "detector_configs": {
-                    "PreComputedDetector": {
-                        "cache_dir": cache_dir,
-                        "algorithm_name": "PreComputedDetector",
-                        "round_size": 32,
-                        "has_roundwise_file": False,
-                    }
-                },
-                "csv_folder": "",
-            },
-            "harness_config": {
-                "url": "http://localhost:3307",
-                "data_dir": f"{data_dir}",
-                "gt_dir": f"{gt_dir}",
-                "gt_config": f"{gt_config}",
-            },
-        }
-        config_name = "test_ond_config.json"
-        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
-        yield os.path.join(config_folder, config_name)
+    baseline_algorithm = {
+        baseline_class: PreComputedONDReactionAgent(
+            "BaselinePreComputedONDAgent", cache_dir, False, 32
+        )
+    }
+    return baseline_class, has_reaction_baseline, baseline_algorithm
 
 
 @pytest.fixture(scope="function")
-def ond_config_with_reaction_baseline():
-    """Fixture to create a reaction baseline."""
+def ond_protocol_cfg_params():
+    """Fixture for creating algorithm cfg."""
     test_dir = os.path.dirname(__file__)
     cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     data_dir = os.path.join(test_dir, "data")
     gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
     gt_config = os.path.join(gt_dir, "activity_recognition.json")
-    with TemporaryDirectory() as config_folder:
-        dummy_config = {
-            "domain": "activity_recognition",
-            "test_ids": ["OND.10.90001.2100554"],
-            "is_eval_enabled": True,
-            "detectors": {
-                "has_baseline": False,
-                "has_reaction_baseline": True,
-                "baseline_class": "BaselinePreComputedDetector",
-                "csv_folder": "",
-                "detector_configs": {
-                    "PreComputedDetector": {
-                        "cache_dir": cache_dir,
-                        "algorithm_name": "PreComputedDetector",
-                        "round_size": 32,
-                        "has_roundwise_file": False,
-                    },
-                    "BaselinePreComputedDetector": {
-                        "cache_dir": cache_dir,
-                        "algorithm_name": "BaselinePreComputedDetector",
-                        "round_size": 32,
-                        "has_roundwise_file": False,
-                    },
+    algorithms = {
+        "algorithms": {
+            "PreComputedONDAgent": {
+                "class": "PreComputedONDAgent",
+                "config": {
+                    "algorithm_name": "PreComputedONDAgent",
+                    "cache_dir": cache_dir,
+                    "has_roundwise_file": False,
+                    "round_size": 32,
                 },
-            },
-            "harness_config": {
-                "url": "http://localhost:3307",
-                "data_dir": f"{data_dir}",
-                "gt_dir": f"{gt_dir}",
-                "gt_config": f"{gt_config}",
-            },
-        }
-        config_name = "test_ond_config.json"
-        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
-        yield os.path.join(config_folder, config_name)
+            }
+        },
+        "harness": {
+            "class": "LocalHarness",
+            "config": {"data_dir": data_dir, "gt_dir": gt_dir, "gt_config": gt_config},
+        },
+    }
+    return algorithms
 
 
 def test_initialize(
-    server_setup, get_interface_params, discoverable_plugins, ond_config
+    server_setup, ond_params, ond_harness_instance, ond_algorithm_instance
 ):
     """
     Test ond protocol initialization.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        ond_config (str): Path to json file
+        ond_params (tuple): Tuple to configure OND parameters with all defaults
+        ond_harness_instance: An instance of local harness
+        ond_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
-    SailOn(discoverable_plugins, "", par_interface, ond_config)
-    local_interface = LocalInterface(config_name, config_directory)
-    SailOn(discoverable_plugins, "", local_interface, ond_config)
+    algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = ond_params
+    ONDProtocol(
+        algorithms, dataset_root, domain, ond_harness_instance, save_dir, seed, test_ids
+    )
+
+
+def test_ond_from_config(ond_params, ond_protocol_cfg_params):
+    """
+    Test from_config in ond_protocol.
+
+    Args:
+        ond_params (tuple): Tuple to configure OND parameters with all defaults
+        ond_protocol_cfg_params: dictionary with the algorithms
+
+    Returns:
+        None
+    """
+    dataset_root, domain, seed, test_ids, save_dir = ond_params
+    ond_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
+    ond_protocol = ONDProtocol.from_config(ond_protocol_cfg_params)
+    assert "PreComputedONDAgent" in ond_protocol.algorithms.keys()
+    assert isinstance(ond_protocol.harness, LocalHarness)
+
+
+def test_ond_get_config(ond_params, ond_protocol_cfg_params):
+    """
+    Test from_config in ond_protocol.
+
+    Args:
+        ond_params (tuple): Tuple to configure OND parameters with all defaults
+        ond_protocol_cfg_params: dictionary with the algorithms
+
+    Returns:
+        None
+    """
+    dataset_root, domain, seed, test_ids, save_dir = ond_params
+    ond_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
+    ond_protocol = ONDProtocol.from_config(ond_protocol_cfg_params)
+    ond_config = ond_protocol.get_config()
+    # Testing the validity of the config by reconstructing the protocol from it
+    ONDProtocol.from_config(ond_config)
 
 
 def test_run_protocol(
-    server_setup, get_interface_params, discoverable_plugins, ond_config
+    server_setup, ond_params, ond_harness_instance, ond_algorithm_instance
 ):
     """
     Test running protocol.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        ond_config (str): Path to json file
+        ond_params (tuple): Tuple to configure OND parameters with all defaults
+        ond_harness_instance: An instance of local harness
+        ond_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
-    ond = SailOn(discoverable_plugins, "", par_interface, ond_config)
-    ond.run_protocol()
-    local_interface = LocalInterface(config_name, config_directory)
-    SailOn(discoverable_plugins, "", local_interface, ond_config)
-    ond.run_protocol()
+    algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = ond_params
+    ond = ONDProtocol(
+        algorithms, dataset_root, domain, ond_harness_instance, save_dir, seed, test_ids
+    )
+    ond.run_protocol({})
 
 
 def test_feature_extraction(
     server_setup,
-    get_interface_params,
-    discoverable_plugins,
-    ond_config_with_feature_extraction,
+    ond_params,
+    ond_fe_params,
+    ond_harness_instance,
+    ond_algorithm_instance,
 ):
     """
-    Test feature extraction.
+    Test feature extraction only.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        ond_config_with_feature_extraction (str): Path to json file
+        ond_params (tuple): Tuple to configure OND parameters with all defaults
+        ond_fe_params (tuple): Tuple to configure OND parameters with feature extraction
+        ond_harness_instance: An instance of local harness
+        ond_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
-    ond = SailOn(
-        discoverable_plugins, "", par_interface, ond_config_with_feature_extraction
+    algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = ond_params
+    feature_extraction_only, save_features = ond_fe_params
+    ond = ONDProtocol(
+        algorithms,
+        dataset_root,
+        domain,
+        ond_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+        feature_extraction_only=feature_extraction_only,
+        save_features=save_features,
     )
-    ond.run_protocol()
-    local_interface = LocalInterface(config_name, config_directory)
-    SailOn(
-        discoverable_plugins, "", local_interface, ond_config_with_feature_extraction
-    )
-    ond.run_protocol()
+    ond.run_protocol({})
 
 
 def test_reaction_baseline(
     server_setup,
-    get_ar_interface_params,
-    discoverable_plugins,
-    ond_config_with_reaction_baseline,
+    ond_params,
+    ond_reaction_baseline_params,
+    ond_harness_instance,
+    ond_algorithm_instance,
 ):
     """
     Test reaction baseline with a detector.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_ar_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        ond_config_with_reaction_baseline(str): Path to json file
+        ond_params (tuple): Tuple to configure OND parameters with all defaults
+        ond_reaction_baseline_params (tuple): Tuple for testing with baseline
+        ond_harness_instance: An instance of local harness
+        ond_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_ar_interface_params
-    local_interface = LocalInterface(config_name, config_directory)
-    ond = SailOn(
-        discoverable_plugins, "", local_interface, ond_config_with_reaction_baseline
+    algorithms = {"PreComputedONDAgent": ond_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = ond_params
+    (
+        baseline_class,
+        has_reaction_baseline,
+        baseline_algorithm,
+    ) = ond_reaction_baseline_params
+    algorithms.update(baseline_algorithm)
+    ond = ONDProtocol(
+        algorithms,
+        dataset_root,
+        domain,
+        ond_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+        baseline_class=baseline_class,
+        has_reaction_baseline=has_reaction_baseline,
+        is_eval_enabled=True,
+        is_eval_roundwise_enabled=True,
     )
-    ond.run_protocol()
+    ond.run_protocol({})

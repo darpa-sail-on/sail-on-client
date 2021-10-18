@@ -31,12 +31,11 @@ Client and Protocols for DARPA sail-on
 3. Clone the repositories associated with different components in a working directory
     ```
       git clone https://github.com/tinker-engine/tinker-engine.git
-      git clone https://github.com/darpa-sail-on/sailon_tinker_launcher.git
       git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
       git clone https://github.com/darpa-sail-on/Sail-On-API.git
       git clone https://github.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create tinker-engine, sailon_tinker_launcher, Sail_On_Evaluate,
+   This would create tinker-engine, Sail_On_Evaluate,
    Sail-On-API and sail-on-client directories in your working directory
 
 
@@ -44,7 +43,7 @@ Client and Protocols for DARPA sail-on
    ```
      cd sail-on-client
      poetry install
-     poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+     poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
      poetry shell
    ```
 
@@ -56,6 +55,7 @@ in sail_on_client/protocol/configuration.json and skip step 1 of running the ser
 
 1. [Instructions for running M6 Algorithms](M6-ALGO.md)
 1. [Instructions for running M12 Algorithms](M12-ALGO.md)
+1. [Instructions for running M18 Algorithms](M18-ALGO.md)
 
 
 ## Semantic Versioning

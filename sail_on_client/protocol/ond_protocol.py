@@ -1,11 +1,11 @@
 """OND protocol."""
 
+from sail_on_client.agent.ond_agent import ONDAgent
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.protocol.visual_protocol import VisualProtocol
-from sail_on_client.protocol.ond_config import OndConfig
-from sail_on_client.utils.utils import update_harness_parameters
 from sail_on_client.utils.numpy_encoder import NumpyEncoder
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
 from sail_on_client.protocol.ond_dataclasses import AlgorithmAttributes
 from sail_on_client.protocol.ond_test import ONDTest
 from sail_on_client.utils.decorators import skip_stage
@@ -14,38 +14,145 @@ import os
 import json
 import logging
 
-from typing import Dict, List, Any, Union
+from typing import Dict, List
 
 log = logging.getLogger(__name__)
 
 
-class SailOn(VisualProtocol):
+class ONDProtocol(VisualProtocol):
     """OND protocol."""
 
     def __init__(
         self,
-        discovered_plugins: Dict[str, Any],
-        algorithmsdirectory: str,
-        harness: Union[ParInterface, LocalInterface],
-        config_file: str,
+        algorithms: Dict[str, ONDAgent],
+        dataset_root: str,
+        domain: str,
+        harness: TestAndEvaluationHarnessType,
+        save_dir: str,
+        seed: str,
+        test_ids: List[str],
+        baseline_class: str = "",
+        feature_extraction_only: bool = False,
+        has_baseline: bool = False,
+        has_reaction_baseline: bool = False,
+        hints: List = None,
+        is_eval_enabled: bool = False,
+        is_eval_roundwise_enabled: bool = False,
+        resume_session: bool = False,
+        resume_session_ids: Dict = None,
+        save_attributes: bool = False,
+        saved_attributes: Dict = None,
+        save_elementwise: bool = False,
+        save_features: bool = False,
+        skip_stages: List = None,
+        use_feedback: bool = False,
+        feedback_type: str = "classification",
+        use_consolidated_features: bool = False,
+        use_saved_attributes: bool = False,
+        use_saved_features: bool = False,
     ) -> None:
         """
         Construct OND protocol.
 
         Args:
-            discovered_plugins: Dict of algorithms that can be used by the protocols
-            algorithmsdirectory: Directory with the algorithms
-            harness: An object for the harness used for T&E
-            config_file: Path to a config file used by the protocol
+            algorithms: Dictionary of algorithms that are used run based on the protocol
+            baseline_class: Name of the baseline class
+            dataset_root: Root directory of the dataset
+            domain: Domain of the problem
+            save_dir: Directory where results are saved
+            seed: Seed for the experiments
+            feedback_type: Type of feedback
+            test_ids: List of tests
+            feature_extraction_only: Flag to only run feature extraction
+            has_baseline: Flag to check if the session has baseline
+            has_reaction_baseline: Flag to check if the session has reaction baseline
+            hints: List of hint provided in the session
+            harness: A harness for test and evaluation
+            is_eval_enabled: Flag to check if evaluation is enabled in session
+            is_eval_roundwise_enabled: Flag to check if evaluation is enabled for rounds
+            resume_session: Flag to resume session
+            resume_session_ids: Dictionary for resuming sessions
+            save_attributes: Flag to save attributes
+            saved_attributes: Dictionary for attributes
+            save_elementwise: Flag to save features elementwise
+            save_features: Flag to save  features
+            skip_stages: List of stages that are skipped
+            use_feedback: Flag to use feedback
+            use_saved_attributes: Flag to use saved attributes
+            use_saved_features: Flag to use saved features
 
         Returns:
             None
         """
-        super().__init__(discovered_plugins, algorithmsdirectory, harness, config_file)
-        with open(config_file, "r") as f:
-            overriden_config = json.load(f)
-        self.config = OndConfig(overriden_config)
-        self.harness = update_harness_parameters(harness, self.config["harness_config"])
+        super().__init__(algorithms, harness)
+        self.baseline_class = baseline_class
+        self.dataset_root = dataset_root
+        self.domain = domain
+        self.feature_extraction_only = feature_extraction_only
+        self.feedback_type = feedback_type
+        self.has_baseline = has_baseline
+        self.has_reaction_baseline = has_reaction_baseline
+        if hints is None:
+            self.hints = []
+        else:
+            self.hints = hints
+        self.is_eval_enabled = is_eval_enabled
+        self.is_eval_roundwise_enabled = is_eval_roundwise_enabled
+        self.resume_session = resume_session
+        if resume_session_ids is None:
+            self.resume_session_ids = {}
+        else:
+            self.resume_session_ids = resume_session_ids
+        self.save_attributes = save_attributes
+        if saved_attributes is None:
+            self.saved_attributes = {}
+        else:
+            self.saved_attributes = saved_attributes
+        self.save_dir = save_dir
+        self.save_elementwise = save_elementwise
+        self.save_features = save_features
+        if skip_stages is None:
+            self.skip_stages = []
+        else:
+            self.skip_stages = skip_stages
+        self.seed = seed
+        self.test_ids = test_ids
+        self.use_consolidated_features = use_consolidated_features
+        self.use_feedback = use_feedback
+        self.use_saved_attributes = use_saved_attributes
+        self.use_saved_features = use_saved_features
+
+    def get_config(self) -> Dict:
+        """Get dictionary representation of the object."""
+        config = super().get_config()
+        config.update(
+            {
+                "baseline_class": self.baseline_class,
+                "dataset_root": self.dataset_root,
+                "domain": self.domain,
+                "feature_extraction_only": self.feature_extraction_only,
+                "feedback_type": self.feedback_type,
+                "has_baseline": self.has_baseline,
+                "has_reaction_baseline": self.has_reaction_baseline,
+                "hints": self.hints,
+                "is_eval_enabled": self.is_eval_enabled,
+                "is_eval_roundwise_enabled": self.is_eval_roundwise_enabled,
+                "resume_session": self.resume_session,
+                "resume_session_ids": self.resume_session_ids,
+                "save_attributes": self.save_attributes,
+                "saved_attributes": self.saved_attributes,
+                "save_dir": self.save_dir,
+                "save_elementwise": self.save_elementwise,
+                "save_features": self.save_features,
+                "skip_stages": self.skip_stages,
+                "seed": self.seed,
+                "test_ids": self.test_ids,
+                "use_feedback": self.use_feedback,
+                "use_saved_attributes": self.use_saved_attributes,
+                "use_saved_features": self.use_saved_features,
+            }
+        )
+        return config
 
     def create_algorithm_attributes(
         self,
@@ -70,9 +177,9 @@ class SailOn(VisualProtocol):
         Returns:
             An instance of AlgorithmAttributes
         """
-        algorithm_instance = self.get_algorithm(algorithm_name, algorithm_param,)
+        algorithm_instance = self.algorithms[algorithm_name]
         is_baseline = algorithm_name == baseline_algorithm_name
-        session_id = self.config.get("resumed_session_ids", {}).get(algorithm_name, "")
+        session_id = self.resume_session_ids.get(algorithm_name, "")
         return AlgorithmAttributes(
             algorithm_name,
             algorithm_param.get("detection_threshold", 0.5),
@@ -233,64 +340,37 @@ class SailOn(VisualProtocol):
             skip_stages.append("NoveltyCharacterization")
         return skip_stages
 
-    def run_protocol(self) -> None:
-        """Run the protocol."""
+    def run_protocol(self, config: Dict) -> None:
+        """
+        Run the protocol.
+
+        Args:
+            config: Parameters provided in the config
+
+        Returns:
+            None
+        """
         log.info("Starting OND")
-        # provide all of the configuration information in the toolset
-        self.toolset.update(self.config)
-        detector_params = self.config["detectors"]
-        has_reaction_baseline = detector_params["has_reaction_baseline"]
-        has_baseline = detector_params["has_baseline"]
-        save_dir = detector_params["csv_folder"]
-        algorithm_params = detector_params["detector_configs"]
-        algorithm_names = algorithm_params.keys()
-        baseline_algorithm_name = detector_params.get("baseline_class", None)
-        test_ids = self.config["test_ids"]
-        domain = self.config["domain"]
-        hints = self.config["hints"]
-        resume_session = self.config["resume_session"]
-        is_eval_enabled = self.config["is_eval_enabled"]
-        is_eval_roundwise_enabled = self.config["is_eval_roundwise_enabled"]
-        data_root = self.config["dataset_root"]
-        save_dir = self.config["save_dir"]
-        save_features = self.config["save_features"]
-        use_feedback = self.config["use_feedback"]
-        feedback_type = self.config["feedback_type"]
-        use_saved_features = self.config["use_saved_features"]
-        use_consolidated_features = self.config["use_consolidated_features"]
-        feature_extraction_only = self.config["feature_extraction_only"]
-        self.skip_stages = self.config["skip_stages"]
         self.skip_stages = self.update_skip_stages(
             self.skip_stages,
-            is_eval_enabled,
-            is_eval_roundwise_enabled,
-            use_feedback,
-            save_features,
-            feature_extraction_only,
+            self.is_eval_enabled,
+            self.is_eval_roundwise_enabled,
+            self.use_feedback,
+            self.save_features,
+            self.feature_extraction_only,
         )
 
         algorithms_attributes = []
-
         # Populate most of the attributes for the algorithm
-        for algorithm_name in algorithm_names:
-            algorithm_param = algorithm_params[algorithm_name]
+        for algorithm_name in self.algorithms.keys():
+            algorithm_param = self.algorithms[algorithm_name].get_config()
             algorithm_attributes = self.create_algorithm_attributes(
                 algorithm_name,
                 algorithm_param,
-                baseline_algorithm_name,
-                has_baseline,
-                has_reaction_baseline,
-                test_ids,
-            )
-            # Add common parameters to algorithm specific config with some exclusions
-            algorithm_attributes.merge_detector_params(
-                detector_params,
-                [
-                    "has_baseline",
-                    "has_reaction_baseline",
-                    "baseline_class",
-                    "detector_configs",
-                ],
+                self.baseline_class,
+                self.has_baseline,
+                self.has_reaction_baseline,
+                self.test_ids,
             )
             log.info(f"Consolidating attributes for {algorithm_name}")
             algorithms_attributes.append(algorithm_attributes)
@@ -299,7 +379,11 @@ class SailOn(VisualProtocol):
         # session_id for algorithm attributes
         for idx, algorithm_attributes in enumerate(algorithms_attributes):
             algorithms_attributes[idx] = self.create_algorithm_session(
-                algorithm_attributes, domain, hints, resume_session, "OND"
+                algorithm_attributes,
+                self.domain,
+                self.hints,
+                self.resume_session,
+                "OND",
             )
 
         # Run tests for all the algorithms
@@ -315,15 +399,15 @@ class SailOn(VisualProtocol):
                 skip_stages.append("NoveltyCharacterization")
             ond_test = ONDTest(
                 algorithm_attributes,
-                data_root,
-                domain,
-                feedback_type,
+                self.dataset_root,
+                self.domain,
+                self.feedback_type,
                 self.harness,
-                save_dir,
+                self.save_dir,
                 session_id,
                 skip_stages,
-                use_consolidated_features,
-                use_saved_features,
+                self.use_consolidated_features,
+                self.use_saved_features,
             )
             test_scores = {}
             for test_id in test_ids:
@@ -334,7 +418,9 @@ class SailOn(VisualProtocol):
             algorithm_scores[algorithm_name] = test_scores
 
         # Evaluate algorithms
-        self._evaluate_algorithms(algorithms_attributes, algorithm_scores, save_dir)
+        self._evaluate_algorithms(
+            algorithms_attributes, algorithm_scores, self.save_dir
+        )
 
         # Terminate algorithms
         for algorithm_attributes in algorithms_attributes:

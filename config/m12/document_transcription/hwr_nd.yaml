@@ -1,0 +1,25 @@
+domain: "document_transcription"
+test_ids:
+  - OND.1.1.1234
+dataset_root: ""
+save_dir: document_transcription
+seed: 2194
+algorithms:
+  HWRNoveltyDetector:
+    smqtk:
+      class: HWRNoveltyDetector
+      config:
+        config_file_path: "./hwr_config.yaml"
+        cores: 1
+        device: "gpu"
+        csv_folder: "document_transcription"
+        img_height: 64
+        hogs_ppc: 16
+        unknown_threshold: 0.5
+        crnn_pass: []
+        save_header_csv: 0
+harness:
+  smqtk:
+    class: ParHarness
+    config:
+      url: ""

@@ -12,8 +12,9 @@ from sail_on_client.protocol.ond_dataclasses import (
 from sail_on_client.protocol.ond_round import ONDRound
 from sail_on_client.protocol.visual_test import VisualTest
 from sail_on_client.feedback import create_feedback_instance, feedback_type
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.utils.utils import safe_remove
 from sail_on_client.utils.decorators import skip_stage
 from sail_on_client.errors import RoundError
@@ -31,7 +32,7 @@ class ONDTest(VisualTest):
         data_root: str,
         domain: str,
         feedback_type: str,
-        harness: Union[LocalInterface, ParInterface],
+        harness: TestAndEvaluationHarnessType,
         save_dir: str,
         session_id: str,
         skip_stages: List[str],

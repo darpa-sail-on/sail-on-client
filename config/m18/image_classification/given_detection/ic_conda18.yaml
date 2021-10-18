@@ -1,0 +1,49 @@
+domain: image_classification
+test_ids:
+  - OND.54012315.0900.1239
+is_eval_enabled: False
+hints:
+  - red_light
+dataset_root: ""
+save_dir: "image_classification"
+algorithms:
+  CONDDA_18_Without_Redlight:
+    smqtk:
+      class: CONDDA_18_Without_Redlight
+      config:
+        cnn_params:
+            model_path: ""
+            known_classes: 413
+            known_unknown_classes: 51
+            image_size: 320
+        evm_params:
+           model_path: ""
+           feature_known_path: ""
+           tail_size: 40000
+           cover_threshold: 0.8
+           distance_multiplier: 0.65
+           unknown_distance_multiplier: 0.80
+           distance_function: "cosine"
+           chunk_size: 200
+           gpu_list:
+             - 0
+             - 1
+           mu_train: 1.0
+           sigma_train: 0.028588828
+           KL_threshold: 62.855897282606946
+           threshold_evm: 0.5
+           number_of_unknown_to_crate_evm: 10
+        characterization_param:
+           clustering_type: "FINCH"
+           number_of_unknown_to_strat_clustering: 100
+           minimum_number_of_cluster_to_be_accepted: 4
+        dataloader_params:
+            batch_size: 100
+            num_workers: 6
+        csv_folder: 'condda_results'
+        cores: 6
+        detection_threshold: 0.1
+harness:
+    class: ParHarness
+    config:
+      url: ""

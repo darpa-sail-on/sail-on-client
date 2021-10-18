@@ -1,141 +1,205 @@
 """Tests for CONDDA protocol."""
 
 from tempfile import TemporaryDirectory
-import json
 import pytest
 import os
 
 from sail_on_client.protocol.condda_protocol import Condda
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.harness.local_harness import LocalHarness
 
 
 @pytest.fixture(scope="function")
-def condda_config():
-    """Fixture to create a temporal directory and create a json file in it."""
-    test_dir = os.path.dirname(__file__)
-    data_dir = os.path.join(test_dir, "data")
-    with TemporaryDirectory() as config_folder:
-        dummy_config = {
-            "domain": "image_classification",
-            "test_ids": ["CONDDA.1.1.1234"],
-            "detectors": {
-                "has_baseline": False,
-                "has_reaction_baseline": False,
-                "detector_configs": {"MockDetector": {}},
-                "csv_folder": "",
-            },
-            "harness_config": {
-                "url": "http://localhost:3307",
-                "data_dir": f"{data_dir}",
-            },
-        }
-        config_name = "test_condda_config.json"
-        json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
-        yield os.path.join(config_folder, config_name)
+def condda_params():
+    """Fixture to provide parameters for CONDDA Protocol."""
+    with TemporaryDirectory() as save_dir:
+        test_dir = os.path.dirname(__file__)
+        dataset_root = os.path.join(test_dir, "data")
+        domain = "activity_recognition"
+        seed = "5278"
+        test_ids = ["CONDDA.10.90001.2100554"]
+        yield dataset_root, domain, seed, test_ids, save_dir
 
 
 @pytest.fixture(scope="function")
-def condda_config_with_feature_extraction():
+def condda_fe_params():
     """Fixture to create a config file for feature extraction."""
+    feature_extraction_only = True
+    save_features = True
+    return feature_extraction_only, save_features
+
+
+@pytest.fixture(scope="function")
+def condda_protocol_cfg_params():
+    """Fixture for creating algorithm cfg."""
     test_dir = os.path.dirname(__file__)
+    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
     data_dir = os.path.join(test_dir, "data")
-    with TemporaryDirectory() as feature_dir:
-        with TemporaryDirectory() as config_folder:
-            dummy_config = {
-                "domain": "image_classification",
-                "test_ids": ["CONDDA.1.1.1234"],
-                "detectors": {
-                    "has_baseline": False,
-                    "has_reaction_baseline": False,
-                    "detector_configs": {"MockDetector": {}},
-                    "csv_folder": "",
-                },
-                "feature_extraction_only": True,
-                "save_features": True,
-                "save_dir": feature_dir,
-                "harness_config": {
-                    "url": "http://localhost:3307",
-                    "data_dir": f"{data_dir}",
+    gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
+    gt_config = os.path.join(
+        data_dir, "OND", "activity_recognition", "activity_recognition.json"
+    )
+    algorithms = {
+        "algorithms": {
+            "PreComputedCONDDAAgent": {
+                "class": "PreComputedCONDDAAgent",
+                "config": {
+                    "algorithm_name": "PreComputedCONDDAAgent",
+                    "cache_dir": cache_dir,
+                    "has_roundwise_file": False,
+                    "round_size": 32,
                 },
             }
-            config_name = "test_condda_config.json"
-            json.dump(dummy_config, open(os.path.join(config_folder, config_name), "w"))
-            yield os.path.join(config_folder, config_name)
+        },
+        "harness": {
+            "class": "LocalHarness",
+            "config": {"data_dir": data_dir, "gt_dir": gt_dir, "gt_config": gt_config},
+        },
+    }
+    return algorithms
 
 
 def test_initialize(
-    server_setup, get_interface_params, discoverable_plugins, condda_config
+    server_setup, condda_params, condda_harness_instance, condda_algorithm_instance
 ):
     """
     Test condda protocol initialization.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        condda_config (str): Path to json file
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_harness_instance: An instance of local harness
+        condda_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
-    Condda(discoverable_plugins, "", par_interface, condda_config)
-    local_interface = LocalInterface(config_name, config_directory)
-    Condda(discoverable_plugins, "", local_interface, condda_config)
+    algorithms = {"PreComputedCONDDAAgent": condda_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    Condda(
+        algorithms,
+        dataset_root,
+        domain,
+        condda_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+    )
+
+
+def test_condda_from_config(condda_params, condda_protocol_cfg_params):
+    """
+    Test from_config in ond_protocol.
+
+    Args:
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_protocol_cfg_params: dictionary with the algorithms
+
+    Returns:
+        None
+    """
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    condda_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
+    condda_protocol = Condda.from_config(condda_protocol_cfg_params)
+    assert "PreComputedCONDDAAgent" in condda_protocol.algorithms.keys()
+    assert isinstance(condda_protocol.harness, LocalHarness)
+
+
+def test_condda_get_config(condda_params, condda_protocol_cfg_params):
+    """
+    Test from_config in condda_protocol.
+
+    Args:
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_protocol_cfg_params: dictionary with the algorithms
+
+    Returns:
+        None
+    """
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    condda_protocol_cfg_params.update(
+        {
+            "dataset_root": dataset_root,
+            "domain": domain,
+            "seed": seed,
+            "test_ids": test_ids,
+            "save_dir": save_dir,
+        }
+    )
+    condda_protocol = Condda.from_config(condda_protocol_cfg_params)
+    condda_config = condda_protocol.get_config()
+    # Testing the validity of the config by reconstructing the protocol from it
+    Condda.from_config(condda_config)
 
 
 def test_run_protocol(
-    server_setup, get_interface_params, discoverable_plugins, condda_config
+    server_setup, condda_params, condda_harness_instance, condda_algorithm_instance
 ):
     """
     Test running protocol.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        condda_config (str): Path to json file
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_harness_instance: An instance of local harness
+        condda_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
-    condda = Condda(discoverable_plugins, "", par_interface, condda_config)
-    condda.run_protocol()
-    local_interface = LocalInterface(config_name, config_directory)
-    condda = Condda(discoverable_plugins, "", local_interface, condda_config)
-    condda.run_protocol()
+    algorithms = {"PreComputedCONDDAAgent": condda_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    condda = Condda(
+        algorithms,
+        dataset_root,
+        domain,
+        condda_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+    )
+    condda.run_protocol({})
 
 
 def test_feature_extraction(
     server_setup,
-    get_interface_params,
-    discoverable_plugins,
-    condda_config_with_feature_extraction,
+    condda_params,
+    condda_harness_instance,
+    condda_algorithm_instance,
+    condda_fe_params,
 ):
     """
     Test feature extraction.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
-        discoverable_plugins (dict): Dictionary with the plugins
-        condda_config_with_feature_extraction (str): Path to json file
+        condda_params (tuple): Tuple to configure CONDDA parameters with all defaults
+        condda_fe_params (tuple): Tuple to configure CONDDA parameters for feature extraction
+        condda_harness_instance: An instance of local harness
+        condda_algorithm_instance: An instance of PreComputedONDAgent
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    algorithms = {"PreComputedCONDDAAgent": condda_algorithm_instance}
+    dataset_root, domain, seed, test_ids, save_dir = condda_params
+    feature_extraction_only, save_features = condda_fe_params
     condda = Condda(
-        discoverable_plugins, "", par_interface, condda_config_with_feature_extraction
+        algorithms,
+        dataset_root,
+        domain,
+        condda_harness_instance,
+        save_dir,
+        seed,
+        test_ids,
+        feature_extraction_only=feature_extraction_only,
+        save_features=save_features,
     )
-    condda.run_protocol()
-    local_interface = LocalInterface(config_name, config_directory)
-    condda = Condda(
-        discoverable_plugins, "", local_interface, condda_config_with_feature_extraction
-    )
-    condda.run_protocol()
+    condda.run_protocol({})

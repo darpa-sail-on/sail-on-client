@@ -1,7 +1,7 @@
 """Tests for Checkpointer."""
 
 from sail_on_client.checkpointer import Checkpointer
-from sail_on_client.mock import MockAdapterWithCheckpoint
+from sail_on_client.agent.mock_ond_agents import MockONDAdapterWithCheckpoint
 from tempfile import TemporaryDirectory
 from random import randint
 import torch
@@ -103,7 +103,7 @@ def test_save_attribute(checkpoint_save_config, dummy_attributes):
     Return:
         None
     """
-    mock_detector = MockAdapterWithCheckpoint(checkpoint_save_config)
+    mock_detector = MockONDAdapterWithCheckpoint(checkpoint_save_config)
     mock_detector.execute(dummy_attributes, "FeatureExtraction")
     mock_detector.save_attributes("FeatureExtraction")
     attribute_dict = mock_detector.toolset["attributes"]
@@ -138,7 +138,7 @@ def test_restore_attribute(
     Return:
         None
     """
-    mock_detector = MockAdapterWithCheckpoint(checkpoint_save_config)
+    mock_detector = MockONDAdapterWithCheckpoint(checkpoint_save_config)
     mock_detector.execute(dummy_attributes, "FeatureExtraction")
     mock_detector.save_attributes("FeatureExtraction")
     attribute_dict = mock_detector.toolset["attributes"]
@@ -146,6 +146,6 @@ def test_restore_attribute(
     if os.path.isdir(save_dir):
         save_dir = os.path.join(save_dir, "Dummy_test_attribute.pkl")
     pkl.dump(attribute_dict, open(save_dir, "wb"))
-    restored_mock_detector = MockAdapterWithCheckpoint(checkpoint_restore_config)
+    restored_mock_detector = MockONDAdapterWithCheckpoint(checkpoint_restore_config)
     restored_mock_detector.restore_attributes("FeatureExtraction")
     assert mock_detector == restored_mock_detector

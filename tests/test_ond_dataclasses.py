@@ -2,7 +2,7 @@
 
 import pytest
 import uuid
-from sail_on_client.mock import MockDetector
+from sail_on_client.agent.mock_ond_agents import MockONDAgent
 from sail_on_client.protocol.ond_dataclasses import (
     AlgorithmAttributes,
     InitializeParams,
@@ -16,9 +16,9 @@ from sail_on_client.protocol.ond_dataclasses import (
 def algorithm_attributes_params():
     """Fixture for providing parameters for initializing AlgorithmAttributes."""
     return {
-        "name": "MockDetector",
+        "name": "MockONDAgent",
         "detection_threshold": 0.5,
-        "instance": MockDetector({}),
+        "instance": MockONDAgent(),
         "is_baseline": False,
         "is_reaction_baseline": False,
         "package_name": "sail-on-client",
@@ -81,7 +81,7 @@ def test_algorithm_attributes_named_version(algorithm_attributes_params):
         None
     """
     algorithm_attributes = AlgorithmAttributes(**algorithm_attributes_params)
-    assert "MockDetector" in algorithm_attributes.named_version()
+    assert "MockONDAgent" in algorithm_attributes.named_version()
 
 
 def test_algorithm_attributes_removed_completed_tests(algorithm_attributes_params):

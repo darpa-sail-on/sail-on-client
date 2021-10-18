@@ -12,8 +12,9 @@ from sail_on_client.protocol.visual_dataclasses import (
     WorldChangeDetectionParams,
 )
 from sail_on_client.protocol.visual_round import VisualRound
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.utils.utils import safe_remove
 from sail_on_client.utils.decorators import skip_stage
 
@@ -29,7 +30,7 @@ class ONDRound(VisualRound):
         algorithm: Any,
         data_root: str,
         features_dict: Dict,
-        harness: Union[LocalInterface, ParInterface],
+        harness: TestAndEvaluationHarnessType,
         logit_dict: Dict,
         redlight_instance: str,
         session_id: str,
@@ -111,7 +112,7 @@ class ONDRound(VisualRound):
         Returns:
             None
         """
-        return self.algorithm.execute(na_params.get_toolset(), "NoveltyAdaption")
+        return self.algorithm.execute(na_params.get_toolset(), "NoveltyAdaptation")
 
     def __call__(self, dataset: str, round_id: int) -> Union[Dict, None]:
         """

@@ -8,7 +8,7 @@ import os
 from sail_on_client.feedback.document_transcription_feedback import (
     DocumentTranscriptionFeedback,
 )
-from sail_on_client.protocol.parinterface import ParInterface
+from sail_on_client.harness.par_harness import ParHarness
 
 
 feedback_image_ids = [
@@ -33,7 +33,7 @@ def _initialize_session(par_interface, protocol_name, hints=()):
     Private function to initialize session.
 
     Args:
-        par_interface (ParInterface): An instance of ParInterface
+        par_interface (ParHarness): An instance of ParHarness
         protocol_name (str): Name of the protocol
         hints (list[str]): Hints used in session request
 
@@ -80,22 +80,22 @@ def ond_config():
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_initialize(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test feedback initialization.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
@@ -118,22 +118,22 @@ def test_initialize(
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_labelled_feedback(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test get feedback.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
@@ -159,22 +159,22 @@ def test_get_labelled_feedback(
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_score_feedback(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test get feedback.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
@@ -200,22 +200,22 @@ def test_get_score_feedback(
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_lavenshtein_feedback(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test get feedback.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_files = {}
     result_folder = os.path.join(
@@ -245,22 +245,22 @@ def test_get_lavenshtein_feedback(
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_feedback(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test get feedback.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "transcripts"
@@ -288,22 +288,22 @@ def test_get_feedback(
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_deposit_income(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test deposit income.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     dt_feedback = DocumentTranscriptionFeedback(
@@ -322,22 +322,22 @@ def test_deposit_income(
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_budget(
-    server_setup, get_interface_params, feedback_mapping, protocol_name
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
 ):
     """
     Test get budget.
 
     Args:
         server_setup (tuple): Tuple containing url and result directory
-        get_interface_params (tuple): Tuple to configure par interface
+        get_par_harness_params (tuple): Tuple to configure par interface
         feedback_mapping (dict): Dict with mapping for feedback
         protocol_name (str): Name of the protocol ( options: OND and CONDDA)
 
     Return:
         None
     """
-    config_directory, config_name = get_interface_params
-    par_interface = ParInterface(config_name, config_directory)
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     dt_feedback = DocumentTranscriptionFeedback(

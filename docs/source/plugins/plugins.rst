@@ -34,21 +34,19 @@ The protocols assumes that the algorithm have the following functions during eva
    it had provided results for :code:`WorldDetection` and :code:`NoveltyClassification`/
    :code:`NoveltyCharacterization` depending on the protocol.
 
-Adapters And Toolset
---------------------
+Adapters
+--------
 
 Rather than enforcing a strict API for the functions required by the algorithms,
 sail on client provides adapters to fulfill input-output requirements of an algorithm.
-The adapters are provided a dictionary of the global state maintained by the protocol.
-This dictionary is called `toolset`. The algorithm can select data from the `toolset`
-to execute different steps associated with the algorithm.
+The adapters are provided a dictionary with the parameters obtained from the harness.
 
 Sample Adapter
 ^^^^^^^^^^^^^^
 
-.. literalinclude:: ../../../sail_on_client/mock.py
+.. literalinclude:: ../../../sail_on_client/agent/mock_ond_agents.py
    :language: python
-   :lines: 154-178
+   :lines: 162-197
 
 Sample Detector and Registration
 --------------------------------
@@ -56,9 +54,9 @@ Sample Detector and Registration
 Sample Detector
 ^^^^^^^^^^^^^^^
 
-.. literalinclude:: ../../../sail_on_client/mock.py
+.. literalinclude:: ../../../sail_on_client/agent/mock_ond_agents.py
    :language: python
-   :lines: 15-120
+   :lines: 19-129
 
 Registering the Detector
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -66,10 +64,10 @@ Registering the Detector
 .. note::
     The registration is highlighted below.
 
-.. literalinclude:: ../../../setup.py
-   :language: python
-   :lines: 29-43
-   :emphasize-lines: 10-14
+.. literalinclude:: ../../../pyproject.toml
+   :language: toml
+   :lines: 57-69
+   :emphasize-lines: 6
 
 .. Appendix 1: Links
 

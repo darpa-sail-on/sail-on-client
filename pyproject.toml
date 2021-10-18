@@ -47,14 +47,20 @@ types-requests = "^2.25.0"
 types-six = "^0.1.7"
 types-toml = "^0.1.3"
 
-[tool.poetry.plugins."tinker_test"]
-MockDetector = "sail_on_client.mock:MockDetector"
-PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
-BaselinePreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
 
-[tool.poetry.plugins."tinker"]
-MockDetector = "sail_on_client.mock:MockDetector"
-PreComputedDetector = "sail_on_client.pre_computed_detector:PreComputedDetector"
+[tool.poetry.plugins."smqtk_plugins"]
+LocalHarness = "sail_on_client.harness.local_harness:LocalHarness"
+ParHarness = "sail_on_client.harness.par_harness:ParHarness"
+MockONDAgent = "sail_on_client.agent.mock_ond_agents:MockONDAgent"
+MockONDAgentWithAttributes = "sail_on_client.agent.mock_ond_agents:MockONDAgentWithAttributes"
+MockONDAdapterWithCheckpoint = "sail_on_client.agent.mock_ond_agents:MockONDAdapterWithCheckpoint"
+MockCONDDAAgent = "sail_on_client.agent.mock_condda_agents:MockCONDDAAgent"
+MockCONDDAAgentWithAttributes = "sail_on_client.agent.mock_condda_agents:MockCONDDAAgentWithAttributes"
+MockCONDDAAdapterWithCheckpoint = "sail_on_client.agent.mock_condda_agents:MockCONDDAAdapterWithCheckpoint"
+PreComputedONDAgent = "sail_on_client.agent.pre_computed_detector:PreComputedONDAgent"
+PreComputedONDReactionAgent = "sail_on_client.agent.pre_computed_reaction_agent.PreComputedONDReactionAgent"
+PreComputedCONDDAAgent = "sail_on_client.agent.pre_computed_detector:PreComputedCONDDAAgent"
+
 
 [build-system]
 requires = ["setuptools", "poetry-core==1.0.4"]

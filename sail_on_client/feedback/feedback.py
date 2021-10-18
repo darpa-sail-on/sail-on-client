@@ -1,8 +1,8 @@
 """Abstract class for feedback for sail-on."""
 
 import pandas as pd
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.harness.par_harness import ParHarness
+from sail_on_client.harness.local_harness import LocalHarness
 
 from typing import Union, Dict
 
@@ -15,7 +15,7 @@ class Feedback:
         first_budget: int,
         income_per_batch: int,
         maximum_budget: int,
-        interface: Union[LocalInterface, ParInterface],
+        interface: Union[LocalHarness, ParHarness],
         session_id: str,
         test_id: str,
         feedback_type: str,

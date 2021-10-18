@@ -1,10 +1,11 @@
 """Round for CONDDA."""
 
 import logging
-from typing import Union, List, Dict, Any
+from typing import List, Dict, Any
 
-from sail_on_client.protocol.parinterface import ParInterface
-from sail_on_client.protocol.localinterface import LocalInterface
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 from sail_on_client.utils.decorators import skip_stage
 from sail_on_client.protocol.visual_round import VisualRound
 from sail_on_client.protocol.condda_dataclasses import NoveltyCharacterizationParams
@@ -25,7 +26,7 @@ class CONDDARound(VisualRound):
         algorithm: Any,
         data_root: str,
         features_dict: Dict,
-        harness: Union[LocalInterface, ParInterface],
+        harness: TestAndEvaluationHarnessType,
         logit_dict: Dict,
         redlight_instance: str,
         session_id: str,
