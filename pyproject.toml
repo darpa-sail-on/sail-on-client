@@ -66,3 +66,6 @@ PreComputedCONDDAAgent = "sail_on_client.agent.pre_computed_detector:PreComputed
 [build-system]
 requires = ["setuptools", "poetry-core==1.0.4"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+sail-on-client = "sail_on_client.client_launcher:client_launcher"
