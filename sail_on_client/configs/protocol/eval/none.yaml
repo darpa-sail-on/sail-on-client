@@ -1,0 +1,5 @@
+is_eval_enabled: false
+is_eval_roundwise_enabled: false
+has_baseline: false
+has_reaction_baseline: false
+baseline_class: ""

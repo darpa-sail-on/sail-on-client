@@ -1,0 +1,8 @@
+# @package protocol.smqtk
+defaults:
+  - /protocol@config: ond
+  - /algorithms@config.algorithms:
+    - pre_computed_ond_agent
+  - /harness@config.harness: local
+
+class: ONDProtocol

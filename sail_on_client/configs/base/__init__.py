@@ -1,0 +1,1 @@
+"""Base options for protocols."""
