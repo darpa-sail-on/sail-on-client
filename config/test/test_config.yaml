@@ -1,0 +1,29 @@
+defaults:
+  - default
+  - _self_
+
+project_root: ???
+protocol:
+  smqtk:
+    class: ONDProtocol
+    config:
+      domain: activity_recognition
+      test_ids:
+        - OND.10.90001.2100554
+      dataset_root: ""
+      algorithms:
+        PreComputedONDAgent:
+          smqtk:
+            class: PreComputedONDAgent
+            config:
+              algorithm_name: PreComputedONDAgent
+              cache_dir: ${project_root}/tests/mock_results/activity_recognition
+              has_roundwise_file: False
+              round_size: 32
+      harness:
+        smqtk:
+          class: LocalHarness
+          config:
+            data_dir: ${project_root}/tests/data
+            gt_dir: ${project_root}/tests/data/activity_recognition
+            gt_config: ${project_root}/tests/data/activity_recognition/activity_recognition.json
