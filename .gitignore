@@ -148,3 +148,4 @@ OND.10.90001.2100554_PreComputedDetector.json
 tests/mock_results/activity_recognition/BaselinePreComputedDetector_classification.csv
 tests/mock_results/activity_recognition/PreComputedDetector_classification.csv
 tests/mock_results/activity_recognition/PreComputedDetector_detection.csv
+outputs/*
