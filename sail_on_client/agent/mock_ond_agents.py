@@ -159,7 +159,7 @@ class MockONDAgentWithAttributes(MockONDAgent):
         return {}, {}
 
 
-class MockONDAdapterWithCheckpoint(MockONDAgent, Checkpointer):
+class MockONDAdapterWithCheckpoint(Checkpointer, MockONDAgent):
     """Mock Adapter for testing checkpointing."""
 
     def __init__(self, toolset: Dict) -> None:
