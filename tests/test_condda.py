@@ -58,7 +58,7 @@ def condda_protocol_cfg_params():
                 "config": {
                     "data_dir": data_dir,
                     "gt_dir": gt_dir,
-                    "gt_config": gt_config
+                    "gt_config": gt_config,
                 },
             }
         },

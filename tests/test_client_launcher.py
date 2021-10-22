@@ -27,8 +27,10 @@ def test_client_launcher(temp_save_dir):
     test_root = os.path.dirname(__file__)
     config_module = "sail_on_client.configs"
     initialize_config_dir(config_dir=config_dir)
-    overrides = [f"test_root={test_root}",
-                 f"protocol.smqtk.config.save_dir={temp_save_dir}",
-                 f"hydra.searchpath=[pkg://{config_module}]"]
+    overrides = [
+        f"test_root={test_root}",
+        f"protocol.smqtk.config.save_dir={temp_save_dir}",
+        f"hydra.searchpath=[pkg://{config_module}]",
+    ]
     cfg = compose(config_name="test_config", overrides=overrides)
     client_launcher(cfg)

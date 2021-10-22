@@ -7,6 +7,7 @@ from tinker.configuration import process_config
 
 log = logging.getLogger(__name__)
 
+
 @hydra.main(config_path="configs", config_name="default")
 def client_launcher(cfg: DictConfig) -> None:
     """

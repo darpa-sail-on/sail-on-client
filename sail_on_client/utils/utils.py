@@ -4,7 +4,9 @@ import os
 import logging
 
 from typing import Dict, List
-from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarnessType
+from sail_on_client.harness.test_and_evaluation_harness import (
+    TestAndEvaluationHarnessType,
+)
 
 log = logging.getLogger(__name__)
 
@@ -37,8 +39,9 @@ def safe_remove_results(results: dict) -> None:
         safe_remove(result_files)
 
 
-def update_harness_parameters(ip_harness: TestAndEvaluationHarnessType,
-                              new_parameters: Dict) -> TestAndEvaluationHarnessType:
+def update_harness_parameters(
+    ip_harness: TestAndEvaluationHarnessType, new_parameters: Dict
+) -> TestAndEvaluationHarnessType:
     """
     Update parameters in a harness.
 
