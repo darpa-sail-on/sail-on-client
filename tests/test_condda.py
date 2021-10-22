@@ -41,18 +41,26 @@ def condda_protocol_cfg_params():
     algorithms = {
         "algorithms": {
             "PreComputedCONDDAAgent": {
-                "class": "PreComputedCONDDAAgent",
-                "config": {
-                    "algorithm_name": "PreComputedCONDDAAgent",
-                    "cache_dir": cache_dir,
-                    "has_roundwise_file": False,
-                    "round_size": 32,
-                },
+                "smqtk": {
+                    "class": "PreComputedCONDDAAgent",
+                    "config": {
+                        "algorithm_name": "PreComputedCONDDAAgent",
+                        "cache_dir": cache_dir,
+                        "has_roundwise_file": False,
+                        "round_size": 32,
+                    },
+                }
             }
         },
         "harness": {
-            "class": "LocalHarness",
-            "config": {"data_dir": data_dir, "gt_dir": gt_dir, "gt_config": gt_config},
+            "smqtk": {
+                "class": "LocalHarness",
+                "config": {
+                    "data_dir": data_dir,
+                    "gt_dir": gt_dir,
+                    "gt_config": gt_config
+                },
+            }
         },
     }
     return algorithms
