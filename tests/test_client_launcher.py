@@ -1,11 +1,9 @@
 """Tests for client launcher."""
 
-from hydra import compose, initialize_config_module, initialize_config_dir
+from hydra import compose, initialize_config_dir
 from tempfile import TemporaryDirectory
 import os
 import pytest
-from smqtk_core import Pluggable
-from sail_on_client.protocol.visual_protocol import VisualProtocol
 from sail_on_client.client_launcher import client_launcher
 
 

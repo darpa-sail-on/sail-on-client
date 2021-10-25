@@ -4,9 +4,6 @@ import os
 import logging
 
 from typing import Dict, List
-from sail_on_client.harness.test_and_evaluation_harness import (
-    TestAndEvaluationHarnessType,
-)
 
 log = logging.getLogger(__name__)
 

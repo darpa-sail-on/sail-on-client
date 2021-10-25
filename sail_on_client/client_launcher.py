@@ -1,9 +1,13 @@
+"""CLI For client."""
 import hydra
 import logging
 import os
 from omegaconf import DictConfig, OmegaConf
 from omegaconf.errors import MissingMandatoryValue
 from tinker.configuration import process_config
+from typing import cast
+
+from sail_on_client.protocol.visual_protocol import VisualProtocol
 
 log = logging.getLogger(__name__)
 
@@ -22,14 +26,22 @@ def client_launcher(cfg: DictConfig) -> None:
     log.info(cfg)
     # Hack to set save directory based on working directory
     try:
-        cfg_dict = OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True)
-    except MissingMandatoryValue as e:
+        cfg_dict = OmegaConf.to_container(
+            cfg.protocol, resolve=True, throw_on_missing=True
+        )
+    except MissingMandatoryValue:
         # Set save directory to output directory that hydra is using
         cfg.protocol.smqtk.config.save_dir = os.getcwd()
     finally:
-        cfg_dict = OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True)
-    protocol = process_config(cfg_dict["protocol"])
-    protocol.run_protocol({})
+        cfg_dict = OmegaConf.to_container(
+            cfg.protocol, resolve=True, throw_on_missing=True
+        )
+    processed_config = process_config(cfg_dict)  # type: ignore
+    if issubclass(type(processed_config), VisualProtocol):
+        protocol = cast(VisualProtocol, processed_config)
+        protocol.run_protocol({})
+    else:
+        raise NotImplementedError(f"Failed to create a protocol from {cfg}")
 
 
 if __name__ == "__main__":
