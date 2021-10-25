@@ -39,30 +39,6 @@ def safe_remove_results(results: dict) -> None:
         safe_remove(result_files)
 
 
-def update_harness_parameters(
-    ip_harness: TestAndEvaluationHarnessType, new_parameters: Dict
-) -> TestAndEvaluationHarnessType:
-    """
-    Update parameters in a harness.
-
-    Args:
-        ip_harness (harness): Input harness with old parameters
-        new_parameters (dict): Dictionary containing new parameters
-
-    Return:
-        Updated harness object
-    """
-    for param_name, param_value in new_parameters.items():
-        if not hasattr(ip_harness, param_name):
-            log.warn(
-                f"{param_name} is not an attribute in the harness, adding the attribute"
-            )
-        setattr(ip_harness, param_name, param_value)
-    if hasattr(ip_harness, "update_provider"):
-        ip_harness.update_provider()
-    return ip_harness
-
-
 def merge_dictionaries(base_dict: Dict, other_dict: Dict, exclude_keys: List) -> Dict:
     """
     Shallow merge for two dictionaries with certain keys would be skipped.

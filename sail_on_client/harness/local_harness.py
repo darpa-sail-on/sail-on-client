@@ -49,15 +49,6 @@ class LocalHarness(TestAndEvaluationHarness):
             "gt_config": self.gt_config,
         }
 
-    def update_provider(self) -> None:
-        """
-        Update file provider with new data directory and result directory.
-
-        Returns:
-            None
-        """
-        self.file_provider = FileProvider(self.data_dir, self.result_directory)
-
     def test_ids_request(
         self,
         protocol: str,
