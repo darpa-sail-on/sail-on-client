@@ -1,5 +1,8 @@
 defaults:
   - default
+  - override /algorithms@protocol.smqtk.config.algorithms:
+    - override_agent
+  - override /harness@protocol.smqtk.config.harness: override_harness
   - _self_
 
 test_root: ???
@@ -11,19 +14,3 @@ protocol:
       test_ids:
         - OND.10.90001.2100554
       dataset_root: ""
-      algorithms:
-        PreComputedONDAgent:
-          smqtk:
-            class: PreComputedONDAgent
-            config:
-              algorithm_name: PreComputedONDAgent
-              cache_dir: ${test_root}/mock_results/activity_recognition
-              has_roundwise_file: False
-              round_size: 32
-      harness:
-        smqtk:
-          class: LocalHarness
-          config:
-            data_dir: ${test_root}/data
-            gt_dir: ${test_root}/data/activity_recognition
-            gt_config: ${test_root}/data/activity_recognition/activity_recognition.json

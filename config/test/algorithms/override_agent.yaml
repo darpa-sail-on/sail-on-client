@@ -1,0 +1,8 @@
+PreComputedONDAgent:
+    smqtk:
+      class: PreComputedONDAgent
+      config:
+        algorithm_name: PreComputedONDAgent
+        cache_dir: ${test_root}/mock_results/activity_recognition
+        has_roundwise_file: False
+        round_size: 32
