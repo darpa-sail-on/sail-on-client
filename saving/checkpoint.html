@@ -417,7 +417,7 @@ the original sequence. This would result in undefined behavior.</p>
 </section>
 <section id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">Checkpointer</span><span class="p">,</span> <span class="n">MockONDAgent</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">MockONDAgent</span><span class="p">,</span> <span class="n">Checkpointer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Mock Adapter for testing checkpointing.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
