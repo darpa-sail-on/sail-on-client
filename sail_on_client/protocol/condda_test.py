@@ -123,3 +123,4 @@ class CONDDATest(VisualTest):
             safe_remove(dataset)
             log.info(f"Round complete: {round_id}")
         self.harness.complete_test(self.session_id, test_id)
+        self._save_features(test_id, aggregated_features_dict, aggregated_logit_dict)
