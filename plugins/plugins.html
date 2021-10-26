@@ -401,7 +401,7 @@ sail on client provides adapters to fulfill input-output requirements of an algo
 The adapters are provided a dictionary with the parameters obtained from the harness.</p>
 <section id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">MockONDAgent</span><span class="p">,</span> <span class="n">Checkpointer</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">Checkpointer</span><span class="p">,</span> <span class="n">MockONDAgent</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Mock Adapter for testing checkpointing.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -565,17 +565,19 @@ The adapters are provided a dictionary with the parameters obtained from the har
 <p class="admonition-title">Note</p>
 <p>The registration is highlighted below.</p>
 </div>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="n">MockCONDDAAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents:MockCONDDAAgent&quot;</span>
-<span class="n">MockCONDDAAgentWithAttributes</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents:MockCONDDAAgentWithAttributes&quot;</span>
-<span class="n">MockCONDDAAdapterWithCheckpoint</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents:MockCONDDAAdapterWithCheckpoint&quot;</span>
-<span class="n">PreComputedONDAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_detector:PreComputedONDAgent&quot;</span>
-<span class="n">PreComputedONDReactionAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_reaction_agent.PreComputedONDReactionAgent&quot;</span>
-<span class="hll"><span class="n">PreComputedCONDDAAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_detector:PreComputedCONDDAAgent&quot;</span>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="n">ParHarness</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.harness.par_harness&quot;</span>
+<span class="n">MockONDAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_ond_agents&quot;</span>
+<span class="n">MockCONDDAAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.mock_condda_agents&quot;</span>
+<span class="n">PreComputedAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_detector&quot;</span>
+<span class="n">PreComputedReactionAgent</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.agent.pre_computed_reaction_agent&quot;</span>
+<span class="hll">
 </span>
-
 <span class="k">[build-system]</span>
 <span class="n">requires</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;setuptools&quot;</span><span class="p">,</span> <span class="s">&quot;poetry-core==1.0.4&quot;</span><span class="p">]</span>
 <span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.core.masonry.api&quot;</span>
+
+<span class="k">[tool.poetry.scripts]</span>
+<span class="n">sail-on-client</span> <span class="o">=</span> <span class="s">&quot;sail_on_client.client_launcher:client_launcher&quot;</span>
 </pre></div>
 </div>
 </section>
