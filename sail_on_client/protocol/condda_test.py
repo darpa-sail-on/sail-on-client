@@ -28,6 +28,7 @@ class CONDDATest(VisualTest):
         algorithm_attributes: AlgorithmAttributes,
         data_root: str,
         domain: str,
+        feature_dir: str,
         harness: TestAndEvaluationHarnessType,
         save_dir: str,
         session_id: str,
@@ -42,6 +43,7 @@ class CONDDATest(VisualTest):
             algorithm_attributes: An instance of algorithm_attributes
             data_root: Root directory for the dataset
             domain: Name of the domain for the test
+            feature_dir: Directory where features are stored
             harness: An Instance of harness used for T&E
             save_dir: The directory where features are saved
             session_id: Session identifier for the test
@@ -56,6 +58,7 @@ class CONDDATest(VisualTest):
             algorithm_attributes,
             data_root,
             domain,
+            feature_dir,
             harness,
             save_dir,
             session_id,

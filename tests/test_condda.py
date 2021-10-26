@@ -209,5 +209,6 @@ def test_feature_extraction(
         test_ids,
         feature_extraction_only=feature_extraction_only,
         save_features=save_features,
+        feature_dir="",
     )
     condda.run_protocol({})

@@ -37,6 +37,7 @@ class Condda(VisualProtocol):
         saved_attributes: Dict = None,
         save_elementwise: bool = False,
         save_features: bool = False,
+        feature_dir: str = "",
         skip_stages: List = None,
         use_consolidated_features: bool = False,
         use_saved_attributes: bool = False,
@@ -63,6 +64,7 @@ class Condda(VisualProtocol):
             saved_attributes: Dictionary for attributes
             save_elementwise: Flag to save features elementwise
             save_features: Flag to save  features
+            feature_dir: Directory to save features
             skip_stages: List of stages that are skipped
             use_consolidated_features: Flag to use consolidated features
             use_saved_attributes: Flag to use saved attributes
@@ -75,6 +77,7 @@ class Condda(VisualProtocol):
         self.dataset_root = dataset_root
         self.domain = domain
         self.feature_extraction_only = feature_extraction_only
+        self.feature_dir = feature_dir
         if hints is None:
             self.hints = []
         else:
@@ -246,6 +249,7 @@ class Condda(VisualProtocol):
                 algorithm_attributes,
                 self.dataset_root,
                 self.domain,
+                "",
                 self.harness,
                 self.save_dir,
                 session_id,

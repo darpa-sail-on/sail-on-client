@@ -2,3 +2,4 @@ defaults:
   - testwise
 
 save_elementwise: true
+feature_dir: ???
