@@ -5,6 +5,5 @@ defaults:
   - detection/system@_here_
   - resume_session/none@_here_
   - save_features/none@_here_
-  - save_features/none@_here_
   - use_features/none@_here_
   - use_attributes/none@_here_
