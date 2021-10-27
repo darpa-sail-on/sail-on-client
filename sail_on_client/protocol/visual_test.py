@@ -81,15 +81,15 @@ class VisualTest:
         logit_dict: Dict = {}
         algorithm_name = self.algorithm_attributes.name
         if self.use_saved_features:
-            if os.path.isdir(self.save_dir):
+            if os.path.isdir(self.feature_dir):
                 if self.use_consolidated_features:
                     feature_fname = f"{algorithm_name}_features.pkl"
                 else:
                     feature_fname = f"{test_id}_{algorithm_name}_features.pkl"
-                feature_path = os.path.join(self.save_dir, feature_fname)
+                feature_path = os.path.join(self.feature_dir, feature_fname)
                 test_features = pkl.load(open(feature_path, "rb"))
             else:
-                test_features = pkl.load(open(self.save_dir, "rb"))
+                test_features = pkl.load(open(self.feature_dir, "rb"))
             features_dict = test_features["features_dict"]
             logit_dict = test_features["logit_dict"]
         return features_dict, logit_dict

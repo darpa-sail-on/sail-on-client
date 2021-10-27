@@ -199,7 +199,7 @@ def test_call_with_features(ond_harness_instance, ond_algorithm_instance):
             "",
             DOMAIN,
             FEEDBACK_TYPE,
-            "",
+            tempdirectory,
             ond_harness_instance,
             tempdirectory,
             session_id,

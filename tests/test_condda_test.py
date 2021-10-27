@@ -171,7 +171,7 @@ def test_call_with_features(condda_harness_instance, condda_algorithm_instance):
             algorithm_attribute,
             "",
             DOMAIN,
-            "",
+            tempdirectory,
             condda_harness_instance,
             tempdirectory,
             session_id,
