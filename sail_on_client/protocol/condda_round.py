@@ -94,15 +94,15 @@ class CONDDARound(VisualRound):
             None
         """
         # Run feature extraction
-        fe_params = FeatureExtractionParams(
-            dataset, self.data_root, self.redlight_instance, round_id
-        )
+        fe_params = FeatureExtractionParams(dataset, self.data_root, round_id)
         instance_ids = CONDDARound.get_instance_ids(dataset)
         rfeature_dict, rlogit_dict = self._run_feature_extraction(
             fe_params, instance_ids
         )
         # Run World Change Detection
-        wc_params = WorldChangeDetectionParams(rfeature_dict, rlogit_dict, round_id)
+        wc_params = WorldChangeDetectionParams(
+            rfeature_dict, rlogit_dict, round_id, self.redlight_instance
+        )
         self._run_world_change_detection(wc_params, round_id)
         # Run Novelty Classification
         nc_params = NoveltyCharacterizationParams(rfeature_dict, rlogit_dict, round_id)
