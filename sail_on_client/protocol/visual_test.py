@@ -30,6 +30,7 @@ class VisualTest:
         algorithm_attributes: Union[ONDAlgorithmAttributes, CONDDAAlgorithmAttributes],
         data_root: str,
         domain: str,
+        feature_dir: str,
         harness: TestAndEvaluationHarnessType,
         save_dir: str,
         session_id: str,
@@ -44,7 +45,7 @@ class VisualTest:
             algorithm_attributes: An instance of algorithm_attributes
             data_root: Root directory for the dataset
             domain: Name of the domain for the test
-            feedback_type: Type of feedback used in the test
+            feature_dir: Directory to save features
             harness: An Instance of harness used for T&E
             save_dir: The directory where features are saved
             session_id: Session identifier for the test
@@ -59,6 +60,7 @@ class VisualTest:
         self.data_root = data_root
         self.domain = domain
         self.harness = harness
+        self.feature_dir = feature_dir
         self.save_dir = save_dir
         self.session_id = session_id
         self.skip_stages = skip_stages
@@ -79,15 +81,15 @@ class VisualTest:
         logit_dict: Dict = {}
         algorithm_name = self.algorithm_attributes.name
         if self.use_saved_features:
-            if os.path.isdir(self.save_dir):
+            if os.path.isdir(self.feature_dir):
                 if self.use_consolidated_features:
                     feature_fname = f"{algorithm_name}_features.pkl"
                 else:
                     feature_fname = f"{test_id}_{algorithm_name}_features.pkl"
-                feature_path = os.path.join(self.save_dir, feature_fname)
+                feature_path = os.path.join(self.feature_dir, feature_fname)
                 test_features = pkl.load(open(feature_path, "rb"))
             else:
-                test_features = pkl.load(open(self.save_dir, "rb"))
+                test_features = pkl.load(open(self.feature_dir, "rb"))
             features_dict = test_features["features_dict"]
             logit_dict = test_features["logit_dict"]
         return features_dict, logit_dict
@@ -125,10 +127,10 @@ class VisualTest:
         Return:
             None
         """
-        ub.ensuredir(self.save_dir)
+        ub.ensuredir(self.feature_dir)
         algorithm_name = self.algorithm_attributes.name
         feature_path = os.path.join(
-            self.save_dir, f"{test_id}_{algorithm_name}_features.pkl"
+            self.feature_dir, f"{test_id}_{algorithm_name}_features.pkl"
         )
         log.info(f"Saving features in {feature_path}")
         with open(feature_path, "wb") as f:

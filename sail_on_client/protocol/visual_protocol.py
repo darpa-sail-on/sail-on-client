@@ -8,7 +8,7 @@ from sail_on_client.harness.test_and_evaluation_harness import (
 )
 from sail_on_client.agent.visual_agent import VisualAgentType
 from tinker.protocol import Protocol
-from tinker.configuration import smqtk_generator
+from tinker.configuration import process_config
 
 
 log = logging.getLogger(__name__)
@@ -56,13 +56,11 @@ class VisualProtocol(Protocol):
         if not algorithm_configs:
             raise ValueError("No algorithms provided in the config.")
         for algorithm_name, algorithm_config in algorithm_configs.items():
-            config_dict["algorithms"][algorithm_name] = smqtk_generator(
-                algorithm_config
-            )
+            config_dict["algorithms"][algorithm_name] = process_config(algorithm_config)
         harness_config = config_dict.get("harness", None)
         if not harness_config:
             raise ValueError("Harness parameters not provided in the config.")
-        config_dict["harness"] = smqtk_generator(harness_config)
+        config_dict["harness"] = process_config(harness_config)
         return super().from_config(config_dict, merge_default=merge_default)
 
     def get_config(self) -> Dict:

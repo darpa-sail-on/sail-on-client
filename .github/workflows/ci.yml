@@ -38,12 +38,6 @@ jobs:
           repository: darpa-sail-on/sail_on_evaluate
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           path: Sail_On_Evaluate
-      - name: Checkout sail on tinker launcher
-        uses: actions/checkout@v2
-        with:
-          repository: darpa-sail-on/sailon_tinker_launcher
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: sailon_tinker_launcher
 
       - name: Setup python
         uses: actions/setup-python@v2
@@ -71,7 +65,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
 
@@ -87,7 +80,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Install Local Dependencies
-        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+        run: poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
   lint:
@@ -124,7 +117,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Cache Pipenv environment
@@ -140,7 +132,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Install Local Dependencies
-        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+        run: poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Run linting
@@ -181,7 +173,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Cache Poetry environment
@@ -197,7 +188,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Install Local Dependencies
-        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+        run: poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Run typechecking
@@ -242,7 +233,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-${{ matrix.python-version }}
 
       - name: Cache Poetry environment
@@ -258,7 +248,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Install Local Dependencies
-        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+        run: poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Explicitly activate particular environment
@@ -318,7 +308,6 @@ jobs:
            tinker-engine
            Sail-On-API
            Sail_On_Evaluate
-           sailon_tinker_launcher
           key: ${{ runner.os }}-repositories-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
 
       - name: Cache poetry environment
@@ -334,7 +323,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Install Local Dependencies
-        run: poetry run pip install ../tinker-engine ../sailon_tinker_launcher ../Sail-On-API/ ../Sail_On_Evaluate/
+        run: poetry run pip install ../tinker-engine ../Sail-On-API/ ../Sail_On_Evaluate/
         working-directory: sail-on-client
 
       - name: Generate docs

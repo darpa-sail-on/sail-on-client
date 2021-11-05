@@ -1,0 +1,8 @@
+PreComputedONDReactionAgent
+  smqtk:
+    class: PreComputedONDReactionAgent
+    config:
+      algorithm_name: ???
+      cache_dir: ???
+      has_roundwise_file: False
+      round_size: ???

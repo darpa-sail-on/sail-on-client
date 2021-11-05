@@ -14,7 +14,6 @@ class FeatureExtractionParams:
 
     dataset: str
     data_root: str
-    redlight_image: str
     round_id: int
 
     def get_toolset(self) -> Dict:
@@ -28,7 +27,6 @@ class FeatureExtractionParams:
             "dataset": self.dataset,
             "dataset_root": self.data_root,
             "round_id": self.round_id,
-            "redlight_image": self.redlight_image,
         }
 
 
@@ -39,6 +37,7 @@ class WorldChangeDetectionParams:
     features_dict: Dict
     logit_dict: Dict
     round_id: int
+    redlight_image: str
 
     def get_toolset(self) -> Dict:
         """
@@ -51,4 +50,5 @@ class WorldChangeDetectionParams:
             "features_dict": self.features_dict,
             "logit_dict": self.logit_dict,
             "round_id": self.round_id,
+            "redlight_image": self.redlight_image,
         }

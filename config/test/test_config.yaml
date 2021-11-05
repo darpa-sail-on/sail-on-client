@@ -1,0 +1,16 @@
+defaults:
+  - default
+  - override /algorithms@protocol.smqtk.config.algorithms:
+    - override_agent
+  - override /harness@protocol.smqtk.config.harness: override_harness
+  - _self_
+
+test_root: ???
+protocol:
+  smqtk:
+    class: ONDProtocol
+    config:
+      domain: activity_recognition
+      test_ids:
+        - OND.10.90001.2100554
+      dataset_root: ""

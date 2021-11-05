@@ -1,0 +1,8 @@
+# @package protocol.smqtk
+defaults:
+  - /protocol@config: condda
+  - /algorithms@config.algorithms:
+    - pre_computed_condda_agent
+  - /harness@config.harness: local
+
+class: CONDDAProtocol

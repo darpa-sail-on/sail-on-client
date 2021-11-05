@@ -1,0 +1,6 @@
+smqtk:
+  class: LocalHarness
+  config:
+    data_dir: ???
+    gt_dir: ???
+    gt_config: ???

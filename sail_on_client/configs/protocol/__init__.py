@@ -1,0 +1,1 @@
+"""Default config for protocols."""

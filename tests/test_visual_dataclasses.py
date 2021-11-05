@@ -10,13 +10,18 @@ from sail_on_client.protocol.visual_dataclasses import (
 @pytest.fixture(scope="function")
 def feature_extraction_params():
     """Fixture for providing parameters for initialize FeatureExtractionParams."""
-    return {"dataset": "", "data_root": "", "redlight_image": "test.png", "round_id": 0}
+    return {"dataset": "", "data_root": "", "round_id": 0}
 
 
 @pytest.fixture(scope="function")
 def world_change_detection_params():
     """Fixture for providing parameters for initialize WorldChangeDetectionParams."""
-    return {"features_dict": {}, "logit_dict": {}, "round_id": 0}
+    return {
+        "features_dict": {},
+        "logit_dict": {},
+        "redlight_image": "test.png",
+        "round_id": 0,
+    }
 
 
 def test_feature_extraction_initialize(feature_extraction_params):
@@ -46,7 +51,6 @@ def test_feature_extraction_params_get_toolset(feature_extraction_params):
     assert fe_params.get_toolset() == {
         "dataset": "",
         "dataset_root": "",
-        "redlight_image": "test.png",
         "round_id": 0,
     }
 
@@ -79,4 +83,5 @@ def test_world_change_detection_get_toolset(world_change_detection_params):
         "features_dict": {},
         "logit_dict": {},
         "round_id": 0,
+        "redlight_image": "test.png",
     }

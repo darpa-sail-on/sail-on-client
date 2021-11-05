@@ -15,20 +15,12 @@ Client and Protocols for DARPA sail-on
 
 1. [Python 3.7](https://www.python.org/downloads/release/python-370/)
 2. [Poetry >= 1.1.0](https://github.com/python-poetry/poetry)
-3. [poetry-dynamic-versioning](https://github.com/mtkennerly/poetry-dynamic-versioning)
 
 ## Installation
 
 1. Install Poetry following the instructions available in the [installation page](https://python-poetry.org/docs/#installation)
 
-2. Install poetry dynamic versioning using
-    ```
-      pip install poetry-dyanmic-versioning
-    ```
-    Note: This is required before the package is built since poetry does not support plugins yet.
-    This issue would be addressed in the next minor release.
-
-3. Clone the repositories associated with different components in a working directory
+2. Clone the repositories associated with different components in a working directory
     ```
       git clone https://github.com/tinker-engine/tinker-engine.git
       git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
@@ -39,7 +31,7 @@ Client and Protocols for DARPA sail-on
    Sail-On-API and sail-on-client directories in your working directory
 
 
-4. Install the different components in a virtual environment
+3. Install the different components in a virtual environment
    ```
      cd sail-on-client
      poetry install
@@ -56,17 +48,6 @@ in sail_on_client/protocol/configuration.json and skip step 1 of running the ser
 1. [Instructions for running M6 Algorithms](M6-ALGO.md)
 1. [Instructions for running M12 Algorithms](M12-ALGO.md)
 1. [Instructions for running M18 Algorithms](M18-ALGO.md)
-
-
-## Semantic Versioning
-We use [poetry dynamic versioning](https://github.com/mtkennerly/poetry-dynamic-versioning) to maintain the version for the python package and release.
-It uses tag information available in git to generate a version dynamically, for more information please refer to
-[versioneer theory of operation](https://github.com/python-versioneer/python-versioneer#theory-of-operation). Please push a [semantic version](https://semver.org/)
-tag once the Pull request is approved and merged. For example, if the most recent tag on master is 0.1.0 and your branch is making minor changes
-then pushing a tag 0.2.0 would update the version for the python package.
-
-Note: Dynamic versioning generates the versions using the most recent tag information,
-thus all commits in your branch would be versioned using the following [scheme](https://github.com/python-versioneer/python-versioneer#version-string-flavors).
 
 ## Acknowledgement of Support and Disclaimer
 

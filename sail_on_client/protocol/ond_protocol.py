@@ -44,6 +44,7 @@ class ONDProtocol(VisualProtocol):
         saved_attributes: Dict = None,
         save_elementwise: bool = False,
         save_features: bool = False,
+        feature_dir: str = "",
         skip_stages: List = None,
         use_feedback: bool = False,
         feedback_type: str = "classification",
@@ -76,6 +77,7 @@ class ONDProtocol(VisualProtocol):
             saved_attributes: Dictionary for attributes
             save_elementwise: Flag to save features elementwise
             save_features: Flag to save  features
+            feature_dir: Directory to save features
             skip_stages: List of stages that are skipped
             use_feedback: Flag to use feedback
             use_saved_attributes: Flag to use saved attributes
@@ -89,6 +91,7 @@ class ONDProtocol(VisualProtocol):
         self.dataset_root = dataset_root
         self.domain = domain
         self.feature_extraction_only = feature_extraction_only
+        self.feature_dir = feature_dir
         self.feedback_type = feedback_type
         self.has_baseline = has_baseline
         self.has_reaction_baseline = has_reaction_baseline
@@ -131,6 +134,7 @@ class ONDProtocol(VisualProtocol):
                 "dataset_root": self.dataset_root,
                 "domain": self.domain,
                 "feature_extraction_only": self.feature_extraction_only,
+                "feature_dir": self.feature_dir,
                 "feedback_type": self.feedback_type,
                 "has_baseline": self.has_baseline,
                 "has_reaction_baseline": self.has_reaction_baseline,
@@ -402,6 +406,7 @@ class ONDProtocol(VisualProtocol):
                 self.dataset_root,
                 self.domain,
                 self.feedback_type,
+                self.feature_dir,
                 self.harness,
                 self.save_dir,
                 session_id,
