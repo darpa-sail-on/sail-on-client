@@ -24,7 +24,7 @@ tenacity = "^7.0.0"
 matplotlib = "^3.2.2"
 hydra-core = "^1.1.1"
 hydra-colorlog = "^1.1.0"
-tinker-engine = {git = "https://github.com/tinker-engine/tinker-engine.git"}
+tinker-engine = {git = "https://github.com/tinker-engine/tinker-engine.git", rev= "master"}
 
 [tool.poetry.dev-dependencies]
 flake8 = ">=3.7"
