@@ -78,8 +78,10 @@ class ActivityRecognitionFeedback(Feedback):
                     self.session_id,
                 )
                 df = pd.read_csv(
-                    feedback_file, delimiter=",", header=None,
-                    names=["id", "class1",  "class2", "class3", "class4", "class5"]
+                    feedback_file,
+                    delimiter=",",
+                    header=None,
+                    names=["id", "class1", "class2", "class3", "class4", "class5"],
                 )
             else:
                 raise ValueError("the function should be added")

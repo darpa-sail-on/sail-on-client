@@ -16,16 +16,46 @@ feedback_image_ids = [
     "7035526b-4d00-4ffa-9177-2c02dd13834b.mp4",
     "43c3c705-a57b-4e2b-8cd0-91fc15e34449.mp4",
     "7fcebe2f-e133-4ad1-ae27-eb53d0e0b97e.mp4",
-    "42cb4d19-0186-4168-a169-b753c57aa8d9.avi"
+    "42cb4d19-0186-4168-a169-b753c57aa8d9.avi",
 ]
 
 
 feedback_labels = [
-    ["putting on foundation", "putting on mascara", "putting on eyeliner", "dyeing eyebrows", "applying cream"],
-    ["putting on eyeliner", "dyeing eyebrows", "applying cream", "putting in contact lenses", "putting on foundation"],
-    ["putting on mascara", "putting on foundation", "putting on eyeliner", "scrubbing face", "dyeing eyebrows"],
-    ["putting on eyeliner", "putting on foundation", "putting in contact lenses", "raising eyebrows", "trimming or shaving beard"],
-    ["applying cream", "putting on eyeliner", "raising eyebrows", "scrubbing face", "putting on foundation"]
+    [
+        "putting on foundation",
+        "putting on mascara",
+        "putting on eyeliner",
+        "dyeing eyebrows",
+        "applying cream",
+    ],
+    [
+        "putting on eyeliner",
+        "dyeing eyebrows",
+        "applying cream",
+        "putting in contact lenses",
+        "putting on foundation",
+    ],
+    [
+        "putting on mascara",
+        "putting on foundation",
+        "putting on eyeliner",
+        "scrubbing face",
+        "dyeing eyebrows",
+    ],
+    [
+        "putting on eyeliner",
+        "putting on foundation",
+        "putting in contact lenses",
+        "raising eyebrows",
+        "trimming or shaving beard",
+    ],
+    [
+        "applying cream",
+        "putting on eyeliner",
+        "raising eyebrows",
+        "scrubbing face",
+        "putting on foundation",
+    ],
 ]
 
 
@@ -73,8 +103,13 @@ def test_initialize(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     ActivityRecognitionFeedback(
-        FEEDBACK_BUDGET, FEEDBACK_BUDGET, FEEDBACK_BUDGET,
-        par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
 
 
@@ -113,14 +148,22 @@ def test_get_labelled_feedback(
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     ar_feedback = ActivityRecognitionFeedback(
-        FEEDBACK_BUDGET, FEEDBACK_BUDGET, FEEDBACK_BUDGET,
-        par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
     df_labelled = ar_feedback.get_feedback(
-            0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
+        0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
     )
     assert all(df_labelled.id == feedback_image_ids)
-    df_labelled[["class1", "class2", "class3", "class4", "class5"]].values.tolist()==feedback_labels
+    assert (
+        df_labelled[["class1", "class2", "class3", "class4", "class5"]].values.tolist()
+        == feedback_labels
+    )
 
 
 @pytest.mark.parametrize(
@@ -158,11 +201,16 @@ def test_get_score_feedback(
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     feedback = ActivityRecognitionFeedback(
-        FEEDBACK_BUDGET, FEEDBACK_BUDGET, FEEDBACK_BUDGET,
-        par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
     df_score = feedback.get_feedback(
-            0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
+        0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
     )
     assert np.isclose(df_score[1][0], 0.0, atol=1e-05)
 
@@ -206,8 +254,13 @@ def test_get_feedback(
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     ar_feedback = ActivityRecognitionFeedback(
-        FEEDBACK_BUDGET, FEEDBACK_BUDGET, FEEDBACK_BUDGET,
-        par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
     ar_feedback.get_feedback(0, list(range(FEEDBACK_BUDGET)), feedback_image_ids)
 
@@ -236,8 +289,13 @@ def test_deposit_income(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     ar_feedback = ActivityRecognitionFeedback(
-        FEEDBACK_BUDGET, FEEDBACK_BUDGET, FEEDBACK_BUDGET,
-        par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
     ar_feedback.deposit_income()
     assert ar_feedback.budget == FEEDBACK_BUDGET
@@ -267,7 +325,12 @@ def test_get_budget(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     ar_feedback = ActivityRecognitionFeedback(
-        FEEDBACK_BUDGET, FEEDBACK_BUDGET, FEEDBACK_BUDGET,
-        par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
     assert ar_feedback.get_budget() == FEEDBACK_BUDGET
