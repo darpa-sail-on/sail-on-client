@@ -1,0 +1,641 @@
+anonymous_id,novel,detection,ontology_id,spatial,temporal,kinetics_id_0,kinetics_id_1,kinetics_id_2,kinetics_id_3,kinetics_id_4,annotation_name_1,annotation_value_1,annotation_name_2,annotation_value_2,annotation_name_3,annotation_value_3,annotation_name_4,annotation_value_4
+91e68de4-92d1-4e4e-b6d1-8d01a8fe2cf8.mp4,0,0,22,0,0,putting on foundation,putting on mascara,putting on eyeliner,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+7035526b-4d00-4ffa-9177-2c02dd13834b.mp4,0,0,22,0,0,putting on eyeliner,dyeing eyebrows,applying cream,putting in contact lenses,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+43c3c705-a57b-4e2b-8cd0-91fc15e34449.mp4,0,0,22,0,0,putting on mascara,putting on foundation,putting on eyeliner,scrubbing face,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+7fcebe2f-e133-4ad1-ae27-eb53d0e0b97e.mp4,0,0,22,0,0,putting on eyeliner,putting on foundation,putting in contact lenses,raising eyebrows,trimming or shaving beard,Perspective,front,Location,indoors,What,Face,NA,NA
+42cb4d19-0186-4168-a169-b753c57aa8d9.avi,0,0,22,0,0,applying cream,putting on eyeliner,raising eyebrows,scrubbing face,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+6e66529a-11a0-4428-9d18-e5efb4026f6a.avi,0,0,22,0,0,dyeing eyebrows,putting on foundation,putting on eyeliner,applying cream,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+fbb2c755-4409-4868-8bb6-22d0c3d0027e.mp4,0,0,22,0,0,putting on mascara,dyeing eyebrows,scrubbing face,putting on foundation,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+7265523a-4080-4f8c-b88a-43db84e391f8.avi,0,0,22,0,0,putting on foundation,scrubbing face,raising eyebrows,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+78f30927-2f50-4698-a82e-051db189bf4b.mp4,0,0,22,0,0,applying cream,dyeing eyebrows,putting on foundation,putting on mascara,putting on eyeliner,Perspective,side,Location,indoors,What,Face,NA,NA
+037f2441-e262-4070-9b33-726da6eeb8c4.mp4,0,0,19,0,0,plastering,cleaning toilet,bathing dog,washing dishes,cooking egg,Perspective,front,Location,indoors,What,Hair,NA,NA
+23e7e8a3-af66-4ad7-8953-90e174ac19cd.mp4,0,0,22,0,0,dyeing eyebrows,putting on mascara,applying cream,scrubbing face,putting on foundation,Perspective,front,Location,indoors,What,Arm,NA,NA
+000709b1-d01d-43e3-9ef7-f73ae781562b.mp4,0,0,22,0,0,putting on foundation,waxing eyebrows,putting on eyeliner,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+1358a976-a72f-4c53-b24b-23279c49c28e.mp4,0,0,22,0,0,putting on foundation,putting on eyeliner,applying cream,putting in contact lenses,waxing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+0c32fecb-2539-47ea-afe4-f1acbd3c9863.mp4,0,0,22,0,0,putting on eyeliner,putting on mascara,putting on foundation,raising eyebrows,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+51797def-ecda-437d-b8cf-7117f784d9e5.avi,0,0,22,0,0,putting on eyeliner,putting on mascara,putting in contact lenses,scrubbing face,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+480728ab-a652-4a26-9f58-039a470348d2.mp4,0,0,22,0,0,putting on foundation,waxing eyebrows,applying cream,putting on mascara,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+ca982df4-e767-4db6-b24e-f9e61d1cc0e9.avi,0,0,22,0,0,putting on mascara,raising eyebrows,putting on foundation,scrubbing face,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+8fbaa77e-1a52-4e1b-b3aa-147474c90f42.mp4,0,0,22,0,0,scrubbing face,putting on eyeliner,applying cream,putting on mascara,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+0f7386ed-2c4d-4e8c-8b1e-8fd1c68cf812.mp4,0,0,22,0,0,putting on foundation,putting on eyeliner,putting in contact lenses,putting on mascara,dyeing eyebrows,Perspective,side,Location,indoors,What,Arm,NA,NA
+4bf527a4-c511-44cb-97f6-246957cf99a3.mp4,0,0,22,0,0,applying cream,putting on foundation,putting on mascara,scrubbing face,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+d577f4c4-4a29-43c1-ab33-21c69830f7e0.mp4,0,0,19,0,0,washing hands,hand washing clothes,bathing dog,massaging person's head,washing hair,Perspective,front,Location,indoors,What,Hair,NA,NA
+760e0922-9fb1-401a-abee-7e507b7b9974.avi,0,0,22,0,0,putting on mascara,putting on eyeliner,dyeing eyebrows,waxing eyebrows,scrubbing face,Perspective,side,Location,indoors,What,Eye,NA,NA
+a41640bb-3b2a-4e08-9ede-a1453b40ee6a.mp4,0,0,19,0,0,washing hands,washing dishes,hand washing clothes,bathing dog,cooking egg,Perspective,front,Location,indoors,What,Hair,NA,NA
+0ea18b7d-3a31-4bc9-8e30-5ca6402880c9.mp4,0,0,22,0,0,putting on mascara,scrubbing face,putting on eyeliner,waxing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+d28b0af4-240f-4326-9309-b49d3eefcde3.mp4,0,0,19,0,0,hand washing clothes,bathing dog,massaging person's head,cleaning toilet,washing dishes,Perspective,front,Location,indoors,What,Hair,NA,NA
+5f309ebe-2764-49a5-9c6b-a099a7dd5560.mp4,0,0,22,0,0,putting on eyeliner,applying cream,dyeing eyebrows,scrubbing face,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+1c1e67cc-6f4f-4fd0-8598-eb056b8ac153.avi,0,0,22,0,0,putting on mascara,putting on foundation,trimming or shaving beard,applying cream,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+1ba14713-229f-401e-b3d1-66b9fdd3e46b.avi,0,0,22,0,0,putting on mascara,putting on foundation,raising eyebrows,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+ed2b734d-b68f-4bbd-9066-ee01630524a6.mp4,0,0,22,0,0,putting on foundation,putting on mascara,putting on eyeliner,waxing eyebrows,trimming or shaving beard,Perspective,front,Location,indoors,What,Face,NA,NA
+b781d6fd-ccfe-40e4-9726-790b5e4e01f1.avi,0,0,22,0,0,scrubbing face,putting on mascara,trimming or shaving beard,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+b16f919e-29a3-47d2-8775-74f77ed23adb.mp4,0,0,22,0,0,applying cream,dyeing eyebrows,putting in contact lenses,putting on foundation,putting on eyeliner,Perspective,side,Location,indoors,What,Eye,NA,NA
+ab44ca94-da16-44ca-a11b-00608f43d439.mp4,0,0,22,0,0,applying cream,putting on foundation,scrubbing face,putting on eyeliner,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+718171fd-5d75-45c3-b832-db003e75e461.mp4,0,0,22,0,0,putting on foundation,putting on mascara,waxing eyebrows,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+b4c6a6e4-b738-48e3-aeea-06b4a7545916.mp4,0,0,22,0,0,scrubbing face,trimming or shaving beard,putting on mascara,putting on eyeliner,raising eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+9fd5ada3-7937-431a-ad8c-ac494b02a94f.mp4,0,0,22,0,0,putting on foundation,waxing eyebrows,putting on mascara,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+5365cafa-91d8-455a-9517-2d506884d122.avi,0,0,22,0,0,putting on mascara,raising eyebrows,dyeing eyebrows,waxing eyebrows,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+ca62d388-baba-4b9e-9bd6-1c968c045491.mp4,0,0,22,0,0,putting on foundation,dyeing eyebrows,putting on eyeliner,scrubbing face,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+140a8d77-958d-4679-a3f9-2edd2655f683.mp4,0,0,22,0,0,scrubbing face,putting on eyeliner,putting on foundation,applying cream,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+b5bc931e-635e-4ca1-963c-ab569f0ccbae.mp4,0,0,19,0,0,hand washing clothes,cooking egg,washing dishes,washing hair,washing hands,Perspective,front,Location,indoors,What,Hair,NA,NA
+db36a1be-c3c6-4e65-99aa-e675c044dea3.mp4,0,0,19,0,0,hand washing clothes,washing hair,cleaning toilet,massaging person's head,doing laundry,Perspective,front,Location,indoors,What,Hair,NA,NA
+0f51483b-9aa0-4dcc-98db-fd8a2f49d152.mp4,0,0,19,0,0,bathing dog,hand washing clothes,plastering,washing hair,washing dishes,Perspective,front,Location,indoors,What,Hair,NA,NA
+59aa18d7-04cd-4087-b74f-7d3fa3ae918f.mp4,0,0,22,0,0,trimming or shaving beard,putting on foundation,scrubbing face,putting on eyeliner,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+027ed81e-ae12-4ea6-8d88-801095c8db60.mp4,0,0,22,0,0,putting on mascara,putting on foundation,applying cream,scrubbing face,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+3cd4550c-d9dc-41c7-9c62-b48eded31dc8.avi,0,0,22,0,0,putting on eyeliner,waxing eyebrows,putting on mascara,putting on foundation,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+76ab5dc8-6275-48e5-8f2b-0fc6b542f970.mp4,0,0,22,0,0,applying cream,putting on eyeliner,putting on mascara,putting on foundation,trimming or shaving beard,Perspective,front,Location,indoors,What,Eye,NA,NA
+b96a0e54-247e-4718-8083-48afd90cb4dc.mp4,0,0,19,0,0,bathing dog,doing laundry,hand washing clothes,massaging person's head,washing dishes,Perspective,front,Location,indoors,What,Hair,NA,NA
+9f44c3a5-9b4a-44eb-b99e-24bb71232bfa.mp4,0,0,22,0,0,putting on mascara,putting on foundation,scrubbing face,raising eyebrows,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+194719b1-9158-4911-92b2-e135ece1abee.avi,0,0,22,0,0,putting on eyeliner,putting on mascara,putting on foundation,putting in contact lenses,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+12da8a2a-c28f-4650-956f-ecade72d5e34.mp4,0,0,22,0,0,putting on foundation,waxing eyebrows,putting on eyeliner,putting in contact lenses,dyeing eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+947aa3d1-5377-4059-aa24-68dbe8a8426a.mp4,0,0,22,0,0,applying cream,putting on eyeliner,scrubbing face,putting on mascara,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+fabcae2e-0669-4dc9-8a7c-2f353f063477.mp4,0,0,22,0,0,putting on mascara,applying cream,putting on foundation,putting on eyeliner,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+877ba127-0899-4b53-8040-488053fd9876.mp4,0,0,22,0,0,putting on eyeliner,scrubbing face,putting on mascara,putting in contact lenses,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+a21759e7-815f-4923-bbe7-d86fc5f7d84d.mp4,0,0,22,0,0,raising eyebrows,putting on foundation,putting on eyeliner,waxing eyebrows,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+3466ec12-607e-484e-9ac0-efef406489bc.mp4,0,0,22,0,0,putting on eyeliner,trimming or shaving beard,dyeing eyebrows,putting on foundation,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+a46d3cb6-4282-4f23-a310-ecdce1a73a19.avi,0,0,22,0,0,dyeing eyebrows,putting on eyeliner,putting on mascara,waxing eyebrows,applying cream,Perspective,side,Location,indoors,What,Eye,NA,NA
+0a3947bb-2611-4558-b240-4555375ad0cb.mp4,0,0,22,0,0,putting on foundation,scrubbing face,putting in contact lenses,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+cf7b0bc5-ccfc-4c37-b316-feb40b81d80f.avi,0,0,22,0,0,dyeing eyebrows,raising eyebrows,putting on eyeliner,putting in contact lenses,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+e0b8726d-10fc-4ee6-bab7-9dc521664b37.avi,0,0,22,0,0,putting on mascara,putting on foundation,putting on eyeliner,raising eyebrows,waxing eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+dc5c9637-b951-4594-aee1-b1fe07677930.mp4,0,0,22,0,0,dyeing eyebrows,putting in contact lenses,raising eyebrows,putting on foundation,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+e60bc658-b374-41a1-8e66-e4e70d30c554.mp4,0,0,22,0,0,putting on foundation,putting on eyeliner,waxing eyebrows,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+7d28e057-b82e-4e83-ba07-d5d86ce3c0ac.mp4,0,0,19,0,0,massaging person's head,washing dishes,washing hands,washing hair,hand washing clothes,Perspective,front,Location,indoors,What,Hair,NA,NA
+dae87fbe-bfe2-415b-b296-5e097dc39d17.mp4,0,0,22,0,0,putting on eyeliner,scrubbing face,applying cream,putting on foundation,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+179e835d-dc15-4671-9e4f-7e9444f8ada3.avi,0,0,22,0,0,putting on mascara,dyeing eyebrows,putting on eyeliner,raising eyebrows,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+4bff2f95-e5ba-42f3-98e9-87d855b60214.mp4,0,0,19,0,0,washing hair,cooking egg,washing dishes,cleaning toilet,washing hands,Perspective,front,Location,indoors,What,Hair,NA,NA
+42750dfb-a8c5-4ca8-8c36-5c2232d6436c.avi,0,0,22,0,0,applying cream,putting on foundation,scrubbing face,putting on eyeliner,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+17760236-9de8-4ef1-bfeb-46304095820a.avi,0,0,22,0,0,applying cream,scrubbing face,putting on foundation,raising eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+988afa5b-0d8b-407f-98a6-11725febc772.mp4,0,0,22,0,0,dyeing eyebrows,applying cream,putting on eyeliner,putting in contact lenses,putting on foundation,Perspective,front,Location,indoors,What,Arm,NA,NA
+c8cd9df1-d968-442d-95eb-520501ce63c1.mp4,0,0,22,0,0,putting on mascara,putting on eyeliner,putting on foundation,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+c49088b0-a8d0-4631-a4ee-e4e56550bf79.mp4,0,0,22,0,0,putting on mascara,trimming or shaving beard,putting on eyeliner,putting on foundation,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+1c3c1027-6569-41c2-93aa-694ab1b47bb3.avi,0,0,22,0,0,applying cream,putting in contact lenses,putting on eyeliner,dyeing eyebrows,waxing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+572c6f4b-30a4-47df-afbc-e82295fe1f28.mp4,0,0,22,0,0,putting on mascara,putting on eyeliner,raising eyebrows,applying cream,scrubbing face,Perspective,front,Location,indoors,What,Face,NA,NA
+c70c50ef-c4f0-4fe1-ac0a-30d4d60cd4ee.avi,0,0,22,0,0,dyeing eyebrows,putting on eyeliner,raising eyebrows,applying cream,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+1cf896be-a7df-4d0b-a17e-3b15e2dcbdc0.mp4,0,0,19,0,0,cooking egg,hand washing clothes,plastering,washing hair,washing hands,Perspective,back,Location,indoors,What,Hair,NA,NA
+19b87d58-6377-4d1a-b289-6e9cd3c323c5.mp4,0,0,22,0,0,putting on eyeliner,trimming or shaving beard,putting on foundation,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Arm,NA,NA
+dc3fea2b-4c81-435f-86d7-acd1f9c1f1fd.avi,0,0,22,0,0,putting on eyeliner,putting on mascara,raising eyebrows,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+838376dc-9e15-4474-b963-879896c73f69.avi,0,0,22,0,0,putting on foundation,putting on mascara,dyeing eyebrows,raising eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+35ae655c-695e-4248-93cc-192a7e279cdf.mp4,0,0,19,0,0,cooking egg,bathing dog,washing dishes,cleaning toilet,washing hands,Perspective,front,Location,indoors,What,Hair,NA,NA
+103c2a12-a292-46f8-98ae-f9256ad2cdc2.mp4,0,0,22,0,0,dyeing eyebrows,putting on foundation,putting on eyeliner,putting in contact lenses,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+fa65d0d4-156c-471a-abec-a58e2a17e218.mp4,0,0,22,0,0,putting in contact lenses,applying cream,putting on foundation,putting on eyeliner,dyeing eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+dd4c511a-94c6-42ee-a774-15b69602327a.mp4,0,0,22,0,0,putting on foundation,dyeing eyebrows,putting on eyeliner,raising eyebrows,putting on mascara,Perspective,side,Location,indoors,What,Face,NA,NA
+e16a6df3-6c94-4ff6-a7f3-d7815cf62eae.mp4,0,0,22,0,0,scrubbing face,putting on mascara,putting on foundation,dyeing eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+26bc1ef4-42a0-4b74-a183-188120dd96c4.avi,0,0,22,0,0,putting on foundation,scrubbing face,putting on mascara,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+29e3d23c-aabf-4e9f-b435-22e8d8b6e86c.avi,0,0,22,0,0,putting on eyeliner,putting on foundation,raising eyebrows,scrubbing face,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+c6e1fcd5-0365-4e70-a05d-5dae2c011a61.avi,0,0,22,0,0,applying cream,scrubbing face,putting on mascara,dyeing eyebrows,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+4791e516-4470-4a13-aa3a-3cc27e9b636c.mp4,0,0,19,0,0,washing hair,hand washing clothes,cooking egg,massaging person's head,washing hands,Perspective,side,Location,indoors,What,Hair,NA,NA
+e371efa4-ed09-45bc-9dff-dee680815e5d.mp4,0,0,22,0,0,putting on eyeliner,applying cream,scrubbing face,trimming or shaving beard,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+b10a8c6c-1454-4ffe-b540-1b59f5022749.mp4,0,0,22,0,0,applying cream,scrubbing face,putting on eyeliner,putting on mascara,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+8d182e61-d0c8-475b-9bea-a561fd5424d4.mp4,0,0,22,0,0,putting on foundation,putting on mascara,scrubbing face,putting on eyeliner,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+c9101b67-4535-4559-bc85-5948c6cf000f.mp4,0,0,22,0,0,applying cream,scrubbing face,putting on mascara,putting on eyeliner,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+4ff8ff00-2f00-4dc2-b4c2-fa4c1f9fdfce.mp4,0,0,22,0,0,putting on foundation,scrubbing face,putting on eyeliner,waxing eyebrows,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+1a332966-3593-4041-9a80-dfd988d68497.mp4,0,0,22,0,0,putting on eyeliner,applying cream,putting on mascara,putting on foundation,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+16f4a162-b63a-4d28-90e9-ed603703ca57.mp4,0,0,22,0,0,putting on foundation,putting on mascara,applying cream,scrubbing face,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+5045c2a0-397b-47bc-b272-62508490d913.avi,0,0,22,0,0,trimming or shaving beard,putting on foundation,putting on mascara,scrubbing face,applying cream,Perspective,side,Location,indoors,What,Eye,NA,NA
+41e93a23-b8fb-438e-9418-4394e31ca1f6.mp4,0,0,22,0,0,putting on eyeliner,putting on mascara,putting on foundation,scrubbing face,waxing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+661fdc94-61d9-46c9-94c7-80909b5a8c51.mp4,0,0,22,0,0,putting on foundation,raising eyebrows,putting on mascara,putting in contact lenses,scrubbing face,Perspective,side,Location,indoors,What,Eye,NA,NA
+f64cddf5-36d5-4578-9d02-212aaa70c8e2.avi,0,0,22,0,0,dyeing eyebrows,scrubbing face,raising eyebrows,putting on foundation,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+514529c8-475d-416d-a445-6e2bc650fdd1.avi,0,0,22,0,0,dyeing eyebrows,putting on eyeliner,putting on mascara,applying cream,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+a8b565f0-4dec-4332-9b2f-59c213d3bda9.avi,0,0,22,0,0,raising eyebrows,putting on eyeliner,putting on mascara,putting on foundation,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+4d8124c5-4365-43de-a29c-827df2b20dcb.avi,0,0,22,0,0,putting on eyeliner,scrubbing face,putting on foundation,putting on mascara,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+9ac261ec-a98a-4385-82a3-667109201b42.mp4,0,0,22,0,0,scrubbing face,putting on mascara,putting on foundation,applying cream,putting on eyeliner,Perspective,side,Location,indoors,What,Face,NA,NA
+f3483373-5616-4470-9863-d79540cf39a4.mp4,0,0,22,0,0,dyeing eyebrows,scrubbing face,putting on foundation,putting on eyeliner,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+9cd14b2d-6b32-43c9-a400-99c091813734.mp4,0,0,22,0,0,applying cream,putting on mascara,putting on foundation,putting on eyeliner,trimming or shaving beard,Perspective,front,Location,indoors,What,Eye,NA,NA
+31f2e9e0-d37d-4c4c-852d-bd77c869d4c0.mp4,0,0,22,0,0,putting on mascara,raising eyebrows,putting on foundation,scrubbing face,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+15198804-f543-4522-805c-73a4dcfafa02.mp4,0,0,22,0,0,waxing eyebrows,scrubbing face,putting on eyeliner,putting on foundation,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+9c3f02e6-b1ce-41e0-9872-09af8f232f47.mp4,0,0,22,0,0,applying cream,putting in contact lenses,putting on foundation,putting on eyeliner,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+93512679-e5d0-4a91-8c32-9c195b146e5a.mp4,0,0,19,0,0,bathing dog,hand washing clothes,washing hair,washing hands,cooking egg,Perspective,front,Location,indoors,What,Hair,NA,NA
+d9d1a9cc-3056-404b-b137-ec839a9b4b09.mp4,0,0,22,0,0,putting on eyeliner,scrubbing face,putting on mascara,applying cream,putting on foundation,Perspective,front,Location,indoors,What,Arm,NA,NA
+824b35df-5f07-4655-bc1a-060f9a968196.mp4,0,0,22,0,0,scrubbing face,putting on eyeliner,raising eyebrows,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+cb862db3-e398-4624-9d59-43ad0285740d.mp4,0,0,19,0,0,washing hair,washing dishes,washing hands,cleaning toilet,massaging person's head,Perspective,side,Location,indoors,What,Hair,NA,NA
+1d6856bb-12f4-4218-9a7e-386f4bcae9da.avi,0,0,22,0,0,putting on foundation,trimming or shaving beard,dyeing eyebrows,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+ecd11aaf-f04d-4849-b777-d399e2ac78f3.avi,0,0,22,0,0,putting on foundation,putting on mascara,putting on eyeliner,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+84d6cc30-0616-4833-93d3-0e2386da8173.mp4,0,0,22,0,0,scrubbing face,putting on foundation,putting on eyeliner,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+38434f16-fd8a-4fb7-b2c2-ac46e4ce8801.mp4,0,0,22,0,0,putting on foundation,applying cream,putting on mascara,putting on eyeliner,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+d40d7384-f79d-4746-a3b6-90d918855d91.mp4,0,0,22,0,0,scrubbing face,putting on foundation,putting on eyeliner,putting in contact lenses,waxing eyebrows,Perspective,side,Location,indoors,What,Face,NA,NA
+ea3df182-4b2d-49da-9756-976c17508d0b.mp4,0,0,22,0,0,putting on eyeliner,dyeing eyebrows,applying cream,scrubbing face,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+e90fd869-eb98-473e-905e-1c446865d893.mp4,0,0,19,0,0,washing hair,hand washing clothes,washing dishes,doing laundry,washing hands,Perspective,front,Location,indoors,What,Hair,NA,NA
+7adb7c11-a66f-4d3d-9ae3-a40375d2e16f.avi,0,0,22,0,0,trimming or shaving beard,putting on foundation,applying cream,dyeing eyebrows,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+6d61d7e9-3cd9-43b2-8a43-ca287172e2d7.avi,0,0,22,0,0,putting on foundation,putting on eyeliner,raising eyebrows,scrubbing face,waxing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+dc01bbb2-feb3-476a-ae65-d149487f2d0c.mp4,0,0,22,0,0,raising eyebrows,applying cream,putting on eyeliner,dyeing eyebrows,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+3d1bf982-e147-4168-b313-995bd866f515.mp4,0,0,22,0,0,applying cream,putting on foundation,putting in contact lenses,dyeing eyebrows,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+915afaab-f6f7-4578-b551-83aab907e7a4.avi,0,0,22,0,0,applying cream,putting on foundation,scrubbing face,putting on mascara,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+ee7c0be5-0e38-49fc-a3bb-8d490ff8df8c.mp4,0,0,22,0,0,putting in contact lenses,putting on foundation,scrubbing face,putting on mascara,putting on eyeliner,Perspective,side,Location,indoors,What,Eye,NA,NA
+054ca8c3-8389-4794-8423-29a9bc202556.mp4,0,0,19,0,0,washing hair,cooking egg,washing dishes,plastering,bathing dog,Perspective,front,Location,indoors,What,Hair,NA,NA
+62afda92-1742-4d6b-90a6-2f4174d71262.mp4,0,0,22,0,0,putting on eyeliner,putting on foundation,waxing eyebrows,applying cream,scrubbing face,Perspective,side,Location,indoors,What,Eye,NA,NA
+d8f90626-4b58-4a80-99d8-83f723be1019.avi,0,0,22,0,0,dyeing eyebrows,scrubbing face,putting on mascara,putting on eyeliner,applying cream,Perspective,side,Location,indoors,What,Eye,NA,NA
+9cd55be3-36ee-4439-ba9e-44e236df08e7.avi,0,0,22,0,0,putting on foundation,trimming or shaving beard,putting on eyeliner,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+449c060c-e8db-44a1-b089-5067ec2532f2.mp4,0,0,22,0,0,putting in contact lenses,putting on foundation,dyeing eyebrows,raising eyebrows,waxing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+cca150e7-2c05-412e-98ab-ee7b1e3c089f.mp4,0,0,22,0,0,putting on eyeliner,putting on mascara,putting on foundation,putting in contact lenses,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+2b2d381e-f996-4b6f-94c2-b2e7712c83a4.mp4,0,0,22,0,0,raising eyebrows,putting on eyeliner,putting on foundation,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+d580c8d3-73ea-43ce-8016-15af5c0c3b05.mp4,0,0,22,0,0,putting on foundation,raising eyebrows,waxing eyebrows,applying cream,trimming or shaving beard,Perspective,front,Location,indoors,What,Face,NA,NA
+d2ed2ae3-3ad4-438f-ac48-fbf4870df043.avi,0,0,22,0,0,putting on eyeliner,putting on foundation,raising eyebrows,applying cream,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+2e5ec6d0-eb4e-4892-b55c-135f518d6589.avi,0,0,22,0,0,scrubbing face,raising eyebrows,putting on mascara,trimming or shaving beard,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+17ad6150-bc0c-407a-8c8b-cba44169bb88.avi,0,0,22,0,0,trimming or shaving beard,putting in contact lenses,putting on mascara,applying cream,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+508cc159-cbd5-435b-b72b-008bcad87a9b.mp4,0,0,22,0,0,putting on foundation,putting on eyeliner,putting on mascara,dyeing eyebrows,raising eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+021d7a4e-fda0-4869-8698-1ce7027e8fdb.avi,0,0,22,0,0,putting in contact lenses,applying cream,putting on eyeliner,raising eyebrows,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+a9e53124-bc5c-47dd-bf1f-9775ffbab1ab.avi,0,0,22,0,0,putting on foundation,scrubbing face,putting on eyeliner,putting on mascara,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+f7870700-e60a-4f49-8184-c1a373c40fc8.avi,0,0,22,0,0,putting on eyeliner,dyeing eyebrows,putting on foundation,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+c198a246-1a86-4010-9632-f4798839ae7f.avi,0,0,22,0,0,putting on mascara,raising eyebrows,scrubbing face,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+e38ef421-89f1-4730-b4e1-3496f3edf4f2.mp4,0,0,22,0,0,dyeing eyebrows,putting on mascara,waxing eyebrows,putting on foundation,putting on eyeliner,Perspective,side,Location,indoors,What,Face,NA,NA
+8d75388c-35bf-4fdf-a830-8ae419c7b6ff.mp4,0,0,19,0,0,washing hands,washing hair,hand washing clothes,bathing dog,washing dishes,Perspective,front,Location,indoors,What,Hair,NA,NA
+ba4cc16c-99e9-4f76-9435-2ed33d9ed89c.mp4,0,0,22,0,0,putting on foundation,applying cream,waxing eyebrows,raising eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+56a74cb1-2bd2-41cd-9c89-ad694f7b0cdb.mp4,0,0,22,0,0,putting on foundation,raising eyebrows,putting on eyeliner,putting on mascara,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+c2b009a4-04e8-409b-bd53-45ea4a7caa7d.mp4,0,0,22,0,0,putting on foundation,raising eyebrows,putting on eyeliner,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+bfd9cfbf-d033-4ecc-94e2-43fa1e8f52b8.mp4,0,0,22,0,0,putting in contact lenses,applying cream,putting on mascara,putting on foundation,raising eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+e93e95e7-3468-4e38-8a86-99fc486eb35c.mp4,0,0,22,0,0,putting on foundation,putting on mascara,applying cream,scrubbing face,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+618d4a2c-b285-4b19-b8f7-48727a4aed75.mp4,0,0,22,0,0,putting on mascara,dyeing eyebrows,putting on eyeliner,scrubbing face,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+4fa3240e-8276-4fa8-abd8-3fea6352f26c.avi,0,0,22,0,0,putting on mascara,putting in contact lenses,putting on foundation,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+fb885e94-779f-43a9-8299-217d5136b9b5.mp4,0,0,22,0,0,dyeing eyebrows,waxing eyebrows,applying cream,scrubbing face,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+5fd2e84e-0239-4425-8f60-e18d8f90fa65.mp4,0,0,19,0,0,plastering,cooking egg,hand washing clothes,washing hair,washing dishes,Perspective,front,Location,indoors,What,Hair,NA,NA
+59657b2f-249a-4d69-8db1-c71f3f602f01.mp4,0,0,22,0,0,raising eyebrows,applying cream,putting on eyeliner,putting on mascara,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+1c3f98cf-97af-4d58-9a1f-7dd6254b8da4.mp4,0,0,22,0,0,putting in contact lenses,scrubbing face,putting on foundation,trimming or shaving beard,applying cream,Perspective,front,Location,indoors,What,Arm,NA,NA
+46e3cb76-7e2f-4edc-94dd-dff2e58c5a77.avi,0,0,22,0,0,putting in contact lenses,scrubbing face,putting on foundation,putting on eyeliner,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+5f0ce0b6-8429-4fe1-8c17-6e6f909ffea8.mp4,0,0,19,0,0,washing hair,massaging person's head,hand washing clothes,washing dishes,bathing dog,Perspective,top,Location,indoors,What,Hair,NA,NA
+f5c3676b-ce48-4089-9d18-667c86e79fe4.mp4,0,0,22,0,0,putting on foundation,putting on mascara,putting in contact lenses,putting on eyeliner,scrubbing face,Perspective,side,Location,indoors,What,Face,NA,NA
+cb5f30d3-2935-43d9-9115-bc9d698e139f.mp4,0,0,22,0,0,applying cream,putting on mascara,putting on eyeliner,raising eyebrows,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+96e2ac00-b5fa-4411-82ad-bd35df861170.avi,0,0,22,0,0,applying cream,dyeing eyebrows,putting on mascara,putting on foundation,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+effdf317-f4b7-4fde-88da-27b4293d0362.mp4,0,0,22,0,0,putting on eyeliner,dyeing eyebrows,raising eyebrows,scrubbing face,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+9e9615ab-9cba-4ad9-b981-1658ac032f23.mp4,0,0,19,0,0,massaging person's head,washing hair,hand washing clothes,cleaning toilet,washing hands,Perspective,front,Location,indoors,What,Hair,NA,NA
+7255ae56-71f9-4f46-ae0c-b9146481aff5.mp4,0,0,22,0,0,scrubbing face,applying cream,dyeing eyebrows,trimming or shaving beard,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+410e3359-9f2b-4c6f-8d02-4d70f69555a0.avi,0,0,22,0,0,putting on mascara,putting on foundation,waxing eyebrows,applying cream,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+b85dddfd-4361-44b0-98fc-a721f2ddf757.mp4,0,0,19,0,0,hand washing clothes,washing dishes,bathing dog,doing laundry,cleaning toilet,Perspective,front,Location,indoors,What,Hair,NA,NA
+39d7058a-f6b8-4074-93e7-d2888d1ab53b.avi,0,0,22,0,0,putting on foundation,putting on eyeliner,scrubbing face,trimming or shaving beard,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+75b2d1fd-96a0-483e-bc12-f71647eb3233.mp4,0,0,22,0,0,putting on foundation,dyeing eyebrows,putting in contact lenses,trimming or shaving beard,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+9a057308-e199-4027-89c4-4e580d0a1903.mp4,0,0,22,0,0,waxing eyebrows,putting on eyeliner,raising eyebrows,putting on mascara,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+e8aee803-ad15-4c4a-b7e7-2f2d793093d8.mp4,0,0,22,0,0,applying cream,scrubbing face,putting on eyeliner,trimming or shaving beard,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+312fefeb-a48f-4bb9-ab43-71a5dd6accba.mp4,0,0,22,0,0,dyeing eyebrows,putting on eyeliner,putting on mascara,scrubbing face,putting on foundation,Perspective,front,Location,indoors,What,Arm,NA,NA
+2bffd9e4-090c-4a78-92ab-04375a81cc93.mp4,0,0,19,0,0,hand washing clothes,washing hair,bathing dog,cooking egg,massaging person's head,Perspective,front,Location,indoors,What,Hair,NA,NA
+9b2d8045-a491-4717-984c-fa2b28cd08ae.mp4,0,0,22,0,0,applying cream,putting on eyeliner,scrubbing face,waxing eyebrows,putting on mascara,Perspective,side,Location,indoors,What,Eye,NA,NA
+445ebbb7-3069-4c3c-8c2b-862a610462a3.mp4,0,0,22,0,0,putting in contact lenses,putting on foundation,raising eyebrows,applying cream,putting on mascara,Perspective,side,Location,indoors,What,Eye,NA,NA
+08f1664d-84cc-4de5-9cae-a3f582bf3304.mp4,0,0,22,0,0,putting on mascara,putting on eyeliner,scrubbing face,putting on foundation,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+9974c675-5e1d-4dbc-a446-462b7556f948.avi,0,0,22,0,0,putting on eyeliner,putting on foundation,putting on mascara,applying cream,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+a7548979-b4df-4f74-8809-391230a639e9.mp4,0,0,22,0,0,scrubbing face,putting on foundation,putting on eyeliner,waxing eyebrows,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+395713b1-e0b6-4025-a41f-bf441fbfd1ff.mp4,0,0,22,0,0,scrubbing face,raising eyebrows,putting on mascara,trimming or shaving beard,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+890e2f12-b1ed-4d40-954e-74aa2b6e5dfc.mp4,0,0,22,0,0,dyeing eyebrows,scrubbing face,putting on mascara,waxing eyebrows,putting on foundation,Perspective,side,Location,indoors,What,Eye,NA,NA
+41da41cb-12a4-40b6-a159-35e9e1b92936.mp4,0,0,19,0,0,washing dishes,washing hands,cooking egg,washing hair,hand washing clothes,Perspective,back,Location,indoors,What,Hair,NA,NA
+47883ba2-387a-4d08-98f9-9d3f127c2fbb.mp4,0,0,22,0,0,raising eyebrows,putting on eyeliner,putting on mascara,putting on foundation,waxing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+cafa55e1-5194-4f20-89dc-f9902f0fb8fc.mp4,0,0,22,0,0,putting on eyeliner,putting on foundation,applying cream,putting on mascara,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+b6f232ee-191a-4e91-bc05-ac655e327d7d.mp4,0,0,22,0,0,putting on mascara,scrubbing face,raising eyebrows,waxing eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+31f8f6b5-29ff-4fbe-9d13-83b8d3e7cfe4.mp4,0,0,22,0,0,applying cream,putting on eyeliner,scrubbing face,putting on foundation,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+6e1d6e9d-72e8-4d59-a146-9c607da0b3b0.mp4,0,0,22,0,0,putting on mascara,putting on foundation,scrubbing face,dyeing eyebrows,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+52202835-e993-4383-9798-c44c8a05730d.avi,0,0,22,0,0,putting on foundation,putting in contact lenses,applying cream,dyeing eyebrows,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+3728a299-171d-4e57-b1d1-f6354b5892bd.mp4,0,0,19,0,0,washing hair,bathing dog,hand washing clothes,massaging person's head,washing hands,Perspective,front,Location,indoors,What,Hair,NA,NA
+28d4bcea-1207-4ca2-9a43-06226f12d8fe.mp4,0,0,22,0,0,putting on mascara,dyeing eyebrows,putting on foundation,putting on eyeliner,scrubbing face,Perspective,front,Location,indoors,What,Arm,NA,NA
+c3d840b4-6237-4243-a42b-6bb4246c6aaa.mp4,0,0,22,0,0,putting on foundation,applying cream,putting on mascara,putting on eyeliner,scrubbing face,Perspective,front,Location,indoors,What,Face,NA,NA
+534c0bff-02fe-4354-b42f-6b043793aeeb.avi,0,0,22,0,0,putting on foundation,applying cream,putting on mascara,putting in contact lenses,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+819e3d18-265d-4f79-8283-16f2b0c1d5f2.mp4,0,0,19,0,0,washing dishes,bathing dog,washing hair,hand washing clothes,doing laundry,Perspective,front,Location,indoors,What,Hair,NA,NA
+2ad1fb79-7ec9-482e-a4e5-2fc974947816.mp4,0,0,22,0,0,putting on eyeliner,putting in contact lenses,scrubbing face,putting on mascara,putting on foundation,Perspective,side,Location,indoors,What,Face,NA,NA
+6e4e72ce-fc33-4dba-91a1-4cfb933e8b30.mp4,0,0,22,0,0,applying cream,putting on foundation,putting on eyeliner,putting on mascara,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+5050b497-1ecb-4aa8-be30-0f75e736edd2.mp4,0,0,22,0,0,dyeing eyebrows,putting on foundation,scrubbing face,putting on eyeliner,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+7567e68f-f7a5-4b02-adab-4e9a9317fac6.mp4,0,0,22,0,0,putting on eyeliner,putting on foundation,scrubbing face,raising eyebrows,waxing eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+a221c82b-f22a-490d-b132-cd67348842d8.mp4,0,0,22,0,0,dyeing eyebrows,putting on foundation,scrubbing face,trimming or shaving beard,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+d9b985d0-9f41-47d5-b5c7-f2656feb882a.avi,0,0,22,0,0,putting on foundation,applying cream,scrubbing face,putting on mascara,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+e2f2dc85-49ca-4b34-a236-93896a14bed1.mp4,1,1,21,0,0,cutting orange,carving pumpkin,peeling potatoes,peeling apples,cutting pineapple,Perspective,top,Location,indoors,What,Hair,NA,NA
+1e39d53c-f19f-4cc0-b048-cc413f1b76c9.mp4,1,1,21,0,0,peeling potatoes,cutting orange,chopping meat,cutting pineapple,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+baae957c-d7b4-4a56-af5c-16c5eed19230.mp4,1,1,21,0,0,cutting orange,chopping vegetables,chopping meat,cutting watermelon,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+53caa612-24b0-45a9-b562-ebeb645023c5.mp4,0,1,22,0,0,putting on mascara,putting in contact lenses,waxing eyebrows,putting on foundation,putting on eyeliner,Perspective,side,Location,indoors,What,Eye,NA,NA
+96be7d0b-f13e-4090-bb38-318660e8f2f7.mp4,0,1,22,0,0,putting on eyeliner,raising eyebrows,applying cream,scrubbing face,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+8893347e-42fe-48b2-8121-a9c73f815b16.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping meat,carving pumpkin,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+a63959d2-4b31-4ec8-ab10-b9047f3a28a9.mp4,1,1,21,0,0,separating eggs,cutting orange,peeling potatoes,peeling apples,carving pumpkin,Perspective,back,Location,indoors,What,Hair,NA,NA
+774cea3f-3e8b-44b2-b514-23a8748824f3.mp4,1,1,21,0,0,chopping meat,cutting watermelon,chopping vegetables,cutting pineapple,cutting orange,Perspective,back,Location,indoors,What,Hair,NA,NA
+04fb7068-ac68-4719-9f5b-67e9b9c333c6.mp4,1,1,21,0,0,chopping vegetables,separating eggs,cutting orange,carving pumpkin,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+0d93d7ea-0de9-4447-b69a-2c02164e5f51.mp4,1,1,21,0,0,separating eggs,cutting watermelon,cutting orange,peeling apples,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+4a23631b-2997-4788-b5c9-593e696e3c51.mp4,1,1,21,0,0,chopping vegetables,peeling potatoes,cutting orange,peeling apples,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+4b506ec6-f8b4-4b1b-9b83-e30e7e215222.mp4,1,1,21,0,0,separating eggs,cutting orange,cutting pineapple,peeling potatoes,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+cebfca74-1340-48b2-97df-7d69f23af91f.mp4,1,1,21,0,0,cutting apple,cutting orange,separating eggs,cutting watermelon,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+f1fba8f1-44bb-4144-86ca-c24acf8c1286.mp4,1,1,21,0,0,chopping vegetables,cutting orange,carving pumpkin,peeling potatoes,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+073a3edc-f2c1-4106-8453-ad6eb7d1a4c6.mp4,0,1,22,0,0,putting on mascara,dyeing eyebrows,applying cream,putting in contact lenses,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+a1eb4792-7b1c-4316-b3d6-3b431c06066e.mp4,1,1,21,0,0,peeling apples,separating eggs,cutting orange,chopping meat,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+e975090f-404f-4c5c-aac5-2ed1b1703a34.avi,0,1,22,0,0,scrubbing face,putting on foundation,putting on eyeliner,dyeing eyebrows,waxing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+1f62c616-693a-4e5a-b653-1901fd475daf.mp4,1,1,21,0,0,chopping vegetables,separating eggs,chopping meat,cutting orange,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+90408597-6375-42bb-b70e-565e26dfe3a9.mp4,1,1,21,0,0,chopping meat,peeling potatoes,cutting orange,cutting apple,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+215dd777-85fd-43af-9a80-62ef41ba33f5.mp4,1,1,21,0,0,cutting orange,cutting watermelon,carving pumpkin,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+9c5c8cb0-0c9a-4b19-9b90-afd59e8102dd.mp4,1,1,21,0,0,chopping vegetables,chopping meat,cutting watermelon,peeling potatoes,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+eded7a12-dedc-4eba-9521-47bc827698fd.mp4,1,1,21,0,0,cutting watermelon,chopping vegetables,chopping meat,cutting pineapple,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+dfc62d09-dd27-41e1-9e35-7285d2dfe9c7.mp4,1,1,21,0,0,separating eggs,cutting watermelon,peeling potatoes,cutting orange,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+694e1934-2b98-4982-94f1-1e92ae346ab8.mp4,1,1,21,0,0,separating eggs,cutting watermelon,chopping meat,cutting orange,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+916ba83d-9184-44a5-b1bb-21cd79ae8607.avi,0,1,22,0,0,putting in contact lenses,putting on mascara,putting on foundation,dyeing eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+f52b2d42-545e-4545-ad87-cc7c39db5ec8.mp4,1,1,21,0,0,peeling apples,cutting orange,cutting pineapple,chopping meat,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+06b8fb78-5ffe-4270-9049-3212b900865a.mp4,0,1,22,0,0,putting on foundation,putting on eyeliner,scrubbing face,putting on mascara,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+62925fc8-3431-428c-90c5-35e957590647.avi,0,1,22,0,0,putting on foundation,scrubbing face,applying cream,putting on mascara,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+177daa85-cd76-444d-853a-a6d0ea237f87.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting watermelon,chopping vegetables,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+293a59ba-776d-4da4-8496-991dfe583cfe.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting pineapple,cutting watermelon,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+ad3e4cb8-5b9d-4df5-8f4b-6d25785808e2.mp4,1,1,21,0,0,cutting orange,cutting pineapple,cutting watermelon,chopping meat,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+46f4435f-6817-487e-9943-d3aebe6efbcb.mp4,1,1,21,0,0,chopping vegetables,carving pumpkin,chopping meat,cutting pineapple,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+0304cdf4-f91f-4c08-824e-f2de24d98131.mp4,1,1,21,0,0,cutting orange,peeling potatoes,cutting watermelon,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+7d780e70-68ab-4acc-bc60-faa327db24e5.mp4,1,1,21,0,0,chopping meat,chopping vegetables,cutting pineapple,peeling potatoes,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+71ad67e7-b213-40ce-83e6-5a838040bf0f.mp4,1,1,21,0,0,cutting watermelon,chopping meat,carving pumpkin,chopping vegetables,peeling apples,Perspective,back,Location,indoors,What,Hair,NA,NA
+ae465e66-edf9-4f0b-b515-0301f9da917a.mp4,0,1,22,0,0,scrubbing face,putting on eyeliner,applying cream,putting on foundation,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+916bdc8f-a6ab-4174-b453-fe196e289725.mp4,0,1,22,0,0,applying cream,putting on mascara,trimming or shaving beard,putting in contact lenses,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+ecf21d48-3ad8-427b-b73f-4d288e27801a.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,cutting pineapple,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+3b417108-829d-436f-9514-5bfab1940321.mp4,1,1,21,0,0,chopping vegetables,cutting orange,carving pumpkin,cutting watermelon,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+98e8d12f-4584-4d66-8d56-d9ff908b12e2.mp4,1,1,21,0,0,cutting watermelon,chopping meat,cutting apple,cutting orange,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+2868f4eb-e693-4a93-900a-2d99abe9e4de.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping vegetables,chopping meat,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+6089bc5d-a536-4abb-b28a-af9451c78882.mp4,1,1,21,0,0,cutting orange,cutting watermelon,separating eggs,chopping meat,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+99d11cc3-fcde-4a9b-96c3-e421da8c0a63.mp4,1,1,21,0,0,chopping vegetables,carving pumpkin,cutting apple,cutting orange,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+e1d16614-78e7-4273-a135-14552ce5f9df.avi,0,1,22,0,0,dyeing eyebrows,putting on foundation,putting on eyeliner,raising eyebrows,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+8ff99808-1267-4e43-a285-28b3a1d93bac.mp4,1,1,21,0,0,cutting pineapple,carving pumpkin,separating eggs,cutting orange,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+7bb42378-efb6-4632-b0bb-345783ae1210.mp4,1,1,21,0,0,separating eggs,cutting orange,chopping meat,chopping vegetables,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+155ef876-8e58-44ac-91c2-1de7f6d0dceb.mp4,0,1,22,0,0,putting on foundation,putting on mascara,raising eyebrows,scrubbing face,waxing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+cd08fce9-06cd-4bb3-8469-75cc002a62fa.mp4,1,1,21,0,0,peeling apples,cutting orange,cutting pineapple,chopping meat,peeling potatoes,Perspective,top,Location,indoors,What,Hair,NA,NA
+7f3f351a-f697-4cb7-9deb-239de337aec9.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,peeling apples,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+271e5403-00eb-4dd0-b24f-ea008ba33367.mp4,1,1,21,0,0,cutting orange,chopping vegetables,carving pumpkin,cutting apple,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+aef70713-c833-464b-99c0-64ade432a3dd.mp4,1,1,21,0,0,cutting orange,chopping meat,chopping vegetables,cutting apple,separating eggs,Perspective,back,Location,indoors,What,Hair,NA,NA
+6ed1cc8a-c9fa-4a07-8e7a-a62f8a14e7ca.mp4,1,1,21,0,0,chopping meat,cutting orange,chopping vegetables,cutting watermelon,cutting apple,Perspective,back,Location,indoors,What,Hair,NA,NA
+07f3754b-fe04-4977-ad99-d69cfb030810.mp4,1,1,21,0,0,cutting orange,carving pumpkin,chopping meat,peeling potatoes,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+c158c444-baba-47d2-a82f-9492e97cda2f.mp4,1,1,21,0,0,chopping meat,chopping vegetables,cutting orange,cutting apple,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+398edee4-a827-4185-81cc-34e627bdd4ad.mp4,1,1,21,0,0,cutting orange,chopping vegetables,carving pumpkin,cutting pineapple,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+abe524df-1cb2-4d72-bc91-d97c94ab3c76.mp4,1,1,21,0,0,cutting pineapple,cutting orange,chopping meat,chopping vegetables,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+7c7a9cda-5f10-4a56-b573-6392e82ace0e.avi,0,1,22,0,0,dyeing eyebrows,putting on foundation,putting on mascara,raising eyebrows,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+1b3a4609-7e16-4ca4-8d37-28568d52bba9.mp4,1,1,21,0,0,cutting orange,peeling potatoes,chopping vegetables,separating eggs,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+c5e8be3f-fcf0-4576-b191-91da22342b8f.mp4,0,1,22,0,0,applying cream,putting on foundation,putting on mascara,scrubbing face,raising eyebrows,Perspective,side,Location,indoors,What,Face,NA,NA
+7790da22-9e77-4f9f-aa7d-16b81b836993.mp4,0,1,22,0,0,applying cream,putting on eyeliner,putting on mascara,scrubbing face,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+ea50bd15-b2ea-45bf-b83a-f18ab3c9a459.mp4,1,1,21,0,0,cutting orange,carving pumpkin,cutting watermelon,peeling apples,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+1d3967c0-1948-47f6-a218-f652633b589d.mp4,1,1,21,0,0,cutting orange,peeling apples,chopping vegetables,chopping meat,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+c91ac94b-8dec-471f-8c26-3601a9bc4224.mp4,1,1,21,0,0,cutting pineapple,carving pumpkin,chopping vegetables,chopping meat,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+5d699310-5520-4028-80ec-945c7adef309.mp4,1,1,21,0,0,chopping meat,cutting watermelon,cutting orange,carving pumpkin,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+9b6d7494-365c-47ab-9532-76bc76ec5db8.mp4,1,1,21,0,0,peeling potatoes,cutting pineapple,cutting apple,cutting orange,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+e0955493-4d11-43f0-948c-962a34608b1d.mp4,1,1,21,0,0,chopping meat,cutting pineapple,cutting orange,separating eggs,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+c672df0f-e2fb-405b-8ee4-b0b8a81d43ae.mp4,1,1,21,0,0,cutting orange,cutting pineapple,carving pumpkin,cutting watermelon,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+c5db5c3d-c001-4a8f-bab4-a48752ead607.mp4,1,1,21,0,0,carving pumpkin,cutting orange,cutting pineapple,chopping meat,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+a31e68cc-4184-44aa-aa98-627de8c78096.mp4,1,1,21,0,0,cutting watermelon,cutting pineapple,cutting orange,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+6e67b79f-f4db-4fd9-a99d-05e68de3ce8a.mp4,0,1,22,0,0,scrubbing face,applying cream,putting on foundation,dyeing eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+5af694f2-ca2d-4195-b290-3fa836da8857.mp4,0,1,22,0,0,putting on foundation,putting on eyeliner,applying cream,putting on mascara,waxing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+4f1cb7ac-3a0a-4afc-a674-80c40b3226ef.mp4,1,1,21,0,0,cutting orange,cutting watermelon,peeling potatoes,peeling apples,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+0a79a6d2-3dec-4f43-a0d9-5f22ccc4d372.mp4,1,1,21,0,0,separating eggs,cutting orange,cutting pineapple,chopping meat,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+5b41f3f0-f4c1-4eed-afda-cb9d2bc3a943.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting apple,cutting pineapple,cutting watermelon,Perspective,back,Location,indoors,What,Hair,NA,NA
+01760de7-e866-42d8-959a-c0bb3807842a.mp4,1,1,21,0,0,cutting pineapple,chopping vegetables,peeling potatoes,cutting orange,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+738caada-fcb7-425b-afc5-631511de70cf.mp4,0,1,22,0,0,dyeing eyebrows,waxing eyebrows,raising eyebrows,putting on eyeliner,trimming or shaving beard,Perspective,front,Location,indoors,What,Face,NA,NA
+4399a1cb-393f-47c6-b722-e2b5aec65348.mp4,0,1,19,0,0,washing hands,hand washing clothes,massaging person's head,cleaning toilet,bathing dog,Perspective,front,Location,indoors,What,Hair,NA,NA
+ef5091ad-6c91-44cc-b0c0-305f811bd677.mp4,0,1,22,0,0,trimming or shaving beard,applying cream,putting on eyeliner,putting in contact lenses,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+f666bc13-46d9-4756-bd5c-496416680d1a.mp4,1,1,21,0,0,chopping meat,cutting orange,carving pumpkin,cutting pineapple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+ce34c5d4-4beb-4e22-ba90-2cd92d9f0ac4.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,cutting orange,cutting watermelon,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+b9d301d4-7313-4153-9351-2679404deb92.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,chopping meat,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+4a233f52-691f-44b5-98be-b20e9d263e10.mp4,1,1,21,0,0,cutting pineapple,chopping vegetables,chopping meat,carving pumpkin,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+558e45f6-cd6a-4974-ba76-c8300f2baa56.mp4,1,1,21,0,0,separating eggs,cutting orange,cutting pineapple,peeling potatoes,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+64717bc4-0de7-4d41-9e8e-2b6c9121c821.mp4,1,1,21,0,0,peeling potatoes,chopping meat,separating eggs,cutting watermelon,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+e257ea67-8c70-4c5c-be80-b0c004818330.mp4,1,1,21,0,0,cutting orange,carving pumpkin,chopping meat,cutting apple,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+9e203c32-e1ca-4a40-901c-f17aa15e25ef.mp4,1,1,21,0,0,cutting orange,chopping vegetables,chopping meat,cutting watermelon,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+75913b56-6f2e-4387-9210-61090af1bb2c.mp4,1,1,21,0,0,cutting apple,chopping vegetables,chopping meat,peeling potatoes,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+df63254c-bc98-42bb-926d-ae624919fdfb.mp4,0,1,22,0,0,putting on eyeliner,dyeing eyebrows,putting on foundation,applying cream,scrubbing face,Perspective,side,Location,indoors,What,Face,NA,NA
+544f5265-dbe0-4875-8a2c-346b351aa62d.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,peeling apples,carving pumpkin,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+112c126e-876d-4765-aa11-45f01a4aa79d.mp4,1,1,21,0,0,chopping vegetables,cutting watermelon,cutting pineapple,cutting orange,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+bb850648-50fd-4267-908e-58d3c0ef9c0e.mp4,1,1,21,0,0,cutting watermelon,chopping vegetables,cutting orange,peeling apples,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+3232fae7-9824-4b82-bb66-9dee0ba228dd.mp4,1,1,21,0,0,cutting pineapple,cutting orange,separating eggs,chopping meat,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+c15f4075-c413-40a8-b894-7bc696175bcf.mp4,0,1,22,0,0,applying cream,putting on eyeliner,putting in contact lenses,putting on foundation,putting on mascara,Perspective,front,Location,indoors,What,Face,NA,NA
+8439a038-64aa-42c4-9b29-832ee9374921.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping meat,carving pumpkin,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+fac5feee-fa26-494f-be06-ff5837cf1b8b.mp4,1,1,21,0,0,chopping vegetables,chopping meat,peeling apples,peeling potatoes,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+1ca99642-9bec-47b4-b782-33a146fbabc8.mp4,1,1,21,0,0,cutting pineapple,cutting orange,separating eggs,cutting apple,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+db2b6f77-ccfd-46a5-b20c-dd5151e6b3ee.mp4,1,1,21,0,0,cutting orange,cutting watermelon,carving pumpkin,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+62918bc1-511c-44c4-b9b9-7cd469d86ab9.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,cutting orange,cutting apple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+da5ab281-0b25-412a-8879-cc6ef0de5767.avi,0,1,22,0,0,putting on mascara,raising eyebrows,putting in contact lenses,putting on foundation,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+a6a557df-9366-4fff-9952-c526e757013b.mp4,1,1,21,0,0,cutting pineapple,chopping vegetables,cutting orange,peeling potatoes,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+8c9092d2-3731-478f-9ee5-cb8eaa07c2ed.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting pineapple,chopping vegetables,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+3c30c3a4-b246-4062-bb14-902838148533.mp4,1,1,21,0,0,cutting orange,peeling apples,chopping meat,cutting watermelon,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+489c1c5f-d384-458b-ae7e-fae389f2d97c.mp4,0,1,22,0,0,scrubbing face,applying cream,putting on eyeliner,putting on mascara,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+6270e2c8-74f8-4e6c-8b30-730d6e4b1279.mp4,1,1,21,0,0,cutting pineapple,chopping meat,chopping vegetables,peeling potatoes,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+c6252b85-9a25-4e21-8ef4-0b83c6450d52.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping vegetables,peeling potatoes,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+66c76d23-ff42-4a1e-8e9c-e683c9358424.mp4,0,1,22,0,0,waxing eyebrows,applying cream,putting on mascara,putting on eyeliner,raising eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+dabed21d-84e9-4386-ab5b-a122ab23512a.mp4,1,1,21,0,0,cutting orange,cutting pineapple,cutting watermelon,carving pumpkin,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+8033cf11-dd23-4486-84f8-eb7e9f6a0c06.mp4,1,1,21,0,0,separating eggs,cutting orange,chopping vegetables,chopping meat,carving pumpkin,Perspective,back,Location,indoors,What,Hair,NA,NA
+f688a5ab-5163-458d-8a1d-1e0fadc185b8.mp4,1,1,21,0,0,cutting pineapple,cutting watermelon,peeling potatoes,cutting apple,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+f6ca1202-1505-499c-9870-bf413366b998.mp4,1,1,21,0,0,chopping meat,cutting apple,cutting watermelon,separating eggs,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+f536d16a-d0d5-4268-83da-a5c1c9d3719e.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping meat,chopping vegetables,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+a95c413b-9314-4422-9324-db87e2f6682f.mp4,1,1,21,0,0,separating eggs,cutting apple,cutting pineapple,chopping vegetables,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+69703f8b-c85e-4fbe-ac1a-9ad164668b66.mp4,1,1,21,0,0,chopping meat,cutting watermelon,cutting orange,cutting pineapple,carving pumpkin,Perspective,top,Location,indoors,What,Hair,NA,NA
+d3b83df1-ae78-4ad9-94a9-23def9822e13.mp4,0,1,22,0,0,putting on foundation,putting in contact lenses,raising eyebrows,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+f3ead974-8690-41f2-90ea-3bb5238be99f.mp4,0,1,22,0,0,putting on foundation,applying cream,putting on eyeliner,putting on mascara,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+eda46203-9397-44f8-ad20-cb6f9f93f9b8.mp4,1,1,21,0,0,chopping vegetables,cutting apple,cutting pineapple,peeling potatoes,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+c1e016a8-4641-45f6-8c02-bf853bd33b85.mp4,1,1,21,0,0,carving pumpkin,cutting orange,cutting pineapple,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+4b13ffb0-63d1-4a16-af00-f685e06d4c3c.mp4,1,1,21,0,0,cutting orange,peeling apples,cutting pineapple,cutting watermelon,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+ff33ceb7-74fc-43cf-9b89-33ba37b40044.avi,0,1,22,0,0,applying cream,putting on foundation,putting in contact lenses,putting on mascara,scrubbing face,Perspective,side,Location,indoors,What,Eye,NA,NA
+d96b0d60-9d97-4b4b-8bc8-7946448fffc9.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting pineapple,separating eggs,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+1b234e37-88d4-420e-9302-cd04ef4a7a08.mp4,1,1,21,0,0,chopping meat,cutting pineapple,chopping vegetables,carving pumpkin,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+996a6355-ee6c-4540-aee7-4dd9faf7131c.mp4,0,1,22,0,0,putting on mascara,scrubbing face,waxing eyebrows,dyeing eyebrows,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+6c42871f-e569-431f-9b1d-6e62a54156ea.mp4,1,1,21,0,0,chopping meat,cutting apple,cutting orange,chopping vegetables,cutting pineapple,Perspective,back,Location,indoors,What,Hair,NA,NA
+28513ce4-5cfe-48ce-8bd4-34e46b35596d.mp4,1,1,21,0,0,chopping meat,cutting pineapple,peeling potatoes,cutting orange,carving pumpkin,Perspective,back,Location,indoors,What,Hair,NA,NA
+106b1723-e0ee-4c5a-bf35-7eea8eea6f81.mp4,1,1,21,0,0,chopping meat,cutting pineapple,cutting orange,cutting watermelon,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+a9577fc5-5b36-4206-8e7b-63102c03231f.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,carving pumpkin,cutting watermelon,Perspective,back,Location,indoors,What,Hair,NA,NA
+b9b2adb7-2625-4760-8c9f-1c13f138a512.mp4,1,1,21,0,0,chopping meat,cutting watermelon,cutting orange,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+05c99be5-966f-4b81-9057-9a4b381f3513.mp4,1,1,21,0,0,cutting orange,chopping meat,peeling potatoes,chopping vegetables,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+456c08a9-8a24-4d45-8f5c-d55b373deb14.mp4,0,1,22,0,0,putting on foundation,dyeing eyebrows,putting on mascara,trimming or shaving beard,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+1bb4f463-1ff6-4872-a198-71653a811b88.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting pineapple,peeling apples,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+eae91484-47ee-45ed-97c5-d916bafb99e5.mp4,1,1,21,0,0,cutting watermelon,cutting orange,cutting pineapple,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+72c2e8f0-0469-431b-8a61-f145775470b5.mp4,1,1,21,0,0,cutting watermelon,peeling potatoes,cutting pineapple,chopping vegetables,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+e9248680-8b3b-49ab-8c0e-7b7ef22f3d2a.mp4,1,1,21,0,0,cutting orange,cutting watermelon,carving pumpkin,cutting apple,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+096713a8-b683-49e9-8280-f8e69fc02d41.mp4,1,1,21,0,0,cutting orange,peeling potatoes,carving pumpkin,chopping meat,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+4ab2df92-fb7d-41bc-978d-6dde8c7d02c8.mp4,1,1,21,0,0,cutting pineapple,cutting orange,separating eggs,chopping meat,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+6513a242-bd3c-42b3-98eb-5c15d33a17c8.mp4,1,1,21,0,0,chopping vegetables,separating eggs,cutting pineapple,cutting orange,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+5845eecd-82de-4fed-a76f-e1f69c22c31a.mp4,0,1,19,0,0,doing laundry,washing hands,bathing dog,hand washing clothes,cooking egg,Perspective,back,Location,indoors,What,Hair,NA,NA
+2a9c56e7-1ee3-4fe8-b95f-15321880caf8.mp4,0,1,22,0,0,scrubbing face,putting on foundation,dyeing eyebrows,putting on eyeliner,raising eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+dd77cc1d-e056-47a5-a100-2df3e2e468a9.mp4,1,1,21,0,0,peeling apples,cutting pineapple,chopping vegetables,cutting orange,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+56e2a4f4-136f-43e1-ac9d-db51d12ac5f3.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting watermelon,peeling potatoes,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+2190d191-6a4a-42ee-8f37-f193364a1f95.mp4,1,1,21,0,0,cutting pineapple,cutting orange,carving pumpkin,peeling apples,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+bc0e52da-68b2-433f-980e-42d81a6da037.mp4,1,1,21,0,0,chopping meat,cutting orange,separating eggs,cutting pineapple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+2d21ae46-0d75-4624-82b4-638a24d55c27.mp4,1,1,21,0,0,cutting orange,peeling apples,chopping vegetables,carving pumpkin,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+37b8818e-3eca-4c58-8768-19c1190c5c0b.mp4,0,1,22,0,0,dyeing eyebrows,putting on mascara,applying cream,scrubbing face,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+c81dc9a8-8af3-486e-be2b-3ef888666f1a.mp4,1,1,21,0,0,cutting watermelon,cutting orange,chopping vegetables,peeling potatoes,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+035bde81-24fa-4173-a0dd-168c0041c4d8.avi,0,1,22,0,0,putting on foundation,scrubbing face,putting on mascara,putting on eyeliner,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+92b68999-5fbf-4520-b6f9-7be4d64c2da6.mp4,1,1,21,0,0,cutting orange,cutting apple,chopping vegetables,cutting pineapple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+068de01c-5717-46cc-9159-f99c880aaccc.mp4,1,1,21,0,0,chopping vegetables,cutting watermelon,carving pumpkin,chopping meat,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+c7ec34fd-e5e3-475a-85e5-a8d9f91b2bfb.mp4,0,1,22,0,0,putting on eyeliner,putting on foundation,putting on mascara,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+f23ccdbf-42b5-4ffc-880b-612916508863.mp4,1,1,21,0,0,chopping vegetables,cutting orange,separating eggs,chopping meat,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+d8b0c291-88db-47ae-b048-22695d7133c3.mp4,1,1,21,0,0,chopping meat,separating eggs,cutting orange,chopping vegetables,cutting pineapple,Perspective,back,Location,indoors,What,Hair,NA,NA
+a1c3cd22-5187-4602-95fb-8a67c6ad8767.mp4,1,1,21,0,0,carving pumpkin,cutting orange,cutting watermelon,cutting apple,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+9829881e-04b4-4fda-9f16-fe792df884e6.mp4,1,1,21,0,0,cutting watermelon,separating eggs,carving pumpkin,cutting orange,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+7cc578a4-9b91-428a-bf02-40ec889ea262.mp4,1,1,21,0,0,cutting orange,chopping vegetables,chopping meat,cutting pineapple,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+1f131af0-065d-4668-8e4f-8e3732cf6d08.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,carving pumpkin,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+75d33c06-eea2-43a6-93d9-82af6bb8100a.mp4,1,1,21,0,0,cutting orange,cutting apple,cutting pineapple,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+dfec0bb9-ccf5-4fdc-b2e3-b2762679304c.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping meat,peeling apples,cutting watermelon,Perspective,top,Location,indoors,What,Hair,NA,NA
+ecce4605-27b5-4a61-bd25-f57142dc1954.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting pineapple,chopping meat,carving pumpkin,Perspective,back,Location,indoors,What,Hair,NA,NA
+4fdc1f5b-e256-404f-a92d-b568e01d6518.mp4,0,1,22,0,0,dyeing eyebrows,putting on mascara,putting on eyeliner,putting in contact lenses,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+fbf007b8-55c1-4b06-8373-149802fab53c.mp4,1,1,21,0,0,chopping meat,cutting orange,cutting pineapple,cutting watermelon,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+1d8c5c70-04b4-4999-bb2b-5cae32b7f9ca.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting pineapple,cutting apple,separating eggs,Perspective,top,Location,indoors,What,Hair,NA,NA
+f4644ad7-002e-42cc-8f97-526bbe89baaf.mp4,1,1,21,0,0,cutting pineapple,chopping vegetables,chopping meat,cutting orange,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+69088d22-f49b-46ef-a31d-cde0e719f36e.mp4,0,1,22,0,0,putting on mascara,scrubbing face,putting on eyeliner,dyeing eyebrows,putting on foundation,Perspective,side,Location,indoors,What,Eye,NA,NA
+3d0b876b-e07f-4e91-a92e-b4ed3baa653d.mp4,0,1,22,0,0,putting on foundation,putting in contact lenses,waxing eyebrows,putting on mascara,scrubbing face,Perspective,front,Location,indoors,What,Face,NA,NA
+2dbbc617-0dfb-4477-a3ff-2dcca476bb5f.mp4,1,1,21,0,0,peeling apples,cutting pineapple,cutting orange,cutting watermelon,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+21bcdffb-7d00-40ab-b757-26b7be650af9.mp4,1,1,21,0,0,cutting pineapple,chopping vegetables,chopping meat,separating eggs,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+a69261e9-7cd4-48f4-b401-aea33dd5970d.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting pineapple,separating eggs,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+8191ff16-bf8f-457a-9e05-d208ea699476.mp4,0,1,22,0,0,putting in contact lenses,scrubbing face,applying cream,putting on mascara,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+4dece528-0f7c-4430-9a65-f8d6d2ef3c9c.mp4,1,1,21,0,0,chopping vegetables,peeling apples,carving pumpkin,cutting pineapple,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+26f1570b-5156-4e27-aadf-55add58614f7.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting watermelon,peeling potatoes,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+0efe89e1-f055-44b8-a73c-98cd455c5917.avi,0,1,22,0,0,dyeing eyebrows,waxing eyebrows,putting on mascara,putting on eyeliner,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+66d033c6-b376-4d1c-ad77-7f451a8f6f6c.mp4,1,1,21,0,0,cutting orange,carving pumpkin,cutting pineapple,chopping vegetables,cutting watermelon,Perspective,top,Location,indoors,What,Hair,NA,NA
+82dd7c05-88ec-4285-8c59-d6583e2c7502.mp4,1,1,21,0,0,chopping meat,cutting orange,chopping vegetables,cutting watermelon,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+96a1ff24-ba1a-4360-8223-aaa735f86364.mp4,1,1,21,0,0,cutting watermelon,chopping vegetables,cutting apple,cutting orange,peeling apples,Perspective,top,Location,indoors,What,Hair,NA,NA
+cfebadce-d2dc-43d6-bb37-f82980813186.mp4,1,1,21,0,0,cutting pineapple,cutting orange,cutting watermelon,chopping meat,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+4cf73ae8-1d80-4d09-aa42-c26604a28367.mp4,1,1,21,0,0,peeling potatoes,cutting orange,chopping vegetables,cutting apple,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+66466c42-4c8d-4ba7-97c6-4546868b5019.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting watermelon,separating eggs,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+d542e73b-21fe-48d3-92b0-6d931a72e462.mp4,1,1,21,0,0,chopping vegetables,cutting orange,separating eggs,peeling apples,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+70ba3c9d-c60d-4ed0-a21c-a677ff3fec90.mp4,0,1,22,0,0,putting on foundation,dyeing eyebrows,scrubbing face,putting on mascara,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+92c50e42-448d-48e7-bf8e-8dbec7ce1f99.mp4,1,1,21,0,0,chopping vegetables,cutting orange,separating eggs,cutting pineapple,chopping meat,Perspective,top,Location,indoors,What,Hair,NA,NA
+36e6313c-dc6d-4661-958a-96a8698bfc24.mp4,1,1,21,0,0,separating eggs,cutting orange,chopping meat,chopping vegetables,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+e1acbe39-eb7e-4089-94c4-9fa1b1f7df73.mp4,1,1,21,0,0,chopping meat,cutting orange,carving pumpkin,peeling potatoes,cutting pineapple,Perspective,back,Location,indoors,What,Hair,NA,NA
+0c700cb8-1d90-48aa-8f37-42501459c8d4.avi,0,1,22,0,0,putting on mascara,dyeing eyebrows,putting on foundation,putting on eyeliner,scrubbing face,Perspective,side,Location,indoors,What,Eye,NA,NA
+493cae43-d52d-48b5-8130-00653ddf5d1f.mp4,1,1,21,0,0,cutting pineapple,cutting orange,peeling apples,chopping meat,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+1416f4c1-e1f4-4cca-85b7-acfe5d9cb06b.mp4,1,1,21,0,0,chopping meat,cutting orange,cutting watermelon,peeling apples,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+4dcb6abf-0551-4819-b6c8-3ce0a77a74c5.mp4,0,1,22,0,0,putting on mascara,putting on foundation,applying cream,putting on eyeliner,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+3f70b4af-7b4d-43a8-890c-505b2bff5397.mp4,1,1,21,0,0,cutting pineapple,chopping meat,carving pumpkin,cutting orange,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+86b3fe06-fa9f-45d5-9ee1-10feb6bbd3e2.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,cutting pineapple,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+b27ea8b1-5ad0-4aa7-97e0-e9e28d7bf055.mp4,1,1,21,0,0,cutting orange,cutting apple,carving pumpkin,cutting watermelon,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+30445384-c8db-473a-9c97-d0f8412b7123.mp4,1,1,21,0,0,separating eggs,chopping vegetables,cutting orange,cutting pineapple,peeling potatoes,Perspective,back,Location,indoors,What,Hair,NA,NA
+c762fb88-e831-4ce9-bfea-b8112c5f968a.mp4,1,1,21,0,0,cutting pineapple,chopping meat,cutting orange,chopping vegetables,peeling apples,Perspective,top,Location,indoors,What,Hair,NA,NA
+9d16c2ff-1497-48ee-b57c-1155f394da52.mp4,1,1,21,0,0,cutting orange,chopping vegetables,peeling apples,cutting pineapple,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+b206a848-71ae-48b4-8575-966e73456502.mp4,1,1,21,0,0,peeling apples,cutting watermelon,chopping vegetables,cutting pineapple,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+bbd3b899-40a4-4a85-bdc7-11fd7852e01d.mp4,1,1,21,0,0,peeling potatoes,cutting orange,cutting watermelon,cutting pineapple,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+07d50a00-3464-40fe-b6d3-ada1b70a7601.mp4,1,1,21,0,0,chopping vegetables,cutting watermelon,chopping meat,cutting orange,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+30b324dd-a686-4cf1-ab09-6e9609a76213.mp4,1,1,21,0,0,peeling potatoes,separating eggs,cutting watermelon,cutting pineapple,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+e320a794-3c1c-4fab-9ace-d4c4a1ae2064.mp4,0,1,22,0,0,putting on mascara,trimming or shaving beard,putting on foundation,scrubbing face,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+c806bf8b-35ce-4b99-ae8a-b57ee8a7f7f1.mp4,1,1,21,0,0,cutting orange,cutting apple,carving pumpkin,peeling potatoes,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+37aabd8b-770a-4b65-ba48-13ce64e0786f.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting pineapple,carving pumpkin,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+3e5fd2af-90e5-4917-94c0-f36de9f38955.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting pineapple,peeling apples,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+ec18980a-c32c-4137-96d8-d21e41b3b158.mp4,1,1,21,0,0,chopping meat,peeling potatoes,carving pumpkin,cutting orange,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+71da72fa-28b6-4d75-ad87-34d210345a19.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,cutting watermelon,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+be259692-7d53-4cdc-b544-8f0bdc98e2c3.mp4,1,1,21,0,0,chopping vegetables,chopping meat,cutting orange,peeling potatoes,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+54005c76-7a7f-4d22-88f8-d1e31dc21569.mp4,0,1,22,0,0,scrubbing face,putting on mascara,putting in contact lenses,putting on foundation,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+29e79adf-303f-4cf9-80bc-71472e72a5d1.mp4,1,1,21,0,0,cutting watermelon,separating eggs,peeling potatoes,chopping vegetables,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+54c44895-3b7b-4026-9921-3713474a2325.mp4,1,1,21,0,0,chopping meat,peeling apples,cutting watermelon,carving pumpkin,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+9cfffba2-d04e-4d5e-8fd0-1ea641121e12.avi,0,1,22,0,0,putting on foundation,putting on mascara,applying cream,dyeing eyebrows,waxing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+396f9f91-f9c0-4814-b4c3-09c78c5f83ff.mp4,1,1,21,0,0,peeling potatoes,chopping meat,cutting orange,separating eggs,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+4ba0853e-b9fb-400c-bdf3-ccb151e73340.mp4,1,1,21,0,0,cutting watermelon,cutting apple,separating eggs,chopping vegetables,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+e952d747-8cca-4823-a329-aa4700f131eb.mp4,1,1,21,0,0,cutting orange,separating eggs,chopping meat,cutting pineapple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+c13f179a-bd8b-4671-b6aa-6101c5eac1b2.mp4,0,1,19,0,0,washing hands,doing laundry,hand washing clothes,massaging person's head,washing hair,Perspective,front,Location,indoors,What,Hair,NA,NA
+692834cf-9c67-4cb3-aaff-e1b61a159555.mp4,1,1,21,0,0,cutting watermelon,peeling apples,cutting orange,chopping vegetables,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+75225711-2312-4f98-bf52-c28ae143b9ff.mp4,1,1,21,0,0,peeling potatoes,cutting pineapple,cutting orange,chopping vegetables,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+d31db3f2-855b-4767-a530-659cb2f4e584.mp4,1,1,21,0,0,carving pumpkin,cutting orange,cutting pineapple,cutting apple,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+5a25c59b-7a95-4ae1-b79e-f8147281200b.mp4,1,1,21,0,0,cutting orange,cutting watermelon,cutting apple,chopping meat,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+970adf8d-68d2-4b62-92f2-05980fbbcebf.mp4,1,1,21,0,0,cutting orange,peeling potatoes,cutting pineapple,peeling apples,carving pumpkin,Perspective,top,Location,indoors,What,Hair,NA,NA
+cbd1ccc6-8321-4881-bbda-4363f65413d0.mp4,0,1,19,0,0,washing hair,plastering,washing hands,hand washing clothes,washing dishes,Perspective,back,Location,indoors,What,Hair,NA,NA
+2ec24333-616d-4d04-8853-5efb1cee745b.mp4,1,1,21,0,0,chopping meat,peeling apples,cutting apple,cutting pineapple,cutting orange,Perspective,top,Location,indoors,What,Hair,NA,NA
+b901b0f1-2107-4bbc-90a4-545d56ab12db.avi,0,1,22,0,0,putting on eyeliner,raising eyebrows,dyeing eyebrows,putting in contact lenses,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+c233ab27-fd9e-41c0-9082-d8aaef7f5067.mp4,0,1,22,0,0,putting on foundation,putting on eyeliner,putting in contact lenses,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+25b5a9d8-e742-4d60-8dbd-ef289fe32bb6.mp4,1,1,21,0,0,cutting orange,separating eggs,cutting pineapple,chopping meat,chopping vegetables,Perspective,back,Location,indoors,What,Hair,NA,NA
+62625b34-3b9c-4948-bffb-dbe86aebe910.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping meat,cutting apple,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+ce0406bd-1789-4421-9b7a-8d3d717119ce.mp4,1,1,21,0,0,cutting watermelon,cutting pineapple,carving pumpkin,chopping vegetables,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+096f55cd-f9a9-49bd-a6d1-bc3370afc8d5.mp4,1,1,21,0,0,cutting pineapple,separating eggs,cutting orange,peeling apples,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+e3e9ea53-4fb2-44cb-a7d9-e367704cfe25.mp4,1,1,21,0,0,peeling potatoes,chopping meat,chopping vegetables,cutting apple,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+6bbc0e0f-be5e-4024-a121-0169b1e5be87.mp4,1,1,21,0,0,separating eggs,cutting pineapple,cutting apple,peeling potatoes,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+5d4ba241-cc49-47d8-ae1c-ad986a74ecf8.mp4,1,1,21,0,0,chopping meat,cutting pineapple,cutting orange,chopping vegetables,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+e71bf510-81f7-48ae-9905-e4d646b62a7f.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,cutting watermelon,cutting orange,carving pumpkin,Perspective,top,Location,indoors,What,Hair,NA,NA
+f7a7b2be-ffd9-4cb6-b495-fc1babf47722.mp4,0,1,22,0,0,putting on mascara,scrubbing face,dyeing eyebrows,applying cream,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+df1a5140-5772-4989-acca-90e0f80a52ec.mp4,0,1,22,0,0,putting on mascara,waxing eyebrows,putting on eyeliner,scrubbing face,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+8df13d3d-da8a-4b80-b908-0f024c1766cc.mp4,1,1,21,0,0,cutting pineapple,cutting watermelon,chopping meat,chopping vegetables,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+2c850160-9f18-4616-8734-3535e7899690.mp4,1,1,21,0,0,chopping meat,cutting orange,cutting apple,peeling apples,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+8bbbd080-f81a-4f7c-8c61-7052f7745789.mp4,1,1,21,0,0,cutting pineapple,cutting orange,peeling potatoes,chopping meat,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+1a690ba0-59be-4b85-8e89-898ab70e1308.mp4,1,1,21,0,0,cutting orange,separating eggs,chopping meat,cutting pineapple,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+f732d972-fb0c-4e66-94c2-e11356ff0bf3.mp4,1,1,21,0,0,chopping vegetables,cutting orange,separating eggs,chopping meat,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+8d5c4bf7-4d36-424e-a186-3a7ceb035eef.mp4,0,1,22,0,0,scrubbing face,putting on eyeliner,putting on foundation,putting in contact lenses,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+699f8182-bac6-4457-9e60-61594b859059.mp4,1,1,21,0,0,cutting orange,peeling potatoes,carving pumpkin,cutting pineapple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+288c0e99-f4ee-42a5-bf0a-433445ce1394.mp4,1,1,21,0,0,cutting watermelon,chopping meat,cutting orange,peeling potatoes,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+c7d278c0-8383-488d-9aea-5f579749a278.avi,0,1,22,0,0,waxing eyebrows,putting on foundation,raising eyebrows,putting on eyeliner,dyeing eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+37b72bd2-22b6-4db9-a2ee-502c0eaf5271.mp4,1,1,21,0,0,peeling apples,cutting orange,chopping meat,chopping vegetables,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+e3e1bdf6-3328-4977-9ea3-0cb617be35a8.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting watermelon,carving pumpkin,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+e326ab32-a7e8-42c2-a7ca-e4e8aa3f8795.mp4,1,1,21,0,0,peeling potatoes,chopping vegetables,peeling apples,cutting orange,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+97c0d134-f6c0-406e-983d-4d1ec6bbe1a1.mp4,1,1,21,0,0,chopping meat,peeling potatoes,chopping vegetables,cutting pineapple,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+8f58d1b3-8b1c-4525-88e4-3f184d412e97.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,chopping meat,cutting orange,cutting apple,Perspective,back,Location,indoors,What,Hair,NA,NA
+92c80391-e8d2-4f69-8d31-dd07b9b974a8.mp4,1,1,21,0,0,cutting watermelon,chopping meat,cutting orange,cutting pineapple,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+8f6da52d-a738-4a24-874f-38103708558c.mp4,1,1,21,0,0,cutting watermelon,cutting pineapple,peeling potatoes,chopping vegetables,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+4bfaa7a3-7dd5-4a81-88e2-293fe2273ef0.mp4,1,1,21,0,0,cutting orange,peeling potatoes,chopping vegetables,cutting pineapple,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+26aab102-87d2-4357-8125-73cedd3ef36e.mp4,0,1,22,0,0,raising eyebrows,putting on foundation,putting on mascara,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+d8ae715d-645e-4913-b8ee-d743f63f17e8.mp4,1,1,21,0,0,cutting orange,cutting pineapple,peeling apples,cutting apple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+c60a24ac-afd6-4d2c-8be2-1bfbe320cc8c.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping meat,chopping vegetables,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+c3b13feb-29c1-4379-9c6c-7274de45ed54.mp4,1,1,21,0,0,chopping vegetables,chopping meat,separating eggs,cutting orange,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+a7183c3f-d2e7-4830-bf0c-2fc741e56a4f.avi,0,1,22,0,0,putting on eyeliner,dyeing eyebrows,putting on foundation,trimming or shaving beard,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+a65b8f39-977a-417c-9958-5ba4c139fcd1.mp4,0,1,22,0,0,putting on eyeliner,dyeing eyebrows,applying cream,scrubbing face,trimming or shaving beard,Perspective,front,Location,indoors,What,Eye,NA,NA
+6ef79b63-becd-4b75-9c71-c33d00857201.mp4,1,1,21,0,0,cutting orange,chopping meat,separating eggs,cutting pineapple,peeling potatoes,Perspective,back,Location,indoors,What,Hair,NA,NA
+fa8cd008-5026-4228-9f03-d5fb35c7c1aa.mp4,1,1,21,0,0,chopping vegetables,carving pumpkin,peeling apples,cutting orange,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+f3ee5e65-d2d0-4aa0-a654-9e319ac51991.mp4,1,1,21,0,0,cutting pineapple,cutting orange,cutting apple,cutting watermelon,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+a8f4858a-6e1a-4da7-ae6a-3e15e947ae4e.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,separating eggs,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+e1d49a6f-f4c5-49ce-bf12-464755364bdc.mp4,1,1,21,0,0,separating eggs,chopping vegetables,cutting orange,cutting pineapple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+2d3fdec3-a5b0-4b4c-869a-f8fc15fe51cd.mp4,1,1,21,0,0,chopping meat,cutting pineapple,cutting orange,chopping vegetables,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+06bc186e-37f1-4227-9215-376a75638b4e.mp4,1,1,21,0,0,carving pumpkin,chopping meat,cutting pineapple,cutting orange,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+8e4260f9-66c7-41c1-82ad-4011fb4ce4fe.avi,0,1,22,0,0,putting in contact lenses,waxing eyebrows,putting on foundation,trimming or shaving beard,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+0fa13a1d-4007-4289-b292-6723480de3e3.mp4,0,1,22,0,0,putting on foundation,dyeing eyebrows,putting on eyeliner,putting on mascara,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+d3cfbdf5-161f-4e1e-b5c6-ed0ca09f5d12.mp4,1,1,21,0,0,cutting orange,chopping meat,chopping vegetables,peeling potatoes,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+3991dd12-9ea0-48b0-97bf-84d38bf6fae6.mp4,1,1,21,0,0,chopping vegetables,cutting orange,peeling potatoes,carving pumpkin,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+a85ad3ec-1d2e-4659-a3ef-fd06370c552b.mp4,1,1,21,0,0,separating eggs,chopping vegetables,cutting pineapple,chopping meat,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+145044a3-750f-44cf-b08f-b9af1dfe5fb2.mp4,1,1,21,0,0,cutting pineapple,peeling apples,chopping vegetables,chopping meat,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+d30fed94-f0d3-4b27-954e-2b4e8e2ee095.mp4,1,1,21,0,0,peeling potatoes,cutting orange,chopping meat,cutting pineapple,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+7194fb3b-9826-461e-be5e-a695b6010265.mp4,0,1,22,0,0,waxing eyebrows,applying cream,putting on mascara,scrubbing face,putting on foundation,Perspective,front,Location,indoors,What,Eye,NA,NA
+946cec1e-2068-4be3-82d0-2fa178ab62ea.mp4,1,1,21,0,0,cutting pineapple,cutting apple,cutting orange,peeling potatoes,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+00c97851-b3d4-48bc-8508-d76fee5f6a36.mp4,1,1,21,0,0,cutting orange,chopping meat,chopping vegetables,carving pumpkin,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+663ec20b-1605-4641-9056-f5f6ed343773.mp4,0,1,22,0,0,putting on mascara,putting on eyeliner,putting on foundation,applying cream,scrubbing face,Perspective,front,Location,indoors,What,Face,NA,NA
+2f15b230-6c98-4c4b-9cb6-4292f7e08cbd.mp4,1,1,21,0,0,cutting orange,cutting watermelon,cutting pineapple,chopping meat,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+14f9afc3-087c-498e-bde6-717c1e98dcd1.mp4,1,1,21,0,0,peeling apples,chopping vegetables,cutting pineapple,cutting watermelon,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+138e67fb-b064-4bec-902c-c40441b234db.mp4,1,1,21,0,0,cutting watermelon,cutting orange,peeling potatoes,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+c86046b7-783e-4e85-a1db-aa77085da932.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting pineapple,peeling apples,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+b40d3af5-c079-4211-a111-83f13714e189.mp4,1,1,21,0,0,chopping meat,chopping vegetables,cutting pineapple,cutting orange,cutting watermelon,Perspective,top,Location,indoors,What,Hair,NA,NA
+ee012e4f-d528-4bf2-b362-28ac5e3b6ed9.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,chopping meat,cutting apple,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+544a848c-ef42-4b34-9e07-c160eb9d3ebc.mp4,1,1,21,0,0,carving pumpkin,cutting orange,chopping vegetables,chopping meat,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+6799ee9a-fd2d-4b35-8fea-e97f0094948d.mp4,1,1,21,0,0,chopping meat,cutting pineapple,peeling potatoes,chopping vegetables,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+78f2070b-a917-47ed-b680-c2b341138b55.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping meat,separating eggs,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+7993b34e-082a-4631-8e97-4ee008de25fd.mp4,0,1,22,0,0,putting on foundation,putting on mascara,scrubbing face,applying cream,putting on eyeliner,Perspective,side,Location,indoors,What,Eye,NA,NA
+0a614ce5-5aeb-4d22-a2cf-2a4a013d0a73.mp4,0,1,22,0,0,putting on eyeliner,putting on mascara,applying cream,putting on foundation,raising eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+9238133f-17dc-4943-8787-93b42bf50c96.avi,0,1,22,0,0,putting on mascara,applying cream,putting on eyeliner,putting on foundation,dyeing eyebrows,Perspective,side,Location,indoors,What,Eye,NA,NA
+9cc3f17f-525b-44a1-80ac-6839365707ad.mp4,1,1,21,0,0,cutting orange,cutting pineapple,cutting apple,cutting watermelon,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+62fee25e-8f02-478e-8b46-a79eb91a3675.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting watermelon,chopping meat,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+a54fce7b-0e08-4373-946c-fe5dbcc726e8.mp4,1,1,21,0,0,cutting watermelon,carving pumpkin,cutting orange,cutting pineapple,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+caa2e47f-555b-4b44-85e4-462470bd7ea7.mp4,1,1,21,0,0,cutting watermelon,carving pumpkin,cutting pineapple,chopping meat,cutting orange,Perspective,back,Location,indoors,What,Hair,NA,NA
+3095dddf-dd3b-4945-b457-5d4d8fb78bbd.mp4,1,1,21,0,0,cutting orange,separating eggs,chopping vegetables,peeling potatoes,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+966578d7-eaa8-43ab-b89c-ca9c52393ec2.mp4,0,1,22,0,0,waxing eyebrows,applying cream,putting on foundation,raising eyebrows,scrubbing face,Perspective,front,Location,indoors,What,Arm,NA,NA
+e815d5b5-f045-4c39-8d26-25279bff03af.mp4,0,1,22,0,0,applying cream,putting on mascara,scrubbing face,putting in contact lenses,trimming or shaving beard,Perspective,front,Location,indoors,What,Arm,NA,NA
+a12e6e25-d472-439b-a8fa-1cc203f69552.mp4,0,1,22,0,0,trimming or shaving beard,waxing eyebrows,dyeing eyebrows,applying cream,putting on eyeliner,Perspective,front,Location,indoors,What,Eye,NA,NA
+78258ca9-2998-4099-8541-8cbe41ba9341.mp4,1,1,21,0,0,chopping vegetables,chopping meat,cutting watermelon,cutting pineapple,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+308c7907-e6b7-430d-808f-50390c85c15a.mp4,1,1,21,0,0,peeling potatoes,cutting pineapple,separating eggs,cutting orange,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+5f03ba0b-605d-4fa5-9c6b-7036fbf6d6fd.mp4,1,1,21,0,0,cutting watermelon,cutting pineapple,peeling potatoes,cutting orange,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+598e3f74-84be-4024-a8d5-a47c3838f51c.mp4,1,1,21,0,0,cutting watermelon,cutting pineapple,chopping vegetables,cutting orange,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+7f974a2e-5258-479d-b369-91193a464b2e.mp4,1,1,21,0,0,cutting apple,separating eggs,peeling potatoes,cutting orange,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+eac63475-99a5-40ad-9e26-a9f7137ee387.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting pineapple,cutting apple,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+581ef8cb-2b0f-4d72-aadf-fd5fdcc01c21.avi,0,1,22,0,0,scrubbing face,putting on foundation,raising eyebrows,putting on eyeliner,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+66ad9a72-a2f8-4f3e-8d66-8cd0460bb7e1.mp4,1,1,21,0,0,carving pumpkin,separating eggs,cutting orange,cutting pineapple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+2534e8d8-23b2-4727-a200-f5de19e7101b.mp4,1,1,21,0,0,peeling apples,cutting orange,cutting pineapple,chopping meat,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+02f00901-4eed-4a52-b5fd-ec71a872fa20.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,peeling potatoes,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+538319f9-c93c-4a59-bf95-27c2de52e0ff.mp4,1,1,21,0,0,cutting watermelon,cutting orange,cutting pineapple,peeling apples,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+1aab8b2c-1e56-4db8-a867-998c21a3eb7b.mp4,1,1,21,0,0,cutting watermelon,cutting apple,chopping meat,cutting pineapple,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+bc70813c-eb2b-4e43-9042-e93e5b20fc49.mp4,0,1,22,0,0,putting on foundation,putting in contact lenses,putting on eyeliner,scrubbing face,putting on mascara,Perspective,side,Location,indoors,What,Eye,NA,NA
+6ea73fee-2739-4f9e-bd93-f36ef70c26de.mp4,1,1,21,0,0,cutting apple,cutting orange,chopping meat,cutting watermelon,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+4c5ae441-072e-4112-a5d3-a7b7735147fb.mp4,0,1,22,0,0,putting on eyeliner,trimming or shaving beard,dyeing eyebrows,putting on foundation,putting in contact lenses,Perspective,front,Location,indoors,What,Arm,NA,NA
+04a0a35d-9268-4d51-98a3-e84f9d237e19.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,cutting apple,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+2d89e9fd-ed9f-4fd8-925f-bbea2347a3e4.mp4,1,1,21,0,0,separating eggs,chopping meat,cutting watermelon,cutting orange,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+67161da2-6e53-43da-a566-bb021df84664.mp4,1,1,21,0,0,carving pumpkin,chopping vegetables,chopping meat,cutting orange,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+889802da-57e7-4dc3-8ee0-1d37ec180263.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting watermelon,peeling potatoes,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+5c57db11-ebc9-4b1b-bfaf-d39d82b28b43.mp4,0,1,22,0,0,putting on foundation,scrubbing face,putting on mascara,dyeing eyebrows,applying cream,Perspective,front,Location,indoors,What,Face,NA,NA
+c687cfd9-b823-4ce9-a34a-60ee58759703.mp4,1,1,21,0,0,separating eggs,peeling potatoes,cutting pineapple,cutting orange,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+0e9d5596-5b38-4951-81f8-589e9314887c.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,cutting watermelon,chopping meat,Perspective,back,Location,indoors,What,Hair,NA,NA
+6c7ebdd6-7cc1-447b-8999-b6169c90ab52.mp4,1,1,21,0,0,cutting pineapple,cutting orange,chopping vegetables,peeling apples,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+712c9ec0-0a36-48f4-8fea-575a4538c174.mp4,1,1,21,0,0,cutting watermelon,cutting orange,cutting apple,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+95237622-d68a-4cd8-9b67-d72ba7808d5d.mp4,1,1,21,0,0,peeling potatoes,cutting pineapple,chopping meat,cutting orange,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+7bacdbd2-ae7b-4493-a1ee-0856863f3924.mp4,1,1,21,0,0,cutting pineapple,chopping vegetables,cutting orange,carving pumpkin,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+f967f65e-c352-41dd-9754-2304c3f0d61c.mp4,1,1,21,0,0,cutting orange,peeling apples,chopping vegetables,cutting watermelon,separating eggs,Perspective,back,Location,indoors,What,Hair,NA,NA
+0a1386b5-72f6-42eb-8a8a-427a9b18479b.mp4,1,1,21,0,0,cutting pineapple,cutting orange,cutting watermelon,carving pumpkin,chopping vegetables,Perspective,top,Location,indoors,What,Hair,NA,NA
+3cee4893-e539-447e-896f-bd448b4b9de2.mp4,1,1,21,0,0,chopping meat,cutting orange,peeling apples,separating eggs,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+8a033652-4583-4cff-89cf-5c119c3d1573.avi,0,1,22,0,0,putting on mascara,putting on eyeliner,dyeing eyebrows,putting on foundation,putting in contact lenses,Perspective,front,Location,indoors,What,Eye,NA,NA
+ebc26510-4713-4387-bb6c-888ca7c87ff4.mp4,1,1,21,0,0,cutting apple,peeling potatoes,chopping meat,cutting orange,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+b367d7a6-fd0b-4252-9ff0-be293acf4276.avi,0,1,22,0,0,putting on mascara,raising eyebrows,putting on foundation,dyeing eyebrows,putting in contact lenses,Perspective,side,Location,indoors,What,Eye,NA,NA
+002ad85f-691f-43d2-8b87-854fc4802ba8.mp4,1,1,21,0,0,chopping meat,peeling potatoes,peeling apples,cutting watermelon,cutting orange,Perspective,top,Location,indoors,What,Hair,NA,NA
+a29f1be3-aef2-40fb-af6b-c9bd725205bb.mp4,1,1,21,0,0,separating eggs,cutting orange,cutting apple,chopping meat,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+857f29c2-a672-462e-a991-3c5ee64ca883.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,cutting watermelon,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+914d8093-a55f-4e5e-8d1f-84a5bf3640d9.mp4,1,1,21,0,0,cutting watermelon,chopping vegetables,chopping meat,cutting orange,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+8256aff1-f619-4352-869a-2b1ae2fc2265.mp4,0,1,22,0,0,putting on mascara,trimming or shaving beard,putting on eyeliner,scrubbing face,dyeing eyebrows,Perspective,front,Location,indoors,What,Arm,NA,NA
+c7df3e74-ef20-473d-a440-823fbfe37161.mp4,1,1,21,0,0,cutting watermelon,separating eggs,cutting pineapple,cutting orange,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+7597bd8b-55ba-492a-95d9-9c307317c76e.mp4,0,1,22,0,0,trimming or shaving beard,putting on foundation,putting in contact lenses,putting on eyeliner,applying cream,Perspective,side,Location,indoors,What,Eye,NA,NA
+d2a1f807-baa6-4513-8504-35d1f6224418.mp4,1,1,21,0,0,carving pumpkin,cutting orange,chopping vegetables,peeling apples,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+2eca3eef-cb4e-44aa-8f54-09090fe658c7.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting pineapple,chopping vegetables,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+18c2a9fd-eb8a-4541-93fa-b9dd8855ff2b.mp4,1,1,21,0,0,carving pumpkin,cutting watermelon,chopping vegetables,cutting orange,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+aa860c1f-a03d-4968-af26-23630846e3cd.mp4,1,1,21,0,0,peeling apples,carving pumpkin,cutting pineapple,cutting orange,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+69064103-8668-4db8-bb5b-2ed2080060e5.mp4,1,1,21,0,0,cutting orange,peeling potatoes,chopping vegetables,cutting pineapple,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+a940fefc-0745-44cf-bdff-2bb8382b5834.mp4,0,1,22,0,0,raising eyebrows,dyeing eyebrows,putting on foundation,putting on mascara,scrubbing face,Perspective,side,Location,indoors,What,Eye,NA,NA
+101fafe1-7083-4fbc-84c9-099ee0936cb9.mp4,1,1,21,0,0,chopping meat,chopping vegetables,cutting apple,cutting watermelon,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+52242389-e106-4793-a995-dc53de9bc048.avi,0,1,22,0,0,applying cream,putting on foundation,putting on eyeliner,dyeing eyebrows,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+9541681a-8d38-4461-aade-1603bf0acf05.mp4,1,1,21,0,0,chopping meat,cutting pineapple,carving pumpkin,cutting orange,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+c73fb035-7522-4cae-9fa0-0c32dd08e938.mp4,1,1,21,0,0,carving pumpkin,peeling potatoes,cutting orange,chopping meat,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+5d38e9f9-b579-46d0-a869-ed75d4df16f1.avi,0,1,22,0,0,applying cream,putting on foundation,trimming or shaving beard,putting on eyeliner,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+4ae9eac9-5047-4c79-aebf-ba08423e7bb6.mp4,1,1,21,0,0,cutting pineapple,cutting orange,cutting watermelon,peeling potatoes,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+306a8552-8564-4c09-9ada-ad9e6fcaedab.mp4,1,1,21,0,0,cutting watermelon,separating eggs,cutting orange,peeling apples,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+2ab49053-c9a4-4c40-85f6-d98f4e7f9cb9.mp4,1,1,21,0,0,cutting orange,chopping vegetables,chopping meat,cutting pineapple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+5cc80f62-0ec5-4cff-8092-55ea6b67d9fa.mp4,1,1,21,0,0,cutting watermelon,cutting orange,peeling potatoes,chopping vegetables,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+52a7fb5a-e65d-4d51-bd98-b40b1eb78f7c.mp4,1,1,21,0,0,chopping meat,chopping vegetables,separating eggs,cutting watermelon,carving pumpkin,Perspective,front,Location,indoors,What,Hair,NA,NA
+aedfd488-b275-484e-847e-15336dd64abc.mp4,1,1,21,0,0,cutting orange,chopping vegetables,chopping meat,carving pumpkin,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+aa8be818-d6b9-4048-879e-125db14b6e7a.mp4,1,1,21,0,0,cutting orange,carving pumpkin,chopping vegetables,cutting pineapple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+927597fd-c322-4547-a4b2-c9e6d0493bdd.mp4,1,1,21,0,0,chopping meat,carving pumpkin,cutting watermelon,cutting orange,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+8b4f36b8-89e2-4943-b9ae-6d949574ef42.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,cutting orange,peeling potatoes,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+3bd60725-3b7d-433e-8490-50afa5fb42e4.mp4,1,1,21,0,0,carving pumpkin,peeling potatoes,cutting orange,cutting pineapple,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+2e9e5418-d257-4271-9270-1b6dea3de17c.mp4,1,1,21,0,0,carving pumpkin,cutting orange,separating eggs,cutting apple,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+5f88d526-347e-4a20-b243-d861df8c7066.mp4,1,1,21,0,0,cutting orange,carving pumpkin,chopping vegetables,cutting pineapple,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+4306594c-6076-4408-a012-febcf4bd97ab.mp4,1,1,21,0,0,cutting orange,chopping meat,carving pumpkin,cutting pineapple,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+e1b8fd7c-31cd-4698-9be0-7044798f5ed2.mp4,0,1,22,0,0,putting on foundation,putting on mascara,scrubbing face,dyeing eyebrows,putting on eyeliner,Perspective,front,Location,indoors,What,Face,NA,NA
+2accc3dd-a285-467c-b2ce-27d2d89184eb.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,chopping meat,cutting orange,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+6f67ab65-b8ff-417c-a835-35268b432831.mp4,1,1,21,0,0,chopping vegetables,cutting orange,chopping meat,cutting pineapple,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+bc4054e2-d2d7-49f9-8cd8-29e30e042aa1.mp4,1,1,21,0,0,chopping vegetables,cutting orange,cutting pineapple,peeling potatoes,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+0f24ca03-6fd9-49d8-82ac-128c13796cef.mp4,1,1,21,0,0,cutting orange,peeling potatoes,chopping meat,cutting watermelon,chopping vegetables,Perspective,back,Location,indoors,What,Hair,NA,NA
+38902f47-af9c-44d8-a527-28772c124c7f.mp4,0,1,22,0,0,putting on mascara,applying cream,putting on foundation,scrubbing face,dyeing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+4124a854-bb7e-4002-8ef2-83ed71cb3a09.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,peeling apples,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+92373572-6e6b-407a-9c58-103b76eaf871.mp4,0,1,19,0,0,hand washing clothes,plastering,washing hands,washing dishes,washing hair,Perspective,back,Location,indoors,What,Hair,NA,NA
+d620cace-b994-48be-ab58-13a1eeee5692.mp4,1,1,21,0,0,cutting pineapple,carving pumpkin,cutting orange,peeling potatoes,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+31962148-2cde-4ba9-be8a-5c6b89119645.mp4,1,1,21,0,0,chopping meat,cutting orange,separating eggs,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+7b15e67b-5912-43e9-80d1-619f4aec04a6.mp4,1,1,21,0,0,cutting orange,chopping meat,peeling potatoes,chopping vegetables,cutting pineapple,Perspective,top,Location,indoors,What,Hair,NA,NA
+bdc0cffc-5833-458e-ab2a-eb7bc03ea46c.mp4,1,1,21,0,0,peeling apples,separating eggs,cutting apple,cutting orange,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+30c90ed9-b723-42fc-a92d-d408f2dbdaaa.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping meat,peeling apples,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+9bc788fe-4fbd-46c1-a484-10475257078c.mp4,1,1,21,0,0,chopping meat,cutting orange,chopping vegetables,cutting pineapple,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+9cc4c088-dc7d-4d3c-a776-c7cd95746a73.mp4,1,1,21,0,0,chopping vegetables,carving pumpkin,peeling apples,cutting orange,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+82143666-59e7-4b91-a06e-5ffcf15dcf9e.mp4,0,1,22,0,0,putting on foundation,applying cream,dyeing eyebrows,putting on eyeliner,putting on mascara,Perspective,front,Location,indoors,What,Arm,NA,NA
+0e7ba0b2-42f3-4451-8bb1-969101d8e3e7.avi,0,1,22,0,0,putting on foundation,waxing eyebrows,putting on eyeliner,applying cream,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+8002d12e-3dd3-4c99-9d47-aecd2845277e.mp4,1,1,21,0,0,peeling apples,cutting apple,cutting orange,chopping meat,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+28423235-419c-4a90-b098-fd0d80fcd2e9.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting pineapple,chopping meat,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+c96372bc-2002-44b7-af55-bc9931f76ea0.mp4,1,1,21,0,0,cutting watermelon,cutting orange,peeling potatoes,chopping meat,carving pumpkin,Perspective,top,Location,indoors,What,Hair,NA,NA
+a8f37a15-d07c-4155-a901-aa1e8ae803c7.mp4,0,1,22,0,0,putting on mascara,scrubbing face,putting on eyeliner,dyeing eyebrows,putting on foundation,Perspective,front,Location,indoors,What,Face,NA,NA
+fb493092-32fa-4c66-a08c-bacee667b757.mp4,1,1,21,0,0,separating eggs,cutting apple,chopping meat,cutting orange,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+33dc8e59-cb23-41dc-84c3-de7e3689aa29.mp4,1,1,21,0,0,cutting orange,separating eggs,peeling potatoes,cutting watermelon,carving pumpkin,Perspective,side,Location,indoors,What,Hair,NA,NA
+34458fed-722a-41d0-9a50-07cb32b5ba77.mp4,0,1,19,0,0,hand washing clothes,washing hands,washing hair,washing dishes,cleaning toilet,Perspective,back,Location,indoors,What,Hair,NA,NA
+9fb7fd94-7ac1-49e7-b819-d28778ea50c4.mp4,1,1,21,0,0,cutting pineapple,cutting orange,cutting watermelon,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+4d9209a0-51b2-445d-9443-96bcce51660b.mp4,1,1,21,0,0,cutting apple,chopping meat,cutting watermelon,cutting orange,chopping vegetables,Perspective,back,Location,indoors,What,Hair,NA,NA
+f9b92ee5-7e7a-4689-bfc9-4205afc0c0fe.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting watermelon,carving pumpkin,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+544e0aac-8b1c-49f0-b7bc-b4729ef0c8e3.mp4,1,1,21,0,0,cutting pineapple,cutting orange,separating eggs,cutting watermelon,chopping vegetables,Perspective,front,Location,indoors,What,Hair,NA,NA
+c055589b-18fc-4d6a-9979-20d565381077.mp4,1,1,21,0,0,peeling potatoes,chopping meat,cutting pineapple,cutting apple,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+9f55ea77-f8aa-4f29-8467-49720208f655.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping meat,cutting pineapple,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+192f2435-5bdd-4cbd-8b38-cface296e92d.mp4,1,1,21,0,0,separating eggs,cutting orange,cutting apple,cutting pineapple,chopping vegetables,Perspective,back,Location,indoors,What,Hair,NA,NA
+b7129e93-c5b2-4d50-b1a6-c07c0023ddd3.mp4,1,1,21,0,0,cutting watermelon,carving pumpkin,cutting orange,peeling potatoes,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+28da6194-2b2f-413e-8e05-509dc142ec76.mp4,0,1,22,0,0,waxing eyebrows,putting on foundation,putting on eyeliner,putting in contact lenses,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+f56860c2-58ef-4360-901b-5431cbe50276.mp4,1,1,21,0,0,cutting watermelon,cutting orange,chopping vegetables,separating eggs,cutting pineapple,Perspective,back,Location,indoors,What,Hair,NA,NA
+d09624a1-06e8-4dab-bcb6-974811a03d8c.mp4,1,1,21,0,0,cutting orange,cutting pineapple,chopping vegetables,cutting apple,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+11c4585f-af86-4640-8db1-ab6eb4af6286.mp4,1,1,21,0,0,cutting orange,peeling potatoes,chopping meat,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+f4541950-28fb-4f48-9b72-bfeac435de60.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting watermelon,chopping meat,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+a6f416b6-5588-43c8-abd7-6ee9822b9e04.mp4,0,1,22,0,0,putting on eyeliner,putting on mascara,scrubbing face,putting on foundation,putting in contact lenses,Perspective,front,Location,indoors,What,Face,NA,NA
+19f314d5-b4ec-41ca-b691-4e09929eb74f.mp4,1,1,21,0,0,cutting orange,cutting apple,cutting watermelon,chopping vegetables,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA
+3bdc0358-fc85-4db2-ae3f-06e28d80819a.avi,0,1,22,0,0,scrubbing face,waxing eyebrows,putting on foundation,applying cream,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+a886dd05-4c46-4548-81fb-c3902c208dbb.mp4,1,1,21,0,0,chopping vegetables,cutting watermelon,cutting pineapple,carving pumpkin,peeling apples,Perspective,front,Location,indoors,What,Hair,NA,NA
+c0c716f0-b981-4d6b-8ba9-0efa666a17b9.mp4,1,1,21,0,0,cutting pineapple,cutting orange,cutting watermelon,chopping meat,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+5b1f945d-5586-446e-aa3b-fca1291efca8.mp4,1,1,21,0,0,cutting pineapple,cutting apple,chopping meat,cutting orange,separating eggs,Perspective,back,Location,indoors,What,Hair,NA,NA
+b9b43e1f-1559-4c66-8a5e-a7b57cc674a9.mp4,1,1,21,0,0,cutting watermelon,cutting pineapple,chopping vegetables,cutting orange,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+eb7b71e8-88e2-4d31-901f-53b94c03e368.mp4,1,1,21,0,0,carving pumpkin,cutting apple,cutting orange,cutting pineapple,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+378b988e-3f3e-4ebb-acf2-fb63a5f711a4.mp4,1,1,21,0,0,cutting pineapple,peeling apples,chopping meat,chopping vegetables,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+6030e098-5455-410e-a166-600d32eeff56.mp4,1,1,21,0,0,chopping vegetables,cutting pineapple,chopping meat,peeling apples,cutting orange,Perspective,front,Location,indoors,What,Hair,NA,NA
+4475ea1d-222c-4051-8515-faae6c0aa0e3.avi,0,1,22,0,0,applying cream,trimming or shaving beard,raising eyebrows,putting on foundation,scrubbing face,Perspective,front,Location,indoors,What,Eye,NA,NA
+5a2c8aed-9c00-4527-a511-b94a7a56f6eb.mp4,0,1,22,0,0,raising eyebrows,putting on foundation,putting on eyeliner,putting on mascara,scrubbing face,Perspective,front,Location,indoors,What,Face,NA,NA
+6611d4b6-85bd-487d-ba43-ea3037fee965.mp4,1,1,21,0,0,cutting orange,cutting watermelon,separating eggs,carving pumpkin,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+2832cfcb-efc9-4e7b-8df5-9ee0c80fc640.mp4,1,1,21,0,0,cutting watermelon,chopping vegetables,cutting orange,carving pumpkin,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+4d0e8022-c44a-4620-9469-88c6503eb8d8.mp4,1,1,21,0,0,cutting orange,cutting pineapple,peeling apples,cutting watermelon,chopping vegetables,Perspective,bottom,Location,indoors,What,Hair,NA,NA
+1d3b11c2-c8fa-44ed-b8f9-91ad5972e9f9.mp4,0,1,22,0,0,scrubbing face,waxing eyebrows,putting on foundation,dyeing eyebrows,putting on mascara,Perspective,front,Location,indoors,What,Eye,NA,NA
+7532a854-14ea-48cb-a73f-e9c619379755.mp4,1,1,21,0,0,chopping vegetables,separating eggs,cutting pineapple,chopping meat,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+9c5ee9f6-3c2c-45b1-8e2b-510ddb9d98f4.mp4,1,1,21,0,0,cutting watermelon,cutting orange,peeling potatoes,cutting pineapple,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+4d66010d-e9d1-48fe-911f-99042e2c1308.mp4,0,1,22,0,0,dyeing eyebrows,putting on foundation,scrubbing face,applying cream,waxing eyebrows,Perspective,front,Location,indoors,What,Face,NA,NA
+0bdbfdd7-5dc4-4847-8bdc-ace6fd82078c.mp4,1,1,21,0,0,cutting orange,chopping meat,chopping vegetables,peeling potatoes,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+cc4ad42d-e515-4e1d-890f-b2598e7357e8.mp4,1,1,21,0,0,chopping meat,cutting watermelon,cutting orange,carving pumpkin,peeling potatoes,Perspective,front,Location,indoors,What,Hair,NA,NA
+674c343a-a2c5-4a0a-a288-e7bf216d22bb.mp4,1,1,21,0,0,cutting pineapple,cutting orange,peeling apples,chopping vegetables,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+77a683f1-3414-4037-9e03-105623ecb4f3.mp4,1,1,21,0,0,chopping meat,cutting apple,cutting orange,carving pumpkin,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+bafee203-95f4-4f3a-9aa7-a4ba55b62e70.mp4,1,1,21,0,0,cutting orange,separating eggs,chopping meat,cutting pineapple,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+d4477907-2fed-4906-b725-881893a9c89c.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting pineapple,chopping vegetables,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+ccc11223-a0ab-410e-a7bf-5a4e80e1720d.mp4,1,1,21,0,0,peeling potatoes,cutting orange,cutting pineapple,chopping vegetables,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+342f0b86-5524-4082-930b-8814de9cfd30.mp4,1,1,21,0,0,chopping meat,cutting orange,cutting pineapple,cutting watermelon,separating eggs,Perspective,side,Location,indoors,What,Hair,NA,NA
+1d7da4d3-5aa8-4678-91f0-967b98cae34a.avi,0,1,22,0,0,applying cream,putting on eyeliner,putting on foundation,dyeing eyebrows,raising eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+300cb0b3-e71d-4e7e-8caa-1ba51dfc2932.mp4,1,1,21,0,0,peeling apples,cutting orange,peeling potatoes,cutting apple,cutting watermelon,Perspective,front,Location,indoors,What,Hair,NA,NA
+c53c2232-0859-4553-b4c1-924ec224a72e.mp4,1,1,21,0,0,carving pumpkin,cutting apple,chopping meat,cutting watermelon,separating eggs,Perspective,front,Location,indoors,What,Hair,NA,NA
+dfeafe07-4d28-4a3a-8a08-fc911f76a3f7.mp4,1,1,21,0,0,cutting pineapple,chopping meat,cutting watermelon,separating eggs,cutting orange,Perspective,side,Location,indoors,What,Hair,NA,NA
+e37a0e39-1806-4ffb-9966-4552aedc6a5e.mp4,1,1,21,0,0,peeling potatoes,chopping meat,cutting watermelon,cutting orange,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+8cf59646-5e20-4448-bddf-a0a4c10ecf36.mp4,0,1,22,0,0,putting on foundation,applying cream,dyeing eyebrows,scrubbing face,putting on mascara,Perspective,side,Location,indoors,What,Face,NA,NA
+ba0a1402-d958-4d15-a601-906bbd7fd1a5.mp4,1,1,21,0,0,peeling potatoes,chopping meat,cutting orange,chopping vegetables,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+68d9ebba-c84a-4302-8f00-51808ea7ba50.mp4,1,1,21,0,0,cutting orange,chopping meat,cutting watermelon,chopping vegetables,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+6f9bf8d5-0d1b-4d94-bada-dc06db7dab1b.mp4,1,1,21,0,0,chopping meat,cutting pineapple,cutting watermelon,cutting orange,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+d33fa639-6a2a-4944-a005-cdd8f8a81af6.mp4,1,1,21,0,0,cutting orange,carving pumpkin,chopping meat,chopping vegetables,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+228df550-4202-44cc-9142-beaaff1ffb9d.mp4,1,1,21,0,0,chopping meat,cutting orange,chopping vegetables,cutting apple,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+64968da5-185b-454d-a318-de98bbade7a3.mp4,1,1,21,0,0,chopping meat,cutting orange,separating eggs,cutting pineapple,peeling apples,Perspective,side,Location,indoors,What,Hair,NA,NA
+cd33b00c-f97d-4c69-947a-c22474de8fb2.mp4,1,1,21,0,0,cutting orange,cutting pineapple,cutting watermelon,peeling apples,chopping vegetables,Perspective,side,Location,indoors,What,Hair,NA,NA
+2d4ecfc1-6496-4324-9fc3-224bd0180e04.mp4,1,1,21,0,0,separating eggs,chopping vegetables,chopping meat,cutting apple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+9506437a-3c42-4e5f-aae6-42cb73e20453.avi,0,1,22,0,0,scrubbing face,putting on mascara,putting on eyeliner,putting on foundation,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+df75c3d1-fc65-4656-abd5-a5aba28466ec.mp4,1,1,21,0,0,cutting apple,peeling apples,cutting orange,chopping vegetables,cutting pineapple,Perspective,front,Location,indoors,What,Hair,NA,NA
+a26da134-ed33-4c32-b061-9ea136eeded5.mp4,0,1,22,0,0,putting on eyeliner,scrubbing face,waxing eyebrows,putting in contact lenses,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+8634e538-c04e-43dd-b206-e7ec6513b06c.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping vegetables,carving pumpkin,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+f007d12d-647f-4a66-8201-1627b0cd85fd.mp4,1,1,21,0,0,cutting orange,chopping meat,peeling potatoes,cutting pineapple,chopping vegetables,Perspective,bottom,Location,indoors,What,Hair,NA,NA
+e2459025-a2c2-422e-a68f-3d5174fc280c.mp4,1,1,21,0,0,peeling apples,cutting watermelon,chopping vegetables,carving pumpkin,cutting pineapple,Perspective,side,Location,indoors,What,Hair,NA,NA
+77bfba43-8266-4d77-add3-5a3107ab1c0d.avi,0,1,22,0,0,putting on foundation,putting on mascara,putting on eyeliner,applying cream,dyeing eyebrows,Perspective,front,Location,indoors,What,Eye,NA,NA
+700e0729-6c7e-4897-8d1b-852bf5ea5e2d.mp4,1,1,21,0,0,cutting orange,cutting apple,chopping meat,chopping vegetables,cutting pineapple,Perspective,back,Location,indoors,What,Hair,NA,NA
+126c2e69-a041-4d1c-8888-abcb40805f4d.mp4,1,1,21,0,0,peeling apples,chopping vegetables,carving pumpkin,peeling potatoes,cutting apple,Perspective,front,Location,indoors,What,Hair,NA,NA
+e92b2b3d-8a12-41ee-84f7-b15b38048f30.mp4,0,1,22,0,0,putting on eyeliner,putting in contact lenses,putting on mascara,putting on foundation,applying cream,Perspective,side,Location,indoors,What,Eye,NA,NA
+3606184e-f639-488b-876b-468e54b15035.mp4,1,1,21,0,0,cutting orange,chopping vegetables,cutting pineapple,peeling potatoes,cutting watermelon,Perspective,side,Location,indoors,What,Hair,NA,NA
+06a8fafe-c6e1-4ad2-9b5e-3841f3cc28c3.avi,0,1,22,0,0,raising eyebrows,scrubbing face,putting on mascara,putting on foundation,applying cream,Perspective,front,Location,indoors,What,Eye,NA,NA
+d3ea7c7d-ed3d-4dbd-beab-44606e636618.mp4,1,1,21,0,0,peeling potatoes,carving pumpkin,cutting watermelon,cutting pineapple,chopping meat,Perspective,front,Location,indoors,What,Hair,NA,NA
+93d4abe5-cced-4fe2-a332-fe5cd31d5c61.mp4,1,1,21,0,0,cutting orange,cutting watermelon,chopping meat,cutting pineapple,peeling potatoes,Perspective,side,Location,indoors,What,Hair,NA,NA
+fa0419f1-8b92-443b-8ba3-1fca804c0440.mp4,1,1,21,0,0,cutting watermelon,chopping meat,cutting orange,peeling potatoes,cutting apple,Perspective,side,Location,indoors,What,Hair,NA,NA
+f7cf6664-7dcc-448b-a5de-1adc2b0013a1.mp4,1,1,21,0,0,chopping vegetables,cutting apple,peeling potatoes,cutting orange,chopping meat,Perspective,side,Location,indoors,What,Hair,NA,NA

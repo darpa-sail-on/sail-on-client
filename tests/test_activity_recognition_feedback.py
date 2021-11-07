@@ -9,21 +9,54 @@ from sail_on_client.feedback.activity_recognition_feedback import (
 )
 from sail_on_client.harness.par_harness import ParHarness
 
+FEEDBACK_BUDGET = 5
+
 feedback_image_ids = [
-    "3985211f-d6dd-4510-81d7-1825469008f3.avi",
-    "ed60328c-1cfb-4082-8586-f9b5902d79eb.avi",
-    "2c2c4800-6ddf-4bf3-be01-a83635198720.avi",
-    "2df4df62-fa02-4638-a054-e6a5fe19edee.avi",
-    "1a50f7c1-c0c6-46d6-a3ab-05959f9f5545.avi",
-    "3e800115-770f-4067-8543-af77c8661133.avi",
-    "31d4b650-3f4f-41b7-9f7f-93433d470bee.avi",
-    "c0784443-e0e7-4b76-817c-fc6e1529f467.avi",
-    "de9af377-2e0b-42da-9b91-de79e13537d9.avi",
-    "f97a7f62-7db3-46c9-b827-8f2676760a04.avi",
+    "91e68de4-92d1-4e4e-b6d1-8d01a8fe2cf8.mp4",
+    "7035526b-4d00-4ffa-9177-2c02dd13834b.mp4",
+    "43c3c705-a57b-4e2b-8cd0-91fc15e34449.mp4",
+    "7fcebe2f-e133-4ad1-ae27-eb53d0e0b97e.mp4",
+    "42cb4d19-0186-4168-a169-b753c57aa8d9.avi",
 ]
 
 
-feedback_labels = [74, 34, 10, 10, 21, 21, 21, 10, 74, 21]
+feedback_labels = [
+    [
+        "putting on foundation",
+        "putting on mascara",
+        "putting on eyeliner",
+        "dyeing eyebrows",
+        "applying cream",
+    ],
+    [
+        "putting on eyeliner",
+        "dyeing eyebrows",
+        "applying cream",
+        "putting in contact lenses",
+        "putting on foundation",
+    ],
+    [
+        "putting on mascara",
+        "putting on foundation",
+        "putting on eyeliner",
+        "scrubbing face",
+        "dyeing eyebrows",
+    ],
+    [
+        "putting on eyeliner",
+        "putting on foundation",
+        "putting in contact lenses",
+        "raising eyebrows",
+        "trimming or shaving beard",
+    ],
+    [
+        "applying cream",
+        "putting on eyeliner",
+        "raising eyebrows",
+        "scrubbing face",
+        "putting on foundation",
+    ],
+]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -38,7 +71,7 @@ def _initialize_session(par_interface, protocol_name, hints=()):
     Return:
         session id, test_ids
     """
-    test_id = "OND.10.90001.2100554"
+    test_id = "OND.0.10100.6438158"
     # Testing if session was sucessfully initalized
     session_id = par_interface.session_request(
         [test_id], f"{protocol_name}", "activity_recognition", "0.1.1", list(hints), 0.5
@@ -70,7 +103,13 @@ def test_initialize(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     ActivityRecognitionFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
 
 
@@ -109,10 +148,22 @@ def test_get_labelled_feedback(
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     ar_feedback = ActivityRecognitionFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
-    df_labelled = ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
+    df_labelled = ar_feedback.get_feedback(
+        0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
+    )
     assert all(df_labelled.id == feedback_image_ids)
+    assert (
+        df_labelled[["class1", "class2", "class3", "class4", "class5"]].values.tolist()
+        == feedback_labels
+    )
 
 
 @pytest.mark.parametrize(
@@ -150,10 +201,18 @@ def test_get_score_feedback(
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     feedback = ActivityRecognitionFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
-    df_score = feedback.get_feedback(0, list(range(10)), feedback_image_ids)
-    assert np.isclose(df_score[1][0], 0.1987951807228916, atol=1e-05)
+    df_score = feedback.get_feedback(
+        0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
+    )
+    assert np.isclose(df_score[1][0], 0.0, atol=1e-05)
 
 
 @pytest.mark.parametrize(
@@ -195,9 +254,15 @@ def test_get_feedback(
         )
     par_interface.post_results(result_files, f"{test_id}", 0, session_id)
     ar_feedback = ActivityRecognitionFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
-    ar_feedback.get_feedback(0, list(range(10)), feedback_image_ids)
+    ar_feedback.get_feedback(0, list(range(FEEDBACK_BUDGET)), feedback_image_ids)
 
 
 @pytest.mark.parametrize(
@@ -224,10 +289,16 @@ def test_deposit_income(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     ar_feedback = ActivityRecognitionFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
     ar_feedback.deposit_income()
-    assert ar_feedback.budget == 10
+    assert ar_feedback.budget == FEEDBACK_BUDGET
 
 
 @pytest.mark.parametrize(
@@ -254,6 +325,12 @@ def test_get_budget(
     session_id, test_id = _initialize_session(par_interface, protocol_name)
     protocol_constant = feedback_mapping[0]
     ar_feedback = ActivityRecognitionFeedback(
-        10, 10, 10, par_interface, session_id, test_id, protocol_constant
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
     )
-    assert ar_feedback.get_budget() == 10
+    assert ar_feedback.get_budget() == FEEDBACK_BUDGET
