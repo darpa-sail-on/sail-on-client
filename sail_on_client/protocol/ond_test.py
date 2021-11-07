@@ -88,8 +88,10 @@ class ONDTest(VisualTest):
         """
         log.info("Creating Feedback object")
         if feedback_max_ids == 0:
-            log.warn("""feedback_max_ids was missing from metadata, thus setting
-                        the feedback budget to 0""")
+            log.warn(
+                """feedback_max_ids was missing from metadata, thus setting
+                        the feedback budget to 0"""
+            )
         feedback_params = {
             "first_budget": feedback_max_ids,
             "income_per_batch": feedback_max_ids,
@@ -134,8 +136,7 @@ class ONDTest(VisualTest):
         redlight_instance = metadata.get("red_light", "")
         feedback_max_ids = metadata.get("feedback_max_ids", 0)
         # Initialize feedback object for the domains
-        feedback_instance = self._create_feedback_instance(test_id,
-                                                           feedback_max_ids)
+        feedback_instance = self._create_feedback_instance(test_id, feedback_max_ids)
 
         # Initialize algorithm
         algorithm_instance = self.algorithm_attributes.instance
