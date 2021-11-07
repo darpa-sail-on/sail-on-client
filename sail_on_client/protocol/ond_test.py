@@ -73,27 +73,32 @@ class ONDTest(VisualTest):
         self.feedback_type = feedback_type
 
     @skip_stage("CreateFeedbackInstance")
-    def _create_feedback_instance(self, test_id: str) -> feedback_type:
+    def _create_feedback_instance(
+        self, test_id: str, feedback_max_ids: int
+    ) -> feedback_type:
         """
         Private function for creating feedback object.
 
         Args:
            test_id: An identifier for the test
+           feedback_max_ids: Budget provided in metadata
 
         Return:
             An instance of feedback for the domain
         """
-        algorithm_parameters = self.algorithm_attributes.parameters
-        feedback_params = algorithm_parameters["feedback_params"]
         log.info("Creating Feedback object")
-        feedback_params.update(
-            {
-                "interface": self.harness,
-                "session_id": self.session_id,
-                "test_id": test_id,
-                "feedback_type": self.feedback_type,
-            }
-        )
+        if feedback_max_ids == 0:
+            log.warn("""feedback_max_ids was missing from metadata, thus setting
+                        the feedback budget to 0""")
+        feedback_params = {
+            "first_budget": feedback_max_ids,
+            "income_per_batch": feedback_max_ids,
+            "maximum_budget": feedback_max_ids,
+            "interface": self.harness,
+            "session_id": self.session_id,
+            "test_id": test_id,
+            "feedback_type": self.feedback_type,
+        }
         feedback_instance = create_feedback_instance(self.domain, feedback_params)
         return feedback_instance
 
@@ -127,8 +132,10 @@ class ONDTest(VisualTest):
         """
         metadata = self.harness.get_test_metadata(self.session_id, test_id)
         redlight_instance = metadata.get("red_light", "")
+        feedback_max_ids = metadata.get("feedback_max_ids", 0)
         # Initialize feedback object for the domains
-        feedback_instance = self._create_feedback_instance(test_id)
+        feedback_instance = self._create_feedback_instance(test_id,
+                                                           feedback_max_ids)
 
         # Initialize algorithm
         algorithm_instance = self.algorithm_attributes.instance

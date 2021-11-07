@@ -126,13 +126,12 @@ def test_call(ond_harness_instance, ond_algorithm_instance):
         None
     """
     test_ids = ["OND.10.90001.2100554"]
-    feedback_params = {"first_budget": 4, "income_per_batch": 4, "maximum_budget": 4}
     algorithm_attribute = create_algorithm_attribute(
         ALGORITHM_NAME,
         ond_algorithm_instance,
         False,
         False,
-        {"feedback_params": feedback_params},
+        {},
         "",
         test_ids,
     )
@@ -173,13 +172,12 @@ def test_call_with_features(ond_harness_instance, ond_algorithm_instance):
         None
     """
     test_ids = ["OND.10.90001.2100554"]
-    feedback_params = {"first_budget": 4, "income_per_batch": 4, "maximum_budget": 4}
     algorithm_attribute = create_algorithm_attribute(
         ALGORITHM_NAME,
         ond_algorithm_instance,
         False,
         False,
-        {"feedback_params": feedback_params},
+        {},
         "",
         test_ids,
     )
