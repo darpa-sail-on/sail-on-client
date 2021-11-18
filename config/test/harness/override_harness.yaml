@@ -2,5 +2,6 @@ smqtk:
   class: LocalHarness
   config:
     data_dir: ${test_root}/data
+    result_dir: ${test_root}/results
     gt_dir: ${test_root}/data/activity_recognition
     gt_config: ${test_root}/data/activity_recognition/activity_recognition.json
