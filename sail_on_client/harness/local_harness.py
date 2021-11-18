@@ -21,12 +21,13 @@ log = logging.getLogger(__name__)
 class LocalHarness(TestAndEvaluationHarness):
     """Harness without any server communication."""
 
-    def __init__(self, data_dir: str, gt_dir: str = "", gt_config: str = "") -> None:
+    def __init__(self, data_dir: str, result_dir: str, gt_dir: str = "", gt_config: str = "") -> None:
         """
         Initialize an object of local harness.
 
         Args:
             data_dir: Path to the directory with the data
+            result_dir: Path to the directory where results are stored
             gt_dir: Path to directory with ground truth
             gt_config: Path to config file with column mapping for ground truth
 
@@ -38,14 +39,16 @@ class LocalHarness(TestAndEvaluationHarness):
         self.data_dir = data_dir
         self.gt_dir = gt_dir
         self.gt_config = gt_config
-        self.result_directory = self.temp_dir.name
-        self.file_provider = FileProvider(self.data_dir, self.result_directory)
+        self.temp_dir_name = self.temp_dir.name
+        self.result_dir = result_dir
+        self.file_provider = FileProvider(self.data_dir, self.result_dir)
 
     def get_config(self) -> Dict:
         """JSON Compliant representation of the object."""
         return {
             "data_dir": self.data_dir,
             "gt_dir": self.gt_dir,
+            "result_dir": self.result_dir,
             "gt_config": self.gt_config,
         }
 
@@ -130,7 +133,7 @@ class LocalHarness(TestAndEvaluationHarness):
             Filename of a file containing a list of image files (including full path for each)
         """
         self.data_file = os.path.join(
-            self.result_directory, f"{session_id}.{test_id}.{round_id}.csv"
+            self.temp_dir_name, f"{session_id}.{test_id}.{round_id}.csv"
         )
         byte_stream = self.file_provider.dataset_request(session_id, test_id, round_id)
         if byte_stream is None:
@@ -164,11 +167,11 @@ class LocalHarness(TestAndEvaluationHarness):
             Path to a file containing containing requested feedback
         """
         self.feedback_file = os.path.join(
-            self.result_directory,
+            self.temp_dir_name,
             "feedback",
             f"{session_id}.{test_id}.{round_id}_{feedback_type}.csv",
         )
-        ub.ensuredir(os.path.join(self.result_directory, "feedback"))
+        ub.ensuredir(os.path.join(self.temp_dir_name, "feedback"))
         byte_stream = self.file_provider.get_feedback(
             feedback_ids, feedback_type, session_id, test_id
         )
@@ -191,10 +194,10 @@ class LocalHarness(TestAndEvaluationHarness):
         Returns:
             None
         """
-        info = get_session_info(str(self.result_directory), session_id)
+        info = get_session_info(str(self.result_dir), session_id)
         protocol = info["created"]["protocol"]
         domain = info["created"]["domain"]
-        base_result_path = os.path.join(str(self.result_directory), protocol, domain)
+        base_result_path = os.path.join(str(self.result_dir), protocol, domain)
         os.makedirs(base_result_path, exist_ok=True)
         result_content = {}
         for result_key, result_file in result_files.items():
@@ -219,7 +222,7 @@ class LocalHarness(TestAndEvaluationHarness):
         """
         gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
         gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1, quotechar="|")
-        info = get_session_info(str(self.result_directory), session_id)
+        info = get_session_info(str(self.result_dir), session_id)
         protocol = info["created"]["protocol"]
         domain = info["created"]["domain"]
         metadata = self.get_test_metadata(session_id, test_id)
@@ -227,7 +230,7 @@ class LocalHarness(TestAndEvaluationHarness):
         results: Dict[str, Union[Dict, float]] = {}
         gt_config = json.load(open(self.gt_config, "r"))
         classification_file_id = os.path.join(
-            self.result_directory,
+            self.result_dir,
             protocol,
             domain,
             f"{session_id}.{test_id}_classification.csv",
@@ -268,20 +271,20 @@ class LocalHarness(TestAndEvaluationHarness):
         """
         gt_file_id = os.path.join(self.gt_dir, f"{test_id}_single_df.csv")
         gt = pd.read_csv(gt_file_id, sep=",", header=None, skiprows=1, quotechar="|")
-        info = get_session_info(str(self.result_directory), session_id)
+        info = get_session_info(str(self.result_dir), session_id)
         protocol = info["created"]["protocol"]
         domain = info["created"]["domain"]
         results: Dict[str, Union[Dict, float]] = {}
         gt_config = json.load(open(self.gt_config, "r"))
         detection_file_id = os.path.join(
-            self.result_directory,
+            self.result_dir,
             protocol,
             domain,
             f"{session_id}.{test_id}_detection.csv",
         )
         detections = pd.read_csv(detection_file_id, sep=",", header=None, quotechar="|")
         classification_file_id = os.path.join(
-            self.result_directory,
+            self.result_dir,
             protocol,
             domain,
             f"{session_id}.{test_id}_classification.csv",
@@ -292,7 +295,7 @@ class LocalHarness(TestAndEvaluationHarness):
         )
         if baseline_session_id is not None:
             baseline_classification_file_id = os.path.join(
-                self.result_directory,
+                self.result_dir,
                 protocol,
                 domain,
                 f"{baseline_session_id}.{test_id}_classification.csv",
