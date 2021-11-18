@@ -31,39 +31,41 @@ def condda_fe_params():
 @pytest.fixture(scope="function")
 def condda_protocol_cfg_params():
     """Fixture for creating algorithm cfg."""
-    test_dir = os.path.dirname(__file__)
-    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    data_dir = os.path.join(test_dir, "data")
-    gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
-    gt_config = os.path.join(
-        data_dir, "OND", "activity_recognition", "activity_recognition.json"
-    )
-    algorithms = {
-        "algorithms": {
-            "PreComputedCONDDAAgent": {
+    with TemporaryDirectory() as temp_dir:
+        test_dir = os.path.dirname(__file__)
+        cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+        data_dir = os.path.join(test_dir, "data")
+        gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
+        gt_config = os.path.join(
+            data_dir, "OND", "activity_recognition", "activity_recognition.json"
+        )
+        algorithms = {
+            "algorithms": {
+                "PreComputedCONDDAAgent": {
+                    "smqtk": {
+                        "class": "PreComputedCONDDAAgent",
+                        "config": {
+                            "algorithm_name": "PreComputedCONDDAAgent",
+                            "cache_dir": cache_dir,
+                            "has_roundwise_file": False,
+                            "round_size": 32,
+                        },
+                    }
+                }
+            },
+            "harness": {
                 "smqtk": {
-                    "class": "PreComputedCONDDAAgent",
+                    "class": "LocalHarness",
                     "config": {
-                        "algorithm_name": "PreComputedCONDDAAgent",
-                        "cache_dir": cache_dir,
-                        "has_roundwise_file": False,
-                        "round_size": 32,
+                        "data_dir": data_dir,
+                        "result_dir": temp_dir,
+                        "gt_dir": gt_dir,
+                        "gt_config": gt_config,
                     },
                 }
-            }
-        },
-        "harness": {
-            "smqtk": {
-                "class": "LocalHarness",
-                "config": {
-                    "data_dir": data_dir,
-                    "gt_dir": gt_dir,
-                    "gt_config": gt_config,
-                },
-            }
-        },
-    }
-    return algorithms
+            },
+        }
+        yield algorithms
 
 
 def test_initialize(

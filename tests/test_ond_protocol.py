@@ -47,37 +47,39 @@ def ond_reaction_baseline_params():
 @pytest.fixture(scope="function")
 def ond_protocol_cfg_params():
     """Fixture for creating algorithm cfg."""
-    test_dir = os.path.dirname(__file__)
-    cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
-    data_dir = os.path.join(test_dir, "data")
-    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
-    gt_config = os.path.join(gt_dir, "activity_recognition.json")
-    algorithms = {
-        "algorithms": {
-            "PreComputedONDAgent": {
-                "smqtk": {
-                    "class": "PreComputedONDAgent",
-                    "config": {
-                        "algorithm_name": "PreComputedONDAgent",
-                        "cache_dir": cache_dir,
-                        "has_roundwise_file": False,
-                        "round_size": 32,
+    with TemporaryDirectory() as temp_dir:
+        test_dir = os.path.dirname(__file__)
+        cache_dir = os.path.join(test_dir, "mock_results", "activity_recognition")
+        data_dir = os.path.join(test_dir, "data")
+        gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
+        gt_config = os.path.join(gt_dir, "activity_recognition.json")
+        algorithms = {
+            "algorithms": {
+                "PreComputedONDAgent": {
+                    "smqtk": {
+                        "class": "PreComputedONDAgent",
+                        "config": {
+                            "algorithm_name": "PreComputedONDAgent",
+                            "cache_dir": cache_dir,
+                            "has_roundwise_file": False,
+                            "round_size": 32,
+                        },
                     },
-                },
-            }
-        },
-        "harness": {
-            "smqtk": {
-                "class": "LocalHarness",
-                "config": {
-                    "data_dir": data_dir,
-                    "gt_dir": gt_dir,
-                    "gt_config": gt_config,
-                },
-            }
-        },
-    }
-    return algorithms
+                }
+            },
+            "harness": {
+                "smqtk": {
+                    "class": "LocalHarness",
+                    "config": {
+                        "data_dir": data_dir,
+                        "result_dir": temp_dir,
+                        "gt_dir": gt_dir,
+                        "gt_config": gt_config,
+                    },
+                }
+            },
+        }
+        yield algorithms
 
 
 def test_initialize(
