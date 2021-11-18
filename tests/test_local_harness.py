@@ -62,8 +62,8 @@ def test_initialize(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    LocalHarness(data_dir, result_dir, gt_dir, gt_config)
 
 
 def test_test_ids_request(get_local_harness_params):
@@ -78,9 +78,9 @@ def test_test_ids_request(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
 
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
 
     test_dir = os.path.dirname(__file__)
     assumptions_path = os.path.join(test_dir, "assumptions.json")
@@ -106,9 +106,9 @@ def test_session_request(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
 
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
 
     test_dir = os.path.dirname(__file__)
     test_id_path = os.path.join(
@@ -137,9 +137,9 @@ def test_resume_session(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
 
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = local_interface.session_request(
         ["OND.54011215.0000.1236"], "OND", "image_classification", "0.1.1", [], 0.5
     )
@@ -172,15 +172,15 @@ def test_dataset_request(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
 
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
 
     session_id = _initialize_session(local_interface, "OND")
     # Test correct dataset request
     filename = local_interface.dataset_request("OND.1.1.1234", 0, session_id)
     expected = os.path.join(
-        local_interface.result_directory, f"{session_id}.OND.1.1.1234.0.csv"
+        local_interface.temp_dir_name, f"{session_id}.OND.1.1.1234.0.csv"
     )
     assert expected == filename
     expected_image_ids = _read_image_ids(expected)
@@ -204,8 +204,8 @@ def test_post_results(get_local_harness_params, protocol_constant, protocol_name
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, protocol_name)
     result_files = {
         protocol_constant: os.path.join(
@@ -239,8 +239,8 @@ def test_feedback_request(get_local_harness_params, feedback_mapping, protocol_n
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, protocol_name)
     # Post results before posting
     result_files = {}
@@ -262,7 +262,7 @@ def test_feedback_request(get_local_harness_params, feedback_mapping, protocol_n
         session_id,
     )
     expected = os.path.join(
-        local_interface.result_directory,
+        local_interface.temp_dir_name,
         "feedback",
         f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
     )
@@ -281,8 +281,8 @@ def test_image_classification_evaluate(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
 
     session_id = _initialize_session(local_interface, "OND", "image_classification")
     baseline_session_id = _initialize_session(
@@ -330,8 +330,8 @@ def test_activity_recognition_evaluate(get_ar_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_ar_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_ar_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND", "activity_recognition")
     baseline_session_id = _initialize_session(
         local_interface, "OND", "activity_recognition"
@@ -380,8 +380,8 @@ def test_transcripts_evaluate(get_dt_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_dt_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_dt_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND", "transcripts")
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "transcripts"
@@ -430,8 +430,8 @@ def test_image_classification_evaluate_roundwise(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND", "image_classification")
     result_folder = os.path.join(
         os.path.dirname(__file__), "mock_results", "image_classification"
@@ -462,8 +462,8 @@ def test_complete_test(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND")
     local_interface.complete_test(session_id, "OND.10.90001.2100554")
 
@@ -480,8 +480,8 @@ def test_terminate_session(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
 
     session_id = _initialize_session(local_interface, "OND")
     local_interface.terminate_session(session_id)
@@ -499,8 +499,8 @@ def test_get_metadata(get_local_harness_params):
     """
     from sail_on_client.harness.local_harness import LocalHarness
 
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_interface = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     session_id = _initialize_session(local_interface, "OND")
     metadata = local_interface.get_test_metadata(session_id, "OND.1.1.1234")
 

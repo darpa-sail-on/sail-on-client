@@ -43,10 +43,11 @@ def server_setup():
 @pytest.fixture(scope="function")
 def get_local_harness_params():
     """Fixture to provide local harness parameters."""
-    data_dir = f"{os.path.dirname(__file__)}/data"
-    gt_dir = f"{data_dir}/OND/image_classification"
-    gt_config = f"{data_dir}/OND/image_classification/image_classification.json"
-    return data_dir, gt_dir, gt_config
+    with TemporaryDirectory() as temp_dir:
+        data_dir = f"{os.path.dirname(__file__)}/data"
+        gt_dir = f"{data_dir}/OND/image_classification"
+        gt_config = f"{data_dir}/OND/image_classification/image_classification.json"
+        yield data_dir, temp_dir, gt_dir, gt_config
 
 
 @pytest.fixture(scope="function")
@@ -59,30 +60,33 @@ def get_par_harness_params():
 @pytest.fixture(scope="function")
 def get_ar_local_harness_params():
     """Fixture to create parameters for local harness in activity recognition."""
-    data_dir = f"{os.path.dirname(__file__)}/data"
-    gt_dir = f"{data_dir}/OND/activity_recognition"
-    gt_config = f"{data_dir}/OND/activity_recognition/activity_recognition.json"
-    return data_dir, gt_dir, gt_config
+    with TemporaryDirectory() as temp_dir:
+        data_dir = f"{os.path.dirname(__file__)}/data"
+        gt_dir = f"{data_dir}/OND/activity_recognition"
+        gt_config = f"{data_dir}/OND/activity_recognition/activity_recognition.json"
+        yield data_dir, temp_dir, gt_dir, gt_config
 
 
 @pytest.fixture(scope="function")
 def get_dt_local_harness_params():
     """Fixture to create parameters for local harness in document transcription."""
-    data_dir = f"{os.path.dirname(__file__)}/data"
-    gt_dir = f"{data_dir}/OND/transcripts"
-    gt_config = f"{data_dir}/OND/transcripts/transcripts.json"
-    return data_dir, gt_dir, gt_config
+    with TemporaryDirectory() as temp_dir:
+        data_dir = f"{os.path.dirname(__file__)}/data"
+        gt_dir = f"{data_dir}/OND/transcripts"
+        gt_config = f"{data_dir}/OND/transcripts/transcripts.json"
+        yield data_dir, temp_dir, gt_dir, gt_config
 
 
 @pytest.fixture(scope="function")
 def ond_harness_instance():
     """Fixture for creating an instance of harness for OND."""
-    test_dir = os.path.dirname(__file__)
-    data_dir = os.path.join(test_dir, "data")
-    gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
-    gt_config = os.path.join(gt_dir, "activity_recognition.json")
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
-    return local_interface
+    with TemporaryDirectory() as temp_dir:
+        test_dir = os.path.dirname(__file__)
+        data_dir = os.path.join(test_dir, "data")
+        gt_dir = os.path.join(data_dir, "OND", "activity_recognition")
+        gt_config = os.path.join(gt_dir, "activity_recognition.json")
+        local_interface = LocalHarness(data_dir, temp_dir, gt_dir, gt_config)
+        yield local_interface
 
 
 @pytest.fixture(scope="function")
@@ -96,14 +100,15 @@ def ond_algorithm_instance():
 @pytest.fixture(scope="function")
 def condda_harness_instance():
     """Fixture for creating an instance of harness for OND."""
-    test_dir = os.path.dirname(__file__)
-    data_dir = os.path.join(test_dir, "data")
-    gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
-    gt_config = os.path.join(
-        data_dir, "OND", "activity_recognition", "activity_recognition.json"
-    )
-    local_interface = LocalHarness(data_dir, gt_dir, gt_config)
-    return local_interface
+    with TemporaryDirectory() as temp_dir:
+        test_dir = os.path.dirname(__file__)
+        data_dir = os.path.join(test_dir, "data")
+        gt_dir = os.path.join(data_dir, "CONDDA", "activity_recognition")
+        gt_config = os.path.join(
+            data_dir, "OND", "activity_recognition", "activity_recognition.json"
+        )
+        local_interface = LocalHarness(data_dir, temp_dir, gt_dir, gt_config)
+        yield local_interface
 
 
 @pytest.fixture(scope="function")

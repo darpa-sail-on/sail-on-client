@@ -2,5 +2,6 @@ smqtk:
   class: LocalHarness
   config:
     data_dir: ???
+    result_dir: ???
     gt_dir: ???
     gt_config: ???

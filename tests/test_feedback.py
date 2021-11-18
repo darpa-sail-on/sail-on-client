@@ -303,8 +303,8 @@ def test_create_feedback_instance(domain, test_id, get_local_harness_params, exp
     Returns:
         None
     """
-    data_dir, gt_dir, gt_config = get_local_harness_params
-    local_harness = LocalHarness(data_dir, gt_dir, gt_config)
+    data_dir, result_dir, gt_dir, gt_config = get_local_harness_params
+    local_harness = LocalHarness(data_dir, result_dir, gt_dir, gt_config)
     protocol_name = "OND"
     session_id = local_harness.session_request(
         [test_id], protocol_name, domain, "0.1.1", (), 0.5
