@@ -21,7 +21,9 @@ log = logging.getLogger(__name__)
 class LocalHarness(TestAndEvaluationHarness):
     """Harness without any server communication."""
 
-    def __init__(self, data_dir: str, result_dir: str, gt_dir: str = "", gt_config: str = "") -> None:
+    def __init__(
+        self, data_dir: str, result_dir: str, gt_dir: str = "", gt_config: str = ""
+    ) -> None:
         """
         Initialize an object of local harness.
 
@@ -277,10 +279,7 @@ class LocalHarness(TestAndEvaluationHarness):
         results: Dict[str, Union[Dict, float]] = {}
         gt_config = json.load(open(self.gt_config, "r"))
         detection_file_id = os.path.join(
-            self.result_dir,
-            protocol,
-            domain,
-            f"{session_id}.{test_id}_detection.csv",
+            self.result_dir, protocol, domain, f"{session_id}.{test_id}_detection.csv",
         )
         detections = pd.read_csv(detection_file_id, sep=",", header=None, quotechar="|")
         classification_file_id = os.path.join(
