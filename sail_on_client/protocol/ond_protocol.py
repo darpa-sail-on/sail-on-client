@@ -14,7 +14,7 @@ import os
 import json
 import logging
 
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 log = logging.getLogger(__name__)
 
@@ -280,7 +280,9 @@ class ONDProtocol(VisualProtocol):
             None
         """
         if self.has_baseline or self.has_reaction_baseline:
-            baseline_session_id = self._find_baseline_session_id(algorithms_attributes)
+            baseline_session_id: Optional[str] = self._find_baseline_session_id(
+                algorithms_attributes
+            )
         else:
             baseline_session_id = None
         for algorithm_attributes in algorithms_attributes:
