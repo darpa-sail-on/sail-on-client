@@ -279,7 +279,10 @@ class ONDProtocol(VisualProtocol):
         Returns:
             None
         """
-        baseline_session_id = self._find_baseline_session_id(algorithms_attributes)
+        if self.has_baseline or self.has_reaction_baseline:
+            baseline_session_id = self._find_baseline_session_id(algorithms_attributes)
+        else:
+            baseline_session_id = None
         for algorithm_attributes in algorithms_attributes:
             if (
                 algorithm_attributes.is_baseline
