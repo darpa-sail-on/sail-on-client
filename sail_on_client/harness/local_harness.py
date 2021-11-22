@@ -315,7 +315,7 @@ class LocalHarness(TestAndEvaluationHarness):
             detection_idx = 1
             gt_detection_idx = metric.novel_id
             # p_unknown column for activity recognition
-            novel_idx = 89
+            novel_idx = 31
         # ######## Document Transcription Evaluation  ###########
         elif domain == "transcripts":
             detection_idx = 1
