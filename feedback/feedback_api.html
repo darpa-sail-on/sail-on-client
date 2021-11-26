@@ -488,6 +488,48 @@ feedback is requested for an older round</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_and_classification_feedback">
+<span class="sig-name descname"><span class="pre">get_detection_and_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_and_classification_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get detection and classification feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List of indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dataframe with id and novelty detection value as columns</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_feedback">
+<span class="sig-name descname"><span class="pre">get_detection_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_feedback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get detection feedback for the round.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
+<li><p><strong>image_id_list</strong> – List of indices for images</p></li>
+<li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A dataframe with id and novelty detection value as columns</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback">
 <span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get feedback for the round.</p>
