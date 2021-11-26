@@ -6,7 +6,7 @@ from sail_on_client.feedback.feedback import Feedback
 from typing import Union, Optional, Dict
 import pandas as pd
 
-SUPPORTED_FEEDBACK = ["classification", "score", "detection"]
+SUPPORTED_FEEDBACK = ["classification", "score", "detection", "detection_and_classification"]
 
 
 class ActivityRecognitionFeedback(Feedback):
@@ -128,6 +128,59 @@ class ActivityRecognitionFeedback(Feedback):
             df = None
         return df
 
+    def get_detection_and_classification_feedback(
+        self, round_id: int, images_id_list: list, image_names: list
+    ) -> Optional[pd.DataFrame]:
+        """
+        Get detection and classification feedback for the round.
+
+        Args:
+            round_id: Round identifier
+            image_id_list: List of indices for images
+            image_names: List of image names for the round
+
+        Return:
+            A dataframe with id and novelty detection value as columns
+        """
+        if round_id > self.current_round:
+            self.deposit_income()
+            self.current_round = round_id
+            if len(images_id_list) <= self.budget:
+                self.budget = self.budget - len(images_id_list)
+                image_ids = [image_names[int(idx)] for idx in images_id_list]
+                detection_feedback_file = self.interface.get_feedback_request(
+                    image_ids,
+                    "detection",
+                    self.test_id,
+                    round_id,
+                    self.session_id,
+                )
+                detection_df = pd.read_csv(
+                    detection_feedback_file,
+                    delimiter=",",
+                    header=None,
+                    names=["id", "detection"],
+                )
+                classification_feedback_file = self.interface.get_feedback_request(
+                    image_ids,
+                    "classification",
+                    self.test_id,
+                    round_id,
+                    self.session_id,
+                )
+                classification_df = pd.read_csv(
+                    classification_feedback_file,
+                    delimiter=",",
+                    header=None,
+                    names=["id", "class1", "class2", "class3", "class4", "class5"],
+                )
+                df = pd.merge(detection_df, classification_df, on="id")
+            else:
+                raise ValueError("Requesting over budget")
+        else:
+            df = None
+        return df
+
     def get_feedback(
         self, round_id: int, images_id_list: list, image_names: list
     ) -> Union[pd.DataFrame, Dict, None]:
@@ -147,5 +200,7 @@ class ActivityRecognitionFeedback(Feedback):
             return super().get_feedback(round_id, images_id_list, image_names)
         elif self.feedback_type == "detection":
             return self.get_detection_feedback(round_id, images_id_list, image_names)
+        elif self.feedback_type == "detection_and_classification":
+            return self.get_detection_and_classification_feedback(round_id, images_id_list, image_names)
         else:
             raise ValueError("Unsupported feedback type {self.feedback_type} specified")

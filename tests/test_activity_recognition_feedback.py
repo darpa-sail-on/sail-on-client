@@ -215,6 +215,54 @@ def test_get_detection_feedback(
     assert all(df_labelled.id == feedback_image_ids)
 
 @pytest.mark.parametrize(
+    "feedback_mapping", (("detection_and_classification", ("detection", "classification")),)
+)
+@pytest.mark.parametrize("protocol_name", ["OND"])
+def test_get_detection_and_classification_feedback(
+    server_setup, get_par_harness_params, feedback_mapping, protocol_name
+):
+    """
+    Test get feedback.
+
+    Args:
+        server_setup (tuple): Tuple containing url and result directory
+        get_par_harness_params (tuple): Tuple to configure par interface
+        feedback_mapping (dict): Dict with mapping for feedback
+        protocol_name (str): Name of the protocol ( options: OND and CONDDA)
+
+    Return:
+        None
+    """
+    url, save_directory = get_par_harness_params
+    par_interface = ParHarness(url, save_directory)
+    session_id, test_id = _initialize_session(par_interface, protocol_name)
+    result_files = {}
+    result_folder = os.path.join(
+        os.path.dirname(__file__), "mock_results", "activity_recognition"
+    )
+    protocol_constant = feedback_mapping[0]
+    required_files = feedback_mapping[1]
+    for required_file in required_files:
+        result_files[required_file] = os.path.join(
+            result_folder,
+            f"{test_id}_PreComputed{protocol_name}Agent_{required_file}.csv",
+        )
+    par_interface.post_results(result_files, f"{test_id}", 0, session_id)
+    ar_feedback = ActivityRecognitionFeedback(
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        FEEDBACK_BUDGET,
+        par_interface,
+        session_id,
+        test_id,
+        protocol_constant,
+    )
+    df_labelled = ar_feedback.get_feedback(
+        0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
+    )
+    assert all(df_labelled.id == feedback_image_ids)
+
+@pytest.mark.parametrize(
     "feedback_mapping", (("score", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
