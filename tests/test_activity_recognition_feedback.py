@@ -214,8 +214,10 @@ def test_get_detection_feedback(
     )
     assert all(df_labelled.id == feedback_image_ids)
 
+
 @pytest.mark.parametrize(
-    "feedback_mapping", (("detection_and_classification", ("detection", "classification")),)
+    "feedback_mapping",
+    (("detection_and_classification", ("detection", "classification")),),
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_detection_and_classification_feedback(
@@ -261,6 +263,7 @@ def test_get_detection_and_classification_feedback(
         0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
     )
     assert all(df_labelled.id == feedback_image_ids)
+
 
 @pytest.mark.parametrize(
     "feedback_mapping", (("score", ("detection", "classification")),)
