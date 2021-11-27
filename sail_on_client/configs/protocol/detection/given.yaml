@@ -1,2 +1,3 @@
 hints:
   - "red_light"
+  - "feedback_max_ids=32"
