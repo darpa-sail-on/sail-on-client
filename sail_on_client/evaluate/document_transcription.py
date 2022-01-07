@@ -1,10 +1,10 @@
 """Document Transcription Class for metrics for sail-on."""
 
-from sail_on_client.evaluate.metrics import ProgramMetrics
-from evaluate.metrics import M_acc, M_num, M_ndp, M_num_stats
-from evaluate.metrics import M_ndp_failed_reaction
-from evaluate.metrics import M_accuracy_on_novel
-from evaluate.metrics import topk_accuracy
+from sail_on_client.evaluate.program_metrics import ProgramMetrics
+from sail_on_client.evaluate.metrics import M_acc, M_num, M_ndp, M_num_stats
+from sail_on_client.evaluate.metrics import M_ndp_failed_reaction
+from sail_on_client.evaluate.metrics import M_accuracy_on_novel
+from sail_on_client.evaluate.utils import topk_accuracy
 
 import numpy as np
 from pandas import DataFrame
