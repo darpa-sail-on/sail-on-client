@@ -1,9 +1,9 @@
 """Image Classification Class for metrics for sail-on."""
 
 from sail_on_client.evaluate.program_metrics import ProgramMetrics
-from sail_on_client.evaluate.metrics import M_acc, M_num, M_ndp, M_num_stats
-from sail_on_client.evaluate.metrics import M_ndp_failed_reaction
-from sail_on_client.evaluate.metrics import M_accuracy_on_novel
+from sail_on_client.evaluate.metrics import m_acc, m_num, m_ndp, m_num_stats
+from sail_on_client.evaluate.metrics import m_ndp_failed_reaction
+from sail_on_client.evaluate.metrics import m_accuracy_on_novel
 from sail_on_client.evaluate.utils import topk_accuracy
 
 import numpy as np
@@ -60,7 +60,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         """
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
-        return M_acc(
+        return m_acc(
             gt_novel, class_prob, gt_class_idx, round_size, asymptotic_start_round
         )
 
@@ -103,7 +103,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Difference between the novelty introduction and predicting change in world.
         """
-        return M_num(p_novel, gt_novel)
+        return m_num(p_novel, gt_novel)
 
     def m_num_stats(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
@@ -121,7 +121,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing indices for novelty introduction and change in world prediction.
         """
-        return M_num_stats(p_novel, gt_novel)
+        return m_num_stats(p_novel, gt_novel)
 
     def m_ndp(
         self, p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test"
@@ -143,7 +143,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing novelty detection performance over the test.
         """
-        return M_ndp(p_novel, gt_novel, mode="full_test")
+        return m_ndp(p_novel, gt_novel, mode="full_test")
 
     def m_ndp_pre(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
@@ -160,7 +160,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing detection performance pre novelty.
         """
-        return M_ndp(p_novel, gt_novel, mode="pre_novelty")
+        return m_ndp(p_novel, gt_novel, mode="pre_novelty")
 
     def m_ndp_post(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
@@ -176,7 +176,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         Returns:
             Dictionary containing detection performance post novelty.
         """
-        return M_ndp(p_novel, gt_novel, mode="post_novelty")
+        return m_ndp(p_novel, gt_novel, mode="post_novelty")
 
     def m_ndp_failed_reaction(
         self,
@@ -210,7 +210,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         """
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
-        return M_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
+        return m_ndp_failed_reaction(p_novel, gt_novel, class_prob, gt_class_idx)
 
     def m_accuracy_on_novel(
         self, p_class: DataFrame, gt_class: DataFrame, gt_novel: DataFrame
@@ -235,7 +235,7 @@ class ImageClassificationMetrics(ProgramMetrics):
         class_prob = p_class.iloc[:, range(1, p_class.shape[1])].to_numpy()
         gt_class_idx = gt_class.to_numpy()
 
-        return M_accuracy_on_novel(class_prob, gt_class_idx, gt_novel)
+        return m_accuracy_on_novel(class_prob, gt_class_idx, gt_novel)
 
     def m_is_cdt_and_is_early(self, gt_idx: int, ta2_idx: int, test_len: int) -> Dict:
         """

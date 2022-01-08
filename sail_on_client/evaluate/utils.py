@@ -2,15 +2,19 @@
 
 import numpy as np
 import pandas as pd
+from typing import List
 
 
-def check_novel_validity(p_novel, gt_novel):
+def check_novel_validity(p_novel: np.ndarray, gt_novel: np.ndarray) -> None:
     """
     Check the validity of the inputs for per-sample novelty detection.
 
-    Inputs:
-    p_novel: NX1 vector with each element corresponding to probability of novelty
-    gt_novel: NX1 vector with each element 0 (not novel) or 1 (novel)
+    Args:
+        p_novel: NX1 vector with each element corresponding to probability of novelty
+        gt_novel: NX1 vector with each element 0 (not novel) or 1 (novel)
+
+    Returns:
+        None
     """
     if p_novel.shape[0] != gt_novel.shape[0]:
         raise Exception(
@@ -31,7 +35,7 @@ def check_novel_validity(p_novel, gt_novel):
     return
 
 
-def check_class_validity(p_class, gt_class):
+def check_class_validity(p_class: np.ndarray, gt_class: np.ndarray) -> None:
     """
     Check the validity of the inputs for image classification.
 
@@ -64,15 +68,20 @@ def check_class_validity(p_class, gt_class):
     return
 
 
-def topk_accuracy(p_class, gt_class, k, txt=""):
+def topk_accuracy(
+    p_class: np.ndarray, gt_class: np.ndarray, k: int, txt: str = ""
+) -> float:
     """
     The method computes top-K accuracy.
-    Inputs:
-    p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
-    gt_class: Nx1 computevector with ground-truth class for each sample
-    k: 'k' used in top-K accuracy
+
+    Args:
+        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
+        gt_class: Nx1 computevector with ground-truth class for each sample
+        k: 'k' used in top-K accuracy
+        txt: Text associated with accuracy
+
     Returns:
-    top-K accuracy
+        top-K accuracy
     """
     check_class_validity(p_class, gt_class)
     p_class = np.argsort(-p_class)[:, :k]
@@ -82,19 +91,52 @@ def topk_accuracy(p_class, gt_class, k, txt=""):
     return round(float(correct) / p_class.shape[0], 5)
 
 
-def top3_accuracy(p_class, gt_class, txt=""):
-    """The method computes top-3 accuracy. (see topk_accuracy() for details)"""
+def top3_accuracy(p_class: np.ndarray, gt_class: np.ndarray, txt: str = "") -> float:
+    """
+    The method computes top-3 accuracy. (see topk_accuracy() for details).
+
+    Args:
+        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
+        gt_class: Nx1 computevector with ground-truth class for each sample
+        txt: Text associated with accuracy
+
+    Returns:
+        top-3 accuracy
+    """
     return topk_accuracy(p_class, gt_class, k=3, txt=txt)
 
 
-def top1_accuracy(p_class, gt_class, txt=""):
-    """The method computes top-1 accuracy. (see topk_accuracy() for details)"""
+def top1_accuracy(p_class: np.ndarray, gt_class: np.ndarray, txt: str = "") -> float:
+    """
+    The method computes top-1 accuracy. (see topk_accuracy() for details).
+
+    Args:
+        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
+        gt_class: Nx1 computevector with ground-truth class for each sample
+        txt: Text associated with accuracy
+
+    Returns:
+        top-1 accuracy
+    """
     return topk_accuracy(p_class, gt_class, k=1, txt=txt)
 
 
 # compute information for the robustness measures
-def get_rolling_stats(p_class, gt_class, k=1, window_size=50):
-    """The method computes rolling statistics which are used for robustness measures"""
+def get_rolling_stats(
+    p_class: np.ndarray, gt_class: np.ndarray, k: int = 1, window_size: int = 50
+) -> List:
+    """
+    The method computes rolling statistics which are used for robustness measures.
+
+    Args:
+        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
+        gt_class: Nx1 compute vector with ground-truth class for each sample
+        k: 'k' used for selecting top k values
+        window_size: Window size for running stats
+
+    Returns:
+        List with mean and standard deviation
+    """
     p_cls_topk = np.argsort(-p_class)[:, :k]
     gt_cls_indx = gt_class[:, np.newaxis]
     check_zero_topk = p_cls_topk - gt_cls_indx
@@ -104,20 +146,17 @@ def get_rolling_stats(p_class, gt_class, k=1, window_size=50):
     return [acc_mean, acc_std]
 
 
-def best_fit_slope(xs, ys):
-    # https://pythonprogramming.net/how-to-program-best-fit-line-slope-machine-learning-tutorial/
-    m = ((np.mean(xs) * np.mean(ys)) - np.mean(xs * ys)) / (
-        (np.mean(xs) ** 2) - np.mean(xs ** 2)
-    )
-    return m
+def get_first_detect_novelty(p_novel: np.ndarray, thresh: float) -> int:
+    """
+    Find the first index where novelty is detected.
 
+    Args:
+        p_novel: NX1 vector with each element corresponding to probability of novelty
+        thresh: Score threshold for detecting when a sample is novel
 
-def running_average_cumsum(seq, window=100):
-    s = np.insert(np.cumsum(seq), 0, [0])
-    return (s[window:] - s[:-window]) * (1.0 / window)
-
-
-def get_first_detect_novelty(p_novel, thresh):
+    Returns:
+        Index where an agent reports that a sample is novel
+    """
     if np.sum(p_novel >= thresh) < 1:
         first_detect_novelty = len(p_novel) + 1
     else:
