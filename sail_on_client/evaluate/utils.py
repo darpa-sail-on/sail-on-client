@@ -47,10 +47,6 @@ def check_class_validity(p_class: np.ndarray, gt_class: np.ndarray) -> None:
         raise Exception(
             "Number of predicted samples not equal to number of groundtruth samples!"
         )
-    if p_class.shape[0] != gt_class.shape[0]:
-        raise Exception(
-            "Shape mismatch between class probabilities and novel probabilities!"
-        )
     if np.any(p_class < 0) or np.any(p_class > 1):
         raise Exception("Predicted class probabilities should be between 0 and 1!")
     if p_class.ndim != 2:
