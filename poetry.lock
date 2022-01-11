@@ -590,22 +590,22 @@ python-versions = "*"
 
 [[package]]
 name = "nltk"
-version = "3.5"
+version = "3.6.7"
 description = "Natural Language Toolkit"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 
 [package.dependencies]
 click = "*"
 joblib = "*"
-regex = "*"
+regex = ">=2021.8.3"
 tqdm = "*"
 
 [package.extras]
-all = ["requests", "numpy", "python-crfsuite", "scikit-learn", "twython", "pyparsing", "scipy", "matplotlib", "gensim"]
+all = ["matplotlib", "numpy", "pyparsing", "python-crfsuite", "requests", "scikit-learn", "scipy", "twython"]
 corenlp = ["requests"]
-machine_learning = ["gensim", "numpy", "python-crfsuite", "scikit-learn", "scipy"]
+machine_learning = ["numpy", "python-crfsuite", "scikit-learn", "scipy"]
 plot = ["matplotlib"]
 tgrep = ["pyparsing"]
 twitter = ["twython"]
@@ -1185,7 +1185,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "cbea2b9031dd35a263b39c1ec22d136e0652bd1813252629975fcc1923fb814b"
+content-hash = "a639267370349fc775da78e054736796916785c59ed008d6af298d9e2eb2e93f"
 
 [metadata.files]
 alabaster = [
@@ -1543,7 +1543,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 nltk = [
-    {file = "nltk-3.5.zip", hash = "sha256:845365449cd8c5f9731f7cb9f8bd6fd0767553b9d53af9eb1b3abf7700936b35"},
+    {file = "nltk-3.6.7-py3-none-any.whl", hash = "sha256:22e97be5d6c784d93a52d17860515cc50c5cfcc620b1f5c3747765041255a01e"},
+    {file = "nltk-3.6.7.zip", hash = "sha256:51bf1aef5304740a708be7c8e683f7798f03dc5c7a7e7feb758be9e95f4585e3"},
 ]
 numpy = [
     {file = "numpy-1.21.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:38e8648f9449a549a7dfe8d8755a5979b45b3538520d1e735637ef28e8c2dc50"},
