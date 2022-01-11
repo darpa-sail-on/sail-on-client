@@ -151,6 +151,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: sail-on-client
+
+      - name: Checkout sail on api
+        uses: actions/checkout@v2
+        with:
+          repository: darpa-sail-on/sail-on-api
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: Sail-On-API
+
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -183,6 +191,10 @@ jobs:
 
       - name: Explicitly activate particular environment
         run: poetry env use ${{ matrix.python-version }}
+        working-directory: sail-on-client
+
+      - name: Install Local Dependencies
+        run: poetry run pip install ../Sail-On-API/
         working-directory: sail-on-client
 
       - name: Run Test with coverage

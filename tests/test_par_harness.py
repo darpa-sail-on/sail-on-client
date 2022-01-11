@@ -3,7 +3,7 @@
 import os
 import pytest
 
-from sail_on_client.errors import ProtocolError
+from sail_on_client.errors import ServerError
 
 TEST_ID_NAME = "test_ids.csv"
 
@@ -182,7 +182,7 @@ def test_dataset_request(server_setup, get_par_harness_params):
     expected_image_ids = _read_image_ids(expected)
     assert expected_image_ids == ["n01484850_18013.JPEG", "n01484850_24624.JPEG"]
     # Test incorrect dataset request
-    with pytest.raises(ProtocolError):
+    with pytest.raises(ServerError):
         par_interface.dataset_request(f"{session_id}", "OND.1.1.1234", 3)
 
 
