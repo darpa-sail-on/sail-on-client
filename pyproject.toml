@@ -25,6 +25,7 @@ hydra-core = "^1.1.1"
 hydra-colorlog = "^1.1.0"
 tinker-engine = {git = "https://github.com/tinker-engine/tinker-engine.git", rev= "master"}
 nltk = "^3.6.7"
+types-dataclasses = "^0.6.4"
 
 [tool.poetry.dev-dependencies]
 flake8 = ">=3.7"
