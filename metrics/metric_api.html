@@ -253,6 +253,8 @@
             
               <ul>
                 
+                  <li class="toctree-l2"><a href="#methods-for-metric" class="reference internal">Methods For Metric</a></li>
+                
                   <li class="toctree-l2"><a href="#base-class-for-metric" class="reference internal">Base Class For Metric</a></li>
                 
                   <li class="toctree-l2"><a href="#activity-recognition-metric" class="reference internal">Activity Recognition Metric</a></li>
@@ -260,6 +262,8 @@
                   <li class="toctree-l2"><a href="#document-transcription-metric" class="reference internal">Document Transcription Metric</a></li>
                 
                   <li class="toctree-l2"><a href="#image-classification-metric" class="reference internal">Image Classification Metric</a></li>
+                
+                  <li class="toctree-l2"><a href="#utility-methods" class="reference internal">Utility Methods</a></li>
                 
               </ul>
             
@@ -362,15 +366,193 @@
             
   <section id="metric-api">
 <h1>Metric API<a class="headerlink" href="#metric-api" title="Permalink to this headline">¶</a></h1>
+<section id="methods-for-metric">
+<h2>Methods For Metric<a class="headerlink" href="#methods-for-metric" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_num">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_num" title="Permalink to this definition">¶</a></dt>
+<dd><p>Program Metric: Number of samples needed for detecting novelty.</p>
+<p>The method computes number of GT novel samples needed to predict the first true positive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>single scalar for number of GT novel samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_num_stats">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Program Metric: Number of samples needed for detecting novelty.</p>
+<p>The method computes number of GT novel samples needed to predict the first true positive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>single scalar for number of GT novel samples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Program Metric: Novelty detection performance.</p>
+<p>The method computes per-sample novelty detection performance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of it being novel</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – if ‘full_test’ computes on all test samples, if ‘post_novelty’ computes from first GT novel sample</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Accuracy, Precision, Recall, F1_score and Confusion matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dictionary of various metrics</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp_pre">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional Metric: Novelty detection performance before novelty is introduced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Accuracy, Precision, Recall, F1_score and Confusion matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dictionary of following metrics values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp_post">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional Metric: Novelty detection performance after novelty is introduced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Accuracy, Precision, Recall, F1_score and Confusion matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dictionary of following metrics values</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp_failed_reaction">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional Metric: Novelty detection when reaction fails.</p>
+<p>The method computes novelty detection performance for only on samples with incorrect k-class predictions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 vector with ground-truth class for each sample</p></li>
+<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – if ‘full_test’ computes on all test samples, if ‘post_novelty’ computes from the first GT novel sample</p></li>
+<li><p><strong>k</strong> – ‘k’ used in top-K accuracy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Accuracy, Precision, Recall, F1_score and Confusion matrix</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Dictionary of various metrics</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_acc">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_acc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute top1 and top3 accuracy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 vector with ground-truth class for each sample</p></li>
+<li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of samples in a single round of the test</p></li>
+<li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round id where metric computation starts</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary with results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_accuracy_on_novel">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional Metric: Novelty robustness.</p>
+<p>The method computes top-K accuracy for only the novel samples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 vector with ground-truth class for each sample</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p></li>
+<li><p><strong>k</strong> – K value to compute accuracy at</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Accuracy at rank-k</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="base-class-for-metric">
 <h2>Base Class For Metric<a class="headerlink" href="#base-class-for-metric" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">ProgramMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.program_metrics.</span></span><span class="sig-name descname"><span class="pre">ProgramMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract program metric class.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_acc">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -392,8 +574,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_acc_round_wise">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc_round_wise abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -412,8 +594,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_accuracy_on_novel">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_accuracy_on_novel abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -433,8 +615,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_is_cdt_and_is_early">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_is_cdt_and_is_early abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -457,8 +639,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -477,8 +659,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_failed_reaction">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_failed_reaction abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -499,8 +681,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_post">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_post abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -519,8 +701,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_pre">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_pre abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -539,8 +721,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_num">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_num" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -550,7 +732,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -559,8 +741,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.ProgramMetrics.m_num_stats">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num_stats abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -790,7 +972,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -1043,7 +1225,7 @@ first true positive.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -1318,7 +1500,7 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Difference between the novelty introduction and predicting change in world.</p>
@@ -1352,6 +1534,149 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="utility-methods">
+<h2>Utility Methods<a class="headerlink" href="#utility-methods" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.check_novel_validity">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">check_novel_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.check_novel_validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the validity of the inputs for per-sample novelty detection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element 0 (not novel) or 1 (novel)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.check_class_validity">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">check_class_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.check_class_validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the validity of the inputs for image classification.</p>
+<p>Inputs:
+p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
+gt_class: Nx1 vector with ground-truth class for each sample</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.topk_accuracy">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">topk_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.topk_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute top-K accuracy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 computevector with ground-truth class for each sample</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – ‘k’ used in top-K accuracy</p></li>
+<li><p><strong>txt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text associated with accuracy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>top-K accuracy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.top1_accuracy">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">top1_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.top1_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute top-1 accuracy. (see topk_accuracy() for details).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 computevector with ground-truth class for each sample</p></li>
+<li><p><strong>txt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text associated with accuracy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>top-1 accuracy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.top3_accuracy">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">top3_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.top3_accuracy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute top-3 accuracy. (see topk_accuracy() for details).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 computevector with ground-truth class for each sample</p></li>
+<li><p><strong>txt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Text associated with accuracy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>top-3 accuracy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.get_rolling_stats">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">get_rolling_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.get_rolling_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute rolling statistics which are used for robustness measures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Nx1 compute vector with ground-truth class for each sample</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – ‘k’ used for selecting top k values</p></li>
+<li><p><strong>window_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Window size for running stats</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List with mean and standard deviation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="sail_on_client.evaluate.utils.get_first_detect_novelty">
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">get_first_detect_novelty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.utils.get_first_detect_novelty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the first index where novelty is detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – NX1 vector with each element corresponding to probability of novelty</p></li>
+<li><p><strong>thresh</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Score threshold for detecting when a sample is novel</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Index where an agent reports that a sample is novel</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
