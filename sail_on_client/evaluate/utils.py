@@ -68,7 +68,7 @@ def topk_accuracy(
     p_class: np.ndarray, gt_class: np.ndarray, k: int, txt: str = ""
 ) -> float:
     """
-    The method computes top-K accuracy.
+    Compute top-K accuracy.
 
     Args:
         p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
@@ -82,14 +82,14 @@ def topk_accuracy(
     check_class_validity(p_class, gt_class)
     p_class = np.argsort(-p_class)[:, :k]
     gt_class = gt_class[:, np.newaxis]
-    check_zero = p_class - gt_class
+    check_zero: np.ndarray = p_class - gt_class
     correct = np.sum(np.any(check_zero == 0, axis=1).astype(int))
     return round(float(correct) / p_class.shape[0], 5)
 
 
 def top3_accuracy(p_class: np.ndarray, gt_class: np.ndarray, txt: str = "") -> float:
     """
-    The method computes top-3 accuracy. (see topk_accuracy() for details).
+    Compute top-3 accuracy. (see topk_accuracy() for details).
 
     Args:
         p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
@@ -104,7 +104,7 @@ def top3_accuracy(p_class: np.ndarray, gt_class: np.ndarray, txt: str = "") -> f
 
 def top1_accuracy(p_class: np.ndarray, gt_class: np.ndarray, txt: str = "") -> float:
     """
-    The method computes top-1 accuracy. (see topk_accuracy() for details).
+    Compute top-1 accuracy. (see topk_accuracy() for details).
 
     Args:
         p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
@@ -122,7 +122,7 @@ def get_rolling_stats(
     p_class: np.ndarray, gt_class: np.ndarray, k: int = 1, window_size: int = 50
 ) -> List:
     """
-    The method computes rolling statistics which are used for robustness measures.
+    Compute rolling statistics which are used for robustness measures.
 
     Args:
         p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample

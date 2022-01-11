@@ -22,10 +22,8 @@ import logging
 import os
 import glob
 import uuid
-import json
 import traceback
-from dateutil import parser
-from typing import List, Dict, Any, IO
+from typing import List, Dict, Any, IO, Optional
 from io import BytesIO
 
 
@@ -152,9 +150,11 @@ class FileProvider:
                         os.path.join(self.folder, protocol, domain, "*.csv")
                     )
                 ]
-                return {"test_ids": test_ids, "generator_seed": "1234"}
+                with open(file_location, "w") as f:
+                    f.writelines(test_ids)
+                return {"test_ids": file_location, "generator_seed": "1234"}
             raise ProtocolError(
-                "BadDomain", msg, traceback.format_stack(),
+                "BadDomain", msg, "".join(traceback.format_stack()),
             )
 
         return {"test_ids": file_location, "generator_seed": "1234"}
@@ -211,7 +211,9 @@ class FileProvider:
 
         return session_id
 
-    def dataset_request(self, session_id: str, test_id: str, round_id: int) -> IO:
+    def dataset_request(
+        self, session_id: str, test_id: str, round_id: int
+    ) -> Optional[IO]:
         """
         Request a dataset.
 
@@ -380,6 +382,7 @@ class FileProvider:
     ) -> BytesIO:
         """
         Get feedback of the specified type.
+
         Args:
             feedback_ids: List of media ids for which feedback is required
             feedback_type: Protocols constants with the values: label, detection, characterization
@@ -396,8 +399,8 @@ class FileProvider:
         if domain not in self.feedback_request_mapping:
             raise ProtocolError(
                 "BadDomain",
-                f"The set domain does not match a proper domain type. Please check the metadata file for test {test_id}",
-                traceback.format_stack(),
+                f"The set domain does not match a domain type. Please check the metadata file for {test_id}",
+                "".join(traceback.format_stack()),
             )
 
         # Ensure feedback type works with session domain
@@ -406,11 +409,11 @@ class FileProvider:
         try:
             feedback_definition = self.feedback_request_mapping[domain][feedback_type]
             file_types = feedback_definition["files"]
-        except:
+        except Exception:
             raise ProtocolError(
                 "InvalidFeedbackType",
                 f"Invalid feedback type requested for the test id {test_id} with domain {domain}",
-                traceback.format_stack(),
+                "".join(traceback.format_stack()),
             )
 
         is_given_detection_mode = "red_light" in structure["created"].get("hints", [])
@@ -442,7 +445,7 @@ class FileProvider:
                     f"Feedback of type {feedback_type} has already been requested on the maximum number of ids",
                 )
         except KeyError:
-            feedback_round_id = 0
+            feedback_round_id = str(0)
             feedback_count = 0
 
         ground_truth_file = os.path.join(
@@ -453,7 +456,7 @@ class FileProvider:
             raise ServerError(
                 "test_id_invalid",
                 f"Could not find ground truth file for test Id {test_id}",
-                traceback.format_stack(),
+                "".join(traceback.format_stack()),
             )
 
         results_files = []
@@ -495,7 +498,8 @@ class FileProvider:
             if "detection file path" not in test_results_structure:
                 raise ProtocolError(
                     "DetectionPostRequired",
-                    "A detection file is required to be posted before feedback can be requested on a round. Please submit Detection results before requesting feedback",
+                    """A detection file is required to be posted before feedback can be requested on a round.
+                       Please submit Detection results before requesting feedback""",
                 )
             else:
                 try:
@@ -503,7 +507,7 @@ class FileProvider:
                         test_results_structure["detection file path"], "r"
                     ) as d_file:
                         d_reader = csv.reader(d_file, delimiter=",")
-                        detection_lines = [x for x in d_reader]
+                        detection_lines = list(d_reader)
                     predictions = [float(x[1]) for x in detection_lines]
                     # if given detection and past the detection point
                     is_given = is_given_detection_mode and metadata.get(
@@ -528,14 +532,18 @@ class FileProvider:
                         else:
                             raise ProtocolError(
                                 "NoveltyDetectionRequired",
-                                f"In order to request {feedback_type} for domain {domain}, novelty must be declared for the test",
+                                "In order to request feedback, novelty must be declared for the test",
                             )
                 except ProtocolError as e:
                     raise e
-                except Exception as e:
+                except Exception:
                     raise ServerError(
                         "CantReadFile",
-                        f"Couldnt open the logged detection file at {test_results_structure['detection file path']}. Please check if the file exists and that {session_id}.json has the proper file location for test id {test_id}",
+                        f"""Couldnt open the logged detection file at
+                            {test_results_structure['detection file path']}.
+                            Please check if the file exists and that
+                            {session_id}.json has the proper file location
+                            for test id {test_id}""",
                         traceback.format_exc(),
                     )
 
@@ -557,10 +565,11 @@ class FileProvider:
                 feedback = feedback_definition["function"](
                     ground_truth_file, results_files, feedback_ids, metadata
                 )
-        except KeyError as e:
+        except KeyError:
             raise ProtocolError(
                 "feedback_type_invalid",
-                f"Feedback type {feedback_type} is not valid. Make sure the provider's feedback_algorithms variable is properly set up",
+                f"""Feedback type {feedback_type} is not valid. Make sure the
+                    provider's feedback_algorithms variable is properly set up""",
                 traceback.format_exc(),
             )
 
@@ -628,7 +637,9 @@ class FileProvider:
                 ):
                     raise ProtocolError(
                         "DetectionRepost",
-                        "Cannot re post detection for a given round. If you attempted to submit any other results, please resubmit without detection.",
+                        """Cannot re post detection for a given round. If you
+                           attempted to submit any other results, please
+                           resubmit without detection.""",
                     )
             except KeyError:
                 pass
@@ -645,7 +656,7 @@ class FileProvider:
                 result_file.write(result_files[r_type])
 
         # Log call
-        log_content["last round"] = round_id
+        log_content["last round"] = str(round_id)
         updated_test_structure = log_session(
             self.results_folder,
             activity="post_results",
@@ -699,7 +710,7 @@ class FileProvider:
         # Modify session file to indicate session has been terminated
         log_session(self.results_folder, session_id=session_id, activity="termination")
 
-    def latest_session_info(self, session_id: str) -> List[str]:
+    def latest_session_info(self, session_id: str) -> Dict:
         """
         Get tests finished from the most recent session.
 

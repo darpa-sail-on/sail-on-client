@@ -1,8 +1,5 @@
 """Mocks mainly used for testing protocols."""
 
-from __future__ import annotations
-
-
 from sail_on_client.checkpointer import Checkpointer
 from sail_on_client.agent.ond_agent import ONDAgent
 

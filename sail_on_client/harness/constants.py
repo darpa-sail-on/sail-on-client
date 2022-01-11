@@ -1,4 +1,9 @@
+"""Constants used by the file provider."""
+
+
 class ProtocolConstants:
+    """Class with constants for the protocol."""
+
     # Feedback types
     DETECTION = "detection"
     CLASSIFICATION = "classification"

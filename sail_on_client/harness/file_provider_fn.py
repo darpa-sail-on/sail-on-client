@@ -2,7 +2,6 @@
 from sail_on_client.errors.errors import ServerError, ProtocolError, RoundError
 
 import csv
-from csv import reader
 import datetime
 import numpy as np
 import nltk
@@ -26,7 +25,7 @@ def read_gt_csv_file(file_location: str) -> List:
     """
     with open(file_location, "r") as f:
         csv_reader = csv.reader(f, delimiter=",", quotechar="|")
-        return [x for x in csv_reader][1:]
+        return list(csv_reader)[1:]
 
 
 def read_meta_data(file_location: str) -> Dict:
@@ -153,17 +152,17 @@ def log_session(
             if content is not None:
                 test_structure[activity].update(content)
         if round_id is not None:
-            round_id = str(round_id)
+            round_id_str = str(round_id)
             rounds = test_structure[activity].get("rounds", {})
-            if round_id not in rounds:
-                rounds[round_id] = {"time": [str(datetime.datetime.now())]}
+            if round_id_str not in rounds:
+                rounds[round_id_str] = {"time": [str(datetime.datetime.now())]}
             else:
-                rounds[round_id]["time"].append(str(datetime.datetime.now()))
+                rounds[round_id_str]["time"].append(str(datetime.datetime.now()))
             if content_loc == "round":
                 if content is not None:
-                    rounds[round_id].update(content)
+                    rounds[round_id_str].update(content)
             test_structure[activity]["rounds"] = rounds
-            test_structure[activity]["last round"] = round_id
+            test_structure[activity]["last round"] = round_id_str
 
         if not return_structure:
             write_session_log_file(
@@ -185,16 +184,17 @@ def log_session(
 
     if return_structure:
         return test_structure
+    return None
 
 
 def read_feedback_file(
-    csv_reader: reader,
-    feedback_ids: List[str],
+    csv_reader: "csv.reader",  # type: ignore
+    feedback_ids: Optional[List[str]],
     metadata: Dict[str, Any],
     check_constrained: bool = True,
-) -> Dict[str, str]:
+) -> Dict:
     """
-    Gets the feedback from feedback file for the specified ids in the last submitted round.
+    Get feedback from feedback file for the specified ids in the last submitted round.
 
     Args:
         csv_reader: An instance of csv reader
@@ -207,7 +207,7 @@ def read_feedback_file(
     """
     feedback_constrained = metadata.get("feedback_constrained", True)
 
-    lines = [x for x in csv_reader]
+    lines: List = list(csv_reader)
 
     try:
         if not check_constrained or not feedback_constrained:
@@ -221,18 +221,18 @@ def read_feedback_file(
         raise RoundError(
             "no_defined_rounds",
             "round_size not defined in metadata.",
-            traceback.format_stack(),
+            "".join(traceback.format_stack()),
         )
 
     if feedback_ids is not None:
         return {
-            x[0]: [n for n in x[1:]]
+            x[0]: list(x[1:])
             for x in [[n.strip(" \"'") for n in y] for y in lines][start:end]
             if x[0] in feedback_ids
         }
     else:
         return {
-            x[0]: [n for n in x[1:]]
+            x[0]: list(x[1:])
             for x in [[n.strip(" \"'") for n in y] for y in lines][start:end]
         }
 
@@ -244,7 +244,7 @@ def get_classification_feedback(
     metadata: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Calculates and returns the proper feedback for classification type feedback.
+    Calculate the proper feedback for classification type feedback.
 
     Args:
         gt_file: Path to ground truth file
@@ -355,7 +355,7 @@ def get_classificaton_score_feedback(
     metadata: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Calculates and returns feedback on the accuracy of classification
+    Calculate feedback on the accuracy of classification.
 
     Args:
         gt_file: Path to ground truth file
@@ -366,7 +366,6 @@ def get_classificaton_score_feedback(
     Returns:
         Dictionary containing feedback with feedback_ids as keys
     """
-
     ground_truth = read_feedback_file(
         read_gt_csv_file(gt_file), None, metadata, check_constrained=False
     )
@@ -378,9 +377,9 @@ def get_classificaton_score_feedback(
 
     # Go through results and count number correct
     num_correct = 0
-    for id in results.keys():
-        r = int(np.argmax([float(i) for i in results[id]], axis=0))
-        g = int(ground_truth[id][metadata["columns"][0]])
+    for idx in results.keys():
+        r = int(np.argmax([float(i) for i in results[idx]], axis=0))
+        g = int(ground_truth[idx][metadata["columns"][0]])
         if r == g:
             num_correct += 1
 
@@ -395,7 +394,7 @@ def get_characterization_feedback(
     metadata: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Calculates and returns the proper feedback for characterization type feedback
+    Calculate the proper feedback for characterization type feedback.
 
     Args:
         gt_file: Path to ground truth file
@@ -459,7 +458,7 @@ def get_levenshtein_feedback(
     metadata: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Calculates and returns the proper feedback for levenshtein type feedback.
+    Calculate the proper feedback for levenshtein type feedback.
 
     Args:
         gt_file: Path to ground truth file
@@ -496,7 +495,7 @@ def get_cluster_feedback(
     metadata: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Calculates and returns the proper feedback for cluster type feedback.
+    Calculate the proper feedback for cluster type feedback.
 
     Args:
         gt_file: Path to ground truth file
@@ -527,10 +526,11 @@ def get_cluster_feedback(
         for key in sorted(feedback_ids):
             gt_list.append([float(x) for x in ground_truth[key]])
             r_list.append([float(x) for x in results[key]])
-    except:
+    except Exception:
         raise ServerError(
             "MissingIds",
-            "Some requested Ids are missing from either ground truth or results file for the current round",
+            """Some requested Ids are missing from either ground truth or results
+            file for the current round""",
         )
 
     gt_np = np.array(gt_list).reshape(len(gt_list))

@@ -65,7 +65,7 @@ def m_num_stats(p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         first_novel_indx = len(gt_novel) + 1
     else:
         first_novel_indx = np.where(gt_novel == 1)[0][0] + 1
-    res[f"GT_indx"] = first_novel_indx
+    res["GT_indx"] = first_novel_indx
 
     for thresh in DETECT_THRESH_:
         res[f"P_indx_{thresh}"] = get_first_detect_novelty(p_novel, thresh)
@@ -93,7 +93,6 @@ def m_ndp(p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test") ->
         )
 
     def get_all_scores_ndp(thresh):
-        add_suffix = lambda x: f"{x}_{thresh}"
         preds = p_novel > thresh
         gt_novel_ = gt_novel
         if mode == "post_novelty":
@@ -103,14 +102,14 @@ def m_ndp(p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test") ->
                 gt_novel_ = gt_novel[post_novel_idx:]
             else:
                 return {
-                    add_suffix("accuracy"): -1,
-                    add_suffix("precision"): -1,
-                    add_suffix("recall"): -1,
-                    add_suffix("f1_score"): -1,
-                    add_suffix("TP"): -1,
-                    add_suffix("FP"): -1,
-                    add_suffix("TN"): -1,
-                    add_suffix("FN"): -1,
+                    f"accuracy_{thresh}": -1,
+                    f"precision_{thresh}": -1,
+                    f"recall_{thresh}": -1,
+                    f"f1_score_{thresh}": -1,
+                    f"TP_{thresh}": -1,
+                    f"FP_{thresh}": -1,
+                    f"TN_{thresh}": -1,
+                    f"FN_{thresh}": -1,
                 }
         elif mode == "pre_novelty":
             if any(gt_novel != 0) and not all(gt_novel != 0):
@@ -138,14 +137,14 @@ def m_ndp(p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test") ->
             f1_score = 2 * precision * recall / (precision + recall)
 
         return {
-            add_suffix("accuracy"): round(acc, 5),
-            add_suffix("precision"): round(precision, 5),
-            add_suffix("recall"): round(recall, 5),
-            add_suffix("f1_score"): round(f1_score, 5),
-            add_suffix("TP"): tp,
-            add_suffix("FP"): fp,
-            add_suffix("TN"): tn,
-            add_suffix("FN"): fn,
+            f"accuracy_{thresh}": round(acc, 5),
+            f"precision_{thresh}": round(precision, 5),
+            f"recall_{thresh}": round(recall, 5),
+            f"f1_score_{thresh}": round(f1_score, 5),
+            f"TP_{thresh}": tp,
+            f"FP_{thresh}": fp,
+            f"TN_{thresh}": tn,
+            f"FN_{thresh}": fn,
         }
 
     res = {}
@@ -174,7 +173,6 @@ def m_acc(
     Returns:
         Dictionary with results
     """
-    # assert len(gt_novel) > 999, ('Assuming tests are 1000 at least.')
     # full test
     batch_size = round_size
     results = {}
@@ -190,7 +188,6 @@ def m_acc(
             first_novel_indx = np.where(gt_novel == 1)[0][0] + 1
 
         if first_novel_indx == len(gt_novel) + 1:
-            # print('===============TestWarning: No novelty in this test.')
             results["pre_top1"] = top1_accuracy(p_class, gt_class, txt="pre_top1")
             results["pre_top3"] = top3_accuracy(p_class, gt_class, txt="pre_top3")
             results["post_top1"] = -1
@@ -200,8 +197,6 @@ def m_acc(
             results["post_std_top1"] = -1
             results["post_std_top3"] = -1
         else:
-            # assert first_novel_indx < len(
-            #     gt_novel) - 500, ('Needs to change for asymptotic performance.')
             # pre_novelty
             if first_novel_indx == 0:
                 results["pre_top1"] = -1
@@ -387,7 +382,6 @@ def m_accuracy_on_novel(
     """
     check_class_validity(p_class, gt_class)
     if np.sum(gt_novel) < 1:
-        # print('===============TestWarning: No novelty in this test.')
         return {"top3_acc_novel_only": -1, "top1_acc_novel_only": -1}
     p_class = p_class[gt_novel == 1]
     gt_class = gt_class[gt_novel == 1]

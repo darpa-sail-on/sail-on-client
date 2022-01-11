@@ -53,6 +53,8 @@ class ActivityRecognitionFeedback(Feedback):
             test_id,
             feedback_type,
         )
+        self.current_round: int = -1
+        self.budget: int = first_budget
 
     def get_labeled_feedback(
         self, round_id: int, images_id_list: list, image_names: list
