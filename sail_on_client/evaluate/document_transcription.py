@@ -113,7 +113,7 @@ class DocumentTranscriptionMetrics(ProgramMetrics):
             f"top3_accuracy_round_{round_id}": top3_acc,
         }
 
-    def m_num(self, p_novel: DataFrame, gt_novel: DataFrame) -> float:
+    def m_num(self, p_novel: DataFrame, gt_novel: DataFrame) -> Dict:
         """
         m_num function.
 

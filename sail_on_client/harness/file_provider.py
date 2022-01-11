@@ -23,7 +23,7 @@ import os
 import glob
 import uuid
 import traceback
-from typing import List, Dict, Any, IO, Optional
+from typing import List, Dict, Any, Optional
 from io import BytesIO
 
 
@@ -85,7 +85,7 @@ class FileProvider:
             raise ServerError(
                 "metadata_not_found",
                 f"Metadata file for Test Id {test_id} could not be found",
-                traceback.format_stack(),
+                "".join(traceback.format_stack()),
             )
 
         hints = []
@@ -134,7 +134,7 @@ class FileProvider:
             Dictionary with the list of tests and seed used for generating tests
         """
 
-        def _strip_id(filename):
+        def _strip_id(filename: str) -> str:
             return os.path.splitext(os.path.basename(filename))[0]
 
         file_location = os.path.join(self.folder, protocol, domain, "test_ids.csv")
@@ -191,7 +191,7 @@ class FileProvider:
                 raise ServerError(
                     "test_id_invalid",
                     f"Test Id {test_id} could not be matched to a specific file",
-                    traceback.format_stack(),
+                    "".join(traceback.format_stack()),
                 )
 
         session_id = str(uuid.uuid4())
@@ -213,7 +213,7 @@ class FileProvider:
 
     def dataset_request(
         self, session_id: str, test_id: str, round_id: int
-    ) -> Optional[IO]:
+    ) -> Optional[BytesIO]:
         """
         Request a dataset.
 
@@ -244,7 +244,7 @@ class FileProvider:
             raise ServerError(
                 "test_id_invalid",
                 f"Test Id {test_id} could not be matched to a specific file",
-                traceback.format_stack(),
+                "".join(traceback.format_stack()),
             )
 
         metadata = self.get_test_metadata(session_id, test_id, False)
@@ -277,7 +277,7 @@ class FileProvider:
                 raise RoundError(
                     "no_defined_rounds",
                     f"round_size not defined in metadata for test id {test_id}",
-                    traceback.format_stack(),
+                    "".join(traceback.format_stack()),
                 )
             if round_pos >= len(lines):
                 return None
@@ -301,7 +301,7 @@ class FileProvider:
 
         return temp_file_path
 
-    feedback_request_mapping = {
+    feedback_request_mapping: Dict = {
         "image_classification": {
             ProtocolConstants.CLASSIFICATION: {
                 "function": get_classification_feedback,
@@ -474,7 +474,7 @@ class FileProvider:
             raise ServerError(
                 "test_id_invalid",
                 f"Could not find posted result file(s) for test Id {test_id} with feedback type {feedback_type}",
-                traceback.format_stack(),
+                "".join(traceback.format_stack()),
             )
 
         # Ensure any required hint(s) are present in the session info structure
@@ -586,8 +586,8 @@ class FileProvider:
             session_id=session_id,
             activity="get_feedback",
             test_id=test_id,
-            round_id=feedback_round_id,
-            content={feedback_type: feedback_count, feedback_budget: feedback_budget},
+            round_id=int(feedback_round_id),
+            content={feedback_type: feedback_count, "feedback_budget": feedback_budget},
         )
 
         feedback_csv = BytesIO()
@@ -667,18 +667,20 @@ class FileProvider:
             content_loc="activity",
             return_structure=True,
         )
-
-        prev_types = updated_test_structure["post_results"]["rounds"][
-            str(round_id)
-        ].get("types", [])
-        new_types = prev_types + list(result_files.keys())
-        updated_test_structure["post_results"]["rounds"][str(round_id)][
-            "types"
-        ] = new_types
-        write_session_log_file(
-            updated_test_structure,
-            os.path.join(self.results_folder, f"{str(session_id)}.{str(test_id)}.json"),
-        )
+        if updated_test_structure:
+            prev_types = updated_test_structure["post_results"]["rounds"][
+                str(round_id)
+            ].get("types", [])
+            new_types = prev_types + list(result_files.keys())
+            updated_test_structure["post_results"]["rounds"][str(round_id)][
+                "types"
+            ] = new_types
+            write_session_log_file(
+                updated_test_structure,
+                os.path.join(
+                    self.results_folder, f"{str(session_id)}.{str(test_id)}.json"
+                ),
+            )
 
     def complete_test(self, session_id: str, test_id: str) -> None:
         """

@@ -17,7 +17,7 @@ from typing import Dict
 DETECT_THRESH_ = [0.175, 0.225, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
 
 
-def _get_threshold(p_novel):
+def _get_threshold(p_novel: np.ndarray) -> np.ndarray:
     return np.min(p_novel) + ((np.max(p_novel) - np.min(p_novel)) / 2.0)
 
 
@@ -92,8 +92,8 @@ def m_ndp(p_novel: np.ndarray, gt_novel: np.ndarray, mode: str = "full_test") ->
             "Mode should be one of ['full_test','pre_novelty', 'post_novelty']"
         )
 
-    def get_all_scores_ndp(thresh):
-        preds = p_novel > thresh
+    def get_all_scores_ndp(thresh: float) -> Dict:
+        preds: np.ndarray = p_novel > thresh
         gt_novel_ = gt_novel
         if mode == "post_novelty":
             if any(gt_novel != 0):

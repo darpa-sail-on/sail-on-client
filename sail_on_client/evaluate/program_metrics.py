@@ -59,7 +59,7 @@ class ProgramMetrics(ABC):
         """
 
     @abstractmethod
-    def m_num(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> float:
+    def m_num(self, p_novel: np.ndarray, gt_novel: np.ndarray) -> Dict:
         """
         m_num abstract function.
 

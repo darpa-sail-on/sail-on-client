@@ -436,7 +436,7 @@ def get_characterization_feedback(
     }
 
 
-def _ensure_space(input_str):
+def _ensure_space(input_str: str) -> str:
     return " ".join(
         [
             x.strip()
