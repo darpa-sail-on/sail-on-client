@@ -22,19 +22,15 @@ Client and Protocols for DARPA sail-on
 
 2. Clone the repositories associated with different components in a working directory
     ```
-      git clone https://github.com/darpa-sail-on/Sail_On_Evaluate.git
-      git clone https://github.com/darpa-sail-on/Sail-On-API.git
       git clone https://github.com/darpa-sail-on/sail-on-client.git
     ```
-   This would create Sail_On_Evaluate,
-   Sail-On-API and sail-on-client directories in your working directory
+   This would create sail-on-client directories in your working directory
 
 
 3. Install the different components in a virtual environment
    ```
      cd sail-on-client
      poetry install
-     poetry run pip install ../Sail-On-API/ ../Sail_On_Evaluate/
      poetry shell
    ```
 

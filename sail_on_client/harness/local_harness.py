@@ -1,7 +1,7 @@
 """Implementation of T&E Harness for running experiments locally."""
 
-from sail_on.api.file_provider import FileProvider
-from sail_on.api.file_provider import get_session_info
+from sail_on_client.harness.file_provider import FileProvider
+from sail_on_client.harness.file_provider_fn import get_session_info
 from sail_on_client.errors import RoundError as ClientRoundError
 from sail_on_client.evaluate import create_metric_instance
 from sail_on_client.harness.test_and_evaluation_harness import TestAndEvaluationHarness

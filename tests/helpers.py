@@ -11,7 +11,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from sail_on.api import server
-from sail_on.api.file_provider import FileProvider
+from sail_on_client.harness.file_provider import FileProvider
 from sail_on_client.agent.pre_computed_detector import PreComputedONDAgent
 from sail_on_client.agent.pre_computed_detector import PreComputedCONDDAAgent
 from sail_on_client.harness.local_harness import LocalHarness
