@@ -63,11 +63,10 @@ jobs:
         run: poetry publish -r testpypi --verbose
         working-directory: sail-on-client
 
-      # - name: Publish package
-      #   uses: pypa/gh-action-pypi-publish@release/v1
-      #   with:
-      #     print_hash: true
-      #     verbose: true
-      #     user: __token__
-      #     password: ${{ secrets.PYPI_API_TOKEN }}
-      #   working-directory: sail-on-client
+      - name: Configure pypi repository
+        run: poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+        working-directory: sail-on-client
+
+      - name: Publish package to PyPI
+        run: poetry publish --verbose
+        working-directory: sail-on-client
