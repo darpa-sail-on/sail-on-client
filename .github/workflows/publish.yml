@@ -1,0 +1,69 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "[0-9].[0-9]+.[0.9]+"
+      - "[0-9].[0-9]+.[0.9]+-alpha.[0.9]+"
+
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
+          version: 1.1.11
+
+      - name: Capture package version
+        run: echo "::set-output name=client-version::$(poetry version --short| sed 's/[()]//g')"
+        id: client-version
+
+      - name: Capture version tag
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        id: tag-version
+
+      - name: Verify that tag version matches package version
+        if: steps.client-version.outputs.client-version != steps.tag-version.outputs.tag-version
+        uses: actions/github-script@v5
+        with:
+          script: |
+            core.setFailed("Mismatch between package version and tag version")
+
+      - name: Build source and wheel for distribution
+        run: poetry build
+        working-directory: sail-on-client
+
+      - name: Publish package to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          print_hash: true
+          verbose: true
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          print_hash: true
+          verbose: true
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
