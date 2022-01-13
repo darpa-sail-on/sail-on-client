@@ -47,7 +47,7 @@ jobs:
         uses: actions/github-script@v5
         with:
           script: |
-            core.setFailed("Mismatch between package version and tag version")
+            core.setFailed("Mismatch between package version ${{steps.client-version.outputs.client-version}} and tag version ${{steps.tag-version.outputs.tag-version}}")
 
       - name: Build source and wheel for distribution
         run: poetry build
