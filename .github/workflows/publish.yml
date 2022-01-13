@@ -60,7 +60,7 @@ jobs:
       - name: Publish package to TestPyPI
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        run: poetry publish -r testpypi--verbose
+        run: poetry publish -r testpypi --verbose
         working-directory: sail-on-client
 
       # - name: Publish package
