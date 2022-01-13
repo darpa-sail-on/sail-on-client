@@ -1,3 +1,3 @@
 """Sail-on client package."""
 
-__version__ = "0.24.0-alpha.2"
+__version__ = "0.24.0-alpha.3"
