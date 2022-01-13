@@ -38,7 +38,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Capture version tag
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: echo "::set-output name=tag-version::${GITHUB_REF#refs/*/}"
         id: tag-version
         working-directory: sail-on-client
 
