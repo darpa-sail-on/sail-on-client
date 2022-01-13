@@ -35,10 +35,12 @@ jobs:
       - name: Capture package version
         run: echo "::set-output name=client-version::$(poetry version --short| sed 's/[()]//g')"
         id: client-version
+        working-directory: sail-on-client
 
       - name: Capture version tag
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
         id: tag-version
+        working-directory: sail-on-client
 
       - name: Verify that tag version matches package version
         if: steps.client-version.outputs.client-version != steps.tag-version.outputs.tag-version
@@ -59,11 +61,13 @@ jobs:
           user: __token__
           password: ${{ secrets.TEST_PYPI_API_TOKEN }}
           repository_url: https://test.pypi.org/legacy/
+        working-directory: sail-on-client
 
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          print_hash: true
-          verbose: true
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
+      # - name: Publish package
+      #   uses: pypa/gh-action-pypi-publish@release/v1
+      #   with:
+      #     print_hash: true
+      #     verbose: true
+      #     user: __token__
+      #     password: ${{ secrets.PYPI_API_TOKEN }}
+      #   working-directory: sail-on-client
