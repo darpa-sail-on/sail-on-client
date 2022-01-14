@@ -53,16 +53,6 @@ jobs:
         run: poetry build
         working-directory: sail-on-client
 
-      - name: Configure test pypi repository
-        run: |
-          poetry config repositories.testpypi https://test.pypi.org/simple
-          poetry config http-basic.testpypi __token__ ${{ secrets.TEST_PYPI_API_TOKEN }}
-        working-directory: sail-on-client
-
-      - name: Publish package to TestPyPI
-        run: poetry publish -r testpypi --verbose
-        working-directory: sail-on-client
-
       - name: Configure pypi repository
         run: poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
         working-directory: sail-on-client
