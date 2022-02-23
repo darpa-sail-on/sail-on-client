@@ -368,11 +368,11 @@
 <h2>Test And Evaluation Harness<a class="headerlink" href="#test-and-evaluation-harness" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.test_and_evaluation_harness.</span></span><span class="sig-name descname"><span class="pre">TestAndEvaluationHarness</span></span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.test_and_evaluation_harness.</span></span><span class="sig-name descname"><span class="pre">TestAndEvaluationHarness</span></span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract interface for test and evaluation harness.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mark test as completed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -392,7 +392,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request data for evaluation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -413,7 +413,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get results for test(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -434,7 +434,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get results for round(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -455,7 +455,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.from_config">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instantiate a new instance of this class given the configuration
 JSON-compliant dictionary encapsulating initialization arguments.</p>
 <p>This base method is adequate without modification when a class’s
@@ -520,7 +520,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>~C</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">C</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">Configurable</span></code>)</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Constructed instance from the provided config.</p>
@@ -541,7 +541,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_default_config">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -576,7 +576,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get Labels from the server based provided one or more example ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -599,7 +599,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_impls">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_impls" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_impls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -609,7 +609,7 @@ may be overridden to change what environment and entry-point extension
 are looked for, respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[~P]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">P</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">Pluggable</span></code>)]]</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Set of discovered class types that are considered “valid”
@@ -621,7 +621,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the metadata json for the specified test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -641,7 +641,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if this class with be detected by SMQTK’s plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -652,7 +652,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post client detector predictions for the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -674,7 +674,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get finished test from an existing session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -691,7 +691,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new session to evaluate the detector using an empirical protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -715,7 +715,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Terminate the session after the evaluation for the protocol is complete.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -732,7 +732,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request Test Identifiers as part of a series of individual tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -762,7 +762,7 @@ define a “valid” type to be be relative to this class.</p>
 <h2>PAR Harness<a class="headerlink" href="#par-harness" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.par_harness.</span></span><span class="sig-name descname"><span class="pre">ParHarness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.par_harness.</span></span><span class="sig-name descname"><span class="pre">ParHarness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_directory</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness" title="Permalink to this definition">¶</a></dt>
 <dd><p>Harness for PAR server.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.complete_test">
@@ -849,7 +849,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.from_config">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instantiate a new instance of this class given the configuration
 JSON-compliant dictionary encapsulating initialization arguments.</p>
 <p>This base method is adequate without modification when a class’s
@@ -914,7 +914,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>~C</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">C</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">Configurable</span></code>)</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Constructed instance from the provided config.</p>
@@ -935,7 +935,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_default_config">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -993,7 +993,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_impls">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_impls" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_impls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -1003,7 +1003,7 @@ may be overridden to change what environment and entry-point extension
 are looked for, respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[~P]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">P</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">Pluggable</span></code>)]]</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Set of discovered class types that are considered “valid”
@@ -1035,7 +1035,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.is_usable">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.is_usable" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.is_usable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if this class with be detected by SMQTK’s plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1172,7 +1172,7 @@ define a “valid” type to be be relative to this class.</p>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Kitware INC..
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
             </div>
           </div>

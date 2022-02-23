@@ -548,11 +548,11 @@
 <h2>Base Class For Metric<a class="headerlink" href="#base-class-for-metric" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.program_metrics.</span></span><span class="sig-name descname"><span class="pre">ProgramMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.program_metrics.</span></span><span class="sig-name descname"><span class="pre">ProgramMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -575,7 +575,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc_round_wise abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -595,7 +595,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_accuracy_on_novel abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -616,7 +616,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_is_cdt_and_is_early abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -640,7 +640,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -660,7 +660,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_failed_reaction abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -682,7 +682,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_post abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -702,7 +702,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_pre abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -722,7 +722,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -742,7 +742,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num_stats abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -767,7 +767,7 @@
 <h2>Activity Recognition Metric<a class="headerlink" href="#activity-recognition-metric" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.activity_recognition.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">video_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.activity_recognition.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">video_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activity Recognition program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc">
@@ -776,9 +776,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
 <li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
 <li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
@@ -799,8 +799,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
 </ul>
 </dd>
@@ -820,9 +820,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -885,10 +885,10 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions with video id for N videos (Dimension: N X 90 [vid,novel_class,88 known class])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes for N videos (Dimension: N X 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -967,8 +967,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions for N videos (Dimension: N X 1)</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions for N videos (Dimension: N X 1)</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections for N videos (Dimension: N X 1)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -1007,7 +1007,7 @@
 <h2>Document Transcription Metric<a class="headerlink" href="#document-transcription-metric" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.document_transcription.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">letter_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slant_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.document_transcription.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">letter_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slant_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document transcription program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc">
@@ -1016,9 +1016,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
 <li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
 <li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
@@ -1039,8 +1039,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
 </ul>
 </dd>
@@ -1062,9 +1062,9 @@ computes top-K accuracy for only the novel samples</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -1132,10 +1132,10 @@ incorrect k-class predictions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X class idx])</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -1220,8 +1220,8 @@ first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -1262,7 +1262,7 @@ number of GT novel samples needed to predict the first true positive.</p>
 <h2>Image Classification Metric<a class="headerlink" href="#image-classification-metric" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationMetrics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Image Classification program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc">
@@ -1271,9 +1271,9 @@ number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X detection, classification])</p></li>
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X detection, classification])</p></li>
 <li><p><strong>round_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – size of the round</p></li>
 <li><p><strong>asymptotic_start_round</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – asymptotic samples considered for computing metrics</p></li>
 </ul>
@@ -1294,8 +1294,8 @@ number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – class predictions</p></li>
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes</p></li>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – round identifier</p></li>
 </ul>
 </dd>
@@ -1316,11 +1316,11 @@ number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X  prob that sample is novel, prob of known classes])
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X  prob that sample is novel, prob of known classes])
 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X classification])
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension: [img X classification])
 Nx1 vector with ground-truth class for each sample</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: N X [img, classification])
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: N X [img, classification])
 Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p></li>
 </ul>
 </dd>
@@ -1394,13 +1394,13 @@ before first novel sample.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])
 Nx1 vector with each element corresponding to probability of novelty</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])
 Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
-<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
+<li><p><strong>p_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X prob that sample is novel, prob of 88 known classes])
 Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</p></li>
-<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension:  [img X classification])
+<li><p><strong>gt_class</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth classes (Dimension:  [img X classification])
 Nx1 vector with ground-truth class for each sample</p></li>
 <li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – if ‘full_test’ computes on all test samples, if ‘post_novelty’ computes from the first GT
 novel sample.  If ‘pre_novelty’, than everything before novelty introduced.</p></li>
@@ -1493,9 +1493,9 @@ The method computes the number of GT novel samples needed to predict the first t
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])
+<li><p><strong>p_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – detection predictions (Dimension: [img X novel])
 Nx1 vector with each element corresponding to probability of novelty</p></li>
-<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.3.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])
+<li><p><strong>gt_novel</strong> (<a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></a>) – ground truth detections (Dimension: [img X detection])
 Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 </ul>
 </dd>
@@ -1697,7 +1697,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Kitware INC..
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
             </div>
           </div>
