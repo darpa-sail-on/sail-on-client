@@ -44,6 +44,26 @@ in sail_on_client/protocol/configuration.json and skip step 1 of running the ser
 1. [Instructions for running M12 Algorithms](M12-ALGO.md)
 1. [Instructions for running M18 Algorithms](M18-ALGO.md)
 
+
+## Publishing on PYPI
+sail-on-client uses github actions to publish packages on pypi. The action is triggered when a semver tag is pushed to the repository.
+
+We support the following version format <major>.<minor>.<patch> and <major>.<minor>.<patch>-alpha.<alpha-version> for tags.
+To publish a package on pypi, the tag must match with the version maintained in pyproject.toml.
+This is implemented as a mandatory check in the workflow. Poetry provides support for both querying and bumping version via cli.
+Please refer to [version](https://python-poetry.org/docs/cli/#version) for more details.
+
+Thus to publish sail-on-client on pypi use the following commands
+
+1. Bump the version in pyproject.toml using `poetry version <version_rule>`.
+2. Update `__version__` with the new version in `sail_on_client/__init__.py`.
+3. Use poetry version --short to determine the version that would be used in the tag.
+4. Generate and push the tag using
+   ```
+     git tag <package-version>
+     git push origin --tags
+   ```
+
 ## Acknowledgement of Support and Disclaimer
 
 This material is based upon work supported by the Defense Advanced Research Projects Agency (DARPA) under Contract No. HR001120C0055. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the DARPA.
