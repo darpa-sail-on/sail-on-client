@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sail-on-client"
-version = "0.23.0"
+version = "0.24.0"
 description = "Client and Protocols for DARPA sail-on"
 authors = ["Ameya Shringi <ameya.shringi@kitware.com>",
            "Christopher Funk <christopher.funk@kitware.com>",
@@ -23,9 +23,9 @@ tenacity = "^7.0.0"
 matplotlib = "^3.2.2"
 hydra-core = "^1.1.1"
 hydra-colorlog = "^1.1.0"
-tinker-engine = {git = "https://github.com/tinker-engine/tinker-engine.git", rev= "master"}
 nltk = "^3.6.7"
 types-dataclasses = "^0.6.4"
+tinker-engine = "^0.9.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = ">=3.7"

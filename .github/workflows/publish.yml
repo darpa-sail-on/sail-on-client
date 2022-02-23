@@ -1,0 +1,62 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "[0-9].[0-9]+.[0-9]+"
+      - "[0-9].[0-9]+.[0-9]+-alpha.[0-9]+"
+
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sail on client
+        uses: actions/checkout@v2
+        with:
+          path: sail-on-client
+
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+
+      - name: Install poetry
+        uses: snok/install-poetry@v1.1.6
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: false
+          virtualenvs-path: ~/.local/share/poetry-virtualenvs
+          version: 1.1.11
+
+      - name: Capture package version
+        run: echo "::set-output name=client-version::$(poetry version --short| sed 's/[()]//g')"
+        id: client-version
+        working-directory: sail-on-client
+
+      - name: Capture version tag
+        run: echo "::set-output name=tag-version::${GITHUB_REF#refs/*/}"
+        id: tag-version
+        working-directory: sail-on-client
+
+      - name: Verify that tag version matches package version
+        if: steps.client-version.outputs.client-version != steps.tag-version.outputs.tag-version
+        uses: actions/github-script@v5
+        with:
+          script: |
+            core.setFailed("Mismatch between package version ${{steps.client-version.outputs.client-version}} and tag version ${{steps.tag-version.outputs.tag-version}}")
+
+      - name: Build source and wheel for distribution
+        run: poetry build
+        working-directory: sail-on-client
+
+      - name: Configure pypi repository
+        run: poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
+        working-directory: sail-on-client
+
+      - name: Publish package to PyPI
+        run: poetry publish --verbose
+        working-directory: sail-on-client
