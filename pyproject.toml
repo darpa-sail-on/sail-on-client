@@ -8,7 +8,10 @@ authors = ["Ameya Shringi <ameya.shringi@kitware.com>",
            "Adam Kaufman <adam_kaufman@partech.com>"]
 license = "Apache-2.0"
 readme = "README.md"
-packages = [{include = "sail_on_client"}]
+packages = [
+  {include = "sail_on_client"},
+  {include = "hydra_plugins"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
