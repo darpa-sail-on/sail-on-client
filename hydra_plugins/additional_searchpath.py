@@ -18,4 +18,4 @@ class AdditionalSearchPathPlugin(SearchPathPlugin):
             None
         """
         search_path.append(provider="sail-on-client",
-                           path="pkg://additional_config.test")
+                           path="pkg://hydra_plugins.additional_config.test")
