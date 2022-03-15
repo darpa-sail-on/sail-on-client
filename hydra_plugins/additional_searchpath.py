@@ -17,5 +17,4 @@ class AdditionalSearchPathPlugin(SearchPathPlugin):
         Returns:
             None
         """
-        search_path.append(provider="sail-on-client",
-                           path="pkg://hydra_plugins.test")
+        search_path.append(provider="sail-on-client", path="pkg://hydra_plugins.test")
