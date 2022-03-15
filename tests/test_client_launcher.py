@@ -1,6 +1,6 @@
 """Tests for client launcher."""
 
-from hydra import compose, initialize_config_dir
+from hydra import compose, initialize
 from tempfile import TemporaryDirectory
 import os
 import pytest
@@ -21,10 +21,9 @@ def test_client_launcher(temp_save_dir):
     Args:
         temp_save_dir: Path to temporary_directory
     """
-    config_dir = os.path.join(os.path.dirname(__file__), "..", "config", "test")
     test_root = os.path.dirname(__file__)
     config_module = "sail_on_client.configs"
-    initialize_config_dir(config_dir=config_dir)
+    initialize(config_path=None)
     overrides = [
         f"test_root={test_root}",
         f"protocol.smqtk.config.save_dir={temp_save_dir}",
