@@ -266,7 +266,8 @@ def test_feedback_request(
         session_id,
     )
     expected = os.path.join(
-        save_dir, f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
+        save_dir,
+        f"{session_id}.{protocol_name}.1.1.1234.0_{protocol_constant}.csv",
     )
     assert expected == response
 
