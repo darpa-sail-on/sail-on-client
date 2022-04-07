@@ -1,5 +1,5 @@
 defaults:
-  - default
+  - base: base_ond
   - override /algorithms@protocol.smqtk.config.algorithms:
     - override_agent
   - override /harness@protocol.smqtk.config.harness: override_harness
