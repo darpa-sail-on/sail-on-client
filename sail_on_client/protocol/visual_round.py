@@ -104,7 +104,9 @@ class VisualRound:
 
     @skip_stage("WorldDetection")
     def _run_world_change_detection(
-        self, wcd_params: WorldChangeDetectionParams, round_id: int,
+        self,
+        wcd_params: WorldChangeDetectionParams,
+        round_id: int,
     ) -> None:
         """
         Private helper function for detecting that the world has changed.

@@ -209,7 +209,10 @@ class LocalHarness(TestAndEvaluationHarness):
         self.file_provider.post_results(session_id, test_id, round_id, result_content)
 
     def evaluate_round_wise(
-        self, test_id: str, round_id: int, session_id: str,
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
     ) -> Dict[str, Any]:
         """
         Get results for round(s).
@@ -279,7 +282,10 @@ class LocalHarness(TestAndEvaluationHarness):
         results: Dict[str, Union[Dict, float]] = {}
         gt_config = json.load(open(self.gt_config, "r"))
         detection_file_id = os.path.join(
-            self.result_dir, protocol, domain, f"{session_id}.{test_id}_detection.csv",
+            self.result_dir,
+            protocol,
+            domain,
+            f"{session_id}.{test_id}_detection.csv",
         )
         detections = pd.read_csv(detection_file_id, sep=",", header=None, quotechar="|")
         classification_file_id = os.path.join(
@@ -340,7 +346,11 @@ class LocalHarness(TestAndEvaluationHarness):
         m_ndp_post = metric.m_ndp_post(classifications[novel_idx], gt[gt_detection_idx])
         results["m_ndp_post"] = m_ndp_post
         m_acc = metric.m_acc(
-            gt[gt_detection_idx], classifications, gt[gt_classification_idx], 100, 5,
+            gt[gt_detection_idx],
+            classifications,
+            gt[gt_classification_idx],
+            100,
+            5,
         )
         results["m_acc"] = m_acc
         m_acc_failed = metric.m_ndp_failed_reaction(
@@ -351,7 +361,9 @@ class LocalHarness(TestAndEvaluationHarness):
         )
         results["m_acc_failed"] = m_acc_failed
         m_is_cdt_and_is_early = metric.m_is_cdt_and_is_early(
-            m_num_stats["GT_indx"], m_num_stats["P_indx_0.5"], gt.shape[0],
+            m_num_stats["GT_indx"],
+            m_num_stats["P_indx_0.5"],
+            gt.shape[0],
         )
         results["m_is_cdt_and_is_early"] = m_is_cdt_and_is_early
         if baseline_session_id is not None:

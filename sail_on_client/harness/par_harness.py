@@ -214,7 +214,10 @@ class ParHarness(TestAndEvaluationHarness):
             "test_id": test_id,
             "round_id": round_id,
         }
-        response = requests.get(f"{self.url}/session/dataset", params=params,)
+        response = requests.get(
+            f"{self.url}/session/dataset",
+            params=params,
+        )
         if response.status_code == 204:
             raise RoundError("End of Dataset", "The entire dataset has been requested")
         self._check_response(response)
@@ -259,7 +262,10 @@ class ParHarness(TestAndEvaluationHarness):
             "test_id": test_id,
             "feedback_type": feedback_type,
         }
-        response = requests.get(f"{self.url}/session/feedback", params=params,)
+        response = requests.get(
+            f"{self.url}/session/feedback",
+            params=params,
+        )
         self._check_response(response)
         filename = os.path.abspath(
             os.path.join(
@@ -321,7 +327,10 @@ class ParHarness(TestAndEvaluationHarness):
         before_sleep=before_sleep_log(log, logging.INFO),
     )
     def evaluate_round_wise(
-        self, test_id: str, round_id: int, session_id: str,
+        self,
+        test_id: str,
+        round_id: int,
+        session_id: str,
     ) -> Dict[str, Any]:
         """
         Get results for round(s).
@@ -365,7 +374,10 @@ class ParHarness(TestAndEvaluationHarness):
             "test_id": test_id,
             "round_id": round_id,
         }
-        response = requests.get(f"{self.url}/session/evaluations", params=params,)
+        response = requests.get(
+            f"{self.url}/session/evaluations",
+            params=params,
+        )
 
         self._check_response(response)
         return json.loads(response.text)
@@ -413,7 +425,8 @@ class ParHarness(TestAndEvaluationHarness):
             None
         """
         requests.delete(
-            f"{self.url}/test", params={"test_id": test_id, "session_id": session_id},
+            f"{self.url}/test",
+            params={"test_id": test_id, "session_id": session_id},
         )
 
     @retry(
