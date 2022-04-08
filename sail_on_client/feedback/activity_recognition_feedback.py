@@ -156,7 +156,11 @@ class ActivityRecognitionFeedback(Feedback):
                 self.budget = self.budget - len(images_id_list)
                 image_ids = [image_names[int(idx)] for idx in images_id_list]
                 detection_feedback_file = self.interface.get_feedback_request(
-                    image_ids, "detection", self.test_id, round_id, self.session_id,
+                    image_ids,
+                    "detection",
+                    self.test_id,
+                    round_id,
+                    self.session_id,
                 )
                 detection_df = pd.read_csv(
                     detection_feedback_file,

@@ -154,7 +154,9 @@ class FileProvider:
                     f.writelines(test_ids)
                 return {"test_ids": file_location, "generator_seed": "1234"}
             raise ProtocolError(
-                "BadDomain", msg, "".join(traceback.format_stack()),
+                "BadDomain",
+                msg,
+                "".join(traceback.format_stack()),
             )
 
         return {"test_ids": file_location, "generator_seed": "1234"}
