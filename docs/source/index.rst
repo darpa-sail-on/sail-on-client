@@ -83,6 +83,7 @@ Plugins
    :maxdepth: 2
 
    plugins/plugins
+   plugins/hydra_plugins
 
 Saving and Restoring Models
 ---------------------------
