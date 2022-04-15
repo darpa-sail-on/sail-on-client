@@ -56,9 +56,8 @@ Please refer to [version](https://python-poetry.org/docs/cli/#version) for more 
 Thus to publish sail-on-client on pypi use the following commands
 
 1. Bump the version in pyproject.toml using `poetry version <version_rule>`.
-2. Update `__version__` with the new version in `sail_on_client/__init__.py`.
-3. Use poetry version --short to determine the version that would be used in the tag.
-4. Generate and push the tag using
+2. Use poetry version --short to determine the version that would be used in the tag.
+3. Generate and push the tag using
    ```
      git tag <package-version>
      git push origin --tags

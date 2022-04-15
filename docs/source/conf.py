@@ -17,7 +17,10 @@ import sys
 sys.path.insert(0, os.path.abspath("."))
 sys.path.insert(0, os.path.abspath(".."))
 
-from sail_on_client import __version__
+try:
+    from importlib.metadata import version  # type:ignore
+except ModuleNotFoundError:
+    from importlib_metadata import version  # type: ignore
 
 # -- Project information -----------------------------------------------------
 
@@ -27,8 +30,8 @@ author = "Kitware INC."
 
 # TODO: Get the version from the package
 # The full version, including alpha/beta/rc tags
-release = __version__
-version = __version__
+release = version("sail-on-client")
+version = version("sail-on-client")
 
 # -- General configuration ---------------------------------------------------
 
