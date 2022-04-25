@@ -135,6 +135,7 @@ class ONDTest(VisualTest):
         metadata = self.harness.get_test_metadata(self.session_id, test_id)
         redlight_instance = metadata.get("red_light", "")
         feedback_max_ids = metadata.get("feedback_max_ids", 0)
+        pre_novelty_batches = metadata.get("pre_novelty_batches", 0)
         # Initialize feedback object for the domains
         feedback_instance = self._create_feedback_instance(test_id, feedback_max_ids)
 
@@ -142,7 +143,11 @@ class ONDTest(VisualTest):
         algorithm_instance = self.algorithm_attributes.instance
         algorithm_parameters = self.algorithm_attributes.parameters
         algorithm_init_params = InitializeParams(
-            algorithm_parameters, self.session_id, test_id, feedback_instance
+            algorithm_parameters,
+            self.session_id,
+            test_id,
+            pre_novelty_batches,
+            feedback_instance,
         )
         algorithm_instance.execute(algorithm_init_params.get_toolset(), "Initialize")
 

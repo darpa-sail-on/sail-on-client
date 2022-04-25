@@ -97,6 +97,7 @@ class InitializeParams:
     parameters: Dict
     session_id: str
     test_id: str
+    pre_novelty_batches: int
     feedback_instance: Union[
         ImageClassificationFeedback,
         DocumentTranscriptionFeedback,
@@ -115,6 +116,7 @@ class InitializeParams:
         algorithm_toolset["session_id"] = self.session_id
         algorithm_toolset["test_id"] = self.test_id
         algorithm_toolset["test_type"] = ""
+        algorithm_toolset["pre_novelty_batches"] = self.pre_novelty_batches
         if self.feedback_instance:
             algorithm_toolset["FeedbackInstance"] = self.feedback_instance
         return algorithm_toolset
