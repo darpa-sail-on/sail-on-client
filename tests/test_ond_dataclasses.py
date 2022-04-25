@@ -35,6 +35,7 @@ def initialize_params():
         "parameters": {"param1": "foo", "param2": "bar"},
         "session_id": str(uuid.uuid4()),
         "test_id": "OND.10.90001.2100554",
+        "pre_novelty_batches": 5,
         "feedback_instance": None,
     }
 
@@ -152,6 +153,7 @@ def test_initialize_params_get_toolset(initialize_params):
         "param2": "bar",
         "session_id": initialize_params["session_id"],
         "test_id": "OND.10.90001.2100554",
+        "pre_novelty_batches": 5,
         "test_type": "",
     }
 
