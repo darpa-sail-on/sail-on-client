@@ -20,43 +20,7 @@ feedback_image_ids = [
 ]
 
 
-feedback_labels = [
-    [
-        "putting on foundation",
-        "putting on mascara",
-        "putting on eyeliner",
-        "dyeing eyebrows",
-        "applying cream",
-    ],
-    [
-        "putting on eyeliner",
-        "dyeing eyebrows",
-        "applying cream",
-        "putting in contact lenses",
-        "putting on foundation",
-    ],
-    [
-        "putting on mascara",
-        "putting on foundation",
-        "putting on eyeliner",
-        "scrubbing face",
-        "dyeing eyebrows",
-    ],
-    [
-        "putting on eyeliner",
-        "putting on foundation",
-        "putting in contact lenses",
-        "raising eyebrows",
-        "trimming or shaving beard",
-    ],
-    [
-        "applying cream",
-        "putting on eyeliner",
-        "raising eyebrows",
-        "scrubbing face",
-        "putting on foundation",
-    ],
-]
+feedback_labels = [22, 22, 22, 22, 22]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -114,7 +78,7 @@ def test_initialize(
 
 
 @pytest.mark.parametrize(
-    "feedback_mapping", (("classification", ("detection", "classification")),)
+    "feedback_mapping", (("labels", ("detection", "classification")),)
 )
 @pytest.mark.parametrize("protocol_name", ["OND"])
 def test_get_labelled_feedback(
@@ -160,10 +124,7 @@ def test_get_labelled_feedback(
         0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
     )
     assert all(df_labelled.id == feedback_image_ids)
-    assert (
-        df_labelled[["class1", "class2", "class3", "class4", "class5"]].values.tolist()
-        == feedback_labels
-    )
+    assert df_labelled["labels"].tolist() == feedback_labels
 
 
 @pytest.mark.parametrize(
