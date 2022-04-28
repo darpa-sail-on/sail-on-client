@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sail-on-client"
-version = "0.27.0"
+version = "0.28.0"
 description = "Client and Protocols for DARPA sail-on"
 authors = ["Ameya Shringi <ameya.shringi@kitware.com>",
            "Christopher Funk <christopher.funk@kitware.com>",
