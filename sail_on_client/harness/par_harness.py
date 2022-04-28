@@ -105,7 +105,7 @@ class ParHarness(TestAndEvaluationHarness):
 
         response = requests.get(
             f"{self.url}/test/ids",
-            files={
+            files={  # type: ignore
                 "test_requirements": io.StringIO(json.dumps(payload)),
                 "test_assumptions": io.StringIO(contents),
             },
@@ -164,7 +164,7 @@ class ParHarness(TestAndEvaluationHarness):
 
         response = requests.post(
             f"{self.url}/session",
-            files={"test_ids": ids, "configuration": io.StringIO(json.dumps(payload))},
+            files={"test_ids": ids, "configuration": io.StringIO(json.dumps(payload))},  # type: ignore
         )
 
         self._check_response(response)
@@ -316,7 +316,7 @@ class ParHarness(TestAndEvaluationHarness):
                 contents = f.read()
                 files[f"{r_type}_file"] = io.StringIO(contents)
 
-        response = requests.post(f"{self.url}/session/results", files=files)
+        response = requests.post(f"{self.url}/session/results", files=files)  # type: ignore
 
         self._check_response(response)
 
