@@ -7,6 +7,7 @@ from typing import Union, Optional, Dict
 import pandas as pd
 
 SUPPORTED_FEEDBACK = [
+    "labels",
     "classification",
     "score",
     "detection",
@@ -56,7 +57,7 @@ class ActivityRecognitionFeedback(Feedback):
         self.current_round: int = -1
         self.budget: int = first_budget
 
-    def get_labeled_feedback(
+    def get_classification_feedback(
         self, round_id: int, images_id_list: list, image_names: list
     ) -> Union[pd.DataFrame, None]:
         """
@@ -203,7 +204,11 @@ class ActivityRecognitionFeedback(Feedback):
             Either a dataframe or dictionary with score if the request is valid
             for the current round.
         """
-        if self.feedback_type == "classification" or self.feedback_type == "score":
+        if self.feedback_type == "classification":
+            return self.get_classification_feedback(round_id, images_id_list, image_names)
+        elif self.feedback_type == "labels":
+            return self.get_labeled_feedback(round_id, images_id_list, image_names)
+        elif self.feedback_type == "score":
             return super().get_feedback(round_id, images_id_list, image_names)
         elif self.feedback_type == "detection":
             return self.get_detection_feedback(round_id, images_id_list, image_names)

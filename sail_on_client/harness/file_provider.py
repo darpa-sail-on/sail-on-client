@@ -10,8 +10,8 @@ from sail_on_client.harness.file_provider_fn import (
     read_gt_csv_file,
     get_classification_feedback,
     get_classificaton_score_feedback,
-    get_detection_feedback,
-    get_classification_var_feedback,
+    get_single_gt_feedback,
+    get_kinetics_labels_var_feedback,
     get_levenshtein_feedback,
     psuedo_label_feedback,
     write_session_log_file,
@@ -98,6 +98,7 @@ class FileProvider:
             "round_size",
             "feedback_max_ids",
             "pre_novelty_batches",
+            "pre_novelty_training",
             "max_detection_feedback_ids",
         ]
 
@@ -320,7 +321,7 @@ class FileProvider:
                 "budgeted_feedback": False,
             },
             ProtocolConstants.DETECTION: {
-                "function": get_detection_feedback,
+                "function": get_single_gt_feedback,
                 "files": [ProtocolConstants.DETECTION],
                 "columns": [0],
                 "detection_req": ProtocolConstants.SKIP,
@@ -354,11 +355,19 @@ class FileProvider:
         },
         "activity_recognition": {
             ProtocolConstants.CLASSIFICATION: {
-                "function": get_classification_var_feedback,
+                "function": get_kinetics_labels_var_feedback,
                 "files": [ProtocolConstants.CLASSIFICATION],
                 "columns": [5, 10],
                 "detection_req": ProtocolConstants.SKIP,
                 "budgeted_feedback": True,
+            },
+            ProtocolConstants.LABELS:  {
+                "function": get_single_gt_feedback,
+                "files": [ProtocolConstants.CLASSIFICATION],
+                "columns": [2],
+                "detection_req": ProtocolConstants.SKIP,
+                "budgeted_feedback": True,
+                "return_incorrect": ProtocolConstants.CLASSIFICATION
             },
             ProtocolConstants.SCORE: {
                 "function": get_classificaton_score_feedback,
@@ -368,7 +377,7 @@ class FileProvider:
                 "budgeted_feedback": False,
             },
             ProtocolConstants.DETECTION: {
-                "function": get_detection_feedback,
+                "function": get_single_gt_feedback,
                 "files": [ProtocolConstants.DETECTION],
                 "columns": [0],
                 "detection_req": ProtocolConstants.SKIP,
@@ -407,7 +416,6 @@ class FileProvider:
 
         # Ensure feedback type works with session domain
         # and if so, grab the proper files
-
         try:
             feedback_definition = self.feedback_request_mapping[domain][feedback_type]
             file_types = feedback_definition["files"]
@@ -431,6 +439,7 @@ class FileProvider:
         else:
             feedback_budget = int(metadata.get("feedback_max_ids", 0))
 
+        feedback_round_id = 0
         try:
             # Gets the amount of ids already requested for this type of feedback this round and
             # determines whether the limit has already been reached
@@ -447,7 +456,6 @@ class FileProvider:
                     f"Feedback of type {feedback_type} has already been requested on the maximum number of ids",
                 )
         except KeyError:
-            feedback_round_id = str(0)
             feedback_count = 0
 
         ground_truth_file = os.path.join(
