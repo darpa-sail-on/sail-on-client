@@ -205,7 +205,9 @@ class ActivityRecognitionFeedback(Feedback):
             for the current round.
         """
         if self.feedback_type == "classification":
-            return self.get_classification_feedback(round_id, images_id_list, image_names)
+            return self.get_classification_feedback(
+                round_id, images_id_list, image_names
+            )
         elif self.feedback_type == "labels":
             return self.get_labeled_feedback(round_id, images_id_list, image_names)
         elif self.feedback_type == "score":

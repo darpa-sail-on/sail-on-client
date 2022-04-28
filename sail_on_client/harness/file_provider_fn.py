@@ -352,18 +352,26 @@ def get_single_gt_feedback(
     """
     with open(result_files[0], "r") as rf:
         result_reader = csv.reader(rf, delimiter=",")
-        results = read_feedback_file(result_reader, feedback_ids, metadata, check_constrained=True)
+        results = read_feedback_file(
+            result_reader, feedback_ids, metadata, check_constrained=True
+        )
 
     # if feedback ids not provided, limit ids grabbed from ground truth to the last submitted round
     gt_feedback_ids = []
-    if (feedback_ids is None or len(feedback_ids) == 0):
+    if feedback_ids is None or len(feedback_ids) == 0:
         gt_feedback_ids = list(results.keys())
     else:
         gt_feedback_ids = feedback_ids
-    ground_truth = read_feedback_file(read_gt_csv_file(gt_file), gt_feedback_ids, metadata, check_constrained= gt_feedback_ids is None or len(gt_feedback_ids) == 0)
+    ground_truth = read_feedback_file(
+        read_gt_csv_file(gt_file),
+        gt_feedback_ids,
+        metadata,
+        check_constrained=gt_feedback_ids is None or len(gt_feedback_ids) == 0,
+    )
 
     return_ids = []
-    # For specific feedback types, and when no feedback ids are specified, will only return feedback on instances marked incorrectly
+    # For specific feedback types, and when no feedback ids are specified,
+    # will only return feedback on instances marked incorrectly
     if metadata.get("return_incorrect", None) and not feedback_ids:
         for sample_id in results.keys():
             r = -1
@@ -372,18 +380,17 @@ def get_single_gt_feedback(
             elif metadata["return_incorrect"] == ProtocolConstants.DETECTION:
                 r = int(results[sample_id][1])
             else:
-                raise ProtocolError("FeedbackConfigError",
-                        "The api based feedback config is misconfigured. Please check API")
+                raise ProtocolError(
+                    "FeedbackConfigError",
+                    "The api based feedback config is misconfigured. Please check API",
+                )
             g = int(ground_truth[sample_id][metadata["columns"][0]])
             if r != g:
                 return_ids.append(sample_id)
     else:
-        return_ids = ground_truth.keys()
+        return_ids = list(ground_truth.keys())
 
-    return {
-        x: ground_truth[x][metadata["columns"][0]]
-        for x in return_ids
-    }
+    return {x: ground_truth[x][metadata["columns"][0]] for x in return_ids}
 
 
 def get_classificaton_score_feedback(

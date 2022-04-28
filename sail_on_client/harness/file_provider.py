@@ -361,13 +361,13 @@ class FileProvider:
                 "detection_req": ProtocolConstants.SKIP,
                 "budgeted_feedback": True,
             },
-            ProtocolConstants.LABELS:  {
+            ProtocolConstants.LABELS: {
                 "function": get_single_gt_feedback,
                 "files": [ProtocolConstants.CLASSIFICATION],
                 "columns": [2],
                 "detection_req": ProtocolConstants.SKIP,
                 "budgeted_feedback": True,
-                "return_incorrect": ProtocolConstants.CLASSIFICATION
+                "return_incorrect": ProtocolConstants.CLASSIFICATION,
             },
             ProtocolConstants.SCORE: {
                 "function": get_classificaton_score_feedback,
@@ -439,7 +439,7 @@ class FileProvider:
         else:
             feedback_budget = int(metadata.get("feedback_max_ids", 0))
 
-        feedback_round_id = 0
+        feedback_round_id = str(0)
         try:
             # Gets the amount of ids already requested for this type of feedback this round and
             # determines whether the limit has already been reached

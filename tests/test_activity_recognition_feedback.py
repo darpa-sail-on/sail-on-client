@@ -20,7 +20,7 @@ feedback_image_ids = [
 ]
 
 
-feedback_labels = [22,22,22,22,22]
+feedback_labels = [22, 22, 22, 22, 22]
 
 
 def _initialize_session(par_interface, protocol_name, hints=()):
@@ -124,10 +124,7 @@ def test_get_labelled_feedback(
         0, list(range(FEEDBACK_BUDGET)), feedback_image_ids
     )
     assert all(df_labelled.id == feedback_image_ids)
-    assert (
-        df_labelled["labels"].tolist()
-        == feedback_labels
-    )
+    assert df_labelled["labels"].tolist() == feedback_labels
 
 
 @pytest.mark.parametrize(
