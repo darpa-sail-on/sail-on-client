@@ -26,6 +26,7 @@ hydra-colorlog = "^1.1.0"
 nltk = "^3.6.7"
 types-dataclasses = "^0.6.4"
 tinker-engine = "^0.10.1"
+tqdm = "^4.64.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = ">=3.7"
@@ -69,3 +70,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 sail-on-client = "sail_on_client.client_launcher:client_launcher"
+aggregate-features = "sail_on_client.aggregate_features:main"
