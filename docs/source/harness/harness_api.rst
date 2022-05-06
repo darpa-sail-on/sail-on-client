@@ -49,8 +49,6 @@ File Provider Utility Methods
 
 .. autofunction:: sail_on_client.harness.file_provider_fn.get_detection_feedback
 
-.. autofunction:: sail_on_client.harness.file_provider_fn.get_classification_score_feedback
-
 .. autofunction:: sail_on_client.harness.file_provider_fn.get_characterization_feedback
 
 .. autofunction:: sail_on_client.harness.file_provider_fn.get_levenshtein_feedback
