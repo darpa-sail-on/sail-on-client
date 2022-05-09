@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Harness</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -362,14 +362,14 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="harness">
+  <div class="section" id="harness">
 <h1>Harness<a class="headerlink" href="#harness" title="Permalink to this headline">¶</a></h1>
 <p>Harnesses are used for testing and evaluating TA2 agents. The
 evaluation can be conducted using a server setup by TA1 or by
 providing the files containing ground truth and metadata
 associated with the tests. We support two harnesses for
 sail-on-client. These harnesses are subclasses of <code class="code docutils literal notranslate"><span class="pre">TestAndEvaluationHarness</span></code>.</p>
-<section id="local-harness">
+<div class="section" id="local-harness">
 <h2>Local Harness<a class="headerlink" href="#local-harness" title="Permalink to this headline">¶</a></h2>
 <p><code class="code docutils literal notranslate"><span class="pre">LocalHarness</span></code> is primarily used for replicating the capabilities of
 <code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> without using the server. This allows local testing without
@@ -380,8 +380,8 @@ the files it requires 3 parameters:</p>
 <li><p><code class="code docutils literal notranslate"><span class="pre">gt_dir</span></code>: Root directory where ground truth is stored</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">gt_config</span></code>: A json file with column mapping for ground truth</p></li>
 </ol>
-</section>
-<section id="par-harness">
+</div>
+<div class="section" id="par-harness">
 <h2>PAR Harness<a class="headerlink" href="#par-harness" title="Permalink to this headline">¶</a></h2>
 <p><code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> is primarily responsible for communicating with the evaluation
 server setup by the TA1 team. The interface relies on RESTful api <a class="reference internal" href="#rest-api"><span class="std std-ref">(detailed in the next section)</span></a>  to provide the
@@ -396,7 +396,7 @@ following features</p>
 <li><p>Provide feedback as requested by the algorithm after the results for a batch have been
 submitted.</p></li>
 </ol>
-<section id="rest-api">
+<div class="section" id="rest-api">
 <h3>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline">¶</a></h3>
 <p>This section provides a detailed description of the RESTful api used for communication.</p>
 <table class="docutils align-default">
@@ -545,9 +545,9 @@ the protocol.</p></li>
 </tr>
 </tbody>
 </table>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
           </div>

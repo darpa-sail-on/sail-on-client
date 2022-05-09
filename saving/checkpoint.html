@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Saving And Restoring Attributes of Algorithm</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -362,9 +362,9 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="saving-and-restoring-attributes-of-algorithm">
+  <div class="section" id="saving-and-restoring-attributes-of-algorithm">
 <h1>Saving And Restoring Attributes of Algorithm<a class="headerlink" href="#saving-and-restoring-attributes-of-algorithm" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>We rely on <code class="code docutils literal notranslate"><span class="pre">Checkpoint</span></code> mixin to save and restore attribute of an algorithm.
 The mixin can be added to an adaptor associated with an algorithm to provide
@@ -383,10 +383,10 @@ videos as keys. Thus checkpointing can be used to skip steps for a protocol
 but it shouldn’t be used on a sequence of videos that is different from
 the original sequence. This would result in undefined behavior.</p>
 </div>
-</section>
-<section id="sample-detector-adapter-and-configuration-parameters">
+</div>
+<div class="section" id="sample-detector-adapter-and-configuration-parameters">
 <h2>Sample Detector, Adapter and Configuration Parameters<a class="headerlink" href="#sample-detector-adapter-and-configuration-parameters" title="Permalink to this headline">¶</a></h2>
-<section id="sample-detector">
+<div class="section" id="sample-detector">
 <h3>Sample Detector<a class="headerlink" href="#sample-detector" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -420,8 +420,8 @@ the original sequence. This would result in undefined behavior.</p>
 <span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">Checkpointer</span><span class="p">,</span> <span class="n">MockONDAgent</span><span class="p">):</span>
 </pre></div>
 </div>
-</section>
-<section id="sample-adapter">
+</div>
+<div class="section" id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -461,17 +461,17 @@ the original sequence. This would result in undefined behavior.</p>
 <span class="s2">        Overriden method to compare two mock adapters.</span>
 </pre></div>
 </div>
-</section>
-<section id="sample-configuration">
+</div>
+<div class="section" id="sample-configuration">
 <h3>Sample Configuration<a class="headerlink" href="#sample-configuration" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The configuration options used for saving attributes are highlighted in the
 examples below.</p>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
           </div>

@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -365,41 +365,41 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="continuous-open-set-novelty-detection-discovery-adaptation-condda">
+  <div class="section" id="continuous-open-set-novelty-detection-discovery-adaptation-condda">
 <h1>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)<a class="headerlink" href="#continuous-open-set-novelty-detection-discovery-adaptation-condda" title="Permalink to this headline">¶</a></h1>
 <p><strong>K+D+1 classification where K represents known classes, D are dicovered classes, 1 are all unknown classes</strong></p>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This combines classification with novelty/object discovery (and is more natural
 for Class Novelty). A TA2 agent starts with a K+1-way classification model (K known,
 1 unknown) as in OND. During testing, the TA2 agent will discover clusters of
 novelty (e.g., discover new classes) and accordingly add those as separate
 classes in the prediction space (i.e., one of D discovered classes).</p>
-</section>
-<section id="prediction-space">
+</div>
+<div class="section" id="prediction-space">
 <h2>Prediction Space<a class="headerlink" href="#prediction-space" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Binary Classification Score: <span class="math notranslate nohighlight">\(P_{world\_changed}\)</span></p></li>
 <li><p>K + D + 1 Characterization Score: <span class="math notranslate nohighlight">\(P_{class} = [ p_{unknown}, p_1, ..., p_k, p_{cluster0}, ..., p_{clusterU}]\)</span></p></li>
 </ol>
-</section>
-<section id="workflow-for-condda">
+</div>
+<div class="section" id="workflow-for-condda">
 <h2>WorkFlow For CONDDA<a class="headerlink" href="#workflow-for-condda" title="Permalink to this headline">¶</a></h2>
 <p>This section provides detailed workflow of the system in the evaluation condition</p>
-<section id="condda-workflow-with-red-light">
+<div class="section" id="condda-workflow-with-red-light">
 <h3>CONDDA Workflow With Red Light<a class="headerlink" href="#condda-workflow-with-red-light" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="Workflow for CONDDA without red light" src="../_images/CONDDA-Updated.png" />
-</figure>
-</section>
-<section id="id1">
+</div>
+</div>
+<div class="section" id="id1">
 <h3>CONDDA Workflow With Red Light<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="Workflow for CONDDA with red light" src="../_images/CONDDA-With-Red-Light-Updated.png" />
-</figure>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
           </div>

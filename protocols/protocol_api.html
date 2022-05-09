@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Protocol API</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -364,13 +364,16 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="protocol-api">
+  <div class="section" id="protocol-api">
 <h1>Protocol API<a class="headerlink" href="#protocol-api" title="Permalink to this headline">¶</a></h1>
-<section id="visual-protocol-api">
+<div class="section" id="visual-protocol-api">
 <h2>Visual Protocol API<a class="headerlink" href="#visual-protocol-api" title="Permalink to this headline">¶</a></h2>
 <p>Interfaces that are common across OND and CONDDA protocol</p>
-<section id="visual-protocol-dataclasses">
-<h3>Visual Protocol Dataclasses<a class="headerlink" href="#visual-protocol-dataclasses" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-sail_on_client.protocol.visual_dataclasses">
+<span id="visual-protocol-dataclasses"></span><h3>Visual Protocol Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.visual_dataclasses" title="Permalink to this headline">¶</a></h3>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#sail_on_client/protocol/visual_dataclasses.py"><span>sail_on_client/protocol/visual_dataclasses.py</span></a></p>
+<hr class="docutils" />
+<p>Common dataclasses for visual protocols.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">FeatureExtractionParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams" title="Permalink to this definition">¶</a></dt>
@@ -413,9 +416,12 @@
 
 </dd></dl>
 
-</section>
-<section id="visual-round">
-<h3>Visual Round<a class="headerlink" href="#visual-round" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-sail_on_client.protocol.visual_round">
+<span id="visual-round"></span><h3>Visual Round<a class="headerlink" href="#module-sail_on_client.protocol.visual_round" title="Permalink to this headline">¶</a></h3>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#sail_on_client/protocol/visual_round.py"><span>sail_on_client/protocol/visual_round.py</span></a></p>
+<hr class="docutils" />
+<p>Round for visual protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_round.</span></span><span class="sig-name descname"><span class="pre">VisualRound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound" title="Permalink to this definition">¶</a></dt>
@@ -479,12 +485,15 @@
 
 </dd></dl>
 
-</section>
-<section id="visual-test">
+</div>
+<div class="section" id="visual-test">
 <h3>Visual Test<a class="headerlink" href="#visual-test" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="visual-protocol">
-<h3>Visual Protocol<a class="headerlink" href="#visual-protocol" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-sail_on_client.protocol.visual_protocol">
+<span id="visual-protocol"></span><h3>Visual Protocol<a class="headerlink" href="#module-sail_on_client.protocol.visual_protocol" title="Permalink to this headline">¶</a></h3>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#sail_on_client/protocol/visual_protocol.py"><span>sail_on_client/protocol/visual_protocol.py</span></a></p>
+<hr class="docutils" />
+<p>Visual Protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_protocol.</span></span><span class="sig-name descname"><span class="pre">VisualProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol" title="Permalink to this definition">¶</a></dt>
@@ -501,7 +510,7 @@
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">VisualProtocolType</span></code>, bound= <a class="reference internal" href="#sail_on_client.protocol.visual_protocol.VisualProtocol" title="sail_on_client.protocol.visual_protocol.VisualProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">VisualProtocol</span></code></a>)</p>
+<dd class="field-even"><p>~VisualProtocolType</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>An instance of visual protocol</p>
@@ -570,7 +579,7 @@ may be overridden to change what environment and entry-point extension
 are looked for, respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>(<code class="docutils literal notranslate"><span class="pre">P</span></code>, bound= <code class="xref py py-class docutils literal notranslate"><span class="pre">Pluggable</span></code>)]]</p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[~P]]</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Set of discovered class types that are considered “valid”
@@ -604,27 +613,30 @@ define a “valid” type to be be relative to this class.</p>
 
 </dd></dl>
 
-</section>
-</section>
-<section id="ond-api">
+</div>
+</div>
+<div class="section" id="ond-api">
 <h2>OND API<a class="headerlink" href="#ond-api" title="Permalink to this headline">¶</a></h2>
-<section id="ond-dataclasses">
+<div class="section" id="ond-dataclasses">
 <h3>OND Dataclasses<a class="headerlink" href="#ond-dataclasses" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="ond-round">
+</div>
+<div class="section" id="ond-round">
 <h3>OND Round<a class="headerlink" href="#ond-round" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="ond-test">
+</div>
+<div class="section" id="ond-test">
 <h3>OND Test<a class="headerlink" href="#ond-test" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="ond-protocol">
+</div>
+<div class="section" id="ond-protocol">
 <h3>OND Protocol<a class="headerlink" href="#ond-protocol" title="Permalink to this headline">¶</a></h3>
-</section>
-</section>
-<section id="condda-api">
+</div>
+</div>
+<div class="section" id="condda-api">
 <h2>CONDDA API<a class="headerlink" href="#condda-api" title="Permalink to this headline">¶</a></h2>
-<section id="condda-dataclasses">
-<h3>CONDDA Dataclasses<a class="headerlink" href="#condda-dataclasses" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-sail_on_client.protocol.condda_dataclasses">
+<span id="condda-dataclasses"></span><h3>CONDDA Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.condda_dataclasses" title="Permalink to this headline">¶</a></h3>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#sail_on_client/protocol/condda_dataclasses.py"><span>sail_on_client/protocol/condda_dataclasses.py</span></a></p>
+<hr class="docutils" />
+<p>Dataclasses for CONDDA.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="Permalink to this definition">¶</a></dt>
@@ -724,9 +736,12 @@ define a “valid” type to be be relative to this class.</p>
 
 </dd></dl>
 
-</section>
-<section id="condda-round">
-<h3>CONDDA Round<a class="headerlink" href="#condda-round" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-sail_on_client.protocol.condda_round">
+<span id="condda-round"></span><h3>CONDDA Round<a class="headerlink" href="#module-sail_on_client.protocol.condda_round" title="Permalink to this headline">¶</a></h3>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#sail_on_client/protocol/condda_round.py"><span>sail_on_client/protocol/condda_round.py</span></a></p>
+<hr class="docutils" />
+<p>Round for CONDDA.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_round.CONDDARound">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_round.</span></span><span class="sig-name descname"><span class="pre">CONDDARound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound" title="Permalink to this definition">¶</a></dt>
@@ -770,15 +785,15 @@ define a “valid” type to be be relative to this class.</p>
 
 </dd></dl>
 
-</section>
-<section id="condda-test">
+</div>
+<div class="section" id="condda-test">
 <h3>CONDDA Test<a class="headerlink" href="#condda-test" title="Permalink to this headline">¶</a></h3>
-</section>
-<section id="condda-protocol">
+</div>
+<div class="section" id="condda-protocol">
 <h3>CONDDA Protocol<a class="headerlink" href="#condda-protocol" title="Permalink to this headline">¶</a></h3>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
           </div>

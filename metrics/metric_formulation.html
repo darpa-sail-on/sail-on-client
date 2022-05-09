@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Program Metrics</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -375,9 +375,9 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="program-metrics">
+  <div class="section" id="program-metrics">
 <h1>Program Metrics<a class="headerlink" href="#program-metrics" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The sail on metrics evaluates the agents using two criteria</p>
 <ol class="arabic simple">
@@ -386,11 +386,11 @@
 </ol>
 <p>The figure below shows the different points where the metrics
 are calculated.</p>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="Metric In and Across Trials" src="../_images/Metric-Overview.png" />
-</figure>
-</section>
-<section id="symbols-and-terms">
+</div>
+</div>
+<div class="section" id="symbols-and-terms">
 <h2>Symbols and Terms<a class="headerlink" href="#symbols-and-terms" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>L: Novelty Level (L <span class="math notranslate nohighlight">\(\in\)</span> [1,3])</p></li>
@@ -405,10 +405,10 @@ are calculated.</p>
 <li><p><span class="math notranslate nohighlight">\(\beta\)</span>: A Baseline agent</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{E}_{L,C,D,\alpha,\beta}\)</span>: A set of <span class="math notranslate nohighlight">\(\langle\)</span> L,C, D <span class="math notranslate nohighlight">\(\rangle\)</span> on <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
 </ol>
-</section>
-<section id="m1-average-number-of-fns-among-correctly-detected-trials">
+</div>
+<div class="section" id="m1-average-number-of-fns-among-correctly-detected-trials">
 <h2>M1: Average Number of FNs among Correctly Detected Trials<a class="headerlink" href="#m1-average-number-of-fns-among-correctly-detected-trials" title="Permalink to this headline">¶</a></h2>
-<section id="formal-definition">
+<div class="section" id="formal-definition">
 <h3>Formal Definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline">¶</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\delta(\alpha, x)\)</span> be the agent’s distribution on instance x</p>
 <div class="math notranslate nohighlight">
@@ -426,90 +426,90 @@ are calculated.</p>
 \frac{1}{\#CDT(\alpha, \mathcal{E}_\alpha)} * \sum\limits_{T \in \mathcal{E}_\alpha \land CDT(\alpha, T)} FN(\alpha, T) &amp; \#CDT(\alpha, \mathcal{E}_\alpha)  &gt; 0 \\
 \text{N/A} &amp; \text{Otherwise}
 \end{cases}\end{split}\]</div>
-</section>
-<section id="pictorial-representation">
+</div>
+<div class="section" id="pictorial-representation">
 <h3>Pictorial Representation<a class="headerlink" href="#pictorial-representation" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="M1 metric" src="../_images/M1.png" />
-</figure>
-</section>
-</section>
-<section id="m2-percentage-of-correctly-detected-trials">
+</div>
+</div>
+</div>
+<div class="section" id="m2-percentage-of-correctly-detected-trials">
 <h2>M2: Percentage of Correctly Detected Trials<a class="headerlink" href="#m2-percentage-of-correctly-detected-trials" title="Permalink to this headline">¶</a></h2>
-<section id="id1">
+<div class="section" id="id1">
 <h3>Formal Definition<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[CDT_{\%}(\mathcal{E}_\alpha) = \frac{1}{|\mathcal{E}_\alpha|}  \sum\limits_{T\in\mathcal{E}_\alpha}(CDT(\alpha, T) = \text{True})\]</div>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h3>Pictorial Representation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="M2 metric" src="../_images/M2.png" />
-</figure>
-</section>
-</section>
-<section id="m2-1-percentage-of-false-positive-trials">
+</div>
+</div>
+</div>
+<div class="section" id="m2-1-percentage-of-false-positive-trials">
 <h2>M2.1: Percentage of False Positive Trials<a class="headerlink" href="#m2-1-percentage-of-false-positive-trials" title="Permalink to this headline">¶</a></h2>
-<section id="id3">
+<div class="section" id="id3">
 <h3>Formal Definition<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}FP(\alpha, T) = \sum\limits_{x \in T_{pre}}(\delta(\alpha, x) = \delta_{post})\\FP_{\%}(\mathcal{E}_\alpha) = \frac{1}{|\mathcal{E}_\alpha|}\sum\limits_{T\in\mathcal{E}_\alpha}(FP(\alpha, T)&gt;0)\end{aligned}\end{align} \]</div>
-</section>
-<section id="id4">
+</div>
+<div class="section" id="id4">
 <h3>Pictorial Representation<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="M2.1 metric" src="../_images/M2.1.png" />
-</figure>
-</section>
-</section>
-<section id="m3-and-m4-novelty-reaction-performance">
+</div>
+</div>
+</div>
+<div class="section" id="m3-and-m4-novelty-reaction-performance">
 <h2>M3 and M4: Novelty Reaction Performance<a class="headerlink" href="#m3-and-m4-novelty-reaction-performance" title="Permalink to this headline">¶</a></h2>
-<section id="id5">
+<div class="section" id="id5">
 <h3>Formal Definition<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(P_{pre, \beta}\)</span> be baselines average task performance on <span class="math notranslate nohighlight">\(T_{pre}\)</span>
 and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the agents asymptotic task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span></p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}NRP(T) = \frac{P_{post, \alpha}}{P_{pre, \beta}}\\NRP(\mathcal{E}) = \frac{1}{N_\mathcal{E}} \sum\limits_{i=1}^{N_\mathcal{E}} NRP(T_i)\end{aligned}\end{align} \]</div>
-</section>
-<section id="id6">
+</div>
+<div class="section" id="id6">
 <h3>Pictorial Representation<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="M3 and M4 metric" src="../_images/M3.png" />
-</figure>
-</section>
-</section>
-<section id="m5-overall-performance-task-improvement">
+</div>
+</div>
+</div>
+<div class="section" id="m5-overall-performance-task-improvement">
 <h2>M5: Overall Performance Task Improvement<a class="headerlink" href="#m5-overall-performance-task-improvement" title="Permalink to this headline">¶</a></h2>
-<section id="id7">
+<div class="section" id="id7">
 <h3>Formal Definition<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(P_{post, \beta}\)</span> be baselines average task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span>
 and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the agents task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span></p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}OPTI(T) = \frac{P_{post,\alpha}}{P_{post,\alpha} + P_{post, \beta}}\\OPTI = \frac{1}{N_{\mathcal{E}}}\sum\limits_{i=1}^{N_\mathcal{E}}OTPI(T_i)\end{aligned}\end{align} \]</div>
-</section>
-<section id="id8">
+</div>
+<div class="section" id="id8">
 <h3>Pictorial Representation<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="M5 metric" src="../_images/M5.png" />
-</figure>
-</section>
-</section>
-<section id="m6-asymptotic-performance-task-improvement">
+</div>
+</div>
+</div>
+<div class="section" id="m6-asymptotic-performance-task-improvement">
 <h2>M6: Asymptotic Performance Task Improvement<a class="headerlink" href="#m6-asymptotic-performance-task-improvement" title="Permalink to this headline">¶</a></h2>
-<section id="id9">
+<div class="section" id="id9">
 <h3>Formal Definition<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}APTI(T) = \frac{\sum_{i=N_T-m}^{N_T}P_{post,\alpha}}{\sum_{i=N_T-m}^{N_T}P_{post,\beta}}\\APTI = \frac{1}{N_{\mathcal{E}}}\sum\limits_{i=1}^{N_\mathcal{E}}APTI(T_i)\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(m\)</span> is asymptotic width that is domain dependent</p>
-</section>
-<section id="id10">
+</div>
+<div class="section" id="id10">
 <h3>Pictorial Representation<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="M6 metric" src="../_images/M6.png" />
-</figure>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
           </div>

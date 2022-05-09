@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Open World Novelty Detection (OND)</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -365,40 +365,40 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="open-world-novelty-detection-ond">
+  <div class="section" id="open-world-novelty-detection-ond">
 <h1>Open World Novelty Detection (OND)<a class="headerlink" href="#open-world-novelty-detection-ond" title="Permalink to this headline">¶</a></h1>
 <p><strong>K+1 classification where K represents known classes, all unknown classes are grouped together</strong></p>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This is the standard classification setup with an unknown class to flag/reject
 samples that are deemed novel. A TA2 agent can adapt its internal representation
 in any way during testing to model novel samples, but the expected prediction
 space (K+1-classes) remains the same throughout a run.</p>
-</section>
-<section id="prediction-space">
+</div>
+<div class="section" id="prediction-space">
 <h2>Prediction Space<a class="headerlink" href="#prediction-space" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Binary Classification Score: <span class="math notranslate nohighlight">\(P_{world\_changed}\)</span></p></li>
 <li><p>K + 1 Classification Score: <span class="math notranslate nohighlight">\(P_{class} = [ p_{unknown}, p_1, ..., p_k]\)</span></p></li>
 </ol>
-</section>
-<section id="workflow-for-ond">
+</div>
+<div class="section" id="workflow-for-ond">
 <h2>WorkFlow For OND<a class="headerlink" href="#workflow-for-ond" title="Permalink to this headline">¶</a></h2>
 <p>This section provides detailed workflow of the system in the evaluation condition</p>
-<section id="ond-workflow-with-red-light">
+<div class="section" id="ond-workflow-with-red-light">
 <h3>OND Workflow With Red Light<a class="headerlink" href="#ond-workflow-with-red-light" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="Workflow for OND without red light" src="../_images/OND-Updated.png" />
-</figure>
-</section>
-<section id="id1">
+</div>
+</div>
+<div class="section" id="id1">
 <h3>OND Workflow With Red Light<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<figure class="align-center">
+<div class="align-center figure">
 <img alt="Workflow for OND with red light" src="../_images/OND-With-Red-Light-Updated.png" />
-</figure>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
           </div>

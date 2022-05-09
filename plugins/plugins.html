@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Plugins</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -366,17 +366,17 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="plugins">
+  <div class="section" id="plugins">
 <h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>We rely on <a class="reference external" href="https://packaging.python.org/specifications/entry-points/">Entry Points</a> to register an algorithm . The entrypoint specification
 can be used by a python package to register an algorithm by specifying a key value
 pair in setup.py for the package where the key would be the name of the algorithm
 and the value is the path to the algorithm class relative to the package root. Refer
 to <a class="reference internal" href="#sample-detector-and-registration"><span class="std std-ref">the registration section</span></a> for an example.</p>
-</section>
-<section id="functions-used-by-the-protocol">
+</div>
+<div class="section" id="functions-used-by-the-protocol">
 <h2>Functions Used By the Protocol<a class="headerlink" href="#functions-used-by-the-protocol" title="Permalink to this headline">¶</a></h2>
 <p>The protocols assumes that the algorithm have the following functions during evaluation</p>
 <ol class="arabic simple">
@@ -399,13 +399,13 @@ classes and 1 value is reserved for the probability that the sample is novel.</p
 it had provided results for <code class="code docutils literal notranslate"><span class="pre">WorldDetection</span></code> and <code class="code docutils literal notranslate"><span class="pre">NoveltyClassification</span></code>/
 <code class="code docutils literal notranslate"><span class="pre">NoveltyCharacterization</span></code> depending on the protocol.</p></li>
 </ol>
-</section>
-<section id="adapters">
+</div>
+<div class="section" id="adapters">
 <h2>Adapters<a class="headerlink" href="#adapters" title="Permalink to this headline">¶</a></h2>
 <p>Rather than enforcing a strict API for the functions required by the algorithms,
 sail on client provides adapters to fulfill input-output requirements of an algorithm.
 The adapters are provided a dictionary with the parameters obtained from the harness.</p>
-<section id="sample-adapter">
+<div class="section" id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -445,11 +445,11 @@ The adapters are provided a dictionary with the parameters obtained from the har
 <span class="s2">        Overriden method to compare two mock adapters.</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="sample-detector-and-registration">
+</div>
+</div>
+<div class="section" id="sample-detector-and-registration">
 <h2>Sample Detector and Registration<a class="headerlink" href="#sample-detector-and-registration" title="Permalink to this headline">¶</a></h2>
-<section id="sample-detector">
+<div class="section" id="sample-detector">
 <h3>Sample Detector<a class="headerlink" href="#sample-detector" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Construct Mock OND Detector.&quot;&quot;&quot;</span>
@@ -564,8 +564,8 @@ The adapters are provided a dictionary with the parameters obtained from the har
 
 </pre></div>
 </div>
-</section>
-<section id="registering-the-detector">
+</div>
+<div class="section" id="registering-the-detector">
 <h3>Registering the Detector<a class="headerlink" href="#registering-the-detector" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -583,12 +583,11 @@ The adapters are provided a dictionary with the parameters obtained from the har
 
 
 <span class="k">[build-system]</span><span class="w"></span>
-<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;setuptools&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;poetry-core==1.0.4&quot;</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
           </div>

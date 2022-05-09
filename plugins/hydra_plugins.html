@@ -2,8 +2,7 @@
 <html >
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
       <title>Hydra Plugins</title>
     
       <link rel="stylesheet" href="../_static/pygments.css">
@@ -11,6 +10,7 @@
       <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
           <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
+          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
       
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
 
@@ -362,9 +362,9 @@
 <hr>
           <div class="content" role="main">
             
-  <section id="hydra-plugins">
+  <div class="section" id="hydra-plugins">
 <h1>Hydra Plugins<a class="headerlink" href="#hydra-plugins" title="Permalink to this headline">¶</a></h1>
-<section id="introduction">
+<div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>By default the cli supports configurations present in 2 search paths</p>
 <ol class="arabic simple">
@@ -375,8 +375,8 @@
 in multiple packages. An example use case would be an agent that is split across
 multiple python package. In this case, the user could use <a class="reference external" href="https://hydra.cc/docs/advanced/search_path/#creating-a-searchpathplugin">hydra searchpath plugin</a>
 to provide additional directories where the configuration files might be available.</p>
-</section>
-<section id="searchpath-plugin">
+</div>
+<div class="section" id="searchpath-plugin">
 <h2>Searchpath Plugin<a class="headerlink" href="#searchpath-plugin" title="Permalink to this headline">¶</a></h2>
 <p>To create add a new search path to cli, use the following steps</p>
 <ol class="arabic">
@@ -426,8 +426,8 @@ in the plugin. Please refer to <cite>example plugin</cite> for a concrete exampl
 <p>Testing plugins locally can sometimes cause errors with default hydra plugins
 like colorlor. To resolve the issue use <cite>pip install .</cite></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
           </div>
