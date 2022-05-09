@@ -256,7 +256,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Generate docs
-        run: poetry run sphinx-build docs/source/ docs/build/html/
+        run: poetry run sphinx-build -E -a docs/source/ docs/build/html/
         working-directory: sail-on-client
 
       - name: Upload docs
