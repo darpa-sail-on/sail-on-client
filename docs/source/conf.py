@@ -45,6 +45,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinx.ext.autosectionlabel",
     "sphinx_toolbox.more_autodoc.sourcelink",
+    "sphinx.ext.viewcode"
 ]
 
 intersphinx_mapping = {
@@ -89,11 +90,11 @@ github_repository = "https://github.com/darpa-sail-on/sail-on-client"
 
 # Automatically extract typehints when specified and place them in
 # descriptions of the relevant function/method.
-# autodoc_typehints = "description"
+autodoc_typehints = "description"
 
 # Don't show class signature with the class' name.
-# autodoc_class_signature = "separated"
+autodoc_class_signature = "separated"
 
 # Show link of source code at the top of each automodule directive
-# autodoc_show_sourcelink = True
+autodoc_show_sourcelink = True
 
