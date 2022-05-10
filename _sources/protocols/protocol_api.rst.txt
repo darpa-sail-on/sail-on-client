@@ -49,7 +49,7 @@ OND API
 OND Dataclasses
 ^^^^^^^^^^^^^^^
 
-.. autoclass:: sail_on_client.protocol.ond_dataclasses
+.. automodule:: sail_on_client.protocol.ond_dataclasses
     :members:
     :inherited-members:
     :sourcelink:

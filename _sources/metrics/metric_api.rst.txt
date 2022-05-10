@@ -19,7 +19,7 @@ Base Class For Metric
 Activity Recognition Metric
 ---------------------------
 
-.. automodule:: sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics
+.. automodule:: sail_on_client.evaluate.activity_recognition
     :members:
     :inherited-members:
     :sourcelink:
@@ -27,7 +27,7 @@ Activity Recognition Metric
 Document Transcription Metric
 -----------------------------
 
-.. automodule:: sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics
+.. automodule:: sail_on_client.evaluate.document_transcription
     :members:
     :inherited-members:
     :sourcelink:
@@ -35,7 +35,7 @@ Document Transcription Metric
 Image Classification Metric
 ---------------------------
 
-.. automodule:: sail_on_client.evaluate.image_classification.ImageClassificationMetrics
+.. automodule:: sail_on_client.evaluate.image_classification
     :members:
     :inherited-members:
     :sourcelink:

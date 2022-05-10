@@ -664,8 +664,152 @@ define a “valid” type to be be relative to this class.</p>
 </div>
 <div class="section" id="ond-api">
 <h2>OND API<a class="headerlink" href="#ond-api" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="ond-dataclasses">
-<h3>OND Dataclasses<a class="headerlink" href="#ond-dataclasses" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-sail_on_client.protocol.ond_dataclasses">
+<span id="ond-dataclasses"></span><h3>OND Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.ond_dataclasses" title="Permalink to this headline">¶</a></h3>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#sail_on_client/protocol/ond_dataclasses.py"><span>sail_on_client/protocol/ond_dataclasses.py</span></a></p>
+<hr class="docutils" />
+<p>Dataclasses for the protocols.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing attributes of algorithm present in the protocol.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params">
+<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge common parameters with algorithm specific parameters with exclusions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>detector_params</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Dictionary of common parameters</p></li>
+<li><p><strong>exclude_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]) – List of keys that should be excluded in the merge</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version">
+<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute version of an algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A string containing name and the version number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests">
+<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove finished tests from test_ids.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>finished_tests</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of tests that are complete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_novelty_batches</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters that are used to initialize the algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyAdaptationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated novelty adaptation with an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated novelty characterization with an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyClassificationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for storing parameters associated novelty classification in an algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset">
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the data present in the class into a dictionary.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-sail_on_client.protocol.ond_round">
 <span id="ond-round"></span><h3>OND Round<a class="headerlink" href="#module-sail_on_client.protocol.ond_round" title="Permalink to this headline">¶</a></h3>
@@ -703,7 +847,7 @@ define a “valid” type to be be relative to this class.</p>
 <dd><p>Private helper function for adaptation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>na_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NoveltyAdaptationParams</span></code>) – An instance of dataclass with parameters for adaptation</p>
+<dd class="field-odd"><p><strong>na_params</strong> (<a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams" title="sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoveltyAdaptationParams</span></code></a>) – An instance of dataclass with parameters for adaptation</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
@@ -721,7 +865,7 @@ define a “valid” type to be be relative to this class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>nc_params</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">NoveltyClassificationParams</span></code>) – An instance of dataclass with parameters for novelty classification</p></li>
+<li><p><strong>nc_params</strong> (<a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams" title="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">NoveltyClassificationParams</span></code></a>) – An instance of dataclass with parameters for novelty classification</p></li>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Identifier for a round</p></li>
 </ul>
 </dd>
@@ -819,7 +963,7 @@ define a “valid” type to be be relative to this class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>algorithms_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code>]) – All algorithms present in the config</p></li>
+<li><p><strong>algorithms_attributes</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a>]) – All algorithms present in the config</p></li>
 <li><p><strong>algorithm_scores</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>) – Scores for round wise evaluation</p></li>
 <li><p><strong>save_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Directory where the scores are stored</p></li>
 </ul>
@@ -849,7 +993,7 @@ define a “valid” type to be be relative to this class.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>An instance of AlgorithmAttributes</p>
@@ -864,7 +1008,7 @@ define a “valid” type to be be relative to this class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>algorithm_attributes</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code>) – An instance of AlgorithmAttributes</p></li>
+<li><p><strong>algorithm_attributes</strong> (<a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a>) – An instance of AlgorithmAttributes</p></li>
 <li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Domain for the algorithm</p></li>
 <li><p><strong>hints</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List of hints used in the session</p></li>
 <li><p><strong>has_a_session</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Already has a session and we want to resume it</p></li>
@@ -872,7 +1016,7 @@ define a “valid” type to be be relative to this class.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></p>
+<dd class="field-even"><p><a class="reference internal" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes"><code class="xref py py-class docutils literal notranslate"><span class="pre">AlgorithmAttributes</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>An AlgorithmAttributes object with updated session id or test id</p>
