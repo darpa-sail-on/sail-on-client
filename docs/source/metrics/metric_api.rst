@@ -4,63 +4,45 @@ Metric API
 Methods For Metric
 ------------------
 
-.. autofunction:: sail_on_client.evaluate.metrics.m_num
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_num_stats
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_ndp
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_ndp_pre
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_ndp_post
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_ndp_failed_reaction
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_acc
-
-.. autofunction:: sail_on_client.evaluate.metrics.m_accuracy_on_novel
+.. automodule:: sail_on_client.evaluate.metrics
+    :members:
+    :sourcelink:
 
 Base Class For Metric
 ---------------------
 
-.. autoclass:: sail_on_client.evaluate.program_metrics.ProgramMetrics
+.. automodule:: sail_on_client.evaluate.program_metrics
     :members:
     :inherited-members:
+    :sourcelink:
 
 Activity Recognition Metric
 ---------------------------
 
-.. autoclass:: sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics
+.. automodule:: sail_on_client.evaluate.activity_recognition
     :members:
     :inherited-members:
+    :sourcelink:
 
 Document Transcription Metric
 -----------------------------
 
-.. autoclass:: sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics
+.. automodule:: sail_on_client.evaluate.document_transcription
     :members:
     :inherited-members:
+    :sourcelink:
 
 Image Classification Metric
 ---------------------------
 
-.. autoclass:: sail_on_client.evaluate.image_classification.ImageClassificationMetrics
+.. automodule:: sail_on_client.evaluate.image_classification
     :members:
     :inherited-members:
+    :sourcelink:
 
 Utility Methods
 ---------------
 
-.. autofunction:: sail_on_client.evaluate.utils.check_novel_validity
-
-.. autofunction:: sail_on_client.evaluate.utils.check_class_validity
-
-.. autofunction:: sail_on_client.evaluate.utils.topk_accuracy
-
-.. autofunction:: sail_on_client.evaluate.utils.top1_accuracy
-
-.. autofunction:: sail_on_client.evaluate.utils.top3_accuracy
-
-.. autofunction:: sail_on_client.evaluate.utils.get_rolling_stats
-
-.. autofunction:: sail_on_client.evaluate.utils.get_first_detect_novelty
+.. automodule:: sail_on_client.evaluate.utils
+    :members:
+    :sourcelink:

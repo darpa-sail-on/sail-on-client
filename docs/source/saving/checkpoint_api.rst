@@ -4,6 +4,7 @@ Checkpoint API
 Checkpointer Mixin
 ------------------
 
-.. autoclass:: sail_on_client.checkpointer.Checkpointer
+.. automodule:: sail_on_client.checkpointer
     :members:
     :private-members: _save_elementwise_attribute, _restore_elementwise_attribute
+    :sourcelink:

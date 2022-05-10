@@ -44,6 +44,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
     "sphinx.ext.autosectionlabel",
+    "sphinx_toolbox.more_autodoc.sourcelink",
+    "sphinx.ext.viewcode"
 ]
 
 intersphinx_mapping = {
@@ -75,9 +77,24 @@ pygments_style = "sphinx"
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "press"
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
+
+github_username = "as6520"
+github_repository = "https://github.com/darpa-sail-on/sail-on-client"
+
+
+# Automatically extract typehints when specified and place them in
+# descriptions of the relevant function/method.
+autodoc_typehints = "description"
+
+# Don't show class signature with the class' name.
+autodoc_class_signature = "separated"
+
+# Show link of source code at the top of each automodule directive
+autodoc_show_sourcelink = True
+
