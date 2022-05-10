@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.protocol.ond_test &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.protocol.ond_test</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.protocol.ond_test</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Test for OND.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">sail_on_client.protocol.ond_dataclasses</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AlgorithmAttributes</span><span class="p">,</span>
+    <span class="n">InitializeParams</span><span class="p">,</span>
+    <span class="n">NoveltyCharacterizationParams</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.protocol.ond_round</span> <span class="kn">import</span> <span class="n">ONDRound</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.protocol.visual_test</span> <span class="kn">import</span> <span class="n">VisualTest</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.feedback</span> <span class="kn">import</span> <span class="n">create_feedback_instance</span><span class="p">,</span> <span class="n">feedback_type</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.test_and_evaluation_harness</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TestAndEvaluationHarnessType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.utils.utils</span> <span class="kn">import</span> <span class="n">safe_remove</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.utils.decorators</span> <span class="kn">import</span> <span class="n">skip_stage</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.errors</span> <span class="kn">import</span> <span class="n">RoundError</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ONDTest"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_test.ONDTest">[docs]</a><span class="k">class</span> <span class="nc">ONDTest</span><span class="p">(</span><span class="n">VisualTest</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class Representing OND test.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ONDTest.__init__"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_test.ONDTest.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algorithm_attributes</span><span class="p">:</span> <span class="n">AlgorithmAttributes</span><span class="p">,</span>
+        <span class="n">data_root</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">feature_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">harness</span><span class="p">:</span> <span class="n">TestAndEvaluationHarnessType</span><span class="p">,</span>
+        <span class="n">save_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">skip_stages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">use_consolidated_features</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">use_saved_features</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct test for OND.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithm_attributes: An instance of algorithm_attributes</span>
+<span class="sd">            data_root: Root directory for the dataset</span>
+<span class="sd">            domain: Name of the domain for the test</span>
+<span class="sd">            feedback_type: Type of feedback used in the test</span>
+<span class="sd">            harness: An Instance of harness used for T&amp;E</span>
+<span class="sd">            save_dir: The directory where features are saved</span>
+<span class="sd">            session_id: Session identifier for the test</span>
+<span class="sd">            skip_stages: List of stages that would be skipped</span>
+<span class="sd">            use_consolidated_features: Flag for using consolidated features</span>
+<span class="sd">            use_saved_features: Flag for using saved features</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">algorithm_attributes</span><span class="p">,</span>
+            <span class="n">data_root</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">,</span>
+            <span class="n">feature_dir</span><span class="p">,</span>
+            <span class="n">harness</span><span class="p">,</span>
+            <span class="n">save_dir</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="p">,</span>
+            <span class="n">skip_stages</span><span class="p">,</span>
+            <span class="n">use_consolidated_features</span><span class="p">,</span>
+            <span class="n">use_saved_features</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span> <span class="o">=</span> <span class="n">feedback_type</span></div>
+
+<div class="viewcode-block" id="ONDTest._create_feedback_instance"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_test.ONDTest._create_feedback_instance">[docs]</a>    <span class="nd">@skip_stage</span><span class="p">(</span><span class="s2">&quot;CreateFeedbackInstance&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_create_feedback_instance</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">feedback_max_ids</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">feedback_type</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private function for creating feedback object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">           test_id: An identifier for the test</span>
+<span class="sd">           feedback_max_ids: Budget provided in metadata</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            An instance of feedback for the domain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Creating Feedback object&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">feedback_max_ids</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sd">&quot;&quot;&quot;feedback_max_ids was missing from metadata, thus setting</span>
+<span class="sd">                        the feedback budget to 0&quot;&quot;&quot;</span>
+            <span class="p">)</span>
+        <span class="n">feedback_params</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;first_budget&quot;</span><span class="p">:</span> <span class="n">feedback_max_ids</span><span class="p">,</span>
+            <span class="s2">&quot;income_per_batch&quot;</span><span class="p">:</span> <span class="n">feedback_max_ids</span><span class="p">,</span>
+            <span class="s2">&quot;maximum_budget&quot;</span><span class="p">:</span> <span class="n">feedback_max_ids</span><span class="p">,</span>
+            <span class="s2">&quot;interface&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="p">,</span>
+            <span class="s2">&quot;session_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="s2">&quot;test_id&quot;</span><span class="p">:</span> <span class="n">test_id</span><span class="p">,</span>
+            <span class="s2">&quot;feedback_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">feedback_instance</span> <span class="o">=</span> <span class="n">create_feedback_instance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">feedback_params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">feedback_instance</span></div>
+
+    <span class="nd">@skip_stage</span><span class="p">(</span><span class="s2">&quot;NoveltyCharacterization&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_run_novelty_characterization</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">nc_params</span><span class="p">:</span> <span class="n">NoveltyCharacterizationParams</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">characterization_results</span> <span class="o">=</span> <span class="n">algorithm</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="n">nc_params</span><span class="o">.</span><span class="n">get_toolset</span><span class="p">(),</span> <span class="s2">&quot;NoveltyCharacterization&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">characterization_results</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">characterization_results</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">post_results</span><span class="p">(</span>
+                    <span class="n">characterization_results</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;characterization&quot;</span><span class="p">:</span> <span class="n">characterization_results</span><span class="p">}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">post_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No characterization result provided by the algorithm&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ONDTest.__call__"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_test.ONDTest.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core logic for running test in OND.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: An identifier for the test</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Score for the test</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">get_test_metadata</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="n">redlight_instance</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;red_light&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">feedback_max_ids</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_max_ids&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">pre_novelty_batches</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pre_novelty_batches&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Initialize feedback object for the domains</span>
+        <span class="n">feedback_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_feedback_instance</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">feedback_max_ids</span><span class="p">)</span>
+
+        <span class="c1"># Initialize algorithm</span>
+        <span class="n">algorithm_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">instance</span>
+        <span class="n">algorithm_parameters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">parameters</span>
+        <span class="n">algorithm_init_params</span> <span class="o">=</span> <span class="n">InitializeParams</span><span class="p">(</span>
+            <span class="n">algorithm_parameters</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="n">test_id</span><span class="p">,</span>
+            <span class="n">pre_novelty_batches</span><span class="p">,</span>
+            <span class="n">feedback_instance</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">algorithm_instance</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">algorithm_init_params</span><span class="o">.</span><span class="n">get_toolset</span><span class="p">(),</span> <span class="s2">&quot;Initialize&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Restore features</span>
+        <span class="n">features_dict</span><span class="p">,</span> <span class="n">logit_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restore_features</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span>
+
+        <span class="c1"># Initialize Round</span>
+        <span class="n">round_instance</span> <span class="o">=</span> <span class="n">ONDRound</span><span class="p">(</span>
+            <span class="n">algorithm_instance</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data_root</span><span class="p">,</span>
+            <span class="n">features_dict</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="p">,</span>
+            <span class="n">logit_dict</span><span class="p">,</span>
+            <span class="n">redlight_instance</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span><span class="p">,</span>
+            <span class="n">test_id</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">aggregated_features_dict</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">aggregated_logit_dict</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">test_score</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">test_instances</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Run algorithm for multiple rounds</span>
+        <span class="k">for</span> <span class="n">round_id</span> <span class="ow">in</span> <span class="n">count</span><span class="p">(</span><span class="mi">0</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Start round: </span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># see if there is another round available</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">dataset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">dataset_request</span><span class="p">(</span>
+                    <span class="n">test_id</span><span class="p">,</span> <span class="n">round_id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="n">RoundError</span><span class="p">:</span>
+                <span class="c1"># no more rounds available, this test is done.</span>
+                <span class="k">break</span>
+            <span class="n">round_score</span> <span class="o">=</span> <span class="n">round_instance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">round_id</span><span class="p">)</span>
+            <span class="n">test_instances</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">ONDRound</span><span class="o">.</span><span class="n">get_instance_ids</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">round_score</span><span class="p">:</span>
+                <span class="n">test_score</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Round </span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">round_score</span>
+            <span class="p">(</span>
+                <span class="n">aggregated_features_dict</span><span class="p">,</span>
+                <span class="n">aggregated_logit_dict</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_aggregate_features_across_round</span><span class="p">(</span>
+                <span class="n">round_instance</span><span class="p">,</span> <span class="n">aggregated_features_dict</span><span class="p">,</span> <span class="n">aggregated_logit_dict</span>
+            <span class="p">)</span>
+            <span class="c1"># cleanup the dataset file for the round</span>
+            <span class="n">safe_remove</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Round complete: </span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">nc_params</span> <span class="o">=</span> <span class="n">NoveltyCharacterizationParams</span><span class="p">(</span><span class="n">test_instances</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_run_novelty_characterization</span><span class="p">(</span><span class="n">algorithm_instance</span><span class="p">,</span> <span class="n">nc_params</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">complete_test</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_features</span><span class="p">(</span><span class="n">test_id</span><span class="p">,</span> <span class="n">aggregated_features_dict</span><span class="p">,</span> <span class="n">aggregated_logit_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">test_score</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

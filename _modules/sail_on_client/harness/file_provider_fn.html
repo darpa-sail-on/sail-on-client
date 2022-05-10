@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.harness.file_provider_fn &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.harness.file_provider_fn</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.harness.file_provider_fn</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Set of functions used by file provider.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.errors.errors</span> <span class="kn">import</span> <span class="n">ServerError</span><span class="p">,</span> <span class="n">ProtocolError</span><span class="p">,</span> <span class="n">RoundError</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.constants</span> <span class="kn">import</span> <span class="n">ProtocolConstants</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.cluster</span> <span class="kn">import</span> <span class="n">normalized_mutual_info_score</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+
+<div class="viewcode-block" id="read_gt_csv_file"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.read_gt_csv_file">[docs]</a><span class="k">def</span> <span class="nf">read_gt_csv_file</span><span class="p">(</span><span class="n">file_location</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the ground truth csv file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_location: Path to the gt csv file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of entries in csv file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv_reader</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span></div>
+
+
+<div class="viewcode-block" id="read_meta_data"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.read_meta_data">[docs]</a><span class="k">def</span> <span class="nf">read_meta_data</span><span class="p">(</span><span class="n">file_location</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the metadata file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_location: Path to the gt csv file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Content of the metadata file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">md</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">md</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_encoding"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_encoding">[docs]</a><span class="k">def</span> <span class="nf">get_encoding</span><span class="p">(</span><span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get encoding based on the domain.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        Name of the domain</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Encoding string for the domain</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;nlt&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">NLT_ENCODING</span>
+    <span class="k">elif</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">VAR_ENCODING</span>
+    <span class="k">elif</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;transcripts&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">WTR_ENCODING</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;utf-8&quot;</span></div>
+
+
+<div class="viewcode-block" id="get_session_info"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_session_info">[docs]</a><span class="k">def</span> <span class="nf">get_session_info</span><span class="p">(</span>
+    <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">in_process_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve session info.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        folder: Folder where the session file is saved</span>
+<span class="sd">        session_id: Session id for which the info is required</span>
+<span class="sd">        in_process_only: Flag to get information while the session is active</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Session information as a dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">session_file</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">session_file</span><span class="p">)</span>
+            <span class="n">terminated</span> <span class="o">=</span> <span class="s2">&quot;termination&quot;</span> <span class="ow">in</span> <span class="n">info</span>
+            <span class="k">if</span> <span class="n">terminated</span> <span class="ow">and</span> <span class="n">in_process_only</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                    <span class="s2">&quot;SessionEnded&quot;</span><span class="p">,</span>
+                    <span class="sd">&quot;&quot;&quot;The session being requested has already been terminated.</span>
+<span class="sd">                       Please either create a new session or request a different ID&quot;&quot;&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">info</span>
+    <span class="k">return</span> <span class="p">{}</span></div>
+
+
+<div class="viewcode-block" id="get_session_test_info"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_session_test_info">[docs]</a><span class="k">def</span> <span class="nf">get_session_test_info</span><span class="p">(</span><span class="n">folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve session info for a test.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        folder: Folder where the session file is saved</span>
+<span class="sd">        session_id: Session id for which the info is required</span>
+<span class="sd">        test_id: Test id for which the info is required</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Session information associated with test as a dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">session_file</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">session_file</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;completion&quot;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                    <span class="s2">&quot;TestCompleted&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;The test being requested has already been completed for this session&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">info</span>
+    <span class="k">return</span> <span class="p">{}</span></div>
+
+
+<div class="viewcode-block" id="write_session_log_file"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.write_session_log_file">[docs]</a><span class="k">def</span> <span class="nf">write_session_log_file</span><span class="p">(</span><span class="n">structure</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write session information in a log file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        structure: Dict with information about the session</span>
+<span class="sd">        filepath: Path to the file where log file is saved</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">session_file</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">session_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="log_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.log_session">[docs]</a><span class="k">def</span> <span class="nf">log_session</span><span class="p">(</span>
+    <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">activity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">test_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">round_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">content_loc</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;round&quot;</span><span class="p">,</span>
+    <span class="n">return_structure</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a log files of all session activity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        folder: Folder where the session file is saved</span>
+<span class="sd">        session_id: Session id associated with the log</span>
+<span class="sd">        test_id: Test id associated with the log</span>
+<span class="sd">        round_id: Round id associated with the log</span>
+<span class="sd">        content: Content of the log</span>
+<span class="sd">        content_loc: Location where the content should be added</span>
+<span class="sd">        return_structure: Flag to return the updated log</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        Updated log if `return_structure` is set to True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+    <span class="n">write_session_file</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">test_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">structure</span><span class="p">[</span><span class="n">activity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())]}</span>
+        <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">[</span><span class="n">activity</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_structure</span> <span class="o">=</span> <span class="n">get_session_test_info</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">activity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">test_structure</span><span class="p">:</span>
+            <span class="n">test_structure</span><span class="p">[</span><span class="n">activity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())]}</span>
+        <span class="k">if</span> <span class="n">content_loc</span> <span class="o">==</span> <span class="s2">&quot;activity&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">test_structure</span><span class="p">[</span><span class="n">activity</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">round_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">round_id_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">round_id</span><span class="p">)</span>
+            <span class="n">rounds</span> <span class="o">=</span> <span class="n">test_structure</span><span class="p">[</span><span class="n">activity</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rounds&quot;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="k">if</span> <span class="n">round_id_str</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rounds</span><span class="p">:</span>
+                <span class="n">rounds</span><span class="p">[</span><span class="n">round_id_str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())]}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rounds</span><span class="p">[</span><span class="n">round_id_str</span><span class="p">][</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+            <span class="k">if</span> <span class="n">content_loc</span> <span class="o">==</span> <span class="s2">&quot;round&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">rounds</span><span class="p">[</span><span class="n">round_id_str</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+            <span class="n">test_structure</span><span class="p">[</span><span class="n">activity</span><span class="p">][</span><span class="s2">&quot;rounds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rounds</span>
+            <span class="n">test_structure</span><span class="p">[</span><span class="n">activity</span><span class="p">][</span><span class="s2">&quot;last round&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">round_id_str</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">return_structure</span><span class="p">:</span>
+            <span class="n">write_session_log_file</span><span class="p">(</span>
+                <span class="n">test_structure</span><span class="p">,</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">activity</span> <span class="o">==</span> <span class="s2">&quot;completion&quot;</span><span class="p">:</span>
+            <span class="n">session_tests</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tests&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;completed_tests&quot;</span><span class="p">:</span> <span class="p">[]})</span>
+            <span class="n">session_tests</span><span class="p">[</span><span class="s2">&quot;completed_tests&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span>
+            <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session_tests</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">write_session_file</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">write_session_file</span><span class="p">:</span>
+        <span class="n">write_session_log_file</span><span class="p">(</span>
+            <span class="n">structure</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_structure</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">test_structure</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="read_feedback_file"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.read_feedback_file">[docs]</a><span class="k">def</span> <span class="nf">read_feedback_file</span><span class="p">(</span>
+    <span class="n">csv_reader</span><span class="p">:</span> <span class="s2">&quot;csv.reader&quot;</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">check_constrained</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get feedback from feedback file for the specified ids in the last submitted round.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        csv_reader: An instance of csv reader</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+<span class="sd">        check_constrained: Flag to check constraints associated with feedback</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">feedback_constrained</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_constrained&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">lines</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv_reader</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">check_constrained</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">feedback_constrained</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># under the constrained case, we always look at the last round</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;round_size&quot;</span><span class="p">])</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;round_size&quot;</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RoundError</span><span class="p">(</span>
+            <span class="s2">&quot;no_defined_rounds&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;round_size not defined in metadata.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feedback_ids</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[[</span><span class="n">n</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">feedback_ids</span>
+        <span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[[</span><span class="n">n</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot; </span><span class="se">\&quot;</span><span class="s2">&#39;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_classification_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_classification_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_classification_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the proper feedback for classification type feedback.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">feedback_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># if feedback ids not provided, limit to those in the last round</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+            <span class="n">result_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+                <span class="n">result_reader</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="n">feedback_max_ids</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+                <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_max_ids&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)),</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">feedback_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())[:</span> <span class="nb">int</span><span class="p">(</span><span class="n">feedback_max_ids</span><span class="p">)]</span>
+
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span>
+        <span class="n">feedback_ids</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">,</span>
+        <span class="n">check_constrained</span><span class="o">=</span><span class="n">feedback_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]]),</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;known_classes&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_kinetics_labels_var_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_kinetics_labels_var_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_kinetics_labels_var_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get feedback for video activity recognition.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span>
+        <span class="n">feedback_ids</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">,</span>
+        <span class="n">check_constrained</span><span class="o">=</span><span class="n">feedback_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_single_gt_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_single_gt_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_single_gt_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get feedback that specifies if a sample if correct or incorrect.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+        <span class="n">result_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+            <span class="n">result_reader</span><span class="p">,</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+    <span class="c1"># if feedback ids not provided, limit ids grabbed from ground truth to the last submitted round</span>
+    <span class="n">gt_feedback_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">feedback_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">gt_feedback_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">gt_feedback_ids</span> <span class="o">=</span> <span class="n">feedback_ids</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span>
+        <span class="n">gt_feedback_ids</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">,</span>
+        <span class="n">check_constrained</span><span class="o">=</span><span class="n">gt_feedback_ids</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">gt_feedback_ids</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">return_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># For specific feedback types, and when no feedback ids are specified,</span>
+    <span class="c1"># will only return feedback on instances marked incorrectly</span>
+    <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;return_incorrect&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">feedback_ids</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">sample_id</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;return_incorrect&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="n">sample_id</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;return_incorrect&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">DETECTION</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">sample_id</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                    <span class="s2">&quot;FeedbackConfigError&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;The api based feedback config is misconfigured. Please check API&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">sample_id</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">!=</span> <span class="n">g</span><span class="p">:</span>
+                <span class="n">return_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sample_id</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">return_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">return_ids</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_classificaton_score_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_classificaton_score_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_classificaton_score_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate feedback on the accuracy of classification.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+        <span class="n">result_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+            <span class="n">result_reader</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Go through results and count number correct</span>
+    <span class="n">num_correct</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="n">idx</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="n">g</span><span class="p">:</span>
+            <span class="n">num_correct</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num_correct</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_characterization_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_characterization_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_characterization_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the proper feedback for characterization type feedback.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Not implemented</span>
+    <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s2">&quot;Characterization Feedback is not supported.&quot;</span><span class="p">)</span>
+    <span class="n">known_classes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;known_classes&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+        <span class="n">result_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span><span class="n">result_reader</span><span class="p">,</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="c1"># If ground truth is not novel, returns 1 is prediction is correct,</span>
+    <span class="c1"># otherwise returns 1 if prediction is not a known class</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="n">known_classes</span><span class="p">])</span>
+            <span class="o">&gt;</span> <span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">known_classes</span><span class="p">:]))</span>
+            <span class="ow">and</span> <span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+            <span class="o">!=</span> <span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="p">)</span>
+        <span class="ow">or</span> <span class="p">(</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="n">known_classes</span><span class="p">])</span>
+            <span class="o">&lt;</span> <span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">known_classes</span><span class="p">:]))</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">known_classes</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="k">else</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">}</span></div>
+
+
+<span class="k">def</span> <span class="nf">_ensure_space</span><span class="p">(</span><span class="n">input_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                <span class="sa">r</span><span class="s2">&quot;(\W+)&quot;</span><span class="p">,</span>
+                <span class="n">input_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">),</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_levenshtein_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_levenshtein_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_levenshtein_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the proper feedback for levenshtein type feedback.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+        <span class="n">result_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span><span class="n">result_reader</span><span class="p">,</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">x</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">nltk</span><span class="o">.</span><span class="n">edit_distance</span><span class="p">(</span>
+                <span class="n">_ensure_space</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]]),</span>
+                <span class="n">_ensure_space</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">])</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_cluster_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.get_cluster_feedback">[docs]</a><span class="k">def</span> <span class="nf">get_cluster_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">result_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the proper feedback for cluster type feedback.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        result_files: List of paths with results</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span>
+        <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">check_constrained</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rf</span><span class="p">:</span>
+        <span class="n">result_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">rf</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span><span class="n">result_reader</span><span class="p">,</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">feedback_ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">feedback_ids</span> <span class="o">=</span> <span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="c1"># clear ground truth of all but relevant columns</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">ground_truth</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]]</span>
+
+    <span class="n">gt_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">r_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">feedback_ids</span><span class="p">):</span>
+            <span class="n">gt_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ground_truth</span><span class="p">[</span><span class="n">key</span><span class="p">]])</span>
+            <span class="n">r_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]])</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+            <span class="s2">&quot;MissingIds&quot;</span><span class="p">,</span>
+            <span class="sd">&quot;&quot;&quot;Some requested Ids are missing from either ground truth or results</span>
+<span class="sd">            file for the current round&quot;&quot;&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">gt_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gt_list</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gt_list</span><span class="p">))</span>
+    <span class="n">r_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_list</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nmi&quot;</span><span class="p">:</span> <span class="n">normalized_mutual_info_score</span><span class="p">(</span><span class="n">gt_np</span><span class="p">,</span> <span class="n">r_np</span><span class="p">)}</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">r_np</span><span class="p">):</span>
+        <span class="n">places</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r_np</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">return_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">gt_np</span><span class="p">[</span><span class="n">places</span><span class="p">],</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">places</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">return_dict</span></div>
+
+
+<div class="viewcode-block" id="psuedo_label_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider_fn.psuedo_label_feedback">[docs]</a><span class="k">def</span> <span class="nf">psuedo_label_feedback</span><span class="p">(</span>
+    <span class="n">gt_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get psuedo label feedback for requested ids.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gt_file: Path to ground truth file</span>
+<span class="sd">        feedback_ids: Element ids for which feedback is requested</span>
+<span class="sd">        feedback_type: Type of feedback</span>
+<span class="sd">        metadata: Dictionary with metadata</span>
+<span class="sd">        folder: Folder where the session file is saved</span>
+<span class="sd">        session_id: Session id for which the info is required</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Dictionary containing feedback with feedback_ids as keys</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ground_truth</span> <span class="o">=</span> <span class="n">read_feedback_file</span><span class="p">(</span><span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">gt_file</span><span class="p">),</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
+
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;psuedo_labels&quot;</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">feedback_type</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;psuedo_labels&quot;</span><span class="p">]:</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;psuedo_labels&quot;</span><span class="p">][</span><span class="n">feedback_type</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;psuedo_labels&quot;</span><span class="p">][</span><span class="n">feedback_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;psuedo_labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">feedback_type</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">return_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ground_truth</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+            <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+        <span class="n">return_dict</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+    <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;psuedo_labels&quot;</span><span class="p">][</span><span class="n">feedback_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+    <span class="n">write_session_log_file</span><span class="p">(</span><span class="n">structure</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">return_dict</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

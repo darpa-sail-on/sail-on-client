@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.evaluate.utils &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.evaluate.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.evaluate.utils</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Helper functions for metrics.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+
+<div class="viewcode-block" id="check_novel_validity"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.check_novel_validity">[docs]</a><span class="k">def</span> <span class="nf">check_novel_validity</span><span class="p">(</span><span class="n">p_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check the validity of the inputs for per-sample novelty detection.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p_novel: NX1 vector with each element corresponding to probability of novelty</span>
+<span class="sd">        gt_novel: NX1 vector with each element 0 (not novel) or 1 (novel)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">p_novel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">gt_novel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Number of predicted samples not equal to number of groundtruth samples!&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">p_novel</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Predicted probabilities must be a vector but is an array of dimension </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">p_novel</span><span class="o">.</span><span class="n">ndim</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">p_novel</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">p_novel</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Predicted novel probabilities should be between 0 and 1!&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">gt_novel</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">gt_novel</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Groundtruth array should only consist of 0s (non-novel) or 1s(novel)!&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="check_class_validity"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.check_class_validity">[docs]</a><span class="k">def</span> <span class="nf">check_class_validity</span><span class="p">(</span><span class="n">p_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check the validity of the inputs for image classification.</span>
+
+<span class="sd">    Inputs:</span>
+<span class="sd">    p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</span>
+<span class="sd">    gt_class: Nx1 vector with ground-truth class for each sample</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">gt_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Number of predicted samples not equal to number of groundtruth samples!&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">p_class</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">p_class</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Predicted class probabilities should be between 0 and 1!&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p_class</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Predicted probabilities must be a 2D matrix but is an array of dimension </span><span class="si">{}</span><span class="s2">!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">p_class</span><span class="o">.</span><span class="n">ndim</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">gt_class</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">gt_class</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Groundtruth class labels must lie in the range [0-</span><span class="si">{}</span><span class="s2">]!&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="topk_accuracy"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.topk_accuracy">[docs]</a><span class="k">def</span> <span class="nf">topk_accuracy</span><span class="p">(</span>
+    <span class="n">p_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">txt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute top-K accuracy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</span>
+<span class="sd">        gt_class: Nx1 computevector with ground-truth class for each sample</span>
+<span class="sd">        k: &#39;k&#39; used in top-K accuracy</span>
+<span class="sd">        txt: Text associated with accuracy</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        top-K accuracy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_class_validity</span><span class="p">(</span><span class="n">p_class</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">)</span>
+    <span class="n">p_class</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">p_class</span><span class="p">)[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">gt_class</span> <span class="o">=</span> <span class="n">gt_class</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">check_zero</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">p_class</span> <span class="o">-</span> <span class="n">gt_class</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">check_zero</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">correct</span><span class="p">)</span> <span class="o">/</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="top3_accuracy"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.top3_accuracy">[docs]</a><span class="k">def</span> <span class="nf">top3_accuracy</span><span class="p">(</span><span class="n">p_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">txt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute top-3 accuracy. (see topk_accuracy() for details).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</span>
+<span class="sd">        gt_class: Nx1 computevector with ground-truth class for each sample</span>
+<span class="sd">        txt: Text associated with accuracy</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        top-3 accuracy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">topk_accuracy</span><span class="p">(</span><span class="n">p_class</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="top1_accuracy"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.top1_accuracy">[docs]</a><span class="k">def</span> <span class="nf">top1_accuracy</span><span class="p">(</span><span class="n">p_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">txt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute top-1 accuracy. (see topk_accuracy() for details).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</span>
+<span class="sd">        gt_class: Nx1 computevector with ground-truth class for each sample</span>
+<span class="sd">        txt: Text associated with accuracy</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        top-1 accuracy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">topk_accuracy</span><span class="p">(</span><span class="n">p_class</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">txt</span><span class="o">=</span><span class="n">txt</span><span class="p">)</span></div>
+
+
+<span class="c1"># compute information for the robustness measures</span>
+<div class="viewcode-block" id="get_rolling_stats"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.get_rolling_stats">[docs]</a><span class="k">def</span> <span class="nf">get_rolling_stats</span><span class="p">(</span>
+    <span class="n">p_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute rolling statistics which are used for robustness measures.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample</span>
+<span class="sd">        gt_class: Nx1 compute vector with ground-truth class for each sample</span>
+<span class="sd">        k: &#39;k&#39; used for selecting top k values</span>
+<span class="sd">        window_size: Window size for running stats</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List with mean and standard deviation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p_cls_topk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">p_class</span><span class="p">)[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">gt_cls_indx</span> <span class="o">=</span> <span class="n">gt_class</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">check_zero_topk</span> <span class="o">=</span> <span class="n">p_cls_topk</span> <span class="o">-</span> <span class="n">gt_cls_indx</span>
+    <span class="n">topk_correct</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">check_zero_topk</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">acc_mean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">topk_correct</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window_size</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">acc_std</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">topk_correct</span><span class="p">)</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window_size</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">acc_mean</span><span class="p">,</span> <span class="n">acc_std</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_first_detect_novelty"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.utils.get_first_detect_novelty">[docs]</a><span class="k">def</span> <span class="nf">get_first_detect_novelty</span><span class="p">(</span><span class="n">p_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">thresh</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the first index where novelty is detected.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        p_novel: NX1 vector with each element corresponding to probability of novelty</span>
+<span class="sd">        thresh: Score threshold for detecting when a sample is novel</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Index where an agent reports that a sample is novel</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p_novel</span> <span class="o">&gt;=</span> <span class="n">thresh</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">first_detect_novelty</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_novel</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">first_detect_novelty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p_novel</span> <span class="o">&gt;=</span> <span class="n">thresh</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">first_detect_novelty</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

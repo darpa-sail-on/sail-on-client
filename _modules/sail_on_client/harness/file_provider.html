@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.harness.file_provider &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.harness.file_provider</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.harness.file_provider</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A provider class for evaluating with files.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sail_on_client.errors.errors</span> <span class="kn">import</span> <span class="n">ProtocolError</span><span class="p">,</span> <span class="n">ServerError</span><span class="p">,</span> <span class="n">RoundError</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.constants</span> <span class="kn">import</span> <span class="n">ProtocolConstants</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.file_provider_fn</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">get_session_info</span><span class="p">,</span>
+    <span class="n">get_session_test_info</span><span class="p">,</span>
+    <span class="n">log_session</span><span class="p">,</span>
+    <span class="n">read_meta_data</span><span class="p">,</span>
+    <span class="n">read_gt_csv_file</span><span class="p">,</span>
+    <span class="n">get_classification_feedback</span><span class="p">,</span>
+    <span class="n">get_classificaton_score_feedback</span><span class="p">,</span>
+    <span class="n">get_single_gt_feedback</span><span class="p">,</span>
+    <span class="n">get_kinetics_labels_var_feedback</span><span class="p">,</span>
+    <span class="n">get_levenshtein_feedback</span><span class="p">,</span>
+    <span class="n">psuedo_label_feedback</span><span class="p">,</span>
+    <span class="n">write_session_log_file</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+
+
+<div class="viewcode-block" id="FileProvider"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider">[docs]</a><span class="k">class</span> <span class="nc">FileProvider</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;File-based service provider.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FileProvider.__init__"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">results_folder</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize file provider.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            folder: Folder where the data is present</span>
+<span class="sd">            results_folder: Folder where the results are saved</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">folder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span> <span class="o">=</span> <span class="n">results_folder</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileProvider.get_test_metadata"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.get_test_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">get_test_metadata</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">api_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">in_process_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get test metadata.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: Session id for which the info is required</span>
+<span class="sd">            test_id: Test id for which the info is required</span>
+<span class="sd">            api_call: Flag to change metadata to approved metadata</span>
+<span class="sd">            in_process_only: Flag to get information while the session is active</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Metadata associated with the test as a dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">structure</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">in_process_only</span><span class="o">=</span><span class="n">in_process_only</span>
+            <span class="p">)</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">]</span>
+            <span class="n">metadata_location</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;protocol&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_metadata.json&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="s2">&quot;session_id_invalid&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Provided session id </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> could not be found or was improperly set up&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">metadata_location</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+                <span class="s2">&quot;metadata_not_found&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Metadata file for Test Id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2"> could not be found&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="n">hints</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># List of metadata vars approved to be sent to the client</span>
+        <span class="n">approved_metadata</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;protocol&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;known_classes&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;max_novel_classes&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;round_size&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;feedback_max_ids&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pre_novelty_batches&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pre_novelty_training&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;max_detection_feedback_ids&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="n">hints</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hints&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="n">approved_metadata</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">data</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;red_light&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">hints</span><span class="p">])</span>
+
+        <span class="n">overrides</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">hint_data</span> <span class="ow">in</span> <span class="n">hints</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">hint_data</span><span class="p">:</span>
+                <span class="n">parts</span> <span class="o">=</span> <span class="n">hint_data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">approved_metadata</span><span class="p">:</span>
+                    <span class="n">overrides</span><span class="p">[</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">md</span> <span class="o">=</span> <span class="n">read_meta_data</span><span class="p">(</span><span class="n">metadata_location</span><span class="p">)</span>
+        <span class="n">md</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">overrides</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">api_call</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">md</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">approved_metadata</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">md</span></div>
+
+<div class="viewcode-block" id="FileProvider.test_ids_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.test_ids_request">[docs]</a>    <span class="k">def</span> <span class="nf">test_ids_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">detector_seed</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_assumptions</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request test IDs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            protocol: Name of the protocol</span>
+<span class="sd">            domain: Domain of the application</span>
+<span class="sd">            detector_seed: Seed used by the detector</span>
+<span class="sd">            test_assumptions: Assumptions made when generating the tests</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with the list of tests and seed used for generating tests</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">_strip_id</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">file_location</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="s2">&quot;test_ids.csv&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_location</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">)):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2"> not configured&quot;</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">)):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;domain </span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2"> not configured&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">test_ids</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">_strip_id</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="s2">&quot;*.csv&quot;</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="p">]</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">test_ids</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;test_ids&quot;</span><span class="p">:</span> <span class="n">file_location</span><span class="p">,</span> <span class="s2">&quot;generator_seed&quot;</span><span class="p">:</span> <span class="s2">&quot;1234&quot;</span><span class="p">}</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="s2">&quot;BadDomain&quot;</span><span class="p">,</span>
+                <span class="n">msg</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;test_ids&quot;</span><span class="p">:</span> <span class="n">file_location</span><span class="p">,</span> <span class="s2">&quot;generator_seed&quot;</span><span class="p">:</span> <span class="s2">&quot;1234&quot;</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="FileProvider.new_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.new_session">[docs]</a>    <span class="k">def</span> <span class="nf">new_session</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">novelty_detector_version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">detection_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a session.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_ids: Test ids evaluated in the session</span>
+<span class="sd">            protocol: Name of the protocol</span>
+<span class="sd">            domain: Domain of the protocol</span>
+<span class="sd">            novelty_detector_version: Version of the novelty detector</span>
+<span class="sd">            hints: List of hints used in the session</span>
+<span class="sd">            detection_threshold: Detection threshold used by the novelty detector</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Session id for the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Verify&#39;s that all given test id&#39;s are valid and have associated csv files</span>
+        <span class="k">for</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">test_ids</span><span class="p">:</span>
+            <span class="n">file_location</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_single_df.csv&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_location</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+                    <span class="s2">&quot;test_id_invalid&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;Test Id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2"> could not be matched to a specific file&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+                <span class="p">)</span>
+
+        <span class="n">session_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+
+        <span class="n">log_session</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="p">,</span>
+            <span class="n">activity</span><span class="o">=</span><span class="s2">&quot;created&quot;</span><span class="p">,</span>
+            <span class="n">content</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="n">protocol</span><span class="p">,</span>
+                <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+                <span class="s2">&quot;detector&quot;</span><span class="p">:</span> <span class="n">novelty_detector_version</span><span class="p">,</span>
+                <span class="s2">&quot;detection_threshold&quot;</span><span class="p">:</span> <span class="n">detection_threshold</span><span class="p">,</span>
+                <span class="s2">&quot;hints&quot;</span><span class="p">:</span> <span class="n">hints</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">session_id</span></div>
+
+<div class="viewcode-block" id="FileProvider.dataset_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.dataset_request">[docs]</a>    <span class="k">def</span> <span class="nf">dataset_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BytesIO</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request a dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The test being evaluated at this moment.</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The identifier provided by the server for a single experiment</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns an instance of BytesIO</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)[</span><span class="s2">&quot;created&quot;</span><span class="p">]</span>
+            <span class="n">test_info</span> <span class="o">=</span> <span class="n">get_session_test_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+            <span class="n">file_location</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;protocol&quot;</span><span class="p">],</span>
+                <span class="n">info</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_single_df.csv&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="s2">&quot;session_id_invalid&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Provided session id </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> could not be found or was improperly set up&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_location</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+                <span class="s2">&quot;test_id_invalid&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Test Id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2"> could not be matched to a specific file&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_test_metadata</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">round_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Check for removing leftover files from restarting tests within a session</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">round_id</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">test_info</span><span class="p">:</span>
+                <span class="n">test_session_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">test_session_path</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">test_session_path</span><span class="p">)</span>
+                <span class="n">test_result_paths</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+                        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;protocol&quot;</span><span class="p">],</span>
+                        <span class="n">info</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">],</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span><span class="si">}</span><span class="s2">_*.csv&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">test_result_paths</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+            <span class="n">temp_file_path</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="n">read_gt_csv_file</span><span class="p">(</span><span class="n">file_location</span><span class="p">)</span>
+            <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\t\&quot;</span><span class="s2">&#39;,.&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">round_pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">round_id</span><span class="p">)</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;round_size&quot;</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">RoundError</span><span class="p">(</span>
+                    <span class="s2">&quot;no_defined_rounds&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;round_size not defined in metadata for test id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">round_pos</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="n">text</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">round_pos</span> <span class="p">:</span> <span class="n">round_pos</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;round_size&quot;</span><span class="p">])])</span>
+                <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">temp_file_path</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">temp_file_path</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">temp_file_path</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+
+        <span class="n">log_session</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="p">,</span>
+            <span class="n">test_id</span><span class="o">=</span><span class="n">test_id</span><span class="p">,</span>
+            <span class="n">round_id</span><span class="o">=</span><span class="n">round_id</span><span class="p">,</span>
+            <span class="n">activity</span><span class="o">=</span><span class="s2">&quot;data_request&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">temp_file_path</span></div>
+
+    <span class="n">feedback_request_mapping</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;image_classification&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_classification_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">NOTIFY_AND_CONTINUE</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SCORE</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_classificaton_score_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">DETECTION</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_single_gt_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">DETECTION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;required_hints&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;alternate_budget&quot;</span><span class="p">:</span> <span class="s2">&quot;max_detection_feedback_ids&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;transcripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_classification_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">TRANSCRIPTION</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_levenshtein_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">TRANSCRIPTION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SCORE</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_classificaton_score_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;activity_recognition&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_kinetics_labels_var_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">LABELS</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_single_gt_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;return_incorrect&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SCORE</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_classificaton_score_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">CLASSIFICATION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">DETECTION</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">get_single_gt_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">DETECTION</span><span class="p">],</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;detection_req&quot;</span><span class="p">:</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">,</span>
+                <span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;required_hints&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                <span class="s2">&quot;alternate_budget&quot;</span><span class="p">:</span> <span class="s2">&quot;max_detection_feedback_ids&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="FileProvider.get_feedback"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.get_feedback">[docs]</a>    <span class="k">def</span> <span class="nf">get_feedback</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">feedback_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BytesIO</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get feedback of the specified type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feedback_ids: List of media ids for which feedback is required</span>
+<span class="sd">            feedback_type: Protocols constants with the values: label, detection, characterization</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An instance of BytesIO with feedback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_test_metadata</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+        <span class="n">test_structure</span> <span class="o">=</span> <span class="n">get_session_test_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">domain</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_request_mapping</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="s2">&quot;BadDomain&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;The set domain does not match a domain type. Please check the metadata file for </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Ensure feedback type works with session domain</span>
+        <span class="c1"># and if so, grab the proper files</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">feedback_definition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_request_mapping</span><span class="p">[</span><span class="n">domain</span><span class="p">][</span><span class="n">feedback_type</span><span class="p">]</span>
+            <span class="n">file_types</span> <span class="o">=</span> <span class="n">feedback_definition</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="s2">&quot;InvalidFeedbackType&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Invalid feedback type requested for the test id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2"> with domain </span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="n">is_given_detection_mode</span> <span class="o">=</span> <span class="s2">&quot;red_light&quot;</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hints&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">budgeted_feedback</span> <span class="o">=</span> <span class="n">feedback_definition</span><span class="p">[</span><span class="s2">&quot;budgeted_feedback&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
+            <span class="n">feedback_type</span> <span class="o">==</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">DETECTION</span> <span class="ow">and</span> <span class="n">is_given_detection_mode</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="s2">&quot;alternate_budget&quot;</span> <span class="ow">in</span> <span class="n">feedback_definition</span>
+            <span class="ow">and</span> <span class="n">feedback_definition</span><span class="p">[</span><span class="s2">&quot;alternate_budget&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">metadata</span>
+        <span class="p">):</span>
+            <span class="n">feedback_budget</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="n">feedback_definition</span><span class="p">[</span><span class="s2">&quot;alternate_budget&quot;</span><span class="p">]])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">feedback_budget</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_max_ids&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+        <span class="n">feedback_round_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Gets the amount of ids already requested for this type of feedback this round and</span>
+            <span class="c1"># determines whether the limit has already been reached</span>
+            <span class="n">feedback_round_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
+                <span class="nb">max</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">test_structure</span><span class="p">[</span><span class="s2">&quot;post_results&quot;</span><span class="p">][</span><span class="s2">&quot;rounds&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()])</span>
+            <span class="p">)</span>
+
+            <span class="n">feedback_count</span> <span class="o">=</span> <span class="n">test_structure</span><span class="p">[</span><span class="s2">&quot;get_feedback&quot;</span><span class="p">][</span><span class="s2">&quot;rounds&quot;</span><span class="p">][</span>
+                <span class="n">feedback_round_id</span>
+            <span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">feedback_type</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">feedback_count</span> <span class="o">&gt;=</span> <span class="n">feedback_budget</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                    <span class="s2">&quot;FeedbackBudgetExceeded&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;Feedback of type </span><span class="si">{</span><span class="n">feedback_type</span><span class="si">}</span><span class="s2"> has already been requested on the maximum number of ids&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="n">feedback_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">ground_truth_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">folder</span><span class="p">,</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;protocol&quot;</span><span class="p">],</span> <span class="n">domain</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_single_df.csv&quot;</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ground_truth_file</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+                <span class="s2">&quot;test_id_invalid&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Could not find ground truth file for test Id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="n">results_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">file_types</span><span class="p">:</span>
+            <span class="n">results_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+                    <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;protocol&quot;</span><span class="p">],</span>
+                    <span class="n">domain</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results_files</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_types</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+                <span class="s2">&quot;test_id_invalid&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;Could not find posted result file(s) for test Id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2"> with feedback type </span><span class="si">{</span><span class="n">feedback_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_stack</span><span class="p">()),</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Ensure any required hint(s) are present in the session info structure</span>
+        <span class="n">req_hints</span> <span class="o">=</span> <span class="n">feedback_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;required_hints&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">req_hints</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">hint</span> <span class="ow">in</span> <span class="n">req_hints</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">hint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hints&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                    <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s2">&quot;Inform TA2 team that they are requesting feedback prior to the threshold indication&quot;</span>
+                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="n">BytesIO</span><span class="p">()</span>
+
+        <span class="n">detection_requirement</span> <span class="o">=</span> <span class="n">feedback_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;detection_req&quot;</span><span class="p">,</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">IGNORE</span>
+        <span class="p">)</span>
+
+        <span class="c1"># If novelty detection is required, ensure detection has been posted</span>
+        <span class="c1"># for the requested round and novelty claimed for the test</span>
+        <span class="k">if</span> <span class="n">detection_requirement</span> <span class="o">!=</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">IGNORE</span><span class="p">:</span>
+            <span class="n">test_results_structure</span> <span class="o">=</span> <span class="n">test_structure</span><span class="p">[</span><span class="s2">&quot;post_results&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s2">&quot;detection file path&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">test_results_structure</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                    <span class="s2">&quot;DetectionPostRequired&quot;</span><span class="p">,</span>
+                    <span class="sd">&quot;&quot;&quot;A detection file is required to be posted before feedback can be requested on a round.</span>
+<span class="sd">                       Please submit Detection results before requesting feedback&quot;&quot;&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+                        <span class="n">test_results_structure</span><span class="p">[</span><span class="s2">&quot;detection file path&quot;</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span>
+                    <span class="p">)</span> <span class="k">as</span> <span class="n">d_file</span><span class="p">:</span>
+                        <span class="n">d_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">d_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                        <span class="n">detection_lines</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">d_reader</span><span class="p">)</span>
+                    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">detection_lines</span><span class="p">]</span>
+                    <span class="c1"># if given detection and past the detection point</span>
+                    <span class="n">is_given</span> <span class="o">=</span> <span class="n">is_given_detection_mode</span> <span class="ow">and</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                        <span class="s2">&quot;red_light&quot;</span>
+                    <span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">detection_lines</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="p">(</span>
+                        <span class="nb">max</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;detection_threshold&quot;</span><span class="p">]</span>
+                        <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_given</span>
+                    <span class="p">):</span>
+                        <span class="k">if</span> <span class="p">(</span>
+                            <span class="n">detection_requirement</span>
+                            <span class="o">==</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">NOTIFY_AND_CONTINUE</span>
+                        <span class="p">):</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                                <span class="s2">&quot;Inform TA2 team that they are requesting feedback prior to the threshold indication&quot;</span>
+                            <span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">detection_requirement</span> <span class="o">==</span> <span class="n">ProtocolConstants</span><span class="o">.</span><span class="n">SKIP</span><span class="p">:</span>
+                            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                                <span class="s2">&quot;Inform TA2 team that they are requesting feedback prior to the threshold indication&quot;</span>
+                            <span class="p">)</span>
+                            <span class="k">return</span> <span class="n">BytesIO</span><span class="p">()</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                                <span class="s2">&quot;NoveltyDetectionRequired&quot;</span><span class="p">,</span>
+                                <span class="s2">&quot;In order to request feedback, novelty must be declared for the test&quot;</span><span class="p">,</span>
+                            <span class="p">)</span>
+                <span class="k">except</span> <span class="n">ProtocolError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">e</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">ServerError</span><span class="p">(</span>
+                        <span class="s2">&quot;CantReadFile&quot;</span><span class="p">,</span>
+                        <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Couldnt open the logged detection file at</span>
+<span class="s2">                            </span><span class="si">{</span><span class="n">test_results_structure</span><span class="p">[</span><span class="s1">&#39;detection file path&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">                            Please check if the file exists and that</span>
+<span class="s2">                            </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.json has the proper file location</span>
+<span class="s2">                            for test id </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+                        <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
+                    <span class="p">)</span>
+
+        <span class="c1"># Add columns to metadata for use in feedback</span>
+        <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">feedback_definition</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="c1"># Get feedback from specified test</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;psuedo&quot;</span> <span class="ow">in</span> <span class="n">feedback_type</span><span class="p">:</span>
+                <span class="n">feedback</span> <span class="o">=</span> <span class="n">psuedo_label_feedback</span><span class="p">(</span>
+                    <span class="n">ground_truth_file</span><span class="p">,</span>
+                    <span class="n">feedback_ids</span><span class="p">,</span>
+                    <span class="n">feedback_definition</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">metadata</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+                    <span class="n">session_id</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">feedback</span> <span class="o">=</span> <span class="n">feedback_definition</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">](</span>
+                    <span class="n">ground_truth_file</span><span class="p">,</span> <span class="n">results_files</span><span class="p">,</span> <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">metadata</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                <span class="s2">&quot;feedback_type_invalid&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Feedback type </span><span class="si">{</span><span class="n">feedback_type</span><span class="si">}</span><span class="s2"> is not valid. Make sure the</span>
+<span class="s2">                    provider&#39;s feedback_algorithms variable is properly set up&quot;&quot;&quot;</span><span class="p">,</span>
+                <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">(),</span>
+            <span class="p">)</span>
+
+        <span class="n">number_of_ids_to_return</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
+
+        <span class="c1"># if budgeted, decrement use and check if too many has been requested</span>
+        <span class="k">if</span> <span class="n">budgeted_feedback</span><span class="p">:</span>
+            <span class="n">left_over_ids</span> <span class="o">=</span> <span class="n">feedback_budget</span> <span class="o">-</span> <span class="n">feedback_count</span>
+            <span class="n">number_of_ids_to_return</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">number_of_ids_to_return</span><span class="p">,</span> <span class="n">left_over_ids</span><span class="p">)</span>
+        <span class="n">feedback_count</span> <span class="o">+=</span> <span class="n">number_of_ids_to_return</span>
+
+        <span class="n">log_session</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="n">activity</span><span class="o">=</span><span class="s2">&quot;get_feedback&quot;</span><span class="p">,</span>
+            <span class="n">test_id</span><span class="o">=</span><span class="n">test_id</span><span class="p">,</span>
+            <span class="n">round_id</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">feedback_round_id</span><span class="p">),</span>
+            <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="n">feedback_type</span><span class="p">:</span> <span class="n">feedback_count</span><span class="p">,</span> <span class="s2">&quot;feedback_budget&quot;</span><span class="p">:</span> <span class="n">feedback_budget</span><span class="p">},</span>
+        <span class="p">)</span>
+
+        <span class="n">feedback_csv</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">feedback</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">feedback</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+                <span class="n">feedback_csv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">feedback</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">feedback_csv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">feedback</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">number_of_ids_to_return</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="c1"># once maximium requested number is hit, quit</span>
+            <span class="k">if</span> <span class="n">number_of_ids_to_return</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="n">feedback_csv</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">feedback_csv</span></div>
+
+<div class="viewcode-block" id="FileProvider.post_results"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.post_results">[docs]</a>    <span class="k">def</span> <span class="nf">post_results</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">result_files</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Post results.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result_files: A dictionary of results with protocol constant as key and file path as value</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Modify session file with posted results</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+        <span class="n">test_structure</span> <span class="o">=</span> <span class="n">get_session_test_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;detection&quot;</span> <span class="ow">in</span> <span class="n">result_files</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="s2">&quot;detection&quot;</span>
+                    <span class="ow">in</span> <span class="n">test_structure</span><span class="p">[</span><span class="s2">&quot;post_results&quot;</span><span class="p">][</span><span class="s2">&quot;rounds&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">round_id</span><span class="p">)][</span><span class="s2">&quot;types&quot;</span><span class="p">]</span>
+                <span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">ProtocolError</span><span class="p">(</span>
+                        <span class="s2">&quot;DetectionRepost&quot;</span><span class="p">,</span>
+                        <span class="sd">&quot;&quot;&quot;Cannot re post detection for a given round. If you</span>
+<span class="sd">                           attempted to submit any other results, please</span>
+<span class="sd">                           resubmit without detection.&quot;&quot;&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="n">protocol</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;protocol&quot;</span><span class="p">]</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">log_content</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">r_type</span> <span class="ow">in</span> <span class="n">result_files</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">r_type</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+            <span class="n">log_content</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r_type</span><span class="si">}</span><span class="s2"> file path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">result_file</span><span class="p">:</span>
+                <span class="n">result_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result_files</span><span class="p">[</span><span class="n">r_type</span><span class="p">])</span>
+
+        <span class="c1"># Log call</span>
+        <span class="n">log_content</span><span class="p">[</span><span class="s2">&quot;last round&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">round_id</span><span class="p">)</span>
+        <span class="n">updated_test_structure</span> <span class="o">=</span> <span class="n">log_session</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+            <span class="n">activity</span><span class="o">=</span><span class="s2">&quot;post_results&quot;</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="n">test_id</span><span class="o">=</span><span class="n">test_id</span><span class="p">,</span>
+            <span class="n">round_id</span><span class="o">=</span><span class="n">round_id</span><span class="p">,</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">log_content</span><span class="p">,</span>
+            <span class="n">content_loc</span><span class="o">=</span><span class="s2">&quot;activity&quot;</span><span class="p">,</span>
+            <span class="n">return_structure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">updated_test_structure</span><span class="p">:</span>
+            <span class="n">prev_types</span> <span class="o">=</span> <span class="n">updated_test_structure</span><span class="p">[</span><span class="s2">&quot;post_results&quot;</span><span class="p">][</span><span class="s2">&quot;rounds&quot;</span><span class="p">][</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">round_id</span><span class="p">)</span>
+            <span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;types&quot;</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="n">new_types</span> <span class="o">=</span> <span class="n">prev_types</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">result_files</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">updated_test_structure</span><span class="p">[</span><span class="s2">&quot;post_results&quot;</span><span class="p">][</span><span class="s2">&quot;rounds&quot;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="n">round_id</span><span class="p">)][</span>
+                <span class="s2">&quot;types&quot;</span>
+            <span class="p">]</span> <span class="o">=</span> <span class="n">new_types</span>
+            <span class="n">write_session_log_file</span><span class="p">(</span>
+                <span class="n">updated_test_structure</span><span class="p">,</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span><span class="si">}</span><span class="s2">.json&quot;</span>
+                <span class="p">),</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileProvider.complete_test"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.complete_test">[docs]</a>    <span class="k">def</span> <span class="nf">complete_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mark test as completed in session logs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id of the session currently being evaluated</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_session</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="n">test_id</span><span class="o">=</span><span class="n">test_id</span><span class="p">,</span>
+            <span class="n">activity</span><span class="o">=</span><span class="s2">&quot;completion&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileProvider.terminate_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.terminate_session">[docs]</a>    <span class="k">def</span> <span class="nf">terminate_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Terminate the session.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Modify session file to indicate session has been terminated</span>
+        <span class="n">log_session</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span> <span class="n">activity</span><span class="o">=</span><span class="s2">&quot;termination&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FileProvider.latest_session_info"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.file_provider.FileProvider.latest_session_info">[docs]</a>    <span class="k">def</span> <span class="nf">latest_session_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get tests finished from the most recent session.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id of the session currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tests that have been marked as completed in the session</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_folder</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+        <span class="n">latest</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">latest</span><span class="p">[</span><span class="s2">&quot;finished_tests&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">][</span><span class="s2">&quot;completed_tests&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">latest</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

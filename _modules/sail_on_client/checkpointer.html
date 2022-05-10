@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.checkpointer &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.checkpointer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.checkpointer</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Checkpoint to save and restore attributes.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span> <span class="k">as</span> <span class="nn">pkl</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">Tensor</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Checkpointer"><a class="viewcode-back" href="../../saving/checkpoint_api.html#sail_on_client.checkpointer.Checkpointer">[docs]</a><span class="k">class</span> <span class="nc">Checkpointer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Checkpoint object to save and restore attributes.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Checkpointer.__init__"><a class="viewcode-back" href="../../saving/checkpoint_api.html#sail_on_client.checkpointer.Checkpointer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset: Dictionary with parameter for the mixin</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span> <span class="o">=</span> <span class="n">toolset</span></div>
+
+<div class="viewcode-block" id="Checkpointer._save_elementwise_attribute"><a class="viewcode-back" href="../../saving/checkpoint_api.html#sail_on_client.checkpointer.Checkpointer._save_elementwise_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">_save_elementwise_attribute</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">detector</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">attribute</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attribute_dict</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private method to save attributes element wise.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            detector: Instance of novelty detector</span>
+<span class="sd">            attribute: Name of the detector attribute that needs to be saved</span>
+<span class="sd">            attribute dict: A dictonary containing attribute value for other tests</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Update attribute dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">attribute_val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">detector</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span>
+        <span class="n">test_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;test_id&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">attribute_dict</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_val</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">attribute_dict</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_val</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">attribute_dict</span><span class="p">:</span>
+                <span class="n">old_attr_val</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">])</span>
+                <span class="n">old_attr_val</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">))</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">old_attr_val</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_val</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">attribute_dict</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">],</span> <span class="n">attribute_val</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_val</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Treating attribute value as a single element rather than an iterable&quot;</span>
+            <span class="p">)</span>
+            <span class="n">attribute_dict</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_val</span>
+        <span class="k">return</span> <span class="n">attribute_dict</span></div>
+
+<div class="viewcode-block" id="Checkpointer.save_attributes"><a class="viewcode-back" href="../../saving/checkpoint_api.html#sail_on_client.checkpointer.Checkpointer.save_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">save_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save attribute for a detector.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            step_descriptor: String describing steps for protocol</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">step_descriptor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;saved_attributes&quot;</span><span class="p">]:</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;saved_attributes&quot;</span><span class="p">][</span><span class="n">step_descriptor</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">save_elementwise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;save_elementwise&quot;</span><span class="p">]</span>
+        <span class="n">attribute_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">:</span> <span class="n">Any</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span> <span class="ow">and</span> <span class="n">save_elementwise</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">attribute</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">attribute_dict</span><span class="p">:</span>
+                        <span class="n">attribute_dict</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">attribute_dict</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_save_elementwise_attribute</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">attribute_dict</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">,</span> <span class="n">attribute</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">save_elementwise</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                        <span class="s2">&quot;Saving attributes for an entire round is not supported&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Detector does not have </span><span class="si">{</span><span class="n">attribute</span><span class="si">}</span><span class="s2"> attribute&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No attributes found for </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;attributes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_dict</span></div>
+
+<div class="viewcode-block" id="Checkpointer._restore_elementwise_attribute"><a class="viewcode-back" href="../../saving/checkpoint_api.html#sail_on_client.checkpointer.Checkpointer._restore_elementwise_attribute">[docs]</a>    <span class="k">def</span> <span class="nf">_restore_elementwise_attribute</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">detector</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attribute_val</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private method to restore attributes element wise.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            detector: Instance of novelty detector</span>
+<span class="sd">            attribute_name: Name of the detector attribute that needs to be saved</span>
+<span class="sd">            attribute_val: A dictonary containing value for attributes</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            Detector with updated value for attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+            <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">],</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">())</span>
+        <span class="p">)</span>
+        <span class="n">round_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;round_id&quot;</span><span class="p">]</span>
+        <span class="n">round_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataset_ids</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">round_attribute_val</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">dataset_id</span> <span class="ow">in</span> <span class="n">dataset_ids</span><span class="p">:</span>
+                <span class="n">round_attribute_val</span><span class="p">[</span><span class="n">dataset_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">attribute_val</span><span class="p">[</span><span class="n">dataset_id</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attribute_val</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">round_attribute_val</span> <span class="o">=</span> <span class="n">attribute_val</span><span class="p">[</span>
+                <span class="n">round_id</span> <span class="o">*</span> <span class="n">round_len</span> <span class="p">:</span> <span class="p">(</span><span class="n">round_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">round_len</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">&quot;Treating attribute value as a single element rather than an iterable.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">round_attribute_val</span> <span class="o">=</span> <span class="n">attribute_val</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">detector</span><span class="p">,</span> <span class="n">attribute_name</span><span class="p">,</span> <span class="n">round_attribute_val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">detector</span></div>
+
+<div class="viewcode-block" id="Checkpointer.restore_attributes"><a class="viewcode-back" href="../../saving/checkpoint_api.html#sail_on_client.checkpointer.Checkpointer.restore_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">restore_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Restore attribute for a detector.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            step_descriptor: String describing steps for protocol</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;use_saved_attributes&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">step_descriptor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;saved_attributes&quot;</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="n">attributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;saved_attributes&quot;</span><span class="p">][</span><span class="n">step_descriptor</span><span class="p">]</span>
+            <span class="n">save_elementwise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;save_elementwise&quot;</span><span class="p">]</span>
+            <span class="n">save_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;save_dir&quot;</span><span class="p">]</span>
+            <span class="n">test_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;test_id&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">save_dir</span><span class="p">):</span>
+                <span class="n">attribute_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_attribute.pkl&quot;</span><span class="p">)</span>
+                <span class="n">attribute_val</span> <span class="o">=</span> <span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">attribute_file</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">attribute_val</span> <span class="o">=</span> <span class="n">pkl</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">save_elementwise</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">detector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_restore_elementwise_attribute</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">attribute_val</span><span class="p">[</span><span class="n">attribute</span><span class="p">][</span><span class="n">test_id</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                        <span class="s2">&quot;Restoring attributes for an entire round is not supported.&quot;</span>
+                    <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No attributes found for </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

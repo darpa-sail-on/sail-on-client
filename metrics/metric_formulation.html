@@ -1,384 +1,138 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Program Metrics</title>
-    
-      <link rel="stylesheet" href="../_static/pygments.css">
-      <link rel="stylesheet" href="../_static/theme.css">
-      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
-          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
-          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Metrics &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Metric API" href="metric_api.html" />
+    <link rel="prev" title="Harness API" href="../harness/harness_api.html" /> 
+</head>
 
-      
-      <script src="../_static/theme-vendors.js"></script>
-      <script src="../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../genindex.html" />
-  <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="Metric API" href="metric_api.html" />
-  <link rel="prev" title="Harness API" href="../harness/harness_api.html" /> 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="../index.html" class="home-link">
-    
-      <span class="site-name">Sail-On Client</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link  router-link-active">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link  router-link-active">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="../search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 current"><a href="#" class="reference internal current">Program Metrics</a>
-
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                
-                  <li class="toctree-l2"><a href="#introduction" class="reference internal">Introduction</a></li>
-                
-                  <li class="toctree-l2"><a href="#symbols-and-terms" class="reference internal">Symbols and Terms</a></li>
-                
-                  <li class="toctree-l2"><a href="#m1-average-number-of-fns-among-correctly-detected-trials" class="reference internal">M1: Average Number of FNs among Correctly Detected Trials</a></li>
-                
-                  <li class="toctree-l2"><a href="#m2-percentage-of-correctly-detected-trials" class="reference internal">M2: Percentage of Correctly Detected Trials</a></li>
-                
-                  <li class="toctree-l2"><a href="#m2-1-percentage-of-false-positive-trials" class="reference internal">M2.1: Percentage of False Positive Trials</a></li>
-                
-                  <li class="toctree-l2"><a href="#m3-and-m4-novelty-reaction-performance" class="reference internal">M3 and M4: Novelty Reaction Performance</a></li>
-                
-                  <li class="toctree-l2"><a href="#m5-overall-performance-task-improvement" class="reference internal">M5: Overall Performance Task Improvement</a></li>
-                
-                  <li class="toctree-l2"><a href="#m6-asymptotic-performance-task-improvement" class="reference internal">M6: Asymptotic Performance Task Improvement</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="metric_api.html" class="reference internal ">Metric API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../plugins/hydra_plugins.html" class="reference internal ">Hydra Plugins</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-    <li>Program Metrics</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="../harness/harness_api.html"
-       title="previous chapter">← Harness API</a>
-  </li>
-  <li class="next">
-    <a href="metric_api.html"
-       title="next chapter">Metric API →</a>
-  </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
 </ul>
-  
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Program Metrics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#symbols-and-terms">Symbols and Terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#m1-average-number-of-fns-among-correctly-detected-trials">M1: Average Number of FNs among Correctly Detected Trials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#formal-definition">Formal Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pictorial-representation">Pictorial Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#m2-percentage-of-correctly-detected-trials">M2: Percentage of Correctly Detected Trials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Formal Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Pictorial Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#m2-1-percentage-of-false-positive-trials">M2.1: Percentage of False Positive Trials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Formal Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Pictorial Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#m3-and-m4-novelty-reaction-performance">M3 and M4: Novelty Reaction Performance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Formal Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Pictorial Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#m5-overall-performance-task-improvement">M5: Overall Performance Task Improvement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">Formal Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">Pictorial Representation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#m6-asymptotic-performance-task-improvement">M6: Asymptotic Performance Task Improvement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">Formal Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Pictorial Representation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Program Metrics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/metrics/metric_formulation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
 </div>
-<hr>
-          <div class="content" role="main">
-            
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="program-metrics">
-<h1>Program Metrics<a class="headerlink" href="#program-metrics" title="Permalink to this headline">¶</a></h1>
+<h1>Program Metrics<a class="headerlink" href="#program-metrics" title="Permalink to this headline"></a></h1>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>The sail on metrics evaluates the agents using two criteria</p>
 <ol class="arabic simple">
 <li><p>Detecting the instance when novelty was introduced.</p></li>
@@ -391,7 +145,7 @@ are calculated.</p>
 </div>
 </div>
 <div class="section" id="symbols-and-terms">
-<h2>Symbols and Terms<a class="headerlink" href="#symbols-and-terms" title="Permalink to this headline">¶</a></h2>
+<h2>Symbols and Terms<a class="headerlink" href="#symbols-and-terms" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>L: Novelty Level (L <span class="math notranslate nohighlight">\(\in\)</span> [1,3])</p></li>
 <li><p>C: Condition (C <span class="math notranslate nohighlight">\(\in\)</span> [System Detection, Given Detection])</p></li>
@@ -407,9 +161,9 @@ are calculated.</p>
 </ol>
 </div>
 <div class="section" id="m1-average-number-of-fns-among-correctly-detected-trials">
-<h2>M1: Average Number of FNs among Correctly Detected Trials<a class="headerlink" href="#m1-average-number-of-fns-among-correctly-detected-trials" title="Permalink to this headline">¶</a></h2>
+<h2>M1: Average Number of FNs among Correctly Detected Trials<a class="headerlink" href="#m1-average-number-of-fns-among-correctly-detected-trials" title="Permalink to this headline"></a></h2>
 <div class="section" id="formal-definition">
-<h3>Formal Definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline">¶</a></h3>
+<h3>Formal Definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline"></a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\delta(\alpha, x)\)</span> be the agent’s distribution on instance x</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}CDT(\alpha, T) =  \begin{cases}
@@ -428,82 +182,82 @@ are calculated.</p>
 \end{cases}\end{split}\]</div>
 </div>
 <div class="section" id="pictorial-representation">
-<h3>Pictorial Representation<a class="headerlink" href="#pictorial-representation" title="Permalink to this headline">¶</a></h3>
+<h3>Pictorial Representation<a class="headerlink" href="#pictorial-representation" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="M1 metric" src="../_images/M1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="m2-percentage-of-correctly-detected-trials">
-<h2>M2: Percentage of Correctly Detected Trials<a class="headerlink" href="#m2-percentage-of-correctly-detected-trials" title="Permalink to this headline">¶</a></h2>
+<h2>M2: Percentage of Correctly Detected Trials<a class="headerlink" href="#m2-percentage-of-correctly-detected-trials" title="Permalink to this headline"></a></h2>
 <div class="section" id="id1">
-<h3>Formal Definition<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>Formal Definition<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
 \[CDT_{\%}(\mathcal{E}_\alpha) = \frac{1}{|\mathcal{E}_\alpha|}  \sum\limits_{T\in\mathcal{E}_\alpha}(CDT(\alpha, T) = \text{True})\]</div>
 </div>
 <div class="section" id="id2">
-<h3>Pictorial Representation<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>Pictorial Representation<a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="M2 metric" src="../_images/M2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="m2-1-percentage-of-false-positive-trials">
-<h2>M2.1: Percentage of False Positive Trials<a class="headerlink" href="#m2-1-percentage-of-false-positive-trials" title="Permalink to this headline">¶</a></h2>
+<h2>M2.1: Percentage of False Positive Trials<a class="headerlink" href="#m2-1-percentage-of-false-positive-trials" title="Permalink to this headline"></a></h2>
 <div class="section" id="id3">
-<h3>Formal Definition<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3>Formal Definition<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}FP(\alpha, T) = \sum\limits_{x \in T_{pre}}(\delta(\alpha, x) = \delta_{post})\\FP_{\%}(\mathcal{E}_\alpha) = \frac{1}{|\mathcal{E}_\alpha|}\sum\limits_{T\in\mathcal{E}_\alpha}(FP(\alpha, T)&gt;0)\end{aligned}\end{align} \]</div>
 </div>
 <div class="section" id="id4">
-<h3>Pictorial Representation<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3>Pictorial Representation<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="M2.1 metric" src="../_images/M2.1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="m3-and-m4-novelty-reaction-performance">
-<h2>M3 and M4: Novelty Reaction Performance<a class="headerlink" href="#m3-and-m4-novelty-reaction-performance" title="Permalink to this headline">¶</a></h2>
+<h2>M3 and M4: Novelty Reaction Performance<a class="headerlink" href="#m3-and-m4-novelty-reaction-performance" title="Permalink to this headline"></a></h2>
 <div class="section" id="id5">
-<h3>Formal Definition<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3>Formal Definition<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
 <p>Let <span class="math notranslate nohighlight">\(P_{pre, \beta}\)</span> be baselines average task performance on <span class="math notranslate nohighlight">\(T_{pre}\)</span>
 and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the agents asymptotic task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span></p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}NRP(T) = \frac{P_{post, \alpha}}{P_{pre, \beta}}\\NRP(\mathcal{E}) = \frac{1}{N_\mathcal{E}} \sum\limits_{i=1}^{N_\mathcal{E}} NRP(T_i)\end{aligned}\end{align} \]</div>
 </div>
 <div class="section" id="id6">
-<h3>Pictorial Representation<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3>Pictorial Representation<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="M3 and M4 metric" src="../_images/M3.png" />
 </div>
 </div>
 </div>
 <div class="section" id="m5-overall-performance-task-improvement">
-<h2>M5: Overall Performance Task Improvement<a class="headerlink" href="#m5-overall-performance-task-improvement" title="Permalink to this headline">¶</a></h2>
+<h2>M5: Overall Performance Task Improvement<a class="headerlink" href="#m5-overall-performance-task-improvement" title="Permalink to this headline"></a></h2>
 <div class="section" id="id7">
-<h3>Formal Definition<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3>Formal Definition<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h3>
 <p>Let <span class="math notranslate nohighlight">\(P_{post, \beta}\)</span> be baselines average task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span>
 and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the agents task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span></p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}OPTI(T) = \frac{P_{post,\alpha}}{P_{post,\alpha} + P_{post, \beta}}\\OPTI = \frac{1}{N_{\mathcal{E}}}\sum\limits_{i=1}^{N_\mathcal{E}}OTPI(T_i)\end{aligned}\end{align} \]</div>
 </div>
 <div class="section" id="id8">
-<h3>Pictorial Representation<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3>Pictorial Representation<a class="headerlink" href="#id8" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="M5 metric" src="../_images/M5.png" />
 </div>
 </div>
 </div>
 <div class="section" id="m6-asymptotic-performance-task-improvement">
-<h2>M6: Asymptotic Performance Task Improvement<a class="headerlink" href="#m6-asymptotic-performance-task-improvement" title="Permalink to this headline">¶</a></h2>
+<h2>M6: Asymptotic Performance Task Improvement<a class="headerlink" href="#m6-asymptotic-performance-task-improvement" title="Permalink to this headline"></a></h2>
 <div class="section" id="id9">
-<h3>Formal Definition<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<h3>Formal Definition<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}APTI(T) = \frac{\sum_{i=N_T-m}^{N_T}P_{post,\alpha}}{\sum_{i=N_T-m}^{N_T}P_{post,\beta}}\\APTI = \frac{1}{N_{\mathcal{E}}}\sum\limits_{i=1}^{N_\mathcal{E}}APTI(T_i)\end{aligned}\end{align} \]</div>
 <p>where <span class="math notranslate nohighlight">\(m\)</span> is asymptotic width that is domain dependent</p>
 </div>
 <div class="section" id="id10">
-<h3>Pictorial Representation<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<h3>Pictorial Representation<a class="headerlink" href="#id10" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="M6 metric" src="../_images/M6.png" />
 </div>
@@ -512,27 +266,34 @@ and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the
 </div>
 
 
+           </div>
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="../harness/harness_api.html"
-       title="previous chapter">← Harness API</a>
-  </li>
-  <li class="next">
-    <a href="metric_api.html"
-       title="next chapter">Metric API →</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2020, Kitware INC..
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../harness/harness_api.html" class="btn btn-neutral float-left" title="Harness API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="metric_api.html" class="btn btn-neutral float-right" title="Metric API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-    
-    
-  </body>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

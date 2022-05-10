@@ -1,371 +1,107 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Hydra Plugins</title>
-    
-      <link rel="stylesheet" href="../_static/pygments.css">
-      <link rel="stylesheet" href="../_static/theme.css">
-      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
-          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
-          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hydra Plugins &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Saving And Restoring Features for Algorithm" href="../saving/features.html" />
+    <link rel="prev" title="Plugins" href="plugins.html" /> 
+</head>
 
-      
-      <script src="../_static/theme-vendors.js"></script>
-      <script src="../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../genindex.html" />
-  <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="Saving And Restoring Features for Algorithm" href="../saving/features.html" />
-  <link rel="prev" title="Plugins" href="plugins.html" /> 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="../index.html" class="home-link">
-    
-      <span class="site-name">Sail-On Client</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link  router-link-active">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link  router-link-active">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="../search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 "><a href="plugins.html" class="reference internal ">Plugins</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 current"><a href="#" class="reference internal current">Hydra Plugins</a>
-
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                
-                  <li class="toctree-l2"><a href="#introduction" class="reference internal">Introduction</a></li>
-                
-                  <li class="toctree-l2"><a href="#searchpath-plugin" class="reference internal">Searchpath Plugin</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-    <li>Hydra Plugins</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="plugins.html"
-       title="previous chapter">← Plugins</a>
-  </li>
-  <li class="next">
-    <a href="../saving/features.html"
-       title="next chapter">Saving And Restoring Features for Algorithm →</a>
-  </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
 </ul>
-  
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="plugins.html">Plugins</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hydra Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#searchpath-plugin">Searchpath Plugin</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Hydra Plugins</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/plugins/hydra_plugins.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
 </div>
-<hr>
-          <div class="content" role="main">
-            
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="hydra-plugins">
-<h1>Hydra Plugins<a class="headerlink" href="#hydra-plugins" title="Permalink to this headline">¶</a></h1>
+<h1>Hydra Plugins<a class="headerlink" href="#hydra-plugins" title="Permalink to this headline"></a></h1>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>By default the cli supports configurations present in 2 search paths</p>
 <ol class="arabic simple">
 <li><p>Default path <code class="code docutils literal notranslate"><span class="pre">sail_on_client.configs</span></code> present in the sail-on-client package.</p></li>
@@ -377,7 +113,7 @@ multiple python package. In this case, the user could use <a class="reference ex
 to provide additional directories where the configuration files might be available.</p>
 </div>
 <div class="section" id="searchpath-plugin">
-<h2>Searchpath Plugin<a class="headerlink" href="#searchpath-plugin" title="Permalink to this headline">¶</a></h2>
+<h2>Searchpath Plugin<a class="headerlink" href="#searchpath-plugin" title="Permalink to this headline"></a></h2>
 <p>To create add a new search path to cli, use the following steps</p>
 <ol class="arabic">
 <li><p>Create a <cite>hydra_plugins</cite> folder at the root directory of your package.</p></li>
@@ -430,27 +166,34 @@ like colorlor. To resolve the issue use <cite>pip install .</cite></p>
 </div>
 
 
+           </div>
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="plugins.html"
-       title="previous chapter">← Plugins</a>
-  </li>
-  <li class="next">
-    <a href="../saving/features.html"
-       title="next chapter">Saving And Restoring Features for Algorithm →</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2020, Kitware INC..
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plugins.html" class="btn btn-neutral float-left" title="Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../saving/features.html" class="btn btn-neutral float-right" title="Saving And Restoring Features for Algorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-    
-    
-  </body>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

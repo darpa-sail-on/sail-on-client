@@ -1,375 +1,114 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</title>
-    
-      <link rel="stylesheet" href="../_static/pygments.css">
-      <link rel="stylesheet" href="../_static/theme.css">
-      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
-          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
-          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA) &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Protocol API" href="protocol_api.html" />
+    <link rel="prev" title="Open World Novelty Detection (OND)" href="ond.html" /> 
+</head>
 
-      
-      <script src="../_static/theme-vendors.js"></script>
-      <script src="../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../genindex.html" />
-  <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="Protocol API" href="protocol_api.html" />
-  <link rel="prev" title="Open World Novelty Detection (OND)" href="ond.html" /> 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="../index.html" class="home-link">
-    
-      <span class="site-name">Sail-On Client</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link  router-link-active">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link  router-link-active">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="../search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 "><a href="ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 current"><a href="#" class="reference internal current">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
-
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                
-                  <li class="toctree-l2"><a href="#introduction" class="reference internal">Introduction</a></li>
-                
-                  <li class="toctree-l2"><a href="#prediction-space" class="reference internal">Prediction Space</a></li>
-                
-                  <li class="toctree-l2"><a href="#workflow-for-condda" class="reference internal">WorkFlow For CONDDA</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="protocol_api.html" class="reference internal ">Protocol API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../plugins/hydra_plugins.html" class="reference internal ">Hydra Plugins</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-    <li>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="ond.html"
-       title="previous chapter">← Open World Novelty Detection (OND)</a>
-  </li>
-  <li class="next">
-    <a href="protocol_api.html"
-       title="next chapter">Protocol API →</a>
-  </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
 </ul>
-  
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prediction-space">Prediction Space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow-for-condda">WorkFlow For CONDDA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#condda-workflow-with-red-light">CONDDA Workflow With Red Light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">CONDDA Workflow With Red Light</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/protocols/condda.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
 </div>
-<hr>
-          <div class="content" role="main">
-            
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="continuous-open-set-novelty-detection-discovery-adaptation-condda">
-<h1>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)<a class="headerlink" href="#continuous-open-set-novelty-detection-discovery-adaptation-condda" title="Permalink to this headline">¶</a></h1>
+<h1>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)<a class="headerlink" href="#continuous-open-set-novelty-detection-discovery-adaptation-condda" title="Permalink to this headline"></a></h1>
 <p><strong>K+D+1 classification where K represents known classes, D are dicovered classes, 1 are all unknown classes</strong></p>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>This combines classification with novelty/object discovery (and is more natural
 for Class Novelty). A TA2 agent starts with a K+1-way classification model (K known,
 1 unknown) as in OND. During testing, the TA2 agent will discover clusters of
@@ -377,23 +116,23 @@ novelty (e.g., discover new classes) and accordingly add those as separate
 classes in the prediction space (i.e., one of D discovered classes).</p>
 </div>
 <div class="section" id="prediction-space">
-<h2>Prediction Space<a class="headerlink" href="#prediction-space" title="Permalink to this headline">¶</a></h2>
+<h2>Prediction Space<a class="headerlink" href="#prediction-space" title="Permalink to this headline"></a></h2>
 <ol class="arabic simple">
 <li><p>Binary Classification Score: <span class="math notranslate nohighlight">\(P_{world\_changed}\)</span></p></li>
 <li><p>K + D + 1 Characterization Score: <span class="math notranslate nohighlight">\(P_{class} = [ p_{unknown}, p_1, ..., p_k, p_{cluster0}, ..., p_{clusterU}]\)</span></p></li>
 </ol>
 </div>
 <div class="section" id="workflow-for-condda">
-<h2>WorkFlow For CONDDA<a class="headerlink" href="#workflow-for-condda" title="Permalink to this headline">¶</a></h2>
+<h2>WorkFlow For CONDDA<a class="headerlink" href="#workflow-for-condda" title="Permalink to this headline"></a></h2>
 <p>This section provides detailed workflow of the system in the evaluation condition</p>
 <div class="section" id="condda-workflow-with-red-light">
-<h3>CONDDA Workflow With Red Light<a class="headerlink" href="#condda-workflow-with-red-light" title="Permalink to this headline">¶</a></h3>
+<h3>CONDDA Workflow With Red Light<a class="headerlink" href="#condda-workflow-with-red-light" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="Workflow for CONDDA without red light" src="../_images/CONDDA-Updated.png" />
 </div>
 </div>
 <div class="section" id="id1">
-<h3>CONDDA Workflow With Red Light<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>CONDDA Workflow With Red Light<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
 <div class="align-center figure">
 <img alt="Workflow for CONDDA with red light" src="../_images/CONDDA-With-Red-Light-Updated.png" />
 </div>
@@ -402,27 +141,34 @@ classes in the prediction space (i.e., one of D discovered classes).</p>
 </div>
 
 
+           </div>
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="ond.html"
-       title="previous chapter">← Open World Novelty Detection (OND)</a>
-  </li>
-  <li class="next">
-    <a href="protocol_api.html"
-       title="next chapter">Protocol API →</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2020, Kitware INC..
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ond.html" class="btn btn-neutral float-left" title="Open World Novelty Detection (OND)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="protocol_api.html" class="btn btn-neutral float-right" title="Protocol API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-    
-    
-  </body>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

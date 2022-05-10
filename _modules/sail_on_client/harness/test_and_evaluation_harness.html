@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.harness.test_and_evaluation_harness &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.harness.test_and_evaluation_harness</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.harness.test_and_evaluation_harness</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract harness for T&amp;E.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">smqtk_core</span> <span class="kn">import</span> <span class="n">Configurable</span><span class="p">,</span> <span class="n">Pluggable</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="n">TestAndEvaluationHarnessType</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span>
+    <span class="s2">&quot;TestAndEvaluationHarnessType&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s2">&quot;TestAndEvaluationHarness&quot;</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="TestAndEvaluationHarness"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness">[docs]</a><span class="k">class</span> <span class="nc">TestAndEvaluationHarness</span><span class="p">(</span><span class="n">Configurable</span><span class="p">,</span> <span class="n">Pluggable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Abstract interface for test and evaluation harness.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.is_usable"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">is_usable</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Determine if this class with be detected by SMQTK&#39;s plugin.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.get_config"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a default configuration dictionary.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.test_ids_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">test_ids_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">detector_seed</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_assumptions</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request Test Identifiers as part of a series of individual tests.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            protocol : string indicating which protocol is being evaluated</span>
+<span class="sd">            domain : problem domain for the tests</span>
+<span class="sd">            detector_seed : A seed provided by the novelty detector</span>
+<span class="sd">            test_assumptions : Assumptions used by the detector</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Filename of file containing test ids</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.session_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">session_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">novelty_detector_version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hints</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">detection_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new session to evaluate the detector using an empirical protocol.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_ids: List of tests being evaluated in this session</span>
+<span class="sd">            protocol: String indicating which protocol is being evaluated</span>
+<span class="sd">            domain: String indicating which domain is being evaluated</span>
+<span class="sd">            novelty_detector_version: The novelty detector being evaluated</span>
+<span class="sd">            hints: Hints used for the session</span>
+<span class="sd">            detection_threshold: Detection threshold for the session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A session identifier provided by the server</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.resume_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">resume_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get finished test from an existing session.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session id : Session id that was started but not terminated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tests finished in the session</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.dataset_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">dataset_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request data for evaluation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The test being evaluated at this moment.</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The identifier provided by the server for a single experiment</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Filename of a file containing a list of image files (including full path for each)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.get_feedback_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_feedback_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">feedback_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Labels from the server based provided one or more example ids.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feedback_ids: List of media ids for which feedback is required</span>
+<span class="sd">            feedback_type: Protocols constants with the values: label, detection, characterization</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to a file containing containing requested feedback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.post_results"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">post_results</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">result_files</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Post client detector predictions for the dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result_files: A dictionary of results with protocol constant as key and file path as value</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.evaluate_round_wise"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">evaluate_round_wise</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get results for round(s).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to a file with the results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.evaluate"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">baseline_session_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get results for test(s).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to a file with the results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.get_test_metadata"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_test_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the metadata json for the specified test.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id of the session currently being evaluated</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary containing metadata</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.complete_test"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">complete_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mark test as completed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id of the session currently being evaluated</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="TestAndEvaluationHarness.terminate_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">terminate_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Terminate the session after the evaluation for the protocol is complete.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

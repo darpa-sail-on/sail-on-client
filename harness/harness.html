@@ -1,376 +1,115 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Harness</title>
-    
-      <link rel="stylesheet" href="../_static/pygments.css">
-      <link rel="stylesheet" href="../_static/theme.css">
-      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
-          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
-          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harness &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Harness API" href="harness_api.html" />
+    <link rel="prev" title="Protocol API" href="../protocols/protocol_api.html" /> 
+</head>
 
-      
-      <script src="../_static/theme-vendors.js"></script>
-      <script src="../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../genindex.html" />
-  <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="Harness API" href="harness_api.html" />
-  <link rel="prev" title="Protocol API" href="../protocols/protocol_api.html" /> 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="../index.html" class="home-link">
-    
-      <span class="site-name">Sail-On Client</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link  router-link-active">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link  router-link-active">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link ">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="../search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 current"><a href="#" class="reference internal current">Harness</a>
-
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                
-                  <li class="toctree-l2"><a href="#local-harness" class="reference internal">Local Harness</a></li>
-                
-                  <li class="toctree-l2"><a href="#par-harness" class="reference internal">PAR Harness</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="harness_api.html" class="reference internal ">Harness API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback.html" class="reference internal ">Feedback</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../feedback/feedback_api.html" class="reference internal ">Feedback API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../plugins/hydra_plugins.html" class="reference internal ">Hydra Plugins</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-    <li>Harness</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="../protocols/protocol_api.html"
-       title="previous chapter">← Protocol API</a>
-  </li>
-  <li class="next">
-    <a href="harness_api.html"
-       title="next chapter">Harness API →</a>
-  </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
 </ul>
-  
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Harness</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#local-harness">Local Harness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#par-harness">PAR Harness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rest-api">REST API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Harness</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/harness/harness.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
 </div>
-<hr>
-          <div class="content" role="main">
-            
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="harness">
-<h1>Harness<a class="headerlink" href="#harness" title="Permalink to this headline">¶</a></h1>
+<h1>Harness<a class="headerlink" href="#harness" title="Permalink to this headline"></a></h1>
 <p>Harnesses are used for testing and evaluating TA2 agents. The
 evaluation can be conducted using a server setup by TA1 or by
 providing the files containing ground truth and metadata
 associated with the tests. We support two harnesses for
 sail-on-client. These harnesses are subclasses of <code class="code docutils literal notranslate"><span class="pre">TestAndEvaluationHarness</span></code>.</p>
 <div class="section" id="local-harness">
-<h2>Local Harness<a class="headerlink" href="#local-harness" title="Permalink to this headline">¶</a></h2>
+<h2>Local Harness<a class="headerlink" href="#local-harness" title="Permalink to this headline"></a></h2>
 <p><code class="code docutils literal notranslate"><span class="pre">LocalHarness</span></code> is primarily used for replicating the capabilities of
 <code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> without using the server. This allows local testing without
 setting up a server instance locally or via a URL. Since LocalHarness uses
@@ -382,7 +121,7 @@ the files it requires 3 parameters:</p>
 </ol>
 </div>
 <div class="section" id="par-harness">
-<h2>PAR Harness<a class="headerlink" href="#par-harness" title="Permalink to this headline">¶</a></h2>
+<h2>PAR Harness<a class="headerlink" href="#par-harness" title="Permalink to this headline"></a></h2>
 <p><code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> is primarily responsible for communicating with the evaluation
 server setup by the TA1 team. The interface relies on RESTful api <a class="reference internal" href="#rest-api"><span class="std std-ref">(detailed in the next section)</span></a>  to provide the
 following features</p>
@@ -397,7 +136,7 @@ following features</p>
 submitted.</p></li>
 </ol>
 <div class="section" id="rest-api">
-<h3>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline">¶</a></h3>
+<h3>REST API<a class="headerlink" href="#rest-api" title="Permalink to this headline"></a></h3>
 <p>This section provides a detailed description of the RESTful api used for communication.</p>
 <table class="docutils align-default">
 <colgroup>
@@ -550,27 +289,34 @@ the protocol.</p></li>
 </div>
 
 
+           </div>
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="../protocols/protocol_api.html"
-       title="previous chapter">← Protocol API</a>
-  </li>
-  <li class="next">
-    <a href="harness_api.html"
-       title="next chapter">Harness API →</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2020, Kitware INC..
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../protocols/protocol_api.html" class="btn btn-neutral float-left" title="Protocol API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="harness_api.html" class="btn btn-neutral float-right" title="Harness API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-    
-    
-  </body>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.evaluate.document_transcription &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.evaluate.document_transcription</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.evaluate.document_transcription</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Document Transcription Class for metrics for sail-on.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sail_on_client.evaluate.program_metrics</span> <span class="kn">import</span> <span class="n">ProgramMetrics</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.evaluate.metrics</span> <span class="kn">import</span> <span class="n">m_acc</span><span class="p">,</span> <span class="n">m_num</span><span class="p">,</span> <span class="n">m_ndp</span><span class="p">,</span> <span class="n">m_num_stats</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.evaluate.metrics</span> <span class="kn">import</span> <span class="n">m_ndp_failed_reaction</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.evaluate.metrics</span> <span class="kn">import</span> <span class="n">m_accuracy_on_novel</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.evaluate.utils</span> <span class="kn">import</span> <span class="n">topk_accuracy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics">[docs]</a><span class="k">class</span> <span class="nc">DocumentTranscriptionMetrics</span><span class="p">(</span><span class="n">ProgramMetrics</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Document transcription program metric class.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.__init__"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">image_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">novel</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">representation</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">detection</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">classification</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">pen_pressure</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">letter_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">word_spacing</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">slant_angle</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">attribute</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            protocol: Name of the protocol.</span>
+<span class="sd">            image_id: Column id for image</span>
+<span class="sd">            text: Transcription associated with the image</span>
+<span class="sd">            novel: Column id for predicting if change was detected</span>
+<span class="sd">            representation: Column id with representation novelty label</span>
+<span class="sd">            detection: Column id with sample wise novelty</span>
+<span class="sd">            classification:  Column id with writer id</span>
+<span class="sd">            pen_pressure: Column id with pen pressure values</span>
+<span class="sd">            letter_size: Column id with letter size values</span>
+<span class="sd">            word_spacing: Column id with word spacing values</span>
+<span class="sd">            slant_angle: Column id with slant angle values</span>
+<span class="sd">            attribute: Column id with attribute level novelty label</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">protocol</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image_id</span> <span class="o">=</span> <span class="n">image_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text_id</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">novel_id</span> <span class="o">=</span> <span class="n">novel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">representation_id</span> <span class="o">=</span> <span class="n">representation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">detection_id</span> <span class="o">=</span> <span class="n">detection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classification_id</span> <span class="o">=</span> <span class="n">classification</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pen_pressure_id</span> <span class="o">=</span> <span class="n">pen_pressure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">letter_size_id</span> <span class="o">=</span> <span class="n">letter_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word_spacing_id</span> <span class="o">=</span> <span class="n">word_spacing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slant_angle_id</span> <span class="o">=</span> <span class="n">slant_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attribute_id</span> <span class="o">=</span> <span class="n">attribute</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_acc"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc">[docs]</a>    <span class="k">def</span> <span class="nf">m_acc</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">gt_novel</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">p_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">gt_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">round_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">asymptotic_start_round</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_acc helper function used for computing novelty reaction performance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+<span class="sd">            p_class: class predictions (Dimension: [img X prob that sample is novel, prob of known classes])</span>
+<span class="sd">            gt_class: ground truth classes (Dimension: [img X class idx])</span>
+<span class="sd">            round_size: size of the round</span>
+<span class="sd">            asymptotic_start_round: asymptotic samples considered for computing metrics</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing top1, top3 accuracy over the test, pre and post novelty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">class_prob</span> <span class="o">=</span> <span class="n">p_class</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">gt_class_idx</span> <span class="o">=</span> <span class="n">gt_class</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">m_acc</span><span class="p">(</span>
+            <span class="n">gt_novel</span><span class="p">,</span> <span class="n">class_prob</span><span class="p">,</span> <span class="n">gt_class_idx</span><span class="p">,</span> <span class="n">round_size</span><span class="p">,</span> <span class="n">asymptotic_start_round</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_acc_round_wise"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc_round_wise">[docs]</a>    <span class="k">def</span> <span class="nf">m_acc_round_wise</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">p_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_acc_round_wise function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_class: class predictions</span>
+<span class="sd">            gt_class: ground truth classes</span>
+<span class="sd">            round_id: round identifier</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing top1, top3 accuracy for a round</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">class_prob</span> <span class="o">=</span> <span class="n">p_class</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">gt_class_idx</span> <span class="o">=</span> <span class="n">gt_class</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">top1_acc</span> <span class="o">=</span> <span class="n">topk_accuracy</span><span class="p">(</span><span class="n">class_prob</span><span class="p">,</span> <span class="n">gt_class_idx</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">top3_acc</span> <span class="o">=</span> <span class="n">topk_accuracy</span><span class="p">(</span><span class="n">class_prob</span><span class="p">,</span> <span class="n">gt_class_idx</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="sa">f</span><span class="s2">&quot;top1_accuracy_round_</span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">top1_acc</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;top3_accuracy_round_</span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="n">top3_acc</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_num"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num">[docs]</a>    <span class="k">def</span> <span class="nf">m_num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_novel</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_num function.</span>
+
+<span class="sd">        A Program Metric where the number of samples needed for detecting novelty.</span>
+<span class="sd">        The method computes the number of GT novel samples needed to predict the</span>
+<span class="sd">        first true positive.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_novel: detection predictions (Dimension: [img X novel])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Difference between the novelty introduction and predicting change in world.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">m_num</span><span class="p">(</span><span class="n">p_novel</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_num_stats"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num_stats">[docs]</a>    <span class="k">def</span> <span class="nf">m_num_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_num_stats function.</span>
+
+<span class="sd">        Number of samples needed for detecting novelty. The method computes</span>
+<span class="sd">        number of GT novel samples needed to predict the first true positive.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_novel: detection predictions (Dimension: [img X novel])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing indices for novelty introduction and change in world prediction.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">m_num_stats</span><span class="p">(</span><span class="n">p_novel</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_ndp"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp">[docs]</a>    <span class="k">def</span> <span class="nf">m_ndp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_ndp function.</span>
+
+<span class="sd">        Novelty detection performance. The method computes per-sample novelty</span>
+<span class="sd">        detection performance over the entire test.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_novel: detection predictions (Dimension: [img X novel])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing novelty detection performance over the test.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">m_ndp</span><span class="p">(</span><span class="n">p_novel</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_ndp_pre"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_pre">[docs]</a>    <span class="k">def</span> <span class="nf">m_ndp_pre</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_ndp_pre function.</span>
+
+<span class="sd">        See :func:`~sail-on-client.evaluate.transcription.DocumentTranscriptionMetrics.m_ndp`</span>
+<span class="sd">        with post_novelty. This computes to the first GT novel sample. It really isn&#39;t useful</span>
+<span class="sd">        and is just added for completion. Should always be 0 since no possible TP.</span>
+
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_novel: detection predictions (Dimension: [img X novel])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing detection performance pre novelty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">m_ndp</span><span class="p">(</span><span class="n">p_novel</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;pre_novelty&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_ndp_post"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_post">[docs]</a>    <span class="k">def</span> <span class="nf">m_ndp_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_ndp_post function.</span>
+
+<span class="sd">        See :func:`~sail-on-client.evaluate.transcription.DocumentTranscriptionMetrics.m_ndp`</span>
+<span class="sd">        with post_novelty. This computes from the first GT novel sample.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            p_novel: detection predictions (Dimension: [img X novel])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing detection performance post novelty.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">m_ndp</span><span class="p">(</span><span class="n">p_novel</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;post_novelty&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_ndp_failed_reaction"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_failed_reaction">[docs]</a>    <span class="k">def</span> <span class="nf">m_ndp_failed_reaction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">p_novel</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">gt_novel</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">p_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">gt_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_ndp_failed_reaction function.</span>
+
+<span class="sd">        Not Implemented since no gt_class info for novel samples. The method</span>
+<span class="sd">        computes novelty detection performance for only on samples with</span>
+<span class="sd">        incorrect k-class predictions</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_novel: detection predictions (Dimension: [img X novel])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+<span class="sd">            p_class: detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</span>
+<span class="sd">            gt_class: ground truth classes (Dimension: [img X class idx])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary containing TP, FP, TN, FN, top1, top3 accuracy over the test.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">class_prob</span> <span class="o">=</span> <span class="n">p_class</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">gt_class_idx</span> <span class="o">=</span> <span class="n">gt_class</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">m_ndp_failed_reaction</span><span class="p">(</span><span class="n">p_novel</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">,</span> <span class="n">class_prob</span><span class="p">,</span> <span class="n">gt_class_idx</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_accuracy_on_novel"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_accuracy_on_novel">[docs]</a>    <span class="k">def</span> <span class="nf">m_accuracy_on_novel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">p_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">gt_class</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">:</span> <span class="n">DataFrame</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Additional Metric: Novelty robustness.</span>
+
+<span class="sd">        Not Implemented since no gt_class info for novel samples. The method</span>
+<span class="sd">        computes top-K accuracy for only the novel samples</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_class: detection predictions (Dimension: [img X prob that sample is novel, prob of known classes])</span>
+<span class="sd">            gt_class: ground truth classes (Dimension: [img X class idx])</span>
+<span class="sd">            gt_novel: ground truth detections (Dimension: [img X detection])</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Accuracy on novely samples</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">class_prob</span> <span class="o">=</span> <span class="n">p_class</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p_class</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="n">gt_class_idx</span> <span class="o">=</span> <span class="n">gt_class</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">m_accuracy_on_novel</span><span class="p">(</span><span class="n">class_prob</span><span class="p">,</span> <span class="n">gt_class_idx</span><span class="p">,</span> <span class="n">gt_novel</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_is_cdt_and_is_early"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_is_cdt_and_is_early">[docs]</a>    <span class="k">def</span> <span class="nf">m_is_cdt_and_is_early</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gt_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ta2_idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">test_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Is change detection and is change detection early (m_is_cdt_and_is_early) function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gt_idx: Index when novelty is introduced</span>
+<span class="sd">            ta2_idx: Index when change is detected</span>
+<span class="sd">            test_len: Length of test</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            Dictionary containing boolean showing if change was was detected and if it was detected early</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">is_cdt</span> <span class="o">=</span> <span class="p">(</span><span class="n">ta2_idx</span> <span class="o">&gt;=</span> <span class="n">gt_idx</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ta2_idx</span> <span class="o">&lt;</span> <span class="n">test_len</span><span class="p">)</span>
+        <span class="n">is_early</span> <span class="o">=</span> <span class="n">ta2_idx</span> <span class="o">&lt;</span> <span class="n">gt_idx</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Is CDT&quot;</span><span class="p">:</span> <span class="n">is_cdt</span><span class="p">,</span> <span class="s2">&quot;Is Early&quot;</span><span class="p">:</span> <span class="n">is_early</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="DocumentTranscriptionMetrics.m_nrp"><a class="viewcode-back" href="../../../metrics/metric_api.html#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_nrp">[docs]</a>    <span class="k">def</span> <span class="nf">m_nrp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ta2_acc</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">baseline_acc</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        m_nrp function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ta2_acc: Accuracy scores for the agent</span>
+<span class="sd">            baseline_acc: Accuracy scores for baseline</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Reaction performance for the agent</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nrp</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">nrp</span><span class="p">[</span><span class="s2">&quot;M_nrp_post_top3&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">ta2_acc</span><span class="p">[</span><span class="s2">&quot;post_top3&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">baseline_acc</span><span class="p">[</span><span class="s2">&quot;pre_top3&quot;</span><span class="p">])</span>
+        <span class="n">nrp</span><span class="p">[</span><span class="s2">&quot;M_nrp_post_top1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">ta2_acc</span><span class="p">[</span><span class="s2">&quot;post_top1&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">baseline_acc</span><span class="p">[</span><span class="s2">&quot;pre_top1&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">nrp</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

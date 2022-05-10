@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.protocol.ond_protocol &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.protocol.ond_protocol</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.protocol.ond_protocol</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;OND protocol.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sail_on_client.agent.ond_agent</span> <span class="kn">import</span> <span class="n">ONDAgent</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.test_and_evaluation_harness</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TestAndEvaluationHarnessType</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.protocol.visual_protocol</span> <span class="kn">import</span> <span class="n">VisualProtocol</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.utils.numpy_encoder</span> <span class="kn">import</span> <span class="n">NumpyEncoder</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.protocol.ond_dataclasses</span> <span class="kn">import</span> <span class="n">AlgorithmAttributes</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.protocol.ond_test</span> <span class="kn">import</span> <span class="n">ONDTest</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.utils.decorators</span> <span class="kn">import</span> <span class="n">skip_stage</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ONDProtocol"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol">[docs]</a><span class="k">class</span> <span class="nc">ONDProtocol</span><span class="p">(</span><span class="n">VisualProtocol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;OND protocol.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ONDProtocol.__init__"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algorithms</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ONDAgent</span><span class="p">],</span>
+        <span class="n">dataset_root</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">harness</span><span class="p">:</span> <span class="n">TestAndEvaluationHarnessType</span><span class="p">,</span>
+        <span class="n">save_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">seed</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">baseline_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">feature_extraction_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">has_baseline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">has_reaction_baseline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">hints</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">is_eval_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">is_eval_roundwise_enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">resume_session</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">resume_session_ids</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">saved_attributes</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">save_elementwise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">save_features</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">feature_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">skip_stages</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_feedback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;classification&quot;</span><span class="p">,</span>
+        <span class="n">use_consolidated_features</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_saved_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">use_saved_features</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct OND protocol.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithms: Dictionary of algorithms that are used run based on the protocol</span>
+<span class="sd">            baseline_class: Name of the baseline class</span>
+<span class="sd">            dataset_root: Root directory of the dataset</span>
+<span class="sd">            domain: Domain of the problem</span>
+<span class="sd">            save_dir: Directory where results are saved</span>
+<span class="sd">            seed: Seed for the experiments</span>
+<span class="sd">            feedback_type: Type of feedback</span>
+<span class="sd">            test_ids: List of tests</span>
+<span class="sd">            feature_extraction_only: Flag to only run feature extraction</span>
+<span class="sd">            has_baseline: Flag to check if the session has baseline</span>
+<span class="sd">            has_reaction_baseline: Flag to check if the session has reaction baseline</span>
+<span class="sd">            hints: List of hint provided in the session</span>
+<span class="sd">            harness: A harness for test and evaluation</span>
+<span class="sd">            is_eval_enabled: Flag to check if evaluation is enabled in session</span>
+<span class="sd">            is_eval_roundwise_enabled: Flag to check if evaluation is enabled for rounds</span>
+<span class="sd">            resume_session: Flag to resume session</span>
+<span class="sd">            resume_session_ids: Dictionary for resuming sessions</span>
+<span class="sd">            save_attributes: Flag to save attributes</span>
+<span class="sd">            saved_attributes: Dictionary for attributes</span>
+<span class="sd">            save_elementwise: Flag to save features elementwise</span>
+<span class="sd">            save_features: Flag to save  features</span>
+<span class="sd">            feature_dir: Directory to save features</span>
+<span class="sd">            skip_stages: List of stages that are skipped</span>
+<span class="sd">            use_feedback: Flag to use feedback</span>
+<span class="sd">            use_saved_attributes: Flag to use saved attributes</span>
+<span class="sd">            use_saved_features: Flag to use saved features</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">algorithms</span><span class="p">,</span> <span class="n">harness</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_class</span> <span class="o">=</span> <span class="n">baseline_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset_root</span> <span class="o">=</span> <span class="n">dataset_root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_extraction_only</span> <span class="o">=</span> <span class="n">feature_extraction_only</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_dir</span> <span class="o">=</span> <span class="n">feature_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span> <span class="o">=</span> <span class="n">feedback_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_baseline</span> <span class="o">=</span> <span class="n">has_baseline</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">has_reaction_baseline</span> <span class="o">=</span> <span class="n">has_reaction_baseline</span>
+        <span class="k">if</span> <span class="n">hints</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hints</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hints</span> <span class="o">=</span> <span class="n">hints</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_eval_enabled</span> <span class="o">=</span> <span class="n">is_eval_enabled</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_eval_roundwise_enabled</span> <span class="o">=</span> <span class="n">is_eval_roundwise_enabled</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resume_session</span> <span class="o">=</span> <span class="n">resume_session</span>
+        <span class="k">if</span> <span class="n">resume_session_ids</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resume_session_ids</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">resume_session_ids</span> <span class="o">=</span> <span class="n">resume_session_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_attributes</span> <span class="o">=</span> <span class="n">save_attributes</span>
+        <span class="k">if</span> <span class="n">saved_attributes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saved_attributes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saved_attributes</span> <span class="o">=</span> <span class="n">saved_attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_dir</span> <span class="o">=</span> <span class="n">save_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_elementwise</span> <span class="o">=</span> <span class="n">save_elementwise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_features</span> <span class="o">=</span> <span class="n">save_features</span>
+        <span class="k">if</span> <span class="n">skip_stages</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span> <span class="o">=</span> <span class="n">skip_stages</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_ids</span> <span class="o">=</span> <span class="n">test_ids</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_consolidated_features</span> <span class="o">=</span> <span class="n">use_consolidated_features</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_feedback</span> <span class="o">=</span> <span class="n">use_feedback</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_saved_attributes</span> <span class="o">=</span> <span class="n">use_saved_attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_saved_features</span> <span class="o">=</span> <span class="n">use_saved_features</span></div>
+
+<div class="viewcode-block" id="ONDProtocol.get_config"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol.get_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get dictionary representation of the object.&quot;&quot;&quot;</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;baseline_class&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_class</span><span class="p">,</span>
+                <span class="s2">&quot;dataset_root&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_root</span><span class="p">,</span>
+                <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+                <span class="s2">&quot;feature_extraction_only&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_extraction_only</span><span class="p">,</span>
+                <span class="s2">&quot;feature_dir&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_dir</span><span class="p">,</span>
+                <span class="s2">&quot;feedback_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span><span class="p">,</span>
+                <span class="s2">&quot;has_baseline&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_baseline</span><span class="p">,</span>
+                <span class="s2">&quot;has_reaction_baseline&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_reaction_baseline</span><span class="p">,</span>
+                <span class="s2">&quot;hints&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hints</span><span class="p">,</span>
+                <span class="s2">&quot;is_eval_enabled&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_eval_enabled</span><span class="p">,</span>
+                <span class="s2">&quot;is_eval_roundwise_enabled&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_eval_roundwise_enabled</span><span class="p">,</span>
+                <span class="s2">&quot;resume_session&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">resume_session</span><span class="p">,</span>
+                <span class="s2">&quot;resume_session_ids&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">resume_session_ids</span><span class="p">,</span>
+                <span class="s2">&quot;save_attributes&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_attributes</span><span class="p">,</span>
+                <span class="s2">&quot;saved_attributes&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_attributes</span><span class="p">,</span>
+                <span class="s2">&quot;save_dir&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_dir</span><span class="p">,</span>
+                <span class="s2">&quot;save_elementwise&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_elementwise</span><span class="p">,</span>
+                <span class="s2">&quot;save_features&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_features</span><span class="p">,</span>
+                <span class="s2">&quot;skip_stages&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span><span class="p">,</span>
+                <span class="s2">&quot;seed&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">,</span>
+                <span class="s2">&quot;test_ids&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_ids</span><span class="p">,</span>
+                <span class="s2">&quot;use_feedback&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_feedback</span><span class="p">,</span>
+                <span class="s2">&quot;use_saved_attributes&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_saved_attributes</span><span class="p">,</span>
+                <span class="s2">&quot;use_saved_features&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_saved_features</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">config</span></div>
+
+<div class="viewcode-block" id="ONDProtocol.create_algorithm_attributes"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">create_algorithm_attributes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algorithm_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">algorithm_param</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+        <span class="n">baseline_algorithm_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">has_baseline</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">has_reaction_baseline</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">test_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AlgorithmAttributes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an instance of algorithm attributes.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithm_name: Name of the algorithm</span>
+<span class="sd">            algorithm_param: Parameters for the algorithm</span>
+<span class="sd">            baseline_algorithm_name: Name of the baseline algorithm</span>
+<span class="sd">            has_baseline: Flag to check if a baseline is present in the config</span>
+<span class="sd">            has_reaction_baseline: Flag to check if a reaction baseline is present in the config</span>
+<span class="sd">            test_ids: List of test</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An instance of AlgorithmAttributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">algorithm_instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithms</span><span class="p">[</span><span class="n">algorithm_name</span><span class="p">]</span>
+        <span class="n">is_baseline</span> <span class="o">=</span> <span class="n">algorithm_name</span> <span class="o">==</span> <span class="n">baseline_algorithm_name</span>
+        <span class="n">session_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resume_session_ids</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">algorithm_name</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">AlgorithmAttributes</span><span class="p">(</span>
+            <span class="n">algorithm_name</span><span class="p">,</span>
+            <span class="n">algorithm_param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;detection_threshold&quot;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+            <span class="n">algorithm_instance</span><span class="p">,</span>
+            <span class="n">has_baseline</span> <span class="ow">and</span> <span class="n">is_baseline</span><span class="p">,</span>
+            <span class="n">has_reaction_baseline</span> <span class="ow">and</span> <span class="n">is_baseline</span><span class="p">,</span>
+            <span class="n">algorithm_param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;package_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">algorithm_param</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="p">,</span>
+            <span class="n">test_ids</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ONDProtocol.create_algorithm_session"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_session">[docs]</a>    <span class="k">def</span> <span class="nf">create_algorithm_session</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algorithm_attributes</span><span class="p">:</span> <span class="n">AlgorithmAttributes</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">has_a_session</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">protocol_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AlgorithmAttributes</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create/resume session for an algorithm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithm_attributes: An instance of AlgorithmAttributes</span>
+<span class="sd">            domain: Domain for the algorithm</span>
+<span class="sd">            hints: List of hints used in the session</span>
+<span class="sd">            has_a_session: Already has a session and we want to resume it</span>
+<span class="sd">            protocol_name: Name of the algorithm</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            An AlgorithmAttributes object with updated session id or test id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">test_ids</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">test_ids</span>
+        <span class="n">named_version</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">named_version</span><span class="p">()</span>
+        <span class="n">detection_threshold</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">detection_threshold</span>
+
+        <span class="k">if</span> <span class="n">has_a_session</span><span class="p">:</span>
+            <span class="n">session_id</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">session_id</span>
+            <span class="n">finished_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">resume_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+            <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">remove_completed_tests</span><span class="p">(</span><span class="n">finished_test</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Resumed session </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">session_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">session_request</span><span class="p">(</span>
+                <span class="n">test_ids</span><span class="p">,</span>
+                <span class="n">protocol_name</span><span class="p">,</span>
+                <span class="n">domain</span><span class="p">,</span>
+                <span class="n">named_version</span><span class="p">,</span>
+                <span class="n">hints</span><span class="p">,</span>
+                <span class="n">detection_threshold</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">session_id</span> <span class="o">=</span> <span class="n">session_id</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created session </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">algorithm_attributes</span></div>
+
+    <span class="k">def</span> <span class="nf">_find_baseline_session_id</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">algorithms_attributes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AlgorithmAttributes</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Find baseline session id based on the attributes of algorithms.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithms_attributes: List of algorithm attributes</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Baseline session id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">algorithm_attributes</span> <span class="ow">in</span> <span class="n">algorithms_attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">is_baseline</span>
+                <span class="ow">or</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">is_reaction_baseline</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">session_id</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="s2">&quot;Failed to find baseline, this is required to compute reaction perfomance&quot;</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="ONDProtocol._evaluate_algorithms"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol._evaluate_algorithms">[docs]</a>    <span class="nd">@skip_stage</span><span class="p">(</span><span class="s2">&quot;EvaluateAlgorithms&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_evaluate_algorithms</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">algorithms_attributes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">AlgorithmAttributes</span><span class="p">],</span>
+        <span class="n">algorithm_scores</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+        <span class="n">save_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate algorithms after all tests have been submitted.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            algorithms_attributes: All algorithms present in the config</span>
+<span class="sd">            algorithm_scores: Scores for round wise evaluation</span>
+<span class="sd">            save_dir: Directory where the scores are stored</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_baseline</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_reaction_baseline</span><span class="p">:</span>
+            <span class="n">baseline_session_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_baseline_session_id</span><span class="p">(</span>
+                <span class="n">algorithms_attributes</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">baseline_session_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">algorithm_attributes</span> <span class="ow">in</span> <span class="n">algorithms_attributes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">is_baseline</span>
+                <span class="ow">or</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">is_reaction_baseline</span>
+            <span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">session_id</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">session_id</span>
+            <span class="n">test_ids</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">test_ids</span>
+            <span class="n">algorithm_name</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">test_scores</span> <span class="o">=</span> <span class="n">algorithm_scores</span><span class="p">[</span><span class="n">algorithm_name</span><span class="p">]</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Started evaluating </span><span class="si">{</span><span class="n">algorithm_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">test_ids</span><span class="p">:</span>
+                <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
+                    <span class="n">test_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">baseline_session_id</span>
+                <span class="p">)</span>
+                <span class="n">score</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_scores</span><span class="p">[</span><span class="n">test_id</span><span class="p">])</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">algorithm_name</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">),</span> <span class="s2">&quot;w&quot;</span>
+                <span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving results in </span><span class="si">{</span><span class="n">save_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">NumpyEncoder</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Finished evaluating </span><span class="si">{</span><span class="n">algorithm_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ONDProtocol.update_skip_stages"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol.update_skip_stages">[docs]</a>    <span class="k">def</span> <span class="nf">update_skip_stages</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">skip_stages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">is_eval_enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">is_eval_roundwise_enabled</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">use_feedback</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">save_features</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">feature_extraction_only</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update skip stages based on the boolean values in config.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            skip_stages: List of skip stages specified in the config</span>
+<span class="sd">            is_eval_enabled: Flag to enable evaluation</span>
+<span class="sd">            is_eval_roundwise_enabled: Flag to enable evaluation in every round</span>
+<span class="sd">            use_feedback: Flag to enable using feedback</span>
+<span class="sd">            save_features: Flag to enable saving features</span>
+<span class="sd">            feature_extraction_only: Flag to only run feature extraction</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Update list of skip stages</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_eval_enabled</span><span class="p">:</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;EvaluateAlgorithms&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;EvaluateRoundwise&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_eval_roundwise_enabled</span><span class="p">:</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;EvaluateRoundwise&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">use_feedback</span><span class="p">:</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CreateFeedbackInstance&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NoveltyAdaptation&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">save_features</span><span class="p">:</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;SaveFeatures&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">feature_extraction_only</span><span class="p">:</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;CreateFeedbackInstance&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;WorldDetection&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NoveltyClassification&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NoveltyAdaptation&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NoveltyCharacterization&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">skip_stages</span></div>
+
+<div class="viewcode-block" id="ONDProtocol.run_protocol"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_protocol.ONDProtocol.run_protocol">[docs]</a>    <span class="k">def</span> <span class="nf">run_protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run the protocol.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            config: Parameters provided in the config</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Starting OND&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_skip_stages</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_eval_enabled</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_eval_roundwise_enabled</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">use_feedback</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_features</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feature_extraction_only</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">algorithms_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Populate most of the attributes for the algorithm</span>
+        <span class="k">for</span> <span class="n">algorithm_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">algorithm_param</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">algorithms</span><span class="p">[</span><span class="n">algorithm_name</span><span class="p">]</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+            <span class="n">algorithm_attributes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_algorithm_attributes</span><span class="p">(</span>
+                <span class="n">algorithm_name</span><span class="p">,</span>
+                <span class="n">algorithm_param</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">baseline_class</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">has_baseline</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">has_reaction_baseline</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">test_ids</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Consolidating attributes for </span><span class="si">{</span><span class="n">algorithm_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">algorithms_attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">algorithm_attributes</span><span class="p">)</span>
+
+        <span class="c1"># Create sessions an instances of all the algorithms and populate</span>
+        <span class="c1"># session_id for algorithm attributes</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">algorithm_attributes</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">algorithms_attributes</span><span class="p">):</span>
+            <span class="n">algorithms_attributes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_algorithm_session</span><span class="p">(</span>
+                <span class="n">algorithm_attributes</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hints</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">resume_session</span><span class="p">,</span>
+                <span class="s2">&quot;OND&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Run tests for all the algorithms</span>
+        <span class="n">algorithm_scores</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">algorithm_attributes</span> <span class="ow">in</span> <span class="n">algorithms_attributes</span><span class="p">:</span>
+            <span class="n">algorithm_name</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">session_id</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">session_id</span>
+            <span class="n">test_ids</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">test_ids</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting session: </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> for algorithm: </span><span class="si">{</span><span class="n">algorithm_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">skip_stages</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip_stages</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">is_reaction_baseline</span><span class="p">:</span>
+                <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;WorldDetection&quot;</span><span class="p">)</span>
+                <span class="n">skip_stages</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;NoveltyCharacterization&quot;</span><span class="p">)</span>
+            <span class="n">ond_test</span> <span class="o">=</span> <span class="n">ONDTest</span><span class="p">(</span>
+                <span class="n">algorithm_attributes</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dataset_root</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">feature_dir</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">save_dir</span><span class="p">,</span>
+                <span class="n">session_id</span><span class="p">,</span>
+                <span class="n">skip_stages</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">use_consolidated_features</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">use_saved_features</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">test_scores</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">test_id</span> <span class="ow">in</span> <span class="n">test_ids</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Start test: </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">test_score</span> <span class="o">=</span> <span class="n">ond_test</span><span class="p">(</span><span class="n">test_id</span><span class="p">)</span>
+                <span class="n">test_scores</span><span class="p">[</span><span class="n">test_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_score</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test complete: </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">algorithm_scores</span><span class="p">[</span><span class="n">algorithm_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_scores</span>
+
+        <span class="c1"># Evaluate algorithms</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_algorithms</span><span class="p">(</span>
+            <span class="n">algorithms_attributes</span><span class="p">,</span> <span class="n">algorithm_scores</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">save_dir</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Terminate algorithms</span>
+        <span class="k">for</span> <span class="n">algorithm_attributes</span> <span class="ow">in</span> <span class="n">algorithms_attributes</span><span class="p">:</span>
+            <span class="n">algorithm_name</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">session_id</span> <span class="o">=</span> <span class="n">algorithm_attributes</span><span class="o">.</span><span class="n">session_id</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">harness</span><span class="o">.</span><span class="n">terminate_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Session ended for </span><span class="si">{</span><span class="n">algorithm_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

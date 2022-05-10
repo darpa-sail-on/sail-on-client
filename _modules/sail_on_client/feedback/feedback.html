@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.feedback.feedback &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.feedback.feedback</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.feedback.feedback</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Abstract class for feedback for sail-on.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.par_harness</span> <span class="kn">import</span> <span class="n">ParHarness</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.local_harness</span> <span class="kn">import</span> <span class="n">LocalHarness</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+
+
+<div class="viewcode-block" id="Feedback"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback">[docs]</a><span class="k">class</span> <span class="nc">Feedback</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Base class for Feedback.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Feedback.__init__"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">first_budget</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">income_per_batch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">maximum_budget</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">interface</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">LocalHarness</span><span class="p">,</span> <span class="n">ParHarness</span><span class="p">],</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            first_budget: Initial budget</span>
+<span class="sd">            income_per_batch: Additional labels added after every batch</span>
+<span class="sd">            maximum_budget: Max labels that can be requested</span>
+<span class="sd">            interface: An instance of evaluation interface</span>
+<span class="sd">            session_id: Session identifier</span>
+<span class="sd">            test_id: Test identifier</span>
+<span class="sd">            feedback_type: Type of feedback that can be requested</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">budget</span> <span class="o">=</span> <span class="n">first_budget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">income_per_batch</span> <span class="o">=</span> <span class="n">income_per_batch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximum_budget</span> <span class="o">=</span> <span class="n">maximum_budget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface</span> <span class="o">=</span> <span class="n">interface</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span> <span class="o">=</span> <span class="n">session_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_id</span> <span class="o">=</span> <span class="n">test_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span> <span class="o">=</span> <span class="n">feedback_type</span></div>
+
+<div class="viewcode-block" id="Feedback.get_labeled_feedback"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback.get_labeled_feedback">[docs]</a>    <span class="k">def</span> <span class="nf">get_labeled_feedback</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">images_id_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">image_names</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get labeled feedback for the round.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            round_id: Round identifier</span>
+<span class="sd">            image_id_list: List if indices for images</span>
+<span class="sd">            image_names: List of image names for the round</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            A dictionary with the accuracy value or None if</span>
+<span class="sd">            feedback is requested for an older round</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">round_id</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deposit_income</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span> <span class="o">=</span> <span class="n">round_id</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">images_id_list</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">budget</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">budget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">budget</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">images_id_list</span><span class="p">)</span>
+                <span class="n">image_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">image_names</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">images_id_list</span><span class="p">]</span>
+                <span class="n">feedback_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_feedback_request</span><span class="p">(</span>
+                    <span class="n">image_ids</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">test_id</span><span class="p">,</span>
+                    <span class="n">round_id</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+                    <span class="n">feedback_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;labels&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;the function should be added&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="Feedback.get_score_feedback"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback.get_score_feedback">[docs]</a>    <span class="k">def</span> <span class="nf">get_score_feedback</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">images_id_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">image_names</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get accuracy value for the round. Note: this is not budgeted.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            round_id: Round identifier</span>
+<span class="sd">            image_id_list: List if indices for images</span>
+<span class="sd">            image_names: List of image names for the round</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            A dictionary with the accuracy value or None if</span>
+<span class="sd">            feedback is requested for an older round</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">round_id</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deposit_income</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_round</span> <span class="o">=</span> <span class="n">round_id</span>
+            <span class="n">image_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">image_names</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">images_id_list</span><span class="p">]</span>
+            <span class="n">feedback_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_feedback_request</span><span class="p">(</span>
+                <span class="n">image_ids</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">test_id</span><span class="p">,</span>
+                <span class="n">round_id</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">feedback_file</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Feedback.get_feedback"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback.get_feedback">[docs]</a>    <span class="k">def</span> <span class="nf">get_feedback</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">images_id_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">image_names</span><span class="p">:</span> <span class="nb">list</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get feedback for the round.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            round_id: Round identifier</span>
+<span class="sd">            image_id_list: List if indices for images</span>
+<span class="sd">            image_names: List of image names for the round</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            Either a dataframe or dictionary with score if the request is valid</span>
+<span class="sd">            for the current round.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span> <span class="o">==</span> <span class="s2">&quot;classification&quot;</span><span class="p">:</span>
+            <span class="n">feedback_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_labeled_feedback</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_type</span> <span class="o">==</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span>
+            <span class="n">feedback_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_score_feedback</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unsupported feedback type </span><span class="si">{self.feedback_type}</span><span class="s2"> specified&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">feedback_fn</span><span class="p">(</span><span class="n">round_id</span><span class="p">,</span> <span class="n">images_id_list</span><span class="p">,</span> <span class="n">image_names</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Feedback.deposit_income"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback.deposit_income">[docs]</a>    <span class="k">def</span> <span class="nf">deposit_income</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get income for a round.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">budget</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maximum_budget</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">budget</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">income_per_batch</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Feedback.get_budget"><a class="viewcode-back" href="../../../feedback/feedback_api.html#sail_on_client.feedback.feedback.Feedback.get_budget">[docs]</a>    <span class="k">def</span> <span class="nf">get_budget</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get current budget.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">budget</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

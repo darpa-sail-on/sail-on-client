@@ -1,385 +1,144 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Feedback API</title>
-    
-      <link rel="stylesheet" href="../_static/pygments.css">
-      <link rel="stylesheet" href="../_static/theme.css">
-      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
-          <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-          <link rel="stylesheet" href="../_static/css/theme.css " type="text/css" />
-          <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-      
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-
-      <!-- sphinx script_files -->
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback API &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Plugins" href="../plugins/plugins.html" />
+    <link rel="prev" title="Feedback" href="feedback.html" /> 
+</head>
 
-      
-      <script src="../_static/theme-vendors.js"></script>
-      <script src="../_static/theme.js" defer></script>
-    
-  <link rel="index" title="Index" href="../genindex.html" />
-  <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="Plugins" href="../plugins/plugins.html" />
-  <link rel="prev" title="Feedback" href="feedback.html" /> 
-  </head>
-
-  <body>
-    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
-  <router-link to="../index.html" class="home-link">
-    
-      <span class="site-name">Sail-On Client</span>
-    
-  </router-link>
-
-  <div class="links">
-    <navlinks class="can-hide">
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link  router-link-active">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-    </navlinks>
-  </div>
-</navbar>
-
-      
-      <div class="sidebar-mask" @click="toggleSidebar(false)">
-      </div>
-        <sidebar @toggle-sidebar="toggleSidebar">
-          
-          <navlinks>
-            
-
-  
-    <div class="nav-item">
-      <a href="../index.html#user-guide"
-         class="nav-link ">
-         user guide
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#empirical-protocols"
-         class="nav-link ">
-         empirical protocols
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#interfaces"
-         class="nav-link ">
-         interfaces
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#metrics"
-         class="nav-link ">
-         metrics
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#feedback"
-         class="nav-link  router-link-active">
-         feedback
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#plugins"
-         class="nav-link ">
-         plugins
-      </a>
-    </div>
-  
-    <div class="nav-item">
-      <a href="../index.html#saving-and-restoring-models"
-         class="nav-link ">
-         saving and restoring models
-      </a>
-    </div>
-  
-
-
-
-            
-          </navlinks><div id="searchbox" class="searchbox" role="search">
-  <div class="caption"><span class="caption-text">Quick search</span>
-    <div class="searchformwrapper">
-      <form class="search" action="../search.html" method="get">
-        <input type="text" name="q" />
-        <input type="submit" value="Search" />
-        <input type="hidden" name="check_keywords" value="yes" />
-        <input type="hidden" name="area" value="default" />
-      </form>
-    </div>
-  </div>
-</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#user-guide">user guide</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../user/install.html" class="reference internal ">Installation</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#empirical-protocols">empirical protocols</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../protocols/ond.html" class="reference internal ">Open World Novelty Detection (OND)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/condda.html" class="reference internal ">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../protocols/protocol_api.html" class="reference internal ">Protocol API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#interfaces">interfaces</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../harness/harness.html" class="reference internal ">Harness</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../harness/harness_api.html" class="reference internal ">Harness API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#metrics">metrics</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_formulation.html" class="reference internal ">Program Metrics</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../metrics/metric_api.html" class="reference internal ">Metric API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#feedback">feedback</a></span>
-      </p>
-      <ul class="current">
-        
-          <li class="toctree-l1 "><a href="feedback.html" class="reference internal ">Feedback</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 current"><a href="#" class="reference internal current">Feedback API</a>
-
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-                
-                  <li class="toctree-l2"><a href="#module-sail_on_client.feedback.feedback" class="reference internal">Base Class for Feedback</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-sail_on_client.feedback.activity_recognition_feedback" class="reference internal">Activity Recognition Feedback</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-sail_on_client.feedback.document_transcription_feedback" class="reference internal">Document Transcription Feedback</a></li>
-                
-                  <li class="toctree-l2"><a href="#module-sail_on_client.feedback.image_classification_feedback" class="reference internal">Image Classification Feedback</a></li>
-                
-              </ul>
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#plugins">plugins</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../plugins/plugins.html" class="reference internal ">Plugins</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../plugins/hydra_plugins.html" class="reference internal ">Hydra Plugins</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-    <div class="sidebar-group">
-      <p class="caption">
-        <span class="caption-text"><a href="../index.html#saving-and-restoring-models">saving and restoring models</a></span>
-      </p>
-      <ul class="">
-        
-          <li class="toctree-l1 "><a href="../saving/features.html" class="reference internal ">Saving And Restoring Features for Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint.html" class="reference internal ">Saving And Restoring Attributes of Algorithm</a>
-
-            
-          </li>
-
-        
-          <li class="toctree-l1 "><a href="../saving/checkpoint_api.html" class="reference internal ">Checkpoint API</a>
-
-            
-          </li>
-
-        
-      </ul>
-    </div>
-  
-</div>
-        </sidebar>
-
-      <page>
-          <div class="body-header" role="navigation" aria-label="navigation">
-  
-  <ul class="breadcrumbs">
-    <li><a href="../index.html">Docs</a> &raquo;</li>
-    
-    <li>Feedback API</li>
-  </ul>
-  
-
-  <ul class="page-nav">
-  <li class="prev">
-    <a href="feedback.html"
-       title="previous chapter">← Feedback</a>
-  </li>
-  <li class="next">
-    <a href="../plugins/plugins.html"
-       title="next chapter">Plugins →</a>
-  </li>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
 </ul>
-  
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="feedback.html">Feedback</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Feedback API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.feedback.feedback">Base Class for Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.feedback.activity_recognition_feedback">Activity Recognition Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.feedback.document_transcription_feedback">Document Transcription Feedback</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.feedback.image_classification_feedback">Image Classification Feedback</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Feedback API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/feedback/feedback_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
 </div>
-<hr>
-          <div class="content" role="main">
-            
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="feedback-api">
-<h1>Feedback API<a class="headerlink" href="#feedback-api" title="Permalink to this headline">¶</a></h1>
+<h1>Feedback API<a class="headerlink" href="#feedback-api" title="Permalink to this headline"></a></h1>
 <div class="section" id="module-sail_on_client.feedback.feedback">
-<span id="base-class-for-feedback"></span><h2>Base Class for Feedback<a class="headerlink" href="#module-sail_on_client.feedback.feedback" title="Permalink to this headline">¶</a></h2>
+<span id="base-class-for-feedback"></span><h2>Base Class for Feedback<a class="headerlink" href="#module-sail_on_client.feedback.feedback" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#sail_on_client/feedback/feedback.py"><span>sail_on_client/feedback/feedback.py</span></a></p>
 <hr class="docutils" />
 <p>Abstract class for feedback for sail-on.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.feedback.</span></span><span class="sig-name descname"><span class="pre">Feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.feedback.</span></span><span class="sig-name descname"><span class="pre">Feedback</span></span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Base class for Feedback.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial budget</p></li>
+<li><p><strong>income_per_batch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Additional labels added after every batch</p></li>
+<li><p><strong>maximum_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Max labels that can be requested</p></li>
+<li><p><strong>interface</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness" title="sail_on_client.harness.local_harness.LocalHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalHarness</span></code></a>, <a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.par_harness.ParHarness" title="sail_on_client.harness.par_harness.ParHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParHarness</span></code></a>]) – An instance of evaluation interface</p></li>
+<li><p><strong>session_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Session identifier</p></li>
+<li><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Test identifier</p></li>
+<li><p><strong>feedback_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Type of feedback that can be requested</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.deposit_income">
-<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback.deposit_income"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.deposit_income" title="Permalink to this definition"></a></dt>
 <dd><p>Get income for a round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -390,7 +149,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_budget">
-<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback.get_budget"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_budget" title="Permalink to this definition"></a></dt>
 <dd><p>Get current budget.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -401,7 +160,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_feedback">
-<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback.get_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -409,6 +168,7 @@
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -423,7 +183,7 @@ for the current round.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_labeled_feedback">
-<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback.get_labeled_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_labeled_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get labeled feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -431,6 +191,7 @@ for the current round.</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -445,7 +206,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.feedback.Feedback.get_score_feedback">
-<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/feedback.html#Feedback.get_score_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.feedback.Feedback.get_score_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -453,6 +214,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -469,17 +231,42 @@ feedback is requested for an older round</p>
 
 </div>
 <div class="section" id="module-sail_on_client.feedback.activity_recognition_feedback">
-<span id="activity-recognition-feedback"></span><h2>Activity Recognition Feedback<a class="headerlink" href="#module-sail_on_client.feedback.activity_recognition_feedback" title="Permalink to this headline">¶</a></h2>
+<span id="activity-recognition-feedback"></span><h2>Activity Recognition Feedback<a class="headerlink" href="#module-sail_on_client.feedback.activity_recognition_feedback" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#sail_on_client/feedback/activity_recognition_feedback.py"><span>sail_on_client/feedback/activity_recognition_feedback.py</span></a></p>
 <hr class="docutils" />
 <p>Activity Recognition Feedback.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.activity_recognition_feedback.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.activity_recognition_feedback.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionFeedback</span></span><a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#ActivityRecognitionFeedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback" title="Permalink to this definition"></a></dt>
 <dd><p>Feedback for activity recognition.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#ActivityRecognitionFeedback.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize activity recognition feedback object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial budget</p></li>
+<li><p><strong>income_per_batch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Additional labels added after every batch</p></li>
+<li><p><strong>maximum_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Max labels that can be requested</p></li>
+<li><p><strong>interface</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness" title="sail_on_client.harness.local_harness.LocalHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalHarness</span></code></a>, <a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.par_harness.ParHarness" title="sail_on_client.harness.par_harness.ParHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParHarness</span></code></a>]) – An instance of evaluation interface</p></li>
+<li><p><strong>session_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Session identifier</p></li>
+<li><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Test identifier</p></li>
+<li><p><strong>feedback_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Type of feedback that can be requested</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.deposit_income">
-<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.deposit_income" title="Permalink to this definition"></a></dt>
 <dd><p>Get income for a round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -490,7 +277,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_budget">
-<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_budget" title="Permalink to this definition"></a></dt>
 <dd><p>Get current budget.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -501,7 +288,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_classification_feedback">
-<span class="sig-name descname"><span class="pre">get_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_classification_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#ActivityRecognitionFeedback.get_classification_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_classification_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get labeled feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -509,6 +296,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -523,7 +311,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_and_classification_feedback">
-<span class="sig-name descname"><span class="pre">get_detection_and_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_and_classification_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_detection_and_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#ActivityRecognitionFeedback.get_detection_and_classification_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_and_classification_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get detection and classification feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -531,6 +319,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List of indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -544,7 +333,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_feedback">
-<span class="sig-name descname"><span class="pre">get_detection_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_detection_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#ActivityRecognitionFeedback.get_detection_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_detection_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get detection feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -552,6 +341,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List of indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -565,7 +355,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback">
-<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/activity_recognition_feedback.html#ActivityRecognitionFeedback.get_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -573,6 +363,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -587,7 +378,7 @@ for the current round.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_labeled_feedback">
-<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_labeled_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get labeled feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -595,6 +386,7 @@ for the current round.</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -609,7 +401,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_score_feedback">
-<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.activity_recognition_feedback.ActivityRecognitionFeedback.get_score_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -617,6 +409,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -633,17 +426,42 @@ feedback is requested for an older round</p>
 
 </div>
 <div class="section" id="module-sail_on_client.feedback.document_transcription_feedback">
-<span id="document-transcription-feedback"></span><h2>Document Transcription Feedback<a class="headerlink" href="#module-sail_on_client.feedback.document_transcription_feedback" title="Permalink to this headline">¶</a></h2>
+<span id="document-transcription-feedback"></span><h2>Document Transcription Feedback<a class="headerlink" href="#module-sail_on_client.feedback.document_transcription_feedback" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/feedback/document_transcription_feedback.html#sail_on_client/feedback/document_transcription_feedback.py"><span>sail_on_client/feedback/document_transcription_feedback.py</span></a></p>
 <hr class="docutils" />
 <p>Document Transcription Feedback.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.document_transcription_feedback.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.document_transcription_feedback.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionFeedback</span></span><a class="reference internal" href="../_modules/sail_on_client/feedback/document_transcription_feedback.html#DocumentTranscriptionFeedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback" title="Permalink to this definition"></a></dt>
 <dd><p>Feedback for document transcription.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/document_transcription_feedback.html#DocumentTranscriptionFeedback.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize document transcription feedback object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial budget</p></li>
+<li><p><strong>income_per_batch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Additional labels added after every batch</p></li>
+<li><p><strong>maximum_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Max labels that can be requested</p></li>
+<li><p><strong>interface</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness" title="sail_on_client.harness.local_harness.LocalHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalHarness</span></code></a>, <a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.par_harness.ParHarness" title="sail_on_client.harness.par_harness.ParHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParHarness</span></code></a>]) – An instance of evaluation interface</p></li>
+<li><p><strong>session_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Session identifier</p></li>
+<li><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Test identifier</p></li>
+<li><p><strong>feedback_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Type of feedback that can be requested</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.deposit_income">
-<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.deposit_income" title="Permalink to this definition"></a></dt>
 <dd><p>Get income for a round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -654,7 +472,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_budget">
-<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_budget" title="Permalink to this definition"></a></dt>
 <dd><p>Get current budget.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -665,7 +483,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_feedback">
-<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/document_transcription_feedback.html#DocumentTranscriptionFeedback.get_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -673,6 +491,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -687,7 +506,7 @@ for the current round.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_labeled_feedback">
-<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_labeled_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get labeled feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -695,6 +514,7 @@ for the current round.</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -709,7 +529,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_levenshtein_feedback">
-<span class="sig-name descname"><span class="pre">get_levenshtein_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_levenshtein_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_levenshtein_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/document_transcription_feedback.html#DocumentTranscriptionFeedback.get_levenshtein_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_levenshtein_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get levenshtein feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -717,6 +537,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -731,7 +552,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_score_feedback">
-<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.document_transcription_feedback.DocumentTranscriptionFeedback.get_score_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -739,6 +560,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -755,17 +577,42 @@ feedback is requested for an older round</p>
 
 </div>
 <div class="section" id="module-sail_on_client.feedback.image_classification_feedback">
-<span id="image-classification-feedback"></span><h2>Image Classification Feedback<a class="headerlink" href="#module-sail_on_client.feedback.image_classification_feedback" title="Permalink to this headline">¶</a></h2>
+<span id="image-classification-feedback"></span><h2>Image Classification Feedback<a class="headerlink" href="#module-sail_on_client.feedback.image_classification_feedback" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/feedback/image_classification_feedback.html#sail_on_client/feedback/image_classification_feedback.py"><span>sail_on_client/feedback/image_classification_feedback.py</span></a></p>
 <hr class="docutils" />
 <p>Image Classification Feedback.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.image_classification_feedback.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.feedback.image_classification_feedback.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationFeedback</span></span><a class="reference internal" href="../_modules/sail_on_client/feedback/image_classification_feedback.html#ImageClassificationFeedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback" title="Permalink to this definition"></a></dt>
 <dd><p>Feedback for image classification.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">income_per_batch</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum_budget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/feedback/image_classification_feedback.html#ImageClassificationFeedback.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Initialize image classification feedback object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Initial budget</p></li>
+<li><p><strong>income_per_batch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Additional labels added after every batch</p></li>
+<li><p><strong>maximum_budget</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Max labels that can be requested</p></li>
+<li><p><strong>interface</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness" title="sail_on_client.harness.local_harness.LocalHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalHarness</span></code></a>, <a class="reference internal" href="../harness/harness_api.html#sail_on_client.harness.par_harness.ParHarness" title="sail_on_client.harness.par_harness.ParHarness"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParHarness</span></code></a>]) – An instance of evaluation interface</p></li>
+<li><p><strong>session_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Session identifier</p></li>
+<li><p><strong>test_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Test identifier</p></li>
+<li><p><strong>feedback_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Type of feedback that can be requested</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.deposit_income">
-<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.deposit_income" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deposit_income</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.deposit_income" title="Permalink to this definition"></a></dt>
 <dd><p>Get income for a round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -776,7 +623,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_budget">
-<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_budget" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_budget</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_budget" title="Permalink to this definition"></a></dt>
 <dd><p>Get current budget.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -787,7 +634,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_feedback">
-<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -795,6 +642,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -809,7 +657,7 @@ for the current round.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_labeled_feedback">
-<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_labeled_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_labeled_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_labeled_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get labeled feedback for the round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -817,6 +665,7 @@ for the current round.</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -831,7 +680,7 @@ feedback is requested for an older round</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_score_feedback">
-<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_score_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">images_id_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.feedback.image_classification_feedback.ImageClassificationFeedback.get_score_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get accuracy value for the round. Note: this is not budgeted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -839,6 +688,7 @@ feedback is requested for an older round</p>
 <li><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Round identifier</p></li>
 <li><p><strong>image_id_list</strong> – List if indices for images</p></li>
 <li><p><strong>image_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of image names for the round</p></li>
+<li><p><strong>images_id_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -857,27 +707,34 @@ feedback is requested for an older round</p>
 </div>
 
 
+           </div>
           </div>
-          <div class="page-nav">
-            <div class="inner"><ul class="page-nav">
-  <li class="prev">
-    <a href="feedback.html"
-       title="previous chapter">← Feedback</a>
-  </li>
-  <li class="next">
-    <a href="../plugins/plugins.html"
-       title="next chapter">Plugins →</a>
-  </li>
-</ul><div class="footer" role="contentinfo">
-      &#169; Copyright 2020, Kitware INC..
-    <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
-</div>
-            </div>
-          </div>
-      </page>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="feedback.html" class="btn btn-neutral float-left" title="Feedback" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../plugins/plugins.html" class="btn btn-neutral float-right" title="Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-    
-    
-  </body>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

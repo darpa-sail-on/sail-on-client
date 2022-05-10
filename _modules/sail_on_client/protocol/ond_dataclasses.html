@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.protocol.ond_dataclasses &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.protocol.ond_dataclasses</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.protocol.ond_dataclasses</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Dataclasses for the protocols.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.utils.utils</span> <span class="kn">import</span> <span class="n">merge_dictionaries</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.feedback.image_classification_feedback</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ImageClassificationFeedback</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.feedback.document_transcription_feedback</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DocumentTranscriptionFeedback</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.feedback.activity_recognition_feedback</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ActivityRecognitionFeedback</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib.metadata</span> <span class="kn">import</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>  <span class="c1"># type:ignore</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib_metadata</span> <span class="kn">import</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>  <span class="c1"># type: ignore</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="AlgorithmAttributes"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">AlgorithmAttributes</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing attributes of algorithm present in the protocol.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">detection_threshold</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">instance</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">is_baseline</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">is_reaction_baseline</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">test_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<div class="viewcode-block" id="AlgorithmAttributes.named_version"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version">[docs]</a>    <span class="k">def</span> <span class="nf">named_version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute version of an algorithm.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A string containing name and the version number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="p">:</span>
+                <span class="n">version_number</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No package_name provided. Using 0.0.1 as stand in.&quot;</span><span class="p">)</span>
+                <span class="n">version_number</span> <span class="o">=</span> <span class="s2">&quot;0.0.1&quot;</span>
+        <span class="k">except</span> <span class="n">PackageNotFoundError</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;Failed to detect the version of the algorithm. Using 0.0.1 as stand in.&quot;</span>
+            <span class="p">)</span>
+            <span class="n">version_number</span> <span class="o">=</span> <span class="s2">&quot;0.0.1&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">version_number</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+<div class="viewcode-block" id="AlgorithmAttributes.remove_completed_tests"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests">[docs]</a>    <span class="k">def</span> <span class="nf">remove_completed_tests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">finished_tests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove finished tests from test_ids.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            finished_tests: List of tests that are complete</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">test_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_ids</span><span class="p">)</span>
+        <span class="n">ftest_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">finished_tests</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">test_set</span> <span class="o">^</span> <span class="n">ftest_set</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AlgorithmAttributes.merge_detector_params"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params">[docs]</a>    <span class="k">def</span> <span class="nf">merge_detector_params</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">detector_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">exclude_keys</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Merge common parameters with algorithm specific parameters with exclusions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            detector_params: Dictionary of common parameters</span>
+<span class="sd">            exclude_keys: List of keys that should be excluded in the merge</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exclude_keys</span><span class="p">:</span>
+            <span class="n">exclude_keys</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span> <span class="o">=</span> <span class="n">merge_dictionaries</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">detector_params</span><span class="p">,</span> <span class="n">exclude_keys</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="InitializeParams"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.InitializeParams">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">InitializeParams</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing parameters that are used to initialize the algorithm.&quot;&quot;&quot;</span>
+
+    <span class="n">parameters</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">pre_novelty_batches</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">feedback_instance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">ImageClassificationFeedback</span><span class="p">,</span>
+        <span class="n">DocumentTranscriptionFeedback</span><span class="p">,</span>
+        <span class="n">ActivityRecognitionFeedback</span><span class="p">,</span>
+        <span class="kc">None</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="InitializeParams.get_toolset"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset">[docs]</a>    <span class="k">def</span> <span class="nf">get_toolset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the data present in the class into a dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            A dictionary with data associated with the class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">algorithm_toolset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">algorithm_toolset</span><span class="p">[</span><span class="s2">&quot;session_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session_id</span>
+        <span class="n">algorithm_toolset</span><span class="p">[</span><span class="s2">&quot;test_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_id</span>
+        <span class="n">algorithm_toolset</span><span class="p">[</span><span class="s2">&quot;test_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">algorithm_toolset</span><span class="p">[</span><span class="s2">&quot;pre_novelty_batches&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_novelty_batches</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_instance</span><span class="p">:</span>
+            <span class="n">algorithm_toolset</span><span class="p">[</span><span class="s2">&quot;FeedbackInstance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_instance</span>
+        <span class="k">return</span> <span class="n">algorithm_toolset</span></div></div>
+
+
+<div class="viewcode-block" id="NoveltyClassificationParams"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">NoveltyClassificationParams</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing parameters associated novelty classification in an algorithm.&quot;&quot;&quot;</span>
+
+    <span class="n">features_dict</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">logit_dict</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span>
+
+<div class="viewcode-block" id="NoveltyClassificationParams.get_toolset"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset">[docs]</a>    <span class="k">def</span> <span class="nf">get_toolset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the data present in the class into a dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            A dictionary with data associated with the class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;features_dict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">features_dict</span><span class="p">,</span>
+            <span class="s2">&quot;logit_dict&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">logit_dict</span><span class="p">,</span>
+            <span class="s2">&quot;round_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">round_id</span><span class="p">,</span>
+        <span class="p">}</span></div></div>
+
+
+<div class="viewcode-block" id="NoveltyAdaptationParams"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">NoveltyAdaptationParams</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing parameters associated novelty adaptation with an algorithm.&quot;&quot;&quot;</span>
+
+    <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span>
+
+<div class="viewcode-block" id="NoveltyAdaptationParams.get_toolset"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.get_toolset">[docs]</a>    <span class="k">def</span> <span class="nf">get_toolset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the data present in the class into a dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            A dictionary with data associated with the class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;round_id&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">round_id</span><span class="p">,</span>
+        <span class="p">}</span></div></div>
+
+
+<div class="viewcode-block" id="NoveltyCharacterizationParams"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">NoveltyCharacterizationParams</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing parameters associated novelty characterization with an algorithm.&quot;&quot;&quot;</span>
+
+    <span class="n">dataset_ids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+<div class="viewcode-block" id="NoveltyCharacterizationParams.get_toolset"><a class="viewcode-back" href="../../../protocols/protocol_api.html#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset">[docs]</a>    <span class="k">def</span> <span class="nf">get_toolset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the data present in the class into a dictionary.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">            A dictionary with data associated with the class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;dataset_ids&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset_ids</span><span class="p">}</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sail_on_client.harness.local_harness &mdash; Sail-On Client 0.30.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.30.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>sail_on_client.harness.local_harness</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for sail_on_client.harness.local_harness</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementation of T&amp;E Harness for running experiments locally.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.file_provider</span> <span class="kn">import</span> <span class="n">FileProvider</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.file_provider_fn</span> <span class="kn">import</span> <span class="n">get_session_info</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.errors</span> <span class="kn">import</span> <span class="n">RoundError</span> <span class="k">as</span> <span class="n">ClientRoundError</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.evaluate</span> <span class="kn">import</span> <span class="n">create_metric_instance</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.harness.test_and_evaluation_harness</span> <span class="kn">import</span> <span class="n">TestAndEvaluationHarness</span>
+
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">ubelt</span> <span class="k">as</span> <span class="nn">ub</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LocalHarness"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness">[docs]</a><span class="k">class</span> <span class="nc">LocalHarness</span><span class="p">(</span><span class="n">TestAndEvaluationHarness</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Harness without any server communication.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LocalHarness.__init__"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gt_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">gt_config</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize an object of local harness.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data_dir: Path to the directory with the data</span>
+<span class="sd">            result_dir: Path to the directory where results are stored</span>
+<span class="sd">            gt_dir: Path to directory with ground truth</span>
+<span class="sd">            gt_config: Path to config file with column mapping for ground truth</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">TestAndEvaluationHarness</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">=</span> <span class="n">data_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gt_dir</span> <span class="o">=</span> <span class="n">gt_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gt_config</span> <span class="o">=</span> <span class="n">gt_config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span> <span class="o">=</span> <span class="n">result_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span> <span class="o">=</span> <span class="n">FileProvider</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalHarness.get_config"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.get_config">[docs]</a>    <span class="k">def</span> <span class="nf">get_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;JSON Compliant representation of the object.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;data_dir&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dir</span><span class="p">,</span>
+            <span class="s2">&quot;gt_dir&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gt_dir</span><span class="p">,</span>
+            <span class="s2">&quot;result_dir&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">,</span>
+            <span class="s2">&quot;gt_config&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gt_config</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="LocalHarness.test_ids_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.test_ids_request">[docs]</a>    <span class="k">def</span> <span class="nf">test_ids_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">detector_seed</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_assumptions</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request Test Identifiers as part of a series of individual tests.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            protocol : string indicating which protocol is being evaluated</span>
+<span class="sd">            domain : problem domain for the tests</span>
+<span class="sd">            detector_seed : A seed provided by the novelty detector</span>
+<span class="sd">            test_assumptions : Assumptions used by the detector</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Filename of file containing test ids</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">test_ids_request</span><span class="p">(</span>
+            <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">detector_seed</span><span class="p">,</span> <span class="n">test_assumptions</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;test_ids&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LocalHarness.session_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.session_request">[docs]</a>    <span class="k">def</span> <span class="nf">session_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">novelty_detector_version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hints</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">detection_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new session to evaluate the detector using an empirical protocol.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_ids: List of tests being evaluated in this session</span>
+<span class="sd">            protocol: String indicating which protocol is being evaluated</span>
+<span class="sd">            domain: String indicating which domain is being evaluated</span>
+<span class="sd">            novelty_detector_version: The novelty detector being evaluated</span>
+<span class="sd">            hints: Hints used for the session</span>
+<span class="sd">            detection_threshold: Detection threshold for the session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A session identifier provided by the server</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">new_session</span><span class="p">(</span>
+            <span class="n">test_ids</span><span class="p">,</span>
+            <span class="n">protocol</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">,</span>
+            <span class="n">novelty_detector_version</span><span class="p">,</span>
+            <span class="n">hints</span><span class="p">,</span>
+            <span class="n">detection_threshold</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalHarness.resume_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.resume_session">[docs]</a>    <span class="k">def</span> <span class="nf">resume_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get finished test from an existing session.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session id : Session id that was started but not terminated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tests finished in the session</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">latest_session_info</span><span class="p">(</span><span class="n">session_id</span><span class="p">)[</span><span class="s2">&quot;finished_tests&quot;</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LocalHarness.dataset_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.dataset_request">[docs]</a>    <span class="k">def</span> <span class="nf">dataset_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Request data for evaluation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The test being evaluated at this moment.</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The identifier provided by the server for a single experiment</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Filename of a file containing a list of image files (including full path for each)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir_name</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">.csv&quot;</span>
+        <span class="p">)</span>
+        <span class="n">byte_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">dataset_request</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="n">round_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">byte_stream</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ClientRoundError</span><span class="p">(</span>
+                <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;End of Dataset&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;All Data from dataset has been requested&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_file</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">byte_stream</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_file</span></div>
+
+<div class="viewcode-block" id="LocalHarness.get_feedback_request"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.get_feedback_request">[docs]</a>    <span class="k">def</span> <span class="nf">get_feedback_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">feedback_ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">feedback_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Labels from the server based provided one or more example ids.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feedback_ids: List of media ids for which feedback is required</span>
+<span class="sd">            feedback_type: Protocols constants with the values: label, detection, characterization</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to a file containing containing requested feedback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temp_dir_name</span><span class="p">,</span>
+            <span class="s2">&quot;feedback&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">feedback_type</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ub</span><span class="o">.</span><span class="n">ensuredir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_dir_name</span><span class="p">,</span> <span class="s2">&quot;feedback&quot;</span><span class="p">))</span>
+        <span class="n">byte_stream</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">get_feedback</span><span class="p">(</span>
+            <span class="n">feedback_ids</span><span class="p">,</span> <span class="n">feedback_type</span><span class="p">,</span> <span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span>
+        <span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feedback_file</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">byte_stream</span><span class="o">.</span><span class="n">getbuffer</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedback_file</span></div>
+
+<div class="viewcode-block" id="LocalHarness.post_results"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.post_results">[docs]</a>    <span class="k">def</span> <span class="nf">post_results</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">result_files</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Post client detector predictions for the dataset.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            result_files: A dictionary of results with protocol constant as key and file path as value</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">),</span> <span class="n">session_id</span><span class="p">)</span>
+        <span class="n">protocol</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;protocol&quot;</span><span class="p">]</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span>
+        <span class="n">base_result_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">),</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">base_result_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">result_content</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">result_key</span><span class="p">,</span> <span class="n">result_file</span> <span class="ow">in</span> <span class="n">result_files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">result_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">result_content</span><span class="p">[</span><span class="n">result_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">post_results</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="n">round_id</span><span class="p">,</span> <span class="n">result_content</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalHarness.evaluate_round_wise"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.evaluate_round_wise">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate_round_wise</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get results for round(s).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to a file with the results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gt_file_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gt_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_single_df.csv&quot;</span><span class="p">)</span>
+        <span class="n">gt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">gt_file_id</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">),</span> <span class="n">session_id</span><span class="p">)</span>
+        <span class="n">protocol</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;protocol&quot;</span><span class="p">]</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_test_metadata</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span>
+        <span class="n">round_size</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;round_size&quot;</span><span class="p">]</span>
+        <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">gt_config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gt_config</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">))</span>
+        <span class="n">classification_file_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">,</span>
+            <span class="n">protocol</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_classification.csv&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">classifications</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+            <span class="n">classification_file_id</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span>
+        <span class="p">)</span>
+        <span class="n">gt_round</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">round_id</span> <span class="o">*</span> <span class="n">round_size</span> <span class="p">:</span> <span class="p">(</span><span class="n">round_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">round_size</span><span class="p">]</span>
+        <span class="n">classification_round</span> <span class="o">=</span> <span class="n">classifications</span><span class="p">[</span>
+            <span class="n">round_id</span> <span class="o">*</span> <span class="n">round_size</span> <span class="p">:</span> <span class="p">(</span><span class="n">round_id</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">round_size</span>
+        <span class="p">]</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="n">create_metric_instance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">gt_config</span><span class="p">)</span>
+        <span class="n">m_acc</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_acc_round_wise</span><span class="p">(</span>
+            <span class="n">classification_round</span><span class="p">,</span> <span class="n">gt_round</span><span class="p">[</span><span class="n">metric</span><span class="o">.</span><span class="n">classification_id</span><span class="p">],</span> <span class="n">round_id</span>
+        <span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;m_acc_round_</span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_acc</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy for </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">round_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ub</span><span class="o">.</span><span class="n">repr2</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+<div class="viewcode-block" id="LocalHarness.evaluate"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">round_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">baseline_session_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get results for test(s).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+<span class="sd">            round_id: The sequential number of the round being evaluated</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Path to a file with the results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gt_file_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gt_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_single_df.csv&quot;</span><span class="p">)</span>
+        <span class="n">gt</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">gt_file_id</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">get_session_info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">),</span> <span class="n">session_id</span><span class="p">)</span>
+        <span class="n">protocol</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;protocol&quot;</span><span class="p">]</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">][</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span>
+        <span class="n">results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">gt_config</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gt_config</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">))</span>
+        <span class="n">detection_file_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">,</span>
+            <span class="n">protocol</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_detection.csv&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">detections</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">detection_file_id</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+        <span class="n">classification_file_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">,</span>
+            <span class="n">protocol</span><span class="p">,</span>
+            <span class="n">domain</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_classification.csv&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">classifications</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+            <span class="n">classification_file_id</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s2">&quot;|&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">baseline_session_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">baseline_classification_file_id</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">result_dir</span><span class="p">,</span>
+                <span class="n">protocol</span><span class="p">,</span>
+                <span class="n">domain</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">baseline_session_id</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">_classification.csv&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">baseline_classifications</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+                <span class="n">baseline_classification_file_id</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span>
+            <span class="p">)</span>
+        <span class="n">metric</span> <span class="o">=</span> <span class="n">create_metric_instance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">gt_config</span><span class="p">)</span>
+        <span class="n">detection_idx</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">gt_classification_idx</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">classification_id</span>
+        <span class="c1"># ######## Image Classification Evaluation  ###########</span>
+        <span class="k">if</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;image_classification&quot;</span><span class="p">:</span>
+            <span class="n">gt_detection_idx</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">detection_id</span>
+            <span class="c1"># p_unknown column for image classification</span>
+            <span class="n">novel_idx</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># ######## Activity Recognition Evaluation  ###########</span>
+        <span class="k">elif</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;activity_recognition&quot;</span><span class="p">:</span>
+            <span class="n">detection_idx</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">gt_detection_idx</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">novel_id</span>
+            <span class="c1"># p_unknown column for activity recognition</span>
+            <span class="n">novel_idx</span> <span class="o">=</span> <span class="mi">31</span>
+        <span class="c1"># ######## Document Transcription Evaluation  ###########</span>
+        <span class="k">elif</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;transcripts&quot;</span><span class="p">:</span>
+            <span class="n">detection_idx</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">gt_detection_idx</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">novel_id</span>
+            <span class="c1"># p_unknown column for transcripts in writer identification</span>
+            <span class="n">novel_idx</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Domain: &quot;</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&quot; is not a real domain.  Get a clue.&#39;</span>
+            <span class="p">)</span>
+
+        <span class="n">m_num</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_num</span><span class="p">(</span><span class="n">detections</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">],</span> <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">])</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_num&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_num</span>
+        <span class="n">m_num_stats</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_num_stats</span><span class="p">(</span>
+            <span class="n">detections</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">],</span> <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_num_stats&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_num_stats</span>
+        <span class="n">m_ndp</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_ndp</span><span class="p">(</span><span class="n">classifications</span><span class="p">[</span><span class="n">novel_idx</span><span class="p">],</span> <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">])</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_ndp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_ndp</span>
+        <span class="n">m_ndp_pre</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_ndp_pre</span><span class="p">(</span><span class="n">classifications</span><span class="p">[</span><span class="n">novel_idx</span><span class="p">],</span> <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">])</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_ndp_pre&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_ndp_pre</span>
+        <span class="n">m_ndp_post</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_ndp_post</span><span class="p">(</span><span class="n">classifications</span><span class="p">[</span><span class="n">novel_idx</span><span class="p">],</span> <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">])</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_ndp_post&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_ndp_post</span>
+        <span class="n">m_acc</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_acc</span><span class="p">(</span>
+            <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">],</span>
+            <span class="n">classifications</span><span class="p">,</span>
+            <span class="n">gt</span><span class="p">[</span><span class="n">gt_classification_idx</span><span class="p">],</span>
+            <span class="mi">100</span><span class="p">,</span>
+            <span class="mi">5</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_acc&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_acc</span>
+        <span class="n">m_acc_failed</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_ndp_failed_reaction</span><span class="p">(</span>
+            <span class="n">detections</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">],</span>
+            <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">],</span>
+            <span class="n">classifications</span><span class="p">,</span>
+            <span class="n">gt</span><span class="p">[</span><span class="n">gt_classification_idx</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_acc_failed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_acc_failed</span>
+        <span class="n">m_is_cdt_and_is_early</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_is_cdt_and_is_early</span><span class="p">(</span>
+            <span class="n">m_num_stats</span><span class="p">[</span><span class="s2">&quot;GT_indx&quot;</span><span class="p">],</span>
+            <span class="n">m_num_stats</span><span class="p">[</span><span class="s2">&quot;P_indx_0.5&quot;</span><span class="p">],</span>
+            <span class="n">gt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_is_cdt_and_is_early&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_is_cdt_and_is_early</span>
+        <span class="k">if</span> <span class="n">baseline_session_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">m_acc_baseline</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_acc</span><span class="p">(</span>
+                <span class="n">gt</span><span class="p">[</span><span class="n">gt_detection_idx</span><span class="p">],</span>
+                <span class="n">baseline_classifications</span><span class="p">,</span>
+                <span class="n">gt</span><span class="p">[</span><span class="n">gt_classification_idx</span><span class="p">],</span>
+                <span class="mi">100</span><span class="p">,</span>
+                <span class="mi">5</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Baseline performance for </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ub</span><span class="o">.</span><span class="n">repr2</span><span class="p">(</span><span class="n">m_acc_baseline</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">m_nrp</span> <span class="o">=</span> <span class="n">metric</span><span class="o">.</span><span class="n">m_nrp</span><span class="p">(</span><span class="n">m_acc</span><span class="p">,</span> <span class="n">m_acc_baseline</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">&quot;m_nrp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">m_nrp</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results for </span><span class="si">{</span><span class="n">test_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ub</span><span class="o">.</span><span class="n">repr2</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+<div class="viewcode-block" id="LocalHarness.get_test_metadata"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.get_test_metadata">[docs]</a>    <span class="k">def</span> <span class="nf">get_test_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the metadata json for the specified test.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id of the session currently being evaluated</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A dictionary containing metadata</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">get_test_metadata</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalHarness.complete_test"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.complete_test">[docs]</a>    <span class="k">def</span> <span class="nf">complete_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">test_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Mark test as completed.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id of the session currently being evaluated</span>
+<span class="sd">            test_id: The id of the test currently being evaluated</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">complete_test</span><span class="p">(</span><span class="n">session_id</span><span class="p">,</span> <span class="n">test_id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LocalHarness.terminate_session"><a class="viewcode-back" href="../../../harness/harness_api.html#sail_on_client.harness.local_harness.LocalHarness.terminate_session">[docs]</a>    <span class="k">def</span> <span class="nf">terminate_session</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Terminate the session after the evaluation for the protocol is complete.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The id provided by a server denoting a session</span>
+
+<span class="sd">        Returns: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_provider</span><span class="o">.</span><span class="n">terminate_session</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
