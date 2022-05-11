@@ -1,14 +1,16 @@
-Plugins
-=======
+Agents
+======
 
 Introduction
 ------------
 
-We rely on `Entry Points`_ to register an algorithm . The entrypoint specification
+The client assumes that the agent would be present in a separate python package.
+Thus, we rely on `Entry Points`_ to register the agent. The entrypoint specification
 can be used by a python package to register an algorithm by specifying a key value
-pair in setup.py for the package where the key would be the name of the algorithm
-and the value is the path to the algorithm class relative to the package root. Refer
-to :ref:`the registration section<Sample Detector and Registration>` for an example.
+pair in setup.py/pyproject.toml for the package where the key would be the name of
+the algorithm and the value is the path to the algorithm class relative to the
+package root. Refer to :ref:`the registration section<Sample Detector and Registration>`
+for an example.
 
 Functions Used By the Protocol
 ------------------------------
