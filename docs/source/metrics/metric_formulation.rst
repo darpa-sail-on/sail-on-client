@@ -36,6 +36,11 @@ Symbols and Terms
 M1: Average Number of FNs among Correctly Detected Trials (⬇ is better)
 -----------------------------------------------------------------------
 
+The goal of the metric is to measure the distance between when novelty was
+introduced and when the agent declared that the world changed.
+
+.. note:: M1 is only computed across correctly detected tests.
+
 Formal Definition
 ^^^^^^^^^^^^^^^^^
 
@@ -73,6 +78,9 @@ Pictorial Representation
 M2: Percentage of Correctly Detected Trials (⬆ is better)
 ---------------------------------------------------------
 
+The goal of the metric is to measure the number of tests when agent declares
+that the world has changed after the novelty is introduced in a test.
+
 Formal Definition
 ^^^^^^^^^^^^^^^^^
 
@@ -90,6 +98,9 @@ Pictorial Representation
 
 M2.1: Percentage of False Positive Trials (⬇ is better)
 -------------------------------------------------------
+
+The goal of the metric is to measure the number of tests when agent declares
+that the world has changed before the novelty is introduced in a test.
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -111,6 +122,12 @@ Pictorial Representation
 
 M3 and M4: Novelty Reaction Performance (⬆ is better)
 -----------------------------------------------------
+
+The goal of the metric is to measure the performance of the agent post novelty
+when compared to a baseline before novelty was introduced. The performance of
+the agent is measure over asymptotic samples.
+
+.. note:: The asymptotic samples for a test is the last 100 samples in the test.
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -136,6 +153,9 @@ Pictorial Representation
 M5: Overall Performance Task Improvement (⬆ is better)
 ------------------------------------------------------
 
+The goal of the metric is to measure the performance of the agent post novelty
+when compared to the performance of the baseline and the agent post novelty.
+
 Formal Definition
 ^^^^^^^^^^^^^^^^^
 
@@ -159,6 +179,12 @@ Pictorial Representation
 
 M6: Asymptotic Performance Task Improvement (⬆ is better)
 ---------------------------------------------------------
+
+The goal of the metric is to measure the performance of the agent post novelty
+when compared to the performance of the baseline and the agent post novelty for
+asymptotic samples.
+
+.. note:: The asymptotic samples for a test is the last 100 samples in the test.
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
