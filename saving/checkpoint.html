@@ -61,17 +61,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="features.html">Saving And Restoring Features for Algorithm</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Saving And Restoring Attributes of Algorithm</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sample-detector-adapter-and-configuration-parameters">Sample Detector, Adapter and Configuration Parameters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sample-detector-and-adapter">Sample Detector and Adapter</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#sample-detector">Sample Detector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sample-adapter">Sample Adapter</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sample-configuration">Sample Configuration</a></li>
 </ul>
 </li>
 </ul>
@@ -111,8 +111,12 @@
 The mixin can be added to an adaptor associated with an algorithm to provide
 <code class="code docutils literal notranslate"><span class="pre">save_attributes</span></code> and <code class="code docutils literal notranslate"><span class="pre">restore_attributes</span></code> function. These functions
 can be used with configuration options to save and restore states in a pickle
-file. Refer to <cite>ond_12_with_rd_nd_save.json</cite> and <cite>ond_12_with_rd_nd_restore.json</cite>
-configurations on the <a class="reference external" href="https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/tree/master/config">config</a> directory for more details.</p>
+file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Saving and restorying attributes is experimental, and error-prone due
+to lack of a concrete use-case in the current evaluation.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Saving features and saving attributes were created with different use cases.
@@ -125,8 +129,8 @@ but it shouldn’t be used on a sequence of videos that is different from
 the original sequence. This would result in undefined behavior.</p>
 </div>
 </div>
-<div class="section" id="sample-detector-adapter-and-configuration-parameters">
-<h2>Sample Detector, Adapter and Configuration Parameters<a class="headerlink" href="#sample-detector-adapter-and-configuration-parameters" title="Permalink to this headline"></a></h2>
+<div class="section" id="sample-detector-and-adapter">
+<h2>Sample Detector and Adapter<a class="headerlink" href="#sample-detector-and-adapter" title="Permalink to this headline"></a></h2>
 <div class="section" id="sample-detector">
 <h3>Sample Detector<a class="headerlink" href="#sample-detector" title="Permalink to this headline"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -164,7 +168,168 @@ the original sequence. This would result in undefined behavior.</p>
 </div>
 <div class="section" id="sample-adapter">
 <h3>Sample Adapter<a class="headerlink" href="#sample-adapter" title="Permalink to this headline"></a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Mocks mainly used for testing protocols.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sail_on_client.checkpointer</span> <span class="kn">import</span> <span class="n">Checkpointer</span>
+<span class="kn">from</span> <span class="nn">sail_on_client.agent.ond_agent</span> <span class="kn">import</span> <span class="n">ONDAgent</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MockONDAgent</span><span class="p">(</span><span class="n">ONDAgent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mock Detector for OND Protocol.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Construct Mock OND Detector.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Initialize&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize</span><span class="p">,</span>
+            <span class="s2">&quot;FeatureExtraction&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_extraction</span><span class="p">,</span>
+            <span class="s2">&quot;WorldDetection&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">world_detection</span><span class="p">,</span>
+            <span class="s2">&quot;NoveltyClassification&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">novelty_classification</span><span class="p">,</span>
+            <span class="s2">&quot;NoveltyAdaption&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">novelty_adaptation</span><span class="p">,</span>
+            <span class="s2">&quot;NoveltyCharacterization&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">novelty_characterization</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Algorithm Initialization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">feature_extraction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Feature extraction step for the algorithm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            Tuple of dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{},</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">world_detection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detect change in world ( Novelty has been introduced ).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            path to csv file containing the results for change in world</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="n">dst_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;wc.csv&quot;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dst_file</span>
+
+    <span class="k">def</span> <span class="nf">novelty_classification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Classify data provided in known classes and unknown class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            path to csv file containing the results for novelty classification step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="n">dst_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;ncl.csv&quot;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dst_file</span>
+
+    <span class="k">def</span> <span class="nf">novelty_adaptation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update models based on novelty classification and characterization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">novelty_characterization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Characterize novelty by clustering different novel samples.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            path to csv file containing the results for novelty characterization step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="n">dst_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;nc.csv&quot;</span><span class="p">)</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span> <span class="n">dst_file</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dst_file</span>
+
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">step_descriptor</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute method used by the protocol to run different steps.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+<span class="sd">            step_descriptor (str): Name of the step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Executing </span><span class="si">{</span><span class="n">step_descriptor</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_dict</span><span class="p">[</span><span class="n">step_descriptor</span><span class="p">](</span><span class="n">toolset</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">MockONDAgentWithAttributes</span><span class="p">(</span><span class="n">MockONDAgent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mock Detector for testing checkpointing.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Detector constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for the constructor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">MockONDAgent</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">feature_extraction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Feature extraction step for the algorithm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            toolset (dict): Dictionary containing parameters for different steps</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            Tuple of dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_dict</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_dict&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_list</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_list&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_tuple</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_tuple&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_tensor</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_tensor&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dummy_val</span> <span class="o">=</span> <span class="n">toolset</span><span class="p">[</span><span class="s2">&quot;dummy_val&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{},</span> <span class="p">{}</span>
+
+
+<span class="k">class</span> <span class="nc">MockONDAdapterWithCheckpoint</span><span class="p">(</span><span class="n">Checkpointer</span><span class="p">,</span> <span class="n">MockONDAgent</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mock Adapter for testing checkpointing.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolset</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Detector constructor.</span>
 
@@ -198,17 +363,30 @@ the original sequence. This would result in undefined behavior.</p>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">step_dict</span><span class="p">[</span><span class="n">step_descriptor</span><span class="p">](</span><span class="n">toolset</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        Overriden method to compare two mock adapters.</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Overriden method to compare two mock adapters.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            other (MockONDAdapterWithCheckpoint): Another instance of mock adapter</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            True if both instances have same attributes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">MockONDAdapterWithCheckpoint</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_dict</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_dict</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_list</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_list</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_tuple</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_tuple</span>
+            <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_tensor</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_tensor</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_val</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">detector</span><span class="o">.</span><span class="n">dummy_val</span>
+        <span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="section" id="sample-configuration">
-<h3>Sample Configuration<a class="headerlink" href="#sample-configuration" title="Permalink to this headline"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The configuration options used for saving attributes are highlighted in the
-examples below.</p>
 </div>
 </div>
 </div>

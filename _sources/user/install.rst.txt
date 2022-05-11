@@ -23,13 +23,13 @@ Setup Poetry
 Installation with Poetry
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Clone the repositories associated with different components in a working directory::
+1. Clone the `sail-on-client`_ repository in your working directory::
 
       git clone https://github.com/darpa-sail-on/sail-on-client.git
 
-   This would create sail-on-client directories in your working directory
+   This would create sail-on-client directory in your working directory
 
-2. Install the different components in a virtual environment::
+2. Install sail-on-client in a virtual environment::
 
       cd sail-on-client
       poetry install

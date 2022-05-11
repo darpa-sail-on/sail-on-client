@@ -49,8 +49,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#prediction-space">Prediction Space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#workflow-for-ond">WorkFlow For OND</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ond-workflow-with-red-light">OND Workflow With Red Light</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">OND Workflow With Red Light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ond-workflow-without-red-light-system-detection">OND Workflow Without Red Light (System Detection)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ond-workflow-with-red-light-given-detection">OND Workflow With Red Light (Given Detection)</a></li>
 </ul>
 </li>
 </ul>
@@ -71,7 +71,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul>
@@ -123,15 +124,69 @@ space (K+1-classes) remains the same throughout a run.</p>
 </div>
 <div class="section" id="workflow-for-ond">
 <h2>WorkFlow For OND<a class="headerlink" href="#workflow-for-ond" title="Permalink to this headline"></a></h2>
-<p>This section provides detailed workflow of the system in the evaluation condition</p>
-<div class="section" id="ond-workflow-with-red-light">
-<h3>OND Workflow With Red Light<a class="headerlink" href="#ond-workflow-with-red-light" title="Permalink to this headline"></a></h3>
+<p>This section provides detailed workflow of the system in the evaluation condition.
+OND protocol evaluates the open set capabilities of an agent along with its ability
+to detect when novelty was introduced.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The point where novelty is introduced is canonically referred to as the
+point when the red-button was pushed or when the agent saw the red-light.</p>
+</div>
+<p>OND workflow is executed under 2 different experimental setting</p>
+<ol class="arabic simple">
+<li><p>Without Red Light (System Detection)</p></li>
+<li><p>With Red Light (Given Detection)</p></li>
+</ol>
+<div class="section" id="ond-workflow-without-red-light-system-detection">
+<h3>OND Workflow Without Red Light (System Detection)<a class="headerlink" href="#ond-workflow-without-red-light-system-detection" title="Permalink to this headline"></a></h3>
+<p>The workflow of OND without red light is as follow.</p>
+<ol class="arabic simple">
+<li><p>Create a session on the server by providing a list of tests and hints</p></li>
+<li><dl class="simple">
+<dt>For a test with a fixed number of images/videos,</dt><dd><ol class="arabic simple">
+<li><p>Provide a mini-batch of image/video ids to the agent.</p></li>
+<li><p>The agent would use the mini-batch to determine if the novelty was introduced
+in the batch and provide K+1 classification score for every sample in the mini-batch</p></li>
+<li><p>Post the results the mini-batch to the server.</p></li>
+<li><p>Optional: Compute top1 and top3 score over the mini-batch of data.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Optional: Compute program metrics for the test.</p></li>
+<li><p>Declare that the test is complete.</p></li>
+<li><p>Terminate the session after all tests are complete.</p></li>
+</ol>
 <div class="align-center figure">
 <img alt="Workflow for OND without red light" src="../_images/OND-Updated.png" />
 </div>
 </div>
-<div class="section" id="id1">
-<h3>OND Workflow With Red Light<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<div class="section" id="ond-workflow-with-red-light-given-detection">
+<h3>OND Workflow With Red Light (Given Detection)<a class="headerlink" href="#ond-workflow-with-red-light-given-detection" title="Permalink to this headline"></a></h3>
+<p>The workflow of OND with red light is as follow.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In given detection the agent is explicitly provided the image/video id
+where novelty was introduced in the test.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Create a session on the server by providing a list of tests and hints</p></li>
+<li><dl class="simple">
+<dt>For a test with a fixed number of images/videos,</dt><dd><ol class="arabic simple">
+<li><p>Provide the image/video id where novelty is introduced.</p></li>
+<li><p>Provide a mini-batch of image/video ids to the agent.</p></li>
+<li><p>The agent would use the mini-batch to determine and provide K+1
+classification score for every sample.</p></li>
+<li><p>Post the results the mini-batch to the server.</p></li>
+<li><p>Optional: Compute top1 and top3 score over the mini-batch of data.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Optional: Compute program metrics for the test.</p></li>
+<li><p>Declare that the test is complete.</p></li>
+<li><p>Terminate the session after all tests are complete.</p></li>
+</ol>
 <div class="align-center figure">
 <img alt="Workflow for OND with red light" src="../_images/OND-With-Red-Light-Updated.png" />
 </div>

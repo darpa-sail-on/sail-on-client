@@ -61,15 +61,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Saving And Restoring Features for Algorithm</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sample-configuration">Sample Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#saving-features">Saving Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#restore-features">Restore Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config-options-for-saving-features">Config Options For Saving Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-option-for-saving-features">Default Option For Saving Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-features-elementwise">Saving Features Elementwise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-features-testwise">Saving Features Testwise</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#config-options-for-using-features">Config Options For Using Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-option-for-using-features">Default Option For Using Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-consolidated-features">Using Consolidated Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-non-consolidated-features">Using Non Consolidated Features</a></li>
 </ul>
 </li>
 </ul>
@@ -107,21 +115,100 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>We rely on configuration options to save and restore features associated with
-an algorithm. Refer to <cite>gae_nd_graph_fe.json</cite> and <cite>gae_nd_graph_precomputed.json</cite>
-configurations on the <a class="reference external" href="https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/tree/master/config">config</a> directory for an example usage.</p>
+an algorithm. The features are saved in pickle files as dictionary with the
+following keys <cite>features_dict</cite> and <cite>logit_dict</cite>.</p>
 </div>
-<div class="section" id="sample-configuration">
-<h2>Sample Configuration<a class="headerlink" href="#sample-configuration" title="Permalink to this headline"></a></h2>
+<div class="section" id="config-options-for-saving-features">
+<h2>Config Options For Saving Features<a class="headerlink" href="#config-options-for-saving-features" title="Permalink to this headline"></a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Along with the config options provided below, the configuration
+saving features also require the directory where features would be
+saved in <cite>protocol.smqtk.config.feature_dir</cite>. This can be
+provided in the configuration file or supplied to the cli.</p>
+</div>
+<div class="section" id="default-option-for-saving-features">
+<h3>Default Option For Saving Features<a class="headerlink" href="#default-option-for-saving-features" title="Permalink to this headline"></a></h3>
+<p>By default, the protocol does not save feature. This option can be used to
+disable saving features in a config</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol/save_features@protocol.smqtk.config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saving-features-elementwise">
+<h3>Saving Features Elementwise<a class="headerlink" href="#saving-features-elementwise" title="Permalink to this headline"></a></h3>
+<p>In elementwise option, <cite>features_dict</cite> and <cite>logit_dict</cite> would use image/video ids
+as keys with features as values. This option is used for feature extraction in
+activity recognition where video features can be reused across multiple tests</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol/save_features@protocol.smqtk.config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elementwise</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saving-features-testwise">
+<h3>Saving Features Testwise<a class="headerlink" href="#saving-features-testwise" title="Permalink to this headline"></a></h3>
+<p>In testwise option, the pickle file would be saved for every test that was present
+in the session. This option is used for replicating an experiment with pre-computed features.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol/save_features@protocol.smqtk.config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">testwise</span><span class="w"></span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The configuration options used for saving features are highlighted in the
-examples below.</p>
+<p>When <cite>testwise</cite> is used, the protocol would assume that the features
+are saved in <cite>&lt;test_id&gt;_&lt;agent_name&gt;`_features.pkl</cite>.</p>
 </div>
-<div class="section" id="saving-features">
-<h3>Saving Features<a class="headerlink" href="#saving-features" title="Permalink to this headline"></a></h3>
 </div>
-<div class="section" id="restore-features">
-<h3>Restore Features<a class="headerlink" href="#restore-features" title="Permalink to this headline"></a></h3>
+</div>
+<div class="section" id="config-options-for-using-features">
+<h2>Config Options For Using Features<a class="headerlink" href="#config-options-for-using-features" title="Permalink to this headline"></a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Along with the config options provided below, the configuration
+using features also require the directory where features are
+present in <cite>protocol.smqtk.config.feature_dir</cite>. This can be
+provided in the configuration file or supplied to the cli.</p>
+</div>
+<div class="section" id="default-option-for-using-features">
+<h3>Default Option For Using Features<a class="headerlink" href="#default-option-for-using-features" title="Permalink to this headline"></a></h3>
+<p>By default, the protocol does not use saved feature. This option can be used to
+disable using features specified in a config</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol/use_features@protocol.smqtk.config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-consolidated-features">
+<h3>Using Consolidated Features<a class="headerlink" href="#using-consolidated-features" title="Permalink to this headline"></a></h3>
+<p>In consolidated option, <cite>features_dict</cite> and <cite>logit_dict</cite> would use image/video ids
+as keys with features as values. This option is the complement of <cite>elementwise</cite>
+option in the previous section and is used to re-use features to save time during
+evaluation.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol/use_features@protocol.smqtk.config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">consolidated</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <cite>consolidated</cite> is used, the protocol would assume that the features
+are present in <cite>&lt;agent_name&gt;`_features.pkl</cite>.</p>
+</div>
+</div>
+<div class="section" id="using-non-consolidated-features">
+<h3>Using Non Consolidated Features<a class="headerlink" href="#using-non-consolidated-features" title="Permalink to this headline"></a></h3>
+<p>In non consolidated option, <cite>features_dict</cite> and <cite>logit_dict</cite> are assumed to be
+coming from a single test. This option is used for replicating an experiment
+with pre-computed features.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
+<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">protocol/use_features@protocol.smqtk.config</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">non_consolidated</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <cite>non_consolidated</cite> is used, the protocol would assume that the features
+are present in <cite>&lt;test_id&gt;_&lt;agent_name&gt;`_features.pkl</cite>.</p>
+</div>
 </div>
 </div>
 </div>

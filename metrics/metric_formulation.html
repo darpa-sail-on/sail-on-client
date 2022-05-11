@@ -57,32 +57,32 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Program Metrics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#symbols-and-terms">Symbols and Terms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#m1-average-number-of-fns-among-correctly-detected-trials">M1: Average Number of FNs among Correctly Detected Trials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m1-average-number-of-fns-among-correctly-detected-trials-is-better">M1: Average Number of FNs among Correctly Detected Trials (⬇ is better)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#formal-definition">Formal Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pictorial-representation">Pictorial Representation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#m2-percentage-of-correctly-detected-trials">M2: Percentage of Correctly Detected Trials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m2-percentage-of-correctly-detected-trials-is-better">M2: Percentage of Correctly Detected Trials (⬆ is better)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Formal Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Pictorial Representation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#m2-1-percentage-of-false-positive-trials">M2.1: Percentage of False Positive Trials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m2-1-percentage-of-false-positive-trials-is-better">M2.1: Percentage of False Positive Trials (⬇ is better)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">Formal Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Pictorial Representation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#m3-and-m4-novelty-reaction-performance">M3 and M4: Novelty Reaction Performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m3-and-m4-novelty-reaction-performance-is-better">M3 and M4: Novelty Reaction Performance (⬆ is better)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id5">Formal Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id6">Pictorial Representation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#m5-overall-performance-task-improvement">M5: Overall Performance Task Improvement</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m5-overall-performance-task-improvement-is-better">M5: Overall Performance Task Improvement (⬆ is better)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id7">Formal Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id8">Pictorial Representation</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#m6-asymptotic-performance-task-improvement">M6: Asymptotic Performance Task Improvement</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#m6-asymptotic-performance-task-improvement-is-better">M6: Asymptotic Performance Task Improvement (⬆ is better)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id9">Formal Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">Pictorial Representation</a></li>
 </ul>
@@ -96,7 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul>
@@ -160,8 +161,14 @@ are calculated.</p>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{E}_{L,C,D,\alpha,\beta}\)</span>: A set of <span class="math notranslate nohighlight">\(\langle\)</span> L,C, D <span class="math notranslate nohighlight">\(\rangle\)</span> on <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span></p></li>
 </ol>
 </div>
-<div class="section" id="m1-average-number-of-fns-among-correctly-detected-trials">
-<h2>M1: Average Number of FNs among Correctly Detected Trials<a class="headerlink" href="#m1-average-number-of-fns-among-correctly-detected-trials" title="Permalink to this headline"></a></h2>
+<div class="section" id="m1-average-number-of-fns-among-correctly-detected-trials-is-better">
+<h2>M1: Average Number of FNs among Correctly Detected Trials (⬇ is better)<a class="headerlink" href="#m1-average-number-of-fns-among-correctly-detected-trials-is-better" title="Permalink to this headline"></a></h2>
+<p>The goal of the metric is to measure the distance between when novelty was
+introduced and when the agent declared that the world changed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>M1 is only computed across correctly detected tests.</p>
+</div>
 <div class="section" id="formal-definition">
 <h3>Formal Definition<a class="headerlink" href="#formal-definition" title="Permalink to this headline"></a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\delta(\alpha, x)\)</span> be the agent’s distribution on instance x</p>
@@ -188,8 +195,10 @@ are calculated.</p>
 </div>
 </div>
 </div>
-<div class="section" id="m2-percentage-of-correctly-detected-trials">
-<h2>M2: Percentage of Correctly Detected Trials<a class="headerlink" href="#m2-percentage-of-correctly-detected-trials" title="Permalink to this headline"></a></h2>
+<div class="section" id="m2-percentage-of-correctly-detected-trials-is-better">
+<h2>M2: Percentage of Correctly Detected Trials (⬆ is better)<a class="headerlink" href="#m2-percentage-of-correctly-detected-trials-is-better" title="Permalink to this headline"></a></h2>
+<p>The goal of the metric is to measure the number of tests when agent declares
+that the world has changed after the novelty is introduced in a test.</p>
 <div class="section" id="id1">
 <h3>Formal Definition<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
@@ -202,8 +211,10 @@ are calculated.</p>
 </div>
 </div>
 </div>
-<div class="section" id="m2-1-percentage-of-false-positive-trials">
-<h2>M2.1: Percentage of False Positive Trials<a class="headerlink" href="#m2-1-percentage-of-false-positive-trials" title="Permalink to this headline"></a></h2>
+<div class="section" id="m2-1-percentage-of-false-positive-trials-is-better">
+<h2>M2.1: Percentage of False Positive Trials (⬇ is better)<a class="headerlink" href="#m2-1-percentage-of-false-positive-trials-is-better" title="Permalink to this headline"></a></h2>
+<p>The goal of the metric is to measure the number of tests when agent declares
+that the world has changed before the novelty is introduced in a test.</p>
 <div class="section" id="id3">
 <h3>Formal Definition<a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">
@@ -216,8 +227,15 @@ are calculated.</p>
 </div>
 </div>
 </div>
-<div class="section" id="m3-and-m4-novelty-reaction-performance">
-<h2>M3 and M4: Novelty Reaction Performance<a class="headerlink" href="#m3-and-m4-novelty-reaction-performance" title="Permalink to this headline"></a></h2>
+<div class="section" id="m3-and-m4-novelty-reaction-performance-is-better">
+<h2>M3 and M4: Novelty Reaction Performance (⬆ is better)<a class="headerlink" href="#m3-and-m4-novelty-reaction-performance-is-better" title="Permalink to this headline"></a></h2>
+<p>The goal of the metric is to measure the performance of the agent post novelty
+when compared to a baseline before novelty was introduced. The performance of
+the agent is measure over asymptotic samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The asymptotic samples for a test is the last 100 samples in the test.</p>
+</div>
 <div class="section" id="id5">
 <h3>Formal Definition<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
 <p>Let <span class="math notranslate nohighlight">\(P_{pre, \beta}\)</span> be baselines average task performance on <span class="math notranslate nohighlight">\(T_{pre}\)</span>
@@ -232,8 +250,10 @@ and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the
 </div>
 </div>
 </div>
-<div class="section" id="m5-overall-performance-task-improvement">
-<h2>M5: Overall Performance Task Improvement<a class="headerlink" href="#m5-overall-performance-task-improvement" title="Permalink to this headline"></a></h2>
+<div class="section" id="m5-overall-performance-task-improvement-is-better">
+<h2>M5: Overall Performance Task Improvement (⬆ is better)<a class="headerlink" href="#m5-overall-performance-task-improvement-is-better" title="Permalink to this headline"></a></h2>
+<p>The goal of the metric is to measure the performance of the agent post novelty
+when compared to the performance of the baseline and the agent post novelty.</p>
 <div class="section" id="id7">
 <h3>Formal Definition<a class="headerlink" href="#id7" title="Permalink to this headline"></a></h3>
 <p>Let <span class="math notranslate nohighlight">\(P_{post, \beta}\)</span> be baselines average task performance on <span class="math notranslate nohighlight">\(T_{post}\)</span>
@@ -248,8 +268,15 @@ and <span class="math notranslate nohighlight">\(P_{post,\alpha}\)</span> be the
 </div>
 </div>
 </div>
-<div class="section" id="m6-asymptotic-performance-task-improvement">
-<h2>M6: Asymptotic Performance Task Improvement<a class="headerlink" href="#m6-asymptotic-performance-task-improvement" title="Permalink to this headline"></a></h2>
+<div class="section" id="m6-asymptotic-performance-task-improvement-is-better">
+<h2>M6: Asymptotic Performance Task Improvement (⬆ is better)<a class="headerlink" href="#m6-asymptotic-performance-task-improvement-is-better" title="Permalink to this headline"></a></h2>
+<p>The goal of the metric is to measure the performance of the agent post novelty
+when compared to the performance of the baseline and the agent post novelty for
+asymptotic samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The asymptotic samples for a test is the last 100 samples in the test.</p>
+</div>
 <div class="section" id="id9">
 <h3>Formal Definition<a class="headerlink" href="#id9" title="Permalink to this headline"></a></h3>
 <div class="math notranslate nohighlight">

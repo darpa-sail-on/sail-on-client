@@ -60,7 +60,8 @@
 <li class="toctree-l1"><a class="reference internal" href="feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul>
@@ -180,12 +181,12 @@ abstractions and interface used for running the empirical protocols</p>
 <li class="toctree-l1"><a class="reference internal" href="metrics/metric_formulation.html">Program Metrics</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#symbols-and-terms">Symbols and Terms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m1-average-number-of-fns-among-correctly-detected-trials">M1: Average Number of FNs among Correctly Detected Trials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m2-percentage-of-correctly-detected-trials">M2: Percentage of Correctly Detected Trials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m2-1-percentage-of-false-positive-trials">M2.1: Percentage of False Positive Trials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m3-and-m4-novelty-reaction-performance">M3 and M4: Novelty Reaction Performance</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m5-overall-performance-task-improvement">M5: Overall Performance Task Improvement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m6-asymptotic-performance-task-improvement">M6: Asymptotic Performance Task Improvement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m1-average-number-of-fns-among-correctly-detected-trials-is-better">M1: Average Number of FNs among Correctly Detected Trials (⬇ is better)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m2-percentage-of-correctly-detected-trials-is-better">M2: Percentage of Correctly Detected Trials (⬆ is better)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m2-1-percentage-of-false-positive-trials-is-better">M2.1: Percentage of False Positive Trials (⬇ is better)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m3-and-m4-novelty-reaction-performance-is-better">M3 and M4: Novelty Reaction Performance (⬆ is better)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m5-overall-performance-task-improvement-is-better">M5: Overall Performance Task Improvement (⬆ is better)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics/metric_formulation.html#m6-asymptotic-performance-task-improvement-is-better">M6: Asymptotic Performance Task Improvement (⬆ is better)</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="metrics/metric_api.html">Metric API</a><ul>
@@ -223,11 +224,20 @@ abstractions and interface used for running the empirical protocols</p>
 <h2>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="plugins/plugins.html">Plugins</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="plugins/plugins.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/plugins.html#functions-used-by-the-protocol">Functions Used By the Protocol</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/plugins.html#adapters">Adapters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="plugins/plugins.html#sample-detector-and-registration">Sample Detector and Registration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/agents.html">Agents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents.html#functions-used-by-the-protocol">Functions Used By the Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents.html#adapters">Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents.html#sample-detector-and-registration">Sample Detector and Registration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/agents_api.html">Agents API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents_api.html#module-sail_on_client.agent.visual_agent">Visual Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents_api.html#module-sail_on_client.agent.ond_agent">OND Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents_api.html#module-sail_on_client.agent.mock_ond_agents">Mock OND Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents_api.html#module-sail_on_client.agent.pre_computed_detector">Pre Computed Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents_api.html#module-sail_on_client.agent.condda_agent">CONDDA Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/agents_api.html#module-sail_on_client.agent.mock_condda_agents">Mock CONDDA Agents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plugins/hydra_plugins.html">Hydra Plugins</a><ul>
@@ -244,12 +254,13 @@ abstractions and interface used for running the empirical protocols</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="saving/features.html">Saving And Restoring Features for Algorithm</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="saving/features.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="saving/features.html#sample-configuration">Sample Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving/features.html#config-options-for-saving-features">Config Options For Saving Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving/features.html#config-options-for-using-features">Config Options For Using Features</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="saving/checkpoint.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="saving/checkpoint.html#sample-detector-adapter-and-configuration-parameters">Sample Detector, Adapter and Configuration Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saving/checkpoint.html#sample-detector-and-adapter">Sample Detector and Adapter</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="saving/checkpoint_api.html">Checkpoint API</a><ul>

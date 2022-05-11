@@ -68,7 +68,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul>
@@ -106,13 +107,16 @@
 <p>Harnesses are used for testing and evaluating TA2 agents. The
 evaluation can be conducted using a server setup by TA1 or by
 providing the files containing ground truth and metadata
-associated with the tests. We support two harnesses for
-sail-on-client. These harnesses are subclasses of <code class="code docutils literal notranslate"><span class="pre">TestAndEvaluationHarness</span></code>.</p>
+associated with the tests. The abstraction was primarily to communicate with the
+evaluation server or replicate the same functionality without with files provided
+by TA1s. They work in conjunction with the protocol classes to fulfill the input
+and output requirements of an agent. The harnesses are subclasses of <code class="code docutils literal notranslate"><span class="pre">TestAndEvaluationHarness</span></code>.
+We support two harnesses in sail-on-client</p>
 <div class="section" id="local-harness">
 <h2>Local Harness<a class="headerlink" href="#local-harness" title="Permalink to this headline"></a></h2>
 <p><code class="code docutils literal notranslate"><span class="pre">LocalHarness</span></code> is primarily used for replicating the capabilities of
-<code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> without using the server. This allows local testing without
-setting up a server instance locally or via a URL. Since LocalHarness uses
+<code class="code docutils literal notranslate"><span class="pre">ParHarness</span></code> without using the server. This allows local testing an agent
+without setting up a server instance locally or via a URL. Since LocalHarness uses
 the files it requires 3 parameters:</p>
 <ol class="arabic simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">data_dir</span></code>: Root directory where the data for tests is stored</p></li>

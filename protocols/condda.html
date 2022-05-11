@@ -50,8 +50,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#prediction-space">Prediction Space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#workflow-for-condda">WorkFlow For CONDDA</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#condda-workflow-with-red-light">CONDDA Workflow With Red Light</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">CONDDA Workflow With Red Light</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#condda-workflow-without-red-light-system-detection">CONDDA Workflow Without Red Light (System Detection)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#condda-workflow-with-red-light-given-detection">CONDDA Workflow With Red Light (Given Detection)</a></li>
 </ul>
 </li>
 </ul>
@@ -71,7 +71,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/plugins.html">Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
 </ul>
 <ul>
@@ -106,6 +107,11 @@
              
   <div class="section" id="continuous-open-set-novelty-detection-discovery-adaptation-condda">
 <h1>Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)<a class="headerlink" href="#continuous-open-set-novelty-detection-discovery-adaptation-condda" title="Permalink to this headline"></a></h1>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>While sail-on-client supports CONDDA protocol, it is not used in
+DARPA evaluation.</p>
+</div>
 <p><strong>K+D+1 classification where K represents known classes, D are dicovered classes, 1 are all unknown classes</strong></p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
@@ -114,6 +120,13 @@ for Class Novelty). A TA2 agent starts with a K+1-way classification model (K kn
 1 unknown) as in OND. During testing, the TA2 agent will discover clusters of
 novelty (e.g., discover new classes) and accordingly add those as separate
 classes in the prediction space (i.e., one of D discovered classes).</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In CONDDA, once an agent is able to characterize a class, the class is
+considered to be discovered rather than unknown. Thus after an agent is
+able to consistently identify the instances coming from unknown class
+is coming from the same class, it is considered a discovered class.</p>
+</div>
 </div>
 <div class="section" id="prediction-space">
 <h2>Prediction Space<a class="headerlink" href="#prediction-space" title="Permalink to this headline"></a></h2>
@@ -124,15 +137,66 @@ classes in the prediction space (i.e., one of D discovered classes).</p>
 </div>
 <div class="section" id="workflow-for-condda">
 <h2>WorkFlow For CONDDA<a class="headerlink" href="#workflow-for-condda" title="Permalink to this headline"></a></h2>
-<p>This section provides detailed workflow of the system in the evaluation condition</p>
-<div class="section" id="condda-workflow-with-red-light">
-<h3>CONDDA Workflow With Red Light<a class="headerlink" href="#condda-workflow-with-red-light" title="Permalink to this headline"></a></h3>
+<p>This section provides detailed workflow of the system in the evaluation condition.
+CONDDA protocol evaluates the novelty Characterization capabilities of an agent
+along with its ability to detect when novelty was introduced.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The point where novelty is introduced is canonically referred to as the
+point when the red-button was pushed or when the agent saw the red-light.</p>
+</div>
+<p>CONDDA workflow is executed under 2 different experimental setting</p>
+<ol class="arabic simple">
+<li><p>Without Red Light (System Detection)</p></li>
+<li><p>With Red Light (Given Detection)</p></li>
+</ol>
+<div class="section" id="condda-workflow-without-red-light-system-detection">
+<h3>CONDDA Workflow Without Red Light (System Detection)<a class="headerlink" href="#condda-workflow-without-red-light-system-detection" title="Permalink to this headline"></a></h3>
+<p>The workflow of CONDDA without red light is as follow.</p>
+<ol class="arabic simple">
+<li><p>Create a session on the server by providing a list of tests and hints</p></li>
+<li><dl class="simple">
+<dt>For a test with a fixed number of images/videos,</dt><dd><ol class="arabic simple">
+<li><p>Provide a mini-batch of image/video ids to the agent.</p></li>
+<li><p>The agent would use the mini-batch to determine if the novelty was introduced
+in the batch and provide K+D+1 Characterization score for every sample
+in the mini-batch</p></li>
+<li><p>Post the results the mini-batch to the server.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Declare that the test is complete.</p></li>
+<li><p>Terminate the session after all tests are complete.</p></li>
+</ol>
 <div class="align-center figure">
 <img alt="Workflow for CONDDA without red light" src="../_images/CONDDA-Updated.png" />
 </div>
 </div>
-<div class="section" id="id1">
-<h3>CONDDA Workflow With Red Light<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<div class="section" id="condda-workflow-with-red-light-given-detection">
+<h3>CONDDA Workflow With Red Light (Given Detection)<a class="headerlink" href="#condda-workflow-with-red-light-given-detection" title="Permalink to this headline"></a></h3>
+<p>The workflow of CONDDA with red light is as follow.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In given detection the agent is explicitly provided the image/video id
+where novelty was introduced in the test.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Create a session on the server by providing a list of tests and hints</p></li>
+<li><dl class="simple">
+<dt>For a test with a fixed number of images/videos,</dt><dd><ol class="arabic simple">
+<li><p>Provide the image/video id where novelty is introduced.</p></li>
+<li><p>Provide a mini-batch of image/video ids to the agent.</p></li>
+<li><p>The agent would use the mini-batch to determine and provide K+D+1
+Characterization score for every sample in the mini-batch.</p></li>
+<li><p>Post the results the mini-batch to the server.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>Declare that the test is complete.</p></li>
+<li><p>Terminate the session after all tests are complete.</p></li>
+</ol>
 <div class="align-center figure">
 <img alt="Workflow for CONDDA with red light" src="../_images/CONDDA-With-Red-Light-Updated.png" />
 </div>
