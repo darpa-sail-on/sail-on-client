@@ -33,8 +33,8 @@ Symbols and Terms
 #. :math:`\mathcal{E}_{L,C,D,\alpha,\beta}`: A set of :math:`\langle` L,C, D :math:`\rangle` on :math:`\alpha` and :math:`\beta`
 
 
-M1: Average Number of FNs among Correctly Detected Trials
----------------------------------------------------------
+M1: Average Number of FNs among Correctly Detected Trials (⬇ is better)
+-----------------------------------------------------------------------
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -70,8 +70,8 @@ Pictorial Representation
    :figclass: align-center
 
 
-M2: Percentage of Correctly Detected Trials
--------------------------------------------
+M2: Percentage of Correctly Detected Trials (⬆ is better)
+---------------------------------------------------------
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -88,8 +88,8 @@ Pictorial Representation
    :figclass: align-center
 
 
-M2.1: Percentage of False Positive Trials
------------------------------------------
+M2.1: Percentage of False Positive Trials (⬇ is better)
+-------------------------------------------------------
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -109,8 +109,8 @@ Pictorial Representation
    :figclass: align-center
 
 
-M3 and M4: Novelty Reaction Performance
----------------------------------------
+M3 and M4: Novelty Reaction Performance (⬆ is better)
+-----------------------------------------------------
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -133,8 +133,8 @@ Pictorial Representation
    :figclass: align-center
 
 
-M5: Overall Performance Task Improvement
-----------------------------------------
+M5: Overall Performance Task Improvement (⬆ is better)
+------------------------------------------------------
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
@@ -157,8 +157,8 @@ Pictorial Representation
    :figclass: align-center
 
 
-M6: Asymptotic Performance Task Improvement
--------------------------------------------
+M6: Asymptotic Performance Task Improvement (⬆ is better)
+---------------------------------------------------------
 
 Formal Definition
 ^^^^^^^^^^^^^^^^^
