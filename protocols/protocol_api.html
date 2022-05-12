@@ -1,140 +1,65 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Protocol API &mdash; Sail-On Client 0.31.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-    <script src="../_static/js/theme.js"></script>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Protocol API &#8212; Sail-On Client 0.31.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Harness" href="../harness/harness.html" />
     <link rel="prev" title="Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)" href="condda.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../harness/harness.html" title="Harness"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="condda.html" title="Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Protocol API</a></li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Sail-On Client
-          </a>
-              <div class="version">
-                0.31.0
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ond.html">Open World Novelty Detection (OND)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Protocol API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#visual-protocol-api">Visual Protocol API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.visual_dataclasses">Visual Protocol Dataclasses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.visual_round">Visual Round</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.visual_test">Visual Test</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.visual_protocol">Visual Protocol</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#ond-api">OND API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.ond_dataclasses">OND Dataclasses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.ond_round">OND Round</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.ond_test">OND Test</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.ond_protocol">OND Protocol</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#condda-api">CONDDA API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.condda_dataclasses">CONDDA Dataclasses</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.condda_round">CONDDA Round</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.condda_test">CONDDA Test</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-sail_on_client.protocol.condda_protocol">CONDDA Protocol</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Sail-On Client</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Protocol API</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/protocols/protocol_api.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   <div class="section" id="protocol-api">
-<h1>Protocol API<a class="headerlink" href="#protocol-api" title="Permalink to this headline"></a></h1>
+<h1>Protocol API<a class="headerlink" href="#protocol-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="visual-protocol-api">
-<h2>Visual Protocol API<a class="headerlink" href="#visual-protocol-api" title="Permalink to this headline"></a></h2>
+<h2>Visual Protocol API<a class="headerlink" href="#visual-protocol-api" title="Permalink to this headline">¶</a></h2>
 <p>Interfaces that are common across OND and CONDDA protocol</p>
 <div class="section" id="module-sail_on_client.protocol.visual_dataclasses">
-<span id="visual-protocol-dataclasses"></span><h3>Visual Protocol Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.visual_dataclasses" title="Permalink to this headline"></a></h3>
+<span id="visual-protocol-dataclasses"></span><h3>Visual Protocol Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.visual_dataclasses" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#sail_on_client/protocol/visual_dataclasses.py"><span>sail_on_client/protocol/visual_dataclasses.py</span></a></p>
 <hr class="docutils" />
 <p>Common dataclasses for visual protocols.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">FeatureExtractionParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#FeatureExtractionParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">FeatureExtractionParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#FeatureExtractionParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing feature extraction parameters associated with an algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -151,7 +76,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#FeatureExtractionParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#FeatureExtractionParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.FeatureExtractionParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -168,11 +93,11 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">WorldChangeDetectionParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#WorldChangeDetectionParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_dataclasses.</span></span><span class="sig-name descname"><span class="pre">WorldChangeDetectionParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#WorldChangeDetectionParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters associated world change in an algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -190,7 +115,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#WorldChangeDetectionParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_dataclasses.html#WorldChangeDetectionParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_dataclasses.WorldChangeDetectionParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -207,17 +132,17 @@
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.visual_round">
-<span id="visual-round"></span><h3>Visual Round<a class="headerlink" href="#module-sail_on_client.protocol.visual_round" title="Permalink to this headline"></a></h3>
+<span id="visual-round"></span><h3>Visual Round<a class="headerlink" href="#module-sail_on_client.protocol.visual_round" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#sail_on_client/protocol/visual_round.py"><span>sail_on_client/protocol/visual_round.py</span></a></p>
 <hr class="docutils" />
 <p>Round for visual protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_round.</span></span><span class="sig-name descname"><span class="pre">VisualRound</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_round.</span></span><span class="sig-name descname"><span class="pre">VisualRound</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class with common elements for visual protocols.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct VisualRound.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -244,7 +169,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound._run_feature_extraction">
-<span class="sig-name descname"><span class="pre">_run_feature_extraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fe_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound._run_feature_extraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound._run_feature_extraction" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_run_feature_extraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fe_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound._run_feature_extraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound._run_feature_extraction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private helper function for running feature extraction.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -264,7 +189,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound._run_world_change_detection">
-<span class="sig-name descname"><span class="pre">_run_world_change_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wcd_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound._run_world_change_detection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound._run_world_change_detection" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_run_world_change_detection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wcd_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound._run_world_change_detection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound._run_world_change_detection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private helper function for detecting that the world has changed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -284,7 +209,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_round.VisualRound.get_instance_ids">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound.get_instance_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound.get_instance_ids" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_round.html#VisualRound.get_instance_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_round.VisualRound.get_instance_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get instance ids from the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -303,17 +228,17 @@
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.visual_test">
-<span id="visual-test"></span><h3>Visual Test<a class="headerlink" href="#module-sail_on_client.protocol.visual_test" title="Permalink to this headline"></a></h3>
+<span id="visual-test"></span><h3>Visual Test<a class="headerlink" href="#module-sail_on_client.protocol.visual_test" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#sail_on_client/protocol/visual_test.py"><span>sail_on_client/protocol/visual_test.py</span></a></p>
 <hr class="docutils" />
 <p>Test for Visual Protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_test.</span></span><span class="sig-name descname"><span class="pre">VisualTest</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_test.</span></span><span class="sig-name descname"><span class="pre">VisualTest</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing test in visual protocol.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct visual test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -341,7 +266,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest._restore_features">
-<span class="sig-name descname"><span class="pre">_restore_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest._restore_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest._restore_features" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_restore_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest._restore_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest._restore_features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private function to restore features.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -358,7 +283,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_test.VisualTest._save_features">
-<span class="sig-name descname"><span class="pre">_save_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest._save_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest._save_features" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_save_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_test.html#VisualTest._save_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_test.VisualTest._save_features" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save features for a test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -381,17 +306,17 @@
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.visual_protocol">
-<span id="visual-protocol"></span><h3>Visual Protocol<a class="headerlink" href="#module-sail_on_client.protocol.visual_protocol" title="Permalink to this headline"></a></h3>
+<span id="visual-protocol"></span><h3>Visual Protocol<a class="headerlink" href="#module-sail_on_client.protocol.visual_protocol" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#sail_on_client/protocol/visual_protocol.py"><span>sail_on_client/protocol/visual_protocol.py</span></a></p>
 <hr class="docutils" />
 <p>Visual Protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_protocol.</span></span><span class="sig-name descname"><span class="pre">VisualProtocol</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.visual_protocol.</span></span><span class="sig-name descname"><span class="pre">VisualProtocol</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol for visual tasks.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct visual protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -411,7 +336,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.__new__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.__new__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>~P</p>
@@ -428,7 +353,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.from_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.from_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol.from_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct protocol from config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -448,7 +373,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_config" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/visual_protocol.html#VisualProtocol.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get json compliant representation of the protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -462,7 +387,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.get_default_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_default_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_default_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -497,7 +422,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.get_impls">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_impls" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.get_impls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -519,7 +444,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.is_usable">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.is_usable" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.is_usable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if this class will be detected by SMQTK’s plugin utilities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -530,7 +455,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.visual_protocol.VisualProtocol.run_protocol">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.run_protocol" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.visual_protocol.VisualProtocol.run_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -547,19 +472,19 @@ define a “valid” type to be be relative to this class.</p>
 </div>
 </div>
 <div class="section" id="ond-api">
-<h2>OND API<a class="headerlink" href="#ond-api" title="Permalink to this headline"></a></h2>
+<h2>OND API<a class="headerlink" href="#ond-api" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-sail_on_client.protocol.ond_dataclasses">
-<span id="ond-dataclasses"></span><h3>OND Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.ond_dataclasses" title="Permalink to this headline"></a></h3>
+<span id="ond-dataclasses"></span><h3>OND Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.ond_dataclasses" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#sail_on_client/protocol/ond_dataclasses.py"><span>sail_on_client/protocol/ond_dataclasses.py</span></a></p>
 <hr class="docutils" />
 <p>Dataclasses for the protocols.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing attributes of algorithm present in the protocol.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -582,7 +507,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params">
-<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes.merge_detector_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes.merge_detector_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge common parameters with algorithm specific parameters with exclusions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -602,7 +527,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version">
-<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes.named_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes.named_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute version of an algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -616,7 +541,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests">
-<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes.remove_completed_tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#AlgorithmAttributes.remove_completed_tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove finished tests from test_ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -635,11 +560,11 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#InitializeParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#InitializeParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters that are used to initialize the algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_novelty_batches</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_novelty_batches</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_instance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -658,7 +583,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#InitializeParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#InitializeParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -675,11 +600,11 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyAdaptationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyAdaptationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyAdaptationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyAdaptationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters associated novelty adaptation with an algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>round_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p>
@@ -692,7 +617,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyAdaptationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyAdaptationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyAdaptationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -709,11 +634,11 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyCharacterizationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyCharacterizationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters associated novelty characterization with an algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>dataset_ids</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – </p>
@@ -726,7 +651,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyCharacterizationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyCharacterizationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -743,11 +668,11 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyClassificationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyClassificationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyClassificationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyClassificationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters associated novelty classification in an algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -764,7 +689,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyClassificationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_dataclasses.html#NoveltyClassificationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_dataclasses.NoveltyClassificationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -781,17 +706,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.ond_round">
-<span id="ond-round"></span><h3>OND Round<a class="headerlink" href="#module-sail_on_client.protocol.ond_round" title="Permalink to this headline"></a></h3>
+<span id="ond-round"></span><h3>OND Round<a class="headerlink" href="#module-sail_on_client.protocol.ond_round" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#sail_on_client/protocol/ond_round.py"><span>sail_on_client/protocol/ond_round.py</span></a></p>
 <hr class="docutils" />
 <p>Round for OND.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_round.ONDRound">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_round.</span></span><span class="sig-name descname"><span class="pre">ONDRound</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_round.</span></span><span class="sig-name descname"><span class="pre">ONDRound</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class Representing a round in OND.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_round.ONDRound.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Core logic for running round in OND.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -812,7 +737,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_round.ONDRound.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct round for OND.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -839,7 +764,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_round.ONDRound._run_novelty_adaptation">
-<span class="sig-name descname"><span class="pre">_run_novelty_adaptation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">na_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound._run_novelty_adaptation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound._run_novelty_adaptation" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_run_novelty_adaptation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">na_params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound._run_novelty_adaptation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound._run_novelty_adaptation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private helper function for adaptation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -856,7 +781,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_round.ONDRound._run_novelty_classification">
-<span class="sig-name descname"><span class="pre">_run_novelty_classification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nc_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound._run_novelty_classification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound._run_novelty_classification" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_run_novelty_classification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nc_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_round.html#ONDRound._run_novelty_classification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound._run_novelty_classification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private helper function for novelty classification.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -876,7 +801,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_round.ONDRound.get_instance_ids">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound.get_instance_ids" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_round.ONDRound.get_instance_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get instance ids from the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -895,17 +820,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.ond_test">
-<span id="ond-test"></span><h3>OND Test<a class="headerlink" href="#module-sail_on_client.protocol.ond_test" title="Permalink to this headline"></a></h3>
+<span id="ond-test"></span><h3>OND Test<a class="headerlink" href="#module-sail_on_client.protocol.ond_test" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#sail_on_client/protocol/ond_test.py"><span>sail_on_client/protocol/ond_test.py</span></a></p>
 <hr class="docutils" />
 <p>Test for OND.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_test.</span></span><span class="sig-name descname"><span class="pre">ONDTest</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_test.</span></span><span class="sig-name descname"><span class="pre">ONDTest</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class Representing OND test.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Core logic for running test in OND.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -922,7 +847,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct test for OND.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -951,7 +876,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_test.ONDTest._create_feedback_instance">
-<span class="sig-name descname"><span class="pre">_create_feedback_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_max_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest._create_feedback_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest._create_feedback_instance" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_create_feedback_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_max_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_test.html#ONDTest._create_feedback_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_test.ONDTest._create_feedback_instance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Private function for creating feedback object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -973,22 +898,22 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.ond_protocol">
-<span id="ond-protocol"></span><h3>OND Protocol<a class="headerlink" href="#module-sail_on_client.protocol.ond_protocol" title="Permalink to this headline"></a></h3>
+<span id="ond-protocol"></span><h3>OND Protocol<a class="headerlink" href="#module-sail_on_client.protocol.ond_protocol" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#sail_on_client/protocol/ond_protocol.py"><span>sail_on_client/protocol/ond_protocol.py</span></a></p>
 <hr class="docutils" />
 <p>OND protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_protocol.</span></span><span class="sig-name descname"><span class="pre">ONDProtocol</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.ond_protocol.</span></span><span class="sig-name descname"><span class="pre">ONDProtocol</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>OND protocol.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_reaction_baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_elementwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_feedback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_class</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_reaction_baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_elementwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_feedback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'classification'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct OND protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>algorithms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="../plugins/agents_api.html#sail_on_client.agent.ond_agent.ONDAgent" title="sail_on_client.agent.ond_agent.ONDAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ONDAgent</span></code></a>]) – Dictionary of algorithms that are used run based on the protocol</p></li>
+<li><p><strong>algorithms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="../agents/agents_api.html#sail_on_client.agent.ond_agent.ONDAgent" title="sail_on_client.agent.ond_agent.ONDAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">ONDAgent</span></code></a>]) – Dictionary of algorithms that are used run based on the protocol</p></li>
 <li><p><strong>baseline_class</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the baseline class</p></li>
 <li><p><strong>dataset_root</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Root directory of the dataset</p></li>
 <li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Domain of the problem</p></li>
@@ -1028,7 +953,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.__new__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.__new__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>~P</p>
@@ -1045,7 +970,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol._evaluate_algorithms">
-<span class="sig-name descname"><span class="pre">_evaluate_algorithms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol._evaluate_algorithms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol._evaluate_algorithms" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">_evaluate_algorithms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_scores</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol._evaluate_algorithms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol._evaluate_algorithms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate algorithms after all tests have been submitted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1066,7 +991,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_attributes">
-<span class="sig-name descname"><span class="pre">create_algorithm_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.create_algorithm_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_attributes" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_algorithm_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_reaction_baseline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.create_algorithm_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an instance of algorithm attributes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1090,7 +1015,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_session">
-<span class="sig-name descname"><span class="pre">create_algorithm_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_a_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.create_algorithm_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_session" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_algorithm_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_a_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.create_algorithm_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.create_algorithm_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create/resume session for an algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1113,7 +1038,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.from_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.from_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct protocol from config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1133,7 +1058,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.get_config" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.get_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get dictionary representation of the object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1144,7 +1069,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.get_default_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.get_default_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.get_default_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -1179,7 +1104,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.get_impls">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.get_impls" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.get_impls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -1201,7 +1126,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.is_usable">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.is_usable" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.is_usable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if this class will be detected by SMQTK’s plugin utilities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1212,7 +1137,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.run_protocol">
-<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.run_protocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.run_protocol" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.run_protocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.run_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1229,7 +1154,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.ond_protocol.ONDProtocol.update_skip_stages">
-<span class="sig-name descname"><span class="pre">update_skip_stages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_feedback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.update_skip_stages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.update_skip_stages" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">update_skip_stages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_feedback</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/ond_protocol.html#ONDProtocol.update_skip_stages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.ond_protocol.ONDProtocol.update_skip_stages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update skip stages based on the boolean values in config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1256,19 +1181,19 @@ define a “valid” type to be be relative to this class.</p>
 </div>
 </div>
 <div class="section" id="condda-api">
-<h2>CONDDA API<a class="headerlink" href="#condda-api" title="Permalink to this headline"></a></h2>
+<h2>CONDDA API<a class="headerlink" href="#condda-api" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="module-sail_on_client.protocol.condda_dataclasses">
-<span id="condda-dataclasses"></span><h3>CONDDA Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.condda_dataclasses" title="Permalink to this headline"></a></h3>
+<span id="condda-dataclasses"></span><h3>CONDDA Dataclasses<a class="headerlink" href="#module-sail_on_client.protocol.condda_dataclasses" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#sail_on_client/protocol/condda_dataclasses.py"><span>sail_on_client/protocol/condda_dataclasses.py</span></a></p>
 <hr class="docutils" />
 <p>Dataclasses for CONDDA.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">AlgorithmAttributes</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing attributes of algorithm present in the protocol.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">package_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1289,7 +1214,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.merge_detector_params">
-<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes.merge_detector_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">merge_detector_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector_params</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes.merge_detector_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.merge_detector_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge common parameters with algorithm specific parameters with exclusions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1309,7 +1234,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.named_version">
-<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes.named_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">named_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes.named_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.named_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute version of an algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1323,7 +1248,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.remove_completed_tests">
-<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes.remove_completed_tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">remove_completed_tests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">finished_tests</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#AlgorithmAttributes.remove_completed_tests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.AlgorithmAttributes.remove_completed_tests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove finished tests from test_ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1342,11 +1267,11 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.InitializeParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#InitializeParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">InitializeParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#InitializeParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters that are used to initialize the algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.InitializeParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1363,7 +1288,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.InitializeParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#InitializeParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#InitializeParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.InitializeParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -1380,11 +1305,11 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#NoveltyCharacterizationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_dataclasses.</span></span><span class="sig-name descname"><span class="pre">NoveltyCharacterizationParams</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#NoveltyCharacterizationParams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class for storing parameters associated novelty characterization with an algorithm.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1401,7 +1326,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.get_toolset">
-<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#NoveltyCharacterizationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_toolset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_dataclasses.html#NoveltyCharacterizationParams.get_toolset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_dataclasses.NoveltyCharacterizationParams.get_toolset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the data present in the class into a dictionary.</p>
 <dl class="simple">
 <dt>Returns</dt><dd><p>A dictionary with data associated with the class</p>
@@ -1418,17 +1343,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.condda_round">
-<span id="condda-round"></span><h3>CONDDA Round<a class="headerlink" href="#module-sail_on_client.protocol.condda_round" title="Permalink to this headline"></a></h3>
+<span id="condda-round"></span><h3>CONDDA Round<a class="headerlink" href="#module-sail_on_client.protocol.condda_round" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#sail_on_client/protocol/condda_round.py"><span>sail_on_client/protocol/condda_round.py</span></a></p>
 <hr class="docutils" />
 <p>Round for CONDDA.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_round.CONDDARound">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_round.</span></span><span class="sig-name descname"><span class="pre">CONDDARound</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#CONDDARound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_round.</span></span><span class="sig-name descname"><span class="pre">CONDDARound</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#CONDDARound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class Representing a round for CONDDA.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_round.CONDDARound.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#CONDDARound.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#CONDDARound.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Core logic for running round in CONDDA.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1448,7 +1373,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_round.CONDDARound.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#CONDDARound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logit_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redlight_instance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_round.html#CONDDARound.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct CONDDARound.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1475,7 +1400,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_round.CONDDARound.get_instance_ids">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound.get_instance_ids" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_instance_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_round.CONDDARound.get_instance_ids" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get instance ids from the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1494,17 +1419,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.condda_test">
-<span id="condda-test"></span><h3>CONDDA Test<a class="headerlink" href="#module-sail_on_client.protocol.condda_test" title="Permalink to this headline"></a></h3>
+<span id="condda-test"></span><h3>CONDDA Test<a class="headerlink" href="#module-sail_on_client.protocol.condda_test" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#sail_on_client/protocol/condda_test.py"><span>sail_on_client/protocol/condda_test.py</span></a></p>
 <hr class="docutils" />
 <p>Test for CONDDA.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_test.CONDDATest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_test.</span></span><span class="sig-name descname"><span class="pre">CONDDATest</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#CONDDATest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_test.CONDDATest" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_test.</span></span><span class="sig-name descname"><span class="pre">CONDDATest</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#CONDDATest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_test.CONDDATest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing CONDDA Test.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_test.CONDDATest.__call__">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#CONDDATest.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_test.CONDDATest.__call__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#CONDDATest.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_test.CONDDATest.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Core logic for running test in CONDDA.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1521,7 +1446,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_test.CONDDATest.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#CONDDATest.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_test.CONDDATest.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_test.html#CONDDATest.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_test.CONDDATest.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct test for CONDDA.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1551,22 +1476,22 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.protocol.condda_protocol">
-<span id="condda-protocol"></span><h3>CONDDA Protocol<a class="headerlink" href="#module-sail_on_client.protocol.condda_protocol" title="Permalink to this headline"></a></h3>
+<span id="condda-protocol"></span><h3>CONDDA Protocol<a class="headerlink" href="#module-sail_on_client.protocol.condda_protocol" title="Permalink to this headline">¶</a></h3>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#sail_on_client/protocol/condda_protocol.py"><span>sail_on_client/protocol/condda_protocol.py</span></a></p>
 <hr class="docutils" />
 <p>CONDDA protocol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_protocol.</span></span><span class="sig-name descname"><span class="pre">Condda</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.protocol.condda_protocol.</span></span><span class="sig-name descname"><span class="pre">Condda</span></span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda" title="Permalink to this definition">¶</a></dt>
 <dd><p>CONDDA protocol.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_elementwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">harness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_eval_roundwise_enabled</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resume_session_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_elementwise</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_consolidated_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_saved_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize CONDDA protocol object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>algorithms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="../plugins/agents_api.html#sail_on_client.agent.condda_agent.CONDDAAgent" title="sail_on_client.agent.condda_agent.CONDDAAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">CONDDAAgent</span></code></a>]) – Dictionary of algorithms that are used run based on the protocol</p></li>
+<li><p><strong>algorithms</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference internal" href="../agents/agents_api.html#sail_on_client.agent.condda_agent.CONDDAAgent" title="sail_on_client.agent.condda_agent.CONDDAAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">CONDDAAgent</span></code></a>]) – Dictionary of algorithms that are used run based on the protocol</p></li>
 <li><p><strong>dataset_root</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Root directory of the dataset</p></li>
 <li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Domain of the problem</p></li>
 <li><p><strong>save_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Directory where results are saved</p></li>
@@ -1601,7 +1526,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.__new__" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.__new__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>~P</p>
@@ -1618,7 +1543,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.create_algorithm_attributes">
-<span class="sig-name descname"><span class="pre">create_algorithm_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.create_algorithm_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.create_algorithm_attributes" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_algorithm_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.create_algorithm_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.create_algorithm_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an instance of algorithm attributes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1642,7 +1567,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.create_algorithm_session">
-<span class="sig-name descname"><span class="pre">create_algorithm_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_a_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.create_algorithm_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.create_algorithm_session" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">create_algorithm_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">algorithm_attributes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_a_session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.create_algorithm_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.create_algorithm_session" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create/resume session for an algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1665,7 +1590,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.from_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.from_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.from_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct protocol from config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1685,7 +1610,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_config" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get json compliant representation of the protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1699,7 +1624,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.get_default_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_default_config" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_default_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -1734,7 +1659,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.get_impls">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_impls" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.get_impls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -1756,7 +1681,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.is_usable">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.is_usable" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.is_usable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if this class will be detected by SMQTK’s plugin utilities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1767,7 +1692,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.run_protocol">
-<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.run_protocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.run_protocol" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_protocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.run_protocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.run_protocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1784,7 +1709,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.protocol.condda_protocol.Condda.update_skip_stages">
-<span class="sig-name descname"><span class="pre">update_skip_stages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.update_skip_stages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.update_skip_stages" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">update_skip_stages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip_stages</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_extraction_only</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/protocol/condda_protocol.html#Condda.update_skip_stages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.protocol.condda_protocol.Condda.update_skip_stages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update skip stages based on the boolean values in config.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1813,34 +1738,89 @@ define a “valid” type to be be relative to this class.</p>
 </div>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="condda.html" class="btn btn-neutral float-left" title="Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../harness/harness.html" class="btn btn-neutral float-right" title="Harness" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2020, Kitware INC..</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Protocol API</a><ul>
+<li><a class="reference internal" href="#visual-protocol-api">Visual Protocol API</a><ul>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.visual_dataclasses">Visual Protocol Dataclasses</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.visual_round">Visual Round</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.visual_test">Visual Test</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.visual_protocol">Visual Protocol</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ond-api">OND API</a><ul>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.ond_dataclasses">OND Dataclasses</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.ond_round">OND Round</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.ond_test">OND Test</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.ond_protocol">OND Protocol</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#condda-api">CONDDA API</a><ul>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.condda_dataclasses">CONDDA Dataclasses</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.condda_round">CONDDA Round</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.condda_test">CONDDA Test</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.protocol.condda_protocol">CONDDA Protocol</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
-</body>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="condda.html"
+                        title="previous chapter">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../harness/harness.html"
+                        title="next chapter">Harness</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/protocols/protocol_api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../harness/harness.html" title="Harness"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="condda.html" title="Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Protocol API</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Kitware INC..
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
 </html>

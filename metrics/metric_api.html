@@ -1,118 +1,58 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Metric API &mdash; Sail-On Client 0.31.0 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-    <script src="../_static/js/theme.js"></script>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metric API &#8212; Sail-On Client 0.31.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Feedback" href="../feedback/feedback.html" />
     <link rel="prev" title="Program Metrics" href="metric_formulation.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../feedback/feedback.html" title="Feedback"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="metric_formulation.html" title="Program Metrics"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Metric API</a></li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Sail-On Client
-          </a>
-              <div class="version">
-                0.31.0
-              </div>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="metric_formulation.html">Program Metrics</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Metric API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.evaluate.metrics">Methods For Metric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.evaluate.program_metrics">Base Class For Metric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.evaluate.activity_recognition">Activity Recognition Metric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.evaluate.document_transcription">Document Transcription Metric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.evaluate.image_classification">Image Classification Metric</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.evaluate.utils">Utility Methods</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Sail-On Client</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Metric API</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/metrics/metric_api.rst.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   <div class="section" id="metric-api">
-<h1>Metric API<a class="headerlink" href="#metric-api" title="Permalink to this headline"></a></h1>
+<h1>Metric API<a class="headerlink" href="#metric-api" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-sail_on_client.evaluate.metrics">
-<span id="methods-for-metric"></span><h2>Methods For Metric<a class="headerlink" href="#module-sail_on_client.evaluate.metrics" title="Permalink to this headline"></a></h2>
+<span id="methods-for-metric"></span><h2>Methods For Metric<a class="headerlink" href="#module-sail_on_client.evaluate.metrics" title="Permalink to this headline">¶</a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#sail_on_client/evaluate/metrics.py"><span>sail_on_client/evaluate/metrics.py</span></a></p>
 <hr class="docutils" />
 <p>Program Metric Functions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_acc">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_acc" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute top1 and top3 accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -136,7 +76,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_accuracy_on_novel">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_accuracy_on_novel" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty robustness.</p>
 <p>The method computes top-K accuracy for only the novel samples</p>
 <dl class="field-list simple">
@@ -159,7 +99,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Program Metric: Novelty detection performance.</p>
 <p>The method computes per-sample novelty detection performance</p>
 <dl class="field-list simple">
@@ -181,7 +121,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp_failed_reaction">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_failed_reaction" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty detection when reaction fails.</p>
 <p>The method computes novelty detection performance for only on samples with incorrect k-class predictions</p>
 <dl class="field-list simple">
@@ -206,7 +146,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp_post">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_post" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty detection performance after novelty is introduced.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -226,7 +166,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_ndp_pre">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty detection performance before novelty is introduced.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -246,7 +186,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_num">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_num" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>Program Metric: Number of samples needed for detecting novelty.</p>
 <p>The method computes number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
@@ -267,7 +207,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.metrics.m_num_stats">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_num_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.metrics.</span></span><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/metrics.html#m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.metrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Program Metric: Number of samples needed for detecting novelty.</p>
 <p>The method computes number of GT novel samples needed to predict the first true positive.</p>
 <dl class="field-list simple">
@@ -288,17 +228,17 @@
 
 </div>
 <div class="section" id="module-sail_on_client.evaluate.program_metrics">
-<span id="base-class-for-metric"></span><h2>Base Class For Metric<a class="headerlink" href="#module-sail_on_client.evaluate.program_metrics" title="Permalink to this headline"></a></h2>
+<span id="base-class-for-metric"></span><h2>Base Class For Metric<a class="headerlink" href="#module-sail_on_client.evaluate.program_metrics" title="Permalink to this headline">¶</a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#sail_on_client/evaluate/program_metrics.py"><span>sail_on_client/evaluate/program_metrics.py</span></a></p>
 <hr class="docutils" />
 <p>Abstract Class for metrics for sail-on.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.program_metrics.</span></span><span class="sig-name descname"><span class="pre">ProgramMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.program_metrics.</span></span><span class="sig-name descname"><span class="pre">ProgramMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Abstract program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -315,7 +255,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,7 +278,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc_round_wise abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -359,7 +299,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_accuracy_on_novel abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -380,7 +320,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_is_cdt_and_is_early abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -414,7 +354,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -434,7 +374,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_failed_reaction abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -456,7 +396,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_post abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -476,7 +416,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_pre abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -496,7 +436,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -516,7 +456,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/program_metrics.html#ProgramMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.program_metrics.ProgramMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num_stats abstract function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -538,17 +478,17 @@
 
 </div>
 <div class="section" id="module-sail_on_client.evaluate.activity_recognition">
-<span id="activity-recognition-metric"></span><h2>Activity Recognition Metric<a class="headerlink" href="#module-sail_on_client.evaluate.activity_recognition" title="Permalink to this headline"></a></h2>
+<span id="activity-recognition-metric"></span><h2>Activity Recognition Metric<a class="headerlink" href="#module-sail_on_client.evaluate.activity_recognition" title="Permalink to this headline">¶</a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#sail_on_client/evaluate/activity_recognition.py"><span>sail_on_client/evaluate/activity_recognition.py</span></a></p>
 <hr class="docutils" />
 <p>Activity Recognition Class for metrics for sail-on.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.activity_recognition.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.activity_recognition.</span></span><span class="sig-name descname"><span class="pre">ActivityRecognitionMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activity Recognition program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">video_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">video_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spatial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temporal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -573,7 +513,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc">
-<span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -596,7 +536,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc_round_wise">
-<span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc_round_wise" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc_round_wise function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -617,7 +557,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_accuracy_on_novel">
-<span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_accuracy_on_novel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_accuracy_on_novel function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -638,7 +578,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_is_cdt_and_is_early">
-<span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_is_cdt_and_is_early" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_is_cdt_and_is_early function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -672,7 +612,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp">
-<span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -692,7 +632,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_failed_reaction">
-<span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_failed_reaction" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_failed_reaction function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -714,7 +654,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_post">
-<span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_post" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_post function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -734,7 +674,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_pre">
-<span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_pre function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -754,7 +694,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_nrp">
-<span class="sig-name descname"><span class="pre">m_nrp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ta2_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_nrp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_nrp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_nrp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ta2_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_nrp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_nrp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_nrp function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -774,7 +714,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num">
-<span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -794,7 +734,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num_stats">
-<span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/activity_recognition.html#ActivityRecognitionMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.activity_recognition.ActivityRecognitionMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num_stats function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -816,17 +756,17 @@
 
 </div>
 <div class="section" id="module-sail_on_client.evaluate.document_transcription">
-<span id="document-transcription-metric"></span><h2>Document Transcription Metric<a class="headerlink" href="#module-sail_on_client.evaluate.document_transcription" title="Permalink to this headline"></a></h2>
+<span id="document-transcription-metric"></span><h2>Document Transcription Metric<a class="headerlink" href="#module-sail_on_client.evaluate.document_transcription" title="Permalink to this headline">¶</a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#sail_on_client/evaluate/document_transcription.py"><span>sail_on_client/evaluate/document_transcription.py</span></a></p>
 <hr class="docutils" />
 <p>Document Transcription Class for metrics for sail-on.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.document_transcription.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.document_transcription.</span></span><span class="sig-name descname"><span class="pre">DocumentTranscriptionMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Document transcription program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">letter_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slant_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">representation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pen_pressure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">letter_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_spacing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slant_angle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -856,7 +796,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc">
-<span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc helper function used for computing novelty reaction performance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -879,7 +819,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc_round_wise">
-<span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc_round_wise" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc_round_wise function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -900,7 +840,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_accuracy_on_novel">
-<span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_accuracy_on_novel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty robustness.</p>
 <p>Not Implemented since no gt_class info for novel samples. The method
 computes top-K accuracy for only the novel samples</p>
@@ -923,7 +863,7 @@ computes top-K accuracy for only the novel samples</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_is_cdt_and_is_early">
-<span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_is_cdt_and_is_early" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is change detection and is change detection early (m_is_cdt_and_is_early) function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -957,7 +897,7 @@ computes top-K accuracy for only the novel samples</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp">
-<span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp function.</p>
 <p>Novelty detection performance. The method computes per-sample novelty
 detection performance over the entire test.</p>
@@ -979,7 +919,7 @@ detection performance over the entire test.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_failed_reaction">
-<span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_failed_reaction" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_failed_reaction function.</p>
 <p>Not Implemented since no gt_class info for novel samples. The method
 computes novelty detection performance for only on samples with
@@ -1004,7 +944,7 @@ incorrect k-class predictions</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_post">
-<span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_post" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_post function.</p>
 <p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">m_ndp()</span></code>
 with post_novelty. This computes from the first GT novel sample.
@@ -1030,7 +970,7 @@ with post_novelty. This computes from the first GT novel sample.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_pre">
-<span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_ndp_pre function.</p>
 <p>See <code class="xref py py-func docutils literal notranslate"><span class="pre">m_ndp()</span></code>
 with post_novelty. This computes to the first GT novel sample. It really isn’t useful
@@ -1053,7 +993,7 @@ and is just added for completion. Should always be 0 since no possible TP.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_nrp">
-<span class="sig-name descname"><span class="pre">m_nrp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ta2_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_nrp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_nrp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_nrp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ta2_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_nrp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_nrp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_nrp function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1073,7 +1013,7 @@ and is just added for completion. Should always be 0 since no possible TP.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num">
-<span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num function.</p>
 <p>A Program Metric where the number of samples needed for detecting novelty.
 The method computes the number of GT novel samples needed to predict the
@@ -1096,7 +1036,7 @@ first true positive.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num_stats">
-<span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/document_transcription.html#DocumentTranscriptionMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.document_transcription.DocumentTranscriptionMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num_stats function.</p>
 <p>Number of samples needed for detecting novelty. The method computes
 number of GT novel samples needed to predict the first true positive.</p>
@@ -1120,17 +1060,17 @@ number of GT novel samples needed to predict the first true positive.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.evaluate.image_classification">
-<span id="image-classification-metric"></span><h2>Image Classification Metric<a class="headerlink" href="#module-sail_on_client.evaluate.image_classification" title="Permalink to this headline"></a></h2>
+<span id="image-classification-metric"></span><h2>Image Classification Metric<a class="headerlink" href="#module-sail_on_client.evaluate.image_classification" title="Permalink to this headline">¶</a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#sail_on_client/evaluate/image_classification.py"><span>sail_on_client/evaluate/image_classification.py</span></a></p>
 <hr class="docutils" />
 <p>Image Classification Class for metrics for sail-on.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></span><span class="sig-name descname"><span class="pre">ImageClassificationMetrics</span></span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics" title="Permalink to this definition">¶</a></dt>
 <dd><p>Image Classification program metric class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">image_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1152,7 +1092,7 @@ number of GT novel samples needed to predict the first true positive.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc">
-<span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_acc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asymptotic_start_round</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_acc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1175,7 +1115,7 @@ number of GT novel samples needed to predict the first true positive.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc_round_wise">
-<span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc_round_wise" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_acc_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_acc_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_acc_round_wise" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_acc_round_wise function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1196,7 +1136,7 @@ number of GT novel samples needed to predict the first true positive.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_accuracy_on_novel">
-<span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_accuracy_on_novel" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_accuracy_on_novel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_accuracy_on_novel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_accuracy_on_novel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty robustness.</p>
 <p>The method computes top-K accuracy for only the novel samples</p>
 <dl class="field-list simple">
@@ -1221,7 +1161,7 @@ Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_is_cdt_and_is_early">
-<span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_is_cdt_and_is_early" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_is_cdt_and_is_early</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ta2_idx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_len</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_is_cdt_and_is_early"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_is_cdt_and_is_early" title="Permalink to this definition">¶</a></dt>
 <dd><p>Is change detection and is change detection early (m_is_cdt_and_is_early) function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1255,7 +1195,7 @@ Nx1 binary vector corresponding to the ground truth novel{1}/seen{0} labels</p><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp">
-<span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Novelty Detection Performance: Program Metric.</p>
 <blockquote>
 <div><p>Novelty detection performance.  The method computes per-sample novelty detection performance.</p>
@@ -1283,7 +1223,7 @@ before first novel sample.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_failed_reaction">
-<span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_failed_reaction" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_failed_reaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'full_test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp_failed_reaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_failed_reaction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Additional Metric: Novelty detection when reaction fails.</p>
 <p>Not Implemented since no gt_class info for novel samples</p>
 <p>The method computes novelty detection performance for only on samples with incorrect k-class predictions</p>
@@ -1313,7 +1253,7 @@ novel sample.  If ‘pre_novelty’, than everything before novelty introduced.<
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_post">
-<span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_post" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_post" title="Permalink to this definition">¶</a></dt>
 <dd><p>Novelty Detection Performance Post Red Light.  m_ndp_post function.</p>
 <dl class="simple">
 <dt>See <code class="xref py py-func docutils literal notranslate"><span class="pre">m_ndp()</span></code> with</dt><dd><p>post_novelty.  This computes from the first GT novel sample</p>
@@ -1337,7 +1277,7 @@ novel sample.  If ‘pre_novelty’, than everything before novelty introduced.<
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_pre">
-<span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_pre" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_ndp_pre</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_ndp_pre"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_ndp_pre" title="Permalink to this definition">¶</a></dt>
 <dd><p>Novelty Detection Performance Pre Red Light.  m_ndp_pre function.</p>
 <dl class="simple">
 <dt>See <code class="xref py py-func docutils literal notranslate"><span class="pre">m_ndp()</span></code> with</dt><dd><p>post_novelty.  This computes to the first GT novel sample.  It really isn’t useful
@@ -1362,7 +1302,7 @@ and is just added for completion.  Should always be 0 since no possible TP.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_nrp">
-<span class="sig-name descname"><span class="pre">m_nrp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ta2_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_nrp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_nrp" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_nrp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ta2_acc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_acc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_nrp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_nrp" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_nrp function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1382,7 +1322,7 @@ and is just added for completion.  Should always be 0 since no possible TP.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num">
-<span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num" title="Permalink to this definition">¶</a></dt>
 <dd><p>m_num function.</p>
 <p>A Program Metric where the number of samples needed for detecting novelty.
 The method computes the number of GT novel samples needed to predict the first true positive.</p>
@@ -1406,7 +1346,7 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num_stats">
-<span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">m_num_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#ImageClassificationMetrics.m_num_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.ImageClassificationMetrics.m_num_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Program Metric.</p>
 <dl class="simple">
 <dt>Number of samples needed for detecting novelty.  The method computes number of GT novel</dt><dd><p>samples needed to predict the first true positive.</p>
@@ -1434,7 +1374,7 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.image_classification.convert_df">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></span><span class="sig-name descname"><span class="pre">convert_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#convert_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.convert_df" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.image_classification.</span></span><span class="sig-name descname"><span class="pre">convert_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/image_classification.html#convert_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.image_classification.convert_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert from the old df to the new df.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1454,13 +1394,13 @@ Nx1 vector with each element 0 (not novel) or 1 (novel)</p></li>
 
 </div>
 <div class="section" id="module-sail_on_client.evaluate.utils">
-<span id="utility-methods"></span><h2>Utility Methods<a class="headerlink" href="#module-sail_on_client.evaluate.utils" title="Permalink to this headline"></a></h2>
+<span id="utility-methods"></span><h2>Utility Methods<a class="headerlink" href="#module-sail_on_client.evaluate.utils" title="Permalink to this headline">¶</a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#sail_on_client/evaluate/utils.py"><span>sail_on_client/evaluate/utils.py</span></a></p>
 <hr class="docutils" />
 <p>Helper functions for metrics.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.check_class_validity">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">check_class_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#check_class_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.check_class_validity" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">check_class_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#check_class_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.check_class_validity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the validity of the inputs for image classification.</p>
 <p>Inputs:
 p_class: Nx(K+1) matrix with each row corresponding to K+1 class probabilities for each sample
@@ -1480,7 +1420,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.check_novel_validity">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">check_novel_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#check_novel_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.check_novel_validity" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">check_novel_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_novel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#check_novel_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.check_novel_validity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check the validity of the inputs for per-sample novelty detection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1500,7 +1440,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.get_first_detect_novelty">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">get_first_detect_novelty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#get_first_detect_novelty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.get_first_detect_novelty" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">get_first_detect_novelty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_novel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thresh</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#get_first_detect_novelty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.get_first_detect_novelty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the first index where novelty is detected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1520,7 +1460,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.get_rolling_stats">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">get_rolling_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#get_rolling_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.get_rolling_stats" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">get_rolling_stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#get_rolling_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.get_rolling_stats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute rolling statistics which are used for robustness measures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1542,7 +1482,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.top1_accuracy">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">top1_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#top1_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.top1_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">top1_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#top1_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.top1_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute top-1 accuracy. (see topk_accuracy() for details).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1563,7 +1503,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.top3_accuracy">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">top3_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#top3_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.top3_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">top3_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#top3_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.top3_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute top-3 accuracy. (see topk_accuracy() for details).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1584,7 +1524,7 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.evaluate.utils.topk_accuracy">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">topk_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#topk_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.topk_accuracy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.evaluate.utils.</span></span><span class="sig-name descname"><span class="pre">topk_accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/evaluate/utils.html#topk_accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.evaluate.utils.topk_accuracy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute top-K accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1608,34 +1548,74 @@ gt_class: Nx1 vector with ground-truth class for each sample</p>
 </div>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="metric_formulation.html" class="btn btn-neutral float-left" title="Program Metrics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../feedback/feedback.html" class="btn btn-neutral float-right" title="Feedback" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2020, Kitware INC..</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Metric API</a><ul>
+<li><a class="reference internal" href="#module-sail_on_client.evaluate.metrics">Methods For Metric</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.evaluate.program_metrics">Base Class For Metric</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.evaluate.activity_recognition">Activity Recognition Metric</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.evaluate.document_transcription">Document Transcription Metric</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.evaluate.image_classification">Image Classification Metric</a></li>
+<li><a class="reference internal" href="#module-sail_on_client.evaluate.utils">Utility Methods</a></li>
+</ul>
+</li>
+</ul>
 
-</body>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="metric_formulation.html"
+                        title="previous chapter">Program Metrics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../feedback/feedback.html"
+                        title="next chapter">Feedback</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/metrics/metric_api.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../feedback/feedback.html" title="Feedback"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="metric_formulation.html" title="Program Metrics"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Metric API</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Kitware INC..
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
 </html>
