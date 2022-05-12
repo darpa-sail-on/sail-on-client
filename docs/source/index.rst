@@ -87,14 +87,14 @@ Feedback
    feedback/feedback
    feedback/feedback_api
 
-Plugins
--------
+Agents
+------
 
 .. toctree::
    :maxdepth: 2
 
-   plugins/agents
-   plugins/agents_api
+   agents/agents
+   agents/agents_api
 
 Saving and Restoring Models
 ---------------------------
