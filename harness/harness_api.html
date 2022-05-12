@@ -1,62 +1,121 @@
-
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Harness API &#8212; Sail-On Client 0.31.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harness API &mdash; Sail-On Client 0.31.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Program Metrics" href="../metrics/metric_formulation.html" />
     <link rel="prev" title="Harness" href="harness.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../metrics/metric_formulation.html" title="Program Metrics"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="harness.html" title="Harness"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Harness API</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.31.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="harness.html">Harness</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Harness API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.harness.test_and_evaluation_harness">Test And Evaluation Harness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.harness.local_harness">Local Harness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.harness.par_harness">PAR Harness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.harness.file_provider">File Provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.harness.file_provider_fn">File Provider Utility Methods</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../saving/features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../saving/checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Harness API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/harness/harness_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="harness-api">
-<h1>Harness API<a class="headerlink" href="#harness-api" title="Permalink to this headline">¶</a></h1>
+<h1>Harness API<a class="headerlink" href="#harness-api" title="Permalink to this headline"></a></h1>
 <div class="section" id="module-sail_on_client.harness.test_and_evaluation_harness">
-<span id="test-and-evaluation-harness"></span><h2>Test And Evaluation Harness<a class="headerlink" href="#module-sail_on_client.harness.test_and_evaluation_harness" title="Permalink to this headline">¶</a></h2>
+<span id="test-and-evaluation-harness"></span><h2>Test And Evaluation Harness<a class="headerlink" href="#module-sail_on_client.harness.test_and_evaluation_harness" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#sail_on_client/harness/test_and_evaluation_harness.py"><span>sail_on_client/harness/test_and_evaluation_harness.py</span></a></p>
 <hr class="docutils" />
 <p>Abstract harness for T&amp;E.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.test_and_evaluation_harness.</span></span><span class="sig-name descname"><span class="pre">TestAndEvaluationHarness</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.test_and_evaluation_harness.</span></span><span class="sig-name descname"><span class="pre">TestAndEvaluationHarness</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness" title="Permalink to this definition"></a></dt>
 <dd><p>Abstract interface for test and evaluation harness.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.__new__" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.__new__" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>~P</p>
@@ -73,7 +132,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.complete_test" title="Permalink to this definition"></a></dt>
 <dd><p>Mark test as completed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -93,7 +152,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.dataset_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request data for evaluation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -114,7 +173,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate" title="Permalink to this definition"></a></dt>
 <dd><p>Get results for test(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -136,7 +195,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.evaluate_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.evaluate_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.evaluate_round_wise" title="Permalink to this definition"></a></dt>
 <dd><p>Get results for round(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -157,7 +216,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.from_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.from_config" title="Permalink to this definition"></a></dt>
 <dd><p>Instantiate a new instance of this class given the configuration
 JSON-compliant dictionary encapsulating initialization arguments.</p>
 <p>This base method is adequate without modification when a class’s
@@ -232,7 +291,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_config" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_config" title="Permalink to this definition"></a></dt>
 <dd><p>Return a default configuration dictionary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -243,7 +302,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_default_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_default_config" title="Permalink to this definition"></a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -278,7 +337,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.get_feedback_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.get_feedback_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_feedback_request" title="Permalink to this definition"></a></dt>
 <dd><p>Get Labels from the server based provided one or more example ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -301,7 +360,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_impls">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_impls" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_impls" title="Permalink to this definition"></a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -323,7 +382,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.get_test_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve the metadata json for the specified test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -343,7 +402,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.is_usable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.is_usable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.is_usable" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if this class with be detected by SMQTK’s plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -354,7 +413,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.post_results" title="Permalink to this definition"></a></dt>
 <dd><p>Post client detector predictions for the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -376,7 +435,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.resume_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.resume_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.resume_session" title="Permalink to this definition"></a></dt>
 <dd><p>Get finished test from an existing session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -396,7 +455,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.session_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.session_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.session_request" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new session to evaluate the detector using an empirical protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -420,7 +479,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.terminate_session" title="Permalink to this definition"></a></dt>
 <dd><p>Terminate the session after the evaluation for the protocol is complete.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -443,7 +502,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/test_and_evaluation_harness.html#TestAndEvaluationHarness.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.test_and_evaluation_harness.TestAndEvaluationHarness.test_ids_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request Test Identifiers as part of a series of individual tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -467,17 +526,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.harness.local_harness">
-<span id="local-harness"></span><h2>Local Harness<a class="headerlink" href="#module-sail_on_client.harness.local_harness" title="Permalink to this headline">¶</a></h2>
+<span id="local-harness"></span><h2>Local Harness<a class="headerlink" href="#module-sail_on_client.harness.local_harness" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#sail_on_client/harness/local_harness.py"><span>sail_on_client/harness/local_harness.py</span></a></p>
 <hr class="docutils" />
 <p>Implementation of T&amp;E Harness for running experiments locally.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.local_harness.</span></span><span class="sig-name descname"><span class="pre">LocalHarness</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.local_harness.</span></span><span class="sig-name descname"><span class="pre">LocalHarness</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness" title="Permalink to this definition"></a></dt>
 <dd><p>Harness without any server communication.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gt_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize an object of local harness.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -499,7 +558,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.__new__" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.__new__" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>~P</p>
@@ -516,7 +575,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.complete_test">
-<span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.complete_test" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.complete_test" title="Permalink to this definition"></a></dt>
 <dd><p>Mark test as completed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -536,7 +595,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.dataset_request">
-<span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.dataset_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.dataset_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request data for evaluation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -557,7 +616,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.evaluate">
-<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.evaluate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.evaluate" title="Permalink to this definition"></a></dt>
 <dd><p>Get results for test(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -579,7 +638,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.evaluate_round_wise">
-<span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.evaluate_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.evaluate_round_wise" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.evaluate_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.evaluate_round_wise" title="Permalink to this definition"></a></dt>
 <dd><p>Get results for round(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -600,7 +659,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.from_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.from_config" title="Permalink to this definition"></a></dt>
 <dd><p>Instantiate a new instance of this class given the configuration
 JSON-compliant dictionary encapsulating initialization arguments.</p>
 <p>This base method is adequate without modification when a class’s
@@ -675,7 +734,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_config" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_config" title="Permalink to this definition"></a></dt>
 <dd><p>JSON Compliant representation of the object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -686,7 +745,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.get_default_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_default_config" title="Permalink to this definition"></a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -721,7 +780,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.get_feedback_request">
-<span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.get_feedback_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_feedback_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.get_feedback_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_feedback_request" title="Permalink to this definition"></a></dt>
 <dd><p>Get Labels from the server based provided one or more example ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -744,7 +803,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.get_impls">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_impls" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_impls" title="Permalink to this definition"></a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -766,7 +825,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.get_test_metadata">
-<span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.get_test_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve the metadata json for the specified test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -786,7 +845,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.is_usable">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.is_usable" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.is_usable" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if this class with be detected by SMQTK’s plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -797,7 +856,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.post_results">
-<span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.post_results" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.post_results" title="Permalink to this definition"></a></dt>
 <dd><p>Post client detector predictions for the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -819,7 +878,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.resume_session">
-<span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.resume_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.resume_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.resume_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.resume_session" title="Permalink to this definition"></a></dt>
 <dd><p>Get finished test from an existing session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -839,7 +898,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.session_request">
-<span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.session_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.session_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.session_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.session_request" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new session to evaluate the detector using an empirical protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -863,7 +922,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.terminate_session">
-<span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.terminate_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.terminate_session" title="Permalink to this definition"></a></dt>
 <dd><p>Terminate the session after the evaluation for the protocol is complete.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -886,7 +945,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.local_harness.LocalHarness.test_ids_request">
-<span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/local_harness.html#LocalHarness.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.local_harness.LocalHarness.test_ids_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request Test Identifiers as part of a series of individual tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -910,17 +969,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.harness.par_harness">
-<span id="par-harness"></span><h2>PAR Harness<a class="headerlink" href="#module-sail_on_client.harness.par_harness" title="Permalink to this headline">¶</a></h2>
+<span id="par-harness"></span><h2>PAR Harness<a class="headerlink" href="#module-sail_on_client.harness.par_harness" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#sail_on_client/harness/par_harness.py"><span>sail_on_client/harness/par_harness.py</span></a></p>
 <hr class="docutils" />
 <p>Implementation of T&amp;E Harness for PAR Server.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.par_harness.</span></span><span class="sig-name descname"><span class="pre">ParHarness</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.par_harness.</span></span><span class="sig-name descname"><span class="pre">ParHarness</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness" title="Permalink to this definition"></a></dt>
 <dd><p>Harness for PAR server.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize a client connection object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -940,7 +999,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.__new__">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.__new__" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.__new__" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>~P</p>
@@ -957,7 +1016,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.complete_test">
-<span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.complete_test" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.complete_test" title="Permalink to this definition"></a></dt>
 <dd><p>Mark test as completed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -977,7 +1036,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.dataset_request">
-<span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.dataset_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.dataset_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request data for evaluation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -998,7 +1057,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.evaluate">
-<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.evaluate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline_session_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.evaluate" title="Permalink to this definition"></a></dt>
 <dd><p>Get results for test(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1020,7 +1079,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.evaluate_round_wise">
-<span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.evaluate_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.evaluate_round_wise" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">evaluate_round_wise</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.evaluate_round_wise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.evaluate_round_wise" title="Permalink to this definition"></a></dt>
 <dd><p>Get results for round(s).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1041,7 +1100,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.from_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.from_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.from_config" title="Permalink to this definition"></a></dt>
 <dd><p>Instantiate a new instance of this class given the configuration
 JSON-compliant dictionary encapsulating initialization arguments.</p>
 <p>This base method is adequate without modification when a class’s
@@ -1116,7 +1175,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_config">
-<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_config" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_config" title="Permalink to this definition"></a></dt>
 <dd><p>JSON Compliant representation of the object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1127,7 +1186,7 @@ default provided by <code class="docutils literal notranslate"><span class="pre"
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_default_config">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_default_config" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_default_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_default_config" title="Permalink to this definition"></a></dt>
 <dd><p>Generate and return a default configuration dictionary for this class.
 This will be primarily used for generating what the configuration
 dictionary would look like for this class without instantiating it.</p>
@@ -1162,7 +1221,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_feedback_request">
-<span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.get_feedback_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_feedback_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.get_feedback_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_feedback_request" title="Permalink to this definition"></a></dt>
 <dd><p>Get Labels from the server based provided one or more example ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1185,7 +1244,7 @@ from this method is valid for construction of an instance of this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_impls">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_impls" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_impls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_impls" title="Permalink to this definition"></a></dt>
 <dd><p>Discover and return a set of classes that implement the calling class.</p>
 <p>See the various <code class="xref py py-func docutils literal notranslate"><span class="pre">discover_via_*()</span></code> functions in this module for
 more details on the logic of how implementing classes (aka “plugins”)
@@ -1207,7 +1266,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.get_test_metadata">
-<span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.get_test_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve the metadata json for the specified test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1227,7 +1286,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.is_usable">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.is_usable" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_usable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.is_usable" title="Permalink to this definition"></a></dt>
 <dd><p>Determine if this class with be detected by SMQTK’s plugin.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -1238,7 +1297,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.post_results">
-<span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.post_results" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.post_results" title="Permalink to this definition"></a></dt>
 <dd><p>Post client detector predictions for the dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1260,7 +1319,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.resume_session">
-<span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.resume_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.resume_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resume_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.resume_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.resume_session" title="Permalink to this definition"></a></dt>
 <dd><p>Get finished test from an existing session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1280,7 +1339,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.session_request">
-<span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.session_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.session_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">session_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.session_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.session_request" title="Permalink to this definition"></a></dt>
 <dd><p>Create a new session to evaluate the detector using an empirical protocol.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1304,7 +1363,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.terminate_session">
-<span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.terminate_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.terminate_session" title="Permalink to this definition"></a></dt>
 <dd><p>Terminate the session after the evaluation for the protocol is complete.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1327,7 +1386,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.par_harness.ParHarness.test_ids_request">
-<span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'{}'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/par_harness.html#ParHarness.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.par_harness.ParHarness.test_ids_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request Test Identifiers as part of a series of individual tests.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1351,17 +1410,17 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.harness.file_provider">
-<span id="file-provider"></span><h2>File Provider<a class="headerlink" href="#module-sail_on_client.harness.file_provider" title="Permalink to this headline">¶</a></h2>
+<span id="file-provider"></span><h2>File Provider<a class="headerlink" href="#module-sail_on_client.harness.file_provider" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#sail_on_client/harness/file_provider.py"><span>sail_on_client/harness/file_provider.py</span></a></p>
 <hr class="docutils" />
 <p>A provider class for evaluating with files.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider.</span></span><span class="sig-name descname"><span class="pre">FileProvider</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider.</span></span><span class="sig-name descname"><span class="pre">FileProvider</span></span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider" title="Permalink to this definition"></a></dt>
 <dd><p>File-based service provider.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results_folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize file provider.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1381,7 +1440,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.complete_test">
-<span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.complete_test" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">complete_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.complete_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.complete_test" title="Permalink to this definition"></a></dt>
 <dd><p>Mark test as completed in session logs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1401,7 +1460,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.dataset_request">
-<span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.dataset_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dataset_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.dataset_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.dataset_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request a dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1422,7 +1481,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.get_feedback">
-<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.get_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.get_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.get_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.get_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback of the specified type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1444,7 +1503,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.get_test_metadata">
-<span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_call</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_process_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.get_test_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_test_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_call</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_process_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.get_test_metadata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.get_test_metadata" title="Permalink to this definition"></a></dt>
 <dd><p>Get test metadata.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1466,7 +1525,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.latest_session_info">
-<span class="sig-name descname"><span class="pre">latest_session_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.latest_session_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.latest_session_info" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">latest_session_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.latest_session_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.latest_session_info" title="Permalink to this definition"></a></dt>
 <dd><p>Get tests finished from the most recent session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1483,7 +1542,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.new_session">
-<span class="sig-name descname"><span class="pre">new_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.new_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.new_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">new_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">novelty_detector_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hints</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detection_threshold</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.new_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.new_session" title="Permalink to this definition"></a></dt>
 <dd><p>Create a session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1507,7 +1566,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.post_results">
-<span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.post_results" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">post_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.post_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.post_results" title="Permalink to this definition"></a></dt>
 <dd><p>Post results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1529,7 +1588,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.terminate_session">
-<span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.terminate_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">terminate_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.terminate_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.terminate_session" title="Permalink to this definition"></a></dt>
 <dd><p>Terminate the session.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1552,7 +1611,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider.FileProvider.test_ids_request">
-<span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.test_ids_request" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">test_ids_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">detector_seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider.html#FileProvider.test_ids_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider.FileProvider.test_ids_request" title="Permalink to this definition"></a></dt>
 <dd><p>Request test IDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1576,13 +1635,13 @@ define a “valid” type to be be relative to this class.</p>
 
 </div>
 <div class="section" id="module-sail_on_client.harness.file_provider_fn">
-<span id="file-provider-utility-methods"></span><h2>File Provider Utility Methods<a class="headerlink" href="#module-sail_on_client.harness.file_provider_fn" title="Permalink to this headline">¶</a></h2>
+<span id="file-provider-utility-methods"></span><h2>File Provider Utility Methods<a class="headerlink" href="#module-sail_on_client.harness.file_provider_fn" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#sail_on_client/harness/file_provider_fn.py"><span>sail_on_client/harness/file_provider_fn.py</span></a></p>
 <hr class="docutils" />
 <p>Set of functions used by file provider.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_characterization_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_characterization_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_characterization_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_characterization_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_characterization_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_characterization_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_characterization_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the proper feedback for characterization type feedback.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1604,7 +1663,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_classification_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_classification_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_classification_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_classification_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_classification_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_classification_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the proper feedback for classification type feedback.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1626,7 +1685,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_classificaton_score_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_classificaton_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_classificaton_score_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_classificaton_score_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_classificaton_score_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_classificaton_score_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_classificaton_score_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate feedback on the accuracy of classification.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1648,7 +1707,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_cluster_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_cluster_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_cluster_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_cluster_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_cluster_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_cluster_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_cluster_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the proper feedback for cluster type feedback.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1670,7 +1729,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_encoding">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_encoding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_encoding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_encoding" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_encoding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_encoding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_encoding" title="Permalink to this definition"></a></dt>
 <dd><p>Get encoding based on the domain.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1690,7 +1749,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_kinetics_labels_var_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_kinetics_labels_var_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_kinetics_labels_var_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_kinetics_labels_var_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_kinetics_labels_var_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_kinetics_labels_var_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_kinetics_labels_var_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback for video activity recognition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1712,7 +1771,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_levenshtein_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_levenshtein_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_levenshtein_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_levenshtein_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_levenshtein_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_levenshtein_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_levenshtein_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate the proper feedback for levenshtein type feedback.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1734,7 +1793,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_session_info">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_session_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_process_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_session_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_session_info" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_session_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_process_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_session_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_session_info" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve session info.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1755,7 +1814,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_session_test_info">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_session_test_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_session_test_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_session_test_info" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_session_test_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_session_test_info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_session_test_info" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve session info for a test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1776,7 +1835,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.get_single_gt_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_single_gt_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_single_gt_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_single_gt_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">get_single_gt_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#get_single_gt_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.get_single_gt_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback that specifies if a sample if correct or incorrect.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1798,7 +1857,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.log_session">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">log_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'round'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#log_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.log_session" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">log_session</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">round_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_loc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'round'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_structure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#log_session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.log_session" title="Permalink to this definition"></a></dt>
 <dd><p>Create a log files of all session activity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1842,7 +1901,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.psuedo_label_feedback">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">psuedo_label_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#psuedo_label_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.psuedo_label_feedback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">psuedo_label_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gt_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">session_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#psuedo_label_feedback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.psuedo_label_feedback" title="Permalink to this definition"></a></dt>
 <dd><p>Get psuedo label feedback for requested ids.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1866,7 +1925,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.read_feedback_file">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">read_feedback_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_constrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#read_feedback_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.read_feedback_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">read_feedback_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_reader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feedback_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_constrained</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#read_feedback_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.read_feedback_file" title="Permalink to this definition"></a></dt>
 <dd><p>Get feedback from feedback file for the specified ids in the last submitted round.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1888,7 +1947,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.read_gt_csv_file">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">read_gt_csv_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_location</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#read_gt_csv_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.read_gt_csv_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">read_gt_csv_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_location</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#read_gt_csv_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.read_gt_csv_file" title="Permalink to this definition"></a></dt>
 <dd><p>Read the ground truth csv file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1905,7 +1964,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.read_meta_data">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">read_meta_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_location</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#read_meta_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.read_meta_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">read_meta_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_location</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#read_meta_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.read_meta_data" title="Permalink to this definition"></a></dt>
 <dd><p>Read the metadata file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1922,7 +1981,7 @@ define a “valid” type to be be relative to this class.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="sail_on_client.harness.file_provider_fn.write_session_log_file">
-<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">write_session_log_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#write_session_log_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.write_session_log_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">sail_on_client.harness.file_provider_fn.</span></span><span class="sig-name descname"><span class="pre">write_session_log_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/harness/file_provider_fn.html#write_session_log_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.harness.file_provider_fn.write_session_log_file" title="Permalink to this definition"></a></dt>
 <dd><p>Write session information in a log file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1944,73 +2003,34 @@ define a “valid” type to be be relative to this class.</p>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Harness API</a><ul>
-<li><a class="reference internal" href="#module-sail_on_client.harness.test_and_evaluation_harness">Test And Evaluation Harness</a></li>
-<li><a class="reference internal" href="#module-sail_on_client.harness.local_harness">Local Harness</a></li>
-<li><a class="reference internal" href="#module-sail_on_client.harness.par_harness">PAR Harness</a></li>
-<li><a class="reference internal" href="#module-sail_on_client.harness.file_provider">File Provider</a></li>
-<li><a class="reference internal" href="#module-sail_on_client.harness.file_provider_fn">File Provider Utility Methods</a></li>
-</ul>
-</li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="harness.html" class="btn btn-neutral float-left" title="Harness" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../metrics/metric_formulation.html" class="btn btn-neutral float-right" title="Program Metrics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="harness.html"
-                        title="previous chapter">Harness</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../metrics/metric_formulation.html"
-                        title="next chapter">Program Metrics</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/harness/harness_api.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="../metrics/metric_formulation.html" title="Program Metrics"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="harness.html" title="Harness"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Harness API</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kitware INC..
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

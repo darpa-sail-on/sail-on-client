@@ -1,58 +1,125 @@
-
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Saving And Restoring Features for Algorithm &#8212; Sail-On Client 0.31.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saving And Restoring Features for Algorithm &mdash; Sail-On Client 0.31.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Saving And Restoring Attributes of Algorithm" href="checkpoint.html" />
-    <link rel="prev" title="Agents API" href="../agents/agents_api.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="checkpoint.html" title="Saving And Restoring Attributes of Algorithm"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../agents/agents_api.html" title="Agents API"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Saving And Restoring Features for Algorithm</a></li> 
-      </ul>
-    </div>  
+    <link rel="prev" title="Hydra Plugins" href="../plugins/hydra_plugins.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.31.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Saving And Restoring Features for Algorithm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#config-options-for-saving-features">Config Options For Saving Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-option-for-saving-features">Default Option For Saving Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-features-elementwise">Saving Features Elementwise</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#saving-features-testwise">Saving Features Testwise</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#config-options-for-using-features">Config Options For Using Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-option-for-using-features">Default Option For Using Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-consolidated-features">Using Consolidated Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-non-consolidated-features">Using Non Consolidated Features</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint_api.html">Checkpoint API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Saving And Restoring Features for Algorithm</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/saving/features.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="saving-and-restoring-features-for-algorithm">
-<h1>Saving And Restoring Features for Algorithm<a class="headerlink" href="#saving-and-restoring-features-for-algorithm" title="Permalink to this headline">¶</a></h1>
+<h1>Saving And Restoring Features for Algorithm<a class="headerlink" href="#saving-and-restoring-features-for-algorithm" title="Permalink to this headline"></a></h1>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline"></a></h2>
 <p>We rely on configuration options to save and restore features associated with
 an algorithm. The features are saved in pickle files as dictionary with the
 following keys <cite>features_dict</cite> and <cite>logit_dict</cite>.</p>
 </div>
 <div class="section" id="config-options-for-saving-features">
-<h2>Config Options For Saving Features<a class="headerlink" href="#config-options-for-saving-features" title="Permalink to this headline">¶</a></h2>
+<h2>Config Options For Saving Features<a class="headerlink" href="#config-options-for-saving-features" title="Permalink to this headline"></a></h2>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>Along with the config options provided below, the configuration
@@ -61,7 +128,7 @@ saved in <cite>protocol.smqtk.config.feature_dir</cite>. This can be
 provided in the configuration file or supplied to the cli.</p>
 </div>
 <div class="section" id="default-option-for-saving-features">
-<h3>Default Option For Saving Features<a class="headerlink" href="#default-option-for-saving-features" title="Permalink to this headline">¶</a></h3>
+<h3>Default Option For Saving Features<a class="headerlink" href="#default-option-for-saving-features" title="Permalink to this headline"></a></h3>
 <p>By default, the protocol does not save feature. This option can be used to
 disable saving features in a config</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
@@ -70,7 +137,7 @@ disable saving features in a config</p>
 </div>
 </div>
 <div class="section" id="saving-features-elementwise">
-<h3>Saving Features Elementwise<a class="headerlink" href="#saving-features-elementwise" title="Permalink to this headline">¶</a></h3>
+<h3>Saving Features Elementwise<a class="headerlink" href="#saving-features-elementwise" title="Permalink to this headline"></a></h3>
 <p>In elementwise option, <cite>features_dict</cite> and <cite>logit_dict</cite> would use image/video ids
 as keys with features as values. This option is used for feature extraction in
 activity recognition where video features can be reused across multiple tests</p>
@@ -80,7 +147,7 @@ activity recognition where video features can be reused across multiple tests</p
 </div>
 </div>
 <div class="section" id="saving-features-testwise">
-<h3>Saving Features Testwise<a class="headerlink" href="#saving-features-testwise" title="Permalink to this headline">¶</a></h3>
+<h3>Saving Features Testwise<a class="headerlink" href="#saving-features-testwise" title="Permalink to this headline"></a></h3>
 <p>In testwise option, the pickle file would be saved for every test that was present
 in the session. This option is used for replicating an experiment with pre-computed features.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
@@ -95,7 +162,7 @@ are saved in <cite>&lt;test_id&gt;_&lt;agent_name&gt;`_features.pkl</cite>.</p>
 </div>
 </div>
 <div class="section" id="config-options-for-using-features">
-<h2>Config Options For Using Features<a class="headerlink" href="#config-options-for-using-features" title="Permalink to this headline">¶</a></h2>
+<h2>Config Options For Using Features<a class="headerlink" href="#config-options-for-using-features" title="Permalink to this headline"></a></h2>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>Along with the config options provided below, the configuration
@@ -104,7 +171,7 @@ present in <cite>protocol.smqtk.config.feature_dir</cite>. This can be
 provided in the configuration file or supplied to the cli.</p>
 </div>
 <div class="section" id="default-option-for-using-features">
-<h3>Default Option For Using Features<a class="headerlink" href="#default-option-for-using-features" title="Permalink to this headline">¶</a></h3>
+<h3>Default Option For Using Features<a class="headerlink" href="#default-option-for-using-features" title="Permalink to this headline"></a></h3>
 <p>By default, the protocol does not use saved feature. This option can be used to
 disable using features specified in a config</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">defaults</span><span class="p">:</span><span class="w"></span>
@@ -113,7 +180,7 @@ disable using features specified in a config</p>
 </div>
 </div>
 <div class="section" id="using-consolidated-features">
-<h3>Using Consolidated Features<a class="headerlink" href="#using-consolidated-features" title="Permalink to this headline">¶</a></h3>
+<h3>Using Consolidated Features<a class="headerlink" href="#using-consolidated-features" title="Permalink to this headline"></a></h3>
 <p>In consolidated option, <cite>features_dict</cite> and <cite>logit_dict</cite> would use image/video ids
 as keys with features as values. This option is the complement of <cite>elementwise</cite>
 option in the previous section and is used to re-use features to save time during
@@ -129,7 +196,7 @@ are present in <cite>&lt;agent_name&gt;`_features.pkl</cite>.</p>
 </div>
 </div>
 <div class="section" id="using-non-consolidated-features">
-<h3>Using Non Consolidated Features<a class="headerlink" href="#using-non-consolidated-features" title="Permalink to this headline">¶</a></h3>
+<h3>Using Non Consolidated Features<a class="headerlink" href="#using-non-consolidated-features" title="Permalink to this headline"></a></h3>
 <p>In non consolidated option, <cite>features_dict</cite> and <cite>logit_dict</cite> are assumed to be
 coming from a single test. This option is used for replicating an experiment
 with pre-computed features.</p>
@@ -147,81 +214,34 @@ are present in <cite>&lt;test_id&gt;_&lt;agent_name&gt;`_features.pkl</cite>.</p
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Saving And Restoring Features for Algorithm</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
-<li><a class="reference internal" href="#config-options-for-saving-features">Config Options For Saving Features</a><ul>
-<li><a class="reference internal" href="#default-option-for-saving-features">Default Option For Saving Features</a></li>
-<li><a class="reference internal" href="#saving-features-elementwise">Saving Features Elementwise</a></li>
-<li><a class="reference internal" href="#saving-features-testwise">Saving Features Testwise</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#config-options-for-using-features">Config Options For Using Features</a><ul>
-<li><a class="reference internal" href="#default-option-for-using-features">Default Option For Using Features</a></li>
-<li><a class="reference internal" href="#using-consolidated-features">Using Consolidated Features</a></li>
-<li><a class="reference internal" href="#using-non-consolidated-features">Using Non Consolidated Features</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../plugins/hydra_plugins.html" class="btn btn-neutral float-left" title="Hydra Plugins" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="checkpoint.html" class="btn btn-neutral float-right" title="Saving And Restoring Attributes of Algorithm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../agents/agents_api.html"
-                        title="previous chapter">Agents API</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="checkpoint.html"
-                        title="next chapter">Saving And Restoring Attributes of Algorithm</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/saving/features.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="checkpoint.html" title="Saving And Restoring Attributes of Algorithm"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../agents/agents_api.html" title="Agents API"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Saving And Restoring Features for Algorithm</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kitware INC..
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

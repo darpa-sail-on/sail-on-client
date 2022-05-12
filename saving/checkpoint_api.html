@@ -1,58 +1,116 @@
-
 <!DOCTYPE html>
-
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkpoint API &#8212; Sail-On Client 0.31.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkpoint API &mdash; Sail-On Client 0.31.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx-toolbox.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Saving And Restoring Attributes of Algorithm" href="checkpoint.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="checkpoint.html" title="Saving And Restoring Attributes of Algorithm"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Checkpoint API</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Sail-On Client
+          </a>
+              <div class="version">
+                0.31.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../user/install.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/ond.html">Open World Novelty Detection (OND)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/condda.html">Continuous Open-set Novelty Detection, Discovery, Adaptation (CONDDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../protocols/protocol_api.html">Protocol API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness.html">Harness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harness/harness_api.html">Harness API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_formulation.html">Program Metrics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/metric_api.html">Metric API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback.html">Feedback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feedback/feedback_api.html">Feedback API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents.html">Agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/agents_api.html">Agents API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins/hydra_plugins.html">Hydra Plugins</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="features.html">Saving And Restoring Features for Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkpoint.html">Saving And Restoring Attributes of Algorithm</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Checkpoint API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-sail_on_client.checkpointer">Checkpointer Mixin</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sail-On Client</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Checkpoint API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/saving/checkpoint_api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <div class="section" id="checkpoint-api">
-<h1>Checkpoint API<a class="headerlink" href="#checkpoint-api" title="Permalink to this headline">¶</a></h1>
+<h1>Checkpoint API<a class="headerlink" href="#checkpoint-api" title="Permalink to this headline"></a></h1>
 <div class="section" id="module-sail_on_client.checkpointer">
-<span id="checkpointer-mixin"></span><h2>Checkpointer Mixin<a class="headerlink" href="#module-sail_on_client.checkpointer" title="Permalink to this headline">¶</a></h2>
+<span id="checkpointer-mixin"></span><h2>Checkpointer Mixin<a class="headerlink" href="#module-sail_on_client.checkpointer" title="Permalink to this headline"></a></h2>
 <p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#sail_on_client/checkpointer.py"><span>sail_on_client/checkpointer.py</span></a></p>
 <hr class="docutils" />
 <p>Checkpoint to save and restore attributes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="sail_on_client.checkpointer.Checkpointer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.checkpointer.</span></span><span class="sig-name descname"><span class="pre">Checkpointer</span></span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sail_on_client.checkpointer.</span></span><span class="sig-name descname"><span class="pre">Checkpointer</span></span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer" title="Permalink to this definition"></a></dt>
 <dd><p>Checkpoint object to save and restore attributes.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.checkpointer.Checkpointer.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toolset</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Initialize.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -69,7 +127,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.checkpointer.Checkpointer._restore_elementwise_attribute">
-<span class="sig-name descname"><span class="pre">_restore_elementwise_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer._restore_elementwise_attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer._restore_elementwise_attribute" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_restore_elementwise_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer._restore_elementwise_attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer._restore_elementwise_attribute" title="Permalink to this definition"></a></dt>
 <dd><p>Private method to restore attributes element wise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -103,7 +161,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.checkpointer.Checkpointer._save_elementwise_attribute">
-<span class="sig-name descname"><span class="pre">_save_elementwise_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer._save_elementwise_attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer._save_elementwise_attribute" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_save_elementwise_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">detector</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer._save_elementwise_attribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer._save_elementwise_attribute" title="Permalink to this definition"></a></dt>
 <dd><p>Private method to save attributes element wise.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -125,7 +183,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.checkpointer.Checkpointer.restore_attributes">
-<span class="sig-name descname"><span class="pre">restore_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_descriptor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer.restore_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer.restore_attributes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">restore_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_descriptor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer.restore_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer.restore_attributes" title="Permalink to this definition"></a></dt>
 <dd><p>Restore attribute for a detector.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -142,7 +200,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sail_on_client.checkpointer.Checkpointer.save_attributes">
-<span class="sig-name descname"><span class="pre">save_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_descriptor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer.save_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer.save_attributes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">save_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">step_descriptor</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sail_on_client/checkpointer.html#Checkpointer.save_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sail_on_client.checkpointer.Checkpointer.save_attributes" title="Permalink to this definition"></a></dt>
 <dd><p>Save attribute for a detector.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -172,63 +230,33 @@
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Checkpoint API</a><ul>
-<li><a class="reference internal" href="#module-sail_on_client.checkpointer">Checkpointer Mixin</a></li>
-</ul>
-</li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="checkpoint.html" class="btn btn-neutral float-left" title="Saving And Restoring Attributes of Algorithm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="checkpoint.html"
-                        title="previous chapter">Saving And Restoring Attributes of Algorithm</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/saving/checkpoint_api.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Kitware INC..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="checkpoint.html" title="Saving And Restoring Attributes of Algorithm"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Checkpoint API</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kitware INC..
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>
