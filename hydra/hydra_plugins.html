@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hydra Plugins &#8212; Sail-On Client 0.31.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Open World Novelty Detection (OND)" href="../protocols/ond.html" />
+    <link rel="prev" title="Command Line Interface" href="cli.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../protocols/ond.html" title="Open World Novelty Detection (OND)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cli.html" title="Command Line Interface"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Hydra Plugins</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hydra-plugins">
+<h1>Hydra Plugins<a class="headerlink" href="#hydra-plugins" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>By default the cli supports configurations present in 2 search paths</p>
+<ol class="arabic simple">
+<li><p>Default path <code class="code docutils literal notranslate"><span class="pre">sail_on_client.configs</span></code> present in the sail-on-client package.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">config-dir</span></code> provided to the cli by the user.</p></li>
+</ol>
+<p>However there might be use-cases where the configuration files might be present
+in multiple packages. An example use case would be an agent that is split across
+multiple python package. In this case, the user could use <a class="reference external" href="https://hydra.cc/docs/advanced/search_path/#creating-a-searchpathplugin">hydra searchpath plugin</a>
+to provide additional directories where the configuration files might be available.</p>
+</div>
+<div class="section" id="searchpath-plugin">
+<h2>Searchpath Plugin<a class="headerlink" href="#searchpath-plugin" title="Permalink to this headline">¶</a></h2>
+<p>To create add a new search path to cli, use the following steps</p>
+<ol class="arabic">
+<li><p>Create a <cite>hydra_plugins</cite> folder at the root directory of your package.</p></li>
+<li><p>Create a class in it that inherits from <code class="code docutils literal notranslate"><span class="pre">SearchPathPlugin</span></code>. Check the
+example plugin for more details</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;Add additional search paths to hydra&#39;s default searchpath.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">hydra.core.config_search_path</span> <span class="kn">import</span> <span class="n">ConfigSearchPath</span>
+<span class="kn">from</span> <span class="nn">hydra.plugins.search_path_plugin</span> <span class="kn">import</span> <span class="n">SearchPathPlugin</span>
+
+
+<span class="k">class</span> <span class="nc">AdditionalSearchPathPlugin</span><span class="p">(</span><span class="n">SearchPathPlugin</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plugin to add additional search paths to hydra&#39;s default searchpaths.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">manipulate_search_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_path</span><span class="p">:</span> <span class="n">ConfigSearchPath</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add additional search paths for configurations for hydra.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            search_path: Search path used by hydra</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">search_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">provider</span><span class="o">=</span><span class="s2">&quot;sail-on-client&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;pkg://hydra_plugins.test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The example plugin above registers test directory found under hydra_plugins
+directory to the search path used by the cli.</p></li>
+<li><p>Add additional configuration files or overrides in the directory that was
+registered in the previous step.</p></li>
+<li><p>Check if the search path has been registered using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sail</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">client</span> <span class="o">--</span><span class="n">info</span> <span class="n">searchpath</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="code docutils literal notranslate"><span class="pre">pkg://</span></code> syntax requires an <cite>__init__.py</cite> in the directory specified
+in the plugin. Please refer to <cite>example plugin</cite> for a concrete example.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Testing plugins locally can sometimes cause errors with default hydra plugins
+like colorlor. To resolve the issue use <cite>pip install .</cite></p>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hydra Plugins</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#searchpath-plugin">Searchpath Plugin</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cli.html"
+                        title="previous chapter">Command Line Interface</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../protocols/ond.html"
+                        title="next chapter">Open World Novelty Detection (OND)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/hydra/hydra_plugins.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../protocols/ond.html" title="Open World Novelty Detection (OND)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cli.html" title="Command Line Interface"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Sail-On Client 0.31.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Hydra Plugins</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Kitware INC..
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>
