@@ -8,8 +8,12 @@ We rely on :code:`Checkpoint` mixin to save and restore attribute of an algorith
 The mixin can be added to an adaptor associated with an algorithm to provide
 :code:`save_attributes` and :code:`restore_attributes` function. These functions
 can be used with configuration options to save and restore states in a pickle
-file. Refer to `ond_12_with_rd_nd_save.json` and `ond_12_with_rd_nd_restore.json`
-configurations on the `config`_ directory for more details.
+file.
+
+.. warning::
+
+    Saving and restorying attributes is experimental, and error-prone due
+    to lack of a concrete use-case in the current evaluation.
 
 .. note::
 
@@ -23,8 +27,8 @@ configurations on the `config`_ directory for more details.
     the original sequence. This would result in undefined behavior.
 
 
-Sample Detector, Adapter and Configuration Parameters
------------------------------------------------------
+Sample Detector and Adapter
+---------------------------
 
 Sample Detector
 ^^^^^^^^^^^^^^^
@@ -38,26 +42,3 @@ Sample Adapter
 
 .. literalinclude:: ../../../sail_on_client/agent/mock_ond_agents.py
    :language: python
-   :lines: 162-197
-
-
-Sample Configuration
-^^^^^^^^^^^^^^^^^^^^
-
-.. note::
-    The configuration options used for saving attributes are highlighted in the
-    examples below.
-
-.. literalinclude:: ../../../config/ond_12_with_rd_nd_save.json
-   :language: json
-   :lines: 6-16
-   :emphasize-lines: 1-7
-
-.. literalinclude:: ../../../config/ond_12_with_rd_nd_restore.json
-   :language: json
-   :lines: 6-16
-   :emphasize-lines: 1-7
-
-.. Appendix 1: Links
-
-.. _config: https://gitlab.kitware.com/darpa-sail-on/sail-on-client/-/tree/master/config

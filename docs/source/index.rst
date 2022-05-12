@@ -82,7 +82,8 @@ Plugins
 .. toctree::
    :maxdepth: 2
 
-   plugins/plugins
+   plugins/agents
+   plugins/agents_api
    plugins/hydra_plugins
 
 Saving and Restoring Models

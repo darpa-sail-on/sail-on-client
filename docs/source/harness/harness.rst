@@ -4,15 +4,18 @@ Harness
 Harnesses are used for testing and evaluating TA2 agents. The
 evaluation can be conducted using a server setup by TA1 or by
 providing the files containing ground truth and metadata
-associated with the tests. We support two harnesses for
-sail-on-client. These harnesses are subclasses of :code:`TestAndEvaluationHarness`.
+associated with the tests. The abstraction was primarily to communicate with the
+evaluation server or replicate the same functionality without with files provided
+by TA1s. They work in conjunction with the protocol classes to fulfill the input
+and output requirements of an agent. The harnesses are subclasses of :code:`TestAndEvaluationHarness`.
+We support two harnesses in sail-on-client
 
 Local Harness
 -------------
 
 :code:`LocalHarness` is primarily used for replicating the capabilities of
-:code:`ParHarness` without using the server. This allows local testing without
-setting up a server instance locally or via a URL. Since LocalHarness uses
+:code:`ParHarness` without using the server. This allows local testing an agent
+without setting up a server instance locally or via a URL. Since LocalHarness uses
 the files it requires 3 parameters:
 
 1. :code:`data_dir`: Root directory where the data for tests is stored
