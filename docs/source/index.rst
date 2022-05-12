@@ -39,6 +39,17 @@ User Guide
 
    user/install
 
+Hydra
+-----
+
+.. toctree::
+   :maxdepth: 2
+
+   hydra/motivation
+   hydra/config
+   hydra/cli
+   hydra/hydra_plugins
+
 Empirical Protocols
 -------------------
 
@@ -76,15 +87,14 @@ Feedback
    feedback/feedback
    feedback/feedback_api
 
-Plugins
--------
+Agents
+------
 
 .. toctree::
    :maxdepth: 2
 
-   plugins/agents
-   plugins/agents_api
-   plugins/hydra_plugins
+   agents/agents
+   agents/agents_api
 
 Saving and Restoring Models
 ---------------------------
