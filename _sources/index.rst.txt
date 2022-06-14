@@ -118,5 +118,5 @@ Indices and tables
 
 .. _DARPA SAIL-ON: https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty
 .. _APACHE-V2 LICENSE: https://www.apache.org/licenses/LICENSE-2.0
-.. _tinker-engine: https://gitlab.kitware.com/darpa_learn/tinker-engine
+.. _tinker-engine: https://github.com/tinker-engine/tinker-engine
 .. _SAIL-ON Website: https://www.darpa.mil/program/science-of-artificial-intelligence-and-learning-for-open-world-novelty
