@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ '3.7.10', '3.8.10', '3.9.5' ]
+        python-version: [ '3.8.10', '3.9.5' ]
     name: build all repositories for python ${{ matrix.python-version }}
     steps:
       - name: Checkout sail on client
@@ -64,7 +64,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7.10'
+          python-version: '3.8.10'
           architecture: 'x64'
 
       - name: Install poetry
@@ -84,7 +84,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.8.10
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
@@ -107,7 +107,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7.10'
+          python-version: '3.8.10'
           architecture: 'x64'
 
       - name: Install poetry
@@ -127,7 +127,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.8.10
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
@@ -143,7 +143,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [ '3.7.10', '3.8.10', '3.9.5' ]
+        python-version: [ '3.8.10', '3.9.5' ]
     name: Run test and generate coverage report on sail on client for python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     steps:
@@ -208,7 +208,7 @@ jobs:
         working-directory: sail-on-client
 
       - name: Upload coverage report to code cov
-        if: matrix.python-version == '3.7.10'
+        if: matrix.python-version == '3.8.10'
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -228,7 +228,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7.10'
+          python-version: '3.8.10'
           architecture: 'x64'
 
       - name: Install poetry
@@ -248,7 +248,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/poetry-virtualenvs
-          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.7.10
+          key: ${{ runner.os }}-poetry-${{ hashFiles('sail-on-client/poetry.lock') }}-${{ steps.poetry-version.outputs.poetry-version }}-${{ secrets.CACHE_VERSION }}-3.8.10
 
       - name: Install Using Poetry
         if: steps.poetry-cache.outputs.cache-hit != 'true'
