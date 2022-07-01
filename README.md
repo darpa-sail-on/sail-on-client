@@ -13,7 +13,7 @@ Client and Protocols for DARPA sail-on
 
 ## Requirements
 
-1. [Python 3.7](https://www.python.org/downloads/release/python-370/)
+1. [Python 3.8](https://www.python.org/downloads/release/python-380/)
 2. [Poetry >= 1.1.0](https://github.com/python-poetry/poetry)
 
 ## Installation
