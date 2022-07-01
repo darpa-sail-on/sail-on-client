@@ -8,8 +8,8 @@
 Client and Protocols for DARPA sail-on
 
 ### Protocols present in the repository
-1. [OND](https://drive.google.com/file/d/1W2Ex4-eQl1CrAbv67fAN0OJL8kmRtvt2/view?usp=sharing)
-2. [CONDDA](https://drive.google.com/file/d/1sIDLTgXivaguVfSp3g1qfe7sqiUcvFLA/view?usp=sharing)
+1. [OND](https://darpa-sail-on.github.io/sail-on-client/protocols/ond.html)
+2. [CONDDA](https://darpa-sail-on.github.io/sail-on-client/protocols/condda.html)
 
 ## Requirements
 
