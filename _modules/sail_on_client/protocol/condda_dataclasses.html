@@ -44,10 +44,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">sail_on_client.utils.utils</span> <span class="kn">import</span> <span class="n">merge_dictionaries</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">importlib.metadata</span> <span class="kn">import</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>  <span class="c1"># type:ignore</span>
-<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">importlib_metadata</span> <span class="kn">import</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>  <span class="c1"># type: ignore</span>
+<span class="kn">from</span> <span class="nn">importlib.metadata</span> <span class="kn">import</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
