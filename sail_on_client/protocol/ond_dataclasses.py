@@ -14,10 +14,7 @@ from sail_on_client.feedback.activity_recognition_feedback import (
     ActivityRecognitionFeedback,
 )
 
-try:
-    from importlib.metadata import version, PackageNotFoundError  # type:ignore
-except ModuleNotFoundError:
-    from importlib_metadata import version, PackageNotFoundError  # type: ignore
+from importlib.metadata import version, PackageNotFoundError
 
 log = logging.getLogger(__name__)
 
